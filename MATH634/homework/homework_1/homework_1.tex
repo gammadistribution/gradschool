@@ -1,0 +1,627 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+
+\title{Homework Assignment 1}
+\author{Matthew Tiger}
+
+
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\pdf}{\text{pdf}}
+\newcommand{\pmf}{\text{pmf}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Let $X \sim \text{Expo}(\lambda)$. Find the mean, $\E(X)$, and the
+  variance, $\V(X)$, of the random variable $X$.
+\end{problem}
+
+\begin{proof}
+  If $X \sim \text{Expo}(\lambda)$, then the probability density function of
+  $X$, $\pdf(x; \lambda)$, is given by
+
+  \[
+    \pdf(x; \lambda) :=
+      \begin{cases}
+        \lambda \me^{-\lambda x} & \text{if}\ x \geq 0 \\
+        0 & \text{if}\ x < 0 \\
+      \end{cases}.
+  \]
+
+  By definition,
+
+  \[
+    \E(X) = \int_{-\infty}^{\infty} x \pdf(x; \lambda) \diff x = \int_{0}^{\infty} x \left( \lambda \me^{-\lambda x} \right) \diff x.
+  \]
+
+  Using integration by parts, with $u(x) = x$ and $\diff v(x) = \lambda \me^{-\lambda x} \diff x$, we have
+
+  \[
+    \int_{0}^{\infty} x \left( \lambda \me^{-\lambda x} \right) \diff x = -x \me^{-\lambda x}\Big|_{0}^{\infty} - \int_{0}^{\infty} -\me^{-\lambda x} \diff x = - \int_{0}^{\infty} -\me^{-\lambda x} \diff x.
+  \]
+
+  Evaluating the integral, we derive
+
+  \[
+    - \int_{0}^{\infty} -\me^{-\lambda x} \diff x = \frac{-\me^{-\lambda x}}{\lambda} \Big|_{0}^{\infty} = \frac{1}{\lambda}.
+  \]
+
+  Therefore,
+
+  \begin{equation}\label{integral_result}
+    \E(X) = \int_{0}^{\infty} x \left( \lambda \me^{-\lambda x} \right) \diff x = \frac{1}{\lambda}.
+  \end{equation}
+
+  To calculate $\V(X)$, we can combine the fact that $\V(X) = \E(X^2) - (\E(X))^2$
+  with the result in \eqref{integral_result} to derive that
+  $\V(X) = E(X^2) - 1/\lambda^2$. Thus, we need only calculate $\E(X^2)$.
+
+  Using the definition of $\E(g(X))$ with $g(X) = X^2$, we have
+
+  \[
+    \E(X^2) = \int_{-\infty}^{\infty} x^2\ \pdf(x; \lambda) \diff x = \int_{0}^{\infty} x^2 \left( \lambda \me^{-\lambda x} \right) \diff x.
+  \]
+
+  Again, using integration by parts, with $u(x) = x^2$ and $\diff v(x) = \lambda \me^{- \lambda x} \diff x$, we have
+
+  \[
+    \int_{0}^{\infty} x^2 \left( \lambda \me^{-\lambda x} \right) \diff x = - x^2 \me^{-\lambda x}\Big|_{0}^{\infty} + 2 \int_{0}^{\infty} x \me^{-\lambda x} \diff x = 2 \int_{0}^{\infty} x \me^{-\lambda x} \diff x.
+  \]
+
+  Using the result from \eqref{integral_result} it is clear that after accounting for the $\lambda$ constant,
+
+  \[
+    \int_{0}^{\infty} x \me^{-\lambda x} \diff x = \frac{1}{\lambda ^ 2}
+  \]
+
+  implying that
+
+  \[
+    \E(X^2) = \int_{0}^{\infty} x^2 \left( \lambda \me^{-\lambda x} \right) \diff x = 2 \int_{0}^{\infty} x \me^{-\lambda x} \diff x = \frac{2}{\lambda^2}.
+  \]
+
+  Therefore,
+
+  \[
+    \V(X) = \E(X^2) - (\E(X))^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda}.
+  \]
+
+\end{proof}
+
+
+% Problem 2
+\begin{problem}
+  Let $X \sim \text{Bin}(n, p)$. Find the mean, $\E(X)$, and the
+  variance, $\V(X)$, of the random variable $X$.
+\end{problem}
+
+\begin{proof}
+  If $X \sim \text{Bin}(n, p)$, then the probability mass function of
+  $X$, $\pmf(x; n, p)$, is given by
+
+  \[
+    \pmf(x; n, p) := {n \choose x} p^x (1 - p)^{n-x}.
+  \]
+
+  By definition,
+
+  \begin{equation}\label{sum_def}
+    \E(X) = \sum_{x=0}^{\infty} x \pmf(x; n, p) = \sum_{x=0}^{n} x {n \choose x} p^x (1-p)^{n-x}.
+  \end{equation}
+
+  Since the first term in the series in \eqref{sum_def} is 0, we have
+
+  \[
+    \sum_{x=0}^{n} x {n \choose x} p^x (1-p)^{n-x} = \sum_{x=1}^{n} x {n \choose x} p^x (1-p)^{n-x}.
+  \]
+
+  Rewriting the combination in the above equation in terms of factorials gives
+
+  \[
+    \sum_{x=1}^{n} x {n \choose x} p^x (1-p)^{n-x} = \sum_{x=1}^{n} \frac{xn!}{x!(n-x)!} p^x (1-p)^{n-x}.
+  \]
+
+  After cancelling the $x$ term and pulling out an $n$ term from the factorial, we derive
+
+  \[
+    \sum_{x=1}^{n} \frac{xn!}{x!(n-x)!} p^x (1-p)^{n-x} = n \sum_{x=1}^{n} \frac{(n-1)!}{(x-1)!(n-x)!} p^x (1-p)^{n-x}.
+  \]
+
+  The astute observer will notice that
+
+  \[
+    \frac{(n-1)!}{(x-1)!(n-x)!} = \frac{(n-1)!}{(x-1)!((n - 1) - (x - 1))!} = {n-1 \choose x-1},
+  \]
+
+  hence
+
+  \[
+    n \sum_{x=1}^{n} \frac{(n-1)!}{(x-1)!(n-x)!} p^x (1-p)^{n-x} = n \sum_{x=1}^{n} {n-1 \choose x-1} p^x (1-p)^{n-x}.
+  \]
+
+  We can rewrite the index of the above series as $x + 1$ so that
+
+  \[
+    n \sum_{x=1}^{n} {n-1 \choose x-1} p^x (1-p)^{n-x} = n \sum_{x=0}^{n - 1} {n-1 \choose x} p^{x+1} (1-p)^{n-(x+1)}.
+  \]
+
+  We can rewrite the above equation as follows
+
+  \[
+    n \sum_{x=0}^{n - 1} {n-1 \choose x} p^{x+1} (1-p)^{n-(x+1)} = np \sum_{x=0}^{n - 1} {n-1 \choose x} p^{x} (1-p)^{(n-1)-x}.
+  \]
+
+  The Binomial Theorem tells us that this series is $(p + (1 - p))^{n-1} = 1$, hence
+
+  \begin{equation}\label{sum_calc}
+    np \sum_{x=0}^{n - 1} {n-1 \choose x} p^{x} (1-p)^{(n-1)-x} = np.
+  \end{equation}
+
+  Therefore,
+
+  \begin{equation}\label{sum_expected}
+    \E(X) = \sum_{x=0}^{n} x {n \choose x} p^x (1-p)^{n-x} = np.
+  \end{equation}
+
+  To calculate $\V(X)$, we can combine the fact that $\V(X) = \E(X^2) - (\E(X))^2$
+  with the result in \eqref{sum_expected} to derive that
+  $\V(X) = E(X^2) - (np)^2$. Thus, we need only calculate $\E(X^2)$.
+
+  Using the definition of $\E(g(X))$ with $g(X) = X^2$, we have
+  \[
+    \E(X^2) = \sum_{x=0}^{\infty} x^2\ \pmf(x; n, p) = \sum_{x=0}^{n} x^2 {n \choose x} p^x (1-p)^{n-x}.
+  \]
+
+  Using the same techniques to calculate $\E(X)$, i.e. writing out the factorial,
+  cancelling like-terms, regrouping, and changing the index, we can rewrite
+  this series as
+
+  \begin{align}\label{original_var_sum}
+    \sum_{x=0}^{n} x^2 {n \choose x} p^x (1-p)^{n-x}
+    &= \sum_{x=0}^{n} x \cdot x {n \choose x} p^x (1-p)^{n-x} \notag \\
+    &= np \sum_{x=0}^{n - 1} (x + 1) {n - 1 \choose x} p^x (1-p)^{(n-1)-x}.
+  \end{align}
+
+  Let $y(x)$ be defined as
+  \[
+    y(x) = {n - 1 \choose x} p^x (1-p)^{(n-1)-x}.
+  \]
+
+  Then the linearity of the series in \eqref{original_var_sum} allows us to rewrite as
+
+  \begin{align}
+    np \sum_{x=0}^{n - 1} (x + 1) {n - 1 \choose x} p^x (1-p)^{(n-1)-x}
+    &= np \sum_{x=0}^{n - 1} (x + 1) y(x) \notag \\
+    &= np \left( \sum_{x=0}^{n - 1} x y(x) + \sum_{x=0}^{n - 1} y(x) \right). \label{var_sum}
+  \end{align}
+
+  Using the same techniques to derive \eqref{sum_calc}, i.e. writing out the factorial,
+  cancelling like-terms, regrouping, changing the index, and using the
+  Binomial Theorem, we can work out that the left sum in \eqref{var_sum} is
+
+  \begin{align}
+    \sum_{x=0}^{n - 1} x y(x)
+    &= \sum_{x=0}^{n - 1} x {n - 1 \choose x} p^x (1-p)^{(n-1)-x} \notag \\
+    &= p(n-1) \sum_{x=0}^{n - 2} {n - 2 \choose x} p^x (1-p)^{(n-2)-x} \notag \\
+    &= p(n-1)(p + 1 -p)^{n-2} = p(n-1). \label{var_calc_left_sum}
+  \end{align}
+
+  Using the Binomial Theorem, we know that the right sum in \eqref{var_sum} is
+
+  \begin{align}
+    \sum_{x=0}^{n - 1} y(x)
+    &= \sum_{x=0}^{n - 1} {n - 1 \choose x} p^x (1-p)^{(n-1)-x} \notag \\
+    &= (p + 1 - p)^{n-1} = 1 \label{var_calc_right_sum}
+  \end{align}
+
+  Combining the results in \eqref{var_calc_left_sum} and \eqref{var_calc_right_sum}
+  we derive that the sum in \eqref{var_sum} is
+
+  \begin{align}
+    np \left( \sum_{x=0}^{n - 1} x y(x) + \sum_{x=0}^{n - 1} y(x) \right) &= np (p(n - 1) + 1) \notag \\
+    &= np(np - p + 1) \notag \\
+    &= (np)^2 - np^2 + np \notag.
+  \end{align}
+
+  Therefore, $$\E(X^2) = (np)^2 - np^2 + np.$$
+
+  Combining these results we arrive at
+
+  \begin{align}
+    \V(X) &= \E(X^2) - (\E(X))^2 \notag \\ &= (np)^2 - np^2 + np - (np)^2 \notag \\ &= -np^2 + np \notag \\&= np(1-p).
+  \end{align}
+
+\end{proof}
+
+
+% Problem 3
+\begin{problem}
+  Let $X$ be a random variable and $c \in \mathbb{R}.$ Show that, in the
+  discrete and continuous case for $X$, $\E(cX) = c\E(X)$ and
+  $\V(cX) = c^2\V(X).$
+\end{problem}
+
+\begin{proof}
+  Suppose first that $X$ is a discrete random variable. Then $X$ has probability
+  mass function $\pmf(x)$ and
+
+  \begin{align}\label{expected_discrete_function}
+    \E(g(X)) = \sum_{x=0}^{\infty} g(x) \pmf(x).
+  \end{align}
+
+  Thus, to find $\E(cX)$, we can simply apply this definition with $g(X) = cX.$
+  Hence, using the linearity of the series,
+
+  \[
+    \E(cX) = \sum_{x=0}^{\infty} cx \pmf(x) = c \sum_{x=0}^{\infty} x \pmf(x).
+  \]
+
+  We know from \eqref{expected_discrete_function} that
+
+  \[
+    \sum_{x=0}^{\infty} x \pmf(x) = \E(X),
+  \]
+  with $g(X) = X.$ Therefore,
+
+  \[
+    \E(cX) = c \sum_{x=0}^{\infty} x \pmf(x) = c\E(X),
+  \]
+
+  as desired.
+
+  We can perform a similar calculation to find $\V(X).$ Using the fact that
+  $\V(X) = \E(X^2) - (\E(X))^2$ and the previous result, we have that
+
+  \begin{align}\label{var_discrete_3}
+    \V(cX) &= \E((cX)^2) - (\E(cX))^2 \notag \\
+    &= \E(c^2X^2) - c^2\E(X)^2.
+  \end{align}
+
+  To find $\E(c^2X^2),$ we apply \eqref{expected_discrete_function} with
+  $g(X) = c^2X^2$ so that, using the linearity of the series,
+
+  \[
+    \E(c^2X^2) = \sum_{x=0}^{\infty} c^2x^2 \pmf(x) = c^2\sum_{x=0}^{\infty} x^2 \pmf(x).
+  \]
+
+  Note that
+
+  \[
+    \sum_{x=0}^{\infty} x^2 \pmf(x) = \E(X^2)
+  \]
+  using \eqref{expected_discrete_function} with $g(X) = X^2.$
+
+  Thus,
+
+  \begin{align}\label{var_discrete_3_part_2}
+    \E(c^2X^2) = c^2\sum_{x=0}^{\infty} x^2 \pmf(x) = c^2\E(X^2).
+  \end{align}
+
+  Therefore, combining \eqref{var_discrete_3} and \eqref{var_discrete_3_part_2},
+  we have
+
+  \begin{align*}
+    \V(cX)
+    &= \E((cX)^2) - (\E(cX))^2 \\
+    &= c^2\E(X^2) - c^2\E(X)^2 \\
+    &= c^2(\E(X^2) - \E(X)^2) = c^2\V(X),
+  \end{align*}
+  as desired.
+
+  Now suppose that $X$ is a continous random variable. Then $X$ has probability
+  density function $\pdf(x)$ and
+
+  \begin{align}\label{expected_cont_function}
+    \E(g(X)) = \int_{-\infty}^{\infty} g(x) \pdf(x) \diff x.
+  \end{align}
+
+  Thus, to find $\E(cX)$, we can simply apply this definition with $g(X) = cX.$
+  Hence, using the linearity of the integral,
+
+  \[
+    \E(cX) = \int_{-\infty}^{\infty} cx \pdf(x) \diff x = c \int_{-\infty}^{\infty} x \pdf(x) \diff x.
+  \]
+
+  We know from \eqref{expected_cont_function} that
+
+  \[
+    \int_{-\infty}^{\infty} x \pdf(x) \diff x = \E(X),
+  \]
+  with $g(X) = X.$ Therefore,
+
+  \[
+    \E(cX) = c \int_{-\infty}^{\infty} x \pdf(x) \diff x = c\E(X),
+  \]
+
+  as desired.
+
+  We can perform a similar calculation to find $\V(X).$ Using the fact that
+  $\V(X) = \E(X^2) - (\E(X))^2$ and the previous result, we have that
+
+  \begin{align}\label{var_cont_3}
+    \V(cX) &= \E((cX)^2) - (\E(cX))^2 \notag \\
+    &= \E(c^2X^2) - c^2\E(X)^2.
+  \end{align}
+
+  To find $\E(c^2X^2),$ we apply \eqref{expected_cont_function} with
+  $g(X) = c^2X^2$ so that, using the linearity of the integral,
+
+  \[
+    \E(c^2X^2) = \int_{-\infty}^{\infty} c^2x^2 \pdf(x) \diff x = c^2 \int_{-\infty}^{\infty} x^2 \pdf(x) \diff x.
+  \]
+
+  Note that
+
+  \[
+    \int_{-\infty}^{\infty} x^2 \pdf(x) \diff x = \E(X^2)
+  \]
+  using \eqref{expected_cont_function} with $g(X) = X^2.$
+
+  Thus,
+
+  \begin{align}\label{var_cont_3_part_2}
+    \E(c^2X^2) = c^2\int_{-\infty}^{\infty} x^2 \pdf(x) \diff x = c^2\E(X^2).
+  \end{align}
+
+  Therefore, combining \eqref{var_cont_3} and \eqref{var_cont_3_part_2},
+  we have
+
+  \begin{align*}
+    \V(cX)
+    &= \E((cX)^2) - (\E(cX))^2 \\
+    &= c^2\E(X^2) - c^2\E(X)^2 \\
+    &= c^2(\E(X^2) - \E(X)^2) = c^2\V(X),
+  \end{align*}
+  as desired.
+\end{proof}
+
+
+% Problem 4
+\begin{problem}
+  Let $X_1$ and $X_2$ be random variables. Show that, in the
+  discrete and continuous case for $X_1$ and $X_2$,
+  $\E(X_1 + X_2) = \E(X_1) + \E(X_2).$
+\end{problem}
+
+\begin{proof}
+
+  Suppose first that $X_1$ and $X_2$ are discrete random variables. Then
+  $X_1$ and $X_2$ have joint probability mass function $\pmf(\vect{x_j}) = \pmf(x_{j_1}, x_{j_2}).$
+
+  Note, if $\vect{X} =(X_1, X_2, \dots, X_n)^\intercal$, then
+
+  \begin{align}\label{sum_expected_bivariate}
+    \E(g(\vect{X})) = \sum_{j_1} \dots \sum_{j_n} g(x_{j_1}, \dots, x_{j_n}) \pmf(x_{j_1}, \dots, x_{j_n})
+  \end{align}
+
+  We can use \eqref{sum_expected_bivariate} with $g(\vect{X}) = X_1 + X_2$ so that, due to the linearity of the series,
+
+  \begin{align}\label{sum_calc_bivariate}
+    \E(X_1 + X_2)
+    &= \sum_{j_1} \sum_{j_2} (x_{j_1} + x_{j_2})\pmf(x_{j_1}, x_{j_2}) \notag \\
+    &= \sum_{j_1} \sum_{j_2} (x_{j_1}\pmf(x_{j_1}, x_{j_2}) + x_{j_2}\pmf(x_{j_1}, x_{j_2}) \notag \\
+    &= \sum_{j_1} \left( \sum_{j_2} x_{j_1}\pmf(x_{j_1}, x_{j_2}) + \sum_{j_2} x_{j_2}\pmf(x_{j_1}, x_{j_2}) \right) \notag \\
+    &= \sum_{j_1} \sum_{j_2} x_{j_1}\pmf(x_{j_1}, x_{j_2}) + \sum_{j_1} \sum_{j_2} x_{j_2}\pmf(x_{j_1}, x_{j_2})
+  \end{align}
+
+  Note that the left sum in \eqref{sum_calc_bivariate}, by virtue of \eqref{sum_expected_bivariate}, is
+  $\E(X_1)$ with $g(\vect{X}) = X_1$ and similarly the right sum in
+  \eqref{sum_calc_bivariate}, by virtue of \eqref{sum_expected_bivariate}, is $\E(X_2)$ with
+  $g(\vect{X}) = X_2$. Therefore,
+
+  \begin{align*}
+    \E(X_1 + X_2)
+    &= \sum_{j_1} \sum_{j_2} x_{j_1}\pmf(x_{j_1}, x_{j_2}) + \sum_{j_1} \sum_{j_2} x_{j_2}\pmf(x_{j_1}, x_{j_2}) \\
+    &= \E(X_1) + \E(X_2),
+  \end{align*}
+  as desired.
+
+  Now suppose that $X_1$ and $X_2$ are continuous random variables. Then
+  $X_1$ and $X_2$ have joint probability density function $\pdf(\vect{x}) = \pdf(x_1, x_1).$
+
+  Note, if $\vect{X} =(X_1, X_2, \dots, X_n)^\intercal$, then
+
+  \begin{align}\label{int_expected_bivariate}
+    \E(g(\vect{X})) = \int_{-\infty}^{\infty} \dots \int_{-\infty}^{\infty} g(x_1, \dots, x_n) \pmf(x_1, \dots, x_n) \diff x_1 \dots \diff x_n
+  \end{align}
+
+  We can use \eqref{int_expected_bivariate} with $g(\vect{X}) = X_1 + X_2$ so that, due to the linearity of the integral,
+
+  \begin{align}\label{int_calc_bivariate}
+    \E(X_1 + X_2)
+    &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x_1 + x_2)\pdf(x_1, x_2) \diff x_1 \diff x_2 \notag \\
+    &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x_1\pdf(x_1, x_2) + x_2\pdf(x_1, x_2)) \diff x_1 \diff x_2 \notag \\
+    &= \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} x_1\pdf(x_1, x_2) \diff x_1 + \int_{-\infty}^{\infty} x_2\pdf(x_1, x_2)) \diff x_1 \right) \diff x_2 \notag \\
+    &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x_1\pdf(x_1, x_2) \diff x_1 \diff x_2 + \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x_2\pdf(x_1, x_2) \diff x_1 \diff x_2
+  \end{align}
+
+  Note that the left integral in \eqref{int_calc_bivariate}, by virtue of \eqref{int_expected_bivariate}, is
+  $\E(X_1)$ with $g(\vect{X}) = X_1$ and similarly, the right sum in
+  \eqref{int_calc_bivariate}, by virtue of \eqref{int_expected_bivariate}, is $\E(X_2)$ with
+  $g(\vect{X}) = X_2$. Therefore,
+
+  \begin{align*}
+    \E(X_1 + X_2)
+    &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x_1\pdf(x_1, x_2) \diff x_1 \diff x_2 + \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x_2\pdf(x_1, x_2) \diff x_1 \diff x_2 \\
+    &= \E(X_1) + \E(X_2),
+  \end{align*}
+  as desired.
+
+\end{proof}
+
+
+% Problem 5
+\begin{problem}
+  Show that $\V(X) = \E(X^2) - (\E(X))^2.$
+\end{problem}
+
+\begin{proof}
+  Note that by definition, $\V(X) = \text{Cov}(X, X)$, where
+  \[
+    \text{Cov}(X, Y) = \E((X - \E(X))(Y - \E(Y))).
+  \]
+
+  Combining these facts and the linearity of the expectation operator, it is
+  straightforward to see that
+
+  \begin{align*}
+    \V(X)
+    &= \text{Cov}(X, X) \\
+    &= \E((X - \E(X))(X - \E(X))) \\
+    &= \E(X^2 - X\E(X) - \E(X)X + (\E(X))^2) \\
+    &= \E(X^2) - \E(X)\E(X) - \E(X)\E(X) + (\E(X))^2) \\
+    &= \E(X^2) - 2(\E(X))^2 + (\E(X))^2 = \E(X^2) - (\E(X))^2.
+  \end{align*}
+\end{proof}
+
+
+% Problem 6
+\begin{problem}
+  Let $\vect{X} \sim N(\vect{\mu}, \Sigma)$, where $\vect{\mu} =  (1, 5)^\intercal$
+  and $\Sigma = \left ( \begin{matrix} 9 & -2 \\ -2 & 6 \end{matrix} \right).$ Find
+  $\Sigma^{-1/2}$ such that $\vect{Z} = \Sigma^{-1/2}(\vect{X} - \vect{\mu})$ has
+  a standard normal distribution.
+\end{problem}
+
+\begin{proof}
+  If we diagonalize $\Sigma$ such that $\Sigma = P \Lambda P^\intercal$ then
+  $\Sigma^{-1/2} = P \Lambda^{-1/2} P^{\intercal}$ is a matrix satisfying
+  $\vect{Z} = \Sigma^{-1/2}(\vect{X} - \vect{\mu})$ such that $\vect{Z}$ has a
+  standard normal distribution. In order to diagonalize
+  $\Sigma$, we must first find its eigenvalues and eigenvectors. Then the
+  matrix $P$ formed by the unit eigenvectors of $\Sigma$ and $\Lambda$ formed as
+  the diagonal matrix consisting of the eigenvalues of $\Sigma$ are the
+  matrices needed to form the diagonalization.
+
+  So, the eigenvalues of $\Sigma$ are the solutions to the characteristic
+  equation of $\Sigma$, i.e. the solutions to
+
+  \begin{align}\label{characteristic}
+    c(\lambda)
+    = \det(\lambda I - \Sigma) \notag
+    &= \left| \begin{matrix} \lambda - 9 & 2 \\ 2 & \lambda - 6\end{matrix}\right| \notag \\
+    &= (\lambda - 9)(\lambda - 6) - 4 = (\lambda - 10)(\lambda - 5)
+  \end{align}
+
+  Hence, the roots of \eqref{characteristic}, i.e. the eigenvalues of $\Sigma$,
+  are $\lambda_1 = 10$ and $\lambda_2 = 5.$ The eigenvectors associated to
+  $\lambda_1$ and $\lambda_2$ are, respectively, the vectors $\vect{v}_{\lambda_1}$
+  and $\vect{v}_{\lambda_2}$ satisfying the equation
+
+  \[
+    (\lambda_i I - \Sigma) \vect{v}_{\lambda_i} = \vect{0} \text{\ \ for $i = 1, 2$}.
+  \]
+
+  Thus, for $\lambda_1 = 10$, we have for
+  $\vect{v}_{\lambda_1} = (x_1, x_2)^\intercal$,
+
+  \[
+    (\lambda_1 I - \Sigma) \vect{v}_{\lambda_1} = \left(\begin{matrix} 1 & 2 \\ 2 & 4\end{matrix} \right)
+    \left( \begin{matrix} x_1 \\ x_2 \end{matrix}\right) = \left( \begin{matrix} 0 \\ 0 \end{matrix}\right).
+  \]
+
+  By inspection, we can see that $x_1 = -2x_2$ is the solution to the above
+  system of equations. Hence, $\vect{v}_{\lambda_1} = (-2, 1)^\intercal$ is the
+  eigenvector associated to $\lambda_1 = 10$.
+
+  Similarly, for $\lambda_2 = 5,$ we have for $\vect{v_{\lambda_2}} = (x_1, x_2)^\intercal$,
+
+  \[
+    (\lambda_2 I - \Sigma) \vect{v}_{\lambda_2} = \left(\begin{matrix} -4 & 2 \\ 2 & -1\end{matrix} \right)
+    \left( \begin{matrix} x_1 \\ x_2 \end{matrix}\right) = \left( \begin{matrix} 0 \\ 0 \end{matrix}\right).
+  \]
+
+  Again, by inspection, we can see that $2x_1 = x_2$ is the solution to the above
+  system of equations. Thus, $\vect{v}_{\lambda_2} = (1, 2)^\intercal$ is the
+  eigenvector associated to $\lambda_2 = 5$.
+
+  We can make the eigenvectors $\vect{v}_{\lambda_1}$ and $\vect{v}_{\lambda_2}$
+  unit by dividing each vector by its length. Hence, we have
+  $\vect{v}_{\lambda_1}' = (-2/\sqrt{5}, 1/\sqrt{5})^\intercal$ and $\vect{v}_{\lambda_2}'=(1/\sqrt{5}, 2/\sqrt{5})^\intercal$
+  as the unit eigenvectors associated to $\vect{v}_{\lambda_1}$ and $\vect{v}_{\lambda_2}.$
+  Therefore, the matrices $P = \left( \begin{matrix} \vect{v}_{\lambda_1}' & \vect{v}_{\lambda_2}' \end{matrix} \right)$ and
+  $\Lambda = \left( \begin{matrix} 10 & 0 \\ 0 & 5 \end{matrix} \right)$ form the
+  diagonalization of $\Sigma = P \Lambda P^\intercal.$
+
+  Thus, $\Sigma^{-1/2} = P \Lambda^{-1/2} P^\intercal$ is the matrix satisfying
+  $\vect{Z} = \Sigma^{-1/2}(\vect{X} - \vect{\mu})$ where $\vect{Z}$ has a
+  standard normal distribution.
+
+  Therefore,
+
+  \begin{align*}
+    \Sigma^{-1/2}
+    &= P \Lambda^{-1/2} P^\intercal \\
+    &= \begin{pmatrix} \dfrac{-2}{\sqrt{5}} & \dfrac{1}{\sqrt{5}} \\ \dfrac{1}{\sqrt{5}} & \dfrac{2}{\sqrt{5}} \end{pmatrix}
+    \begin{pmatrix} \dfrac{1}{\sqrt{10}} & 0 \\ 0 & \dfrac{1}{\sqrt{5}} \end{pmatrix}
+    \begin{pmatrix} \dfrac{-2}{\sqrt{5}} & \dfrac{1}{\sqrt{5}} \\ \dfrac{1}{\sqrt{5}} & \dfrac{2}{\sqrt{5}} \end{pmatrix} \\
+    &= \begin{pmatrix} \dfrac{-2}{\sqrt{50}} & \dfrac{1}{5} \\ \dfrac{1}{\sqrt{50}} & \dfrac{2}{5} \end{pmatrix} \begin{pmatrix} \dfrac{-2}{\sqrt{5}} & \dfrac{1}{\sqrt{5}} \\ \dfrac{1}{\sqrt{5}} & \dfrac{2}{\sqrt{5}} \end{pmatrix}\\
+    &= \begin{pmatrix} \dfrac{4}{5\sqrt{10}} + \dfrac{1}{5\sqrt{5}} & \dfrac{-2}{5\sqrt{10}} + \dfrac{2}{5\sqrt{5}} \\ \dfrac{-2}{5\sqrt{10}} + \dfrac{2}{5\sqrt{5}} & \dfrac{1}{5\sqrt{10}} + \dfrac{4}{5\sqrt{5}} \end{pmatrix}\\
+    &= \begin{pmatrix} \dfrac{4 + \sqrt{2}}{5\sqrt{10}} & \dfrac{-2 + 2\sqrt{2}}{5\sqrt{10}} \\ \dfrac{-2 + 2\sqrt{2}}{5\sqrt{10}} & \dfrac{1 + 4\sqrt{2}}{5\sqrt{10}} \end{pmatrix} \\
+  \end{align*}
+  is the desired matrix.
+
+\end{proof}
+
+% Problem 7
+\begin{problem}
+  Let $\vect{X} = (X_1, X_2) \sim N(\vect{\mu}, \Sigma)$ where
+  $\vect{\mu} = (\mu_1, \mu_2)^\intercal$ and $\Sigma = \begin{pmatrix} \sigma_1^2 & \rho\sigma_1\sigma_2 \\ \rho\sigma_1\sigma_2 & \sigma_2^2 \end{pmatrix}.$
+  Show that the probability density function of $\vect{X}$, $f(\vect{x})$, for $\vect{x} = (x_1, x_2)^\intercal$ is
+  \[
+    f(\vect{x}) = \frac{1}{2\pi \sqrt{\sigma_1^2\sigma_2^2(1 - \rho^2)}} \exp\left\{ -\frac{1}{2(1 - \rho^2)} \left[ \frac{(x_1 - \mu_1)^2}{\sigma_1^2} + \frac{-2\rho(x_1 - \mu_1)(x_2 - \mu_2)}{\sigma_1\sigma_2} + \frac{(x_2 - \mu_2)^2}{\sigma_2^2}\right] \right\}.
+  \]
+\end{problem}
+
+\begin{proof}
+  By definition, if $\vect{X} \sim N(\vect{\mu}, \Sigma)$, then
+
+  \begin{align}\label{multivariate}
+    f(\vect{x}) = (2\pi)^{-\frac{n}{2}} (\det{\Sigma})^{-\frac{1}{2}} \exp\left\{ -\frac{1}{2} (\vect{x} - \vect{\mu})^\intercal \Sigma^{-1} (\vect{x} - \vect{\mu}) \right\}
+  \end{align}
+
+  Note, since $n=2$ in this case, we need only find $\det{\Sigma}$,
+  $\Sigma^{-1}$, and $\vect{x} - \vect{\mu}$ to find the desired probability
+  density function $f(\vect{x})$.
+
+  Since $\Sigma = \begin{pmatrix} \sigma_1^2 & \rho\sigma_1\sigma_2 \\ \rho\sigma_1\sigma_2 & \sigma_2^2 \end{pmatrix}$ is
+  a $2 \times 2$ matrix, it's clear that $\det{\Sigma} = \sigma_1^2\sigma_2^2 - (\rho\sigma_1\sigma_2)^2$.
+  Again, since $\Sigma$ is a $2 \times 2$ matrix, we can use $\det{\Sigma}$ to
+  calculate $\Sigma^{-1}$. Thus,
+
+  \[
+    \Sigma^{-1} = \begin{pmatrix} \dfrac{\sigma_2^2}{\sigma_1^2\sigma_2^2 - (\rho\sigma_1\sigma_2)^2} & -\dfrac{\rho\sigma_1\sigma_2}{\sigma_1^2\sigma_2^2 - (\rho\sigma_1\sigma_2)^2} \\ -\dfrac{\rho\sigma_1\sigma_2}{\sigma_1^2\sigma_2^2 - (\rho\sigma_1\sigma_2)^2} & \dfrac{\sigma_1^2}{\sigma_1^2\sigma_2^2 - (\rho\sigma_1\sigma_2)^2} \end{pmatrix}.
+  \]
+
+  Finally, $(\vect{x} - \vect{\mu}) = (x_1 - \mu_1, x_2 - \mu_2)^\intercal$. Using
+  these computations and the definition in \eqref{multivariate}, it is
+  straightforward that
+
+  \begin{align*}
+    f(\vect{x})
+    &= (2\pi)^{-\frac{n}{2}} (\det{\Sigma})^{-\frac{1}{2}} \exp\left\{ -\frac{1}{2} (\vect{x} - \vect{\mu})^\intercal \Sigma^{-1} (\vect{x} - \vect{\mu}) \right\} \\
+    &= (2\pi)^{-1} (\sigma_1^2\sigma_2^2 - (\rho\sigma_1\sigma_2)^2)^{-\frac{1}{2}} \exp\left\{ -\frac{1}{2} (x_1 - \mu_1, x_2 - \mu_2)^\intercal \Sigma^{-1} \begin{pmatrix}x_1 - \mu_1 \\ x_2 - \mu_2\end{pmatrix} \right\} \\
+    &= \frac{1}{2\pi\sqrt{\sigma_1^2\sigma_2^2(1 - \rho^2)}} \exp\left\{ -\frac{(\sigma_2^2(x_1-\mu_1)^2 -2\rho\sigma_1\sigma_2(x_1 - \mu_1)(x_2 - \mu_2) + \sigma_1^2(x_2 - \mu_2)^2)}{2(\sigma_1^2\sigma_2^2 - (\rho\sigma_1\sigma_2)^2)}  \right\} \\
+    &= \frac{1}{2\pi\sqrt{\sigma_1^2\sigma_2^2(1 - \rho^2)}} \exp\left\{ -\frac{1}{2(1-p^2)} \left[ \frac{(x_1 - \mu_1)^2}{\sigma_1^2} + \frac{-2\rho(x_1 - \mu_1)(x_2 - \mu_2)}{\sigma_1\sigma_2} + \frac{(x_2 - \mu_2)^2}{\sigma_2^2} \right]\right\},
+  \end{align*}
+  as desired.
+
+\end{proof}
+
+
+\end{document}

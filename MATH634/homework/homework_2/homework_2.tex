@@ -1,0 +1,236 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, breqn}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+
+
+\title{Homework Assignment 2}
+\author{Matthew Tiger}
+
+
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\pdf}{\text{pdf}}
+\newcommand{\pmf}{\text{pmf}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Suppose that $\vect{X_1} \sim N(\vect{\mu}, \Sigma)$. Show that $\vect{Y} = \vect{a} + B\vect{X}$
+  is also a multivariate normal random vector and specify the mean and covariance
+  matrix of $Y$.
+\end{problem}
+
+\begin{proof}
+  Note that a vector $\vect{X}$ is a multivariate normal random vector if
+  and only if every linear combination of its
+  components is a univariate normal random variable. Suppose that $\vect{X} = (X_1, X_2, \dots, X_n)^\intercal$.
+  Then we have that
+  \begin{align*}
+    \vect{Y}
+    &= \vect{a} + B\vect{X} \\
+    &= \begin{pmatrix} a_1 \\ a_2 \\ \vdots \\ a_m \end{pmatrix} + \begin{pmatrix} b_{11} & b_{12} & \cdots & b_{1n} \\ b_{21} & b_{22} & \cdots & b_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ b_{m1} & b_{m2} & \cdots & b_{mn} \end{pmatrix}\begin{pmatrix} X_1 \\ X_2 \\ \vdots \\ X_n \end{pmatrix} \\
+    &= \begin{pmatrix} a_1 + b_{11}X_1 + b_{12}X_2 + \dots + b_{1n}X_n \\ a_2 + b_{21}X_1 + b_{22}X_2 + \dots + b_{2n}X_n \\ \vdots \\ a_m + b_{m1}X_1 + b_{m2}X_2 + \dots + b_{mn}X_n \end{pmatrix}
+  \end{align*}
+  From the above it is clear that every linear combination of the components of $\vect{Y}$ is some linear combination
+  of $\vect{X}$. Therefore, it follows that since
+  $\vect{X}$ is a multivariate random vector, so must $\vect{Y} = \vect{a} + B\vect{X}$.
+
+  Now all that is left is to describe the mean $\vect{\mu_Y}$ and the covariance
+  matrix $\Sigma_{\vect{Y}\vect{Y}}$. We begin with $\vect{\mu_Y}$, where due to the linearity
+  of the expectation operator
+  \begin{align*}
+    \E(\vect{Y})
+    &= \E(\vect{a} + B\vect{X}) \\
+    &= \vect{a} + \E(B\vect{X}) \\
+    &= \vect{a} + \E\left(\begin{pmatrix} b_{11} & b_{12} & \cdots & b_{1n} \\ b_{21} & b_{22} & \cdots & b_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ b_{m1} & b_{m2} & \cdots & b_{mn} \end{pmatrix}\begin{pmatrix} X_1 \\ X_2 \\ \vdots \\ X_n \end{pmatrix}\right) \\
+    &= \vect{a} + \E\left(\begin{pmatrix} b_{11}X_1 + b_{12}X_2 + \dots + b_{1n}X_n \\ b_{21}X_1 + b_{22}X_2 + \dots + b_{2n}X_n \\ \vdots \\ b_{m1}X_1 + b_{m2}X_2 + \dots + b_{mn}X_n \end{pmatrix}\right) \\
+    &= \vect{a} + \begin{pmatrix} b_{11}\E(X_1) + b_{12}\E(X_2) + \dots + b_{1n}\E(X_n) \\ b_{21}\E(X_1) + b_{22}\E(X_2) + \dots + b_{2n}\E(X_n) \\ \vdots \\ b_{m1}\E(X_1) + b_{m2}\E(X_2) + \dots + b_{mn}\E(X_n) \end{pmatrix} \\
+    &= \vect{a} + \begin{pmatrix} b_{11} & b_{12} & \cdots & b_{1n} \\ b_{21} & b_{22} & \cdots & b_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ b_{m1} & b_{m2} & \cdots & b_{mn} \end{pmatrix} \begin{pmatrix} \E(X_1) \\ \E(X_2) \\ \vdots \\ \E(X_n) \end{pmatrix} \\
+    &= \vect{a} + B\E(\vect{X}) = \vect{a} + B\vect{\mu}.
+  \end{align*}
+  Now, knowing the linearity of the expectation operator for random vectors, we see that
+  \begin{align*}
+    \Sigma_{\vect{Y}\vect{Y}}
+    &= \E((\vect{Y} - \E(\vect{Y}))(\vect{Y} - \E(\vect{Y}))^\intercal) \\
+    &= \E(\vect{Y}\vect{Y}^\intercal) - \E(\vect{Y})\E(\vect{Y})^\intercal \\
+    &= \E((\vect{a} + B\vect{X})(\vect{a} + B\vect{X})^\intercal) - (\vect{a} + B \E(\vect{X}))(\vect{a} + B \E(\vect{X}))^\intercal \\
+    &= \E((\vect{a} + B\vect{X})(\vect{a}^\intercal + \vect{X}^\intercal B^\intercal)) - (\vect{a} + B \E(\vect{X}))(\vect{a}^\intercal + \E(\vect{X})^\intercal B^\intercal) \\
+    &= \E(\vect{a}\vect{a}^\intercal + \vect{a}\vect{X}^\intercal B^\intercal+  B\vect{X}\vect{a}^\intercal +  B\vect{X}\vect{X}^\intercal B^\intercal) \\ & \hspace{5mm}- \vect{a}\vect{a}^\intercal - \vect{a}\E(\vect{X})^\intercal B^\intercal - B \E(\vect{X}) \vect{a}^\intercal - B\E(\vect{X}) \E(\vect{X})^\intercal B^\intercal) \\
+    &= \E(\vect{a}\vect{a}^\intercal) + \E(\vect{a}\vect{X}^\intercal B^\intercal) +  \E(B\vect{X}\vect{a}^\intercal) +  \E(B\vect{X}\vect{X}^\intercal B^\intercal) \\ & \hspace{5mm}- \vect{a}\vect{a}^\intercal - \vect{a}\E(\vect{X})^\intercal B^\intercal - B \E(\vect{X}) \vect{a}^\intercal - B\E(\vect{X}) \E(\vect{X})^\intercal B^\intercal) \\
+    &= \E(\vect{a}\vect{a}^\intercal) + \E(\vect{a}\vect{X}^\intercal B^\intercal) +  \E(B\vect{X}\vect{a}^\intercal) +  \E(B\vect{X}\vect{X}^\intercal B^\intercal) \\ & \hspace{5mm}- \vect{a}\vect{a}^\intercal - \vect{a}\E(\vect{X})^\intercal B^\intercal - B \E(\vect{X}) \vect{a}^\intercal - B\E(\vect{X}) \E(\vect{X})^\intercal B^\intercal) \\
+    &= \vect{a}\vect{a}^\intercal + \vect{a}\E(\vect{X})^\intercal B^\intercal +  B\E(\vect{X})\vect{a}^\intercal +  B\E(\vect{X}\vect{X}^\intercal) B^\intercal \\ & \hspace{5mm}- \vect{a}\vect{a}^\intercal - \vect{a}\E(\vect{X})^\intercal B^\intercal - B \E(\vect{X}) \vect{a}^\intercal - B\E(\vect{X}) \E(\vect{X})^\intercal B^\intercal) \\
+    &= B\E(\vect{X}\vect{X}^\intercal)B^\intercal - B\E(\vect{X})\E(\vect{X})^\intercal B^\intercal = B \Sigma_{\vect{X}\vect{X}} B^\intercal.
+  \end{align*}
+\end{proof}
+
+
+% Problem 2
+\begin{problem}
+  Suppose that $\vect{X} \sim N(\vect{\mu}, \Sigma)$ where
+  $\vect{X} = \begin{pmatrix} \vect{X_1} \\ \vect{X_2} \end{pmatrix}$ and
+  $\vect{X_1} \sim N(\vect{\mu_1}, \Sigma_{11})$ and $\vect{X_2} \sim N(\vect{\mu_2}, \Sigma_{22})$ so that
+  $\vect{\vect{\mu}} = \begin{pmatrix} \vect{\mu_1} \\ \vect{\mu_2} \end{pmatrix}$ and
+  $\Sigma = \begin{pmatrix} \Sigma_{11}& \Sigma_{12} \\ \Sigma_{21} & \Sigma_{22} \end{pmatrix}$.
+  Find $f_{\vect{X_2}|\vect{X_1}}(\vect{x_2}|\vect{x_1})$, the
+  conditional distribution of $\vect{X_2}$ given $\vect{X_1}=\vect{x_1}$.
+\end{problem}
+
+\begin{proof}
+   Note that $f_{\vect{X_2}|\vect{X_1}}(\vect{x_2}|\vect{x_1})$, the conditional
+   distribution of $\vect{X_2}$ given $\vect{X_1} = \vect{x_1}$, is
+   \begin{align}\label{conditional}
+     f_{\vect{X_2}|\vect{X_1}}(\vect{x_2}|\vect{x_1}) = \frac{f_{\vect{X_1}, \vect{X_2}}(\vect{x_1}, \vect{x_2})}{f_{\vect{X_1}}(\vect{x_1})}
+   \end{align}
+   where $f_{\vect{X_1}, \vect{X_2}}(\vect{x_1}, \vect{x_2})$ is the joint distribution
+   of $\vect{X_1}$ and $\vect{X_2}$ and $f_{\vect{X_1}}(\vect{x_1})$ is the
+   marginal distribution of $\vect{X_1}$ given by
+   \begin{align}\label{marginal}
+     f_{\vect{X_1}}(\vect{x_1}) = \int_{-\infty}^\infty f_{\vect{X_1}, \vect{X_2}}(\vect{x_1}, \vect{x_2}) \diff \vect{x_2}.
+   \end{align}
+   Note that the joint distribution of $\vect{X_1}$ and $\vect{X_2}$ is the
+   same as the distribution of $\vect{X}$ since $\vect{X}$ is a partition of
+   $\vect{X_1}$ and $\vect{X_2}$. Since we know  $\vect{X} \sim N(\vect{\mu}, \Sigma)$,
+   it is clear that
+   \begin{align}\label{joint}
+     f_{\vect{X_1}, \vect{X_2}}(\vect{x_1}, \vect{x_2}) = f_{\vect{X}}(\vect{x}) = (2\pi) ^ {-\frac{n}{2}} \left|\Sigma\right|^{-\frac{1}{2}} \exp{\left\{-\frac{1}{2}(\vect{x} - \vect{\mu})^\intercal \Sigma ^{-1} (\vect{x} - \vect{\mu})\right\}}
+   \end{align}
+   where $n$ is the length of $\vect{X}$. Using the above partition of
+   $\vect{X}$ and $\vect{\mu}$ as stated in the problem, we can rewrite
+   \eqref{joint} as
+   \begin{align}\label{partition_joint}
+     f_{\vect{X}}(\vect{x})
+     &= (2\pi) ^ {-\frac{(n_1 + n_2)}{2}} \left| \Sigma  \right|^{-\frac{1}{2}} \exp{\left\{-\frac{1}{2}\begin{pmatrix} (\vect{x_1} - \vect{\mu_1})^\intercal \\ (\vect{x_2} - \vect{\mu_2})^\intercal \end{pmatrix}^\intercal \Sigma ^{-1} \begin{pmatrix}\vect{x_1} - \vect{\mu_1} \\ \vect{x_2} - \vect{\mu_2} \end{pmatrix} \right\}}
+   \end{align}
+   where $n_1$ is the length of $\vect{X_1}$ and $n_2$ is the length of
+   $\vect{X_2}$.
+
+   It is clear that the partitioned matrix $\Sigma$ is symmetric since
+   \begin{align*}
+     \Sigma
+     &= \begin{pmatrix} \Sigma_{11} & \Sigma_{12} \\ \Sigma_{21} & \Sigma_{22} \end{pmatrix} \\
+     &= \begin{pmatrix} \Sigma_{11}^\intercal & \Sigma_{21}^\intercal \\ \Sigma_{12}^\intercal & \Sigma_{22}^\intercal \end{pmatrix} = \Sigma ^\intercal
+   \end{align*}
+   due to the symmetry of $\Sigma_{11}$ and $\Sigma_{22}$ and the fact that $\Sigma_{12} ^ \intercal = \Sigma_{21}$
+   and $\Sigma_{21} ^ \intercal = \Sigma_{12}$.
+
+   Using this partitioned matrix's symmetric property, we can find the determinant
+   as such
+   \begin{align}\label{determinant}
+     \left| \Sigma \right|
+     &= \left| \begin{matrix} \Sigma_{11} & \Sigma_{12} \\ \Sigma_{12}^\intercal & \Sigma_{22} \end{matrix} \right| \notag \\
+     &= \left| \begin{matrix} \Sigma_{11} & 0 \\ \Sigma_{12}^\intercal & I \end{matrix} \right| \left| \begin{matrix} I & \Sigma_{11}^{-1}\Sigma_{12} \\ 0  & \Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12} \end{matrix} \right| \notag \\
+     &= \left| \Sigma_{11} \right| \left| \Sigma_{22} - \Sigma_{12}^\intercal \Sigma_{11}^{-1} \Sigma_{12}\right|
+   \end{align}
+   using the property of determinants of block matrices where one entry is $0$.
+
+   Since $\Sigma$ is symmetric it must also follow that $\Sigma^{-1}$ is
+   symmetric. Say $\Sigma^{-1} = \begin{pmatrix} B_{11} & B_{12} \\ B_{21} & B_{22}\end{pmatrix}$.
+   Then the symmetric property of $\Sigma^{-1}$ tells us that $B_{12} ^\intercal = B_{21}$,
+   meaning that to find $\Sigma^{-1}$ we only need to find $B_{11}$, $B_{12}$, and $B_{22}$.
+
+   Using the formula for the inverse of a block matrix and the symmetric property
+   of $\Sigma$, we have that
+   \begin{align}\label{inverse}
+     B_{11} &= (\Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{12}^\intercal)^{-1} \notag \\
+     B_{12} &= -\Sigma_{11}^{-1}\Sigma_{12}(\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1} \notag \\
+     B_{22} &= (\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1}.
+   \end{align}
+   The formula $(A + BCD)^{-1} = A^{-1} - A^{-1}B(C^{-1} - DA^{-1}B)^{-1}DA^{-1}$ informs
+   us that
+   \begin{align}\label{b11_inverse}
+     B_{11}
+     &= (\Sigma_{11} - \Sigma_{12}\Sigma_{22}^{-1}\Sigma_{12}^\intercal)^{-1} \notag \\
+     &= \Sigma_{11}^{-1} + \Sigma_{11}^{-1} \Sigma_{12} (\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1} \Sigma_{12}^\intercal \Sigma_{11}^{-1}.
+   \end{align}
+
+   Combining the formulas found in \eqref{inverse} and \eqref{b11_inverse}, we can
+   see that the expression in the exponential of \eqref{partition_joint} can be simplified as
+   \begin{align}\label{exponential}
+     -\frac{1}{2}\begin{pmatrix} (\vect{x_1} - \vect{\mu_1})^\intercal \\ (\vect{x_2} - \vect{\mu_2})^\intercal \end{pmatrix}^\intercal \Sigma ^{-1} \begin{pmatrix}\vect{x_1} - \vect{\mu_1} \\ \vect{x_2} - \vect{\mu_2} \end{pmatrix}
+     &= -\frac{1}{2}\begin{pmatrix} (\vect{x_1} - \vect{\mu_1})^\intercal \\ (\vect{x_2} - \vect{\mu_2})^\intercal \end{pmatrix}^\intercal \begin{pmatrix} B_{11} & B_{12} \\ B_{12}^\intercal & B_{22} \end{pmatrix} \begin{pmatrix}\vect{x_1} - \vect{\mu_1} \\ \vect{x_2} - \vect{\mu_2} \end{pmatrix} \notag \\
+     &= -\frac{1}{2} \begin{pmatrix} (\vect{x_1} - \vect{\mu_1})^\intercal B_{11} + (\vect{x_2} - \vect{\mu_2})^\intercal B_{12}^\intercal \\ (\vect{x_1} - \vect{\mu_1})^\intercal B_{12} + (\vect{x_2} - \vect{\mu_2})^\intercal B_{22} \end{pmatrix} ^ \intercal \begin{pmatrix}\vect{x_1} - \vect{\mu_1} \\ \vect{x_2} - \vect{\mu_2} \end{pmatrix} \notag \\
+     &= -\frac{1}{2} ( (\vect{x_1} - \vect{\mu_1})^\intercal B_{11} (\vect{x_1} - \vect{\mu_1}) + (\vect{x_2} - \vect{\mu_2})^\intercal B_{12}^\intercal (\vect{x_1} - \vect{\mu_1}) \notag \\ & \hspace{5mm} + (\vect{x_1} - \vect{\mu_1})^\intercal B_{12} (\vect{x_2} - \vect{\mu_2}) + (\vect{x_2} - \vect{\mu_2})^\intercal B_{22} (\vect{x_2} - \vect{\mu_2}) )  \notag \\
+     &= -\frac{1}{2} ( (\vect{x_1} - \vect{\mu_1})^\intercal B_{11} (\vect{x_1} - \vect{\mu_1}) + 2(\vect{x_1} - \vect{\mu_1})^\intercal B_{12} (\vect{x_2} - \vect{\mu_2})  \notag \\ & \hspace{5mm} + (\vect{x_2} - \vect{\mu_2})^\intercal B_{22} (\vect{x_2} - \vect{\mu_2}) ) \notag \\
+     &= -\frac{1}{2} G(\vect{x_1}, \vect{x_2})
+   \end{align}
+   where we make use of the fact $u^\intercal A v = v ^\intercal A^\intercal u$
+   to show that
+   \[
+     (\vect{x_2} - \vect{\mu_2})^\intercal B_{12}^\intercal (\vect{x_1} - \vect{\mu_1}) = (\vect{x_1} - \vect{\mu_1})^\intercal B_{12} (\vect{x_2} - \vect{\mu_2})
+   \]
+   to arrive at the above.
+
+   Substituting $B_{ij}$ with the derivations in \eqref{inverse} and
+   \eqref{b11_inverse} into $G(\vect{x_1}, \vect{x_2})$ we can see that
+   \begin{align}\label{exp_eval}
+     G(\vect{x_1}, \vect{x_2})
+     &= (\vect{x_1} - \vect{\mu_1})^\intercal B_{11} (\vect{x_1} - \vect{\mu_1}) + 2(\vect{x_1} - \vect{\mu_1})^\intercal B_{12} (\vect{x_2} - \vect{\mu_2}) \notag \\  & \hspace{5mm} + (\vect{x_2} - \vect{\mu_2})^\intercal B_{22} (\vect{x_2} - \vect{\mu_2}) \notag \\
+     &= (\vect{x_1} - \vect{\mu_1})^\intercal (\Sigma_{11}^{-1} + \Sigma_{11}^{-1} \Sigma_{12} (\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1} \Sigma_{12}^\intercal \Sigma_{11}^{-1}) (\vect{x_1} - \vect{\mu_1}) \notag \\ & \hspace{5mm} - 2(\vect{x_1} - \vect{\mu_1})^\intercal (\Sigma_{11}^{-1}\Sigma_{12}(\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1}) (\vect{x_2} - \vect{\mu_2}) \notag \\  & \hspace{5mm} + (\vect{x_2} - \vect{\mu_2})^\intercal ((\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1}) (\vect{x_2} - \vect{\mu_2}) \notag \\
+     &= (\vect{x_1} - \vect{\mu_1})^\intercal \Sigma_{11}^{-1} (\vect{x_1} - \vect{\mu_1}) \notag \\ & \hspace{5mm} + (\vect{x_1} - \vect{\mu_1})^\intercal (\Sigma_{11}^{-1} \Sigma_{12} (\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1} \Sigma_{12}^\intercal \Sigma_{11}^{-1}) (\vect{x_1} - \vect{\mu_1}) \notag \\ & \hspace{5mm} - (\vect{x_1} - \vect{\mu_1})^\intercal (\Sigma_{11}^{-1}\Sigma_{12}(\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1}) (\vect{x_2} - \vect{\mu_2}) \notag \\  & \hspace{5mm} - (\vect{x_1} - \vect{\mu_1})^\intercal (\Sigma_{11}^{-1}\Sigma_{12}(\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1}) (\vect{x_2} - \vect{\mu_2}) \notag \\  & \hspace{5mm} + (\vect{x_2} - \vect{\mu_2})^\intercal ((\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1}) (\vect{x_2} - \vect{\mu_2}) \notag \\
+     &= (\vect{x_1} - \vect{\mu_1})^\intercal \Sigma_{11}^{-1} (\vect{x_1} - \vect{\mu_1}) \notag \\ & \hspace{5mm} + (\vect{x_2} - (\vect{\mu_2} + \Sigma_{12}^\intercal\Sigma_{11}^{-1}(\vect{x_1} - \vect{\mu_1})) )^\intercal (\Sigma_{22} - \Sigma_{12}^\intercal\Sigma_{11}^{-1}\Sigma_{12})^{-1} (\vect{x_2} - (\vect{\mu_2} + \Sigma_{12}^\intercal\Sigma_{11}^{-1}(\vect{x_1} - \vect{\mu_1})) ) \notag \\
+     &= g_1(\vect{x_1}) + g_2(\vect{x_2})
+   \end{align}
+
+   Now, the above and \eqref{determinant} show that the joint distribution
+   \eqref{partition_joint} is
+   \begin{align}
+     f_{\vect{X}}(\vect{x})
+     &= (2\pi) ^ {-\frac{(n_1 + n_2)}{2}} \left| \Sigma  \right|^{-\frac{1}{2}} \exp{\left\{-\frac{1}{2} G(\vect{x_1}, \vect{x_2})\right\}} \notag \\
+     &= (2\pi) ^ {-\frac{n_1}{2}} (2\pi) ^ {-\frac{n_2}{2}} \left| \Sigma_{11} \right| ^ {-\frac{1}{2}} \left| \Sigma_{22} - \Sigma_{12}^\intercal \Sigma_{11}^{-1} \Sigma_{12}\right| ^ {-\frac{1}{2}} \exp{\left\{-\frac{1}{2}g(\vect{x_1})\right\}}\exp{\left\{-\frac{1}{2}g(\vect{x_2})\right\}} \notag \\
+     &= (2\pi) ^ {-\frac{n_1}{2}} \left| \Sigma_{11} \right| ^ {-\frac{1}{2}} \exp{\left\{-\frac{1}{2}g(\vect{x_1})\right\}} (2\pi) ^ {-\frac{n_2}{2}} \left| \Sigma_{22} - \Sigma_{12}^\intercal \Sigma_{11}^{-1} \Sigma_{12}\right| ^ {-\frac{1}{2}} \exp{\left\{-\frac{1}{2}g(\vect{x_2})\right\}} \notag \\
+     &= \pdf(\vect{\mu_1}, \Sigma_{11}) \pdf(\vect{\mu_2} + \Sigma_{12}^\intercal\Sigma_{11}^{-1}(\vect{x_1} - \vect{\mu_1}), \Sigma_{22} - \Sigma_{12}^\intercal \Sigma_{11}^{-1} \Sigma_{12})
+   \end{align}
+   where $\pdf(\vect{\mu}, \Sigma)$ is the multivariate normal density function
+   with mean $\vect{\mu}$ and covariance matrix $\Sigma$. It is clear with this
+   definition of $f_{\vect{X_1}, \vect{X_2}}(\vect{x_1}, \vect{x_2})$ that
+   the marginal distribution of $\vect{X_1}$ is
+   \begin{align*}
+     f_{\vect{X_1}}(\vect{x_1})
+     &= \int_{-\infty}^\infty f_{\vect{X_1}, \vect{X_2}}(\vect{x_1}, \vect{x_2}) \diff \vect{x_2} \\
+     &= \int_{-\infty}^\infty \pdf(\vect{\mu_1}, \Sigma_{11}) \pdf(\vect{\mu_2} + \Sigma_{12}^\intercal\Sigma_{11}^{-1}(\vect{x_1} - \vect{\mu_1}), \Sigma_{22} - \Sigma_{12}^\intercal \Sigma_{11}^{-1} \Sigma_{12}) \diff \vect{x_2} \\
+     &= \pdf(\vect{\mu_1}, \Sigma_{11}) \int_{-\infty}^\infty \pdf(\vect{\mu_2} + \Sigma_{12}^\intercal\Sigma_{11}^{-1}(\vect{x_1} - \vect{\mu_1}), \Sigma_{22} - \Sigma_{12}^\intercal \Sigma_{11}^{-1} \Sigma_{12}) \diff \vect{x_2} \\
+     &= \pdf(\vect{\mu_1}, \Sigma_{11}).
+   \end{align*}
+
+   Therefore we know that the conditional distribution of $\vect{X_2}$ given $\vect{X_1} = \vect{x_1}$ is
+   \begin{align*}
+     f_{\vect{X_2}|\vect{X_1}}(\vect{x_2}|\vect{x_1})
+     &= \frac{f_{\vect{X_1}, \vect{X_2}}(\vect{x_1}, \vect{x_2})}{f_{\vect{X_1}}(\vect{x_1})} \\
+     &= \frac{\pdf(\vect{\mu_1}, \Sigma_{11}) \pdf(\vect{\mu_2} + \Sigma_{12}^\intercal\Sigma_{11}^{-1}(\vect{x_1} - \vect{\mu_1}), \Sigma_{22} - \Sigma_{12}^\intercal \Sigma_{11}^{-1} \Sigma_{12})}{\pdf(\vect{\mu_1}, \Sigma_{11})} \\
+     &= \pdf(\vect{\mu_2} + \Sigma_{12}^\intercal\Sigma_{11}^{-1}(\vect{x_1} - \vect{\mu_1}), \Sigma_{22} - \Sigma_{12}^\intercal \Sigma_{11}^{-1} \Sigma_{12}).
+   \end{align*}
+\end{proof}
+
+
+% Problem 3
+\begin{problem}
+  Suppose $X \sim N(\vect{\mu}, \Sigma)$, where $\vect{X} = \begin{pmatrix} X_1 \\ X_2 \end{pmatrix}$
+  and $X_1 \sim N(\mu_1, \sigma_1)$ and $X_2 \sim N(\mu_2, \sigma_2)$ so that
+  $\vect{\mu} = \begin{pmatrix} \mu_1 \\ \mu_2 \end{pmatrix}$ and
+  $\Sigma = \begin{pmatrix} \sigma_1 ^ 2 & \rho\sigma_1\sigma_2 \\ \rho\sigma_1\sigma_2 & \sigma_2 ^ 2\end{pmatrix}$.
+  Show that $X_1$ and $X_2$ are independent if and only if $\rho = 0$.
+\end{problem}
+
+\begin{proof}
+  Note that since $X_1$ and $X_2$ are normal random variables and
+  $\text{Cov}(X_1, X_2) = \rho\sigma_1\sigma_2$, we have in the degenerate case
+  that $X_1$ and $X_2$ are independent if and only if $\text{Cov}(X_1, X_2) = 0$
+  if and only if $\rho = 0$.
+\end{proof}
+
+
+
+\end{document}
