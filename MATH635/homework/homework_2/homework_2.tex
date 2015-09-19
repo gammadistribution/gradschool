@@ -1,0 +1,169 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, breqn}
+
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+
+\title{Homework Assignment 2}
+\author{Matthew Tiger}
+
+
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\pdf}{\text{pdf}}
+\newcommand{\pmf}{\text{pmf}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\MAT}{\texttt{MATLAB}\hspace{1.25mm}}
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Let $A = \begin{bmatrix} 4 & 1 & 0 & 0 \\ 1 & 4 & 1 & 0 \\ 0 & 1 & 4 & 1 \\ 0 & 0 & 1 & 4 \\\end{bmatrix}$. With \MAT, compute $\det A$.
+\end{problem}
+
+\begin{proof}
+  Entering the following into the \MAT console gives:
+  \begin{verbatim}>> A = [4 1 0 0; 1 4 1 0; 0 1 4 1; 0 0 1 4];
+>> det(A)
+
+ans =
+
+   209\end{verbatim}
+ Therefore, $\det A = 209.$
+\end{proof}
+
+
+% Problem 2
+\begin{problem}
+  Determine the rank of $A = \begin{bmatrix} 2 & 1 & 3 & 3 \\ 1 & 0 & -1 & 0 \\ a & 2 & 1 & 1 \\ 4 & 3 & 2 & 4 \end{bmatrix}$ as a function of $a$.
+  Check with \MAT and the function \texttt{rank} for different values of $a$.
+\end{problem}
+
+\begin{proof}
+  We know that $A$ has full rank, i.e. $\text{rank}(A) = 4$, if
+  $\det A \neq 0$. Running the following in the \MAT console shows:
+  \begin{verbatim}
+>> syms a;
+>> A = [2 1 3 3; 1 0 -1 0; a 2 1 1; 4 3 2 4];
+>> det(A)
+
+ans =
+
+5*a
+  \end{verbatim}
+  so that $\det A = 5a$. It is clear that $A$ has full rank if $a \neq 0$. When
+  $a = 0$, we can see using the \MAT console that
+  \begin{verbatim}
+>> A = [2 1 3 3; 1 0 -1 0; 0 2 1 1; 4 3 2 4];
+>> rank(A)
+
+ans =
+
+     3.
+  \end{verbatim}
+  This is because the Reduced Row Echelon form of the matrix has 3 leading entries as
+  \MAT can verify:
+  \begin{verbatim}
+>> A = [2 1 3 3; 1 0 -1 0; 0 2 1 1; 4 3 2 4];
+>> rref(A)
+
+ans =
+
+    1.0000         0         0    0.5556
+         0    1.0000         0    0.2222
+         0         0    1.0000    0.5556
+         0         0         0         0
+  \end{verbatim}
+  Therefore,
+  \[
+    \text{rank}(A) =
+    \begin{cases}
+      4 & a \neq 0 \\
+      3 & a = 0
+    \end{cases}
+  \]
+\end{proof}
+
+
+% Problem 3
+\begin{problem}
+  Let $A = \begin{bmatrix} 2 & 4 & 6 \\ 0 & 2 & 3 \\ 0 & 0 & 2\end{bmatrix}$. Define $B = A - 2I$.
+  \begin{enumerate}
+    \item Compute by hand $B^k$ for any $k\in \mathbb{N}.$
+    \item Find $A^n$ for $n \in \mathbb{N}.$
+    \item Compute $\left(I + \frac{B}{2}\right) \left(I - \frac{B}{2} + \frac{B^2}{4}\right)$
+    \item Find $A^{-n}$ for $n \in \mathbb{N}.$
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+
+ \begin{enumerate}
+    \item Note that $B = A - 2I = \begin{bmatrix}0 & 4 & 6 \\ 0 & 0 & 3 \\ 0 & 0 & 0\end{bmatrix}$
+      is a nilpotent matrix since it is an upper triangular matrix where each
+      entry along the diagonal is a $0$. Thus, $B^k = 0$ for $k \geq 3$ and we
+      need only compute $B^2$ to find all $B^k$ for $k \in \mathbb{N}$.
+      It is easy to see that
+      \[
+        B^2 = \begin{bmatrix}0 & 4 & 6 \\ 0 & 0 & 3 \\ 0 & 0 & 0\end{bmatrix} \begin{bmatrix}0 & 4 & 6 \\ 0 & 0 & 3 \\ 0 & 0 & 0\end{bmatrix} = \begin{bmatrix}0 & 0 & 12 \\ 0 & 0 & 0 \\ 0 & 0 & 0\end{bmatrix}
+      \]
+      and we are done.
+    \item It is clear that $A = B + 2I$, so that $A^n = (B + 2I)^n$. Since $B$ and
+      $2I$ commute, we can use the binomial theorem to find $(B + 2I)^n$. Thus,
+      \begin{align*}
+        A^n
+        &= (B + 2I)^n \\
+        &= \sum_{k=0}^n {n \choose k} B^{n-k} (2I)^k \\
+        &= \sum_{k=0}^n 2 ^k {n \choose k} B^{n-k},
+      \end{align*}
+      where we take special note that $B^{n-k} = 0$ if $n - k \geq 3$
+    \item It is easy to see that
+      \begin{align*}
+        \left(I + \frac{B}{2}\right) \left(I - \frac{B}{2} + \frac{B^2}{4}\right)
+        &= \left(I - \frac{B}{2} + \frac{B^2}{4}\right) \left(I + \frac{B}{2}\right) \\
+      \end{align*}
+      and
+      \begin{align*}
+        \left(I + \frac{B}{2}\right) \left(I - \frac{B}{2} + \frac{B^2}{4}\right) &= \left(I - \frac{B}{2} + \frac{B^2}{4} + \frac{B}{2} - \frac{B^2}{4} + \frac{B^3}{8}\right) = I,
+      \end{align*}
+      since $B^3 = 0$. Thus, $\left(I + \frac{B}{2}\right)^{-1} = \left(I - \frac{B}{2} + \frac{B^2}{4}\right)$.
+      Since $\frac{1}{2}A =  \left(I + \frac{B}{2}\right)$, $2A^{-1} = \left(I - \frac{B}{2} + \frac{B^2}{4}\right)$.
+      Therefore,
+      \begin{align*}
+        A^{-1} &= \left(\frac{I}{2} - \frac{B}{4} + \frac{B^2}{8}\right) \\
+        &= \begin{bmatrix}1/2 & -1 & -3/4\\ 0 & 1/2 & -3/4 \\ 0 & 0 & 1/2\end{bmatrix}.
+      \end{align*}
+    \item Note that $A^{-n} = (A^{-1})^n$. Using the same technique above,
+      define
+      \[
+        C = A^{-1} - \frac{1}{2}I
+      \] Then $C$ is a nilpotent
+      matrix and due to the reasons above, we need only calculate $C^2$, where
+      \begin{align*}
+        C^2 &= \begin{bmatrix}0 & -1 & -3/4\\ 0 & 0 & -3/4 \\ 0 & 0 & 0\end{bmatrix}\begin{bmatrix}0 & -1 & -3/4\\ 0 & 0 & -3/4 \\ 0 & 0 & 0\end{bmatrix} \\
+        &= \begin{bmatrix}0 & 0 & 3/4 \\ 0 & 0 & 0 \\ 0 & 0 & 0\end{bmatrix}.
+      \end{align*}
+      Since $A^{-1} = (C + \frac{1}{2}I)$ and we know that $C$ and $\frac{1}{2}I$
+      commute,
+      \begin{align*}
+        (A^{-1})^n
+        &= \left(C - \frac{1}{2}I\right)^n \\
+        &= \sum_{k=0}^n {n \choose k} C^{n-k} \left(-\frac{1}{2}I\right)^k \\
+        &= \sum_{k=0}^n \frac{(-1)^k}{2^k} {n \choose k} C^{n-k},
+      \end{align*}
+      where we take special note that $C^{n-k} = 0$ if $n - k \geq 3$.
+  \end{enumerate}
+\end{proof}
+
+
+\end{document}

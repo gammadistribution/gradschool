@@ -1,0 +1,187 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, breqn}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+
+
+\title{Homework Assignment 3}
+\author{Matthew Tiger}
+
+
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\pdf}{\text{pdf}}
+\newcommand{\pmf}{\text{pmf}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Let $A$ and $B$ be square $n \times n$ matrices and $x \in \mathbb{R}^{n \times 1}$ be
+  a column vector. Count the number of multiplications needed to compute
+  $(AB)x$ versus $A(Bx)$. Which one is better for large values of $n$?
+\end{problem}
+
+\begin{proof}
+  To determine the number of multiplications necessary to compute the product
+  $(AB)x$ we must find out how many multiplications it takes
+  to compute $AB = C$ and how many multiplications it takes to compute $Cx$.
+  Since $A$ and $B$ are square $n \times n$ matrices, each entry in their product
+  will require $n$ multiplications. Since $AB$ has $n^2$ entries, it will take
+  $n^3$ multiplications to compute $AB=C$. Now, $C$ is a square $n \times n$
+  matrix and $x$ is a $n \times 1$ matrix, so each entry in the product $Cx$ will
+  require $n$ multiplications. Since there are $n$ entries in $Cx$, the product
+  will require $n^2$ multiplications. Therefore, $n^3 + n^2$ multiplications
+  are necessary to compute $(AB)x$.
+
+  Similarly the number of multiplications necessary to compute $A(Bx)$ is
+  determined by the number of multiplications necessary to compute $Bx =D$
+  and $AD$. Since $Bx$ has $n$ entries and it takes $n$ multiplications to
+  compute each entry, it takes $n^2$ multiplications to compute $Bx$. For similar
+  reasons it takes $n^2$ multiplications to compute $AD$. Therefore,
+  it takes $2n^2$ multiplications to compute $A(Bx)$.
+
+  Clearly, it is better to compute $A(Bx)$ for large values of $n$ if the goal
+  is to reduce the number of multiplications necessary to compute the product.
+\end{proof}
+
+
+% Problem 2
+\begin{problem}
+  Let $A$ and $B$ be square $n \times n$ upper triangular matrices. Show that $C=AB$
+  is also upper triangular. How many multiplications are needed to compute
+  $C$?
+\end{problem}
+
+\begin{proof}
+  Note that a matrix $A = (a_{ij})$ is upper triangular if every entry of the
+  matrix below the main diagonal is $0$, i.e. if $a_{ij} = 0$ when $i > j$.
+
+  If $C = AB$, then it is clear that by definition $c_{ij} = \sum_{k=1}^n a_{ik} b_{kj}$. Thus,
+  the matrix product $C$ is upper triangular if $c_{ij} = 0$ when $i>j$. So, let's consider
+  $c_{ij}$ for which $1 \leq j < i \leq n$. Then
+  \begin{align}\label{prob2_sum}
+    c_{ij} = \sum_{k=1}^n a_{ik}b_{kj} = \sum_{k=1}^j a_{ik}b_{kj} + \sum_{k=j+1}^n a_{ik}b_{kj}
+  \end{align}
+  Now for $1 \leq k \leq j < i$, the entry $a_{ik} = 0$ since $A$ is upper triangular
+  showing that the left sum in \eqref{prob2_sum} is 0 and for $j < j + 1 \leq k \leq n$,
+  the entry $b_{kj}=0$ since $B$ is upper triangular showing that the right sum in
+  \eqref{prob2_sum} is 0. Therefore, $c_{ij} = 0$ for $i > j$ and $C$ is an upper triangular matrix.
+
+  To compute the number of multiplications necessary to compute this product, we
+  must determine what the other entries $c_{ij}$ are when $i \leq j$.
+
+  When $1 \leq i \leq j \leq n$,
+  $$c_{ij} = \sum_{k=1}^n a_{ik}b_{kj} = \sum_{k=1}^{i-1} a_{ik}b_{kj} + \sum_{k=i}^j a_{ik}b_{kj} + \sum_{k=j+1}^n a_{ik}b_{kj} = \sum_{k=i}^j a_{ik}b_{kj}$$
+  since $a_{ik} = 0$ for $1 \leq k \leq i-1$ due to the fact that $A$ is upper triangular
+  and $b_{kj} = 0$ for $j + 1 \leq k \leq n$ due to the fact that $B$ is upper triangular. Thus,
+  to compute the entry $c_{ij}$ when $i \leq j,$ there are $j - i + 1$ multiplications necessary to compute the entry
+  and 0 multiplications are necessary when $i > j$.
+
+  If $x(c_{ij})$ is the number of multiplications necessary to calculate the entry $c_{ij},$ then $X,$ the number
+  of computations necessary to calculate the product $C,$ using the above, is given by
+  \begin{align*}
+    X = \sum_{j=1} ^ n \sum_{i=1}^n x(c_{ij})
+    &= \sum_{j=1} ^ n \sum_{i=1}^j x(c_{ij}) \\
+    &= \sum_{j=1} ^ n \sum_{i=1}^j j - i + 1 \\
+    &= \frac{1}{2}\sum_{j=1} ^ n 2j^2 - j(j+1) + 2j \\
+    &= \frac{1}{2}\sum_{j=1} ^ n j^2 + j = \frac{n(n+1)(2n+1)}{12} + \frac{n(n+1)}{4} = \frac{n(n+1)(n+2)}{6}
+  \end{align*}
+  Therefore, the number of multiplications necessary to compute the product of
+  two $n \times n$ upper triangular matrices is, in general, $n(n+1)(n+2)/6$.
+\end{proof}
+
+
+% Problem 3
+\begin{problem}
+  Let $A$ be a square $n \times n$ upper triangular matrix. Show that
+  $A^{-1}$ is also upper triangular.
+\end{problem}
+
+\begin{proof}
+  Suppose a matrix $A$ is an upper triangular matrix. Then
+  \begin{align*}
+    A =
+    \begin{bmatrix}
+      a_{11} & a_{12} & \dots & a_{1n} \\
+      0 & a_{22} & \dots & a_{2n} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0 & 0 & \dots & a_{nn}
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+      a_{11} & 0 & \dots & 0 \\
+      0 & a_{22} & \dots & 0 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0 & 0 & \dots & a_{nn}
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+      0 & a_{12} & \dots & a_{1n} \\
+      0 & 0 & \dots & a_{2n} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0 & 0 & \dots & 0
+    \end{bmatrix}\\
+    &=
+    \begin{bmatrix}
+      a_{11} & 0 & \dots & 0 \\
+      0 & a_{22} & \dots & 0 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0 & 0 & \dots & a_{nn}
+    \end{bmatrix}
+    \left(
+      \begin{bmatrix}
+        1 & 0 & \dots & 0 \\
+        0 & 1 & \dots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \dots & 1
+      \end{bmatrix}
+      +
+      \begin{bmatrix}
+        0 & a_{12} & \dots & a_{1n} \\
+        0 & 0 & \dots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \dots & 0
+      \end{bmatrix}
+    \right)\\
+    &=
+    \Lambda (I + U)
+  \end{align*}
+  where $\Lambda$ is a diagonal matrix consisting of the main diagonal of $A$,
+  $I$ is the identity matrix, and $U$ is an upper triangular nilpotent matrix.
+
+  Using this definition of $A$, we can see easily that $A^{-1} = (I + U)^{-1} \Lambda^{-1}$.
+  Let $B =  I - U + U^2 + \dots + (-1)^{n}U^n$. Then it is easy to
+  see that $B$ commutes with $I+U$ and
+  \begin{align}
+    (I + U)B
+    &= (I + U)(I - U + U^2 + \dots + (-1)^{n}U^n) \notag \\
+    &= (I + U)\sum_{i=0}^n(-1)^i U^i \notag \\
+    &= \sum_{i=0}^n(-1)^i U^i + \sum_{i=0}^n(-1)^i U^{i+1} \notag \\
+    &= I + \sum_{i=1}^n(-1)^i U^i + \sum_{i=1}^{n}(-1)^{i-1} U^{i} + U^{n+1} \notag \\
+    &= I + \sum_{i=1}^n \left((-1)^i +1^{i}\right) U^i + U^{n+1} =I + U^{n+1}.
+  \end{align}
+  Now $(I + U)B = I + U^{n+1} = I$ since
+  $U$ is a nilpotent matrix. Thus, $(I+U)^{-1} = B = I - U + U^2 + \dots + (-1)^{n}U^n$.
+  Note that since the sum of two upper triangular matrices is an upper triangular matrix
+  and the product of two upper triangular matrices is an upper triangular matrix,
+  $(I + U)^{-1} = I - U + U^2 + \dots + (-1)^{n}U^n$ is an upper triangular matrix since
+  $I$ and $U$ are upper triangular matrices.
+
+  Therefore, $A^{-1} = (I+U)^{-1}\Lambda^{-1}$
+  must be upper triangular since $\Lambda^{-1}$ is an upper triangular matrix.
+\end{proof}
+
+
+\end{document}
