@@ -88,4 +88,46 @@
 \end{proof}
 
 
+% Problem 2.5
+
+
+\begin{custompbm}{2.5}
+  Suppose that $\{X_t, t=0, \pm1, \dots\}$ is stationary and that $|\theta|<1$.
+  Show that for each fixed $n$ the sequence
+  \[
+    S_m = \sum_{j=1}^{m} \theta ^ j X_{n-j}
+  \]
+  is convergent absolutely and in mean square as $m \to \infty$.
+\end{custompbm}
+
+\begin{proof}
+  Let $a_j = \theta ^ j X_{n-j}$. Then to see that $S_m$ is convergent absolutely
+  as $m \to \infty$, notice that
+  \begin{align*}
+    S_m = \sum_{j=1}^{m} |a_j|
+    &= \sum_{j=1}^{m} |\theta ^ j X_{n-j}| \\
+    &= \sum_{j=1}^{m} |\theta| ^ j |X_{n-j}|\\
+    &\leq \sum_{j=1}^{m} |X_{n-j}|
+  \end{align*}
+
+  To see that $S_m$ is convergent in the mean square, it suffices to show that
+  $\E(S_m - S_l)^2 \to 0$ as $m, l \to \infty$.
+
+  Without loss of generality, assume that $m > l > 0$. Notice that
+  $S_m - S_l = \sum_{j=1}^m a_j - \sum_{j=1}^n a_j = \sum_{j=l+1}^{m} a_j$.
+  Thus, $$\E(S_m - S_l) = \E(\sum_{j=l+1}^{m} a_j) = \sum_{j=l+1}^m \E(a_j).$$
+  It is clear that $\E(a_j) = \E(\theta^j X_{n-j}) = \theta^j \E(X_{n-j})$. Since
+  $\{X_t\}$ is a stationary time series, its expectation does not depend on $t$,
+  so say $\E(X_{n-j}) = \mu_X$. Then
+  \begin{align*}
+    \E(S_m - S_l)
+    &= \sum_{j=l+1}^m \theta^j\E(X_{n-j}) \\
+    &=\mu_X \sum_{j=l+1}^m \theta^j \\
+    &= \frac{\mu_X\theta^{l+1}(1-\theta^{m-l-1})}{1-\theta}
+  \end{align*}
+  Since $|\theta| < 1$, it is clear then that $\E(S_m - S_l)^2 \to 0$ as $m,l \to \infty$
+  showing that $S_m$ is convergent in mean square for any $n$.
+\end{proof}
+
+
 \end{document}
