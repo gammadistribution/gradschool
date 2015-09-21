@@ -97,10 +97,14 @@
         &= \Co{Z_1 \cos(c(t+h))+ Z_2 \sin(c(t+h))} {Z_1 \cos(ct)+ Z_2 \sin(ct)} \\
         &= \cos(c(t+h))\cos(ct)\Co{Z_1}{Z_1} + \cos(c(t+h))\sin(ct)\Co{Z_1}{Z_2} \\
         & \hspace{5mm} + \sin(c(t+h))\cos(ct)\Co{Z_2}{Z_1} + \sin(c(t+h))\sin(ct)\Co{Z_2}{Z_2} \\
-        &= \cos(c(t+h))\cos(ct) \sigma^2 + \sin(c(t+h))\sin(ct) \sigma^2
+        &= \cos(c(t+h))\cos(ct) \sigma^2 + \sin(c(t+h))\sin(ct) \sigma^2 \\
+        &= \sigma^2(\cos^2(ct)\cos(ch) - \sin(ct)\sin(ch)\cos(ct) \\
+        &\hspace{5mm}+ \sin^2(ct)\cos(ch) + \cos(ct)\sin(ch)\sin(ct)) \\
+        &= \sigma^2 \cos(ch)
       \end{align*}
-      due to the independence of the random variables. As the covariance function
-      depends on $t$ this process is not stationary.
+      due to the independence of the random variables. Since the mean function
+      does not depend on $t$ and the covariance function does not depend on $t$
+      for each $h$, this process is stationary.
     \item The mean function of this process is given by
       \begin{align*}
         \mx &= \E(X_t) \\
@@ -280,28 +284,23 @@
   \begin{enumerate}
     \item Let the sample mean be defined as $\bar{x} = (X_1 + X_2 + \dots + X_n) / n$.
       We know that autocovariance function is given by
-      $\gamma_X(h) = (\phi ^ h \sigma^2) / (1 - \phi^2)$ using Example 1.4.5.
-      Therefore,
+      $\gamma_X(h) = (\sigma^2\phi ^ {|h|} ) / (1 - \phi^2)$ using Example 1.4.5.
+      Note that,
       \begin{align*}
         \V(\bar{x}) &= \Co{\bar{x}}{\bar{x}} \\
         &= \frac{1}{n^2}\text{Cov}\left(\sum_{i=1}^n X_i, \sum_{i=1}^n X_i\right) \\
-        &= \frac{1}{n^2}\sum_{i=1}^n\sum_{j=1}^n\Co{X_i}{X_j} = \frac{1}{n^2}\sum_{i=1}^n\sum_{j=1}^n \gamma_X(i,j) \\
-        &= \frac{1}{n^2}\left(\sum_{i=1}^n \gamma_X(i,1) + \sum_{i=1}^n \gamma_X(i,2) + \dots + \sum_{i=1}^n \gamma_X(i,n)\right)  \\
-        &= \frac{1}{n^2}\left(\sum_{i=0}^{n-1} \gamma_X(i) + \sum_{i=-1}^{n-2} \gamma_X(i) + \dots + \sum_{i=-(n-1)}^0 \gamma_X(i)\right)  \\
-        &= \frac{\sigma^2}{n^2(1-\phi^2)}\left(\sum_{h=0}^{n-1} \phi ^ h + \sum_{h=-1}^{n-2} \phi^h + \dots + \sum_{h=-(n-1)}^0 \phi^h\right)
+        &= \frac{1}{n^2}\sum_{i=1}^{n} \sum_{j=1}^n \gamma_X(i,j) \\
+        &= \frac{1}{n^2}\sum_{h=-n}^{n} (n - |h|)\gamma_X(h)\\
+        &= \frac{1}{n}\left[\gamma_X(0) + 2\sum_{h=1}^{n}\left(1-\frac{h}{n}\right)\gamma_X(h)\right].
       \end{align*}
-      after re-indexing the sums in terms of the autocovariance function. Additionally,
-      we can re-index the above sums so that
+      Using the autocovariance function $\gamma_X(h)$, we can see that
       \begin{align*}
-        \V(\bar{x}) &= \frac{\sigma^2}{n^2(1-\phi^2)}\left(\sum_{h=0}^{n-1} \phi ^ h + \sum_{h=-1}^{n-2} \phi^h + \dots + \sum_{h=-(n-1)}^0 \phi^h\right) \\
-        &= \frac{\sigma^2}{n^2(1-\phi^2)}\left(\sum_{h=0}^{n-1} \phi ^ h + \sum_{h=0}^{n-1} \phi^{h-1} + \dots + \sum_{h=0}^{n-1} \phi^{h-(n-1)}\right) \\
-        &= \frac{\sigma^2}{n^2(1-\phi^2)}\left(\sum_{h=0}^{n-1} \phi ^ h\right) \left(\phi^0 + \phi^{-1} + \dots + \phi^{-(n-1)}\right)\\
-        &= \frac{\sigma^2}{n^2(1-\phi^2)}\sum_{h=0}^{n-1} \phi ^ h \sum_{h=-(n-1)}^{0} \phi ^ h\\
-        &= \frac{\sigma^2}{n^2\phi^{n-1}(1-\phi^2)} \sum_{h=0}^{n-1} \phi ^ h\sum_{h=0}^{n-1} \phi ^ h
-        = \frac{\sigma^2(1-\phi^n)^2}{n^2\phi^{n-1}(1-\phi^2)(1-\phi)^2}
+        \V(\bar{x}) &= \frac{1}{n}\left[\gamma_X(0) + 2\sum_{h=1}^{n}\left(1-\frac{h}{n}\right)\gamma_X(h)\right] \\
+        &= \frac{1}{n}\left[\frac{\sigma^2}{1-\phi^2} + \frac{2\sigma^2}{1-\phi^2}\sum_{h=1}^n \left(1-\frac{h}{n}\right)\phi^h \right] \\
+        &= \frac{\sigma^2}{n(1-\phi^2)}\left[1 + 2\left(\sum_{h=1}^n \phi^h- \frac{1}{n}\sum_{h=1}^n h\phi^h \right)\right] \\
+        &= \frac{\sigma^2}{n(1-\phi^2)}\left[1 + 2\left(\frac{1-\phi^n}{1-\phi}- \frac{(n\phi - n - 1)\phi^{n+1} + \phi}{n(1-\phi)^2}\right)\right] \\
       \end{align*}
-      Now, for sample mean $\bar{x} = (X_1 + X_2 + X_3 + X_4) / 4$
-      when $\phi = 0.9$ and $\sigma^2 = 1$, we set $n=4$ and $\V(\bar{x}) = 5.3366$.
+      Now, when $\phi = 0.9$ and $\sigma^2 = 1$, we set $n=4$ and $\V(\bar{x}) = 5.3366$.
     \item Using the formula above with $\phi = -0.9$ and $\sigma^2 = 1$, it is
       clear that for sample mean $\bar{x} = (X_1 + X_2 + X_3 + X_4) / 4$, $\V(\bar{x}) = -0.0148$.
   \end{enumerate}
