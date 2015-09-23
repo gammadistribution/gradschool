@@ -89,8 +89,6 @@
 
 
 % Problem 2.5
-
-
 \begin{custompbm}{2.5}
   Suppose that $\{X_t, t=0, \pm1, \dots\}$ is stationary and that $|\theta|<1$.
   Show that for each fixed $n$ the sequence
@@ -131,6 +129,43 @@
   \end{align*}
   Since $|\theta| < 1$, it is clear then that $\E(S_m - S_l)^2 \to 0$ as $m,l \to \infty$
   showing that $S_m$ is convergent in mean square for any $n$.
+\end{proof}
+
+
+% Problem 2.11
+\begin{custompbm}{2.11}
+  Suppose that in a sample of size 100 from an AR(1) process with mean $\mu$,
+  $\phi=0.6$, and $\sigma^2 = 2$ we obtain $\bar{x_{100}} = 0.271$.
+  Construct an approximate 95\% confidence interval for $\mu$. Are the data
+  compatible with the hypothesis that $\mu = 0$.
+\end{custompbm}
+
+\begin{proof}
+  Note that since AR(1) is a linear model, $\bar{X_n}$ is approximately normal
+  with mean $\mu$ for large $n$ and an approximate 95\% confidence interval for
+  $\mu$ is
+  \[
+    \left(\bar{X_n} - \frac{1.96\nu^{1/2}}{\sqrt{n}}, \bar{X_n} + \frac{1.96\nu^{1/2}}{\sqrt{n}}\right)
+  \]
+  where $\nu = \sum_{|h|<\infty}\gamma_X(h)$.
+
+  Since $\{X_t\}$ is an AR(1) process, we know $\gamma_X(h) = \gamma_X(0)\phi^{|h|}$
+  where $\gamma_X(0) = \sigma^2 / (1 - \phi^2)$. Thus
+  \begin{align*}
+    \nu = \sum_{|h| < \infty} \gamma_X(h)
+    &= \sum_{|h| < \infty} \frac{\sigma^2 \phi^{|h|}}{1 - \phi^2} \\
+    &= \frac{\sigma ^ 2}{1 - \phi^2} \left(1 + 2\sum_{h=1}^\infty\phi^h\right) \\
+    &= \frac{\sigma ^ 2}{1 - \phi^2} \left(1 + \frac{2\phi}{1-\phi}\right) \\
+    &= \frac{\sigma ^ 2(1+\phi)}{(1-\phi)(1 - \phi^2)} = \frac{\sigma ^ 2}{(1-\phi)^2}
+  \end{align*}
+  If $\phi = 0.6$ and $\sigma^2 = 2$, then $\nu = 2 / (1 - 0.6)^2 = 12.5$. Since $n=100$,
+  $\bar{x_n} = \bar{x_{100}} = 0.271$, and an approximate 95\% confidence interval
+  for $\mu$ is
+  \[
+    \left(0.271 - \frac{1.96(12.5)^{1/2}}{\sqrt{100}}, 0.271 + \frac{1.96(12.5)^{1/2}}{\sqrt{100}}\right)
+  \]
+  or $(-0.42197, 0.96397)$. Given this confidence interval, it is plausible that
+  $\mu = 0.$
 \end{proof}
 
 
