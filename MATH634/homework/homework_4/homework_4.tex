@@ -149,7 +149,7 @@
   \]
   where $\nu = \sum_{|h|<\infty}\gamma_X(h)$.
 
-  Since $\{X_t\}$ is an AR(1) process, we know $\gamma_X(h) = \gamma_X(0)\phi^{|h|}$
+  Since $\{X_t\}$ is an AR(1) process, we know that $\gamma_X(h) = \gamma_X(0)\phi^{|h|}$
   where $\gamma_X(0) = \sigma^2 / (1 - \phi^2)$. Thus
   \begin{align*}
     \nu = \sum_{|h| < \infty} \gamma_X(h)
@@ -165,6 +165,48 @@
     \left(0.271 - \frac{1.96(12.5)^{1/2}}{\sqrt{100}}, 0.271 + \frac{1.96(12.5)^{1/2}}{\sqrt{100}}\right)
   \]
   or $(-0.42197, 0.96397)$. Given this confidence interval, it is plausible that
+  $\mu = 0.$
+\end{proof}
+
+
+% Problem 2.11
+\begin{custompbm}{2.12}
+  Suppose that in a sample of size 100 from an MA(1) process with mean $\mu$,
+  $\theta=-0.6$, and $\sigma^2 = 1$ we obtain $\bar{x_{100}} = 0.157$.
+  Construct an approximate 95\% confidence interval for $\mu$. Are the data
+  compatible with the hypothesis that $\mu = 0$.
+\end{custompbm}
+
+\begin{proof}
+  Note that since MA(1) is a linear model, $\bar{X_n}$ is approximately normal
+  with mean $\mu$ for large $n$ and an approximate 95\% confidence interval for
+  $\mu$ is
+  \[
+    \left(\bar{X_n} - \frac{1.96\nu^{1/2}}{\sqrt{n}}, \bar{X_n} + \frac{1.96\nu^{1/2}}{\sqrt{n}}\right)
+  \]
+  where $\nu = \sum_{|h|<\infty}\gamma_X(h)$.
+
+  Since $\{X_t\}$ is an MA(1) process, we know that
+  \begin{align*}
+    \gamma_X(h) =
+    \begin{cases}
+      \sigma^2(1+\theta^2) & \text{if $h=0$}\\
+      \sigma^2\theta & \text{if $h=\pm 1$}\\
+      0 & \text{otherwise}
+    \end{cases}.
+  \end{align*}
+  Thus
+  \begin{align*}
+    \nu = \sum_{|h| < \infty} \gamma_X(h)
+    &= \sigma^2(1+\theta^2) +2\sigma^2\theta = \sigma^2(1+\theta)^2
+  \end{align*}
+  If $\theta = -0.6$ and $\sigma^2 = 1$, then $\nu = (1 - 0.6))^2 = 0.16$. Since $n=100$,
+  $\bar{x_n} = \bar{x_{100}} = 0.157$, and an approximate 95\% confidence interval
+  for $\mu$ is
+  \[
+    \left(0.157 - \frac{1.96(0.16)^{1/2}}{\sqrt{100}}, 0.157 + \frac{1.96(0.16)^{1/2}}{\sqrt{100}}\right)
+  \]
+  or $(0.15198, 0.16202)$. Given this confidence interval, it is not plausible that
   $\mu = 0.$
 \end{proof}
 
