@@ -101,14 +101,18 @@
 \end{custompbm}
 
 \begin{proof}
-  Let $a_j = \theta ^ j X_{n-j}$. Then to see that $S_m$ is convergent absolutely
+  Let $a_j = \theta ^ j X_{n-j}$. Since each $X_i$ is a random variable, each $X_i$
+  maps to a real, non-infinite value so let $X = \max\{|X_i|\}$. Then to see that $S_m$ is convergent absolutely
   as $m \to \infty$, notice that
   \begin{align*}
-    S_m = \sum_{j=1}^{m} |a_j|
+    \sum_{j=1}^{m} |a_j|
     &= \sum_{j=1}^{m} |\theta ^ j X_{n-j}| \\
     &= \sum_{j=1}^{m} |\theta| ^ j |X_{n-j}|\\
-    &\leq \sum_{j=1}^{m} |X_{n-j}|
+    &\leq \sum_{j=1}^{m} X|\theta| ^ j = \sum_{j=1}^{m} b_j = T_m
   \end{align*}
+  Since $|\theta|<1$, we know that as $m \to \infty$, the partial sum $\sum_{j=1}^m X|\theta|^j \to 0$
+  and it must hold that $T_m \to 0$. Thus, we know that as $m \to \infty$, $\sum_{j=1}^{m} |a_j|$ converges to some $L$ since $|a_j| \leq b_j$
+  and $T_m$ is convergent. Therefore, $S_m$ is convergent absolutely.
 
   To see that $S_m$ is convergent in the mean square, it suffices to show that
   $\E(S_m - S_l)^2 \to 0$ as $m, l \to \infty$.
