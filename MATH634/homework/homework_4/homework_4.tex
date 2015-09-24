@@ -117,7 +117,7 @@
 
   Without loss of generality, assume that $m > l > 0$. Notice that
   $S_m - S_l = \sum_{j=1}^m a_j - \sum_{j=1}^n a_j = \sum_{j=l+1}^{m} a_j$.
-  Thus, $$\E(S_m - S_l) = \E(\sum_{j=l+1}^{m} a_j) = \sum_{j=l+1}^m \E(a_j).$$
+  Thus, $$\E(S_m - S_l) = \E\left(\sum_{j=l+1}^{m} a_j\right) = \sum_{j=l+1}^m \E(a_j).$$
   It is clear that $\E(a_j) = \E(\theta^j X_{n-j}) = \theta^j \E(X_{n-j})$. Since
   $\{X_t\}$ is a stationary time series, its expectation does not depend on $t$,
   so say $\E(X_{n-j}) = \mu_X$. Then
@@ -135,17 +135,17 @@
 % Problem 2.11
 \begin{custompbm}{2.11}
   Suppose that in a sample of size 100 from an AR(1) process with mean $\mu$,
-  $\phi=0.6$, and $\sigma^2 = 2$ we obtain $\bar{x_{100}} = 0.271$.
+  $\phi=0.6$, and $\sigma^2 = 2$ we obtain $\bar{x}_{100} = 0.271$.
   Construct an approximate 95\% confidence interval for $\mu$. Are the data
   compatible with the hypothesis that $\mu = 0$.
 \end{custompbm}
 
 \begin{proof}
-  Note that since AR(1) is a linear model, $\bar{X_n}$ is approximately normal
+  Note that since AR(1) is a linear model, $\bar{X}_n$ is approximately normal
   with mean $\mu$ for large $n$ and an approximate 95\% confidence interval for
   $\mu$ is
   \[
-    \left(\bar{X_n} - \frac{1.96\nu^{1/2}}{\sqrt{n}}, \bar{X_n} + \frac{1.96\nu^{1/2}}{\sqrt{n}}\right)
+    \left(\bar{X}_{n} - \frac{1.96\nu^{1/2}}{\sqrt{n}}, \bar{X}_{n} + \frac{1.96\nu^{1/2}}{\sqrt{n}}\right)
   \]
   where $\nu = \sum_{|h|<\infty}\gamma_X(h)$.
 
@@ -159,7 +159,7 @@
     &= \frac{\sigma ^ 2(1+\phi)}{(1-\phi)(1 - \phi^2)} = \frac{\sigma ^ 2}{(1-\phi)^2}
   \end{align*}
   If $\phi = 0.6$ and $\sigma^2 = 2$, then $\nu = 2 / (1 - 0.6)^2 = 12.5$. Since $n=100$,
-  $\bar{x_n} = \bar{x_{100}} = 0.271$, and an approximate 95\% confidence interval
+  $\bar{x}_{n} = \bar{x}_{100} = 0.271$, and an approximate 95\% confidence interval
   for $\mu$ is
   \[
     \left(0.271 - \frac{1.96(12.5)^{1/2}}{\sqrt{100}}, 0.271 + \frac{1.96(12.5)^{1/2}}{\sqrt{100}}\right)
@@ -169,20 +169,20 @@
 \end{proof}
 
 
-% Problem 2.11
+% Problem 2.12
 \begin{custompbm}{2.12}
   Suppose that in a sample of size 100 from an MA(1) process with mean $\mu$,
-  $\theta=-0.6$, and $\sigma^2 = 1$ we obtain $\bar{x_{100}} = 0.157$.
+  $\theta=-0.6$, and $\sigma^2 = 1$ we obtain $\bar{x}_{100} = 0.157$.
   Construct an approximate 95\% confidence interval for $\mu$. Are the data
   compatible with the hypothesis that $\mu = 0$.
 \end{custompbm}
 
 \begin{proof}
-  Note that since MA(1) is a linear model, $\bar{X_n}$ is approximately normal
+  Note that since MA(1) is a linear model, $\bar{X}_{n}$ is approximately normal
   with mean $\mu$ for large $n$ and an approximate 95\% confidence interval for
   $\mu$ is
   \[
-    \left(\bar{X_n} - \frac{1.96\nu^{1/2}}{\sqrt{n}}, \bar{X_n} + \frac{1.96\nu^{1/2}}{\sqrt{n}}\right)
+    \left(\bar{X}_{n} - \frac{1.96\nu^{1/2}}{\sqrt{n}}, \bar{X}_{n} + \frac{1.96\nu^{1/2}}{\sqrt{n}}\right)
   \]
   where $\nu = \sum_{|h|<\infty}\gamma_X(h)$.
 
@@ -201,13 +201,66 @@
     &= \sigma^2(1+\theta^2) +2\sigma^2\theta = \sigma^2(1+\theta)^2
   \end{align*}
   If $\theta = -0.6$ and $\sigma^2 = 1$, then $\nu = (1 - 0.6))^2 = 0.16$. Since $n=100$,
-  $\bar{x_n} = \bar{x_{100}} = 0.157$, and an approximate 95\% confidence interval
+  $\bar{x}_{n} = \bar{x}_{100} = 0.157$, and an approximate 95\% confidence interval
   for $\mu$ is
   \[
     \left(0.157 - \frac{1.96(0.16)^{1/2}}{\sqrt{100}}, 0.157 + \frac{1.96(0.16)^{1/2}}{\sqrt{100}}\right)
   \]
   or $(0.15198, 0.16202)$. Given this confidence interval, it is not plausible that
   $\mu = 0.$
+\end{proof}
+
+
+% Problem 2.13
+\begin{custompbm}{2.13}
+  Suppose that in a sample of size 100, we obtain $\hat{\rho}(1) = 0.438$
+  and $\hat{\rho}(2) = 0.145$.
+  \begin{enumerate}
+    \item Assuming that the data were generated from an AR(1) model, construct
+      approximate 95 \% confidence intervals for both $\rho(1)$ and $\rho(2)$.
+      Based on these two confidence intervals, are the data consistent with an
+      AR(1) model with $\phi = 0.8$
+    \item Assuming that the data were generated from an MA(1) model, construct
+      approximate 95 \% confidence intervals for both $\rho(1)$ and $\rho(2)$.
+      Based on these two confidence intervals, are the data consistent with an
+      MA(1) model with $\theta = 0.6$
+  \end{enumerate}
+\end{custompbm}
+
+\begin{proof}
+  Note that since AR(1) and MA(1) are linear models, we know that for large $n$,
+  the vector $\vect{\hat{\rho}} = (\hat{\rho}(1), \dots, \hat{\rho}(k))^\intercal$
+  is a multivariate normal random variable with mean $\vect{\rho} = (\rho(1), \dots, \rho(k))^\intercal$
+  and covariance matrix $n^{-1}W$ where $w_{ij}$ is defined by Bartlett's formula.
+
+  Hence, an approximate 95\% confidence interval for
+  $\rho(i)$ is
+  \[
+    \left(\hat{\rho}(i) - 1.96\V(\hat{\rho}(i))^{1/2}, \hat{\rho}(i) + 1.96\V(\hat{\rho}(i))^{1/2}\right).
+  \]
+  Since $\hat{\rho}(i) \sim N(\rho(i), n^{-1}w_{ii})$, we know $\V(\hat{\rho}(i)) = n^{-1}w_{ii}$ and the
+  approximate 95\% confidence interval for $\rho(i)$ is
+  \begin{align}\label{ci}
+    \left(\hat{\rho}(i) - \frac{1.96w_{ii}^{1/2}}{\sqrt{n}}, \hat{\rho}(i) - \frac{1.96w_{ii}^{1/2}}{\sqrt{n}}\right).
+  \end{align}
+  \begin{enumerate}
+    \item If the data were generated from an AR(1) model,
+      then $$w_{ii} = (1 - \phi^{2i})(1 + \phi^2)(1 - \phi^2)^{-1} - 2i\phi^{2i}$$
+      If $\phi = 0.8$, then $w_{11} = 0.36$ and $w_{22} = 1.0512$. Using \eqref{ci}, we know
+      that the 95\% confidence interval for $\rho(1)$ is (0.3204, 0.556) and
+      the 95\% confidence interval for $\rho(2)$ is (-0.0560, 0.3640)
+      If $\phi = 0.8$, then the actual values of $\rho(1) = 0.8$ and $\rho(2) = 0.64$
+      suggest that the data were not generated from an AR(1) model with
+      $\phi = 0.8.$
+    \item If the data were generated from an MA(1) model,
+      then $w_{11} = 1 - 3 \rho(1)^2 + 4 \rho(1)^4$ and $w_{22} = 1 + 2 \rho(1)^2$ where $\rho(1) = \theta / (1 + \theta^2)$.
+      If $\theta = 0.6$, then $w_{11} = 0.5676$ and $w_{22} = 1.3893$. Using \eqref{ci}, we know
+      that the 95\% confidence interval for $\rho(1)$ is (0.2903, 0.5857) and
+      the 95\% confidence interval for $\rho(2)$ is (-0.0860, 0.3760)
+      If $\theta = 0.6$, then the actual values of $\rho(1) = 0.4412$ and $\rho(2) = 0$
+      suggest that the data were generated from an MA(1) model with
+      $\theta = 0.6.$
+  \end{enumerate}
 \end{proof}
 
 
