@@ -1,6 +1,7 @@
 n = 50;
 
-    T = tridiag(n);
+for i = 1:n
+    T = tridiag(i);
     tic
     [Q_1,R_1] = qr_factor(T);
     time_1 = toc;
@@ -10,9 +11,6 @@ n = 50;
     time_2 = toc;
 
     if time_1 < time_2
-        time_1
-        time_2
+        i, time_1, time_2
     end
-
-time_1
-time_2
+end

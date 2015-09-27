@@ -12,16 +12,7 @@ for i = 1:l_T
     Q_j = double.empty;
 
     for j = 1:i -1
-        coefficient = 0;
-        for k = i-1:i+1
-            if k < l_T
-                coefficient = coefficient + Q(k,j)*T(k,i);
-            end
-        end
-        coefficient = sum(coefficient);
-        Q_j = [Q_j,coefficient.*Q(:,j)];
-        % If matrix was not tridiagonal use the below.
-        % Q_j = [Q_j,(Q(:,j)'*T(:,i)).*Q(:,j)];
+        Q_j = [Q_j,(Q(:,j)'*T(:,i)).*Q(:,j)];
     end
     
     if isempty(Q_j)
