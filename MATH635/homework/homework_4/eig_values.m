@@ -1,4 +1,4 @@
-function evalues = eig_values(T, qr_factor_method, threshold)
+function evalues = eig_values(T, qr_factor_method, threshold, verbose)
 % Return the eigenvalues of a matrix T using the passed qr_factor_method.
 
 matrix = T;
@@ -15,13 +15,17 @@ while norm((diag(matrix) - diag(former_matrix)),1) >= threshold
     i = i+1;
     % If the sequence appears to diverge, break off
     if norm((diag(matrix) - diag(former_matrix)),1) >= 10000
-        fprintf('Sequence diverged after %i iterations.\n', i)
+        if verbose
+            fprintf('Sequence diverged after %i iterations.\n', i)
+        end
         evalues = NaN;
         break
     end
 end
 
-fprintf('Sequence converged after %i iterations.\n', i)
+if verbose
+    fprintf('Sequence converged after %i iterations.\n', i)
+end
 evalues = diag(matrix);
 
 end
