@@ -35,11 +35,35 @@
 
 
 % Problem 2.7
-\begin{custompbm}{2.13}
-
+\begin{custompbm}{2.7}
+   Show, using the geometric series $1/(1-x) = \sum_{j=0}^\infty x^j$ for $|x| < 1$,
+   that $1/(1-\phi z) = -\sum_{j=1}^\infty \phi^{-j} z^{-j}$ for $|\phi| > 1$ and $|z| \geq 1$.
 \end{custompbm}
 
 \begin{proof}
+  If $|\phi| > 1$ and $|z| \geq 1$, then $|\phi z| = |\phi| |z| > 1$ and
+  $1 / |\phi z| = 1 / (|\phi| |z|) < 1$. Now,
+  \[
+    \sum_{j=0}^\infty \phi^{-j} z ^ {-j} = \sum_{j=0}^\infty (\phi z )^{-j} = \sum_{j=0}^\infty \left(\frac{1}{\phi z}\right)^j.
+  \]
+  Note that this is a geometric series where $|\frac{1}{\phi z}| < 1$. So the
+  series converges and
+  \[
+    \sum_{j=0}^\infty \left(\frac{1}{\phi z}\right)^j = \frac{1}{1 - \frac{1}{\phi z}} = \frac{\phi z}{\phi z - 1}.
+  \]
+  This implies that
+  \[
+    \frac{\phi z}{\phi z - 1}  = \sum_{j=0}^\infty \left(\frac{1}{\phi z}\right)^j = 1 + \sum_{j=1}^\infty \left(\frac{1}{\phi z}\right)^j
+  \]
+  so that
+  \[
+    \sum_{j=1}^\infty \left(\frac{1}{\phi z}\right)^j = \frac{\phi z}{\phi z - 1} - 1 = \frac{\phi z - (\phi z - 1)}{\phi z - 1} = \frac{1}{\phi z - 1}.
+  \]
+  From this identity it is clear that
+  \[
+    - \sum_{j=1}^\infty \phi^{-j} z ^ {-j} = - \sum_{j=1}^\infty \left(\frac{1}{\phi z}\right)^j = \frac{1}{-(\phi z -1)} = \frac{1}{1 - \phi z}
+  \]
+  and we are done.
 \end{proof}
 
 
