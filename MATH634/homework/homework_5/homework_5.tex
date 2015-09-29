@@ -67,4 +67,87 @@
 \end{proof}
 
 
+% Problem 2
+\begin{problem}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+
+
+% Problem 3
+\begin{problem}
+  Prove that if $|\theta| < 1$, then the ARMA(1, 1) process is invertible.
+\end{problem}
+
+\begin{proof}
+  Note that the ARMA(1, 1) process is invertible if $Z_t$ is expressed in
+  terms of $X_s$ for $s\leq t$. Let $\phi(z) = 1 - \phi z$ and $\theta(z) = 1 + \theta z$
+  and suppose that $|\theta| < 1$.
+  Then the ARMA(1, 1) equation can be written as $\phi(B)X_t = \theta(B)Z_t$ where
+  $B$ is the back-shift operator. Note that the power series expansion of $1/\theta(z)$
+  is given by
+  \[
+    \frac{1}{\theta(z)} = \frac{1}{1+\theta z} = \sum_{j=0}^{\infty} (-\theta)^j z^j
+  \]
+  which converges since $|\theta| < 1$. From this it is clear that
+  $Z_t = (1/\theta(B))\phi(B)X_t$ and, evaluating $(1/\theta(B))\phi(B)$, we see that
+  \begin{align*}
+    \frac{1}{\theta(B)}\phi(B)
+    &= (1 -\theta B + (-\theta)^2 B^2 + \dots )(1 - \phi B)\\
+    &= 1 + (-\theta) B + (-\theta)^2 B^2 + \dots + -\phi B + (-1)^2 \phi \theta B^2 + (-1)^3 \phi \theta^2 B^3 + \dots \\
+    &= 1 + -(\theta + \phi)B + (-1)^2(\theta^2 + \phi\theta)B^2 + (-1)^3(\theta^3 + \phi\theta^2)B^3 + \dots \\
+    &= 1 -(\theta + \phi)\sum_{j=1}^\infty (-\theta)^{j-1}B^{j}.
+  \end{align*}
+  Using this derivation we notice that
+  \begin{align*}
+    Z_t
+    &= \frac{1}{\theta(B)}\phi(B) X_t \\
+    &= X_t -(\theta + \phi)\sum_{j=1}^\infty (-\theta)^{j-1}B^{j}X_t \\
+    &= X_t -(\theta + \phi)\sum_{j=1}^\infty (-\theta)^{j-1}X_{t-j}.
+  \end{align*}
+  But this shows that $Z_t$ is expressed in terms of $X_s$ where $s\leq t$,
+  showing that when $|\theta| < 1$, the ARMA(1, 1) process is invertible.
+\end{proof}
+
+
+% Problem 4
+\begin{problem}
+  Prove that if $|\theta| > 1$, then the ARMA(1, 1) process is non-invertible.
+\end{problem}
+
+\begin{proof}
+  Note that the ARMA(1, 1) process is non-invertible if $Z_t$ is expressed in
+  terms of $X_s$ for $s\geq t$. Let $\phi(z) = 1 - \phi z$ and $\theta(z) = 1 + \theta z$
+  and suppose that $|\theta| > 1$.
+  Then the ARMA(1, 1) equation can be written as $\phi(B)X_t = \theta(B)Z_t$ where
+  $B$ is the back-shift operator. Note that the power series expansion of $1/\theta(z)$
+  is given by
+  \[
+    \frac{1}{\theta(z)} = \frac{1}{1+\theta z} = -\sum_{j=1}^{\infty} (-\theta)^{-j} z^{-j}.
+  \]
+  Since $|\theta| > 1$, we know that $|1/\theta| < 1$ and this series converges.
+  From this it is clear that $Z_t = (1/\theta(B))\phi(B)X_t$ and,
+  evaluating $(1/\theta(B))\phi(B)$, we see that
+  \begin{align*}
+    \frac{1}{\theta(B)}\phi(B)
+    &= -((-\theta)^{-1} B^{-1} + (-\theta)^{-2} B^{-2} + (-\theta)^{-3} B^{-3} + \dots )(1 - \phi B)\\
+    &= ((-\theta)^{-1} B^{-1} + (-\theta)^{-2} B^{-2} + (-\theta)^{-3} B^{-3} + \dots )(\phi B - 1)\\
+    &= -\phi\theta^{-1} + (-1)^2\phi\theta^{-2}B^{-1} + (-1)^3\phi\theta^{-3}B^{-2} + \dots \\
+    & \hspace{5mm} + (-1)^2\theta^{-1}B^{-1} + (-1)^{3}\theta^{-2}B^{-2} + (-1)^4\theta^{-3} B^{-3} + \dots\\
+    &= -\phi\theta^{-1} + (-1)^2(\phi\theta^{-2} + \theta^{-1})B^{-1} + (-1)^3(\phi\theta^{-3} + \theta^{-2})B^{-2} + \dots\\
+    &= -\phi\theta^{-1} + (\phi + \theta)\sum_{j=1}^{\infty} (-\theta)^{-j-1}B^{-j}
+  \end{align*}
+  Using this derivation we notice that
+  \begin{align*}
+    Z_t
+    &= \frac{1}{\theta(B)}\phi(B) X_t \\
+    &= -\phi\theta^{-1}X_t +(\phi + \theta)\sum_{j=1}^\infty (-\theta)^{-j-1}B^{-j}X_t \\
+    &= -\phi\theta^{-1}X_t +(\phi + \theta)\sum_{j=1}^\infty (-\theta)^{-j-1}X_{t+j}.
+  \end{align*}
+  But this shows that $Z_t$ is expressed in terms of $X_s$ where $s\geq t$,
+  showing that when $|\theta| > 1$, the ARMA(1, 1) process is non-invertible.
+\end{proof}
+
+
 \end{document}
