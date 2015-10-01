@@ -42,7 +42,7 @@
 
 \begin{proof}
   If $|\phi| > 1$ and $|z| \geq 1$, then $|\phi z| = |\phi| |z| > 1$ and
-  $1 / |\phi z| = 1 / (|\phi| |z|) < 1$. Now,
+  $|1 / \phi z| = 1 / |\phi z|  < 1$. Now,
   \[
     \sum_{j=0}^\infty \phi^{-j} z ^ {-j} = \sum_{j=0}^\infty (\phi z )^{-j} = \sum_{j=0}^\infty \left(\frac{1}{\phi z}\right)^j.
   \]
@@ -69,9 +69,42 @@
 
 % Problem 2
 \begin{problem}
+  Prove that if $|\phi|>1$, then the unique stationary solution is given by (2.3.4).
 \end{problem}
 
 \begin{proof}
+  Let $\phi(z) = 1 - \phi z$ and $\theta(z) = 1 + \theta z$
+  and suppose that $|\phi| > 1$. Note that the ARMA(1, 1) process is defined
+  by the equation $\phi(B)X_t = \theta(B)Z_t$ where $B$ is the back-shift
+  operator. Using our definition of $\phi(z)$, we can see that the power series
+  expansion of $1/\phi(z)$ is given by
+  \[
+    \frac{1}{\phi(z)} = \frac{1}{1-\phi z} = - \sum_{j=1}^{\infty} \phi^{-j}z^{-j}
+  \]
+  which converges since $|1/\phi|<1$. From this it is clear that
+  $X_t = (1/\phi(B))\theta(B)Z_t$ and, evaluating $(1/\phi(B))\theta(B)$, we see that
+  \begin{align*}
+    \frac{1}{\phi(B)}\theta(B)
+    &= -(\phi^{-1} B^{-1} + \phi^{-2} B^{-2} + \phi^{-3} B^{-3} + \dots )(1 + \theta B)\\
+    &= (\phi^{-1} B^{-1} + \phi^{-2} B^{-2} + \phi^{-3} B^{-3} + \dots )(-1 - \theta B)\\
+    &= -\phi^{-1}B^{-1} - \phi^{-2}B^{-1} - \phi^{-3}B^{-2} + \dots
+    + -\theta\phi^{-1} - \theta\phi^{-2}B^{-1} - \theta\phi^{-3} B^{-2} + \dots\\
+    &= -\theta\phi^{-1} + (-\theta\phi^{-2} - \phi^{-1})B^{-1} + (-\theta\phi^{-3} - \phi^{-2})B^{-2} + \dots\\
+    &= -\theta\phi^{-1} - (\theta + \phi)\sum_{j=1}^{\infty} \phi^{-j-1}B^{-j}.
+  \end{align*}
+  Using this derivation we notice that
+  \begin{align}
+    X_t
+    &= \frac{1}{\phi(B)}\theta(B) Z_t \notag \\
+    &= -\theta\phi^{-1}Z_t - (\theta + \phi)\sum_{j=1}^{\infty} \phi^{-j-1}B^{-j} Z_t \notag \\
+    &= -\theta\phi^{-1}Z_t - (\theta + \phi)\sum_{j=1}^{\infty} \phi^{-j-1}Z_{t+j} \notag \\
+    &= -\theta\phi^{-1}Z_t - (\theta + \phi)\sum_{j=-\infty}^{-1} \phi^{j-1}Z_{t-j} \label{sum}.
+  \end{align}
+  It is then clear that $X_t$ is of the form $\sum_{j=-\infty}^\infty \psi_j Z_{t-j}$
+  where $\psi_0 = -\theta\phi^{-1}$ and $\psi_j = -(\theta + \phi)\phi^{j-1} \text{for $j\leq -1$}$.
+  If $|\phi|>1$, then $\sum_{j=-\infty}^\infty |\psi_j| =\sum_{j=-\infty}^{-1} |\psi_j| < \infty$. This fact
+  combined with the fact that $\{Z_t\}$ is stationary shows that $\{X_t\}$ must be stationary by proposition 2.2.1.
+  Therefore \eqref{sum} is the unique stationary solution to the ARMA(1, 1) equation when $|\phi| > 1$.
 \end{proof}
 
 
