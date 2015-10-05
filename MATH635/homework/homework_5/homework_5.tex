@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, breqn}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+
+
+\title{Homework Assignment 5}
+\author{Matthew Tiger}
+
+
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\pdf}{\text{pdf}}
+\newcommand{\pmf}{\text{pmf}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Find the 1, 2, $\infty$ norms of the matrices
+  \begin{align*}
+    \vect{T}:= \begin{bmatrix}2 & -1 \\ -1 & 2 \\\end{bmatrix}, && \vect{I} := \begin{bmatrix}1 & 0 \\ 0 & 1\\\end{bmatrix}, && \vect{J} := \begin{bmatrix}1 & 1\\ 0 & 1\end{bmatrix}.
+  \end{align*}
+  Then find their $p$-condition numbers $\text{cond}_p(\vect{T})$ for $p=1, 2, \infty$.
+\end{problem}
+
+\begin{proof}
+  \hfill \break
+  \begin{itemize}
+    \item \textbf{1-Norm} Note that if $\vect{X}$ is a $2 \times 2$ matrix then
+      $||\vect{X}||_1 = \max_{1\leq j \leq 2}{\sum_{i=1}^2 |x_{ij}|}$ where $x_{ij}$ is the
+      entry in the $i$ -th row and the $j$ -th column of $\vect{X}$. So,
+      $$||\vect{X}||_1 = \max_{1\leq j \leq 2}{\{|x_{1j}| + |x_{2j}|\}} = \max{\{ |x_{11}| + |x_{21}|, |x_{12}| + |x_{22}| \}}$$
+
+      If $\vect{T} = \begin{bmatrix}2 & -1 \\ -1 & 2 \\\end{bmatrix}$, then
+      $\vect{T}^{-1} = \begin{bmatrix}\frac{2}{3} & \frac{1}{3} \\ \frac{1}{3} & \frac{2}{3} \\\end{bmatrix}$.
+      So, $$||\vect{T}||_1 = \max{\{ |2| + |-1|, |-1| + |2| \}} = \max{\{ 3, 3\}} = 3$$ and
+      $$||\vect{T}^{-1}||_1 = \max{\{ |2/3| + |1/3|, |1/3| + |2/3| \}} = \max{\{ 1, 1\}} = 1.$$
+      Thus, $||\vect{T}||_1 = 3$ and $\text{cond}_p(\vect{T}) = ||\vect{T}||_1 ||\vect{T}^{-1}||_1 = 3 \cdot 1 = 3$.
+
+      If $\vect{I} = \begin{bmatrix}1 & 0 \\ 0 & 1 \\\end{bmatrix}$, then
+      $\vect{I}^{-1} = \begin{bmatrix}1 & 0 \\ 0 & 1\\\end{bmatrix} = \vect{I}$.
+      So, $$||\vect{I}||_1 = \max{\{ |1| + |0|, |0| + |1| \}} = \max{\{ 1, 1\}} = 1.$$
+      Thus, $||\vect{I}||_1 = 1$ and $\text{cond}_p(\vect{I}) = ||\vect{I}||_1 ||\vect{I}^{-1}||_1 = 1 \cdot 1 = 1$.
+
+      If $\vect{J} = \begin{bmatrix}1 & 1 \\ 0 & 1 \\\end{bmatrix}$, then
+      $\vect{J}^{-1} = \begin{bmatrix}1 & -1 \\ 0 & 1 \\\end{bmatrix}$.
+      So, $$||\vect{J}||_1 = \max{\{ |1| + |0|, |1| + |1| \}} = \max{\{ 1, 2\}} = 2$$ and
+      $$||\vect{J}^{-1}||_1 = \max{\{ |1| + |0|, |-1| + |1| \}} = \max{\{ 1, 2\}} = 2.$$
+      Thus, $||\vect{J}||_1 = 2$ and $\text{cond}_p(\vect{J}) = ||\vect{J}||_1 ||\vect{J}^{-1}||_1 = 2 \cdot 2 = 4$.
+
+    \item \textbf{$\infty$-norm} Note that if $\vect{X}$ is a $2 \times 2$ matrix then
+      $||\vect{X}||_\infty = \max_{1\leq i \leq 2}{\sum_{j=1}^2 |x_{ij}|}$ where $x_{ij}$ is the
+      entry in the $i$ -th row and the $j$ -th column of $\vect{X}$. So,
+      $$||\vect{X}||_\infty = \max_{1\leq i \leq 2}{\{|x_{i1}| + |x_{i2}|\}} = \max{\{ |x_{11}| + |x_{12}|, |x_{21}| + |x_{22}| \}}$$
+
+      If $\vect{T} = \begin{bmatrix}2 & -1 \\ -1 & 2 \\\end{bmatrix}$, then
+      $\vect{T}^{-1} = \begin{bmatrix}\frac{2}{3} & \frac{1}{3} \\ \frac{1}{3} & \frac{2}{3} \\\end{bmatrix}$.
+      So, $$||\vect{T}||_\infty = \max{\{ |2| + |-1|, |-1| + |2| \}} = \max{\{ 3, 3\}} = 3$$ and
+      $$||\vect{T}^{-1}||_\infty = \max{\{ |2/3| + |1/3|, |1/3| + |2/3| \}} = \max{\{ 1, 1\}} = 1.$$
+      Thus, $||\vect{T}||_\infty = 3$ and $\text{cond}_p(\vect{T}) = ||\vect{T}||_\infty ||\vect{T}^{-1}||_\infty = 3 \cdot 1 = 3$.
+
+      If $\vect{I} = \begin{bmatrix}1 & 0 \\ 0 & 1 \\\end{bmatrix}$, then
+      $\vect{I}^{-1} = \begin{bmatrix}1 & 0 \\ 0 & 1\\\end{bmatrix} = \vect{I}$.
+      So, $$||\vect{I}||_\infty = \max{\{ |1| + |0|, |0| + |1| \}} = \max{\{ 1, 1\}} = 1.$$
+      Thus, $||\vect{I}||_\infty = 1$ and $\text{cond}_p(\vect{I}) = ||\vect{I}||_\infty ||\vect{I}^{-1}||_\infty = 1 \cdot 1 = 1$.
+
+      If $\vect{J} = \begin{bmatrix}1 & 1 \\ 0 & 1 \\\end{bmatrix}$, then
+      $\vect{J}^{-1} = \begin{bmatrix}1 & -1 \\ 0 & 1 \\\end{bmatrix}$.
+      So, $$||\vect{J}||_\infty = \max{\{ |1| + |1|, |0| + |1| \}} = \max{\{ 2, 1\}} = 2$$ and
+      $$||\vect{J}^{-1}||_\infty = \max{\{ |1| + |-1|, |0| + |1| \}} = \max{\{ 2, 1\}} = 2.$$
+      Thus, $||\vect{J}||_\infty = 2$ and $\text{cond}_p(\vect{J}) = ||\vect{J}||_\infty ||\vect{J}^{-1}||_\infty = 2 \cdot 2 = 4$.
+  \end{itemize}
+
+\end{proof}
+
+\end{document}
