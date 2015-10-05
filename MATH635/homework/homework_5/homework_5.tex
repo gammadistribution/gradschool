@@ -60,6 +60,29 @@
       $$||\vect{J}^{-1}||_1 = \max{\{ |1| + |0|, |-1| + |1| \}} = \max{\{ 1, 2\}} = 2.$$
       Thus, $||\vect{J}||_1 = 2$ and $\text{cond}_p(\vect{J}) = ||\vect{J}||_1 ||\vect{J}^{-1}||_1 = 2 \cdot 2 = 4$.
 
+    \item \textbf{2-Norm} Note that if $\vect{X}$ is a $2 \times 2$ matrix then
+      $||\vect{X}||_2 = \sqrt {\lambda_{\max}(\vect{X^*} \vect{X})}$ where
+      $\lambda_{\max}(\vect{X}^*\vect{X})$ is the largest eigenvalue of the matrix
+      product $\vect{X}^*\vect{X}$. Since all of our matrices our real, we can use the
+      following Matlab code to find the 2-norm of each matrix:
+      \begin{verbatim}norm = sqrt(max(eig(X' * X)))\end{verbatim}
+      where we define the matrix $X$ beforehand.
+
+      If $\vect{T} = \begin{bmatrix}2 & -1 \\ -1 & 2 \\\end{bmatrix}$, then
+      $\vect{T}^{-1} = \begin{bmatrix}\frac{2}{3} & \frac{1}{3} \\ \frac{1}{3} & \frac{2}{3} \\\end{bmatrix}$.
+      Using the code above, $||\vect{T}||_2 = 3$ and $||\vect{T}^{-1}||_2 =1.$
+      Thus, $||\vect{T}||_2 = 3$ and $\text{cond}_p(\vect{T}) = ||\vect{T}||_2 ||\vect{T}^{-1}||_2 = 3 \cdot 1 = 3$.
+
+      If $\vect{I} = \begin{bmatrix}1 & 0 \\ 0 & 1 \\\end{bmatrix}$, then
+      $\vect{I}^{-1} = \begin{bmatrix}1 & 0 \\ 0 & 1\\\end{bmatrix} = \vect{I}$.
+      Using the code above, $||\vect{I}||_2 = 1$.
+      Thus, $||\vect{I}||_2 = 1$ and $\text{cond}_p(\vect{I}) = ||\vect{I}||_2 ||\vect{I}^{-1}||_2 = 1 \cdot 1 = 1$.
+
+      If $\vect{J} = \begin{bmatrix}1 & 1 \\ 0 & 1 \\\end{bmatrix}$, then
+      $\vect{J}^{-1} = \begin{bmatrix}1 & -1 \\ 0 & 1 \\\end{bmatrix}$.
+      Using the code above, $||\vect{J}||_2 = 1.61803$ and $||\vect{J}^{-1}||_2 =1.61803.$
+      Thus, $||\vect{J}||_2 = 1.61803$ and $\text{cond}_p(\vect{J}) = ||\vect{J}||_2 ||\vect{J}^{-1}||_2 = 1.61803 \cdot 1.61803 = 2.61802$.
+
     \item \textbf{$\infty$-norm} Note that if $\vect{X}$ is a $2 \times 2$ matrix then
       $||\vect{X}||_\infty = \max_{1\leq i \leq 2}{\sum_{j=1}^2 |x_{ij}|}$ where $x_{ij}$ is the
       entry in the $i$ -th row and the $j$ -th column of $\vect{X}$. So,
