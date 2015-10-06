@@ -1,0 +1,65 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, breqn}
+
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\newenvironment{custompbm}[1]
+  {\renewcommand\theproblem{#1}\problem}
+  {\endproblem}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\Co}[2]{\text{Cov}({#1}, {#2})}
+\newcommand{\pdf}{\text{pdf}}
+\newcommand{\pmf}{\text{pmf}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\mx}[1][t]{\mu_X({#1})}
+\newcommand{\gx}[2]{\gamma_X({#1}, {#2})}
+
+
+\title{Homework Assignment 6}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 3.1
+\begin{custompbm}{3.1}
+  Determine which of the following ARMA processes are causal and which of them
+  are invertible. (In each case $\{ Z_t \}$ denotes white noise.)
+  \begin{enumerate}
+    \item $X_t + 0.2X_{t-1} - 0.48X_{t-2} = Z_t$
+    \item $X_t + 1.9X_{t-1} + 0.88X_{t-2} = Z_t + 0.2Z_{t-1} + 0.7Z_{t-2}$
+    \item $X_t + 0.6X_{t-1} = Z_t + 1.2Z_{t-1}$
+    \item $X_t + 1.8X_{t-1} + 0.81X_{t-2} = Z_t$
+    \item $X_t + 1.6X_{t-1} = Z_t + - 0.4Z_{t-1}  + 0.04Z_{t-2} $
+  \end{enumerate}
+\end{custompbm}
+
+\begin{proof}
+\end{proof}
+
+
+% Problem 3.3
+\begin{custompbm}{3.3}
+  For those processes in Problem 3.1 that are causal, compute the first six
+  coefficients $\psi_0, \psi_1, \dots, \psi_5$ in the causal representation
+  $X_t = \sum_{j=0}^\infty \psi_j Z_{t-j}$ of $\{X_t\}$.
+\end{custompbm}
+
+\begin{proof}
+\end{proof}
+
+
+\end{document}
