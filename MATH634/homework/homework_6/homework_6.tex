@@ -59,11 +59,13 @@
   process is invertible if the solutions to $\theta(x) = 0$ have norm greater
   than 1.
   \begin{enumerate}
+    % a
     \item For this process, $\phi(x) = 1 - (-0.2)x - (0.48)x^2$ and
       $\theta(x) = 1$. The solutions to $\phi(x) = 0$ are $x_1 = 1.\overline{66}$ and $x_2=-1.25$
       both of which have norm greater than 1. Therefore a stationary solution
       exists and the process is causal. Similarly, $\theta(x) \ne 0$ for any
       $x$ so it is invertible as well.
+    % b
     \item For this process, $\phi(x) = 1 - (-1.9)x - (-0.88)x^2$ and
       $\theta(x) = 1 + 0.2x + 0.7x^2$. The solutions to $\phi(x) = 0$ are
       $x_1 = -0.\overline{90}$ and $x_2 =-1.25$. Therefore a stationary solution
@@ -71,17 +73,20 @@
       solutions to $\theta(x) = 0$ are $x_1 = -0.1429 + 1.1867i$
       and $x_2 =  -0.1429 - 1.1867i$ both of
       which have norm greater than 1. Therefore the process is invertible.
+    % c
     \item For this process, $\phi(x) = 1 - (-0.6)x$ and
       $\theta(x) = 1 + 1.2x$. The solution to $\phi(x) = 0$ is
       $x_1 = -1.\overline{66}$ which has norm greater than 1. Therefore a stationary solution
       exists and the process is causal. Similarly, the
       solution to $\theta(x) = 0$ is $x_1 = -0.8\overline{33}$ which has norm
       less than 1. Therefore the process is not invertible.
+    % d
     \item For this process, $\phi(x) = 1 - (-1.8)x - (-0.81)x^2$ and
       $\theta(x) = 1$. The solution to $\phi(x) = 0$ is $x_1 = -1.\overline{11}$ with multiplicity 2
       which has norm greater than 1. Therefore a stationary solution
       exists and the process is causal. Similarly, $\theta(x) \ne 0$ for any
       $x$ so it is invertible as well.
+    % e
     \item For this process, $\phi(x) = 1 - (-1.6)x$ and
       $\theta(x) = 1 + (-0.4)x + (0.04)x^2$. The solution to $\phi(x) = 0$ is
       $x_1 = -0.625$ which has norm less than 1. Therefore a stationary solution
@@ -100,6 +105,95 @@
 \end{custompbm}
 
 \begin{proof}
+  For causal ARMA$(p ,q)$ processes, the causal representation of $\{ X_t\}$ is
+  given by $X_t = \sum_{j=0}^\infty \psi_j Z_{t-j}$ where for $j \geq 1$,
+  \begin{align}\label{psi}
+    \psi_j - \sum_{k=1}^p \phi_k \psi_{j-k} = \theta_j.
+  \end{align}
+  In the above formula, $\psi_{j} = 0$ for $j < 0$ and $\phi_k$ and $\theta_j$ are the coefficients found in the
+  polynomials $\phi(x)$ and $\theta(x)$. We already know $\psi_0 = 1$ for
+  any causal ARMA$(p, q)$ process, so we need only compute $\psi_j$ for $1\leq j\leq 5$.
+  \begin{enumerate}
+    % a
+    \item Note that for this ARMA$(2, 0)$ process $\phi(x) = 1 - (-0.2)x - (0.48)x^2$ and
+      $\theta(x) = 1$. So $\phi_1 = -0.2$, $\phi_2 = 0.48$, and $\phi_k = 0$ for $k\geq 3$. Similarly,
+      $\theta_k = 0$ for $k\geq 1$. Using \eqref{psi}, we can see that
+      since $\theta_j = 0$, $\psi_j = \sum_{k=1}^2 \phi_k \psi_{j-k}$ for $j\geq 1$.
+
+      For $j=1$:
+
+      $\psi_1 = \phi_1 \psi_0 = (-0.2)(1) = -0.2$
+
+      For $j=2$:
+
+      $\psi_2 = \phi_1\psi_1 + \phi_2\psi_0 = (-0.2)(-0.2) + (0.48)(1) = 0.52$
+
+      For $j=3$:
+
+      $\psi_3 = \phi_1\psi_2 + \phi_2\psi_1 = (-0.2)(0.52) + (0.48)(-0.2) = -0.2$
+
+      For $j=4$:
+
+      $\psi_4 = \phi_1\psi_3 + \phi_2\psi_2 = (-0.2)(-0.2) + (0.48)(0.52) = 0.2896$
+
+      For $j=5$:
+
+      $\psi_5 = \phi_1\psi_4 + \phi_2\psi_3 = (-0.2)(0.2896) + (0.48)(-0.2) = -0.1539$
+      % b
+    \item This process is not causal.
+    % c
+    \item Note that for this ARMA$(1,1)$ process, $\phi(x) = 1 - (-0.6)x$ and
+      $\theta(x) = 1 + 1.2x$. So $\phi_1 = -0.6$ and $\phi_k = 0$ for $k\geq 2$. Similarly,
+      $\theta_1 = 1.2$ and $\theta_k = 0$ for $k\geq 2$. Using \eqref{psi}, we can
+      see that $\psi_j = \theta_j +  \phi_1 \psi_{j-1}$.
+
+      For $j=1$:
+
+      $\psi_1 = \theta_1 + \phi_1\psi_0 = 1.2 + (-0.6)(1) = 0.6$
+
+      For $j=2$:
+
+      $\psi_2 = \theta_2 + \phi_1\psi_1 = (-0.6)(0.6) = -0.36$
+
+      For $j=3$:
+
+      $\psi_3 = \theta_3 + \phi_1\psi_2 = (-0.6)(-0.36) = 0.2160$
+
+      For $j=4$:
+
+      $\psi_4 = \theta_4 + \phi_1\psi_3 = (-0.6)(0.2160) = -0.1296$
+
+      For $j=5$:
+
+      $\psi_5 = \theta_5 + \phi_1\psi_4 = (-0.6)(-0.1296) = 0.0778$
+    % d
+    \item Note that for this ARMA$(2, 0)$ process $\phi(x) = 1 - (-1.8)x - (-0.81)x^2$ and
+      $\theta(x) = 1$. So $\phi_1 = -1.8$, $\phi_2 = -0.81$, and $\phi_k = 0$ for $k\geq 3$. Similarly,
+      $\theta_k = 0$ for $k\geq 1$. Using \eqref{psi}, we can see that
+      since $\theta_j = 0$, $\psi_j = \sum_{k=1}^2 \phi_k \psi_{j-k}$ for $j\geq 1$.
+
+      For $j=1$:
+
+      $\psi_1 = \phi_1 \psi_0 = (-1.8)(1) = -1.8$
+
+      For $j=2$:
+
+      $\psi_2 = \phi_1\psi_1 + \phi_2\psi_0 = (-1.8)(-1.8) + (-0.81)(1) = 2.43$
+
+      For $j=3$:
+
+      $\psi_3 = \phi_1\psi_2 + \phi_2\psi_1 = (-1.8)(2.43) + (-0.81)(-1.8) = -2.916$
+
+      For $j=4$:
+
+      $\psi_4 = \phi_1\psi_3 + \phi_2\psi_2 = (-1.8)(-2.916) + (-0.81)(2.43) = 3.2805$
+
+      For $j=5$:
+
+      $\psi_5 = \phi_1\psi_4 + \phi_2\psi_3 = (-1.8)(3.2805) + (-0.81)(-2.916) = -3.5429$
+    % e
+    \item This process is not causal.
+  \end{enumerate}
 \end{proof}
 
 
