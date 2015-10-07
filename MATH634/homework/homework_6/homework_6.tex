@@ -43,11 +43,52 @@
     \item $X_t + 1.9X_{t-1} + 0.88X_{t-2} = Z_t + 0.2Z_{t-1} + 0.7Z_{t-2}$
     \item $X_t + 0.6X_{t-1} = Z_t + 1.2Z_{t-1}$
     \item $X_t + 1.8X_{t-1} + 0.81X_{t-2} = Z_t$
-    \item $X_t + 1.6X_{t-1} = Z_t + - 0.4Z_{t-1}  + 0.04Z_{t-2} $
+    \item $X_t + 1.6X_{t-1} = Z_t - 0.4Z_{t-1}  + 0.04Z_{t-2} $
   \end{enumerate}
 \end{custompbm}
 
 \begin{proof}
+  A general $\text{ARMA}(p, q)$ process
+  $X_t - \phi_1 X_{t-1} - \dots - \phi_p X_{t-p} = Z_t + \theta_1 Z_{t-1} + \dots + \theta_q Z_{t-q}$
+  can be rewritten as $\phi(B)X_t = \theta(B)Z_t$, where $B$ is the backshift
+  operator and $\phi(x) = 1 - \phi_1 x - \dots - \phi_p x^p$ and
+  $\theta(x) = 1 + \theta_1 x + \dots + \theta_q x^q$. A stationary solution of the
+  above process exists if and only if $\phi(x) = 0$ for $|x| \ne 1$. Similarly,
+  if a stationary solution to the process exists, then the process is causal
+  if and only the solutions to $\phi(x) = 0$ have norm greater than 1 and the
+  process is invertible if the solutions to $\theta(x) = 0$ have norm greater
+  than 1.
+  \begin{enumerate}
+    \item For this process, $\phi(x) = 1 - (-0.2)x - (0.48)x^2$ and
+      $\theta(x) = 1$. The solutions to $\phi(x) = 0$ are $x_1 = 1.\overline{66}$ and $x_2=-1.25$
+      both of which have norm greater than 1. Therefore a stationary solution
+      exists and the process is causal. Similarly, $\theta(x) \ne 0$ for any
+      $x$ so it is invertible as well.
+    \item For this process, $\phi(x) = 1 - (-1.9)x - (-0.88)x^2$ and
+      $\theta(x) = 1 + 0.2x + 0.7x^2$. The solutions to $\phi(x) = 0$ are
+      $x_1 = -0.\overline{90}$ and $x_2 =-1.25$. Therefore a stationary solution
+      exists however since $|x_1| \leq 1$ the process is not causal. Similarly, the
+      solutions to $\theta(x) = 0$ are $x_1 = -0.1429 + 1.1867i$
+      and $x_2 =  -0.1429 - 1.1867i$ both of
+      which have norm greater than 1. Therefore the process is invertible.
+    \item For this process, $\phi(x) = 1 - (-0.6)x$ and
+      $\theta(x) = 1 + 1.2x$. The solution to $\phi(x) = 0$ is
+      $x_1 = -1.\overline{66}$ which has norm greater than 1. Therefore a stationary solution
+      exists and the process is causal. Similarly, the
+      solution to $\theta(x) = 0$ is $x_1 = -0.8\overline{33}$ which has norm
+      less than 1. Therefore the process is not invertible.
+    \item For this process, $\phi(x) = 1 - (-1.8)x - (-0.81)x^2$ and
+      $\theta(x) = 1$. The solution to $\phi(x) = 0$ is $x_1 = -1.\overline{11}$ with multiplicity 2
+      which has norm greater than 1. Therefore a stationary solution
+      exists and the process is causal. Similarly, $\theta(x) \ne 0$ for any
+      $x$ so it is invertible as well.
+    \item For this process, $\phi(x) = 1 - (-1.6)x$ and
+      $\theta(x) = 1 + (-0.4)x + (0.04)x^2$. The solution to $\phi(x) = 0$ is
+      $x_1 = -0.625$ which has norm less than 1. Therefore a stationary solution
+      exists however the process is not causal. Similarly, the
+      solution to $\theta(x) = 0$ is $x = 5$ with multiplicity 2 which has norm
+      greater than 1. Therefore the process is invertible.
+  \end{enumerate}
 \end{proof}
 
 
