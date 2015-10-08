@@ -1,4 +1,4 @@
-function time_eig_values(dimension, iterations, verbose)
+function time_eig_values(dimension, iterations, threshold, verbose)
 % Time function eig_values for square tri-diagonal matrices. 
 %
 % For each integer dim from 1 to dimension, iterate from 1 to iterations,
@@ -7,15 +7,15 @@ function time_eig_values(dimension, iterations, verbose)
 % Display number of times custom eig_values beat matlab's function for 
 % each matrix dimension.
 
-thresholds = [eps,1e-10,1e-8,1e-6];
+precisions = [eps,1e-10,1e-8,1e-6];
 
 for dim = 1:dimension
     counter = 0;
-    for threshold = thresholds
+    for precision = precisions
         for iteration = 1:iterations
             T = tridiag(dim);
             tic
-            evalues_1 = eig_values(T,@qr_factor,threshold,verbose);
+            evalues_1 = eig_values(T,@qr_factor,precision,threshold,verbose);
             time_1 = toc;
 
             tic
@@ -26,6 +26,6 @@ for dim = 1:dimension
                 counter = counter + 1;
             end
         end
-        fprintf('For dimension = %i, threshold = %d, custom eigenvalue function faster in %i out of %i iterations.\n', dim, threshold, counter, iterations)
+        fprintf('For dimension = %i, precision = %d, custom eigenvalue function faster in %i out of %i iterations.\n', dim, precision, counter, iterations)
     end
 end
