@@ -18,15 +18,16 @@ for p = 1:n_plots
     if p > 2
         p_cond = @(n) log_hil_cond(n, inf);
         y_axis = 'log(cond(H, inf))';
+        
     else
         p_cond = @(n) log_hil_cond(n, p);
         y_axis = sprintf('log(cond(H, %d))', p);
     end
     
-    X = 1:25;
+    X = 1:24;
     Y = arrayfun(p_cond, X);
     
-    plot(X, Y);
+    h = plot(X, Y, 'ob','MarkerFaceColor','b');
     
     title(fig_title);
     ylabel(y_axis);
