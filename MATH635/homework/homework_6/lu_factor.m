@@ -57,7 +57,8 @@ for i = 1:n
         L(i, i - 1) = l_i;
     end
     if i + 1 < n + 1
-        U(i, i + 1) = T(i, i + 1);
+        c_i = T(i, i + 1);
+        U(i, i + 1) = c_i;
     end
     
     % Update diagonals of matrices L and U.
