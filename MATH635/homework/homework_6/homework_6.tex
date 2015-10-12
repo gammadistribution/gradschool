@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, breqn}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+
+
+\title{Homework Assignment 6}
+\author{Matthew Tiger}
+
+
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\pdf}{\text{pdf}}
+\newcommand{\pmf}{\text{pmf}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Prove that if $A$ and $A + \delta A$ are invertible, then
+  \[
+    \norm{\delta x} < \norm{x} \to \frac{\norm{\delta x}}{\norm{x}} \leq
+    2 \text{cond}(A) \frac{\norm{\delta A}}{\norm{A}}
+  \]
+\end{problem}
+
+\begin{proof}
+  Note that we have already proved that if $A$ and $A + \delta A$ are invertible, then
+  \begin{align}\label{second_ineq}
+    \norm{\delta x} < \norm{x} \to \frac{\norm{\delta x}}{\norm{x + \delta x}} \leq
+    \text{cond}(A) \frac{\norm{\delta A}}{\norm{A}}.
+  \end{align}
+  Since $\norm{x + \delta x} \leq \norm{x} + \norm{\delta x}$, we know that
+  \begin{align}\label{delta}
+    \frac{1}{\norm{x} + \norm{\delta x}} \leq \frac{1}{\norm{x + \delta x}}.
+  \end{align}
+  Using our assumption that $\norm{\delta x} < \norm{x}$ we see that
+  $\norm{x} + \norm{\delta x} < \norm{x} + \norm{x}$ or
+  \begin{align}\label{double}
+    \frac{1}{\norm{x} + \norm{x}} < \frac{1}{\norm{x} + \norm{\delta x}}.
+  \end{align}
+  Combining \eqref{delta} and \eqref{double} and multiplying by $\norm{\delta x}$, we can see that
+  \[
+    \frac{\norm{\delta x}}{2\norm{x}} = \frac{\norm{\delta x}}{\norm{x} + \norm{x}} < \frac{\norm{\delta x}}{\norm{x} + \norm{\delta x}} \leq \frac{\norm{\delta x}}{\norm{x + \delta x}}
+  \]
+  Using the above inequality and \eqref{second_ineq}, it is clear that if
+  $A$ and $A + \delta A$ are invertible and $\norm{\delta x} < \norm{x}$, then
+  \[
+    \frac{\norm{\delta x}}{2\norm{x}} \leq \frac{\norm{\delta x}}{\norm{x + \delta x}} \leq     \text{cond}(A) \frac{\norm{\delta A}}{\norm{A}}
+  \]
+  and we are done.
+\end{proof}
+
+\end{document}
