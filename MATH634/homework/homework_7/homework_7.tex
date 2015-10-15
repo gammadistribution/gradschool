@@ -132,6 +132,48 @@
 \end{custompbm}
 
 \begin{proof}
+  Note that for an ARMA$(p,q)$ the autocovariance function $\gamma(h) = \sigma^2 \sum_{j=0}^\infty \psi_j \psi_{j+|h|}$
+  where $\psi_0 = 1$, $\psi_j = \theta_j + \sum_{k=1}^p \phi_k \psi_{j-k}$ for $j >1$ and $\psi_j = 0$ for $j<0$.
+
+  For $X_t$, we have
+  \[
+    \psi_j =
+    \begin{cases}
+      1 & \text{ if $j = 0$}\\
+      \theta & \text{if $j = 1$}\\
+      0 & \text{if $j > 1$}
+    \end{cases}
+  \]
+  and for $Y_t$, we have
+  \[
+    \widetilde{\psi}_j =
+    \begin{cases}
+      1 & \text{ if $j = 0$}\\
+      \frac{1}{\theta} & \text{if $j = 1$}\\
+      0 & \text{if $j > 1$}
+    \end{cases}
+  \]
+  Thus, $$\gamma_X(h) = \sigma^2 \sum_{j=0}^\infty \psi_{j} \psi_{j + |h|} = \sigma^2 \sum_{j=0}^1 \psi_{j} \psi_{j + |h|} = \sigma^2(\psi_{|h|} + \theta\psi_{1+|h|})$$
+  and $$\gamma_Y(h) = \sigma^2\theta^2 \sum_{j=0}^\infty \widetilde{\psi}_{j} \widetilde{\psi}_{j + |h|} = \sigma^2\theta^2 \sum_{j=0}^1 \widetilde{\psi}_{j} \widetilde{\psi}_{j + |h|}= \sigma^2\theta^2\left(\psi_{|h|} + \frac{1}{\theta}\psi_{1+|h|}\right ).$$
+  Explicitly,
+  \[
+    \gamma_X(h) =
+    \begin{cases}
+      \sigma^2(1+\theta^2) & \text{ if $h = 0$}\\
+      \sigma^2 \theta & \text{if $|h| = 1$}\\
+      0 & \text{if $|h| > 1$}
+    \end{cases}
+  \]
+  and
+  \[
+    \gamma_X(h) =
+    \begin{cases}
+      \sigma^2\theta^2\left(1+\frac{1}{\theta^2}\right) & \text{ if $h = 0$}\\
+      \sigma^2 \theta^2 \left(\frac{1}{\theta}\right) & \text{if $|h| = 1$}\\
+      0 & \text{if $|h| > 1$}
+    \end{cases}.
+  \]
+  Therefore, these two processes autocovariance functions are the same.
 \end{proof}
 
 
