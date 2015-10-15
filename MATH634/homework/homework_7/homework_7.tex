@@ -37,16 +37,28 @@
 
 % Problem 3.2
 \begin{custompbm}{3.2}
-  For those processes in Problem 3.1 that are causal.
+  For those processes in Problem 3.1 that are causal, compute and graph their
+  ACF and PACF using the program ITSM.
 \end{custompbm}
 
 \begin{proof}
   From problem 3.1, the following processes are causal:
   \begin{enumerate}
-    \item $X_t + 0.2X_{t-1} - 0.48X_{t-2} = Z_t$
-    \item $X_t + 0.6X_{t-1} = Z_t + 1.2Z_{t-1}$
-    \item $X_t + 1.8X_{t-1} + 0.81X_{t-2} = Z_t$.
+    \item $X_t - (-0.2)X_{t-1} - 0.48X_{t-2} = Z_t$
+    \item $X_t - (-0.6)X_{t-1} = Z_t + 1.2Z_{t-1}$
+    \item $X_t - (-1.8)X_{t-1} - (-0.8)1X_{t-2} = Z_t$.
   \end{enumerate}
+
+  I am unable to copy the graphs from the program and save the image data.
+
+  To create one such graph, open itsm.exe and follow the below steps.
+  \begin{enumerate}
+    \item Create a new univariate project.
+    \item Go to \texttt{Model > Specify}.
+    \item Specify the AR order and MA order and enter in the coefficients to the above processes.
+      \item Go to \texttt{Model > ACF/PACF > Model} to display the graph.
+  \end{enumerate}
+  These instructions can be repeated for each model to create the three graphs
 \end{proof}
 
 
@@ -179,9 +191,29 @@
 
 % Problem 3.10
 \begin{custompbm}{3.10}
+  As defined in the book.
 \end{custompbm}
 
 \begin{proof}
+  We want to fit the \texttt{strikes.tsm} data to the mean corrected model
+  $Y_t - \phi Y_{t-1} = Z_t$ where $Y_t = X_t - \mu$ and $X_t$ is the data point
+  from \texttt{strikes.tsm} at time $t$. Note that this is an AR(1) model.
+  As such we know that the AR(1) autocovariance function is given by
+  \[
+    \gamma_Y(h) = \sigma^2 \sum_{j=0} ^ \infty \psi_{j} \psi_{j + |h|} = \sigma^2 \phi^{|h|} \sum_{j=0}^\infty \phi^j = \frac{\sigma^2 \phi^{|h|}}{1-\phi^2}
+  \]
+  for $|\phi| < 1$.
+
+  From the ITSM tool, we know that the sample variance is $\hat{\gamma}(0) = 676789$.
+  Using the fact that the sample ACF at lag 1 is $\hat{\rho}(1) = .7323$, we know
+  that $\hat{\gamma}(1) = \hat{\rho}(1)\hat{\gamma}(0) = 495612.5847$.
+
+  Equating $\gamma_Y(h)$ to $\hat{\gamma}(h)$ at lags 0 and 1 gives us two equations
+  to solve for the unknown parameters $\phi$ and $\sigma^2$.
+
+  Writing out the equations and choosing $\phi$ so that $|\phi| < 1$ gives
+  $phi=0.5646$ and $\sigma^2 = 461050$. These parameters define the given model
+  and we are done.
 \end{proof}
 
 
