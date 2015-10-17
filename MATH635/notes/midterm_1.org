@@ -1,0 +1,56 @@
+* Unit 1
+** Basic Ideas
+   Mathematical models are created to describe physical phenomena.
+
+   Examples include
+   - integrals - Model of area underneath the curve
+   - differential equation - model of population growth/change
+   - spline - polynomial model of arbitrary functions
+
+   There are analytical solutions and numerical solutions to these models.
+   The analytical solution is the exact solution to the model.
+
+
+   When using a numerical solutions we are interested in three aspects of the
+   solution:
+
+   - How close is the numerical solution to the analytical one.
+   - Which algorithm is better?
+   - Which algorithm is faster?
+** Discretization
+   The process of taking a continuous model and breaking it up into discrete
+   parts. Computers can only handle discrete processes.
+*** Derivative
+    Continous model: $f'(a) := \lim_{h\to 0} \frac{f(a+h) - f(a)}{h}$
+    Discrete model: $f'(a) \approx df(a, h) := \frac{f(a+h) - f(a)}{h}$
+    We can find the approximate error associated to using this discrete model.
+** Stability
+   An algorithm is unstable if arbitrarily small input may lead to indefinitely
+   large errors in the output. Likewise, an algorithm is stable if arbitrarily
+   small input lead to arbitrarily small errors in the output.
+** Well-posed
+   The problem of finding a solution $q = R(u)$ is well-posed, if
+   $\lim_{x \to u} q(x) = q(u)$, i.e. if for any $\epsilon > 0$, there is a
+   $\delta > 0$ such that for any $u_1, u_2$, if $|u_1 - u_2| < \delta$, then
+   $|R(u_1) - R(u_2)| < \epsilon$.
+*** Examples
+    - $q = 1/u$ for $0 < u < 1$ This is not well-posed. Small changes in input
+      affect output indefinitely.
+    - $q = 1/u$ for $10^{-3} < u < 1$ This is well-posed.
+*** Ill-posed
+    A problem is ill-posed if it has no solutions, two or more solutions, or
+    the solution is unstable.
+** Conditioning
+   Sensitivity of problems to perturbations of input data.
+   Problems with low sensitivity are defined to be well-conditioned.
+   Problems with high sensitivity are defined to be ill-conditioned.
+*** Well posed problems that are ill-conditioned
+    $q = 1/u$ for $10^{-3} < u < 1$ This is well-posed but ill-conditioned.
+** Types of Error
+   There are three types of error:
+*** Unavoidable Error
+    Input data, measurement, modeling.
+*** Approximation Error
+    Error associated to algorithm
+*** Round-off Error
+    Error associated to computer
