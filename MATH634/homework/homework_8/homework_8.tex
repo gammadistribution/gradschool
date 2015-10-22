@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath, amsthm, amssymb, amsfonts, breqn}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, breqn, graphicx}
 
 
 \theoremstyle{definition}
@@ -84,6 +84,35 @@
     = \sigma^2\left(\sum_{j=0}^\infty \psi_j^2 - \sum_{j=0}^\infty \psi_j \sum_{i = 1}^p \phi_i \psi_{j+i}\right)
     = \sigma^2\sum_{j=0}^\infty \psi_j \left(\psi_j - \sum_{i = 1}^p \phi_i \psi_{j+i}\right).
   \end{align*}
+\end{proof}
+
+
+\begin{custompbm}{2.16}
+  As in the book.
+\end{custompbm}
+
+\begin{proof}
+  For the \texttt{SUNSPOTS.tsm} data, after fitting an AR(2) model to the mean corrected
+  data we obtain the following graphs for the ACF and PACF of the model:
+
+  \vskip 3mm
+  \includegraphics{acf_pacf}
+
+  with parameters $\phi_1 = 1.318$, $\phi_2 = -0.6341$, and $\sigma^2 = 232.895$.
+\end{proof}
+
+
+\begin{custompbm}{2.17}
+  As in the book.
+\end{custompbm}
+
+\begin{proof}
+  Following the instructions presented in the book using the fitted AR(2) model to
+  the \texttt{SUNSPOTS.tsm} data in problem 2.16, we have the following predictions
+  for lags $t = 101, \dots, 110$:
+
+  \vskip 3mm
+  \includegraphics{forecast}
 \end{proof}
 
 \end{document}
