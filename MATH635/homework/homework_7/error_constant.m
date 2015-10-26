@@ -1,3 +1,6 @@
+% Choose polynomial q(x) = x^4. Then the fourth derivative of q is 24 and
+% we can easily compute the error constant.
+
 func = @(x) x.^4;
 
 quadrature = simpsons_rule(func);
