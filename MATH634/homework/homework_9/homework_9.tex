@@ -65,11 +65,134 @@
 \end{custompbm}
 
 \begin{proof}
+  If $Y$ and $W_n, \dots, W_1$ are random variables, then for $\vect{W} = (W_n, \dots, W_1)$
+  and $\vect{\mu}_W= \left(\E(W_n), \dots, \E(W_1)\right)^\intercal$, the best linear
+  predictor of $Y$ in terms of $\{1, W_n, \dots, W_1\}$ is
+  \[
+    P(Y|\vect{W}) = \E(Y) + \vect{a}^\intercal (\vect{W} - \vect{\mu_W})
+  \]
+  where $\vect{a}$ is the solution of $\Gamma \vect{a} = \gamma$ for
+  $\Gamma = \Co{\vect{W}}{\vect{W}}$ and $\gamma = \Co{Y}{\vect{W}}$.
+
+  Also, note for an MA(1) process, the autocovariance function is defined as
+  \[
+    \gamma_X(h) =
+    \begin{cases}
+      \sigma^2 (1 + \theta^2) & \text{if $h = 0$}\\
+      \sigma^2 \theta & \text{if $|h| = 1$}\\
+      0 & \text{if $|h| > 1$}\\
+    \end{cases}
+  \]
+  \begin{enumerate}
+    \item Using the above, set $Y = X_3$ and $W = (X_2, X_1)^\intercal$. Then
+      \begin{align*}
+        \Gamma = \Co{\vect{W}}{\vect{W}} =
+        \begin{bmatrix} \gamma_X(0) & \gamma_X(1) \\ \gamma_X(1) & \gamma_X(0) \end{bmatrix} =
+        \sigma^2 \begin{bmatrix} 1 + \theta^2 & \theta \\ \theta & 1 + \theta^2 \end{bmatrix}
+      \end{align*}
+      and
+      \begin{align*}
+        \gamma = \begin{bmatrix} \gamma_X(1) \\ \gamma_X(2) \end{bmatrix}
+        = \sigma^2 \begin{bmatrix} \theta \\ 0 \end{bmatrix}.
+      \end{align*}
+      The solution to the system of equations $\Gamma \vect{a} = \gamma$ is
+      $$\vect{a} = \frac{\theta}{1 + \theta^2 + \theta^4} \begin{bmatrix}1 + \theta^2 \\ -\theta\end{bmatrix}.$$
+      Therefore, the best predictor of $X_3$ is
+      \begin{align*}
+        P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) \\
+        &= \frac{\theta}{1 + \theta^2 + \theta^4} ((1 + \theta^2) X_2 - \theta X_1)
+      \end{align*}
+
+    \item Using the above, set $Y = X_3$ and $W = (X_5, X_4)^\intercal$. Then
+      \begin{align*}
+        \Gamma = \Co{\vect{W}}{\vect{W}} =
+        \begin{bmatrix} \gamma_X(0) & \gamma_X(1) \\ \gamma_X(1) & \gamma_X(0) \end{bmatrix} =
+        \sigma^2 \begin{bmatrix} 1 + \theta^2 & \theta \\ \theta & 1 + \theta^2 \end{bmatrix}
+      \end{align*}
+      and
+      \begin{align*}
+        \gamma = \begin{bmatrix} \gamma_X(2) \\ \gamma_X(1) \end{bmatrix}
+        = \sigma^2 \begin{bmatrix} 0 \\ \theta \end{bmatrix}.
+      \end{align*}
+      The solution to the system of equations $\Gamma \vect{a} = \gamma$ is
+      $$\vect{a} = \frac{\theta}{1 + \theta^2 + \theta^4} \begin{bmatrix}-\theta\\ 1 + \theta^2 \end{bmatrix}.$$
+      Therefore, the best predictor of $X_3$ is
+      \begin{align*}
+        P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) \\
+        &= \frac{\theta}{1 + \theta^2 + \theta^4} (- \theta  X_5 + (1 + \theta^2) X_4)
+      \end{align*}
+
+    \item Using the above, set $Y = X_3$ and $W = (X_5, X_4, X_2, X_1)^\intercal$. Then
+      \begin{align*}
+        \Gamma = \Co{\vect{W}}{\vect{W}} &=
+        \phantom{\sigma^2}
+        \begin{bmatrix}
+          \gamma_X(0) & \gamma_X(1) & \gamma_X(3) & \gamma_X(4) \\
+          \gamma_X(1) & \gamma_X(0) & \gamma_X(2) & \gamma_X(3) \\
+          \gamma_X(3) & \gamma_X(2) & \gamma_X(0) & \gamma_X(1) \\
+          \gamma_X(4) & \gamma_X(3) & \gamma_X(1) & \gamma_X(0) \\
+        \end{bmatrix}\\
+        &=
+        \sigma^2
+        \begin{bmatrix}
+          1 + \theta^2 & \theta & 0 & 0 \\
+          \theta & 1 + \theta^2 & 0 & 0 \\
+          0 & 0 & 1 + \theta^2 & \theta \\
+          0 & 0 & \theta & 1 + \theta^2 \\
+        \end{bmatrix}
+      \end{align*}
+      and
+      \begin{align*}
+        \gamma =
+        \begin{bmatrix}
+          \gamma_X(2) \\
+          \gamma_X(1) \\
+          \gamma_X(1) \\
+          \gamma_X(2) \\
+        \end{bmatrix}
+        = \sigma^2
+        \begin{bmatrix}
+          0 \\
+          \theta \\
+          \theta \\
+          0 \\
+        \end{bmatrix}.
+      \end{align*}
+      The solution to the system of equations $\Gamma \vect{a} = \gamma$ is
+      \begin{align*}
+        \vect{a} = \frac{\theta}{1 + \theta^2 + \theta^4}
+        \begin{bmatrix}
+          -\theta \\
+          1 + \theta^2 \\
+          1 + \theta^2 \\
+          -\theta \\
+        \end{bmatrix}.
+      \end{align*}
+      Therefore, the best predictor of $X_3$ is
+      \begin{align*}
+        P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) \\
+        &= \frac{\theta}{1 + \theta^2 + \theta^4} (- \theta  X_5 + (1 + \theta^2) X_4 + (1 + \theta^2) X_2 -\theta X_1)
+      \end{align*}
+
+    \item The mean squared error of the predictor in terms of the known random
+      variables is $\E\left[ (Y - P(Y|\vect{W}))^2 \right] = \V(Y) - \vect{a}^\intercal \gamma$.
+
+      Therefore, the mean squared error for:
+
+      (a) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
+      \frac{-\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+
+      (b) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
+      \frac{-\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+
+      (c) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
+      \frac{-2\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+  \end{enumerate}
 \end{proof}
 
 
-% Problem 2.21
-\begin{custompbm}{2.21}
+% Problem 2.22
+\begin{custompbm}{2.22}
   Repeat parts (a)-(d) of Problem 2.21 assuming now that the observations
   $X_1, X_2, X_3, X_4, X_5$ are from the causal AR(1) model
   \[
@@ -78,6 +201,129 @@
 \end{custompbm}
 
 \begin{proof}
+  If $Y$ and $W_n, \dots, W_1$ are random variables, then for $\vect{W} = (W_n, \dots, W_1)$
+  and $\vect{\mu}_W= \left(\E(W_n), \dots, \E(W_1)\right)^\intercal$, the best linear
+  predictor of $Y$ in terms of $\{1, W_n, \dots, W_1\}$ is
+  \[
+    P(Y|\vect{W}) = \E(Y) + \vect{a}^\intercal (\vect{W} - \vect{\mu_W})
+  \]
+  where $\vect{a}$ is the solution of $\Gamma \vect{a} = \gamma$ for
+  $\Gamma = \Co{\vect{W}}{\vect{W}}$ and $\gamma = \Co{Y}{\vect{W}}$.
+
+  Also, note for an MA(1) process, the autocovariance function is defined as
+  \[
+    \gamma_X(h) =
+    \begin{cases}
+      \sigma^2 (1 + \theta^2) & \text{if $h = 0$}\\
+      \sigma^2 \theta & \text{if $|h| = 1$}\\
+      0 & \text{if $|h| > 1$}\\
+    \end{cases}
+  \]
+  \begin{enumerate}
+    \item Using the above, set $Y = X_3$ and $W = (X_2, X_1)^\intercal$. Then
+      \begin{align*}
+        \Gamma = \Co{\vect{W}}{\vect{W}} =
+        \begin{bmatrix} \gamma_X(0) & \gamma_X(1) \\ \gamma_X(1) & \gamma_X(0) \end{bmatrix} =
+        \sigma^2 \begin{bmatrix} 1 + \theta^2 & \theta \\ \theta & 1 + \theta^2 \end{bmatrix}
+      \end{align*}
+      and
+      \begin{align*}
+        \gamma = \begin{bmatrix} \gamma_X(1) \\ \gamma_X(2) \end{bmatrix}
+        = \sigma^2 \begin{bmatrix} \theta \\ 0 \end{bmatrix}.
+      \end{align*}
+      The solution to the system of equations $\Gamma \vect{a} = \gamma$ is
+      $$\vect{a} = \frac{\theta}{1 + \theta^2 + \theta^4} \begin{bmatrix}1 + \theta^2 \\ -\theta\end{bmatrix}.$$
+      Therefore, the best predictor of $X_3$ is
+      \begin{align*}
+        P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) \\
+        &= \frac{\theta}{1 + \theta^2 + \theta^4} ((1 + \theta^2) X_2 - \theta X_1)
+      \end{align*}
+
+    \item Using the above, set $Y = X_3$ and $W = (X_5, X_4)^\intercal$. Then
+      \begin{align*}
+        \Gamma = \Co{\vect{W}}{\vect{W}} =
+        \begin{bmatrix} \gamma_X(0) & \gamma_X(1) \\ \gamma_X(1) & \gamma_X(0) \end{bmatrix} =
+        \sigma^2 \begin{bmatrix} 1 + \theta^2 & \theta \\ \theta & 1 + \theta^2 \end{bmatrix}
+      \end{align*}
+      and
+      \begin{align*}
+        \gamma = \begin{bmatrix} \gamma_X(2) \\ \gamma_X(1) \end{bmatrix}
+        = \sigma^2 \begin{bmatrix} 0 \\ \theta \end{bmatrix}.
+      \end{align*}
+      The solution to the system of equations $\Gamma \vect{a} = \gamma$ is
+      $$\vect{a} = \frac{\theta}{1 + \theta^2 + \theta^4} \begin{bmatrix}-\theta\\ 1 + \theta^2 \end{bmatrix}.$$
+      Therefore, the best predictor of $X_3$ is
+      \begin{align*}
+        P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) \\
+        &= \frac{\theta}{1 + \theta^2 + \theta^4} (- \theta  X_5 + (1 + \theta^2) X_4)
+      \end{align*}
+
+    \item Using the above, set $Y = X_3$ and $W = (X_5, X_4, X_2, X_1)^\intercal$. Then
+      \begin{align*}
+        \Gamma = \Co{\vect{W}}{\vect{W}} &=
+        \phantom{\sigma^2}
+        \begin{bmatrix}
+          \gamma_X(0) & \gamma_X(1) & \gamma_X(3) & \gamma_X(4) \\
+          \gamma_X(1) & \gamma_X(0) & \gamma_X(2) & \gamma_X(3) \\
+          \gamma_X(3) & \gamma_X(2) & \gamma_X(0) & \gamma_X(1) \\
+          \gamma_X(4) & \gamma_X(3) & \gamma_X(1) & \gamma_X(0) \\
+        \end{bmatrix}\\
+        &=
+        \sigma^2
+        \begin{bmatrix}
+          1 + \theta^2 & \theta & 0 & 0 \\
+          \theta & 1 + \theta^2 & 0 & 0 \\
+          0 & 0 & 1 + \theta^2 & \theta \\
+          0 & 0 & \theta & 1 + \theta^2 \\
+        \end{bmatrix}
+      \end{align*}
+      and
+      \begin{align*}
+        \gamma =
+        \begin{bmatrix}
+          \gamma_X(2) \\
+          \gamma_X(1) \\
+          \gamma_X(1) \\
+          \gamma_X(2) \\
+        \end{bmatrix}
+        = \sigma^2
+        \begin{bmatrix}
+          0 \\
+          \theta \\
+          \theta \\
+          0 \\
+        \end{bmatrix}.
+      \end{align*}
+      The solution to the system of equations $\Gamma \vect{a} = \gamma$ is
+      \begin{align*}
+        \vect{a} = \frac{\theta}{1 + \theta^2 + \theta^4}
+        \begin{bmatrix}
+          -\theta \\
+          1 + \theta^2 \\
+          1 + \theta^2 \\
+          -\theta \\
+        \end{bmatrix}.
+      \end{align*}
+      Therefore, the best predictor of $X_3$ is
+      \begin{align*}
+        P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) \\
+        &= \frac{\theta}{1 + \theta^2 + \theta^4} (- \theta  X_5 + (1 + \theta^2) X_4 + (1 + \theta^2) X_2 -\theta X_1)
+      \end{align*}
+
+    \item The mean squared error of the predictor in terms of the known random
+      variables is $\E\left[ (Y - P(Y|\vect{W}))^2 \right] = \V(Y) - \vect{a}^\intercal \gamma$.
+
+      Therefore, the mean squared error for:
+
+      (a) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
+      \frac{-\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+
+      (b) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
+      \frac{-\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+
+      (c) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
+      \frac{-2\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+  \end{enumerate}
 \end{proof}
 
 
