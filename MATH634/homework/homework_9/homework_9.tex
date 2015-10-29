@@ -14,7 +14,7 @@
 
 \newcommand{\E}{\text{E}}
 \newcommand{\V}{\text{Var}}
-\newcommand{\Co}[2]{\text{Cov}({#1}, {#2})}
+\newcommand{\Co}[2]{\text{Cov}\left({#1}, {#2}\right)}
 \newcommand{\pdf}{\text{pdf}}
 \newcommand{\pmf}{\text{pmf}}
 \newcommand{\me}{\mathrm{e}}
@@ -43,6 +43,49 @@
 \end{custompbm}
 
 \begin{proof}
+  Note that if $n \geq 2$, then $\hat{X}_n = P_{n-1}X_n = a_0 + a_1 X_{n-1} + \dots + a_{n-1}X_{1}$
+  where $a_1, \dots, a_{n-1}$ is the solution to the system of equations
+  \[
+    \begin{bmatrix}
+      \gamma(0) & \gamma(1) & \hdots & \gamma(n-2) \\
+      \gamma(1) & \gamma(0) & \hdots & \gamma(n-3) \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \gamma(n-2) & \gamma(n-3) & \hdots & \gamma(0) \\
+    \end{bmatrix}
+    \begin{bmatrix}
+      a_1 \\
+      a_2 \\
+      \vdots \\
+      a_{n-1} \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \gamma(1) \\
+      \gamma(2) \\
+      \vdots \\
+      \gamma(n) \\
+    \end{bmatrix}.
+  \]
+  Now, for $0 < i < n$,
+  \begin{align}\label{sum}
+    \Co{X_n - \hat{X}_n}{X_i} &= \Co{X_n}{X_i} - \Co{\sum_{j=1}^{n-1} a_j X_{n-j}}{X_i} \notag\\
+    &= \Co{X_n}{X_i} - \sum_{j=1}^{n-1} a_j \Co{X_{n-j}}{X_i} \notag \\
+    &= \gamma(n-i) - \sum_{j=1}^{n-1} a_j \gamma(n-j-i)
+  \end{align}
+  From the above system of equations it is clear that $\sum_{j=1}^{n-1} a_j \gamma(n-j-i) = \gamma(n-i)$
+  and that $\Co{X_n - \hat{X}_n}{X_i} = 0$. Therefore,
+  $X_n - \hat{X}_n$ is uncorrelated with $X_i$ for $n\geq 2$ and $0 < i < n$.
+
+  Now, say $\hat{X}_i = b_0 + b_1 X_{n-1} + \dots + b_{n-1}X_{1}$for $0 < i < n$. Then
+  \begin{align*}
+    \Co{X_n - \hat{X}_n}{X_i - \hat{X_i}} &= \Co{X_n - \hat{X}_n}{X_i} - \Co{X_n - \hat{X}_n}{\hat{X}_i} \\
+    &= -\Co{X_n - \hat{X}_n}{\sum_{j=1}^{i-1} b_j X_{i-j}} \notag\\
+    &= -\sum_{j=1}^{i-1} b_j \Co{X_n - \hat{X}_n}{X_{i-j}} = 0 \notag \\
+  \end{align*}
+  from our above results since $i - j < n$ for $0 < i < n$, $0 < j < i$, and $n \geq 2$.
+  Therefore $X_n - \hat{X}_n$ is uncorrelated with $X_i - \hat{X}_i$ for $n\geq 2$ and $0 < i < n$.
+
+
 \end{proof}
 
 
@@ -65,7 +108,7 @@
 \end{custompbm}
 
 \begin{proof}
-  If $Y$ and $W_n, \dots, W_1$ are random variables, then for $\vect{W} = (W_n, \dots, W_1)$
+  If $Y$ and $W_n, \dots, W_1$ are random variables, then for $\vect{W} = (W_n, \dots, W_1)^\intercal$
   and $\vect{\mu}_W= \left(\E(W_n), \dots, \E(W_1)\right)^\intercal$, the best linear
   predictor of $Y$ in terms of $\{1, W_n, \dots, W_1\}$ is
   \[
@@ -201,7 +244,7 @@
 \end{custompbm}
 
 \begin{proof}
-  If $Y$ and $W_n, \dots, W_1$ are random variables, then for $\vect{W} = (W_n, \dots, W_1)$
+  If $Y$ and $W_n, \dots, W_1$ are random variables, then for $\vect{W} = (W_n, \dots, W_1)^\intercal$
   and $\vect{\mu}_W= \left(\E(W_n), \dots, \E(W_1)\right)^\intercal$, the best linear
   predictor of $Y$ in terms of $\{1, W_n, \dots, W_1\}$ is
   \[
