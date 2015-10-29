@@ -180,13 +180,13 @@
       Therefore, the mean squared error for:
 
       (a) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
-      \frac{-\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+      \sigma^2 (1 + \theta^2) - \frac{\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
 
       (b) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
-      \frac{-\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+      \sigma^2 (1 + \theta^2) - \frac{\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
 
       (c) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
-      \frac{-2\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+      \sigma^2 (1 + \theta^2) - \frac{2\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
   \end{enumerate}
 \end{proof}
 
@@ -210,58 +210,51 @@
   where $\vect{a}$ is the solution of $\Gamma \vect{a} = \gamma$ for
   $\Gamma = \Co{\vect{W}}{\vect{W}}$ and $\gamma = \Co{Y}{\vect{W}}$.
 
-  Also, note for an MA(1) process, the autocovariance function is defined as
+  Also, note for an AR(1) process, the autocovariance function is defined as
   \[
-    \gamma_X(h) =
-    \begin{cases}
-      \sigma^2 (1 + \theta^2) & \text{if $h = 0$}\\
-      \sigma^2 \theta & \text{if $|h| = 1$}\\
-      0 & \text{if $|h| > 1$}\\
-    \end{cases}
+    \gamma_X(h) = \frac{\sigma^2\phi^{|h|}}{1-\phi^2}
   \]
   \begin{enumerate}
     \item Using the above, set $Y = X_3$ and $W = (X_2, X_1)^\intercal$. Then
       \begin{align*}
         \Gamma = \Co{\vect{W}}{\vect{W}} =
         \begin{bmatrix} \gamma_X(0) & \gamma_X(1) \\ \gamma_X(1) & \gamma_X(0) \end{bmatrix} =
-        \sigma^2 \begin{bmatrix} 1 + \theta^2 & \theta \\ \theta & 1 + \theta^2 \end{bmatrix}
+        \frac{\sigma^2}{1-\phi^2} \begin{bmatrix} 1  & \phi \\ \phi & 1 \end{bmatrix}
       \end{align*}
       and
       \begin{align*}
         \gamma = \begin{bmatrix} \gamma_X(1) \\ \gamma_X(2) \end{bmatrix}
-        = \sigma^2 \begin{bmatrix} \theta \\ 0 \end{bmatrix}.
+        = \frac{\sigma^2}{1-\phi^2} \begin{bmatrix} \phi \\ \phi^2 \end{bmatrix}.
       \end{align*}
       The solution to the system of equations $\Gamma \vect{a} = \gamma$ is
-      $$\vect{a} = \frac{\theta}{1 + \theta^2 + \theta^4} \begin{bmatrix}1 + \theta^2 \\ -\theta\end{bmatrix}.$$
+      $$\vect{a} = \begin{bmatrix} \phi \\ 0\end{bmatrix}.$$
       Therefore, the best predictor of $X_3$ is
       \begin{align*}
-        P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) \\
-        &= \frac{\theta}{1 + \theta^2 + \theta^4} ((1 + \theta^2) X_2 - \theta X_1)
+        P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) = \phi X_2
       \end{align*}
 
     \item Using the above, set $Y = X_3$ and $W = (X_5, X_4)^\intercal$. Then
       \begin{align*}
         \Gamma = \Co{\vect{W}}{\vect{W}} =
         \begin{bmatrix} \gamma_X(0) & \gamma_X(1) \\ \gamma_X(1) & \gamma_X(0) \end{bmatrix} =
-        \sigma^2 \begin{bmatrix} 1 + \theta^2 & \theta \\ \theta & 1 + \theta^2 \end{bmatrix}
+        \frac{\sigma^2}{1-\phi^2} \begin{bmatrix} 1  & \phi \\ \phi & 1 \end{bmatrix}
       \end{align*}
       and
       \begin{align*}
         \gamma = \begin{bmatrix} \gamma_X(2) \\ \gamma_X(1) \end{bmatrix}
-        = \sigma^2 \begin{bmatrix} 0 \\ \theta \end{bmatrix}.
+        =  \frac{\sigma^2}{1-\phi^2} \begin{bmatrix} \phi^2 \\ \phi \end{bmatrix}.
       \end{align*}
       The solution to the system of equations $\Gamma \vect{a} = \gamma$ is
-      $$\vect{a} = \frac{\theta}{1 + \theta^2 + \theta^4} \begin{bmatrix}-\theta\\ 1 + \theta^2 \end{bmatrix}.$$
+      $$\vect{a} = \begin{bmatrix} 0 \\ \phi \end{bmatrix}.$$
       Therefore, the best predictor of $X_3$ is
       \begin{align*}
-        P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) \\
-        &= \frac{\theta}{1 + \theta^2 + \theta^4} (- \theta  X_5 + (1 + \theta^2) X_4)
+        P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) = \phi X_4
       \end{align*}
 
     \item Using the above, set $Y = X_3$ and $W = (X_5, X_4, X_2, X_1)^\intercal$. Then
       \begin{align*}
         \Gamma = \Co{\vect{W}}{\vect{W}} &=
-        \phantom{\sigma^2}
+        \phantom{\frac{\sigma^2}{1-\phi^2} }
         \begin{bmatrix}
           \gamma_X(0) & \gamma_X(1) & \gamma_X(3) & \gamma_X(4) \\
           \gamma_X(1) & \gamma_X(0) & \gamma_X(2) & \gamma_X(3) \\
@@ -269,12 +262,12 @@
           \gamma_X(4) & \gamma_X(3) & \gamma_X(1) & \gamma_X(0) \\
         \end{bmatrix}\\
         &=
-        \sigma^2
+        \frac{\sigma^2}{1-\phi^2}
         \begin{bmatrix}
-          1 + \theta^2 & \theta & 0 & 0 \\
-          \theta & 1 + \theta^2 & 0 & 0 \\
-          0 & 0 & 1 + \theta^2 & \theta \\
-          0 & 0 & \theta & 1 + \theta^2 \\
+          1 & \phi & \phi^3 & \phi^4 \\
+          \phi & 1  & \phi^2 & \phi^3 \\
+          \phi^3 & \phi^2 & 1  & \phi \\
+          \phi^4 & \phi^3 & \phi & 1 \\
         \end{bmatrix}
       \end{align*}
       and
@@ -286,28 +279,28 @@
           \gamma_X(1) \\
           \gamma_X(2) \\
         \end{bmatrix}
-        = \sigma^2
+        = \frac{\sigma^2}{1-\phi^2}
         \begin{bmatrix}
-          0 \\
-          \theta \\
-          \theta \\
-          0 \\
+          \phi^2 \\
+          \phi \\
+          \phi \\
+          \phi^2 \\
         \end{bmatrix}.
       \end{align*}
       The solution to the system of equations $\Gamma \vect{a} = \gamma$ is
       \begin{align*}
-        \vect{a} = \frac{\theta}{1 + \theta^2 + \theta^4}
+        \vect{a} = \phi
         \begin{bmatrix}
-          -\theta \\
-          1 + \theta^2 \\
-          1 + \theta^2 \\
-          -\theta \\
+          0 \\
+          \frac{1-\phi^2}{1-\phi^4} \\
+          \frac{1-\phi^2}{1-\phi^4} \\
+          0 \\
         \end{bmatrix}.
       \end{align*}
       Therefore, the best predictor of $X_3$ is
       \begin{align*}
         P(X_3|\vect{W}) &= \E(X_3) + \vect{a}^\intercal (\vect{W} - \vect{\mu}_W) \\
-        &= \frac{\theta}{1 + \theta^2 + \theta^4} (- \theta  X_5 + (1 + \theta^2) X_4 + (1 + \theta^2) X_2 -\theta X_1)
+        &= \frac{\phi-\phi^3}{1-\phi^4}(X_4 + X_2)
       \end{align*}
 
     \item The mean squared error of the predictor in terms of the known random
@@ -316,13 +309,13 @@
       Therefore, the mean squared error for:
 
       (a) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
-      \frac{-\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+      \frac{\sigma^2}{1-\phi^2} - \frac{\sigma^2\phi^2}{1-\phi^2} = \sigma^2$
 
       (b) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
-      \frac{-\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+      \frac{\sigma^2}{1-\phi^2} - \frac{\sigma^2\phi^2}{1-\phi^2} = \sigma^2$
 
       (c) is $\E\left[ (X_3 - P(X_3|\vect{W}))^2 \right] =
-      \frac{-2\sigma^2\theta^2(1 + \theta^2)}{1 + \theta^2 + \theta^4}$
+      \frac{\sigma^2}{1-\phi^2} - \frac{2\sigma^2\phi^2(1 - \phi^2)}{(1-\phi^2)(1-\phi^4)} = \frac{\sigma^2(1-\phi^2)}{1-\phi^4}$
   \end{enumerate}
 \end{proof}
 
