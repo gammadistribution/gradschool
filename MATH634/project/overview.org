@@ -1,0 +1,4 @@
+* Data Analysis project
+Collect Twitter data for show with specific hashtag over two weeks.
+Count the number of tweets with the hashtag at each quarter day. This should
+give us 56 observations which should be enough to model a time series.
