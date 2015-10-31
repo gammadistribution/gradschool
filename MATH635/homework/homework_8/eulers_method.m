@@ -10,17 +10,8 @@ function [t, u] = eulers_method(func, interval, eta, n, epsilon)
 a = interval(1);
 b = interval(2);
 
-t = [];
-
 % Create array of points within interval.
-for i=1:n+1
-    if i == 1
-        element = a;
-    else
-        element = t(i-1) + 1/n;
-    end
-    t(i) = element;
-end
+t = uniform_nodes(interval, n);
 
 % The first element of the solution array is the initial condition.
 u = [eta + epsilon];
