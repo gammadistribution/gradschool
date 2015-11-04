@@ -64,4 +64,24 @@
 \end{proof}
 
 
+\begin{custompbm}{9.1.2}
+  Show that $J(f)$ has degree of precision at least $n-1$.
+\end{custompbm}
+
+\begin{proof}
+  Let $q(t)$ be a polynomial of degree $n-1$. Then,
+  \[
+    q(t) = \sum_{j=1}^n q(x_i) \prod_{\substack{i=1\\i\neq j}} \frac{t - x_i}{x_j - x_i},
+  \]
+  i.e.\ the Lagrange interpolating polynomial of $q$ through the nodes $x_1, x_2, \dots x_n$ is $q$ itself.
+  Hence, the exact integral of $q$, $I(q) = \int_a^b q(t) \diff{t}$, satisfies
+  \begin{align*}
+    I(q) = \int_a^b q(t) \diff{t}
+    &= \int_a^b \sum_{j=1}^{n} q(x_j) \prod_{\substack{i=1\\i\neq j}} \frac{t - x_i}{x_j - x_i} \diff{t} \\
+    &= \sum_{j=1}^{n} \left[\int_a^b \prod_{\substack{i=1\\i\neq j}} \frac{t - x_i}{x_j - x_i} \diff{t} \right] q(x_j) = J(q).
+  \end{align*}
+  Since $q$ is a polynomial of degree $n-1$ and $I(q) = J(q)$, we know that $J(f)$
+  has degree of precision at least $n-1$.
+\end{proof}
+
 \end{document}
