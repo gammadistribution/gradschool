@@ -156,4 +156,32 @@
 \end{proof}
 
 
+\begin{custompbm}{9.4.1}
+  Given two real numbers $\alpha_1$ and $\alpha_2$ and two values $t_1, t_2$ in
+  [-1, 1]. For a function $f: [-1,1] \to \mathbb{R}$, consider the basic quadrature
+  $J_1(f):= \alpha_1 f(t_1) + \alpha_2 f(t_2)$ to approximate $\int_{-1}^{1} f(t) \diff{t}$
+  How do we choose the four numbers $\alpha_1, \alpha_2, t_1,$ and $t_2$ to obtain
+  the maximum degree of precision?
+\end{custompbm}
+
+
+\begin{proof}
+  For the quadrature $J_1(f)$ as defined in the problem, we have that
+  \begin{align*}
+    \int_{-1}^{1} t^0 \diff{t} &= 2 = \alpha_1 f(t_1) + \alpha_2 f(t_2) = \alpha_1 + \alpha_2 \\
+    \int_{-1}^{1} t^1 \diff{t} &= 0 = \alpha_1 f(t_1) + \alpha_2 f(t_2) = \alpha_1 t_1 + \alpha_2 t_2 \\
+    \int_{-1}^{1} t^2 \diff{t} &= \frac{2}{3} = \alpha_1 f(t_1) + \alpha_2 f(t_2) = \alpha_1 t_1^2 + \alpha_2 t_2^2 \\
+    \int_{-1}^{1} t^3 \diff{t} &= 0 = \alpha_1 f(t_1) + \alpha_2 f(t_2) = \alpha_1 t_1^3 + \alpha_2 t_2^3.
+  \end{align*}
+  This gives us a system of four equations in four unknowns. Solving the system
+  yields the solution $\alpha_1 = \alpha_2 = 1$, and $t_1 = \frac{1}{\sqrt{3}}$ and
+  $t_2 = -\frac{1}{\sqrt{3}}$.
+
+  Since the quadrature rule is such that $I(p) = J_1(p)$ for any polynomial
+  of degree less than 4, by our own definition, this quadrature rule has
+  maximal degree of precision 3 as the rule does not hold for polynomials of
+  degree greater than or equal to 4.
+\end{proof}
+
+
 \end{document}
