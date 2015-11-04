@@ -164,7 +164,6 @@
   the maximum degree of precision?
 \end{custompbm}
 
-
 \begin{proof}
   For the quadrature $J_1(f)$ as defined in the problem, we have that
   \begin{align*}
@@ -181,6 +180,28 @@
   of degree less than 4, by our own definition, this quadrature rule has
   maximal degree of precision 3 as the rule does not hold for polynomials of
   degree greater than or equal to 4.
+\end{proof}
+
+
+\begin{custompbm}{9.4.2}
+  Now we consider the quadrature $J_2(f):= \beta_1 f(-1) + \beta_2 f(0) + \beta_3 f(1)$.
+  Compute the values of $\beta_i$ to obtain degree of precision 2. Is 2 the maximum
+  degree of precision?
+\end{custompbm}
+
+\begin{proof}
+  To obtain degree of precision 2 for the quadrature $J_2(f)$, we make sure that
+  $I(p) = J_2(p)$ for every polynomial $p$ with degree less than 3. Doing so gives us
+  the following system of equations in three unknowns
+  \begin{align*}
+    \int_{-1}^{1} t^0 \diff{t} &= 2 = \beta_1 f(-1) + \beta_2 f(0) + \beta_3 f(1) = \beta_1 + \beta_2 + \beta_3 \\
+    \int_{-1}^{1} t^1 \diff{t} &= 0 = \beta_1 f(-1) + \beta_2 f(0) + \beta_3 f(1) = -\beta_1 + \beta_3 \\
+    \int_{-1}^{1} t^2 \diff{t} &= \frac{2}{3} = \beta_1 f(-1) + \beta_2 f(0) + \beta_3 f(1) = \beta_1 + \beta_3
+  \end{align*}
+  The solution to this system is $\beta_1 = 1/3, \beta_2 = 4/3$, and $\beta_3 = 1/3$.
+  Note that 2 is not the maximum degree of precision as the quadrature rule
+  holds for polynomials of degree 3.
+
 \end{proof}
 
 
