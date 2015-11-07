@@ -14,6 +14,10 @@ credentials_path = os.path.join(parent_dir, 'credentials', 'credentials.json')
 database_path = os.path.join(parent_dir, 'database', 'twitter_stream.db')
 
 
+# The path leading to the queries to use within the database
+queries_path = os.path.join(os.path.dirname(database_path), 'queries')
+
+
 # The path leading to the logging config file
 logger_config = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              'logging', 'logging.ini')
@@ -25,3 +29,7 @@ required_keys = {
     'consumer': ['token', 'secret'],
     'access': ['token', 'secret']
 }
+
+
+# This is the criteria used to filter incoming streamed tweets.
+hashtag = 'thewalkingdead'

@@ -3,3 +3,4 @@
 *.dvi
 credentials.json
 *.log
+*.db

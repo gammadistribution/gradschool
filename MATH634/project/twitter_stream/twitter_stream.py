@@ -1,7 +1,11 @@
+import datetime
 import json
 import logging
 import logging.config
+import os
+import re
 from settings import twitter_stream_settings as tss
+import sqlite3
 import sys
 import tweepy
 
@@ -14,16 +18,46 @@ class DBStreamListener(tweepy.StreamListener):
     """Class that inherits from tweepy.StreamListener. Saves tweets that are
     streamed through this listener to the specified sqlite3 database.
     """
-    def __init__(self, database, hashtag, logger):
+    def __init__(self, logger, database, hashtag, queries_path):
         super().__init__()
         self.database = database
         self.hashtag = hashtag
         self.logger = logger
+        self.queries = self.retrieve_queries(queries_path)
+        self.start_time = datetime.datetime.now()
+
+    def retrieve_queries(self, queries_path):
+        """Create dictionary of queries found in the queries_path. For all
+        files ending in .sql, add filename as key and file contents as value.
+
+        Returns resulting dictionary.
+        """
+        queries = {}
+        regex = '(?P<query>.*).sql'
+
+        for root, dirs, files in os.walk(queries_path):
+            for filename in files:
+                if re.search(regex, filename):
+                    with open(os.path.join(root, filename)) as query:
+                        key = re.search(regex, filename).group('query')
+                        queries.update({key: query.read()})
+
+        return queries
 
     def on_connect(self):
         """Execute the following when the stream first connects to the twitter
         stream.
         """
+        self.connection = sqlite3.connect(self.database)
+        self.cursor = self.connection.cursor()
+
+        try:
+            self.cursor.execute(self.queries['create_tweets_table'])
+        except sqlite3.OperationalError:
+            message = 'The table tweets already exists in db. '
+            message += 'Skipping creation.'
+            self.logger.info(message)
+
         return
 
     def on_status(self, status):
@@ -112,6 +146,10 @@ def main():
 
     logger.info('Creating Twitter API handle.')
     api = create_api_handle(credentials)
+
+    logger.info('Creating DBStreamListener instance')
+    stream_listener = DBStreamListener(logger, tss.database_path, tss.hashtag,
+                                       tss.queries_path)
 
 
 if __name__ == '__main__':
