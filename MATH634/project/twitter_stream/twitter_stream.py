@@ -3,10 +3,26 @@ import logging
 import logging.config
 from settings import twitter_stream_settings as tss
 import sys
+import tweepy
 
 
 logging.config.fileConfig(tss.logger_config)
 logger = logging.getLogger('twitter_stream')
+
+
+def create_api_handle(credentials):
+    """Using the passed credentials json object, create tweepy.API handle
+    to access TwitterAPI.
+    """
+    auth = tweepy.OAuthHandler(credentials['consumer']['token'],
+                               credentials['consumer']['secret'])
+
+    auth.set_access_token(credentials['access']['token'],
+                          credentials['access']['secret'])
+
+    api = tweepy.API(auth)
+
+    return api
 
 
 def get_credentials(credentials_path, required_keys=tss.required_keys):
@@ -36,7 +52,11 @@ def get_credentials(credentials_path, required_keys=tss.required_keys):
 
 
 def main():
+    logger.info('Retrieving credentials.')
     credentials = get_credentials(tss.credentials_path)
+
+    logger.info('Creating Twitter API handle.')
+    api = create_api_handle(credentials)
 
 
 if __name__ == '__main__':
