@@ -1,0 +1,4 @@
+INSERT INTO
+    tweets
+VALUES
+    (?, ?, ?, ?);

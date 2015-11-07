@@ -10,6 +10,10 @@ parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 credentials_path = os.path.join(parent_dir, 'credentials', 'credentials.json')
 
 
+# The path leading to the database that stores all of the tweets.
+database_path = os.path.join(parent_dir, 'database', 'twitter_stream.db')
+
+
 # The path leading to the logging config file
 logger_config = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              'logging', 'logging.ini')
