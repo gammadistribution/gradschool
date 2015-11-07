@@ -24,7 +24,7 @@ class DBStreamListener(tweepy.StreamListener):
         self.hashtag = hashtag
         self.logger = logger
         self.queries = self.retrieve_queries(queries_path)
-        self.start_time = datetime.datetime.now()
+        self.interval_start_time = datetime.datetime.now()
 
     def retrieve_queries(self, queries_path):
         """Create dictionary of queries found in the queries_path. For all
@@ -64,38 +64,76 @@ class DBStreamListener(tweepy.StreamListener):
         """Execute the following when a new tweet is streamed to the listener
         instance. Parse the status object for the created_at, text,
         and user.screen_name properties, then insert into the database cursor.
-        Commit database connection every fifteen minutes.
+        Commit database connection every preset interval as defined in
+        settings.
         """
+        # Gather the values to insert into database in the following order:
+        # hashtag, screen_name, created_at, text.
+        values = (
+            self.hashtag,
+            status.user.screen_name,
+            datetime.strftime(status.created_at, '%Y-%m-%d %H:%M:%S'),
+            status.text
+        )
+
+        self.cursor.execute(queries['insert_tweet'], values)
+
+        # If the elapsed time is greater than the predefined interval,
+        # save cursor data to connection.
+        if datetime.datetime.now() - self.interval_start_time > tss.interval:
+            self.connection.commit()
+
         return
 
     def on_exception(self, exception):
         """If an exception occurs during the twitter stream process, log the
         exception. Then commit the database connection.
         """
+        self.connection.commit()
+
+        self.logger.error('The following exception occured: {}'.format(exception))
+
         return
 
     def on_limit(self, track):
         """If rate limit warning is parsed by the twitter stream process, log
         the event. Then commit the database connection.
         """
+        self.connection.commit()
+
+        self.logger.warn('Limit warning detected: {}'.format(track))
+
         return
 
     def on_error(self, status_code):
         """If http status code is an error code, log the status_code and defer
         to tweepy. Then commit the database connection.
         """
+        self.connection.commit()
+
+        message = 'The following HTTP error code occured: {}'
+        self.logger.error(message.format(exception))
+
         return
 
     def on_timeout(self):
         """If connection times out, log the event. Then commit the
         database connection.
         """
+        self.connection.commit()
+
+        self.logger.warn('The connection has timed out')
+
         return
 
     def on_disconnect(self, notice):
         """If twitter sends a disconnect notice, log the event. Then commit
         the database connection.
         """
+        self.connection.commit()
+
+        self.logger.critical('The connection has ended: {}'.format(notice))
+
         return False
 
 

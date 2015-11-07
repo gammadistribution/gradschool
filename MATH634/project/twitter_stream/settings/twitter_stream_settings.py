@@ -1,4 +1,5 @@
 import os
+import datetime
 
 
 # The parent_dir of the project is one directories above this current
@@ -33,3 +34,7 @@ required_keys = {
 
 # This is the criteria used to filter incoming streamed tweets.
 hashtag = 'thewalkingdead'
+
+
+# This is how long the process waits before commiting connection
+interval = datetime.timedelta(900)
