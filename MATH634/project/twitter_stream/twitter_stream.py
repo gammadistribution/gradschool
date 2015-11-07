@@ -81,6 +81,7 @@ class DBStreamListener(tweepy.StreamListener):
         # If the elapsed time is greater than the predefined interval,
         # save cursor data to connection.
         if datetime.datetime.now() - self.interval_start_time > tss.interval:
+            self.logger.info('Commiting to database.')
             self.connection.commit()
 
         return
@@ -188,6 +189,12 @@ def main():
     logger.info('Creating DBStreamListener instance')
     stream_listener = DBStreamListener(logger, tss.database_path, tss.hashtag,
                                        tss.queries_path)
+
+    logger.info('Attempting to connect stream.')
+    stream = tweepy.Stream(auth=api.auth, listener=stream_listener)
+
+    logger.info('Streaming tweets.')
+    stream.filter(track=[stream_listener.hashtag])
 
 
 if __name__ == '__main__':
