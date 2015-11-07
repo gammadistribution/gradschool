@@ -10,6 +10,61 @@ logging.config.fileConfig(tss.logger_config)
 logger = logging.getLogger('twitter_stream')
 
 
+class DBStreamListener(tweepy.StreamListener):
+    """Class that inherits from tweepy.StreamListener. Saves tweets that are
+    streamed through this listener to the specified sqlite3 database.
+    """
+    def __init__(self, database, hashtag, logger):
+        super().__init__()
+        self.database = database
+        self.hashtag = hashtag
+        self.logger = logger
+
+    def on_connect(self):
+        """Execute the following when the stream first connects to the twitter
+        stream.
+        """
+        return
+
+    def on_status(self, status):
+        """Execute the following when a new tweet is streamed to the listener
+        instance. Parse the status object for the created_at, text,
+        and user.screen_name properties, then insert into the database cursor.
+        Commit database connection every fifteen minutes.
+        """
+        return
+
+    def on_exception(self, exception):
+        """If an exception occurs during the twitter stream process, log the
+        exception. Then commit the database connection.
+        """
+        return
+
+    def on_limit(self, track):
+        """If rate limit warning is parsed by the twitter stream process, log
+        the event. Then commit the database connection.
+        """
+        return
+
+    def on_error(self, status_code):
+        """If http status code is an error code, log the status_code and defer
+        to tweepy. Then commit the database connection.
+        """
+        return
+
+    def on_timeout(self):
+        """If connection times out, log the event. Then commit the
+        database connection.
+        """
+        return
+
+    def on_disconnect(self, notice):
+        """If twitter sends a disconnect notice, log the event. Then commit
+        the database connection.
+        """
+        return False
+
+
 def create_api_handle(credentials):
     """Using the passed credentials json object, create tweepy.API handle
     to access TwitterAPI.
