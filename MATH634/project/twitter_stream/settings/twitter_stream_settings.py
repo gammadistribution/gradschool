@@ -37,4 +37,8 @@ hashtag = 'thewalkingdead'
 
 
 # This is how long the process waits before commiting connection
-interval = datetime.timedelta(900)
+interval = datetime.timedelta(seconds=60)
+
+
+# This is how long we should stream the tweets.
+stream_duration = datetime.timedelta(seconds=600)

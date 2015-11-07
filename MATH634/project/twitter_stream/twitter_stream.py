@@ -24,7 +24,8 @@ class DBStreamListener(tweepy.StreamListener):
         self.hashtag = hashtag
         self.logger = logger
         self.queries = self.retrieve_queries(queries_path)
-        self.interval_start_time = datetime.datetime.now()
+        self.start_time = datetime.datetime.now()
+        self.interval_start_time = self.start_time
 
     def retrieve_queries(self, queries_path):
         """Create dictionary of queries found in the queries_path. For all
@@ -72,17 +73,27 @@ class DBStreamListener(tweepy.StreamListener):
         values = (
             self.hashtag,
             status.user.screen_name,
-            datetime.strftime(status.created_at, '%Y-%m-%d %H:%M:%S'),
+            datetime.datetime.strftime(status.created_at,
+                                       '%Y-%m-%d %H:%M:%S'),
             status.text
         )
 
-        self.cursor.execute(queries['insert_tweet'], values)
+        self.cursor.execute(self.queries['insert_tweet'], values)
 
         # If the elapsed time is greater than the predefined interval,
         # save cursor data to connection.
         if datetime.datetime.now() - self.interval_start_time > tss.interval:
             self.logger.info('Commiting to database.')
             self.connection.commit()
+            self.interval_start_time = datetime.datetime.now()
+
+        # End stream if past duration setting
+        if datetime.datetime.now() - self.start_time > tss.stream_duration:
+            self.logger.info('Ending stream.')
+            self.connection.commit()
+            self.connection.close()
+
+            return False
 
         return
 
@@ -90,9 +101,9 @@ class DBStreamListener(tweepy.StreamListener):
         """If an exception occurs during the twitter stream process, log the
         exception. Then commit the database connection.
         """
-        self.connection.commit()
-
         self.logger.error('The following exception occured: {}'.format(exception))
+
+        self.connection.commit()
 
         return
 
@@ -100,9 +111,9 @@ class DBStreamListener(tweepy.StreamListener):
         """If rate limit warning is parsed by the twitter stream process, log
         the event. Then commit the database connection.
         """
-        self.connection.commit()
-
         self.logger.warn('Limit warning detected: {}'.format(track))
+
+        self.connection.commit()
 
         return
 
@@ -110,10 +121,10 @@ class DBStreamListener(tweepy.StreamListener):
         """If http status code is an error code, log the status_code and defer
         to tweepy. Then commit the database connection.
         """
-        self.connection.commit()
-
         message = 'The following HTTP error code occured: {}'
-        self.logger.error(message.format(exception))
+        self.logger.error(message.format(status_code))
+
+        self.connection.commit()
 
         return
 
@@ -121,9 +132,9 @@ class DBStreamListener(tweepy.StreamListener):
         """If connection times out, log the event. Then commit the
         database connection.
         """
-        self.connection.commit()
-
         self.logger.warn('The connection has timed out')
+
+        self.connection.commit()
 
         return
 
@@ -131,9 +142,10 @@ class DBStreamListener(tweepy.StreamListener):
         """If twitter sends a disconnect notice, log the event. Then commit
         the database connection.
         """
-        self.connection.commit()
-
         self.logger.critical('The connection has ended: {}'.format(notice))
+
+        self.connection.commit()
+        self.connection.close()
 
         return False
 
@@ -194,6 +206,7 @@ def main():
     stream = tweepy.Stream(auth=api.auth, listener=stream_listener)
 
     logger.info('Streaming tweets.')
+
     stream.filter(track=[stream_listener.hashtag])
 
 
