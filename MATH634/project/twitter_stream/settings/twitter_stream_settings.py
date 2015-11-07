@@ -1,0 +1,23 @@
+import os
+
+
+# The parent_dir of the project is one directories above this current
+# directory.
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+# The path leading to the credentials required to authenticate to Twitter.
+credentials_path = os.path.join(parent_dir, 'credentials', 'credentials.json')
+
+
+# The path leading to the logging config file
+logger_config = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             'logging', 'logging.ini')
+
+
+# This is the layout required of the credentials.json object. The keys are the
+# top level keys and the values in the list are the sub keys of the keys
+required_keys = {
+    'consumer': ['token', 'secret'],
+    'access': ['token', 'secret']
+}
