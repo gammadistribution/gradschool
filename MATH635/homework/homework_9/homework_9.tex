@@ -48,7 +48,7 @@
       \ \text{and} \
       f =
       \begin{cases}
-        0 \\
+        0,\ 0 < x \leq 1 \\
         a
       \end{cases}.
   \]
@@ -121,7 +121,7 @@
       \ \text{and} \
       f =
       \begin{cases}
-        0 \\
+        0,\ o < x \leq 1 \\
         a
       \end{cases}.
   \]
@@ -129,13 +129,13 @@
   \begin{align*}
       L_hu^{(h)} &=
       \begin{cases}
-        \frac{u_{n+1} - u_{n}}{h},\  n = 0, \dots N-1 \\
+        \frac{u_{n+1} - u_{n}}{h} - \frac{1}{2}[G(x_n, u_n) + G(x_{n+1}, u_{n+1})],\  n = 0, \dots N-1 \\
         u_0
       \end{cases}
       \\ \text{and} \\
       f^{(h)} &=
       \begin{cases}
-         \frac{1}{2}[G(x_n, u_n) + G(x_{n+1}, u_{n+1})],\  n = 0, \dots N-1 \\
+        0,\  n = 0, \dots N-1 \\
         a
       \end{cases}.
   \end{align*}
@@ -219,7 +219,7 @@
   does not approach 0 as $h \to 0$.
 
   The exact solution to the problem $Lu = f$ with the initial condition
-  $u(0) = 1$ is $u(x) = e^{-x}$. Hence, $[u]_h = [1, e^{-x_1}, \dots, e^{-x_n}]$.
+  $u(0) = 1$ is $u(x) = e^{-x}$. Hence, $[u]_h = [e^{-x_0}, e^{-x_1}, \dots, e^{-x_n},\dots, e^{-x_N}] = [e^{0}, e^{-h}, \dots, e^{-nh},\dots, e^{-1}]$.
   The solution to the difference scheme $L_h u^{(h)} = f^{(h)}$ given by
   $u^{(h)}$ and can be found by finding the explicit solution to the difference
   equation defined in the scheme.
@@ -236,7 +236,7 @@
   the initial conditions are satisfied gives us the general solution as
   \begin{align*}
     u_n^{(h)} &= u_0 \left[\frac{m_2(h)}{m_2(h) - m_1(h)}m_1(h)^n - \frac{m_1(h)}{m_2(h) - m_1(h)}m_2(h)^n\right] \\
-    &\phantom{= }+ u_1\left[-\frac{1}{m_2(h) - m_1(h)}m_1(h)^n + \frac{1}{m_2(h) - m_1(h)}m_1(h)^n\right].
+    &\phantom{= }+ u_1\left[-\frac{1}{m_2(h) - m_1(h)}m_1(h)^n + \frac{1}{m_2(h) - m_1(h)}m_2(h)^n\right].
   \end{align*}
   Combining this general solution to the scheme and the exact solution to the
   problem we can clearly see that $\norm{[u]_h - u^{(h)}}$ does not approach 0 as
