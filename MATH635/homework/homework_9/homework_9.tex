@@ -139,7 +139,60 @@
         a
       \end{cases}.
   \end{align*}
+  Let $[u]_h$ denote the discretized solution to $Lu = f$. This scheme has
+  second order accuracy if $\norm{L_h[u]_h - L_hu^{(h)}} \leq C h^2$ where
+  $C$ is a constant that does not depend on $h$.
 
+  From the problem $Lu = f$, we see that $\frac{du}{dx} = G(x, u(x))$ implies that
+  \begin{align*}
+    \frac{d^2 u}{dx^2} &= \frac{d}{dx}\left[G(x, u(x))\right] = \frac{\partial G(x, u(x))}{\partial x} + \frac{\partial G(x, u(x))}{\partial u} \frac{du}{dx} \\
+    &= \frac{\partial G(x, u(x))}{\partial x} + \frac{\partial G(x, u(x))}{\partial u} G(x, u(x))
+  \end{align*}
+  The Taylor expansion of $u(x+h)$ centered at $x$ is given by
+  \[
+    u(x + h) = u(x) + u^{\prime}(x) h + \frac{u^{\prime \prime}(x) h^2}{2} + \frac{u^{(3)}(\xi_1) h^3}{6}
+  \]
+  for $x \leq \xi_1 \leq x+h$. This implies that
+  \[
+    u^{\prime}(x) - G(x, u(x)) = -G(x, u(x)) + \frac{u(x+h) - u(x)}{h} - \frac{u^{\prime \prime}(x) h}{2} - \frac{u^{(3)}(\xi_1) h^2}{6} = 0
+  \]
+  Since $u^{\prime \prime}(x) = \frac{\partial G(x, u(x))}{\partial x} + \frac{\partial G(x, u(x))}{\partial u} G(x, u(x))$ from our earlier calculation, we have that
+  \begin{align}\label{first_taylor}
+    u^{\prime}(x) - G(x, u(x)) &= \frac{u(x+h) - u(x)}{h} - \left[G(x, u(x)) + \frac{h}{2}\left(\frac{\partial G}{\partial x} + \frac{\partial G}{\partial u} G(x, u(x))\right)\right] \\
+    &= \frac{u^{(3)}(\xi_1) h^2}{6}.\notag
+  \end{align}
+  We now wish to show that we can replace the expression $\frac{\partial G(x, u(x))}{\partial x} + \frac{\partial G(x, u(x))}{\partial u} G(x, u(x))$ with
+  $\frac{1}{2}[G(x, u(x)) + G(x + h, u(x) + h G(x, u(x)))]$ by expressing the Taylor expansion of $G(x + h, u(x) + h G(x, u(x))) = G(x_1, y_1)$
+  centered at $(x, u(x))$. This Taylor expansion is given by
+  \begin{align*}
+    G(x_1, y_1) &= G(x, u(x)) + h\left[\frac{\partial G(x, u(x))}{\partial x} + \frac{\partial G(x, u(x))}{\partial u} G(x, u(x))\right]\\
+    &\phantom{=}\ + \left. h^2\frac{1}{2}\left[\frac{\partial^2 G(x, u(x))}{\partial x^2} + 2 \frac{\partial^2 G(x, u(x))}{\partial x \partial u}G(x, u(x)) + \frac{\partial ^2G(x, u(x))}{\partial u^2}G(x, u(x))^2\right] \right|_{x=\xi_2}\\
+    &= G(x, u(x)) + \frac{\partial G(x, u(x))}{\partial x} h + \frac{\partial G(x, u(x))}{\partial u} h G(x, u(x)) + R h^2
+  \end{align*}
+  where $x \leq \xi_2 \leq x + h$ and $u(x) \leq u(\xi_2) \leq u(x) + hG(x, u(x))$
+  and $R$ is the additional constant of the second order term. From the above identity we can see that
+  \[
+    \frac{1}{2}\left[G(x, u) + G(x + h, u + hG(x, u))\right] = G(x, u) + \frac{h}{2}\left[\frac{\partial G(x, u)}{\partial x} + \frac{\partial G(x, u)}{\partial u}G(x, u)\right] + \frac{R}{2}h^2
+  \]
+  where we have replaced $u(x)$ with $u$ to shorten the expression. Note that from this identity it is clear that
+  \begin{align}\label{second_taylor}
+    G(x, u) + \frac{h}{2}\left(\frac{\partial G(x, u)}{\partial x} + \frac{\partial G(x, u)}{\partial u}G(x, u)\right) = \frac{1}{2}\left[G(x, u) + G(x + h, u + hG(x, u))\right] - \frac{R}{2}h^2
+  \end{align}
+  and replacing \eqref{second_taylor} in \eqref{first_taylor} yields the exact solution to the problem $Lu = f$ as
+  \begin{align}\label{final}
+    u^{\prime}(x) - G(x, u(x)) &= \frac{u(x+h) - u(x)}{h} - \frac{1}{2}\left[G(x, u) + G(x + h, u + hG(x, u))\right] \\
+    &= \left[\frac{u^{(3)}(\xi_1)}{6} +  \frac{R}{2}\right]h^2.\notag
+  \end{align}
+  If $[u]_h$ is the discretized solution of the problem $Lu =f$, then discretizing
+  the exact solution shows that for $x + h = x_{n+1}$ and $G(x+h,u(x)+ h G(x, u(x)) = G(x_{n+1}, u_n + hG(x_n, u_n)) =G(x_{n+1}, u_{n+1})$
+  we have from \eqref{final} that
+  \begin{align*}
+    u^{\prime}(x) - G(x, u(x)) &= \frac{u_{n+1} - u_n}{h} - \frac{1}{2}\left[\frac{1}{2}[G(x_n, u_n) + G(x_{n+1}, u_{n+1})]\right] \\
+    &= L_h[u]_h - L_h u^{(h)} =  \left[\frac{u^{(3)}(\xi_1)}{6} +  \frac{R}{2}\right]h^2.\notag
+  \end{align*}
+  since $L_h u^{(h)} = 0$. Assuming all second order partials and mixed partials of $G(x, u(x))$ are bounded and that the third derivative of our function $u(x)$ is bounded,
+  it is clear that $\norm{L_h[u]_h - L_hu^{(h)}} \leq C h^2$ where $C$ does not depend on $h$
+  showing that this scheme has second order of accuracy.
 \end{proof}
 
 
@@ -148,6 +201,36 @@
 \end{problem}
 
 \begin{proof}
+  Suppose we have the Cauchy problem $Lu = f$, as defined in 9.30 i.e.
+  \[
+      Lu =
+      \begin{cases}
+        \frac{du}{dx} - G(x, u),\ 0 < x \leq 1 \\
+        0
+      \end{cases}
+      \ \text{and} \
+      f =
+      \begin{cases}
+        0,\ 0 < x \leq 1 \\
+        a
+      \end{cases}.
+  \]
+  Define a variant of the forward Euler scheme $L_hu^{(h)} = f^{(h)}$ as folows
+  \[
+      L_hu^{(h)} =
+      \begin{cases}
+        \frac{u_{n+1} - u_{n}}{h} - G(x_n, u_n) + 1,\  n = 0, 1, \dots N-1 \\
+        u_0
+      \end{cases}
+      \ \text{and} \
+      f^{(h)} =
+      \begin{cases}
+        0,\  n = 0, 1, \dots N-1 \\
+        a
+      \end{cases}.
+  \]
+  Then it is clear that this scheme is inconsistent as the the residual will always
+  be a constant and never vanish regardless of the grid we choose.
 \end{proof}
 
 
