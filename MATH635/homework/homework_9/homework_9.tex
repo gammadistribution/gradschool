@@ -42,7 +42,7 @@
   \[
       Lu =
       \begin{cases}
-        \frac{du}{dx} - G(x, u),\ 0 < x \leq 1, \\
+        \frac{du}{dx} - G(x, u),\ 0 < x \leq 1 \\
         0
       \end{cases}
       \ \text{and} \
@@ -62,7 +62,7 @@
       \ \text{and} \
       f^{(h)} =
       \begin{cases}
-        0 \\
+        0,\  n = 0, 1, \dots N-1 \\
         a
       \end{cases}.
   \]
@@ -103,6 +103,144 @@
   \]
   As $M/2$ does not depend on $h$, we have shown $\norm{L_h[u]_h - L_h u^{(h)}} \leq C h$
   where $C = M/2$ and that the forward Euler scheme has first order of accuracy.
+\end{proof}
+
+
+\begin{problem} Verify that the Crank-Nicolson scheme (9.33) has second order
+  accuracy on a smooth solution $u=u(x)$ of problem (9.30).
+\end{problem}
+
+\begin{proof}
+  Suppose we have the problem $Lu = f$, as defined in 9.30 i.e.
+  \[
+      Lu =
+      \begin{cases}
+        \frac{du}{dx} - G(x, u),\ 0 < x \leq 1 \\
+        0
+      \end{cases}
+      \ \text{and} \
+      f =
+      \begin{cases}
+        0 \\
+        a
+      \end{cases}.
+  \]
+  The Crank-Nicolson scheme $L_hu^{(h)} = f^{(h)}$ is given by
+  \begin{align*}
+      L_hu^{(h)} &=
+      \begin{cases}
+        \frac{u_{n+1} - u_{n}}{h},\  n = 0, \dots N-1 \\
+        u_0
+      \end{cases}
+      \\ \text{and} \\
+      f^{(h)} &=
+      \begin{cases}
+         \frac{1}{2}[G(x_n, u_n) + G(x_{n+1}, u_{n+1})],\  n = 0, \dots N-1 \\
+        a
+      \end{cases}.
+  \end{align*}
+
+\end{proof}
+
+
+\begin{problem}
+  Create a difference scheme that is not consistent.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+
+
+\begin{problem}
+  Prove that the scheme
+  \[
+    4 \frac{u_{n+1} - u_{n-1}}{2h} - 3 \frac{u_{n+1} - u_n}{h} + u_n = 0\text{,\quad $n = 1, 2, \dots, N-1$}
+  \]
+  with initial conditions $u_0 = 1$ and $u_1 = e^{-h}$ is consistent for the problem
+  \[
+    \frac{du}{dx} + u = 0\text{,\quad $0 \leq x \leq 1$}
+  \]
+  with initial condition $u(0) = 1$.
+\end{problem}
+
+\begin{proof}
+  If $[u]_h$ is the discretized solution to the problem $Lu = f$ as defined above,
+  then the scheme $L_h u^{(h)} = f^{(h)}$ is consistent if $\norm{L_h[u]_h - L_hu^{(h)}} \to 0$
+  as $h \to 0$.
+
+  Note that the Taylor series expansions of $u(x + h)$ and $u(x - h)$ centered at $x$ are given by
+  \begin{align*}
+    u(x + h) = u(x) + u^{\prime}(x) h + \frac{u^{\prime \prime}(\xi_1) h^2}{2} \\
+    u(x - h) = u(x) - u^{\prime}(x) h + \frac{u^{\prime \prime}(\xi_2) h^2}{2}
+  \end{align*}
+  for $x \leq \xi_1 \leq x+h$ and $x-h \leq \xi_2 \leq x$.
+  From these expansions we can see that
+  \begin{align*}
+    u^{\prime}(x) = \frac{u(x+h) - u(x-h)}{2h}  - \frac{1}{4}h(u^{\prime \prime}(\xi_1) - u^{\prime \prime}(\xi_2))
+  \end{align*}
+  and
+  \begin{align*}
+    u^{\prime}(x) = \frac{u(x+h) - u(x)}{h} - \frac{1}{2}hu^{\prime \prime}(\xi_3).
+  \end{align*}
+  This shows that
+  \begin{align*}
+    u^{\prime}(x) + u(x) = 4\frac{u(x+h) - u(x-h)}{2h} - 3\frac{u(x+h) - u(x)}{h} + u(x) + h\left(\frac{3}{2}u^{\prime \prime}(\xi_3) - (u^{\prime \prime}(\xi_1) - u^{\prime \prime}(\xi_2))\right)
+  \end{align*}
+  so that if $[u]_h$ is the discretized solution to the problem defined above,
+  \begin{align*}
+    u^{\prime}(x) + u(x) &= 4\frac{u(x_{n+1}) - u(x_{n-1})}{2h} - 3\frac{u(x_{n+1}) - u(x_n)}{h} + u(x_n) + h\left(\frac{3}{2}u^{\prime \prime}(\xi_3) - (u^{\prime \prime}(\xi_1) - u^{\prime \prime}(\xi_2))\right)\\
+    &= L_h[u]_h + h\left(\frac{3}{2}u^{\prime \prime}(\xi_3) - (u^{\prime \prime}(\xi_1) - u^{\prime \prime}(\xi_2))\right) = 0.
+  \end{align*}
+  Combining the above and the fact that $L_h u^{(h)} = 0$, we see that
+  \[
+    \norm{L_h [u]_h - L_h u^{(h)}} = h\norm{(u^{\prime \prime}(\xi_1) - u^{\prime \prime}(\xi_2)) - \frac{3}{2}u^{\prime \prime}(\xi_3)}.
+  \]
+  If $|u^{\prime \prime}(x)| \leq M$, then $0 \leq \norm{L_h [u]_h - L_h u^{(h)}} \leq h \left(\frac{7}{2}M\right)$
+  and it is then clear that $\norm{L_h [u]_h - L_h u^{(h)}} \to 0$ as $h \to 0$ showing the
+  consistency of the scheme.
+\end{proof}
+
+
+\begin{problem}
+  Prove that the scheme
+  \[
+    4 \frac{u_{n+1} - u_{n-1}}{2h} - 3 \frac{u_{n+1} - u_n}{h} + u_n = 0\text{,\quad $n = 1, 2, \dots, N-1$}
+  \]
+  with initial conditions $u_0 = 1$ and $u_1 = e^{-h}$ is divergent for the problem
+  \[
+    \frac{du}{dx} + u = 0\text{,\quad $0 \leq x \leq 1$}
+  \]
+  with initial condition $u(0) = 1$.
+\end{problem}
+
+\begin{proof}
+  If $[u]_h$ is the discretized solution to the problem $Lu = f$ as defined above,
+  then the scheme $L_h u^{(h)} = f^{(h)}$ is divergent if $\norm{[u]_h - u^{(h)}}$
+  does not approach 0 as $h \to 0$.
+
+  The exact solution to the problem $Lu = f$ with the initial condition
+  $u(0) = 1$ is $u(x) = e^{-x}$. Hence, $[u]_h = [1, e^{-x_1}, \dots, e^{-x_n}]$.
+  The solution to the difference scheme $L_h u^{(h)} = f^{(h)}$ given by
+  $u^{(h)}$ and can be found by finding the explicit solution to the difference
+  equation defined in the scheme.
+
+  Note that this is a second order difference equation that can be rewritten as
+  \[
+    - u_{n+1} + (3 + h) u_n - 2 u_{n-1} = 0.
+  \]
+  The characteristic equation of this difference equation is given by $-m^2 + (3+h)m -2 = 0$.
+  As this characteristic equation has distinct real roots, the general
+  solution to the difference equation is $u_n = c_1 m_1^n + c_2 m_2 ^n$ where
+  $m_1 = \frac{1}{2}(-\sqrt{h^2 + 6h +1} + h + 3)$ and $m_2=\frac{1}{2}(\sqrt{h^2 + 6h +1} + h + 3)$
+  are the roots of the characteristic equation. Choosing the constants so that
+  the initial conditions are satisfied gives us the general solution as
+  \begin{align*}
+    u_n^{(h)} &= u_0 \left[\frac{m_2(h)}{m_2(h) - m_1(h)}m_1(h)^n - \frac{m_1(h)}{m_2(h) - m_1(h)}m_2(h)^n\right] \\
+    &\phantom{= }+ u_1\left[-\frac{1}{m_2(h) - m_1(h)}m_1(h)^n + \frac{1}{m_2(h) - m_1(h)}m_1(h)^n\right].
+  \end{align*}
+  Combining this general solution to the scheme and the exact solution to the
+  problem we can clearly see that $\norm{[u]_h - u^{(h)}}$ does not approach 0 as
+  $h\to 0$ and that the scheme is divergent.
 \end{proof}
 
 
