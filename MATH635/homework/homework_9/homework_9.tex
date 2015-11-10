@@ -106,7 +106,7 @@
 \end{proof}
 
 
-\begin{problem} Verify that the Crank-Nicolson scheme (9.33) has second order
+\begin{problem} Verify that the Heun scheme  has second order
   accuracy on a smooth solution $u=u(x)$ of problem (9.30).
 \end{problem}
 
@@ -125,11 +125,11 @@
         a
       \end{cases}.
   \]
-  The Crank-Nicolson scheme $L_hu^{(h)} = f^{(h)}$ is given by
+  The Heun scheme $L_hu^{(h)} = f^{(h)}$ is given by
   \begin{align*}
       L_hu^{(h)} &=
       \begin{cases}
-        \frac{u_{n+1} - u_{n}}{h} - \frac{1}{2}[G(x_n, u_n) + G(x_{n+1}, u_{n+1})],\  n = 0, \dots N-1 \\
+        \frac{u_{n+1} - u_{n}}{h} - \frac{1}{2}[G(x_n, u_n) + G(x_{n+1}, u_n + h G(x_n, u_n))],\  n = 0, \dots N-1 \\
         u_0
       \end{cases}
       \\ \text{and} \\
@@ -184,7 +184,7 @@
     &= \left[\frac{u^{(3)}(\xi_1)}{6} +  \frac{R}{2}\right]h^2.\notag
   \end{align}
   If $[u]_h$ is the discretized solution of the problem $Lu =f$, then discretizing
-  the exact solution shows that for $x + h = x_{n+1}$ and $G(x+h,u(x)+ h G(x, u(x)) = G(x_{n+1}, u_n + hG(x_n, u_n)) =G(x_{n+1}, u_{n+1})$
+  the exact solution shows that for $x + h = x_{n+1}$ and $G(x+h,u(x)+ h G(x, u(x)) = G(x_{n+1}, u_n + hG(x_n, u_n)) =G(x_{n+1}, u_n + h G(x_n, u_n))$
   we have from \eqref{final} that
   \begin{align*}
     u^{\prime}(x) - G(x, u(x)) &= \frac{u_{n+1} - u_n}{h} - \frac{1}{2}\left[\frac{1}{2}[G(x_n, u_n) + G(x_{n+1}, u_{n+1})]\right] \\
