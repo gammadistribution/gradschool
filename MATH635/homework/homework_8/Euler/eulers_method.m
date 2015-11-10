@@ -7,8 +7,6 @@ function [t, u] = eulers_method(func, interval, eta, n, epsilon)
 % 
 % Returns the points within the interval used to compute the solution, t, 
 % and the values of the first derivative at those points.
-a = interval(1);
-b = interval(2);
 
 % Create array of points within interval.
 t = uniform_nodes(interval, n);
