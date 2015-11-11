@@ -14,6 +14,13 @@ logging.config.fileConfig(tss.logger_config)
 logger = logging.getLogger('twitter_stream')
 
 
+class EndStreamException(Exception):
+    """Raise this exception if the stream needs to end.
+    """
+    def __init__(self, message):
+        self.message = message
+
+
 class DBStreamListener(tweepy.StreamListener):
     """Class that inherits from tweepy.StreamListener. Saves tweets that are
     streamed through this listener to the specified sqlite3 database.
@@ -82,18 +89,19 @@ class DBStreamListener(tweepy.StreamListener):
 
         # If the elapsed time is greater than the predefined interval,
         # save cursor data to connection.
-        if datetime.datetime.now() - self.interval_start_time > tss.interval:
+        current_time = datetime.datetime.now()
+        if current_time - self.interval_start_time > tss.interval:
             self.logger.info('Commiting to database.')
             self.connection.commit()
             self.interval_start_time = datetime.datetime.now()
 
         # End stream if past duration setting
-        if datetime.datetime.now() - self.start_time > tss.stream_duration:
+        if current_time - self.start_time > tss.stream_duration:
             self.logger.info('Ending stream.')
             self.connection.commit()
             self.connection.close()
 
-            return False
+            raise EndStreamException('Stream ended at {}'.format(current_time))
 
         return
 
@@ -105,7 +113,7 @@ class DBStreamListener(tweepy.StreamListener):
 
         self.connection.commit()
 
-        return
+        raise exception
 
     def on_limit(self, track):
         """If rate limit warning is parsed by the twitter stream process, log
@@ -148,6 +156,12 @@ class DBStreamListener(tweepy.StreamListener):
         self.connection.close()
 
         return False
+
+    def commit(self):
+        """Commit data and close connection
+        """
+        self.connection.commit()
+        self.connecion.close()
 
 
 def create_api_handle(credentials):
@@ -207,7 +221,14 @@ def main():
 
     logger.info('Streaming tweets.')
 
-    stream.filter(track=[stream_listener.hashtag])
+    streaming = True
+    while streaming:
+        try:
+            stream.filter(track=[stream_listener.hashtag])
+        except Exception as e:
+            if type(e).__name__ == 'EndStreamException':
+                streaming = False
+                stream_listener.commit()
 
 
 if __name__ == '__main__':
