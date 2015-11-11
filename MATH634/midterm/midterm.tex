@@ -62,4 +62,65 @@
   the model $\{X_t\}$ is a stationary process assuming that $\{Z_t\} \sim \text{WN}(0, \sigma^2)$.
 \end{proof}
 
+
+\begin{custompbm}{1.b}
+  Considering the model in problem 1.a, what is $R_3$, i.e. the correlation
+  matrix of size 3?
+\end{custompbm}
+
+\begin{proof}
+  The covariance matrix of size 3 for our model $\{X_t\}$ is given by
+  \begin{align*}
+    \Gamma_3 =
+    \begin{bmatrix}
+      \gamma(0) & \gamma(1) & \gamma(2) \\
+      \gamma(1) & \gamma(0) & \gamma(1) \\
+      \gamma(2) & \gamma(1) & \gamma(0) \\
+    \end{bmatrix}
+  \end{align*}
+  where $\gamma(h)$ is the autocovariance function of the process $\{X_t\}$. For an ARMA$(p, q)$
+  process $X_t -\phi_1 X_{t-1} - \dots - \phi_p X_{t-p} = Z_t + \theta_1 Z_{t-1} + \dots + \theta_q Z_{t-q}$,
+  the autocovariance function $\gamma(h)$ satisfies the equations
+  \[
+    \gamma(k) - \phi_1 \gamma(k-1) - \dots - \phi_p \gamma(k-p) = \sigma^2 \sum_{j=0}^\infty \theta_{k+j}\psi_j \text{\quad for $0 \leq k < 3$}
+  \]
+  where $\psi_j - \sum_{k=1}^p \phi_k \psi_{j-k} = \theta_j$ for $j \geq 0$ and $\psi_j = 0$ for $j < 0$.
+  For our process,  this corresponds to the system of equations
+  \begin{align}\label{cov_sys}
+    \gamma(0) - \phi_1 \gamma(1) - \phi_2 \gamma(2) &= \sigma^2 (\psi_0 + \theta_1\psi_1 + \theta_2\psi_2) \notag \\
+    \gamma(1) - \phi_1 \gamma(0) - \phi_2 \gamma(1) &= \sigma^2 (\theta_1\psi_0 + \theta_2\psi_1) \\
+    \gamma(2) - \phi_1 \gamma(1) - \phi_2 \gamma(0) &= \sigma^2 \theta_2\psi_0 \notag
+  \end{align}
+  where $\psi_0 = 1$, $\psi_1 = \theta_1 + \phi_1$, and $\psi_2 = \theta_2 + \phi_1^2 + \phi_1\theta_1 + \phi_2$.
+  Using the parameters $\phi_j$ and $\theta_k$ defining our model, the system of equations \eqref{cov_sys} becomes
+  \begin{align*}
+    \gamma(0) + 0.4 \gamma(1) - 0.32 \gamma(2) &= 2.1136\sigma^2\\ \notag
+    \gamma(1) + 0.4 \gamma(0) - 0.32 \gamma(1) &= -0.992 \sigma^2 \\
+    \gamma(2) + 0.4 \gamma(1) - 0.32 \gamma(0) &= 0.16 \sigma^2 \notag
+  \end{align*}
+  the solution of which is $\gamma(0) = 5 \sigma^2$, $\gamma(1) = -4.4 \sigma^2$,
+  and $\gamma(2) = 3.52 \sigma^2$. Thus, the covariance matrix $\Gamma_3$ is given by
+  \[
+    \Gamma_3 =
+    \sigma^2
+    \begin{bmatrix}
+      \phantom{-}5.00  & -4.40 & \phantom{-}3.52 \\
+      -4.40 & \phantom{-}5.00  & -4.40  \\
+      \phantom{-}3.52 & -4.40 & \phantom{-}5.00  \\
+    \end{bmatrix}.
+  \]
+  Note that the correlation matrix $R_3 = (1/\gamma(0))\Gamma_3$. Therefore,
+  \[
+    R_3 =
+    \begin{bmatrix}
+      \phantom{-}1.000  & -0.880 & \phantom{-}0.704 \\
+      -0.880 & \phantom{-}1.000  & -0.880  \\
+      \phantom{-}0.704 & -0.880 & \phantom{-}1.000  \\
+    \end{bmatrix}.
+  \]
+
+\end{proof}
+
+
+
 \end{document}
