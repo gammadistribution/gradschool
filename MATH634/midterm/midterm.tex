@@ -343,7 +343,7 @@
   \gamma_U(h) =
   \begin{cases}
     \sigma_Z^2 + (1 + \phi^2)\sigma_W^2 & \text{if $h = 0$} \\
-    -\phi^2\sigma_W^2 & \text{if $|h| = 1$} \\
+    -\phi\sigma_W^2 & \text{if $|h| = 1$} \\
     0 & \text{if $|h| > 1$}
   \end{cases}.
   \end{align*}
@@ -351,7 +351,7 @@
   Now,
   \begin{align*}
     \sigma_N^2 = \E(N_t^2) &= \E(U_tU_t) - 2 \sum_{j=0}^{t-1} a_i \E(U_jU_t) + \sum_{j=0}^{t-1}\sum_{i=0}^{t-1}a_i a_j \E(U_i)\E(U_j)\\
-    &= \gamma_U(0) - 2a_{t-1} \gamma_U(1) + \sum_{j=0}^{t-1}\sum_{i=0}^{t-1}a_i a_j \gamma(i-j)\\
+    &= \gamma_U(0) - 2a_{t-1} \gamma_U(1) + \sum_{j=0}^{t-1}\sum_{i=0}^{t-1}a_i a_j \gamma(i-j)
   \end{align*}
   Note that $\theta$ can be found similarly.
 \end{proof}
