@@ -232,6 +232,62 @@
 \end{proof}
 
 
+\begin{custompbm}{3.a}
+  Let $\{X_t\}$ be an AR(1) process, i.e. $X_t - \phi X_{t-1} = Z_t$ where $\{Z_t\} \sim \text{WN}(0, \sigma_Z^2)$ and
+  let $\{W_t\} \sim \text{WN}(0, \sigma_W^2)$ such that $\E(W_sZ_t) = 0$ for all $s$ and $t$.
+  Suppose that $Y_t = X_t + W_t$. Show that $\{Y_t\}$ is stationary and find its autocovariance function.
+\end{custompbm}
+
+\begin{proof}
+  Note that $\{Y_t\}$ is stationary if $\E(Y_t)$ does not depend on $t$ and
+  $\Co{Y_{t+h}}{Y_t} = \gamma(t+h,t)$ does not depend on $t$ for any $h$. Note that
+  \[
+    \E(Y_t) = \E(X_t + W_t) = \E(X_t) + \E(W_t) = 0
+  \]
+  since the expectation of an AR(1) process is 0 and the expectation of a white
+  noise process with 0 mean is 0. Also note that since $Y_t = X_t + W_t$,
+  \begin{align*}
+    \gamma_Y(t+h,t) = \Co{Y_{t+h}}{Y_t} &= \Co{X_{t+h} + W_{t+h}}{X_t + W_t}\\
+    &= \Co{X_{t+h}}{X_t} + \Co{X_{t+h}}{W_t} + \Co{W_{t+h}}{X_t} + \Co{W_{t+h}}{W_t}\\
+    &= \gamma_X(h) + \Co{X_{t+h}}{W_t} + \Co{W_{t+h}}{X_t} + \gamma_W(h)
+  \end{align*}
+  where $\gamma_X(h)$ is the autocovariance function of the AR(1) process $\{X_t\}$
+  and $\gamma_W(h)$ is the autocovariance function of the white noise process $\{W_t\}$.
+  Since $X_t = \sum_{j=0}^{\infty}\phi^{j}Z_{t-j}$, we know that
+  \[
+    \Co{X_{t+h}}{W_t} = \E(X_{t+h}W_t) = \sum_{j=0}^\infty\E(Z_{t+h-j}W_t) = 0
+  \]
+  as $\E(W_sZ_t) = 0$ for all $s$ and $t$. Thus $\gamma_Y(t+h,t) = \gamma_X(h) + \gamma_W(h)$
+  and the autocovariance function is independent of $t$ for each $h$. Therefore
+  $\{Y_t\}$ is a stationary time series.
+\end{proof}
+
+
+\begin{custompbm}{3.b}
+  Show that the time series $U_t = Y_t - \phi Y_{t-1}$ is 1-correlated and is an MA(1) process.
+\end{custompbm}
+
+\begin{proof}
+  A process is 1-correlated if $\gamma(h) = 0$ for $|h| > 1$.
+  If $U_t = Y_t - \phi Y_{t-1}$, then $U_t = X_t + W_t - \phi X_{t-1} - \phi W_{t-1}$.
+  Since $\{X_t\}$ is an AR(1) process, $X_t - \phi X_{t-1} = Z_t$ and
+  $U_t = Z_t + W_t - \phi W_{t-1}$. Note that
+  \begin{align*}
+    \gamma_U(h) &= \Co{Z_{t+h}}{Z_t} + \Co{Z_{t+h}}{W_{t+h}} -\phi \Co{Z_{t+h}}{W_{t-1}}\\
+    &\quad + \Co{W_{t+h}}{Z_t} + \Co{W_{t+h}}{W_t} - \phi \Co{W_{t+h}}{W_{t-1}} \\
+    &\quad -\phi \Co{W_{t+h-1}}{Z_t} -\phi\Co{W_{t+h-1}}{W_t} + \phi^2 \Co{W_{t+h-1}}{W_{t-1}}\\
+    &= \gamma_Z(h) + \gamma_W(h) -\phi\gamma_W(h+1) -\phi\gamma_W(h-1) + \phi^2 \gamma_W(h)\\
+    &= \gamma_Z(h) + (1 + \phi^2)\gamma_W(h) - \phi(\gamma_W(h+1) + \gamma_W(h-1))
+  \end{align*}
+  since $\E(W_sZ_t) = 0$ for all $s$ and all $t$. For any white noise process,
+  $\gamma(h) = 0$ if $h \neq 0$. Using our definition of $\gamma_U(h)$ and the fact
+  that our process's autocovariance function is a linear combination of the
+  autocovariance functions of white noise processes, it is clear that $\gamma_U(h) = 0$ if $|h| > 1$
+  and $\{U_t\}$ is 1-correlated. Since $\{U_t\}$ is 1-correlated and the mean of
+  $U_t$ is clearly 0, by proposition 2.1.1, the process $\{U_t\}$ is an MA(1)
+  process.
+\end{proof}
+
 \begin{custompbm}{4.a}
   Let $X_1, X_2, X_3, X_4, X_5$ be observations from the MA(1) model.
   Find the best linear estimate of the missing value $X_3$.
