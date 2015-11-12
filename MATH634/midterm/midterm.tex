@@ -159,6 +159,43 @@
 \end{proof}
 
 
+\begin{custompbm}{1.d}
+  Express the process in problem 1.a as a pure AR process in the form of $Z_t = \sum_{j=0}^\infty \pi_j X_{t-j}$.
+\end{custompbm}
+
+\begin{proof}
+  For our process, the roots of the equation $\theta(z) = 1 -0.8 z + 0.16 z^2 = 0$ are
+  $z_1 = 2.5$ and $z_2 = 2.5$. As $|z_i| > 1$ for $i=1,2$, this process is invertible and
+  can be represented as an AR($\infty$) process, i.e.\ $Z_t = \sum_{j=0}^\infty \pi_j X_{t-j}$,
+  where the coefficients $\pi_j$ are determined by the equations $\pi_j + \sum_{k=1}^q \theta_k \pi_{j-k} = -\phi_j$
+  for $j \geq 0$ and $\pi_j = 0$ for $j < 0$ where $\phi_0 = -1$.
+
+  Note that for our ARMA($2, 2$) process, as $\phi_j = 0$ for $j > 2$, the equations
+  determining the coefficients are difference equations determined by the boundary conditions
+  \[
+    \pi_j + \sum_{k=1}^2 \theta_k \pi_{j-k} = -\phi_j \text{\quad \text{for $0 \leq j < 3$}}
+  \]
+  and the homogeneous equation
+  \[
+    \pi_j + \sum_{k=1}^2 \theta_k \pi_{j-k} = 0 \text{\quad \text{for $j \geq 3$}}.
+  \]
+
+  For our process, the characteristic equation of these difference equations is $\theta(z)$. The roots
+  of this characteristic equation are, as shown above, $z_1 = z_2 = 2.5$. As these roots
+  are repeated, the solution to the homogeneous difference equation is
+  \[
+    \pi_j = (\alpha_1 + \alpha_2j)z_1 ^ {-j} = (\alpha_1 + \alpha_2j)(2.5)^{-j} \text{\quad for $j \geq 1$}
+  \]
+  where the coefficients are determined by the boundary conditions $\pi_0 = 1$,
+  $\pi_1 = -(\theta_1 + \phi_1) = 1.2$, and $\pi_2 = -\phi_2 + \theta_1^2 + \phi_1\theta_1 + \theta_2 = 0.8$.
+  Using the method of undetermined coefficients, we can see that $\alpha_1 = 1$ and $\alpha_2 = 2$.
+  Therefore $\pi_j = (1 + 2j)(2.5)^{-j}$ for $j \geq 1$, $\pi_0 = 1$, and
+  \[
+    Z_t = \sum_{j=0}^\infty\pi_j X_{t-j} = X_t + \sum_{j=1}^\infty (1+2j)(2.5)^{-j}Z_{t-j}.
+  \]
+\end{proof}
+
+
 \begin{custompbm}{2.a}
   Let $X_t$ be the AR(2) process such that $X_t = 0.8X_{t-2} + Z_t$ where $\{Z_t\}\sim \text{WN}(0, \sigma^2)$.
   Find the autocorrelation function of $X_t$.
