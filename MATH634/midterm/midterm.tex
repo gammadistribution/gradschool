@@ -321,8 +321,39 @@
   that our process's autocovariance function is a linear combination of the
   autocovariance functions of white noise processes, it is clear that $\gamma_U(h) = 0$ if $|h| > 1$
   and $\{U_t\}$ is 1-correlated. Since $\{U_t\}$ is 1-correlated and
-  $U_t$ is a stationary process with 0 mean, by proposition 2.1.1, the process
+  $U_t$ is a stationary process with 0 mean, by proposition 2.1.1, the processis clearly 0
   $\{U_t\}$ is an MA(1) process.
+\end{proof}
+
+
+\begin{custompbm}{3.c}
+  Show that $\{Y_t\}$ is an ARMA(1,1) process and express the model parameters
+  in terms of $\phi$, $\sigma_W^2$, and $\sigma_Z^2$.
+\end{custompbm}
+
+\begin{proof}
+  As show above, the process $\{U_t\}$ such that $U_t = Y_t - \phi Y_{t-1}$ is
+  1-correlated so it is an MA(1) process. Define $N_t = U_t - P(U_t|(1, U_1, \dots, U_{t-1})$ where
+  $P(U_t|(1, U_1, \dots, U_{t-1})$ is the best linear predictor of $U_t$ in terms of
+  $(1, U_1, \dots, U_{t-1})$. Then $Y_t - \phi Y_{t-1} = U_t = N_t + \theta N_{t-1}$ where $N_t \sim \text{WN}(0, \sigma_N^2)$
+  and $\sigma_N^2 = \E(N_t^2)$ and $\theta = \frac{\E(U_tN_{t-1})}{\sigma^2}$.
+
+  Note that the autocovariance of $U_t = Y_t - \phi Y_{t-1}$ is given by
+  \begin{align*}
+  \gamma_U(h) =
+  \begin{cases}
+    \sigma_Z^2 + (1 + \phi^2)\sigma_W^2 & \text{if $h = 0$} \\
+    -\phi^2\sigma_W^2 & \text{if $|h| = 1$} \\
+    0 & \text{if $|h| > 1$}
+  \end{cases}.
+  \end{align*}
+  Thus, we can use this to find $\sigma_N^2$ and $\theta$ in terms of $\gamma_U(h)$.
+  Now,
+  \begin{align*}
+    \sigma_N^2 = \E(N_t^2) &= \E(U_tU_t) - 2 \sum_{j=0}^{t-1} a_i \E(U_jU_t) + \sum_{j=0}^{t-1}\sum_{i=0}^{t-1}a_i a_j \E(U_i)\E(U_j)\\
+    &= \gamma_U(0) - 2a_{t-1} \gamma_U(1) + \sum_{j=0}^{t-1}\sum_{i=0}^{t-1}a_i a_j \gamma(i-j)\\
+  \end{align*}
+  Note that $\theta$ can be found similarly.
 \end{proof}
 
 \begin{custompbm}{4.a}
