@@ -64,7 +64,7 @@
 
 
 \begin{custompbm}{1.b}
-  Considering the model in problem 1.a, what is $R_3$, i.e. the correlation
+  Considering the model in problem 1.a, what is $R_3$, i.e.\ the correlation
   matrix of size 3?
 \end{custompbm}
 
@@ -82,7 +82,7 @@
   process $X_t -\phi_1 X_{t-1} - \dots - \phi_p X_{t-p} = Z_t + \theta_1 Z_{t-1} + \dots + \theta_q Z_{t-q}$,
   the autocovariance function $\gamma(h)$ satisfies the equations
   \[
-    \gamma(k) - \phi_1 \gamma(k-1) - \dots - \phi_p \gamma(k-p) = \sigma^2 \sum_{j=0}^\infty \theta_{k+j}\psi_j \text{\quad for $0 \leq k < 3$}
+    \gamma(k) - \phi_1 \gamma(k-1) - \dots - \phi_p \gamma(k-p) = \sigma^2 \sum_{j=0}^\infty \theta_{k+j}\psi_j \text{\quad for $0 \leq k < \max(p, q+1)$}
   \]
   where $\psi_j - \sum_{k=1}^p \phi_k \psi_{j-k} = \theta_j$ for $j \geq 0$ and $\psi_j = 0$ for $j < 0$.
   For our process,  this corresponds to the system of equations
@@ -121,6 +121,42 @@
 
 \end{proof}
 
+
+\begin{custompbm}{1.c}
+  Express the process in problem 1.a as pure MA process in the form of $X_t = \sum_{j=0}^\infty\psi_jZ_t$.
+\end{custompbm}
+
+\begin{proof}
+  For our process, the roots of the equation $\phi(z) = 1 + 0.4 z - 0.32 z^2 = 0$ are
+  $z_1 = -1.25$ and $z_2 = 2.5$. As $|z_i| > 1$ for $i=1,2$, this process is causal and
+  can be represented as an MA($\infty$) process, i.e.\ $X_t = \sum_{j=0}^\infty \psi_j Z_{t-j}$,
+  where the coefficients $\psi_j$ are determined by the equations $\psi_j - \sum_{k=1}^p \phi_k\psi_{j-k} = \theta_j$
+  for $j \geq 0$ and $\psi_j = 0$ for $j < 0$.
+
+  Note that for an ARMA($p, q$) process, as $\theta_j = 0$ for $j > q$, the equations
+  determining the coefficients are difference equations determined by the boundary conditions
+  \[
+    \psi_j - \sum_{k=1}^p \phi_k \psi_{j-k} = \theta_j \text{\quad \text{for $0 \leq j < \max(p, q+1)$}}
+  \]
+  and the homogeneous equation
+  \[
+    \psi_j - \sum_{k=1}^p \phi_k \psi_{j-k} = 0 \text{\quad \text{for $j \geq \max(p, q+1)$}}.
+  \]
+
+  For our process, the characteristic equation of these difference equations is $\phi(z)$. The roots
+  of this characteristic equation are, as shown above, $z_1 = -1.25$ and $z_2 = 2.5$. As these roots
+  are distinct, the solution to the homogeneous difference equation is
+  \[
+    \psi_j = \alpha_1 z_1 ^ {-j} + \alpha_2 z_2 ^{-j} = \alpha_1 (-1.25)^{-j} + \alpha_2 (2.5)^{-j} \text{\quad for $j \geq 1$}
+  \]
+  where the coefficients are determined by the boundary conditions $\psi_0 = 1$,
+  $\psi_1 = \theta_1 + \phi_1 = -1.2$, and $\psi_2 = \theta_2 + \phi_1^2 + \phi_1\theta_1 + \phi_2 = 0.96$.
+  Using the method of undetermined coefficients, we can see that $\alpha_1 = 1.5$ and $\alpha_2 = 0$.
+  Therefore $\psi_j = 1.5(-1.25)^{-j}$ for $j \geq 1$, $\psi_0 = 1$, and
+  \[
+    X_t = \sum_{j=0}^\infty\psi_j Z_{t-j} = Z_t + 1.5 \sum_{j=1}^\infty (-1.25)^{-j}Z_{t-j}.
+  \]
+\end{proof}
 
 
 \end{document}
