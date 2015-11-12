@@ -184,6 +184,51 @@
   \[
     \gamma(h) = \frac{5\sqrt{5}\sigma^2}{9}\left[\left(\frac{\sqrt{5}}{2}\right)^{1-|h|} - \left(\frac{-\sqrt{5}}{2}\right)^{1-|h|}\right].
   \]
+  As $\gamma(0) = \frac{25 \sigma^2}{9}$, the autocorrelation function of this process is given by
+  \[
+    \rho(h) = \frac{\gamma(h)}{\gamma(0)} = \frac{\sqrt{5}}{5}\left[\left(\frac{\sqrt{5}}{2}\right)^{1-|h|} - \left(\frac{-\sqrt{5}}{2}\right)^{1-|h|}\right].
+  \]
+\end{proof}
+
+
+\begin{custompbm}{2.b}
+  Let $X_t$ be the AR(2) process such that $X_t = 0.8X_{t-2} + Z_t$ where $\{Z_t\}\sim \text{WN}(0, \sigma^2)$.
+  Find the partial autocorrelation function of $X_t$.
+\end{custompbm}
+
+\begin{proof}
+  The partial autocorrelation function $\alpha(h)$ is defined as $\alpha(0) = 1$,
+  and for $h > 0$, $\alpha(h) = \phi_{hh}$ where $\phi_{hh}$ is the last component of
+  \[
+    \phi_h =
+    \begin{bmatrix}
+      \gamma(0) & \gamma(1) & \dots & \gamma(h-1) \\
+      \gamma(1) & \gamma(0) & \dots & \gamma(h-2) \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \gamma(h - 1) & \gamma(h-2) & \dots & \gamma(0)
+    \end{bmatrix}^{-1}
+    \begin{bmatrix}
+      \gamma(1) \\
+      \gamma(2) \\
+      \vdots\\
+      \gamma(h) \\
+    \end{bmatrix}.
+  \]
+  Note for an $AR(p)$ process that $\alpha(h) = 0$ if $h > p$ and $\alpha(p) = \phi_p$. So for our process, we need only determine
+  $\alpha(1)$. From the above,
+  \[
+    \alpha(1) = \frac{\gamma(1)}{\gamma(0)} = 0.
+  \]
+  Therefore, for our AR(2) process, the partial autocorrelation function is
+  \[
+    \alpha(h) =
+    \begin{cases}
+      1 & \text{if $h = 0$}\\
+      0 & \text{if $|h| = 1$}\\
+      0.8 & \text{if $|h| = 2$} \\
+      0 & \text{if $|h| > 2$}
+    \end{cases}.
+  \]
 \end{proof}
 
 
