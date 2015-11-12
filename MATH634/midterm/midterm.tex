@@ -292,9 +292,9 @@
   and $\gamma_W(h)$ is the autocovariance function of the white noise process $\{W_t\}$.
   Since $X_t = \sum_{j=0}^{\infty}\phi^{j}Z_{t-j}$, we know that
   \[
-    \Co{X_{t+h}}{W_t} = \E(X_{t+h}W_t) = \sum_{j=0}^\infty\E(Z_{t+h-j}W_t) = 0
+    \Co{X_{s}}{W_t} = \E(X_{s}W_t) = \sum_{j=0}^\infty\phi^j\E(Z_{s-j}W_t) = 0
   \]
-  as $\E(W_sZ_t) = 0$ for all $s$ and $t$. Thus $\gamma_Y(t+h,t) = \gamma_X(h) + \gamma_W(h)$
+  as $\E(W_vZ_t) = 0$ for all $v$ and $t$. Thus $\gamma_Y(t+h,t) = \gamma_X(h) + \gamma_W(h)$
   and the autocovariance function is independent of $t$ for each $h$. Therefore
   $\{Y_t\}$ is a stationary time series.
 \end{proof}
@@ -310,7 +310,7 @@
   Since $\{X_t\}$ is an AR(1) process, $X_t - \phi X_{t-1} = Z_t$ and
   $U_t = Z_t + W_t - \phi W_{t-1}$. Note that
   \begin{align*}
-    \gamma_U(h) &= \Co{Z_{t+h}}{Z_t} + \Co{Z_{t+h}}{W_{t+h}} -\phi \Co{Z_{t+h}}{W_{t-1}}\\
+    \gamma_U(h) &= \Co{Z_{t+h}}{Z_t} + \Co{Z_{t+h}}{W_{t}} -\phi \Co{Z_{t+h}}{W_{t-1}}\\
     &\quad + \Co{W_{t+h}}{Z_t} + \Co{W_{t+h}}{W_t} - \phi \Co{W_{t+h}}{W_{t-1}} \\
     &\quad -\phi \Co{W_{t+h-1}}{Z_t} -\phi\Co{W_{t+h-1}}{W_t} + \phi^2 \Co{W_{t+h-1}}{W_{t-1}}\\
     &= \gamma_Z(h) + \gamma_W(h) -\phi\gamma_W(h+1) -\phi\gamma_W(h-1) + \phi^2 \gamma_W(h)\\
@@ -320,9 +320,9 @@
   $\gamma(h) = 0$ if $h \neq 0$. Using our definition of $\gamma_U(h)$ and the fact
   that our process's autocovariance function is a linear combination of the
   autocovariance functions of white noise processes, it is clear that $\gamma_U(h) = 0$ if $|h| > 1$
-  and $\{U_t\}$ is 1-correlated. Since $\{U_t\}$ is 1-correlated and the mean of
-  $U_t$ is clearly 0, by proposition 2.1.1, the process $\{U_t\}$ is an MA(1)
-  process.
+  and $\{U_t\}$ is 1-correlated. Since $\{U_t\}$ is 1-correlated and
+  $U_t$ is a stationary process with 0 mean, by proposition 2.1.1, the process
+  $\{U_t\}$ is an MA(1) process.
 \end{proof}
 
 \begin{custompbm}{4.a}
