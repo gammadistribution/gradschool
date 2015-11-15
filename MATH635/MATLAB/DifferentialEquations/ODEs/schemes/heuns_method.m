@@ -1,4 +1,4 @@
-function [t, u] = eulers_method(func, interval, eta, n, epsilon)
+function [t, u] = heuns_method(func, interval, eta, n, epsilon)
 % Computes the approximate solution to the first order cauchy problem 
 % over the passed interval where func(t, y) is the first order derivative 
 % of y. Note that eta is the initial condition of the problem, n is the
@@ -17,7 +17,7 @@ u = [eta + epsilon];
 % Create the solution array.
 for i=1:length(t) - 1
     h = t(i + 1) - t(i);
-    phi = func(t(i), u(i));
+    phi = (1/2)*(func(t(i), u(i)) + func(t(i) + h, u(i) + h*func(t(i), u(i))));
 
     u(i + 1) = u(i) + h*phi;
 end  
