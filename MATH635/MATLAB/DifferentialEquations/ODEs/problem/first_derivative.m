@@ -5,4 +5,3 @@ function output = first_derivative(t, y_t)
 output = -150*y_t + 49 - 150*t;
 
 end
-
