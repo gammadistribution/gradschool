@@ -44,6 +44,8 @@
     \item Heun's method
     \item Trapezoidal method
     \item Fourth-order Runge-Kutta method.
+    \item \texttt{ode23}
+    \item \texttt{ode45}
   \end{itemize}
 \end{problem}
 
@@ -63,6 +65,8 @@ scheme such that the error is the value in the column header.
       Heun's method & 74 & 76 & 166 \\
       Trapezoidal method & 1 & 1 & 90 \\
       Fourth-order Runge-Kutta method & 54 & 54 & 87\\
+      \texttt{ode23}* & 2 & 2 & 2 \\
+      \texttt{ode45}* & 2 & 2 & 2 \\
       \hline
     \end{tabular}
     \caption{Number of subintervals N to achieve various errors.}
@@ -71,6 +75,7 @@ scheme such that the error is the value in the column header.
 
 Note that due to the stability of the Implicit Euler's method, the number of
 subintervals required to attain each error is much, much lower compared to the
-other numerical schemes.
+other numerical schemes. I was unable to compute \texttt{ode23} and \texttt{ode45} with only one subinterval, but
+I suspect if done, that the number of subintervals would be 1 for norms within error of the true solution.
 \end{proof}
 \end{document}

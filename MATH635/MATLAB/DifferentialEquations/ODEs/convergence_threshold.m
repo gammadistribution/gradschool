@@ -13,7 +13,15 @@ function n = convergence_threshold(solution, scheme, func, interval, eta, epsilo
 %
 % Returns the number n of subintervals needed for the scheme to approximate
 % the exact solution within the given threshold.
-n = 1;
+if func2str(scheme) == 'ode23_method'
+    n = 2;
+else
+    if func2str(scheme) == 'ode45_method' 
+        n = 2;
+    else
+        n = 1;
+    end
+end
 
 [t, u] = scheme(func, interval, eta, n, epsilon);
 [t_h, u_h] = solution(interval, n, epsilon);

@@ -8,7 +8,7 @@ interval = [0, 1];
 eta = 1/3;
 epsilon = 0.01;
 thresholds = [0.1, 0.01, 0.001];
-schemes = {@eulers_method, @implicit_eulers_method, @heuns_method, @trapezoidal_method, @runge_kutta_method};
+schemes = {@eulers_method, @implicit_eulers_method, @heuns_method, @trapezoidal_method, @runge_kutta_method, @ode23_method, @ode45_method};
 
 for scheme=1:length(schemes)
     subintervals = [];
