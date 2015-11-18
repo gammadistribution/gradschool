@@ -75,7 +75,7 @@
   \[
    \hat{\phi}_j \pm \Phi_{1-\frac{\alpha}{2}}n ^{-1/2} \hat{\nu}_{jj}^{1/2}
   \]
-  where $\Phi_{1-\frac{\alpha}{2}} = 1.96$ and $\hat{\nu}_{jj}$ is the $j$-the element on the diagonal of
+  where $\Phi_{1-\frac{\alpha}{2}} = 1.96$ and $\hat{\nu}_{jj}$ is the $j$-th element on the diagonal of
   $\hat{\sigma}^2\Gamma_2^{-1}$ for $j=1,2$. Using this formula, we see that
   $\nu_{jj} = 0.5979$ for $j=1,2$ and 95\% confidence intervals for the model
   parameters are given by
@@ -83,6 +83,63 @@
     (1.1660, 1.4961)& \quad \text{for $\phi_1$} \\
     (-0.7858, -0.4827)& \quad \text{for $\phi_2$} .
   \end{align*}
+\end{proof}
+
+
+\begin{custompbm}{5.3}
+  Consider the AR(2) process $\{X_t\}$ satisfying
+  \[
+    X_t - \phi X_{t-1} - \phi^2 X_{t-2} = Z_t, \quad \{Z_t\} \sim \text{WN}(0, \sigma^2).
+  \]
+  \begin{enumerate}
+    \item For what values of $\phi$ is this a causal process?
+    \item The following sample moments were computed after observing $X_1,\dots, X_{200}$:
+      \[
+        \hat{\gamma}(0) = 6.06, \quad \hat{\rho}(1) = 0.687.
+      \]
+      Find estimates of $\phi$ and $\sigma^2$ by solving the Yule-Walker equations. (If
+      you find more than one solution, choose the one that is causal.)
+  \end{enumerate}
+\end{custompbm}
+
+\begin{proof}
+  The characteristic polynomial of this AR(2) process is given by $\phi(z) = 1 - \phi z - \phi^2 z^2$.
+  The AR(2) process $\{X_t\}$ is causal if the roots of $\phi(z)$ occur outside the unit circle.
+  Note that the roots of $\phi(z)$ are given by $z_1 = \frac{-1 + \sqrt{5}}{2}$
+  and $z_2 = \frac{-1 - \sqrt{5}}{2}$. Note that $|z_i| > 1$ for $i=1,2$ if
+  $|\phi| < \frac{-1 + \sqrt{5}}{2}$. Therefore, the process is causal if
+  $|\phi| < \frac{-1 + \sqrt{5}}{2} = 0.618034$.
+
+  Given $\hat{\gamma}(0) = 6.06$ and $\hat{\rho}(1) = \frac{\hat{\gamma}(1)}{\hat{\gamma}(0)} = 0.687$,
+  we see that $\hat{\gamma}(1) = 4.16322$. By the Yule-Walker equations,
+  \[
+    \begin{bmatrix}
+      \hat{\gamma}(0) & \hat{\gamma}(1) \\
+      \hat{\gamma}(1) & \hat{\gamma}(0) \\
+    \end{bmatrix}
+    \begin{bmatrix}
+      \phi \\
+      \phi^2 \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \hat{\gamma}(1) \\
+      \hat{\gamma}(2) \\
+    \end{bmatrix}.
+  \]
+  The solution to this system of equations suggests that
+  $\phi = 1.30106 - 0.214696 \hat{\gamma}(2)$ and $\phi^2 = -0.893828 + 0.3125\hat{\gamma}(2)$.
+  Therefore,
+  \[
+    1.30106 - 0.214696 \hat{\gamma}(2) = \sqrt{\phi^2} = \pm \sqrt{-0.893828 + 0.3125\hat{\gamma}(2)}.
+  \]
+  This suggests that $\hat{\gamma}(2) = 15.2107$ or $\hat{\gamma}(2) = 3.68918$. For $\hat{\gamma}(2) = 15.2107$,
+  we have that $\phi = -1.96462$. As this value of $\phi$ violates the causality of the process,
+  we reject this value so $\hat{\gamma}(2) = 3.68918$ and $\phi = 0.509008$. These values of
+  $\phi$ and $\hat{\gamma}(2)$ can be used to show that
+  \[
+    \sigma^2 = \hat{\gamma}(0) - \phi \hat{\gamma}(1) - \phi^2 \hat{\gamma}(2) = 2.98506.
+  \]
 \end{proof}
 
 
