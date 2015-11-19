@@ -179,4 +179,99 @@
 \end{proof}
 
 
+\begin{custompbm}{5.4}
+  Two hundred observations of a time series $X_1,\dots, X_{200}$, gave the following
+  sample statistics:
+
+  \[
+  \begin{array}{ll}
+    \text{sample mean:} & \bar{x}_{200} = 3.82; \\
+    \text{sample variance:} & \hat{\gamma}(0) = 1.15; \\
+    \text{sample ACF:} & \hat{\rho}(1) = 0.427;\\
+    & \hat{\rho}(2) = 0.475;\\
+    & \hat{\rho}(3) = 0.169.\\
+  \end{array}
+  \]
+
+  \begin{enumerate}
+    \item Based on these sample statistics, is it reasonable to suppose that
+      $\{X_t - \mu\}$ is white noise?
+    \item Assuming $\{X_t - \mu\}$ can be modeled as an AR(2) process
+      \[
+        X_t - \mu - \phi_1(X_{t-1} - \mu) - \phi_2(X_{t-2} - \mu) = Z_t,
+      \]
+      where $\{Z_t\} \sim \text{IID}(0, \sigma^2)$, find estimates of $\mu$, $\phi_1$, $\phi_2$, $\sigma^2$.
+    \item Would you conclude that $\mu = 0$?
+    \item Construct 95\% confidence intervals for $\phi_1$ and $\phi_2$.
+    \item Assuming that the data were generated from an AR(2) model, derive estimates for the PACF for all lags $h \geq 1$.
+  \end{enumerate}
+\end{custompbm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item The process $\{X_t - \mu\}$ is white noise with mean 0 if $\rho(i) = 0$ for $i > 0$.
+      As the process $\{X_t - \mu\}$ is zero-mean, a 95\% confidence interval for zero
+      with 200 samples is given by
+      \[
+        \left(-\frac{1.96}{\sqrt(200)}, \frac{1.96}{\sqrt(200)}\right) = (-0.1386, 0.1386).
+      \]
+      As the sample autocorrelations fall outside this interval, they are not identically
+      0 and we reject the hypothesis that the process $\{X_t - \mu\}$ is white noise.
+    \item By the Yule-Walker equations,
+      \[
+        \begin{bmatrix}
+          \hat{\phi}_1 \\
+          \hat{\phi}_1 \\
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+          \hat{\rho}(0) & \hat{\rho}(1)\\
+          \hat{\rho}(1) & \hat{\rho}(0) \\
+        \end{bmatrix} ^{-1}
+        \begin{bmatrix}
+          \hat{\rho}(1) \\
+          \hat{\rho}(2) \\
+        \end{bmatrix}
+      \]
+      so we see that $\hat{\phi}_1 = 0.2742$ and $\hat{\phi}_2 = 0.3579$ and
+      \[
+      \hat{\sigma}^2 = \hat{\gamma}(0)\left[1 -   \begin{bmatrix}
+          \hat{\rho}(1) \\
+          \hat{\rho}(2) \\
+        \end{bmatrix}^{\intercal}
+        =
+        \begin{bmatrix}
+          \hat{\rho}(0) & \hat{\rho}(1)\\
+          \hat{\rho}(1) & \hat{\rho}(0) \\
+        \end{bmatrix} ^{-1}
+        \begin{bmatrix}
+          \hat{\rho}(1) \\
+          \hat{\rho}(2) \\
+        \end{bmatrix}\right] = 0.8199.
+      \]
+      An estimate for $\mu$ is given by the sample mean, i.e. $\hat{\mu} = \bar{x}_{200} = 3.82.$
+    \item As our sample size $n=200$ is large, the sample mean is normally distribute with mean $\mu$ and
+      variance $\sum \gamma(i) \approx 3.61$. Thus, a 95\% confidence interval for the mean
+      is given by (3.5567, 4.0833). As $\mu = 0$ falls outside this interval, we reject the
+      hypothesis that $\mu = 0$.
+    \item   Since our sample size $n=200$ is large, a 95\% confidence interval for the parameter $\phi_j$ is given by
+      \[
+        \hat{\phi}_j \pm \Phi_{1-\frac{\alpha}{2}}n ^{-1/2} \hat{\nu}_{jj}^{1/2}
+      \]
+      where $\Phi_{1-\frac{\alpha}{2}} = 1.96$ and $\hat{\nu}_{jj}$ is the $j$-th element on the diagonal of
+      $\hat{\sigma}^2\Gamma_2^{-1}$ for $j=1,2$. Using this formula, we see that
+      $\nu_{jj} = 0.8719$ for $j=1,2$ and 95\% confidence intervals for the model
+      parameters are given by
+      \begin{align*}
+        (0.1450, 0.4050)& \quad \text{for $\phi_1$} \\
+        (0.2279, 0.4879)& \quad \text{for $\phi_2$}.
+      \end{align*}
+    \item If the data were generated from an AR(2) process then, by the Durbin-Levinson algorithm,
+      $\hat{\alpha}(1) = \hat{\phi}_{11} = \hat{\rho}(1) = 0.427$,
+      $\hat{\alpha}(2) = \hat{\phi}_{22} = 0.3579$, and
+      $\hat{\alpha}(h) = 0 $ for $h \geq 3$.
+  \end{enumerate}
+\end{proof}
+
+
 \end{document}
