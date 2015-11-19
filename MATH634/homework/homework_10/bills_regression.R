@@ -1,3 +1,5 @@
+library(nlme)
+
 quarter_variable <- function(ts, position){
     vector <- rep(0, 4)
     vector[position] <- 1
@@ -25,12 +27,31 @@ summary(bills.ts.regression)
 
 bills.ts.residuals <- residuals(bills.ts.regression)
 
-bills.ts.regression
-
 pdf(file="residuals_acf.png")
 acf(bills.ts.residuals)
 dev.off()
 
 pdf(file="residuals_pacf.png")
 pacf(bills.ts.residuals)
+dev.off()
+
+# Rerun regression with correlation to ARMA(1,1) process
+bills.ts.regression_correction <- gls(bills.ts.regression_equation,
+                               correlation=corARMA(p=1,q=1), method="ML")
+
+# Not all values are significant
+summary(bills.ts.regression_correction)
+
+bills.ts.regression_new_equation <- bills.ts ~ 0 + time(bills.ts) +
+    bills.ts.Q1 + bills.ts.Q2 + bills.ts.Q4
+
+bills.ts.regression_correction_2 <- gls(bills.ts.regression_new_equation,
+                                        correlation=corARMA(p=1,q=1),
+                                        method="ML")
+
+# This is our time series model.
+summary(bills.ts.regression_correction_2)
+
+png(file="new_residuals_acf.png")
+acf(residuals(bills.ts.regression_correction_2, type="normalized"))
 dev.off()

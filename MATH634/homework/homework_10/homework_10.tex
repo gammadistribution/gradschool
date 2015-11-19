@@ -155,12 +155,36 @@ lag greater than 0.
 
 \begin{proof}
 
-Combining all of the information above, the time series model that best fits the data is
+Note that are residuals are not white noise so we need to rerun the regression
+analysis using the fact that the residuals are correlated as an ARMA(1,1) model.
+
+Rerunning the regression with this fact shows that the $Q_3$ variable is no longer
+significant. Removing this variable and rerunning the analysis shows that
+
+\begin{verbatim}
+                   Value Std.Error   t-value p-value
+time(bills.ts)   7.44860  1.157879  6.432974       0
+bills.ts.Q1    206.68710 20.346380 10.158421       0
+bills.ts.Q2     95.32084 16.141974  5.905154       0
+bills.ts.Q4    130.94859 16.143011  8.111782       0
+
+\end{verbatim}
+
+verifying that all of our variables are now statistically significant. The ACF
+of the residuals is shown below:
+
+\begin{center}
+  \includegraphics[scale=0.6]{new_residuals_acf}
+\end{center}
+From the graph, it is clear that with our new regression equation the residuals are white noise.
+The underlying noise of the regression is given by the ARMA(1,1) process $\{Y_t\}$
+with $Y_t = 0.6055 Y_{t-1} + Z_t + 0.3097Z_{t-1}$ with $Z_t \sim \text{WN}(0, 75.3106^2)$.
+
+Therefore, a statistically significant time series model is given by
 \[
-  X_t = 4.892t + 256.255Q_1 + 152.012Q_2 + 62.270Q_3 +190.484Q_4 + Y_t
+  X_t = 7.45t + 206.68Q_1 + 95.32Q_2 + 130.95Q_4 + 0.61 Y_{t-1} + Z_t + 0.31Z_{t-1},
 \]
-where $Y_t \sim \text{ARMA}(1,1)$. Note that this model is statistically
-significant.
+where $Z_t \sim \text{WN}(0, 75.3106^2)$.
 \end{proof}
 
 \end{document}
