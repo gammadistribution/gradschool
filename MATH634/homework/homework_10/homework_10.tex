@@ -71,4 +71,62 @@
   constant.
 \end{proof}
 
+
+\begin{problem}
+  Are all the variables in the model statistically significant? Justify your answer.
+\end{problem}
+
+\begin{proof}
+  The following \texttt{R} code performs a linear regression on our data set using the
+  above equation:
+  \begin{verbatim}
+quarter_variable <- function(ts, position){
+    vector <- rep(0, 4)
+    vector[position] <- 1
+
+    variable <- rep(vector, length(ts) / 4)
+
+    return(variable)
+}
+
+bills <- scan("bills.csv", skip=1)
+bills.ts <- ts(bills)
+
+bills.ts.Q1 <- quarter_variable(bills.ts, 1)
+bills.ts.Q2 <- quarter_variable(bills.ts, 2)
+bills.ts.Q3 <- quarter_variable(bills.ts, 3)
+bills.ts.Q4 <- quarter_variable(bills.ts, 4)
+
+bills.ts.regression_equation <- bills.ts ~ 0 + time(bills.ts) +
+    I(time(bills.ts)^2) + bills.ts.Q1 + bills.ts.Q2 + bills.ts.Q3 +
+    bills.ts.Q4
+bills.ts.regression <- lm(bills.ts.regression_equation)
+
+# The following tells us that all variables are significant
+# using a significance level of alpha = 0.05.
+summary(bills.ts.regression)
+
+  \end{verbatim}
+
+  The code above outputs the following table displaying the significance of the
+  variables in the regression equation:
+  \begin{verbatim}
+Coefficients:
+                    Estimate Std. Error t value Pr(>|t|)
+time(bills.ts)       -7.4582     3.3960  -2.196 0.034999 *
+I(time(bills.ts)^2)   0.3012     0.0803   3.751 0.000657 ***
+bills.ts.Q1         342.4070    33.8113  10.127 8.44e-12 ***
+bills.ts.Q2         238.7662    34.3165   6.958 5.06e-08 ***
+bills.ts.Q3         149.0250    34.7278   4.291 0.000139 ***
+bills.ts.Q4         276.6363    35.0485   7.893 3.43e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+  \end{verbatim}
+
+From this table we see that all of our of our variables are statistically significant
+using a significance level of $\alpha=0.05$.
+\end{proof}
+
+
 \end{document}
