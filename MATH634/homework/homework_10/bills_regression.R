@@ -27,11 +27,11 @@ summary(bills.ts.regression)
 
 bills.ts.residuals <- residuals(bills.ts.regression)
 
-pdf(file="residuals_acf.png")
+pdf(file="residuals_acf.pdf")
 acf(bills.ts.residuals)
 dev.off()
 
-pdf(file="residuals_pacf.png")
+pdf(file="residuals_pacf.pdf")
 pacf(bills.ts.residuals)
 dev.off()
 
@@ -52,6 +52,6 @@ bills.ts.regression_correction_2 <- gls(bills.ts.regression_new_equation,
 # This is our time series model.
 summary(bills.ts.regression_correction_2)
 
-png(file="new_residuals_acf.png")
+pdf(file="new_residuals_acf.pdf")
 acf(residuals(bills.ts.regression_correction_2, type="normalized"))
 dev.off()
