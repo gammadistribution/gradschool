@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage{amsmath}
 \usepackage{./.sty/appendix}
 \usepackage{graphicx}
 \usepackage{./.sty/titlesec}
@@ -35,23 +36,29 @@
 
 
 \maketitle
-
-
 \newpage
-\begin{abstract}
-	Abstract here
-\end{abstract}
 
 
-\newpage
 \tableofcontents
 \newpage
 
 
 \begin{section}{Introduction}
+  The authors were tasked by a client with finding the solution to the following
+  family of differential equations
+  \[
+  -u''(x) + c u(x) = f(x), \quad a \leq x \leq b, \quad u(a) = \epsilon \text{ and } u(b) = \delta.
+  \]
+  Assumptions were placed on this family so that $c > 0$ and $f \in C^k([a,b])$
+  for sufficiently large $k$ so that $f$ is relatively well-behaved on the defined interval. The client has also requested
+  to be provided with a means of plotting the solution once obtained.
 
-	\begin{subsection}{Problem Description}
-	\end{subsection}
+  In this report we will detail the analytical solution to this family of differential
+  equations and explain why this solution is not amenable to practical use. We
+  therefore provide a numerical scheme to approximate the solution to the family
+  of differential equations and examine the convergence, consistency and stability
+  of the numerical scheme. Using the solution provided by the numerical scheme,
+  we then explore the different options for plotting the solution.
 
 \end{section}
 
@@ -62,30 +69,30 @@
 
 \begin{section}{Numerical Scheme}
 
-	\begin{subsection}{Description}
-	\end{subsection}
+  \begin{subsection}{Description}
+  \end{subsection}
 
-	\begin{subsection}{Implementation}
+  \begin{subsection}{Implementation}
 
-		\subsubsection{Discretized Solution}
+    \subsubsection{Discretized Solution}
 
-		\subsubsection{Plotting}
+    \subsubsection{Plotting}
 
-	\end{subsection}
+  \end{subsection}
 
 \end{section}
 
 
 \begin{section}{Numerical Scheme Properties}
 
-	\begin{subsection}{Convergence}
-	\end{subsection}
+  \begin{subsection}{Convergence}
+  \end{subsection}
 
-	\begin{subsection}{Consistency}
-	\end{subsection}
+  \begin{subsection}{Consistency}
+  \end{subsection}
 
-	\begin{subsection}{Stability}
-	\end{subsection}
+  \begin{subsection}{Stability}
+  \end{subsection}
 
 \end{section}
 
@@ -96,7 +103,7 @@
 
 \newpage
 \begin{appendices}
-	\section{Numerical Scheme Program}
+  \section{Numerical Scheme Program}
 \end{appendices}
 
 
