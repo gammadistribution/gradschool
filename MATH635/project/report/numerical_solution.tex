@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{./.sty/appendix}
+\usepackage{graphicx}
+\usepackage{./.sty/titlesec}
+\usepackage[dotinlabels]{./.sty/titletoc}
+
+
+\graphicspath{ {images/} }
+
+
+\titlelabel{\thetitle.\quad}
+
+
+\renewenvironment{abstract}
+  {\small\quotation
+  {\bfseries\noindent{\large\abstractname}\par\nobreak\smallskip}}
+  {\endquotation}
+
+
+\title{
+	{A Numerical Solution to a Second Order Ordinary Differential Equation}\\
+}
+
+
+\author{
+	Hunter, Marcus \\
+	\and
+	Tiger, Matthew \\
+	\and
+	Wigfield, Jacob \\
+}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\newpage
+\begin{abstract}
+	Abstract here
+\end{abstract}
+
+
+\newpage
+\tableofcontents
+\newpage
+
+
+\begin{section}{Introduction}
+
+	\begin{subsection}{Problem Description}
+	\end{subsection}
+
+\end{section}
+
+
+\begin{section}{Analytical Solution}
+\end{section}
+
+
+\begin{section}{Numerical Scheme}
+
+	\begin{subsection}{Description}
+	\end{subsection}
+
+	\begin{subsection}{Implementation}
+
+		\subsubsection{Discretized Solution}
+
+		\subsubsection{Plotting}
+
+	\end{subsection}
+
+\end{section}
+
+
+\begin{section}{Numerical Scheme Properties}
+
+	\begin{subsection}{Convergence}
+	\end{subsection}
+
+	\begin{subsection}{Consistency}
+	\end{subsection}
+
+	\begin{subsection}{Stability}
+	\end{subsection}
+
+\end{section}
+
+
+\begin{section}{Worked Example}
+\end{section}
+
+
+\newpage
+\begin{appendices}
+	\section{Numerical Scheme Program}
+\end{appendices}
+
+
+\end{document}
