@@ -86,7 +86,7 @@
   is a particular solution of $-u''(x) + c u(x) = f(x)$.
 
   To find the homogeneous solution, note that the characteristic equation of
-  this family of differential equations is given by $-m^2 + c = 0$ the roots of
+  this family of differential equations is given by $-m^2 + c = 0$, the roots of
   which are $m_1 = \sqrt{c} = \omega $ and $m_2 = -\sqrt{c} = -\omega$. Note
   that since $c > 0$, these roots are real and distinct suggesting that the
   homogeneous solution is given by
@@ -98,7 +98,7 @@
   form $u_p(x) = \kappa(x) e^{\omega x}$ for some unknown function $\kappa(x)$.
   Thus,
   \[
-    u_p''(x) = \kappa''(x) e^{\omega x} + 2 \omega \kappa'(x) e^{\omega x} + \omega^2 \kappa(x) e^{\omega x},
+    u_p''(x) = \kappa''(x) e^{\omega x} + 2 \omega \kappa'(x) e^{\omega x} + \omega^2 \kappa(x) e^{\omega x}
   \]
   and substituting the above into the original differential equation $Lu = f$
   with $u_p(x) = \kappa(x) e^{\omega x}$ we have
@@ -162,19 +162,105 @@
   Furthermore, we deduce that the problem is in fact well-posed.
 
   From this solution, we must make the following additional assumption on this
-  problem:
-  \begin{itemize}
-    \item $f(x)$ must be integrable on the interval $[0, 1]$.
-  \end{itemize}
+  problem: $f(x)$ and its anti-derivative must be integrable on the interval $[0, 1]$.
+
   As the analytical solution depends on the symbolic integration of $f(x)$, we
   will be unable to use this solution for functions $f(x)$ in which the
   closed-form of the integral is not known.
 \end{section}
 
 
-\begin{section}{Numerical Scheme}
+\begin{section}{Numerical Scheme}\label{sec:scheme}
+  As mentioned in the previous section, the analytical solution is not practical
+  to use for most functions $f(x)$. Thus, we present a numerical solution to
+  approximate the analytical solution for the problem $Lu = f$.
 
   \begin{subsection}{Description}
+    Our solution is derived from the method of finite differences. We define
+    a finite set of points on the interval $[0, 1]$ called the grid $D_h$ where
+    the parameter $h$ is the size of the grid where a smaller $h$ denotes a finer
+    grid. For our purposes, we consider $h=1/N$ for positive $N$ and
+    create the uniform grid
+    \[
+      D_h = \{x_n| x_n = hn \text{ for $0 \leq n \leq N$}\}.
+    \]
+
+    Define on this grid the discretized solution to the problem $Lu = f$ as
+    $[u]_h = \{u(x_n)\}$ and define the discretized function $f^{(h)} = \{f(x_n)\}$.
+    We wish to create a scheme $L_h$ that computes an approximate solution
+    $u^{(h)} = \left\{u_0^{(h)}, u_1^{(h)}, \dots, u_N^{(h)}\right\}$ to the problem
+    $Lu = f$, i.e.\ a scheme such that $L_h u^{(h)} = f^{(h)}$.
+
+    Finding an approximation to $u''(x)$ should suggest how to construct
+    the scheme $L_h$.
+    To find an approximation for $u''(x)$, we investigate the Taylor expansion
+    of $u(x)$ centered at $h$ and $-h$. These expansions are given by
+    \begin{align*}
+      u(x + h) &= u(x) + h u'(x) + \frac{h^2 u ''(x)}{2} + \frac{h^3 u^{(3)}(x)}{3!} + O(h^4) \\
+      u(x - h) &= u(x) - h u'(x) + \frac{h^2 u ''(x)}{2} - \frac{h^3 u^{(3)}(x)}{3!} + O(h^4).
+    \end{align*}
+    Adding these two expressions and solving for $u''(x)$ shows that
+    \begin{align}\label{second_deriv}
+      u''(x) = \frac{u(x + h) - 2u(x) + u(x-h)}{h^2} - O(h^2).
+    \end{align}
+    This suggests that we should define our numerical scheme by replacing $u''(x)$
+    in $Lu = f$ with the approximation
+    \[
+      u''(x) \approx \frac{u(x + h) - 2u(x) + u(x-h)}{h^2}.
+    \]
+    Therefore, we define the numerical scheme as
+    \begin{align*}
+      L_h u^{(h)} = f^{(h)} :=
+      \begin{cases}
+        \frac{-u_{n+1} + 2 u_n - u_{n-1}}{h^2} + c u_n = f_n & \text{for $n= 1, \dots, N - 1$} \\
+        u_0 = \epsilon \\
+        u_N = \delta
+      \end{cases}.
+    \end{align*}
+    For $n=1,\dots,N-1$, the scheme presents us with the recurrence relation
+    \[
+      -u_{n-1} + (2 + ch^2) u_n - u_{n+1} = h^2 f_n
+    \]
+    with initial conditions $u_0 = \epsilon$ and $u_N = \delta$. This recurrence
+    relation is represented by the following system of equations
+    \begin{align*}
+      (2 + ch^2) u_1 - u_2 &= h^2f_1 + u_0 \\
+      -u_1 + (2 + ch^2) u_2 - u_3 &= h^2f_2 \\
+      -u_2 + (2 + ch^2) u_3 - u_4 &= h^2f_3 \\
+      \vdots &  \\
+      -u_{N-2} + (2 + ch^2) u_{N-1} &= h^2f_{N-1} + u_N.
+    \end{align*}
+    In matrix form, this system of equations becomes
+    \begin{align*}
+      \begin{bmatrix}
+        2 + ch^2 & -1 & 0 & \hdots & 0 & 0\\
+        -1 & 2 + ch^2 & -1 & \hdots & 0 & 0\\
+        0 & -1 & 2 + ch^2 & \hdots & 0 & 0\\
+        \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+        0 & 0 & 0 & \hdots & -1 & 2+ch^2 \\
+      \end{bmatrix}
+      \begin{bmatrix}
+        u_1 \\
+        u_2 \\
+        u_3 \\
+        \vdots \\
+        u_{N-1}
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        h^2 f_1 + u_0 \\
+        h^2 f_2 \\
+        h^2 f_3 \\
+        \vdots \\
+        h^2 f_{N-1} + u_{N}
+      \end{bmatrix}
+    \end{align*}
+    The solution to this system of equations paired with the initial conditions
+    allows us to explicitly find $u^{(h)}$, our scheme's solution.
+
+    In section \ref{sec:scheme_prop} we examine the convergence, consistency,
+    and stability of this scheme in order to determine its usefulness in
+    approximating the analytical solution to the problem $Lu = f$.
   \end{subsection}
 
   \begin{subsection}{Implementation}
@@ -188,8 +274,10 @@
 \end{section}
 
 
-\begin{section}{Numerical Scheme Properties}
-
+\begin{section}{Numerical Scheme Properties}\label{sec:scheme_prop}
+  There are three main properties of the numerical scheme presented in section
+  \ref{sec:scheme} that are important to the validity of the numerical solution,
+  namely the convergence, consistency, and stability of the numerical scheme.
   \begin{subsection}{Convergence}
   \end{subsection}
 
