@@ -154,15 +154,15 @@
   by
   \begin{align*}
     c_1 = \frac{\epsilon e^{-\omega} - \delta - e^{\omega} \int_{0}^{1} e^{-2 \omega s} \left[ \int_{0}^s f(r) e^{\omega r} dr \right] ds}{e^{-\omega} - e^{\omega}}\\
-    c_2 = \frac{-\epsilon e^{-\omega} + \delta + e^{\omega} \int_{0}^{1} e^{-2 \omega s} \left[ \int_{0}^s f(r) e^{\omega r} dr \right] ds}{e^{-\omega} - e^{\omega}}.
+    c_2 = \frac{-\epsilon e^{\omega} + \delta + e^{\omega} \int_{0}^{1} e^{-2 \omega s} \left[ \int_{0}^s f(r) e^{\omega r} dr \right] ds}{e^{-\omega} - e^{\omega}}.
   \end{align*}
 
-  Using these constants in \eqref{general_analytical_solution} gives us the
-  unique analytical solution to the family of differential equation $Lu = f$.
+  Using these constants in the general solution \eqref{general_analytical_solution}
+  gives us the unique analytical solution to the family of differential equation $Lu = f$.
   Furthermore, we deduce that the problem is in fact well-posed.
 
   From this solution, we must make the following additional assumption on this
-  problem: $f(x)$ and its anti-derivative must be integrable on the interval $[0, 1]$.
+  problem: $f(x)$ must be integrable on the interval $[0, 1]$.
 
   As the analytical solution depends on the symbolic integration of $f(x)$, we
   will be unable to use this solution for functions $f(x)$ in which the
@@ -264,7 +264,9 @@
   \end{subsection}
 
   \begin{subsection}{Implementation}
-
+    We will now discuss how we implemented the above numerical scheme so that
+    we can use the scheme to numerically approximate the solution to the
+    problem $Lu = f$.
     \subsubsection{Discretized Solution}
 
     \subsubsection{Plotting}
@@ -278,10 +280,17 @@
   There are three main properties of the numerical scheme presented in section
   \ref{sec:scheme} that are important to the validity of the numerical solution,
   namely the convergence, consistency, and stability of the numerical scheme.
+  We will now investigate these properties in detail to determine how well
+  the numerical scheme approximates the analytical solution to our differential
+  equation.
+
   \begin{subsection}{Convergence}
   \end{subsection}
 
   \begin{subsection}{Consistency}
+    The consistency can be gained by looking at the taylor expansion and the
+    discretized solution. It is clear that the truncation error goes to 0
+    as h goes to 0 implying consistency.
   \end{subsection}
 
   \begin{subsection}{Stability}
@@ -291,6 +300,8 @@
 
 
 \begin{section}{Worked Example}
+  Specify a polynomial for f and set c and show how to implement solution and
+  then plot it.
 \end{section}
 
 
