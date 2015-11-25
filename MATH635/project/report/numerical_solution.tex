@@ -196,12 +196,13 @@
     To find an approximation for $u''(x)$, we investigate the Taylor expansion
     of $u(x)$ centered at $h$ and $-h$. These expansions are given by
     \begin{align*}
-      u(x + h) &= u(x) + h u'(x) + \frac{h^2 u ''(x)}{2} + \frac{h^3 u^{(3)}(x)}{3!} + O(h^4) \\
-      u(x - h) &= u(x) - h u'(x) + \frac{h^2 u ''(x)}{2} - \frac{h^3 u^{(3)}(x)}{3!} + O(h^4).
+      u(x + h) &= u(x) + h u'(x) + \frac{h^2 u ''(x)}{2} + \frac{h^3 u^{(3)}(x)}{3!} + \frac{h^4 u^{(4)}(\xi_1)}{4!} \\
+      u(x - h) &= u(x) - h u'(x) + \frac{h^2 u ''(x)}{2} - \frac{h^3 u^{(3)}(x)}{3!} + \frac{h^4 u^{(4)}(\xi_2)}{4!}
     \end{align*}
+    where $x \leq \xi_1 \leq x + h$ and $x - h \leq \xi_2 \leq x$.
     Adding these two expressions and solving for $u''(x)$ shows that
     \begin{align}\label{second_deriv}
-      u''(x) = \frac{u(x + h) - 2u(x) + u(x-h)}{h^2} - O(h^2).
+      u''(x) = \frac{u(x + h) - 2u(x) + u(x-h)}{h^2} - \frac{h^2(u^{(4)}(\xi_1) + u^{(4)}(\xi_2))}{4!}.
     \end{align}
     This suggests that we should define our numerical scheme by replacing $u''(x)$
     in $Lu = f$ with the approximation
@@ -264,8 +265,8 @@
   \end{subsection}
 
   \begin{subsection}{Implementation}
-    We will now discuss how we implemented the above numerical scheme so that
-    we can use the scheme to numerically approximate the solution to the
+    We will now discuss the implementation of the above numerical scheme and
+    how to use the implementation to numerically approximate the solution to the
     problem $Lu = f$.
     \subsubsection{Discretized Solution}
 
@@ -288,9 +289,14 @@
   \end{subsection}
 
   \begin{subsection}{Consistency}
-    The consistency can be gained by looking at the taylor expansion and the
-    discretized solution. It is clear that the truncation error goes to 0
-    as h goes to 0 implying consistency.
+    The consistency of a numerical scheme is a measure of how well the solution
+    obtained by the scheme approximates the analytical solution as the grid
+    becomes more refined. Formally, for a scheme $L_h u^{(h)} = f^{(h)}$ for the
+    problem $Lu = f$, we say the scheme is \textit{consistent} if
+    \begin{align}\label{consistency}
+      ||L_h[u]_h - L_h u^{(h)}|| \to 0 \text{\ as $h \to 0$}
+    \end{align}
+    where $|| u^{(h)} || = \max_n |u_n|$.
   \end{subsection}
 
   \begin{subsection}{Stability}
