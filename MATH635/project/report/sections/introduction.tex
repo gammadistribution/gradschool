@@ -1,0 +1,28 @@
+The authors were tasked by the client with finding the solution to the following
+family of differential equations
+\[
+  \begin{cases}
+    -u''(x) + c u(x) = f(x) \\
+    0 \leq x \leq 1 \\
+    u(0) = \epsilon \\
+    u(1) = \delta.
+  \end{cases}
+\]
+Additionally, the client has also requested to be provided with a means of
+plotting the solution once obtained.
+
+Throughout this report, the above family of differential equations together with
+the interval of definition and initial conditions will be represented by
+$Lu = f$.
+
+Assumptions were placed on this family so that $c \in \mathbb{R}$ with $c > 0$
+and $f \in C^k([0,1])$ for sufficiently large $k$ so that $f$ is relatively
+well-behaved on the defined interval.
+
+In this report we will detail the analytical solution to this family of
+differential equations showing the the above problem is well-posed and
+explain why this solution is not amenable to practical use. We therefore
+provide a numerical scheme to approximate the solution to the family of
+differential equations and examine the convergence, consistency and stability
+of the numerical scheme. Using the solution provided by the numerical scheme,
+we then explore the different options for plotting the solution.

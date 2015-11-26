@@ -1,0 +1,90 @@
+The family of differential equations $Lu = f$ represents a second order linear
+differential equation and therefore well-known techniques can be used to find
+the solution $u(x)$.
+
+The solution $u(x)$ is given by $u(x) = u_h(x) + u_p(x)$ where $u_h(x)$ is
+the solution to the homogeneous equation $-u''(x) + c u(x) = 0$ and $u_p(x)$
+is a particular solution of $-u''(x) + c u(x) = f(x)$.
+
+To find the homogeneous solution, note that the characteristic equation of
+this family of differential equations is given by $-m^2 + c = 0$, the roots of
+which are $m_1 = \sqrt{c} = \omega $ and $m_2 = -\sqrt{c} = -\omega$. Note
+that since $c > 0$, these roots are real and distinct suggesting that the
+homogeneous solution is given by
+\begin{align}\label{homogeneous_solution}
+  u_h(x) = c_1 e^{\omega x} + c_2 e^{-\omega x}.
+\end{align}
+
+To find the particular solution, we assume the particular solution is of the
+form $u_p(x) = \kappa(x) e^{\omega x}$ for some unknown function $\kappa(x)$.
+Thus,
+\[
+u_p''(x) = \kappa''(x) e^{\omega x} + 2 \omega \kappa'(x) e^{\omega x} + \omega^2 \kappa(x) e^{\omega x}
+\]
+and substituting the above into the original differential equation $Lu = f$
+with $u_p(x) = \kappa(x) e^{\omega x}$ we have
+\begin{align}\label{particular_step_one}
+  \kappa''(x) + 2\omega\kappa'(x) = -f(x)e^{-\omega x}.
+\end{align}
+Making the substitution $\lambda(x) = \kappa'(x)$ into \eqref{particular_step_one}
+we can reduce the above second order linear differential equation into the
+first order linear differential equation
+\begin{align}\label{particular_step_two}
+  \lambda'(x) + 2\omega\lambda(x) = -f(x)e^{-\omega x}.
+\end{align}
+The homogeneous solution to this first order differential equation is given by
+$\lambda_h(x) = c_3 e^{-2\omega x}$ suggesting the particular solution to the
+first order differential equation is of the form $\lambda_p(x) = \mu(x) e^{-2\omega x}$.
+
+Repeating the same process as above, we see that
+\[
+\lambda_p'(x) = \mu'(x) e^{-2 \omega x} - 2 \omega\mu(x) e^{-2 \omega x}
+\]
+and substituting into \eqref{particular_step_two} with $\lambda_p(x) = \mu(x) e^{-2\omega x}$
+we find that the first order linear differential equation becomes the separable first order differential
+equation
+\[
+\mu'(x) = -f(x)e^{\omega x}.
+\]
+We readily see the solution to the above differential equation is given by
+\[
+\mu(x) = - \int_{0}^x f(r) e^{\omega r} dr.
+\]
+As $\kappa'(x) = \lambda_p(x) = \mu(x)e^{-2\omega x}$, we deduce that
+\begin{align*}
+  \kappa(x) = - \int_{0}^{x} e^{-2 \omega s} \left[ \int_{0}^s f(r) e^{\omega r} dr \right] ds
+\end{align*}
+and
+\begin{align}\label{particular_solution}
+  u_p(x) = \kappa(x)e^{\omega x} = -e^{\omega x} \int_{0}^{x} e^{-2 \omega s} \left[ \int_{0}^s f(r) e^{\omega r} dr \right] ds.
+\end{align}
+Combining the homogeneous solution \eqref{homogeneous_solution} and the particular
+solution \eqref{particular_solution} we have that the general solution to
+$Lu = f$ is given by
+\begin{align}\label{general_analytical_solution}
+  u(x) &= u_h(x) + u_p(x) \nonumber \\
+  &= c_1 e^{\omega x} + c_2 e^{-\omega x} - e^{\omega x} \int_{0}^{x} e^{-2 \omega s} \left[ \int_{0}^s f(r) e^{\omega r} dr \right] ds.
+\end{align}
+Using the boundary values provided in $Lu=f$, the general solution is specified
+by the system of linear equations
+\begin{align*}
+  u(0) &= c_1 + c_2 = \epsilon \\
+  u(1) &= c_1 e^{\omega} + c_2 e^{-\omega} - e^{\omega} \int_{0}^{1} e^{-2 \omega s} \left[ \int_{0}^s f(r) e^{\omega r} dr \right] ds = \delta .
+\end{align*}
+The solution to this system in terms of the unknowns $c_1$ and $c_2$ is given
+by
+\begin{align*}
+  c_1 = \frac{\epsilon e^{-\omega} - \delta - e^{\omega} \int_{0}^{1} e^{-2 \omega s} \left[ \int_{0}^s f(r) e^{\omega r} dr \right] ds}{e^{-\omega} - e^{\omega}}\\
+  c_2 = \frac{-\epsilon e^{\omega} + \delta + e^{\omega} \int_{0}^{1} e^{-2 \omega s} \left[ \int_{0}^s f(r) e^{\omega r} dr \right] ds}{e^{-\omega} - e^{\omega}}.
+\end{align*}
+
+Using these constants in the general solution \eqref{general_analytical_solution}
+gives us the unique analytical solution to the family of differential equation $Lu = f$.
+Furthermore, we deduce that the problem is in fact well-posed.
+
+From this solution, we must make the following additional assumption on this
+problem: $f(x)$ must be integrable on the interval $[0, 1]$.
+
+As the analytical solution depends on the symbolic integration of $f(x)$, we
+will be unable to use this solution for functions $f(x)$ in which the
+closed-form of the integral is not known.
