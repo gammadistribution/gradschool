@@ -24,14 +24,14 @@ end
 
 u_0 = initials(1);
 u_N = initials(2);
-h = 1 / (length(x) - 1);
+h = 1 / subintervals;
 
 % We wish to find v = [u_1, ..., u_subintervals-1] such that Av = b.
 
 % Define b as the evaluation of f at the nodes x_1, ..., x_subintervals-1 
 % with the exception of the first and last element which is 
 % f(x(1)) + initials(1) and f(x(subintervals-1)) + initials(2) respectively.
-b = f(v);
+b = h^2 * f(v);
 b(1) = b(1) + u_0;
 b(length(b)) = b(length(b)) + u_N;
 
