@@ -1,0 +1,42 @@
+In order to efficiently use the numerical scheme just described we will need to
+implement the scheme using computational software.
+
+\subsubsection{Discretized Solution}
+We have implemented the numerical scheme described above in MATLAB which can be
+used by calling the m-function \texttt{numerical\_scheme.m}. We will now
+describe the parameters necessary to call the function, how the function
+computes the solution, and the results outputted by the function. Please refer
+to appendix \ref{append_numerical} for the function definition in MATLAB.
+
+This m-function requires the following parameters to compute the numerical solution:
+\begin{itemize}
+  \item \texttt{f} - MATLAB function that represents the function $f$ in the differential equation $Lu = f$.
+  \item \texttt{c} - A real number that represents the constant $c$ in the differential equation $Lu = f$.
+  \item \texttt{initials} - An array with two elements representing the initial conditions in the problem
+    $Lu=f$. The first element of the array is $\epsilon$ and the second element of the array is $\delta$.
+  \item \texttt{interval} - An array with two elements represent the endpoints of the interval of definition in
+    the problem $Lu = f$.
+  \item \texttt{subintervals} - An integer that represents the number of subintervals with which to construct
+    the uniform nodes on the interval of definition. This corresponds to an
+    $h$-value of $1/\texttt{subintervals}$ on the grid $D_h$.
+\end{itemize}
+
+Calling the function as follows
+\[
+  \texttt{numerical\_scheme(f, c, initials, interval, subintervals)}
+\]
+returns the array \texttt{[x, u]} where \texttt{x} is an array whose elements are
+the nodes on the grid $D_h$ and \texttt{u} is an array whose elements are the
+numerical solution obtained by the scheme $L_h u^{(h)} = f^{(h)}$ evaluated on the
+nodes of the grid.
+
+From these parameters, after verifying that $c$ is a positive real number,
+the function creates and assigns to \texttt{x} the uniform
+nodes equally spaced on the interval with width 1/\texttt{subintervals}. We then
+construct the  coefficient matrix \texttt{A} and the right-hand side vector \texttt{b} of the equation
+in \eqref{matrix_system}. Finally, we then assign to \texttt{u} the solution vector
+which is given by \texttt{initials(1), inv(A) * b, initials(2)}.
+
+Using this function then allows us to compute the numerical solution to the problem
+$Lu = f$.
+\subsubsection{Plotting}

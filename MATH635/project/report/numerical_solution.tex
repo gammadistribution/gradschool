@@ -72,14 +72,15 @@
 
 \newpage
 \begin{appendices}
-  \section{Analytical Solution Program}
+  \section{Analytical Solution Program}\label{append_analytical}
   The following is the m-function \texttt{analytical\_solution.m} for use in
   MATLAB to compute the analytical solution to the problem $Lu = f$. Returns
   a function handle to evaluate the analytical solution at any point on the
   interval [0, 1]. This function requires the symbolic toolbox in MATLAB.
   \lstinputlisting{../NumericalSolution/analytical_solution.m}
 
-  \section{Numerical Scheme Program}
+  \newpage
+  \section{Numerical Scheme Program}\label{append_numerical}
   The following is the m-function \texttt{numerical\_scheme.m} for use in MATLAB
   to compute the numerical solution to the problem $Lu = f$.
   \lstinputlisting{../NumericalSolution/numerical_scheme.m}

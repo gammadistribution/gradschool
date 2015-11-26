@@ -59,13 +59,13 @@ approximate the analytical solution for the problem $Lu = f$.
     -u_{N-2} + (2 + ch^2) u_{N-1} &= h^2f_{N-1} + u_N.
   \end{align*}
   In matrix form, this system of equations becomes
-  \begin{align*}
+  \begin{align}\label{matrix_system}
     \begin{bmatrix}
-      2 + ch^2 & -1 & 0 & \hdots & 0 & 0\\
-      -1 & 2 + ch^2 & -1 & \hdots & 0 & 0\\
-      0 & -1 & 2 + ch^2 & \hdots & 0 & 0\\
-      \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-      0 & 0 & 0 & \hdots & -1 & 2+ch^2 \\
+      2 + ch^2 & -1 & 0 & \hdots & 0\\
+      -1 & 2 + ch^2 & -1 & \hdots & 0\\
+      0 & -1 & 2 + ch^2 & \hdots & 0\\
+      \vdots & \vdots & \vdots & \ddots & \vdots \\
+      0 & 0 & 0 & \hdots & 2+ch^2 \\
     \end{bmatrix}
     \begin{bmatrix}
       u_1 \\
@@ -82,7 +82,7 @@ approximate the analytical solution for the problem $Lu = f$.
       \vdots \\
       h^2 f_{N-1} + u_{N}
     \end{bmatrix}
-  \end{align*}
+  \end{align}
   The solution to this system of equations paired with the initial conditions
   allows us to explicitly find $u^{(h)}$, our scheme's solution.
 
@@ -92,11 +92,5 @@ approximate the analytical solution for the problem $Lu = f$.
 \end{subsection}
 
 \begin{subsection}{Implementation}
-  We will now discuss the implementation of the above numerical scheme and
-  how to use the implementation to numerically approximate the solution to the
-  problem $Lu = f$.
-  \subsubsection{Discretized Solution}
-
-  \subsubsection{Plotting}
-
+  \input{sections/subsections/implementation}
 \end{subsection}

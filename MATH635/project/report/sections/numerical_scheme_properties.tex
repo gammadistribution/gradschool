@@ -6,63 +6,11 @@ the numerical scheme approximates the analytical solution to our differential
 equation.
 
 \begin{subsection}{Convergence}
+  \input{sections/subsections/convergence}
 \end{subsection}
 
 \begin{subsection}{Consistency}
-  The consistency of a numerical scheme is a measure of how well the solution
-  obtained by the scheme approximates the analytical solution as the grid
-  the scheme is defined on becomes more refined. Formally,
-  for a scheme $L_h u^{(h)} = f^{(h)}$ for the problem $Lu = f$, we say the
-  scheme is \textit{consistent} if
-  \begin{align}\label{consistency}
-    ||L_h[u]_h - L_h u^{(h)}|| \to 0 \text{\ as $h \to 0$}
-  \end{align}
-  where $|| u^{(h)} || = \max_n |u_n|$.
-
-  Using the expression for the second
-  derivative in \eqref{second_deriv} and replacing it in our problem $Lu = f$, we
-  see that after some rearranging
-  \begin{align*}
-    \frac{-u(x + h) + 2u(x) - u(x-h)}{h^2} + cu(x) = f(x) - \frac{h^2(u^{(4)}(\xi_1) + u^{(4)}(\xi_2))}{4!}.
-  \end{align*}
-  For the discretized analytical solution $[u]_h$ to our problem $Lu = f$ on the grid $D_h$,
-  this equation then becomes
-  \begin{align*}
-    \frac{-u(x_{n+1}) + 2u(x_n) - u(x_{n-1})}{h^2} + cu(x_n) = f(x_n) - \frac{h^2(u^{(4)}(\xi_1) + u^{(4)}(\xi_2))}{4!}.
-  \end{align*}
-  From this equation we notice that the left side is precisely the evaluation
-  of our numerical scheme for the discretized analytical solution, i.e.
-  \begin{align}\label{discretized}
-    L_h[u]_h = f_n - \frac{h^2(u^{(4)}(\xi_1) + u^{(4)}(\xi_2))}{4!}.
-  \end{align}
-  Combining the expression in \eqref{discretized} with the fact that
-  $L_hu^{(h)} = f_n$, we see that
-  \begin{align*}
-    ||L_h[u]_h - L_hu^{(h)}||
-    &= \left|\left| \left(f_n - \frac{h^2(u^{(4)}(\xi_1) + u^{(4)}(\xi_2))}{4!}\right) - f_n \right|\right| \\
-    &= \left|\left| \frac{(u^{(4)}(\xi_1) + u^{(4)}(\xi_2))}{4!}\right|\right| h^2
-  \end{align*}
-
-  From the above equation it is clear that $||L_h[u]_h - L_hu^{(h)}|| \to 0$ as $h \to 0$.
-  Therefore, according to the definition in \eqref{consistency}, we see that
-  our scheme $L_h[u]_h = f^{(h)}$ is consistent.
-
-  If we make the assumption that the analytical solution's fourth derivative
-  is bounded, i.e. $|u^{(4)}(x)| \leq M$ for all $0 \leq x \leq 1$, then
-  \begin{align}\label{inequality}
-    ||L_h[u]_h - L_hu^{(h)}||
-    &= \left|\left| \frac{(u^{(4)}(\xi_1) + u^{(4)}(\xi_2))}{4!}\right|\right| h^2 \leq \frac{2M}{4!}h^2.
-  \end{align}
-  Moreover, from the inequality in \eqref{inequality}, we see that
-  \begin{align}\label{order}
-    ||L_h[u]_h - L_hu^{(h)}|| \leq \frac{2M}{4!}h^2 = Ch^2
-  \end{align}
-  where the constant $C$ does not depend on $h$. In this case, we then say that
-  the scheme $L_h u^{(h)} = f^{(h)}$ has \textit{order of consistency} 2.
-
-  We thus conclude that as our scheme is consistent, it does in fact approximate
-  the analytical solution to the problem $Lu = f$ and approaches the analytical
-  solution as we refine the grid $D_h$.
+  \input{sections/subsections/consistency}
 \end{subsection}
 
 \begin{subsection}{Stability}
