@@ -8,9 +8,9 @@ approximate the analytical solution for the problem $Lu = f$.
   the parameter $h$ is the size of the grid where a smaller $h$ denotes a finer
   grid. For our purposes, we consider $h=1/N$ for positive $N$ and
   create the uniform grid
-  \[
-  D_h = \{x_n| x_n = hn \text{ for $0 \leq n \leq N$}\}.
-  \]
+  \begin{align}\label{uniform_grid}
+    D_h = \{x_n| x_n = hn \text{ for $0 \leq n \leq N$}\}.
+  \end{align}
 
   Define on this grid the discretized solution to the problem $Lu = f$ as
   $[u]_h = \{u(x_n)\}$ and define the discretized function $f^{(h)} = \{f(x_n)\}$.
@@ -37,14 +37,14 @@ approximate the analytical solution for the problem $Lu = f$.
   u''(x) \approx \frac{u(x + h) - 2u(x) + u(x-h)}{h^2}.
   \]
   Therefore, we define the numerical scheme as
-  \begin{align*}
+  \begin{align}\label{numerical_scheme}
     L_h u^{(h)} = f^{(h)} :=
     \begin{cases}
       \frac{-u_{n+1} + 2 u_n - u_{n-1}}{h^2} + c u_n = f_n & \text{for $n= 1, \dots, N - 1$} \\
       u_0 = \epsilon \\
       u_N = \delta
     \end{cases}.
-  \end{align*}
+  \end{align}
   For $n=1,\dots,N-1$, the scheme presents us with the recurrence relation
   \[
   -u_{n-1} + (2 + ch^2) u_n - u_{n+1} = h^2 f_n

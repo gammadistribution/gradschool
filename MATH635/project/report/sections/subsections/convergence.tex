@@ -1,0 +1,32 @@
+The single most important property of the scheme presented in
+\eqref{numerical_scheme} is its convergence to the analytical solution. We will
+now rigorously define this notion of convergence.
+
+But first, we must define the measure of the deviation between two solutions.
+Let $U_h$ be the normed linear space of all functions defined on the grid $D_h$
+as presented in \eqref{uniform_grid}. For $u^{h} \in U_h$, the equipped norm is
+given as
+\begin{align}\label{norm}
+  ||u^{(h)}|| = \sup_n |u_n| = \max_n |u_n|.
+\end{align}
+With this definition, we can then precisely define the measure of deviation
+between two solutions $a^{(h)}$ and $b^{(h)}$ as $||a^{(h)} - n^{(h)}||$.
+
+Thus, we say that the solution $u^{(h)}$ given to us by the
+scheme $L_h u^{(h)} = f^{(h)}$ \texttt{converges} to the discretized analytical
+solution $[u]_h$ to the problem $Lu = f$ if
+\begin{align}\label{convergence_def}
+  ||[u]_h - u^{(h)}|| \to 0 \quad \text{as $h \to 0$}.
+\end{align}
+
+We now present strong numerical evidence that our scheme $L_h u^{(h)} = f^{(h)}$
+converges to the discretized analytical solution to the problem $Lu = f$. The
+program used to create the following tables can be found in appendix \ref{append_convergence}.
+
+The following table shows the values of the computed norm $||[u]_h - u^{(h)}||$ for
+increasingly bigger values of $h$ for $c=1$ on the interval $[0, 1]$ with the
+initials conditions $u(0) = 1$ and $u(1) = 0.5$ with various definitions of
+the function $f(x)$.
+
+The following tables suggest that the convergence is not dependent upon our
+choice of $c$.
