@@ -17,37 +17,49 @@ where $k$ does not depend on $h$ or $\varepsilon^{(h)}$.
 We now present strong numerical evidence that our scheme satisfies the above
 inequality.
 We begin by investigating this condition for our scheme $L_h u^{(h)} = f^{(h)}$ with
-$f(x) = e^{0.5x}$, $c=1$, and initial conditions $u(0) = 0$ and $u(1)$. The
+$f(x) = e^{0.5x}$, $c=1$, and initial conditions $u(0) = 0$ and $u(1) = 0$. The
 following table shows the values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$
 for the solutions to $L_h u^{(h)} = f^{(h)}$ and
 $L_h z^{(h)} = f^{(h)} + \varepsilon^{(h)}$ for increasing values of
-$\varepsilon^{(h)}$ up to $\varepsilon^{(h)} = 0.5$. The program used to create
-the following tables can be found in appendix \ref{append_stability}.
+$\varepsilon^{(h)}$ up to $\varepsilon^{(h)} = 0.7$. The program used to create
+the following table can be found in appendix \ref{append_stability}.
 
-\begin{table}[h!]
+\begin{table}[h!]\label{stability_table}
   \centering
   \bgroup
   \def\arraystretch{1.5}
   \begin{tabular}{| l | c | c | c | c |}
     \hline
-    $h$ & 0.1 & 0.2 & 0.3 & 0.4 \\
+    $h$ & $\varepsilon^{(h)} = 0.1$ & $\varepsilon^{(h)} = 0.3$ & $\varepsilon^{(h)} = 0.5$ & $\varepsilon^{(h)} = 0.7$ \\
     \hline
-    \texttt{1.0e-3} & 0.011318111 & 0.022636221 & 0.033954332 & 0.045272443  \\
-    \texttt{3.0e-3} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
-    \texttt{5.0e-3} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
-    \texttt{7.0e-3} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
-    \texttt{9.0e-3} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
-    \texttt{1.1e-4} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
-    \texttt{1.3e-4} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
-    \texttt{1.5e-4} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
+    \texttt{1.0e-1} & \texttt{0.0113095845} &  \texttt{0.0339287535} &  \texttt{0.0565479225} &  \texttt{0.0791670915} \\
+    \texttt{1.0e-3} & \texttt{0.0113181107} &  \texttt{0.0339543322} &  \texttt{0.0565905537} &  \texttt{0.0792267752} \\
+    \texttt{3.0e-3} & \texttt{0.0113181115} &  \texttt{0.0339543345} &  \texttt{0.0565905575} &  \texttt{0.0792267806} \\
+    \texttt{5.0e-3} & \texttt{0.0113181116} &  \texttt{0.0339543347} &  \texttt{0.0565905578} &  \texttt{0.0792267809} \\
+    \texttt{7.0e-3} & \texttt{0.0113181116} &  \texttt{0.0339543348} &  \texttt{0.0565905580} &  \texttt{0.0792267811} \\
+    \texttt{9.0e-3} & \texttt{0.0113181116} &  \texttt{0.0339543347} &  \texttt{0.0565905579} &  \texttt{0.0792267811} \\
+    \texttt{1.1e-4} & \texttt{0.0113181116} &  \texttt{0.0339543348} &  \texttt{0.0565905579} &  \texttt{0.0792267811} \\
+    \texttt{1.3e-4} & \texttt{0.0113181116} &  \texttt{0.0339543349} &  \texttt{0.0565905581} &  \texttt{0.0792267813} \\
+    \texttt{1.5e-4} & \texttt{0.0113181116} &  \texttt{0.0339543349} &  \texttt{0.0565905581} &  \texttt{0.0792267813} \\
     \hline
   \end{tabular}
   \egroup
-  \caption{Values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ for various perturbations $\varepsilon^{(h)}$for the function $f(x) = e^{0.5x}$ with $c=1$ and initial values $u(0) = 0$ and $u(1) = 0$.}
+  \caption{Values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ for various
+    perturbations $\varepsilon^{(h)}$ for the function $f(x) = e^{0.5x}$ with $c=1$
+    and initial values $u(0) = 0$ and $u(1) = 0$ rounded to the first 10
+    significant digits.}
 \end{table}
 
-From this table it is clear that for the choice of $h_0 = \texttt{1.0e-3}$ and $\delta = 0.4 + 0.00001$,
-that stability is confirmed for $f(x) = e^{0.5x}$ with $c=1$ and initial conditions
-$u(0) = 0$ and $u(1) = 0$. That is, making the conservative choice of $k = 0.115$
-this table shows that $\left|\left|z^{(h)} - u^{(h)}\right|\right| \leq k ||\varepsilon ^{(h)}||$ for
-$h < h_0$ and $\varepsilon^{(h)} < \delta$.
+This table shows that as $h$ approaches $0$, the value $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ approaches
+a limit dependent upon the perturbation error $\varepsilon^{(h)}$.
+In particular, this table shows that $\left|\left|z^{(h)} - u^{(h)}\right|\right| \leq k ||\varepsilon ^{(h)}||$ with the choice of $k=0.115$ for
+any $h < h_0$ and $\varepsilon^{(h)} < \delta$ where we can specify any $h_0$ and
+$\delta$ satisfying $h_0 < 0.1$ and $\delta < 0.7$.
+Therefore, we have verification that the scheme $L_h u^{(h)} = f^{(h)}$ is stable for
+this particular $f(x)$ and $c$ and the above mentioned initial conditions.
+
+Further investigation shows that replacing $f(x) = e^{0.5x}$ with any function $f(x)$
+produces the same values for $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ as in
+table \ref{stability_table}. Thus, we conclude that the scheme
+$L_hu^{(h)} = f^{(h)}$ is stable for $c=1$ with initial conditions $u(0) = 0$ and $u(1) = 0$
+for any $f(x)$.

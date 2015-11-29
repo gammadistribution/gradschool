@@ -7,7 +7,7 @@ c = 1;
 initials = [0, 0];
 interval = [0, 1];
 
-perturbations = 0.1:0.1:0.5;
+perturbations = 0.1:0.2:0.7;
 
 v = [];
 for i=1:length(perturbations)
