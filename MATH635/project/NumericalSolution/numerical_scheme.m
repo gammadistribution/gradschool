@@ -40,9 +40,10 @@ main_diag = diag(repelem([2 + c * h^2], length(v)), 0);
 sub_diag = diag(repelem([-1], length(v) - 1), -1);
 sup_diag = diag(repelem([-1], length(v) - 1), 1);
 
-A = main_diag + sub_diag + sup_diag;
+A = sparse(main_diag + sub_diag + sup_diag);
 
-v = inv(A) * b;
+% Solve system of equations Av = b.
+v = A\b;
 
 % Our solution is then u = [u_0, v_1, ..., v_N-1, u_N].
 u = [u_0; v; u_N];
