@@ -21,11 +21,8 @@ for i=1:length(subintervals)
     [x, u] = numerical_scheme(f, c, initials, interval, h);
 
     % Compute analytical solution at given nodes
-    u_h = [];
-    for i=1:length(x)
-        u_h = [u_h; double(solution(x(i)))]; 
-    end
+    u_h = subs(solution, x);
     
     % Add to epsilon vector the norm of the difference.
-    e = [e; norm(u_h - u, inf)];
+    e = [e; double(norm(u_h - u, inf))];
 end
