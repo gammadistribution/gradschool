@@ -12,4 +12,42 @@ the estimate
 \begin{align}\label{stability_ineq}
   \left|\left| z^{(h)} - u^{(h)} \right|\right| \leq k \left|\left| \varepsilon^{(h)} \right|\right|
 \end{align}
-where $k$ does note depend on $h$ or $\varepsilon^{(h)}$.
+where $k$ does not depend on $h$ or $\varepsilon^{(h)}$.
+
+We now present strong numerical evidence that our scheme satisfies the above
+inequality.
+We begin by investigating this condition for our scheme $L_h u^{(h)} = f^{(h)}$ with
+$f(x) = e^{0.5x}$, $c=1$, and initial conditions $u(0) = 0$ and $u(1)$. The
+following table shows the values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$
+for the solutions to $L_h u^{(h)} = f^{(h)}$ and
+$L_h z^{(h)} = f^{(h)} + \varepsilon^{(h)}$ for increasing values of
+$\varepsilon^{(h)}$ up to $\varepsilon^{(h)} = 0.5$. The program used to create
+the following tables can be found in appendix \ref{append_stability}.
+
+\begin{table}[h!]
+  \centering
+  \bgroup
+  \def\arraystretch{1.5}
+  \begin{tabular}{| l | c | c | c | c |}
+    \hline
+    $h$ & 0.1 & 0.2 & 0.3 & 0.4 \\
+    \hline
+    \texttt{1.0e-3} & 0.011318111 & 0.022636221 & 0.033954332 & 0.045272443  \\
+    \texttt{3.0e-3} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
+    \texttt{5.0e-3} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
+    \texttt{7.0e-3} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
+    \texttt{9.0e-3} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
+    \texttt{1.1e-4} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
+    \texttt{1.3e-4} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
+    \texttt{1.5e-4} & 0.011318112 & 0.022636223 & 0.033954335 & 0.045272446  \\
+    \hline
+  \end{tabular}
+  \egroup
+  \caption{Values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ for various perturbations $\varepsilon^{(h)}$for the function $f(x) = e^{0.5x}$ with $c=1$ and initial values $u(0) = 0$ and $u(1) = 0$.}
+\end{table}
+
+From this table it is clear that for the choice of $h_0 = \texttt{1.0e-3}$ and $\delta = 0.4 + 0.00001$,
+that stability is confirmed for $f(x) = e^{0.5x}$ with $c=1$ and initial conditions
+$u(0) = 0$ and $u(1) = 0$. That is, making the conservative choice of $k = 0.115$
+this table shows that $\left|\left|z^{(h)} - u^{(h)}\right|\right| \leq k ||\varepsilon ^{(h)}||$ for
+$h < h_0$ and $\varepsilon^{(h)} < \delta$.
