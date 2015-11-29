@@ -24,7 +24,7 @@ $L_h z^{(h)} = f^{(h)} + \varepsilon^{(h)}$ for increasing values of
 $\varepsilon^{(h)}$ up to $\varepsilon^{(h)} = 0.7$. The program used to create
 the following table can be found in appendix \ref{append_stability}.
 
-\begin{table}[h!]\label{stability_table}
+\begin{table}[h!]
   \centering
   \bgroup
   \def\arraystretch{1.5}
@@ -44,15 +44,16 @@ the following table can be found in appendix \ref{append_stability}.
     \hline
   \end{tabular}
   \egroup
-  \caption{Values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ for various
+  \caption{Values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ rounded to the first 10
+    significant digits for various
     perturbations $\varepsilon^{(h)}$ for the function $f(x) = e^{0.5x}$ with $c=1$
-    and initial values $u(0) = 0$ and $u(1) = 0$ rounded to the first 10
-    significant digits.}
+    and initial values $u(0) = 0$ and $u(1) = 0$.}\label{tab:stability_table}
 \end{table}
 
 This table shows that as $h$ approaches $0$, the value $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ approaches
 a limit dependent upon the perturbation error $\varepsilon^{(h)}$.
-In particular, this table shows that $\left|\left|z^{(h)} - u^{(h)}\right|\right| \leq k ||\varepsilon ^{(h)}||$ with the choice of $k=0.115$ for
+In particular, this table shows that $\left|\left|z^{(h)} - u^{(h)}\right|\right| \leq k ||\varepsilon ^{(h)}||$
+with the choice of $k=0.13$ for
 any $h < h_0$ and $\varepsilon^{(h)} < \delta$ where we can specify any $h_0$ and
 $\delta$ satisfying $h_0 < 0.1$ and $\delta < 0.7$.
 Therefore, we have verification that the scheme $L_h u^{(h)} = f^{(h)}$ is stable for
@@ -60,6 +61,79 @@ this particular $f(x)$ and $c$ and the above mentioned initial conditions.
 
 Further investigation shows that replacing $f(x) = e^{0.5x}$ with any function $f(x)$
 produces the same values for $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ as in
-table \ref{stability_table}. Thus, we conclude that the scheme
+Table \ref{tab:stability_table}. Thus, we conclude that the scheme
 $L_hu^{(h)} = f^{(h)}$ is stable for $c=1$ with initial conditions $u(0) = 0$ and $u(1) = 0$
 for any $f(x)$.
+
+We will now present evidence that the stability of the scheme does not depend
+on the value of $c$ in the problem $Lu = f$. As we have just shown the value of
+$\left|\left|z^{(h)} - u^{(h)}\right|\right|$ does not depend on the function $f(x)$.
+Thus, we will compute the value of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$
+for the function $f(x) = e^{0.5x}$ with initial values $u(0) = 0$ and $u(1) = 0$
+for various values of $c$. We will choose $h$ small in these computations, say
+$h=\texttt{1.5e-4}$, to gain insight into what value the increasing sequence
+of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ approaches.
+
+\begin{table}[h!]
+  \centering
+  \bgroup
+  \def\arraystretch{1.5}
+  \begin{tabular}{| l | c | c | c | c |}
+    \hline
+    $c$ & $\varepsilon^{(h)} = 0.1$ & $\varepsilon^{(h)} = 0.3$ & $\varepsilon^{(h)} = 0.5$ & $\varepsilon^{(h)} = 0.7$ \\
+    \hline
+    $10^{-7}$ & \texttt{0.0125000000} & \texttt{0.0375000000} & \texttt{0.0625000000} & \texttt{0.08750000000} \\
+    1        & \texttt{0.0113181116} & \texttt{0.0339543349} & \texttt{0.0565905581} & \texttt{0.07922678132} \\
+    17       & \texttt{0.0044090794} & \texttt{0.0132272383} & \texttt{0.0220453972} & \texttt{0.03086355604} \\
+    59       & \texttt{0.0016221309} & \texttt{0.0048663927} & \texttt{0.0081106545} & \texttt{0.01135491630} \\
+    119      & \texttt{0.0008331470} & \texttt{0.0024994409} & \texttt{0.0041657349} & \texttt{0.00583202879} \\
+    409      & \texttt{0.0002444789} & \texttt{0.0007334368} & \texttt{0.0012223946} & \texttt{0.00171135249} \\
+    1,307    & \texttt{0.0000765111} & \texttt{0.0002295333} & \texttt{0.0003825555} & \texttt{0.00053557764} \\
+    14,639   & \texttt{0.0000068311} & \texttt{0.0000204932} & \texttt{0.0000341553} & \texttt{0.00004781747} \\
+    \hline
+  \end{tabular}
+  \egroup
+  \caption{Values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ rounded to the first 10
+    significant digits for various
+    perturbations $\varepsilon^{(h)}$ for the function $f(x) = e^{0.5x}$ for
+    various values of $c$ with $h=1.5e-4$ and initial values $u(0) = 0$ and $u(1) = 0$.}\label{tab:stability_c_table}
+\end{table}
+
+The above table shows that as $c$ increases, the value of
+$\left|\left|z^{(h)} - u^{(h)}\right|\right|$ decreases for a fixed $h$ value. This
+suggests that the stability constant $k = 0.115$ is valid for any $c$, i.e.
+$\left|\left|z^{(h)} - u^{(h)}\right|\right| \leq k ||\varepsilon ^{(h)}||$ for
+any $h < h_0$ and $\varepsilon^{(h)} < \delta$ where we can specify any $h_0$ and
+$\delta$ satisfying $h_0 < 0.1$ and $\delta < 0.7$. Therefore, we conclude that
+our scheme is stable regardless of the value of $c$ in the problem $Lu = f$ for $c > 0$.
+
+Lastly, we investigate the stability of the scheme as the initial values of the
+problem $Lu = f$ change. As we did for the computations in Table \ref{tab:stability_c_table},
+we fix $f(x) = e^{0.5x}$, $c=1$, and $h=\texttt{1.5e-4}$ and compute $\left|\left|z^{(h)} - u^{(h)}\right|\right|$
+for varying initial conditions.
+
+\begin{table}[h!]
+  \centering
+  \bgroup
+  \def\arraystretch{1.5}
+  \begin{tabular}{| l | c | c | c | c |}
+    \hline
+    \shortstack[l]{Initial \\ Conditions} & $\varepsilon^{(h)} = 0.1$ & $\varepsilon^{(h)} = 0.3$ & $\varepsilon^{(h)} = 0.5$ & $\varepsilon^{(h)} = 0.7$ \\
+    \hline
+    \shortstack[l]{$u(0) = 0$ \\ $u(1) = 0$} & & & & \\
+    \hline
+    \shortstack[l]{$u(0) = 0.05$ \\ $u(1) = 0.1$} & & & & \\
+    \hline
+    \shortstack[l]{$u(0) = 0.1$ \\ $u(1) = 0.05$} & & & & \\
+    \hline
+    \shortstack[l]{$u(0) = 0.1$ \\ $u(1) = 0.1$} & & & & \\
+    \hline
+    \shortstack[l]{$u(0) = -0.1$ \\ $u(1) = 0.1$} & & & & \\
+    \hline
+  \end{tabular}
+  \egroup
+  \caption{Values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ rounded to the first 10
+    significant digits for various
+    perturbations $\varepsilon^{(h)}$ and initial values for the function
+    $f(x) = e^{0.5x}$ with $c=1$ and $h=1.5e-4$.}
+\end{table}
