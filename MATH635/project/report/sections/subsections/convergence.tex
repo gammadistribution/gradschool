@@ -24,9 +24,79 @@ converges to the discretized analytical solution to the problem $Lu = f$. The
 program used to create the following tables can be found in appendix \ref{append_convergence}.
 
 The following table shows the values of the computed norm $||[u]_h - u^{(h)}||$ for
-increasingly bigger values of $h$ for $c=1$ on the interval $[0, 1]$ with the
+increasingly smaller values of $h$ for $c=1$ on the interval $[0, 1]$ with the
 initials conditions $u(0) = 1$ and $u(1) = 0.5$ with various definitions of
 the function $f(x)$.
 
-The following tables suggest that the convergence is not dependent upon our
-choice of $c$.
+\begin{table}[h!]
+  \centering
+  \bgroup
+  \def\arraystretch{1.5}
+  \begin{tabular}{| l | c | c | c | c | c | c | c |}
+    \hline
+    $h$ & $x$ & $x^2$ & $x^3$ & $x^4$ & $x^5$ & $e^{0.5x}$ & $\sin(0.1 x)$\\
+    \hline
+    $10^{-1}$ & \texttt{0.2456e-4} & & & & & & \\
+    $10^{-2}$ & & & & & & & \\
+    $10^{-3}$ & & & & & & & \\
+    $10^{-4}$ & & & & & & & \\
+    \hline
+  \end{tabular}
+  \egroup
+  \caption{Values of $||[u]_h - u^{(h)}||$ for various functions $f(x)$ with $c = 1$, $u(0) = 1$, and $u(1) = 0.5$.}
+\end{table}
+
+The above table suggests that the difference between the approximate solution
+and the exact solution does tend toward zero as we refine the grid value $h$ and
+that this happens regardless of the choice of $f(x)$.
+
+A natural question would then be if the convergence is dependent upon the choice
+of $c$. The following table shows the values of $||[u]_h - u^{h}||$ for various
+increasing values of $c$ with $f(x) = e^{0.5x}$ and $u(0) = 1$, $u(1) = 0.5$.
+
+\begin{table}[h!]
+  \centering
+  \bgroup
+  \def\arraystretch{1.5}
+  \begin{tabular}{| l | c | c | c | c | c | c | c |}
+    \hline
+    $h$ & $1$ & $17$ & $59$ & $119$ & $409$ & $1307$ & $14639$\\
+    \hline
+    $10^{-1}$ & & & & & & & \\
+    $10^{-2}$ & & & & & & & \\
+    $10^{-3}$ & & & & & & & \\
+    $10^{-4}$ & & & & & & & \\
+    \hline
+  \end{tabular}
+  \egroup
+  \caption{Values of $||[u]_h - u^{(h)}||$ for various values of $c$ for the function $f(x) = e^{0.5x}$ with $u(0) = 1$ and $u(1) = 0.5$.}
+\end{table}
+
+The above table suggests that the convergence is not dependent on $c$ for $f(x) = e^{0.5x}$.
+
+The last aspect of convergence to investigate is the impact of the initial conditions
+on the scheme's convergence convergence. The following table shows the values of $||[u]_h - u^{h}||$ for various
+initial conditions with $f(x) = e^{0.5x}$ and $c=1$.
+
+\begin{table}[h!]
+  \centering
+  \bgroup
+  \def\arraystretch{1.5}
+  \begin{tabular}{| l | c | c | c | c | c |}
+    \hline
+    & $u(0) = 0$ & $u(0) = 0$ & $u(0) = -3$ & $u(0) = \phantom{-}10$ & $u(0) = -7$ \\
+    $h$ &  $u(1) = 0$ & $u(1) = 1$ & $u(1) = \phantom{-}5$ & $u(1) = -4\phantom{0}$ & $u(1) = -2$\\
+    \hline
+    $10^{-1}$ & & & & & \\
+    $10^{-2}$ & & & & & \\
+    $10^{-3}$ & & & & & \\
+    $10^{-4}$ & & & & & \\
+    \hline
+  \end{tabular}
+  \egroup
+  \caption{Values of $||[u]_h - u^{(h)}||$ for various initial values for the function $f(x) = e^{0.5x}$ with $c=1$.}
+\end{table}
+
+Again, from the table we conclude that the approximate solution converges to the
+exact solution regardless of the choice in initial conditions for the function
+$f(x) = e^{0.5x}$.

@@ -1,0 +1,15 @@
+The last property we wish to investigate for our numerical scheme is the
+stability of the scheme. The stability of the scheme will ensure that small
+changes in the right hand side of the scheme will only cause small changes in
+the solution derived from the scheme. Formally, the scheme $L_h u^{(h)} = f^{(h)}$
+will be called \textit{stable} if for any chosen $h_0 > 0$ and $\delta > 0$ such
+that for any $h < h_0$ and for any $\varepsilon^{(h)}$ with
+$\left|\left| \varepsilon^{(h)} \right|\right| < \delta$, the solution for the
+finite-difference problem
+$$L_h z^{(h)} = f^{(h)} + \varepsilon^{(h)}$$
+is unique and the deviation from the solution of the unperturbed problem satisfies
+the estimate
+\begin{align}\label{stability_ineq}
+  \left|\left| z^{(h)} - u^{(h)} \right|\right| \leq k \left|\left| \varepsilon^{(h)} \right|\right|
+\end{align}
+where $k$ does note depend on $h$ or $\varepsilon^{(h)}$.
