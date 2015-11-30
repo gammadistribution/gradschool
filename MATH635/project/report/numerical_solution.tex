@@ -7,6 +7,8 @@
 \usepackage{./.sty/titlesec}
 \usepackage[dotinlabels]{./.sty/titletoc}
 \usepackage[]{./.sty/mcode}
+\usepackage{float}
+
 
 
 \graphicspath{ {images/} }
@@ -95,7 +97,7 @@
   \section{Numerical Scheme Convergence Program}\label{append_convergence}
   The following is the m-script \texttt{convergence.m} for use in MATLAB to
   produce a table displaying the convergence of the numerical scheme to the analytical
-  solution
+  solution.
   \lstinputlisting{../NumericalSolution/properties/convergence.m}
 
   This m-script is dependent upon the following m-function \texttt{convergence\_test.m}
@@ -105,7 +107,7 @@
   \section{Numerical Scheme Stability Program}\label{append_stability}
   The following is the m-script \texttt{stability.m} for use in MATLAB to
   produce a table displaying the stability of the numerical scheme to the analytical
-  solution
+  solution.
   \lstinputlisting{../NumericalSolution/properties/stability.m}
 
   This m-script is dependent upon the following m-function \texttt{stability\_test.m}

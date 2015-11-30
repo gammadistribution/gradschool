@@ -13,7 +13,7 @@ With this definition, we can then precisely define the measure of deviation
 between two solutions $a^{(h)}$ and $b^{(h)}$ as $||a^{(h)} - n^{(h)}||$.
 
 Thus, we say that the solution $u^{(h)}$ given to us by the
-scheme $L_h u^{(h)} = f^{(h)}$ \texttt{converges} to the discretized analytical
+scheme $L_h u^{(h)} = f^{(h)}$ \textit{converges} to the discretized analytical
 solution $[u]_h$ to the problem $Lu = f$ if
 \begin{align}\label{convergence_def}
   \left|\left|[u]_h - u^{(h)}\right|\right| \to 0 \quad \text{as $h \to 0$}.
@@ -24,79 +24,107 @@ converges to the discretized analytical solution to the problem $Lu = f$. The
 program used to create the following tables can be found in appendix \ref{append_convergence}.
 
 The following table shows the values of the computed norm $\left|\left|[u]_h - u^{(h)}\right|\right|$ for
-increasingly smaller values of $h$ for $c=1$ on the interval $[0, 1]$ with the
-initials conditions $u(0) = 1$ and $u(1) = 0.5$ with various definitions of
+decreasing values of $h$ for $c=1$ on the interval $[0, 1]$ with the
+initials conditions $u(0) = 0$ and $u(1) = 0$ with various definitions of
 the function $f(x)$.
 
 \begin{table}[h!]
   \centering
   \bgroup
   \def\arraystretch{1.5}
-  \begin{tabular}{| l | c | c | c | c | c | c | c |}
+  \begin{tabular}{| l | c | c | c | c |}
     \hline
-    $h$ & $x$ & $x^2$ & $x^3$ & $x^4$ & $x^5$ & $e^{0.5x}$ & $\sin(0.1 x)$\\
+    $f(x)$ & $h = 10^{-1}$ & $h = 10^{-2}$ & $h = 10^{-3}$ & $h = 10^{-4}$ \\
     \hline
-    $10^{-1}$ & \texttt{0.2456e-4} & & & & & & \\
-    $10^{-2}$ & & & & & & & \\
-    $10^{-3}$ & & & & & & & \\
-    $10^{-4}$ & & & & & & & \\
+    $x$ & \texttt{044.1459e-06} & \texttt{442.1934e-09} & \texttt{004.4227e-09} & \texttt{013.8432e-12} \\
+    $x^2$ & \texttt{213.1776e-06} & \texttt{002.1377e-06} & \texttt{021.3777e-09} & \texttt{194.1320e-12} \\
+    $x^3$ & \texttt{309.0214e-06} & \texttt{003.0954e-06} & \texttt{030.9542e-09} & \texttt{296.6352e-12} \\
+    $x^4$ & \texttt{368.6967e-06} & \texttt{003.7352e-06} & \texttt{037.3546e-09} & \texttt{364.6753e-12} \\
+    $x^5$ & \texttt{416.4482e-06} & \texttt{004.2060e-06} & \texttt{042.0633e-09} & \texttt{414.2863e-12} \\
+    $e^{0.5x}$ & \texttt{140.4375e-06} & \texttt{001.4093e-06} & \texttt{014.0963e-09} & \texttt{056.2481e-12} \\
+    $\sin(0.1x)$ &  \texttt{004.3631e-06} & \texttt{043.7038e-09} & \texttt{437.1167e-12} & \texttt{001.3406e-12} \\
     \hline
   \end{tabular}
   \egroup
-  \caption{Values of $\left|\left|[u]_h - u^{(h)}\right|\right|$ for various functions $f(x)$ with $c = 1$, $u(0) = 1$, and $u(1) = 0.5$.}
+  \caption{Values of $\left|\left|[u]_h - u^{(h)}\right|\right|$ for various functions
+    $f(x)$ with $c = 1$, $u(0) = 0$, and $u(1) = 0$.}
 \end{table}
 
 The above table suggests that the difference between the approximate solution
 and the exact solution does tend toward zero as we refine the grid value $h$ and
-that this happens regardless of the choice of $f(x)$.
+that this happens regardless of the choice of $f(x)$. Thus, the scheme converges
+to the exact solution for the problem $Lu = f$ if $c=1$ with initial conditions
+$u(0) = 0$ and $u(1) = 0$.
 
 A natural question would then be if the convergence is dependent upon the choice
-of $c$. The following table shows the values of $\left|\left|[u]_h - u^{(h)}\right|\right|$for various
-increasing values of $c$ with $f(x) = e^{0.5x}$ and $u(0) = 1$, $u(1) = 0.5$.
+of $c$. As the convergence of the scheme does not appear to depend on $f(x)$, we
+fix $f(x) = e^{0.5x}$ and initial conditions $u(0) = 0$ and $u(1) = 0$ and investigate
+the values of $\left|\left|[u]_h - u^{(h)}\right|\right|$ for varying values of $c$.
+The following table contains the above described computations
 
 \begin{table}[h!]
   \centering
   \bgroup
   \def\arraystretch{1.5}
-  \begin{tabular}{| l | c | c | c | c | c | c | c |}
+  \begin{tabular}{| l | c | c | c | c |}
     \hline
-    $h$ & $1$ & $17$ & $59$ & $119$ & $409$ & $1307$ & $14639$\\
+    $c$ & $h = 10^{-1}$ & $h = 10^{-2}$ & $h = 10^{-3}$ & $h = 10^{-4}$ \\
     \hline
-    $10^{-1}$ & & & & & & & \\
-    $10^{-2}$ & & & & & & & \\
-    $10^{-3}$ & & & & & & & \\
-    $10^{-4}$ & & & & & & & \\
+    $10^{-7}$ & \texttt{033.6085e-06} &  \texttt{336.7078e-09} &   \texttt{003.3658e-09} &   \texttt{153.9025e-12} \\
+    1 & \texttt{140.4375e-06} &  \texttt{001.4093e-06} &   \texttt{014.0963e-09} &   \texttt{056.2481e-12} \\
+    17 & \texttt{299.5348e-06} &  \texttt{003.0371e-06} &   \texttt{030.3761e-09} &   \texttt{276.4544e-12} \\
+    59 & \texttt{234.9940e-06} &  \texttt{002.5653e-06} &   \texttt{025.6691e-09} &   \texttt{256.1311e-12} \\
+    119 & \texttt{229.1304e-06} &  \texttt{002.5310e-06} &   \texttt{025.3418e-09} &   \texttt{252.7861e-12} \\
+    409 &\texttt{147.4121e-06} &  \texttt{002.5192e-06} &   \texttt{025.2848e-09} &   \texttt{252.1907e-12} \\
+    1,307 & \texttt{050.1416e-06} &  \texttt{002.4901e-06} &   \texttt{025.2720e-09} &   \texttt{252.7783e-12} \\
     \hline
   \end{tabular}
   \egroup
-  \caption{Values of $\left|\left|[u]_h - u^{(h)}\right|\right|$ for various values of $c$ for the function $f(x) = e^{0.5x}$ with $u(0) = 1$ and $u(1) = 0.5$.}
+  \caption{Values of $\left|\left|[u]_h - u^{(h)}\right|\right|$ for various values of
+    $c$ for the function $f(x) = e^{0.5x}$ with $u(0) = 0$ and $u(1) = 0$.}
 \end{table}
 
-The above table suggests that the convergence is not dependent on $c$ for $f(x) = e^{0.5x}$.
+The evidence presented in the above table suggests that for decreasing values of $h$,
+the value $\left|\left|[u]_h - u^{(h)}\right|\right|$ tends to 0. Thus, the convergence of the
+scheme is not dependent on the value of $c$ in the problem $Lu = f$.
 
 The last aspect of convergence to investigate is the impact of the initial conditions
-on the scheme's convergence convergence. The following table shows the values of $||[u]_h - u^{h}||$ for various
+in the problem $Lu = f$ on the scheme's convergence.
+The following table shows the values of $||[u]_h - u^{h}||$ for various
 initial conditions with $f(x) = e^{0.5x}$ and $c=1$.
 
-\begin{table}[h!]
+
+From the table of values in Table \ref{tab:con} we see that for decreasing values
+of $h$, the value $\left|\left|[u]_h - u^{(h)}\right|\right|$ tends to 0 and we
+conclude that the approximate solution
+converges to the exact solution regardless of the choice in initial conditions for the function
+$f(x) = e^{0.5x}$.
+
+Therefore, from the numerical evidence presented, the convergence of the
+scheme $L_h u^{(h)} = f^{(h)}$ is not dependent on the function $f(x)$, the constant
+$c$, nor the initial conditions found in the problem $Lu =f$ and we conclude that
+the scheme is convergent.
+
+\begin{table}[H]
   \centering
   \bgroup
   \def\arraystretch{1.5}
-  \begin{tabular}{| l | c | c | c | c | c |}
+  \begin{tabular}{| l | c | c | c | c |}
     \hline
-    & $u(0) = 0$ & $u(0) = 0.05$ & $u(0) = 0.1$ & $u(0) = 0.1$ & $u(0) = -0.1$ \\
-    $h$ &  $u(1) = 0$ & $u(1) = 0.1$ & $u(1) = 0.05$ & $u(1) = 0.1$ & $u(1) = 0.1$\\
+    \shortstack[l]{Initial \\ Conditions} & $h = 10^{-1}$ & $h = 10^{-2}$ & $h = 10^{-3}$ & $h = 10^{-4}$ \\
     \hline
-    $10^{-1}$ & & & & & \\
-    $10^{-2}$ & & & & & \\
-    $10^{-3}$ & & & & & \\
-    $10^{-4}$ & & & & & \\
+    \shortstack[l]{$u(0) = 0$ \\ $u(1) = 0$} & \texttt{140.4375e-006} &   \texttt{001.4093e-06} & \texttt{014.0963e-09}  &  \texttt{056.2481e-12} \\
+    \hline
+    \shortstack[l]{$u(0) = 0.05$ \\ $u(1) = 0.1$} & \texttt{134.0422e-06} &  \texttt{001.3450e-06} &    \texttt{013.4545e-09} &   \texttt{007.8354e-12} \\
+    \hline
+    \shortstack[l]{$u(0) = 0.1$ \\ $u(1) = 0.05$} & \texttt{134.0422e-06} &  \texttt{001.3459e-06} &    \texttt{013.4629e-09} &   \texttt{013.0701e-12} \\
+    \hline
+    \shortstack[l]{$u(0) = 0.1$ \\ $u(1) = 0.1$} & \texttt{131.9104e-06} &  \texttt{001.3242e-06} &    \texttt{013.2460e-09} &   \texttt{016.8537e-12} \\
+    \hline
+    \shortstack[l]{$u(0) = -0.1$ \\ $u(1) = 0.1$} & \texttt{140.4375e-06} &  \texttt{001.4080e-06} &    \texttt{014.0822e-09} &   \texttt{057.2911e-12} \\
     \hline
   \end{tabular}
   \egroup
-  \caption{Values of $\left|\left|[u]_h - u^{(h)}\right|\right|$ for various initial values for the function $f(x) = e^{0.5x}$ with $c=1$.}
+  \caption{Values of $\left|\left|[u]_h - u^{(h)}\right|\right|$ for various initial values
+     for the function $f(x) = e^{0.5x}$ with $c=1$.}\label{tab:con}
 \end{table}
-
-Again, from the table we conclude that the approximate solution converges to the
-exact solution regardless of the choice in initial conditions for the function
-$f(x) = e^{0.5x}$.

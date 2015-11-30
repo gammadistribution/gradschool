@@ -1,9 +1,9 @@
-format long;
+format short eng;
 
 addpath(genpath('../'))
 
 c = 1;
-initials = [1, 0.5];
+initials = [0, 0];
 interval = [0, 1];
 max_order = 4;
 
@@ -17,6 +17,5 @@ for f=1:length(functions)
     body = [body, e];
 end
 
-disp(functions);
-fprintf('---------------------------------------------------------\n');
-disp(body);
+disp(functions')
+disp(body')

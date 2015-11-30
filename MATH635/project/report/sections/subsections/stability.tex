@@ -89,7 +89,6 @@ of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ approaches.
     119      & \texttt{0.0008331470} & \texttt{0.0024994409} & \texttt{0.0041657349} & \texttt{0.00583202879} \\
     409      & \texttt{0.0002444789} & \texttt{0.0007334368} & \texttt{0.0012223946} & \texttt{0.00171135249} \\
     1,307    & \texttt{0.0000765111} & \texttt{0.0002295333} & \texttt{0.0003825555} & \texttt{0.00053557764} \\
-    14,639   & \texttt{0.0000068311} & \texttt{0.0000204932} & \texttt{0.0000341553} & \texttt{0.00004781747} \\
     \hline
   \end{tabular}
   \egroup
@@ -114,9 +113,9 @@ for varying initial conditions. After varying the initial conditions and computi
 the difference between the solution to the perturbed problem and the solution to
 the unperturbed problem, we arrive at the values presented in Table \ref{tab:stability_table}
 regardless for the initial values chosen. Choosing the same stability constant
-$k = 0.13$ will yield that these computed values satisfy inequality \eqref{stability_inequality}
+$k = 0.13$ will yield that these computed values satisfy inequality \eqref{stability_ineq}
 for any chosen $\delta < 0.7$ and $h_0 < 0.1$.
 
 Therefore, we conclude that the scheme $L_h u^{(h)} = f^{(h)}$ is stable regardless
 of the function $f(x)$, the constant $c$, or the initial conditions of the problem
-$Lu = f$.
+$Lu = f$ in light of this numerical evidence.

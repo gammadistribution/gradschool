@@ -4,7 +4,7 @@ addpath(genpath('../'))
 
 f = @(x) exp(0.5*x); 
 c = 1;
-initials = [0.5, 0.1];
+initials = [0, 0];
 interval = [0, 1];
 
 perturbations = 0.1:0.2:0.7;
