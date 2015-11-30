@@ -20,5 +20,5 @@ for i=1:length(h_values)
     
     plot_interpolation(x, u);
     
-    title(sprintf('Number of nodes: %d', h + 1))
+    title(sprintf('Number of n', h + 1))
 end    

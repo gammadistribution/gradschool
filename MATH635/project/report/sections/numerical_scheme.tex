@@ -13,7 +13,10 @@ approximate the analytical solution for the problem $Lu = f$.
   \end{align}
 
   Define on this grid the discretized solution to the problem $Lu = f$ as
-  $[u]_h = \{u(x_n)\}$ and define the discretized function $f^{(h)} = \{f(x_n)\}$.
+  \begin{align}\label{discretized_solution}
+    [u]_h = \{u(x_n)\}.
+  \end{align}
+  Similarly, define the discretized function of $f(x)$ as $f^{(h)} = \{f(x_n)\}$.
   We wish to create a scheme $L_h$ that computes an approximate solution
   $u^{(h)} = \left\{u_0^{(h)}, u_1^{(h)}, \dots, u_N^{(h)}\right\}$ to the problem
   $Lu = f$, i.e.\ a scheme such that $L_h u^{(h)} = f^{(h)}$.

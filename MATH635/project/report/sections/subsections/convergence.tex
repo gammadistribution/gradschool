@@ -4,29 +4,29 @@ now rigorously define this notion of convergence.
 
 But first, we must define the measure of the deviation between two solutions.
 Let $U_h$ be the normed linear space of all functions defined on the grid $D_h$
-as presented in \eqref{uniform_grid}. For $u^{h} \in U_h$, the equipped norm is
+as presented in \eqref{uniform_grid}. For $u^{(h)} \in U_h$, the equipped norm is
 given as
 \begin{align}\label{norm}
   ||u^{(h)}|| = \sup_n |u_n| = \max_n |u_n|.
 \end{align}
 With this definition, we can then precisely define the measure of deviation
-between two solutions $a^{(h)}$ and $b^{(h)}$ as $||a^{(h)} - n^{(h)}||$.
+between two solutions $a^{(h)}$ and $b^{(h)}$ as $||a^{(h)} - b^{(h)}||$.
 
-Thus, we say that the solution $u^{(h)}$ given to us by the
+Thus, we say that the solution $u^{(h)}$ derived from the
 scheme $L_h u^{(h)} = f^{(h)}$ \textit{converges} to the discretized analytical
-solution $[u]_h$ to the problem $Lu = f$ if
+solution $[u]_h$ of the problem $Lu = f$ if
 \begin{align}\label{convergence_def}
   \left|\left|[u]_h - u^{(h)}\right|\right| \to 0 \quad \text{as $h \to 0$}.
 \end{align}
 
 We now present strong numerical evidence that our scheme $L_h u^{(h)} = f^{(h)}$
-converges to the discretized analytical solution to the problem $Lu = f$. The
+converges to the discretized analytical solution of the problem $Lu = f$. The
 program used to create the following tables can be found in appendix \ref{append_convergence}.
 
-The following table shows the values of the computed norm $\left|\left|[u]_h - u^{(h)}\right|\right|$ for
-decreasing values of $h$ for $c=1$ on the interval $[0, 1]$ with the
-initials conditions $u(0) = 0$ and $u(1) = 0$ with various definitions of
-the function $f(x)$.
+Table \ref{con} shows the values of the computed norm $\left|\left|[u]_h - u^{(h)}\right|\right|$ for
+decreasing values of $h$ on the interval $[0, 1]$. For this table, we declare $c=1$ with the
+initials conditions $u(0) = 0$ and $u(1) = 0$ for various definitions of
+the function $f(x)$ in the problem $Lu = f$.
 
 \begin{table}[h!]
   \centering
@@ -47,10 +47,10 @@ the function $f(x)$.
   \end{tabular}
   \egroup
   \caption{Values of $\left|\left|[u]_h - u^{(h)}\right|\right|$ for various functions
-    $f(x)$ with $c = 1$, $u(0) = 0$, and $u(1) = 0$.}
+    $f(x)$ with $c = 1$, $u(0) = 0$, and $u(1) = 0$.}\label{con}
 \end{table}
 
-The above table suggests that the difference between the approximate solution
+The results found in Table \ref{con} suggest that the normed difference between the approximate solution
 and the exact solution does tend toward zero as we refine the grid value $h$ and
 that this happens regardless of the choice of $f(x)$. Thus, the scheme converges
 to the exact solution for the problem $Lu = f$ if $c=1$ with initial conditions
@@ -58,9 +58,9 @@ $u(0) = 0$ and $u(1) = 0$.
 
 A natural question would then be if the convergence is dependent upon the choice
 of $c$. As the convergence of the scheme does not appear to depend on $f(x)$, we
-fix $f(x) = e^{0.5x}$ and initial conditions $u(0) = 0$ and $u(1) = 0$ and investigate
+fix $f(x) = e^{0.5x}$ with initial conditions $u(0) = 0$ and $u(1) = 0$ and investigate
 the values of $\left|\left|[u]_h - u^{(h)}\right|\right|$ for varying values of $c$.
-The following table contains the above described computations
+Table \ref{con_c} contains the above described computations.
 
 \begin{table}[h!]
   \centering
@@ -81,20 +81,19 @@ The following table contains the above described computations
   \end{tabular}
   \egroup
   \caption{Values of $\left|\left|[u]_h - u^{(h)}\right|\right|$ for various values of
-    $c$ for the function $f(x) = e^{0.5x}$ with $u(0) = 0$ and $u(1) = 0$.}
+    $c$ for the function $f(x) = e^{0.5x}$ with $u(0) = 0$ and $u(1) = 0$.}\label{con_c}
 \end{table}
 
-The evidence presented in the above table suggests that for decreasing values of $h$,
+The evidence presented in Table \ref{con_c} suggests that for decreasing values of $h$,
 the value $\left|\left|[u]_h - u^{(h)}\right|\right|$ tends to 0. Thus, the convergence of the
 scheme is not dependent on the value of $c$ in the problem $Lu = f$.
 
 The last aspect of convergence to investigate is the impact of the initial conditions
 in the problem $Lu = f$ on the scheme's convergence.
-The following table shows the values of $||[u]_h - u^{h}||$ for various
+Table \ref{tab:con} shows the values of $||[u]_h - u^{h}||$ for various
 initial conditions with $f(x) = e^{0.5x}$ and $c=1$.
 
-
-From the table of values in Table \ref{tab:con} we see that for decreasing values
+From the results in Table \ref{tab:con} we see that for decreasing values
 of $h$, the value $\left|\left|[u]_h - u^{(h)}\right|\right|$ tends to 0 and we
 conclude that the approximate solution
 converges to the exact solution regardless of the choice in initial conditions for the function

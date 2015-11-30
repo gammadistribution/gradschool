@@ -7,22 +7,22 @@ that for any $h < h_0$ and for any $\varepsilon^{(h)}$ with
 $\left|\left| \varepsilon^{(h)} \right|\right| < \delta$, the solution for the
 finite-difference problem
 $$L_h z^{(h)} = f^{(h)} + \varepsilon^{(h)}$$
-is unique and the deviation from the solution of the unperturbed problem satisfies
+is unique and whose deviation from the solution of the unperturbed problem satisfies
 the estimate
 \begin{align}\label{stability_ineq}
   \left|\left| z^{(h)} - u^{(h)} \right|\right| \leq k \left|\left| \varepsilon^{(h)} \right|\right|
 \end{align}
-where $k$ does not depend on $h$ or $\varepsilon^{(h)}$.
+where $k$ does not depend on $h$ nor $\varepsilon^{(h)}$.
 
 We now present strong numerical evidence that our scheme satisfies the above
 inequality.
 We begin by investigating this condition for our scheme $L_h u^{(h)} = f^{(h)}$ with
-$f(x) = e^{0.5x}$, $c=1$, and initial conditions $u(0) = 0$ and $u(1) = 0$. The
-following table shows the values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$
+$f(x) = e^{0.5x}$, $c=1$, and initial conditions $u(0) = 0$ and $u(1) = 0$. Table
+\ref{tab:stability_table} shows the values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$
 for the solutions to $L_h u^{(h)} = f^{(h)}$ and
 $L_h z^{(h)} = f^{(h)} + \varepsilon^{(h)}$ for increasing values of
 $\varepsilon^{(h)}$ up to $\varepsilon^{(h)} = 0.7$. The program used to create
-the following table can be found in appendix \ref{append_stability}.
+the table can be found in appendix \ref{append_stability}.
 
 \begin{table}[h!]
   \centering
@@ -50,9 +50,9 @@ the following table can be found in appendix \ref{append_stability}.
     and initial values $u(0) = 0$ and $u(1) = 0$.}\label{tab:stability_table}
 \end{table}
 
-This table shows that as $h$ approaches $0$, the value $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ approaches
+The results in Table \ref{tab:stability_table} shows that as $h$ approaches $0$, the value $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ approaches
 a limit dependent upon the perturbation error $\varepsilon^{(h)}$.
-In particular, this table shows that $\left|\left|z^{(h)} - u^{(h)}\right|\right| \leq k ||\varepsilon ^{(h)}||$
+In particular, these results show that $\left|\left|z^{(h)} - u^{(h)}\right|\right| \leq k ||\varepsilon ^{(h)}||$
 with the choice of $k=0.13$ for
 any $h < h_0$ and $\varepsilon^{(h)} < \delta$ where we can specify any $h_0$ and
 $\delta$ satisfying $h_0 < 0.1$ and $\delta < 0.7$.
@@ -66,7 +66,7 @@ $L_hu^{(h)} = f^{(h)}$ is stable for $c=1$ with initial conditions $u(0) = 0$ an
 for any $f(x)$.
 
 We will now present evidence that the stability of the scheme does not depend
-on the value of $c$ in the problem $Lu = f$. As we have just shown the value of
+on the value of $c$ in the problem $Lu = f$. As we have just shown, the value of
 $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ does not depend on the function $f(x)$.
 Thus, we will compute the value of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$
 for the function $f(x) = e^{0.5x}$ with initial values $u(0) = 0$ and $u(1) = 0$
@@ -100,7 +100,7 @@ of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ approaches.
 
 The above table shows that as $c$ increases, the value of
 $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ decreases for a fixed $h$ value. This
-suggests that the stability constant $k = 0.115$ is valid for any $c$, i.e.
+suggests that the stability constant $k = 0.13$ is valid for any $c$, i.e.
 $\left|\left|z^{(h)} - u^{(h)}\right|\right| \leq k ||\varepsilon ^{(h)}||$ for
 any $h < h_0$ and $\varepsilon^{(h)} < \delta$ where we can specify any $h_0$ and
 $\delta$ satisfying $h_0 < 0.1$ and $\delta < 0.7$. Therefore, we conclude that

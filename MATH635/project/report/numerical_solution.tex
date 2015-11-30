@@ -68,13 +68,13 @@
 \end{section}
 
 
-% \begin{section}{Worked Example}
-%   \input{sections/worked_example}
-% \end{section}
+\begin{section}{Conclusion}
+  \input{sections/conclusion}
+\end{section}
 
 \newpage
 \begin{appendices}
-  \section{Analytical Solution Program}\label{append_analytical}
+  \section{Analytical Solution Program and Numerical Scheme Program}\label{append_analytical}
   The following is the m-function \texttt{analytical\_solution.m} for use in
 
   MATLAB to compute the analytical solution to the problem $Lu = f$. Returns
@@ -82,8 +82,6 @@
   interval [0, 1]. This function requires the symbolic toolbox in MATLAB.
   \lstinputlisting{../NumericalSolution/analytical_solution.m}
 
-  \newpage
-  \section{Numerical Scheme Program}\label{append_numerical}
   The following is the m-function \texttt{numerical\_scheme.m} for use in MATLAB
   to compute the numerical solution to the problem $Lu = f$.
   \lstinputlisting{../NumericalSolution/numerical_scheme.m}
@@ -93,7 +91,17 @@
   \texttt{numerical\_scheme.m}.
   \lstinputlisting{../NumericalSolution/uniform_nodes.m}
 
-  \newpage
+  \section{Numerical Scheme Plotting Program}\label{append_plot}
+  The following is the m-function \texttt{stability.m} for use in MATLAB to
+  plot the numerical solution to the problem $Lu=f$
+  solution.
+  \lstinputlisting{../NumericalSolution/plotting/plot_interpolation.m}
+
+  We also have the m-function \texttt{linear\_interpolation.m} to compute
+  the value of the numerical solution at any point in the interval of definition
+  for the problem $Lu =f$.
+  \lstinputlisting{../NumericalSolution/plotting/linear_interpolation.m}
+
   \section{Numerical Scheme Convergence Program}\label{append_convergence}
   The following is the m-script \texttt{convergence.m} for use in MATLAB to
   produce a table displaying the convergence of the numerical scheme to the analytical
@@ -103,7 +111,6 @@
   This m-script is dependent upon the following m-function \texttt{convergence\_test.m}
   \lstinputlisting{../NumericalSolution/properties/convergence_test.m}
 
-  \newpage
   \section{Numerical Scheme Stability Program}\label{append_stability}
   The following is the m-script \texttt{stability.m} for use in MATLAB to
   produce a table displaying the stability of the numerical scheme to the analytical
@@ -112,7 +119,6 @@
 
   This m-script is dependent upon the following m-function \texttt{stability\_test.m}
   \lstinputlisting{../NumericalSolution/properties/stability_test.m}
-
 \end{appendices}
 
 \end{document}
