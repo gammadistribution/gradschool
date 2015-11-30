@@ -13,7 +13,6 @@ function diff = stability_test(f, c, initials, interval, perturbation)
 % Get values of h from h=1000 to h = 21,000.
 
 h_values = [10, feval(@(x) 1000.*x, 1:2:15)];
-h_values = [1.5e4];
 
 diff = [];
 for i=1:length(h_values)

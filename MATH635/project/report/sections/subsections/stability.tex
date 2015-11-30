@@ -110,30 +110,13 @@ our scheme is stable regardless of the value of $c$ in the problem $Lu = f$ for 
 Lastly, we investigate the stability of the scheme as the initial values of the
 problem $Lu = f$ change. As we did for the computations in Table \ref{tab:stability_c_table},
 we fix $f(x) = e^{0.5x}$, $c=1$, and $h=\texttt{1.5e-4}$ and compute $\left|\left|z^{(h)} - u^{(h)}\right|\right|$
-for varying initial conditions.
+for varying initial conditions. After varying the initial conditions and computing
+the difference between the solution to the perturbed problem and the solution to
+the unperturbed problem, we arrive at the values presented in Table \ref{tab:stability_table}
+regardless for the initial values chosen. Choosing the same stability constant
+$k = 0.13$ will yield that these computed values satisfy inequality \eqref{stability_inequality}
+for any chosen $\delta < 0.7$ and $h_0 < 0.1$.
 
-\begin{table}[h!]
-  \centering
-  \bgroup
-  \def\arraystretch{1.5}
-  \begin{tabular}{| l | c | c | c | c |}
-    \hline
-    \shortstack[l]{Initial \\ Conditions} & $\varepsilon^{(h)} = 0.1$ & $\varepsilon^{(h)} = 0.3$ & $\varepsilon^{(h)} = 0.5$ & $\varepsilon^{(h)} = 0.7$ \\
-    \hline
-    \shortstack[l]{$u(0) = 0$ \\ $u(1) = 0$} & & & & \\
-    \hline
-    \shortstack[l]{$u(0) = 0.05$ \\ $u(1) = 0.1$} & & & & \\
-    \hline
-    \shortstack[l]{$u(0) = 0.1$ \\ $u(1) = 0.05$} & & & & \\
-    \hline
-    \shortstack[l]{$u(0) = 0.1$ \\ $u(1) = 0.1$} & & & & \\
-    \hline
-    \shortstack[l]{$u(0) = -0.1$ \\ $u(1) = 0.1$} & & & & \\
-    \hline
-  \end{tabular}
-  \egroup
-  \caption{Values of $\left|\left|z^{(h)} - u^{(h)}\right|\right|$ rounded to the first 10
-    significant digits for various
-    perturbations $\varepsilon^{(h)}$ and initial values for the function
-    $f(x) = e^{0.5x}$ with $c=1$ and $h=1.5e-4$.}
-\end{table}
+Therefore, we conclude that the scheme $L_h u^{(h)} = f^{(h)}$ is stable regardless
+of the function $f(x)$, the constant $c$, or the initial conditions of the problem
+$Lu = f$.
