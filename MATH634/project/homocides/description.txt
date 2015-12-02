@@ -1,1 +1,0 @@
-This dataset contains the number of homocides in Australlia by firearm and nonfirearm per 1000000 people.
