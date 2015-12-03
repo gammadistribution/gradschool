@@ -1,10 +1,10 @@
 In an effort to help researchers glean insight from tweets, Twitter offers
 a streaming API that streams all tweets that contain a certain string.
 We leverage this service to gather data surrounding the popular television
-show The Walking Dead and then measure the number of tweets that occur in a given
+show \textit{The Walking Dead} and then measure the number of tweets that occur each
 hour over a time span.
 
-Using the programming language Python and the library tweepy, a popular
+Using the programming language Python and the library \texttt{tweepy}, a popular
 wrapper for the Twitter streaming API, we collected all tweets containing the
 hashtag ``\#thewalkingdead'' for three weeks from 2015-11-07 21:00 EST to
 2015-11-23 21:00 EST. As this television show airs Sundays at 21:00 EST,
@@ -15,9 +15,8 @@ the television show's airing for the above three week time frame.
 These measurements give rise to the time series presented in Figure \ref{tweets_plot}.
 From this plot it is clear that, due to the weekly episodic nature of the television
 show, there is a seasonal component to this time series. It also appears that
-there is a trend component as well. In order to fit a stationary time series
-to the underlying data, transformations will need to be applied to this time
-series.
+there is a trend component. Thus, in order to fit a stationary time series
+to the underlying data, we will need to first apply transformations to the data.
 
 \begin{figure}[!t]
   \centerline{\includegraphics[scale=0.75]{../analysis/plots/tweets_plot}}
