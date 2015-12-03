@@ -12,10 +12,18 @@ of particular importance is the tweets occurring around this time.
 We therefore restrict our measurements to 24 hours prior to and 24 hours after
 the television show's airing for the above three week time frame.
 
-These measurements give rise to the timeseries presented in Figure \ref{tweets_plot}
+These measurements give rise to the time series presented in Figure \ref{tweets_plot}.
+From this plot it is clear that, due to the weekly episodic nature of the television
+show, there is a seasonal component to this time series. It also appears that
+there is a trend component as well. In order to fit a stationary time series
+to the underlying data, transformations will need to be applied to this time
+series.
 
-\begin{figure}[!T]
-  \centerline{\includegraphics{../analysis/plots/tweets_plot}}
+\begin{figure}[!t]
+  \centerline{\includegraphics[scale=0.75]{../analysis/plots/tweets_plot}}
   \caption{Time series plot of number of tweets containing the hashtag
   \#thewalkingdead over three 48 hour cycles.}\label{tweets_plot}
 \end{figure}
+
+The details behind the process of fitting a stationary time series model to this data is handled in
+Section \ref{model}.

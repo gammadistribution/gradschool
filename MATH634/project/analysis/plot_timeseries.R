@@ -18,4 +18,4 @@ tweets.plot <- ggplot(tweets, aes(factor(hour), tweets, group=1)) + geom_line() 
           title=element_text(vjust=1.5),
           plot.margin=unit(c(1,1,1,1), "cm"))
 
-ggsave(path="plots", filename="tweets_plot.pdf", plot=tweets.plot, width=5.5, height=5.5, res=300)
+ggsave(path="plots", filename="tweets_plot.pdf", plot=tweets.plot, width=5.5, height=5.5)
