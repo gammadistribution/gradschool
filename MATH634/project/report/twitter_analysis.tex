@@ -1,3 +1,4 @@
+
 \documentclass[12pt]{amsart}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -5,6 +6,8 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{listings}
+\usepackage{csvsimple}
+\usepackage{./.sty/appendix}
 
 
 \graphicspath{ {../analysis/plots} }
@@ -53,6 +56,17 @@
 \begin{section}{Conclusion}
   \input{sections/conclusion}
 \end{section}
+
+
+\newpage
+\begin{appendices}
+\section{Future Forecasts of Twitter Data}\label{forecast_table}
+The first 24 hours of the forecasted 48 hour cycle.\\\\
+\csvautotabular{../analysis/data/forecast_1.csv}
+\newpage
+The latter 24 hours of the forecasted 48 hour cycle.\\\\
+\csvautotabular{../analysis/data/forecast_2.csv}
+\end{appendices}
 
 
 \end{document}
