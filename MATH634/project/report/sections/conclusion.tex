@@ -1,0 +1,21 @@
+Twitter's streaming API along with our custom program allowed us to gather tweets
+containing the hashtag ``\#thewalkingdead'' over a three week time period. Isolating
+that data to 48 hour cycles centered at the show's air time gave us a time series
+to analyze, namely the number of tweets containing the hashtag over that three week period.
+
+Utilizing the time series plots of our data $\{X_t\}$ combined with differencing
+techniques allowed us to determine a potential family of seasonal ARIMA models
+to fit to the transformed mean-corrected data $\{Y_t\} = \{\log(X_t) - E(X_t)\}$.
+Choosing the model that minimizes the AIC statistic, we arrived at the SARIMA
+model in \eqref{sarima_model} with period 48.
+
+With a model describing the transformed data, we applied R's forecasting software
+to create a forecast of the next 48 hour cycle for the data. The shape of the forecast
+seems plausible, however. The forecast is not very accurate in predicting the number of
+tweets that will occur during the show's airing due to the large variance between the
+bounds of the 90\% confidence interval as can be seen from Figure \ref{forecast_plot}
+and entry 169 of the table in Appendix \ref{forecast_table}.
+
+Thus, the model currently does not achieve its main goal of accurately predicting the number of
+tweets at the show's future airing. However, the techniques outlined in this
+report can be repeated with more Twitter data to derive a more accurate model.

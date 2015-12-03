@@ -139,18 +139,19 @@ sigma^2 estimated as 0.1152:  log likelihood = -33.53,  aic = 75.07
       ma1          ma2         sar1
 6.878613e-10 4.021464e-02 2.709825e-01
   \end{lstlisting}
+
   Using a significance level of $\alpha=0.05$ suggests that the SAR(1) coefficient
   is not significant. However, removing the seasonal component and fitting the model
   to an MA(2) model results in a worse fit. Thus, we elect to keep the seasonal
   component in the model.
 
-  Thus we fit, our data $Y_t = \log(X_t) - E(\log(X_t))$ to the model
+  Thus, we fit our data $Y_t = \log(X_t) - E(\log(X_t))$ to the model
   \begin{align}\label{sarima_model}
     Y_t = \Phi_1Y_{t-48} + Z_t + \theta_1Z_{t-1} + \theta_2Z_{t-2} \quad Z_t \sim \text{WN}(0, \sigma^2) \notag\\
-    \Phi_1 = -0.1586, \quad \theta_1 = -0.6768, \quad \theta_2 = -0.2257, \quad \sigma^2 = 0.1152
+    \Phi_1 = -0.1586, \quad \theta_1 = -0.6768, \quad \theta_2 = -0.2257, \quad \sigma^2 = 0.1152.
   \end{align}
   We verify that these residuals are indeed
-  a white noise process by examining the plot of their ACF in Figure \ref{res_acf}
+  a white noise process by examining the plot of their ACF in Figure \ref{res_acf}.
 
   \begin{figure}[!h]
     \centerline{\includegraphics[scale=0.75]{../analysis/plots/res_acf}}
