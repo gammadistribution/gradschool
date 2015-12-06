@@ -24,7 +24,7 @@ approximate the analytical solution for the problem $Lu = f$.
   Finding an approximation to $u''(x)$ should suggest how to construct
   the scheme $L_h$.
   To find an approximation for $u''(x)$, we investigate the Taylor expansion
-  of $u(x)$ centered at $h$ and $-h$. These expansions are given by
+  of $u(x+h)$ and $u(x-h)$ about $x$. These expansions are given by
   \begin{align*}
     u(x + h) &= u(x) + h u'(x) + \frac{h^2 u ''(x)}{2} + \frac{h^3 u^{(3)}(x)}{3!} + \frac{h^4 u^{(4)}(\xi_1)}{4!} \\
     u(x - h) &= u(x) - h u'(x) + \frac{h^2 u ''(x)}{2} - \frac{h^3 u^{(3)}(x)}{3!} + \frac{h^4 u^{(4)}(\xi_2)}{4!}
