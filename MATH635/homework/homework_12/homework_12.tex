@@ -129,7 +129,193 @@
 \end{custompbm}
 
 \begin{proof}
+  Note the above differential equation can be represented in the form
+  \[
+    (p(x)y')' + q(x)y' +r(x)y = f(x), \quad y(a) = A, y(b) = B,
+  \]
+  where $p(x) = x+1$, $q(x) = 0$, $r(x)=-(x+2)$, $f(x)=\frac{x+2}{e-1}$, and the
+  boundary conditions are appropriately defined. Using the methods from the reading,
+  we see that an approximation to the solution $y(x)$ of the differential equation
+  is given by
+  \[
+    y_n(x) = \sum_{j=1}^n a_j \phi_j(x) + l(x)
+  \]
+  where the basis functions $\phi_j = sin(j\pi x)$ satisfy $\phi_j(a) = \phi_j(b) = 0$
+  and $l(x)= A \frac{b-x}{b-a} + B \frac{x-a}{b-a} = x$. Note that
+  $y_n(x)$ satisfies the boundary conditions. The coefficients $a_j$ are chosen so that they
+  satisfy the following system of equations
+  \begin{align}\label{system_5}
+    \sum_{j=1}^n a_j &\int_a^b\left[p(x)\phi_j'(x)\phi_i(x) -q(x)\phi_j'(x)\phi_i(x) -r(x)\phi_j(x)\phi_i(x)\right]dx \notag \\
+    &= -\int_a^b \left[f(x) - Ll(x)\right]\phi_i(x)dx \quad \text{for $i=1,\dots n,$}
+  \end{align}
+  where $L$ is the differential operator defining our differential equation.
+
+  Using our basis functions $\phi_j(x) = \sin(j\pi x)$, we see that $\phi_j'(x) = j\pi cos(j\pi x)$. Additionally,
+  we also see that $f(x) - Ll(x) = \frac{x+2}{e-1} + x^2 +2x -1$. From theseidentities
+  and using our definitions of $p(x)$, $q(x)$, and $r(x)$, we see that the system in \eqref{system_5}
+  simplifies to the following system
+  \begin{align}\label{final_system}
+    \sum_{j=1}^n a_j &\int_0^1 \left[(x+1)ij\pi^2\cos(j\pi x)\cos(i \pi x) + (x+2)\sin(j \pi x)\sin(i \pi x)\right]dx \notag \\
+    &= -\int_0^1 \left[\frac{x+2}{e-1} + x^2 + 2x -1\right]\sin(i\pi x)dx\quad \text{for $i=1,\dots,n$}.
+  \end{align}
+
+  We can now find an approximation to the solution $y(x)$ in the form
+  \begin{align}\label{approx}
+    y_n(x) = x + \sum_{j=1}^n a_j \sin(j \pi x)
+  \end{align}
+  where the coefficients $a_j$ are determined by the solution to the system found in \eqref{final_system}.
+
+  After creating a MATLAB implementation of the solution to the above system of
+  equations we see that $y_5(x) = x + \sum_{j=1}^5a_j\sin(j\pi x)$ where the coefficients are given by
+  \[
+    \begin{bmatrix}
+      a_1 \\
+      a_2 \\
+      a_3 \\
+      a_4 \\
+      a_5 \\
+    \end{bmatrix}
+      =
+    \begin{bmatrix}
+      -0.126756792130151\\
+      0.007873907784233\\
+      -0.005123612817319\\
+      0.001007418513753\\
+      -0.001164503231156\\
+    \end{bmatrix}
+  \].
+
+  Similarly, $y_{10}(x) = x + \sum_{j=1}^{10}a_j\sin(j\pi x)$ where the coefficients are given by
+  \[
+    \begin{bmatrix}
+      a_1 \\
+      a_2 \\
+      a_3 \\
+      a_4 \\
+      a_5 \\
+      a_6 \\
+      a_7 \\
+      a_8 \\
+      a_9 \\
+      a_{10} \\
+    \end{bmatrix}
+      =
+    \begin{bmatrix}
+      -0.126740377319384 \\
+      0.007866963591612 \\
+      -0.005111897265922 \\
+      0.001003683279394 \\
+      -0.001111840960052 \\
+      0.000300043256596 \\
+      -0.000405543093287 \\
+      0.000129499026931 \\
+      -0.000189239173159 \\
+      0.000082228427550 \\
+    \end{bmatrix}
+  \]
+  and $y_{15}(x) = x + \sum_{j=1}^{15}a_j\sin(j\pi x)$ where the coefficients are given by
+  \[
+    \begin{bmatrix}
+      a_1 \\
+      a_2 \\
+      a_3 \\
+      a_4 \\
+      a_5 \\
+      a_6 \\
+      a_7 \\
+      a_8 \\
+      a_9 \\
+      a_{10} \\
+      a_{11} \\
+      a_{12} \\
+      a_{13} \\
+      a_{14} \\
+      a_{15} \\
+    \end{bmatrix}
+      =
+    \begin{bmatrix}
+      -0.126740669728242 \\
+      0.007864339443911 \\
+      -0.005112288932438 \\
+      0.001001882459024 \\
+      -0.001112248945762 \\
+      0.000298067482786 \\
+      -0.000406198853140 \\
+      0.000126040763869 \\
+      -0.000191339879818 \\
+      0.000064709821496 \\
+      -0.000104942850428 \\
+      0.000037631839019 \\
+      -0.000063854388930 \\
+      0.000023917094979 \\
+      -0.000043873909881 \\
+    \end{bmatrix}.
+  \]
+
+We now compare these approximations to the actual solution for each of the
+above derived approximations. The following tables evaluate the approximations and the
+exact solution at the points 0.25, 0.50, and 0.75 and compare the absolute difference between these values
+and the relative error of the approximations.
+
+\begin{table}[h!]
+  \centering
+  \bgroup
+  \def\arraystretch{1.5}
+  \begin{tabular}{| l | c | c | c | c |}
+    \hline
+    $x$ & $y(x)$ & $y_5(x)$ & $|y(x) - y_5(x)|$ & $(|y(x) - y_5(x)| / |y(x)|)*100$ \\
+    \hline
+    0.25 & 0.165296 & 0.165443 & 1.476306e-04 & 0.089312 \\
+    0.50 &  0.377540 & 0.377202 & 3.383513e-04 &   0.089619 \\
+    0.75 &  0.650067 & 0.649695 & 3.719995e-04 &  0.057224 \\
+    \hline
+  \end{tabular}
+  \egroup
+  \caption{Comparison of approximation $y_5$ to solution $y$.}
+\end{table}
+
+\begin{table}[h!]
+  \centering
+  \bgroup
+  \def\arraystretch{1.5}
+  \begin{tabular}{| l | c | c | c | c |}
+    \hline
+    $x$ & $y(x)$ & $y_{10}(x)$ & $|y(x) - y_{10}(x)|$ & $(|y(x) - y_{10}(x)| / |y(x)|)*100$ \\
+    \hline
+    0.25 & 0.165296 & 0.165354 & 5.847486e-05 &  0.035375 \\
+    0.50 &  0.377540 & 0.377475 & 6.468589e-05 & 0.017133 \\
+    0.75 &  0.650067 & 0.650056 &  1.163722e-05 & 0.001790 \\
+    \hline
+  \end{tabular}
+  \egroup
+  \caption{Comparison of approximation $y_{10}$ to solution $y$.}
+\end{table}
+
+\begin{table}[t!]
+  \centering
+  \bgroup
+  \def\arraystretch{1.5}
+  \begin{tabular}{| l | c | c | c | c |}
+    \hline
+
+    $x$ & $y(x)$ & $y_{15}(x)$ & $|y(x) - y_{15}(x)|$ & $(|y(x) - y_{15}(x)| / |y(x)|)*100$ \\
+    \hline
+    0.25 & 0.165296 & 0.165313 & 1.714344e-05 & 0.010371\\
+    0.50 &  0.377540 &  0.377559 & 1.852280e-05 &  0.004906 \\
+    0.75 &  0.650067 & 0.650099 &  3.119950e-05 &  0.004799 \\
+    \hline
+  \end{tabular}
+  \egroup
+  \caption{Comparison of approximation $y_{15}$ to solution $y$.}
+
+  Note that as $n$ increases the value $|y(x) - y_{15}(x)|$ decreases. Moreover,
+  this rate of decreases appears to be uniform over the entire interval of definition.
+\end{table}
+
+
+
 \end{proof}
+
 
 
 \end{document}
