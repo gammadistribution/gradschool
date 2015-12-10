@@ -1,0 +1,42 @@
+\begin{problem}
+  Consider the differential equation
+  \begin{align}\label{diffeq}
+    y'' - y = -x,\quad  0<x<1 \quad y(0) = y(1) = 0
+  \end{align}
+  as in Example 15.12 on page 502.
+  Use the basis $\{\phi_j(x)\} = \{x^j(1-x)^j\}$, as in section 15.5.1, to
+  compute approximations to the exact solution using the finite-element method.
+
+  Provide relative errors at the points 0.25, 0.50, and 0.75 of the approximations
+  using the first $j=2,3,4$ basis functions. Plot
+  the corresponding approximations $y_2$, $y_3$, $y_4$, and the exact solution
+  $y$. Then find the first value of $j$ for which the relative error at all
+  three points is less than 0.5\%.
+\end{problem}
+
+\begin{proof}
+  We wish to approximate the solution to the above differential equation, $y(x)$,
+  with a linear combination of the basis functions, i.e.\ find an approximation
+  $y_n(x)$ where
+  \begin{align}\label{finite_approximation}
+    y_n(x) = \sum_{j=1}^n a_j \phi_j(x).
+  \end{align}
+  Note that the basis functions $\phi_j(x) = x^j(1-x)^j$ satisfy the boundary
+  conditions $\phi_j(0) = \phi_j(1) = 0$ so that $y_n(x)$ also satisfies the
+  boundary conditions.
+
+  Corollary 15.2 suggests that if
+  \[
+    \int_0^1 (y_n'' - y_n + x)\phi_i(x) dx = 0 \quad \text{for $i=1,\dots,n$}
+  \]
+  then $y_n'' - y_n + x = 0$, i.e\ the approximation satisfies the differential
+  equation \eqref{diffeq}. If $y_n(x)$ satisfies the
+  differential equation and the boundary conditions, then we know that $y_n(x)$ approximates the
+  exact solution $y(x)$.
+
+  Therefore, we choose the coefficients $a_k$ such that they satisfy the system of
+  equations
+  \begin{align*}
+    \sum_{j=1}^n a_j \int_0^1 \phi_j''(x)\phi_i(x) - \phi_j(x)\phi_i(x) dx = -\int_0^1 x \phi_i(x) dx \quad \text{for $i=1,\dots,n$}.
+  \end{align*}
+\end{proof}
