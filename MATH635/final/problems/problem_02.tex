@@ -8,7 +8,7 @@
   compute approximations to the exact solution using the finite-element method.
 
   Provide relative errors at the points 0.25, 0.50, and 0.75 of the approximations
-  using the first $j=2,3,4$ basis functions. Plot
+  using the first $n=2,3,4$ basis functions. Plot
   the corresponding approximations $y_2$, $y_3$, $y_4$, and the exact solution
   $y$. Then find the first value of $j$ for which the relative error at all
   three points is less than 0.5\%.
@@ -29,12 +29,12 @@
   \[
     \int_0^1 (y_n'' - y_n + x)\phi_i(x) dx = 0 \quad \text{for $i=1,\dots,n$}
   \]
-  then $y_n'' - y_n + x = 0$, i.e\ the approximation satisfies the differential
+  then $y_n'' - y_n + x = 0$, i.e\ $y_n(x)$ satisfies the differential
   equation \eqref{diffeq}. If $y_n(x)$ satisfies the
-  differential equation and the boundary conditions, then we know that $y_n(x)$ approximates the
-  exact solution $y(x)$.
+  differential equation and the boundary conditions, then we know that $y_n(x)$
+  approximates the exact solution $y(x)$.
 
-  Therefore, we choose the coefficients $a_k$ such that they satisfy the system of
+  Therefore, we choose the coefficients $a_j$ such that they satisfy the system of
   equations
   \begin{align*}
     \sum_{j=1}^n a_j \int_0^1 \phi_j''(x)\phi_i(x) - \phi_j(x)\phi_i(x) dx = -\int_0^1 x \phi_i(x) dx \quad \text{for $i=1,\dots,n$}.
