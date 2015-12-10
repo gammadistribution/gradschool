@@ -1,0 +1,41 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, breqn, graphicx}
+
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\newenvironment{custompbm}[1]
+  {\renewcommand\theproblem{#1}\problem}
+  {\endproblem}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+
+\newcommand{\E}{\text{E}}
+\newcommand{\V}{\text{Var}}
+\newcommand{\Co}[2]{\text{Cov}\left({#1}, {#2}\right)}
+\newcommand{\pdf}{\text{pdf}}
+\newcommand{\pmf}{\text{pmf}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\mx}[1][t]{\mu_X({#1})}
+\newcommand{\gx}[2]{\gamma_X({#1}, {#2})}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+
+\title{MATH 635 Final Assessment}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\include{problems/problem_01}
+
+
+\end{document}

@@ -1,0 +1,76 @@
+\begin{problem}
+  Provide a rigorous proof of the case $x_0 = a$ in the Fundamental Lemma
+  of the Calculus of Variations:
+
+  \begin{theorem}[Fundamental Lemma of the Calculus of Variations]
+    Suppose $M(x)$ is a continuous function defined on the interval $a \leq x \leq b$.
+    Suppose further that for every continuous function $\zeta(x)$,
+    \[
+      \int_a^b M(x)\zeta(x)dx = 0.
+    \]
+    Then
+    \[
+      M(x) = 0 \text{ for all $x\in [a,b]$.}
+    \]
+  \end{theorem}
+\end{problem}
+
+\begin{proof}
+  Suppose to the contrary that $M(x) \neq 0$ at the point $x_0 = a$. In that case
+  either $M(a) > 0$ or $M(a) < 0$. Let us first assume that $M(a) > 0$. Due to
+  the continuity of $M(x)$ there is some neighborhood of $a$ where the function
+  is positive, i.e.\ there is some $\delta > 0$ such that if $|x - a| < \delta$
+  then
+  $$|M(x) - M(a)| < \frac{M(a)}{2} \quad \text{ for $x \in [a,b]$}.$$
+  Thus, $0 < M(a)/2 < M(x)$ for $x \in [a,a+\delta)$.
+  Choose the function $\zeta(x)$ to be the linear spline interpolating
+  the points $(a, 3M(a)/2)$ and $(a + \delta, 0)$ with support on $[a, a + \delta)$,
+  i.e.\
+  \[
+    \zeta(x) :=
+    \begin{cases}
+      \frac{-3M(a)}{2\delta}(x - (a+\delta)) & \text{if $a \leq x < a + \delta$}\\
+      0 & \text{if $a + \delta \leq x \leq b$}.
+    \end{cases}
+  \]
+  Clearly $\zeta(x)$ is continuous and positive on the interval $[a, a + \delta)$.
+  Thus,
+  \[
+    \int_a^b M(x) \zeta(x) dx = \int_a^{a+\delta} M(x) \zeta(x) dx > \frac{M(a)}{2} \int_a^{a+\delta}  \zeta(x) dx > 0.
+  \]
+  However, by our supposition
+  \[
+    \int_a^b M(x) \zeta(x) dx = 0,
+  \]
+  a contradiction. Therefore, if $M(a) > 0$, the function $M(x) \equiv 0$ on
+  the interval $[a, b]$.
+
+  If $M(a) < 0$, then we can repeat the argument above replacing $M(x)$ with $-M(x)$.
+  To demonstrate, let us investigate the case when $M(a) < 0$. Due to
+  the continuity of $M(x)$ there is some neighborhood of $a$ where $-M(x)$
+  is positive, i.e.\ there is some $\delta > 0$ such that if $|x - a| < \delta$
+  then
+  $$|-M(x) + M(a)| < \frac{-M(a)}{2} \quad \text{ for $x \in [a,b]$}.$$
+  Thus, $0 < -M(a)/2 < -M(x)$ for $x \in [a,a+\delta)$.
+  Choose the function $\zeta(x)$ to be the linear spline interpolating
+  the points $(a, -3M(a)/2)$ and $(a + \delta, 0)$ with support on $[a, a + \delta)$,
+  i.e.\
+  \[
+    \zeta(x) :=
+    \begin{cases}
+      \frac{3M(a)}{2\delta}(x - (a+\delta)) & \text{if $a \leq x < a + \delta$}\\
+      0 & \text{if $a + \delta \leq x \leq b$}.
+    \end{cases}
+  \]
+  Clearly $\zeta(x)$ is continuous and positive on the interval $[a, a + \delta)$.
+  Thus,
+  \[
+    \int_a^b -M(x) \zeta(x) dx = \int_a^{a+\delta} -M(x) \zeta(x) dx > \frac{-M(a)}{2} \int_a^{a+\delta}  \zeta(x) dx > 0.
+  \]
+  However, by our supposition
+  \[
+    \int_a^b M(x) \zeta(x) dx = 0,
+  \]
+  a contradiction. Therefore, if $M(a) < 0$, the function $M(x) \equiv 0$ on
+  the interval $[a, b]$ and we have proven both cases.
+\end{proof}
