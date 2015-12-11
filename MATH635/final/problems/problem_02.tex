@@ -15,7 +15,17 @@
 \end{problem}
 
 \begin{proof}
-  The exact solution to the differential equation \eqref{diffeq}, $y(x)$, is
+  The differential equation presented in the problem is a second order linear
+  differential equation. It is easily shown that the homogeneous solution is
+  given by $y_h(x) = c_1 e^{-x} + c_2e^{x}$ and that a particular solution is
+  given by $y_p(x) = x$. Thus the general solution is $y(x) = c_1 e^{-x} + c_2e^{x} + x$.
+  Using the boundary conditions, we see that the exact solution is
+  \begin{align}\label{exact}
+    y(x) = \frac{e^{x}e}{1-e^2} -\frac{e^{-x}e}{1-e^2} + x
+  \end{align}
+
+  We now wish to approximate the exact solution $y(x)$.
+  Note that the exact solution to the differential equation \eqref{diffeq} is
   a continuous function. This fact combined with the fact that $\{\phi_j(x)\}$
   form a basis of the function space shows that the continuous function $y(x)$
   can be approximated with a linear combination of the basis functions.
@@ -24,8 +34,8 @@
   \begin{align}\label{finite_approximation}
     y_n(x) = \sum_{j=1}^n a_j \phi_j(x).
   \end{align}
-  Note that the basis functions $\phi_j(x) = x^j(1-x)^j$ satisfy the boundary
-  conditions $\phi_j(0) = \phi_j(1) = 0$ so that $y_n(x)$ also satisfies the
+  Note that our basis functions $\{\phi_j(x)\}$ satisfy the boundary
+  conditions, i.e.\ $\phi_j(0) = \phi_j(1) = 0$ so that $y_n(x)$ also satisfies the
   boundary conditions.
 
   Corollary 15.2 suggests that if
