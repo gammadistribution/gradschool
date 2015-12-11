@@ -15,9 +15,12 @@
 \end{problem}
 
 \begin{proof}
-  We wish to approximate the solution to the above differential equation, $y(x)$,
-  with a linear combination of the basis functions, i.e.\ find an approximation
-  $y_n(x)$ where
+  The exact solution to the differential equation \eqref{diffeq}, $y(x)$, is
+  a continuous function. This fact combined with the fact that $\{\phi_j(x)\}$
+  form a basis of the function space shows that the continuous function $y(x)$
+  can be approximated with a linear combination of the basis functions.
+  Therefore, we wish to find an approximation $y_n(x)$ to the exact solution
+  $y(x)$ where
   \begin{align}\label{finite_approximation}
     y_n(x) = \sum_{j=1}^n a_j \phi_j(x).
   \end{align}
@@ -36,7 +39,44 @@
 
   Therefore, we choose the coefficients $a_j$ such that they satisfy the system of
   equations
-  \begin{align*}
+  \begin{align}\label{first_system}
     \sum_{j=1}^n a_j \int_0^1 \phi_j''(x)\phi_i(x) - \phi_j(x)\phi_i(x) dx = -\int_0^1 x \phi_i(x) dx \quad \text{for $i=1,\dots,n$}.
+  \end{align}
+
+  The above system unnecessarily uses the second derivative of the basis
+  functions. We can rewrite the coefficients of the above system to use only
+  the first derivative of the basis functions. To see this,
+  note that we can rewrite the differential equation \eqref{diffeq} in the form
+  \begin{align}\label{alternate_diffeq}
+    (p(x)y')' + q(x)y' + r(x)y = f(x)
+  \end{align}
+  by choosing $p(x) = 1$, $q(x) = 0$, $r(x) = -1$, and $f(x) = -x$. With this form of the
+  differential equation we would require the approximation \eqref{finite_approximation}
+  to satisfy the following equations
+  \[
+    \int_0^1 ((p(x)y_n')' + r(x)y_n)\phi_i(x) dx = \int_0^1f(x)\phi_i(x)dx \quad \text{for $i=1,\dots,n$}.
+  \]
+  Making use of the fact that the basis functions are 0 on the boundary we see that
+  \begin{align*}
+    \int_0^1(p(x)y_n')'\phi_i(x) dx
+    &= \phi_i(x)p(x)y_n'\rvert_0^1 - \int_0^1 p(x)y_n'\phi_i'(x) dx \\
+    &= - \int_0^1 p(x)y_n'\phi_i'(x) dx.
   \end{align*}
+  With this and the definitions of the functions $p(x)$, $r(x)$, and $f(x)$,
+  the system of equations \eqref{first_system} becomes
+  \begin{align}\label{system_imp}
+    \sum_{j=1}^n a_j \int_0^1 -\phi_j'(x)\phi_i'(x) - \phi_j(x)\phi_i(x) dx = -\int_0^1 x \phi_i(x) dx \quad \text{for $i=1,\dots,n$}.
+  \end{align}
+
+  Finding the solution to the system of equations \eqref{system_imp} identifies
+  the coefficients $a_j$ that define our approximation.
+
+  In this instance, we have chosen the basis $\left.\{\phi_j(x)\}\right._{j=1}^n$ where $\phi_j(x) = x^j(1-x)^j$.
+  Thus,
+  \begin{align*}
+    \phi_j'(x)
+    &= \left(x^j\right)'(1-x)^j + x^j\left((1-x)^j\right)' \\
+    &= jx^{j-1}(1-x)^j -jx^j(1-x)^{j-1}
+  \end{align*}
+  for $j=1,\dots,n$.
 \end{proof}
