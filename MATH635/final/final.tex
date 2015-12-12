@@ -1,6 +1,13 @@
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath, amsthm, amssymb, amsfonts, breqn, graphicx}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, pbox, graphicx}
+\usepackage[colorlinks = true, linkcolor = black, urlcolor = blue]{hyperref}
+
+\makeatletter
+\renewcommand*{\eqref}[1]{%
+  \hyperref[{#1}]{\textup{\tagform@{\ref*{#1}}}}%
+}
+\makeatother
 
 \newtheorem{theorem}{Theorem}
 \theoremstyle{definition}
@@ -22,6 +29,8 @@
 \newcommand{\mx}[1][t]{\mu_X({#1})}
 \newcommand{\gx}[2]{\gamma_X({#1}, {#2})}
 \newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\graphicspath{ {images/} }
 
 \title{MATH 635 Final Assessment}
 \author{Matthew Tiger}

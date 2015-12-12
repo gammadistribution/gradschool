@@ -25,7 +25,7 @@
   \end{align}
 
   We now wish to approximate the exact solution $y(x)$.
-  Note that the exact solution to the differential equation \eqref{diffeq} is
+  Note that the exact solution to the differential equation %\eqref{diffeq} is
   a continuous function. This fact combined with the fact that $\{\phi_j(x)\}$
   form a basis of the function space shows that the continuous function $y(x)$
   can be approximated with a linear combination of the basis functions.
@@ -89,4 +89,83 @@
     &= jx^{j-1}(1-x)^j -jx^j(1-x)^{j-1}
   \end{align*}
   for $j=1,\dots,n$.
+
+  Using the MATLAB function $\texttt{approximation.m}$, we construct the above
+  system of equations and solve them arriving at approximations to the exact
+  solution for $n=2,3,4$.
+  The tables comparing the exact solution to these approximations at the
+  points $x=0.25, 0.50, 0.75$ can be found below.
+
+  \begin{table}[h!]
+    \centering
+    \bgroup
+    \def\arraystretch{1.75}
+    \begin{tabular}{| l | c | c | c | c |}
+      \hline
+      $x$ & $y(x)$ & $y_{2}(x)$ & $|y(x) - y_{2}(x)|$ & \pbox{5cm}{$\frac{100|y(x) - y_{2}(x)|}{|y(x)|}$} \\
+      \hline
+      0.25 & 3.504760e-02 & 4.266210e-02 & 7.614504e-03 & 2.172618e\phantom{-}01 \\
+      0.50 & 5.659056e-02 & 5.659010e-02 &      4.598883e-07 &      8.126590e-04 \\
+      0.75 & 5.027579e-02 & 4.266210e-02 & 7.613681e-03 & 1.514383e\phantom{-}01 \\
+      \hline
+    \end{tabular}
+    \egroup
+    \caption{Comparison of approximation $y_{2}$ to solution $y$. All computations are rounded to 6 significant digits.}
+  \end{table}
+
+  \begin{table}[h!]
+    \centering
+    \bgroup
+    \def\arraystretch{1.75}
+    \begin{tabular}{| l | c | c | c | c |}
+      \hline
+      $x$ & $y(x)$ & $y_{3}(x)$ & $|y(x) - y_{3}(x)|$ & \pbox{5cm}{$\frac{100|y(x) - y_{3}(x)|}{|y(x)|}$} \\
+      \hline
+      0.25 & 3.504760e-02 & 4.266169e-02 & 7.614092e-03 & 2.172500e\phantom{-}01 \\
+      0.50 & 5.659056e-02 & 5.659056e-02 & 5.029993e-10 & 8.888397e-07 \\
+      0.75 & 5.027579e-02 & 4.266169e-02 & 7.614093e-03 & 1.514465e\phantom{-}01 \\
+      \hline
+    \end{tabular}
+    \egroup
+    \caption{Comparison of approximation $y_{3}$ to solution $y$. All computations are rounded to 6 significant digits.}
+  \end{table}
+
+  \begin{table}[h!]
+    \centering
+    \bgroup
+    \def\arraystretch{1.75}
+    \begin{tabular}{| l | c | c | c | c |}
+      \hline
+      $x$ & $y(x)$ & $y_{4}(x)$ & $|y(x) - y_{4}(x)|$ & \pbox{5cm}{$\frac{100|y(x) - y_{4}(x)|}{|y(x)|}$} \\
+      \hline
+      0.25 & 3.504760e-02 & 4.266169e-02 & 7.614093e-03 & 2.172500e\phantom{-}01 \\
+      0.50 & 5.659056e-02 & 5.659056e-02 & 3.451059e-13 & 6.098294e-10 \\
+      0.75 & 5.027579e-02 & 4.266169e-02 & 7.614092e-03 & 1.514465e\phantom{-}01 \\
+      \hline
+    \end{tabular}
+    \egroup
+    \caption{Comparison of approximation $y_{4}$ to solution $y$. All computations are rounded to 6 significant digits.}
+  \end{table}
+
+  We also provide the graphs of these comparisons in Figure \ref{poly_plot}.
+
+  \begin{figure}[h!]
+    \begin{center}
+      \includegraphics[scale=1.0]{polynomial_basis_comparison}
+    \end{center}
+    \caption{Plots of exact solution $y$ and approximation $y_n$ over the interval $[0, 1]$.}\label{poly_plot}
+  \end{figure}
+
+  The first value of $n$ such that the relative error of the approximation at
+  each of the points $x=0.25, 0.50, 0.75$ is less than 0.5e-03 is quite large. In fact
+  it is given by $n=$. This suggests that this basis does not give a practical
+  approximation to the exact solution at all points of the interval of definition.
+  However, as the relative error of the approximation is very small for $n=2$
+  at the point $x=0.50$, this suggests that the approximation would be useful
+  for neighborhoods with small radius centered at 0.50.
+
+  All programming code used to create the approximations, tables, and graphs
+  for this basis can be found here:
+
+  \url{https://github.com/gammadistribution/gradschool/tree/master/MATH635/final/programs}
 \end{proof}

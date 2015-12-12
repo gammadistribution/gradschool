@@ -8,7 +8,7 @@ syms x;
 b = [];
 
 for i=1:n
-    b = [b; int(-x*phi(i), x, interval(1), interval(2))];
+    b = [b; int(-x*phi(x, i), x, interval(1), interval(2))];
 end
 
 end
