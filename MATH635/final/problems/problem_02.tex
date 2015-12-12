@@ -25,7 +25,7 @@
   \end{align}
 
   We now wish to approximate the exact solution $y(x)$.
-  Note that the exact solution to the differential equation %\eqref{diffeq} is
+  Note that the exact solution to the differential equation \eqref{diffeq} is
   a continuous function. This fact combined with the fact that $\{\phi_j(x)\}$
   form a basis of the function space shows that the continuous function $y(x)$
   can be approximated with a linear combination of the basis functions.
@@ -110,7 +110,7 @@
       \hline
     \end{tabular}
     \egroup
-    \caption{Comparison of approximation $y_{2}$ to solution $y$. All computations are rounded to 6 significant digits.}
+    \caption{Comparison of approximation $y_{2}$ to solution $y$ using basis $\phi_j = x^j(1-x)^j$. All computations are rounded to 6 significant digits.}
   \end{table}
 
   \begin{table}[h!]
@@ -127,7 +127,7 @@
       \hline
     \end{tabular}
     \egroup
-    \caption{Comparison of approximation $y_{3}$ to solution $y$. All computations are rounded to 6 significant digits.}
+    \caption{Comparison of approximation $y_{3}$ to solution $y$ using basis $\phi_j = x^j(1-x)^j$. All computations are rounded to 6 significant digits.}
   \end{table}
 
   \begin{table}[h!]
@@ -144,7 +144,7 @@
       \hline
     \end{tabular}
     \egroup
-    \caption{Comparison of approximation $y_{4}$ to solution $y$. All computations are rounded to 6 significant digits.}
+    \caption{Comparison of approximation $y_{4}$ to solution $y$ using basis $\phi_j = x^j(1-x)^j$. All computations are rounded to 6 significant digits.}
   \end{table}
 
   We also provide the graphs of these comparisons in Figure \ref{poly_plot}.
@@ -153,12 +153,22 @@
     \begin{center}
       \includegraphics[scale=1.0]{polynomial_basis_comparison}
     \end{center}
-    \caption{Plots of exact solution $y$ and approximation $y_n$ over the interval $[0, 1]$.}\label{poly_plot}
+    \caption{Plots of exact solution $y$ and approximation $y_n$ over the interval $[0, 1]$
+       using basis $\phi_j = x^j(1-x)^j$.}\label{poly_plot}
   \end{figure}
 
   The first value of $n$ such that the relative error of the approximation at
-  each of the points $x=0.25, 0.50, 0.75$ is less than 0.5e-03 is quite large. In fact
-  it is given by $n=$. This suggests that this basis does not give a practical
+  each of the points $x_0=0.25, x_1=0.50, x_2=0.75$ is less than 5.0e-01\% is a number larger than 50.
+  The relative error percents $r_{x_i}$ for the approximation $y_{50}$ at the above points are given by $r_{x_0}$ = 2.172500e01\%,
+  $r_{x_1}$ = 3.576125e-09\%, and $r_{x_2}$ = 1.514465e01\%. You can see that the relative errors at the points $x_0$ and $x_2$ are no
+  better than they were for $n=4$. It also appears that these errors do not monotonically decrease towards 0.
+
+  As the coefficient matrix in the system \eqref{system_imp} is dense for this basis,
+  we elect not to go any higher than $n=50$ as the computational power needed to solve
+  linear systems for dense matrices of large size is higher than
+  the author's available hardware can accommodate.
+
+  This suggests that this basis does not give a practical
   approximation to the exact solution at all points of the interval of definition.
   However, as the relative error of the approximation is very small for $n=2$
   at the point $x=0.50$, this suggests that the approximation would be useful

@@ -1,9 +1,13 @@
-function y_n = approximation(phi, phi_prime, interval, n)
+function y_n = approximation(phi, phi_prime, interval, n, basis_type)
 % Provide the approximation of the solution to the differential equation
-% y'' - y = -x with boundary conditions y(0) = y(1) = 0
+% y'' - y = -x with boundary conditions y(0) = y(1) = 0. basis_type is
+% either 'trig', 'hat', or any other string. In the first two cases, the
+% coefficient matrix is constructed based off of the special structure of
+% the basis functions provided as long as they match the basis_type.
 
 b = column_vector(phi, interval, n);
-A = coefficient_matrix(phi, phi_prime, interval, n);
+
+A = coefficient_matrix(phi, phi_prime, interval, n, basis_type);
 
 coefficients = A \ b;
 
