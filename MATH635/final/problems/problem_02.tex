@@ -161,7 +161,8 @@
   each of the points $x_0=0.25, x_1=0.50, x_2=0.75$ is less than 5.0e-01\% is a number larger than 50.
   The relative error percents $r_{x_i}$ for the approximation $y_{50}$ at the above points are given by $r_{x_0}$ = 2.172500e01\%,
   $r_{x_1}$ = 3.576125e-09\%, and $r_{x_2}$ = 1.514465e01\%. You can see that the relative errors at the points $x_0$ and $x_2$ are no
-  better than they were for $n=4$. It also appears that these errors do not monotonically decrease towards 0.
+  better than they were for $n=4$. It also appears that these errors do not monotonically decrease towards 0 so that the
+  approximation does not practically converge to the exact solution.
 
   As the coefficient matrix in the system \eqref{system_imp} is dense for this basis,
   we elect not to go any higher than $n=50$ as the computational power needed to solve

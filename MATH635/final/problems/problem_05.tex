@@ -1,0 +1,38 @@
+\begin{problem}
+\end{problem}
+
+\begin{proof}
+  The polynomial basis does not practically approximate the exact solution for any
+  point outside of small neighborhoods of $x=0.50$
+
+  The trigonometric basis provides great approximations with relatively few iterations
+  if trying to achieve relative error 0.5\%. It also appears that the convergence is
+  uniform in the interval of definition suggesting that the approximation is useful
+  for low iterations across the entire interval. It is also computationally inexpensive
+  to calculate the coefficients of the approximation as the coefficient matrix is a
+  diagonal matrix.
+
+  The hat basis only requires 3 basis functions in order to achieve given relative error percents.
+  These errors increase on the next iteration and the errors are not uniform in the
+  interval, but it is computationally cheap to
+  compute these approximations. The reason for this is that the coefficient matrix
+  associated to these basis functions is a sparse matrix and by leveraging MATLAB's system of
+  equations solver for sparse coefficient matrices we are able to quickly obtain the
+  coefficients needed for the approximation. Additionally only two of the basis functions
+  are needed to compute a given point of the approximation as all other basis
+  functions will be zero for any given point, reducing the number of computations
+  needed to evaluate an approximation.
+
+  In order to obtain more accuracy using the trigonometric basis, you must increase
+  the number of basis functions used in the approximation. This has almost no effect on
+  solving the system of equations, as there is nothing to solve with a tridiagonal matrix,
+  but computing the values at each of the sine basis functions increases the computational
+  cost of using this approximation. The hat basis allows us to quickly obtain
+  more and more accurate approximations requiring more basis functions, but not more time.
+
+  To illustrate this, suppose we are interested in a relative accuracy of 0.0005\%
+  at each of the three points 0.25, 0.50, and 0.75.
+  Since the hat basis is faster it's probably going to be better for more accurate
+  approximations but the trigonometric basis is probably the best if you are only
+  looking for an approximation involving at most 6 terms.
+\end{proof}

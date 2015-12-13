@@ -103,8 +103,9 @@
   the solution to the system \eqref{system_imp} is therefore trivial and reduces
   the computational complexity of finding the approximation immensely as we only need
   to compute the entries of the coefficient matrix along the diagonal and the entries
-  of the column vector in the system.
+  of the column vector in the system. Additionally, a similar calculation shows
+  that the integral is not needed for the column vector either as $b_i = (-1)^i / (i\pi)$.
 
   In order to accommodate this special structure we have created conditional creations
-  of the coefficient matrices in the code mentioned earlier.
+  of the coefficient matrices and column vectors in the code mentioned earlier.
 \end{proof}

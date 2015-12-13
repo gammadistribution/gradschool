@@ -8,10 +8,19 @@ function A = coefficient_matrix(phi, phi_prime, interval, n, basis_type)
 % functions is used to compute the coefficient matrix. Otherwise the
 % general form is used.
 
-
-if basis_type == 'trig'
+if strcmp(basis_type, 'trig')
     entry = @(j) (-j.^2*pi.^2 - 1)./2;
     A = diag(feval(entry, 1:n));
+
+elseif strcmp(basis_type, 'hat')
+    h = 1 / (n + 1);
+    main_element = -2*h/3 - 2/h;
+    off_element = 1/h - h/6;
+    main_diagonal = repelem(main_element, n);
+    off_diagonal = repelem(off_element, n - 1);
+    A = diag(main_diagonal) + diag(off_diagonal, -1) + diag(off_diagonal, 1);
+    A = sparse(A);
+
 else
     A = [];
     for i=1:n
