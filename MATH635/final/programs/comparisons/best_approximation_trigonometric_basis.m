@@ -2,7 +2,7 @@ addpath(genpath('../'))
 
 clear all;
 
-points = [0.25, 0.5, 0.75];
+points = [0.25, 0.50, 0.75];
 interval = [0, 1];
 y = exact_solution();
 basis = @trigonometric_basis;
@@ -34,4 +34,3 @@ while norm(errors, inf) >= 0.5
     end
     disp(errors)
 end
-

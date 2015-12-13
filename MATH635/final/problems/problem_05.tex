@@ -1,21 +1,40 @@
 \begin{problem}
+  Compare the results in problems 2,3,4 and make your recommendation on
+  which method is best.
 \end{problem}
 
 \begin{proof}
-  The polynomial basis does not practically approximate the exact solution for any
-  point outside of small neighborhoods of $x=0.50$
+  We now summarize our findings in problems 2, 3, and 4. There are three things
+  of interest to us when considering which of these approximations is best:
+  \begin{enumerate}
+    \item If the approximation attains a relative error percent less than 0.5\%
+      at the points 0.25, 0.50, and 0.75 as well as throughout the interval [0, 1].
+    \item Number of basis functions needed to attain a relative error percent
+      less than 0.5\% at each of the points 0.25, 0.50, and 0.75 as well as throughout the interval [0, 1].
+    \item Time and computational power needed to attain a relative error
+      percent smaller than 0.5\% at the points 0.25, 0.50, and 0.75 as well as throughout the interval [0, 1].
+  \end{enumerate}
+  We will investigate these properties for each of the three basis functions.
 
-  The trigonometric basis provides great approximations with relatively few iterations
-  if trying to achieve relative error 0.5\%. It also appears that the convergence is
-  uniform in the interval of definition suggesting that the approximation is useful
-  for low iterations across the entire interval. It is also computationally inexpensive
-  to calculate the coefficients of the approximation as the coefficient matrix is a
-  diagonal matrix.
+  From problem 2, we see that the polynomial basis does not practically
+  approximate the exact solution for any point outside of small neighborhoods of 0.5.
+  As such, we cannot recommend this solution
+  as it cannot be used throughout the whole interval of definition in any practical way.
 
-  The hat basis only requires 3 basis functions in order to achieve given relative error percents.
+  The trigonometric basis provides great approximations with relative error percents less than 0.5\%
+  at the points 0.25, 0.50, and 0.75 as well as throughout the interval [0, 1]
+  while also requiring only the first 6 basis functions in order to achieve that accuracy.
+  It also appears that the convergence is uniform in the interval of definition suggesting
+  that this level of accuracy is a global property and the relative error percent will be in close to 0.5\% for places not near the boundary.
+  It is also computationally inexpensive to calculate the entries of the column vector and the coefficients of the
+  approximation as the coefficient matrix is a diagonal matrix.
+
+  The hat basis only requires 3 basis functions in order to achieve the given relative error percent
+  for the three points. However, as these are linear splines, that accuracy is not attained throughout
+  the interval of defintion and as such it is a local property of convergence.
   These errors increase on the next iteration and the errors are not uniform in the
-  interval, but it is computationally cheap to
-  compute these approximations. The reason for this is that the coefficient matrix
+  interval, but it is computationally cheap to compute these approximations.
+  The reason for this is that the coefficient matrix
   associated to these basis functions is a sparse matrix and by leveraging MATLAB's system of
   equations solver for sparse coefficient matrices we are able to quickly obtain the
   coefficients needed for the approximation. Additionally only two of the basis functions
@@ -25,14 +44,32 @@
 
   In order to obtain more accuracy using the trigonometric basis, you must increase
   the number of basis functions used in the approximation. This has almost no effect on
-  solving the system of equations, as there is nothing to solve with a tridiagonal matrix,
-  but computing the values at each of the sine basis functions increases the computational
-  cost of using this approximation. The hat basis allows us to quickly obtain
-  more and more accurate approximations requiring more basis functions, but not more time.
+  solving the system of equations, as there is nothing to solve with a diagonal matrix,
+  but computing the values at each of the trigonometric basis functions increases the computational
+  cost of using this approximation as you must involve an increasing number of sine functions.
+  In contrast, the hat basis allows us to quickly obtain more and more accurate approximations
+  requiring more basis functions, but not more computational complexity as only
+  two of those functions are needed to provide an approximation for a given point.
 
-  To illustrate this, suppose we are interested in a relative accuracy of 0.0005\%
-  at each of the three points 0.25, 0.50, and 0.75.
-  Since the hat basis is faster it's probably going to be better for more accurate
-  approximations but the trigonometric basis is probably the best if you are only
-  looking for an approximation involving at most 6 terms.
+  To illustrate this, suppose we are interested in a relative error of 0.0005\%
+  at each of the three points 0.25, 0.50, and 0.75. With the trigonometric basis,
+  it only took the first 57 basis functions to attain the desired accuracy
+  but it took 22.012 seconds to check those basis functions and compute the approximations.
+  In contrast, the hat basis functions required the first 123 basis functions,
+  but only took 15.581 seconds to check all other basis functions for this degree of accuracy.
+  Once the number of basis functions needed for the desired accuracy is determined,
+  it is faster to use the basis functions. It only took 2.233 seconds to obtain the
+  approximation and compute a point using the basis function compared to the
+  3.633 seconds required to obtain the approximation and compute a point. This
+  suggests that using the hat basis will be faster if interested in obtaining
+  an approximation obtaining a relative error less than 0.5\%.
+
+  In summary, if you are interested in only obtaining a maximum relative error of 0.5\%
+  at the given points, you should use the hat basis functions. If you are interested in
+  only obtaining a maximum relative error of 0.5\% throughout the interval, you should
+  use the trigonometric basis. To obtain more accurate approximations using the least
+  amount of time and computational power, it is suggested to use the
+  hat basis as it is very cheap computationally to solve the system of equations
+  associated to the problem and to evaluate the approximation for higher numbers
+  of included basis functions.
 \end{proof}

@@ -34,4 +34,3 @@ while norm(errors, inf) >= 0.5
     end
     disp(errors)
 end
-

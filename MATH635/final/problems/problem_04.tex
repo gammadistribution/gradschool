@@ -81,6 +81,9 @@
       \hline
       $x$ & $y(x)$ & $y_{2}(x)$ & $|y(x) - y_{2}(x)|$ & \pbox{5cm}{$\frac{100|y(x) - y_{2}(x)|}{|y(x)|}$} \\
       \hline
+      0.25 & 3.504760e-02 &  3.359014e-02 &  1.457462e-03 &  4.158520    \\
+      0.50 & 5.659056e-02 &  5.084746e-02 &  5.743100e-03 &  1.014851e01 \\
+      0.75 & 5.027579e-02 &  4.268105e-02 &  7.594738e-03 &  1.510616e01 \\
       \hline
     \end{tabular}
     \egroup
@@ -95,6 +98,9 @@
       \hline
       $x$ & $y(x)$ & $y_{3}(x)$ & $|y(x) - y_{3}(x)|$ & \pbox{5cm}{$\frac{100|y(x) - y_{3}(x)|}{|y(x)|}$} \\
       \hline
+      0.25 & 3.504760e-02 &  3.521250e-02 &  1.648988e-03 &  4.704996e-01 \\
+      0.50 & 5.659056e-02 &  5.685947e-02 &  2.689137e-03 &  4.751917e-01 \\
+      0.75 & 5.027579e-02 &  5.051862e-02 &  2.428358e-03 &  4.830075e-01 \\
       \hline
     \end{tabular}
     \egroup
@@ -109,11 +115,16 @@
       \hline
       $x$ & $y(x)$ & $y_{4}(x)$ & $|y(x) - y_{4}(x)|$ & \pbox{5cm}{$\frac{100|y(x) - y_{4}(x)|}{|y(x)|}$} \\
       \hline
+      0.25 & 3.504760e-02 &   3.423311 &   8.144879e-04 &  2.323948 \\
+      0.50 & 5.659056e-02 &   5.453670 &   2.053859e-03 &  3.629332 \\
+      0.75 & 5.027579e-02 &   4.793311 &   2.342679e-03 &  4.659657 \\
       \hline
     \end{tabular}
     \egroup
     \caption{Comparison of approximation $y_{4}$ to solution $y$ using the hat basis. All computations are rounded to 6 significant digits.}\label{hat_3}
   \end{table}
+
+
 
   We also provide the graphs of these comparisons in Figure \ref{hat_plot}.
 
@@ -127,11 +138,12 @@
 
   The tri-diagonal nature of the coefficient matrix shows that the matrix is sparse.
   MATLAB provides optimized functions for solving systems involving sparse matrices.
-
   Even though this is not as quick as finding the inverse of a diagonal matrix,
   it is still quite quick in MATLAB. This, coupled with the fact that only at most
   two of the evaluations of the basis functions are needed to compute a point
   on the approximation, shows that this may indeed be the best method for approximating
-  the exact solution to this particular differential equation.
+  the exact solution to this particular differential equation. As such, we have implemented
+  special cases of the algorithm for the creation of the coefficient matrix and column vector
+  as in the trigonometric basis case.
 
 \end{proof}
