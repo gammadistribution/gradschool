@@ -37,28 +37,28 @@
   In the first case, we see that for any $i$,
   \begin{align*}
     a_{ii}
-    &= \int_{(i-1)h}^{ih} - \frac{1}{h^2} - \frac{(x - h(j-1))}{h} dx +
-    \int_{ih}^{(i+1)h} - \frac{1}{(-h)^2} - \frac{(x - h(j+1))}{h} dx
-    &= \frac{-2h}{3} - \frac{2}{h}.
+    &= \int_{(i-1)h}^{(i+1)h}-\phi_i'(x)^2 - \phi_i(x)^2 dx \\
+    &= \int_{(i-1)h}^{ih} - \left(\frac{1}{h}\right)^2 - \left(\frac{(x - h(i-1))}{h}\right)^2 dx +
+    \int_{ih}^{(i+1)h} - \left(-\frac{1}{h}\right)^2 - \left(-\frac{(x - h(i+1))}{h}\right)^2 dx \\
+    &= - \frac{2}{h} - \frac{2h}{3}.
   \end{align*}
   In the second case, we similarly see that
   \begin{align*}
     a_{i(i-1)} &=
     \int_{0}^1 -\phi_{i}'(x)\phi_{i-1}'(x) - \phi_{i}(x)\phi_{i-1}(x) dx \\
-    &= \int_{(i-1)h}^{ih} -\left(\frac{1}{h}\right)\left(\frac{-1}{h}\right) - \left(\frac{x - h(j-1)}{h}\right)\left(\frac{-(x - hj)}{h}\right)dx
+    &= \int_{(i-1)h}^{ih} -\left(\frac{1}{h}\right)\left(-\frac{1}{h}\right) - \left(\frac{x - h(i-1)}{h}\right)\left(-\frac{(x - hi)}{h}\right)dx
     = \frac{1}{h} - \frac{h}{6}
   \end{align*}
-
   Therefore,
   \begin{align*}
     a_{ij} =
     \begin{cases}
-      \frac{-2h}{3} - \frac{2}{h} & \text{if $i = j$} \\
+      - \frac{2}{h} -\frac{2h}{3} & \text{if $i = j$} \\
       \frac{1}{h} - \frac{h}{6} & \text{if $|i - j| = 1$} \\
       0 & \text{otherwise}.
     \end{cases}
   \end{align*}
-  The column vector entry is computed very similarly and we see that $b_i = \frac{-i}{(n+1)^2}$.
+  The column vector entry is computed very similarly and we see that $b_i = -\frac{i}{(n+1)^2}$.
   These definitions greatly reduce the number of computations needed to compute the coefficient matrix
   and column vector and the integral is no longer needed.
 
@@ -123,8 +123,6 @@
     \egroup
     \caption{Comparison of approximation $y_{4}$ to solution $y$ using the hat basis. All computations are rounded to 6 significant digits.}\label{hat_3}
   \end{table}
-
-
 
   We also provide the graphs of these comparisons in Figure \ref{hat_plot}.
 
