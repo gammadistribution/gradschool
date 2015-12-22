@@ -1,11 +1,11 @@
 \begin{problem}
   Finish the Laplace equation
   \begin{align}\label{laplace}
-    -\triangledown u &= -x + 1 \quad \text{on $\Omega$} \notag \\
+    -\triangle u &= f(x) \quad \text{on $\Omega$} \notag \\
     u &= 0 \quad \text{on $d\Omega$}
   \end{align}
   solution by finite element
-  space using the seven hat functions on hexagons as a basis.
+  space using the seven hat functions on hexagons as a basis where $f(x) = -x + 1$.
 \end{problem}
 
 \begin{proof}
@@ -28,66 +28,16 @@
   As discussed in class, the weak formulation of the differential equation
   \label{laplace} is as follows
   \[
-    \int_\Omega \triangledown u(x, y) \cdot \triangledown\phi_i(x, y) d\Omega = \int_\Omega (-x + 1)\phi_i(x, y)d\Omega \quad \text{for $i=0,\dots,6$}.
+    \int_\Omega \triangledown u(x, y) \cdot \triangledown\phi_i(x, y) d\Omega = \int_\Omega f(x)\phi_i(x, y)d\Omega \quad \text{for $i=0,\dots,6$}.
   \]
-  We then require our approximation to satisfy this system, i.e.\
+  Discretizing the solution $u(x, y)$ with the approximation $u_7(x, y)$, we
+  then require our approximation to satisfy the following system
   \begin{align}\label{laplace_system}
-    \sum_{j=0}^6 a_j \int_\Omega \phi_i(x, y) \phi_j(x, y) d\Omega = \int_\Omega (-x + 1)\phi_i(x, y)d\Omega \quad \text{for $i=0,\dots,6$}.
+    \sum_{j=0}^6 a_j \int_\Omega \triangledown \phi_j(x, y) \cdot \triangledown \phi_i(x, y) d\Omega = \int_\Omega f(x)\phi_i(x, y)d\Omega \quad \text{for $i=0,\dots,6$}.
   \end{align}
-  Equivalently, the system is given by $Ax = b$ where
-  \[
-    Ax =
-    \renewcommand\arraystretch{1.5}
-    \begin{bmatrix}
-      \int_\Omega \phi_0(x,y)\phi_0(x,y) d\Omega & \int_\Omega \phi_0(x,y)\phi_1(x,y) d\Omega & \hdots & \int_\Omega \phi_0(x,y)\phi_6(x,y) d\Omega \\
-      \int_\Omega \phi_1(x,y)\phi_0(x,y) d\Omega & \int_\Omega \phi_1(x,y)\phi_1(x,y) d\Omega & \hdots & \int_\Omega \phi_1(x,y)\phi_6(x,y) d\Omega \\
-      \vdots & \vdots & \ddots & \vdots \\
-      \int_\Omega \phi_6(x,y)\phi_0(x,y) d\Omega & \int_\Omega \phi_6(x,y)\phi_1(x,y) d\Omega & \hdots & \int_\Omega \phi_6(x,y)\phi_6(x,y) d\Omega \\
+  This system is then given by $Ax = b$ where $A = [a_{ij}]$ is the stiffness matrix
+  of the differential equation with $a_{ij} = \int_\Omega \triangledown \phi_j(x, y) \cdot \triangledown \phi_i(x, y) d\Omega$
+  and $b = [b_i]$ with $b_i = \int_\Omega f(x)\phi_i(x, y)d\Omega$ for $i=0,\dots,6$. The vector $x$ is the solution vector of the system
+  and defines the coefficients in our approximation.
 
-    \end{bmatrix}
-    \begin{bmatrix}
-      a_0 \\
-      a_1 \\
-      \vdots \\
-      a_6
-    \end{bmatrix}
-  \]
-  and
-  \[
-  b =
-    \renewcommand\arraystretch{1.5}
-  \begin{bmatrix}
-    \int_\Omega (-x + 1) \phi_0(x,y) d\Omega \\
-    \int_\Omega (-x + 1) \phi_1(x,y) d\Omega \\
-    \vdots
-    \int_\Omega (-x + 1) \phi_6(x,y) d\Omega
-  \end{bmatrix}
-  \]
-
-  From our definitions of the basis functions, most of the entries in the matrix
-  $A$ are 0. Specifically $a_{ij} = 0$ when there is no overlap in definition of
-  the basis functions. Using $a_ij$ to denote $\int_\Omega \phi_i(x,y)\phi_j(x,y) d\Omega$,
-  we see that
-  \[
-    A =
-    \begin{bmatrix}
-      a_{00} & a_{01} & a_{02} & a_{03} & a_{04} & a_{05} & a_{06} \\
-      a_{10} & a_{11} & a_{12} & 0 & 0 & 0 & a_{16} \\
-      a_{20} & a_{21} & a_{22} & a_{23} & 0 & 0 & 0  \\
-      a_{30} & 0 & a_{32} & a_{33} & a_{34} & 0 & 0 \\
-      a_{40} & 0 & 0  & a_{43} & a_{44} & a_{45} & 0 \\
-      a_{50} & 0 & 0 & 0 & a_{54} & a_{55} & a_{56} \\
-      a_{60} & a_{61} & 0 & 0 & 0 & a_{65} & a_{66} \\
-    \end{bmatrix}.
-  \]
-  At the time of writing, the author regretfully informs that he was unable to fully solve this system,
-  but the author does provide tools to calculate the equations of the plane for a given triangle
-  in the following link:
-  \url{https://github.com/gammadistribution/gradschool/tree/master/MATH635/final/programs/PDEs}
-
-  Using these tools we can determine the equations of the plane for
-  each triangle and calculate the integral over that triangle. Repeating this process
-  for each domain of the basis functions we can determine the rest of the coefficients $a_{ij}$.
-  The column vector is then computed similarly and we can use any desired technique
-  to solve the system.
 \end{proof}
