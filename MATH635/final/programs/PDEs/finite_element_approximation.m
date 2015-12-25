@@ -6,7 +6,7 @@ A = compute_stiffness_matrix();
 b = compute_column_vector(f);
 
 % These coefficients determine the approximation.
-coefficients = A \ b
+coefficients = A \ b;
 
 % Need to create a function that will determine position of point x, y and
 % then return evaluation of function at that point.
