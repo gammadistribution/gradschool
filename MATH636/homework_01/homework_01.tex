@@ -1,0 +1,122 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+
+\title{Homework Assignment 1}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  To be comprehensive, the second derivative test for two-variable functions $f = f(x, y)$
+  studied in Calculus III should contain (among others) the cases:
+  \begin{enumerate}
+    \item $D(a, b) > 0$ and $f_{xx}(a, b) = 0,$
+    \item $D(a, b) = 0$ and $f_{xx}(a, b) = 0.$
+  \end{enumerate}
+  Why aren't these cases considered? Explain.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  Recall that
+  \begin{itemize}
+    \item $(a, b)$ is called an \textit{absolute maximum} of $f = f(x, y)$ on a domain
+      $D \subset \mathbb{R}^2$ if $f(x, y) \leq f(a, b)$
+      for every $(x, y) \in D$.
+    \item (The Extreme Value) If $f$ is continuous and $D$ is closed and bounded,
+      then $f$ attains both an absolute maximum value and an absolute minimum value.
+  \end{itemize}
+  \begin{enumerate}
+    \item Describe in steps (and in words) how one finds absolute extrema for a two-variable
+      function $f = f(x, y)$ on a closed bounded $D \subset \mathbb{R}^2$.
+    \item Apply your procedure derived in (a) to find absolute extrema for $f(x, y) = 2x^3 + xy^2 + xy^2 + 5x^2 + y^2$
+      over the rectangle $D := \{(x, y)\ | -2 \leq x \leq 3, 0 \leq y \leq 2\}$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 3
+\begin{problem}
+  Consider the optimization problem:
+  \begin{align*}
+    \begin{array} {lcl}
+      \text{Min (Max) } & f(x_1, x_2, \dots, x_n) & \\
+      \text{subject to } & g_1(x_1, x_2, \dots, x_n) &= k_1 \\
+      & g_2(x_1, x_2, \dots, x_n) &= k_2 \\
+      & \vdots & \\
+      & g_m(x_1, x_2, \dots, x_n) &= k_m \\
+    \end{array}
+  \end{align*}
+  \begin{enumerate}
+    \item Formulate the Lagrangean and describe how we should proceed in order
+      to solve such a problem.
+    \item Find the relative extrema of $f(x, y, z) = x + 2y + 3z$ subject to
+      $x - y + z = 1, x^2 + y^2 = 1$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 4
+\begin{problem}
+  Solve the shipping problem studied in MATH 111 if we replace the constraint
+  $x + 2y \leq 100$ by the constraint $x + 2y \leq 625/6$. Use Mathematica to
+  (at least) graph the feasible set.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 5
+\begin{problem}
+  Suppose that $f, f_1, f_2$ are convex functions and $a \geq 0$. Prove that
+  $af$ and $f_1 + f_2$ are convex functions.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 6
+\begin{problem}
+  For $f: \mathbb{R}^n \to \mathbb{R} \cup \{+\infty\}$ we define its \textit{epigraph}
+  as the set
+  \[
+   \text{epi}\ f = \{(x, \beta) \in \mathbb{R}^n \times \mathbb{R} | f(x) \leq \beta \} \subset \mathbb{R}^{n+1}.
+  \]
+  Prove that $f$ is convex if and only if $\text{epi}\ f$ is convex.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+
+
+\end{document}
