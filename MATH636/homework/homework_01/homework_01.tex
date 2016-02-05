@@ -47,11 +47,15 @@
     \item Now suppose that $D(a, b) = 0$ and $f_{xx}(a, b) = 0$. As
       $D(a, b) = f_{xx}(a,b) f_{yy}(a,b) - f_{xy}(a,b)^2,$
       it is true under our supposition that $f_{xy}(a,b)^2 = 0$, i.e.\ $f_{xy}(a,b) = 0$.
-      Without further knowledge of $f_{yy}(a,b)$ we cannot conclusively state whether the
-      point is a local extrema or saddle point.
+      We cannot conclusively state whether the point is a local extrema or saddle point as the function could be increasing or decreasing in the direction of $x$ or $y$.
 
-      To clarify, (basically state that if D = 0 then partials can have same or different signs, i.e. function increasing/decreasing in x and y or
-      one increasing other decreasing. since we don't know their signs, can't tell if it's a min or max or saddle point.)
+      To illustrate, take as an example $f_1(x, y) = -x^4 - y^4$ and $f_2(x, y) = x^4 + y^4$.
+      Note that $f_1$ and $f_2$ both satisfy $D(a,b) = 0$ and $f_{xx}(a,b) = 0$ for the point $(a, b) = (0, 0)$.
+      However, upon further inspection $f_1$ obtains a local maximum at $(0, 0)$, yet
+      $f_2$ obtains a local minimum at $(0, 0)$. Thus, two different results occur for two different functions
+      in the case where $D(a, b) = 0$ and $f_{xx}(a, b) = 0$ and we conclude that the
+      test is inconclusive in such cases.
+
   \end{enumerate}
 \end{proof}
 \newpage
