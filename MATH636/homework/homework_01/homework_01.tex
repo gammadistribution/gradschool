@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem}
 
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
@@ -30,6 +30,29 @@
 \end{problem}
 
 \begin{proof}
+  Throughout, we assume that $f: S \subset \mathbb{R}^2 \to \mathbb{R}$ and that $f \in C^2(S)$ so
+  that $f_{xy}(a,b) = f_{yx}(a,b)$. Therefore,
+  \begin{align*}
+    D(a, b)
+    &= f_{xx}(a,b) f_{yy}(a,b) - f_{xy}(a,b)f_{yx}(a,b) \\
+    &= f_{xx}(a,b) f_{yy}(a,b) - f_{xy}(a,b)^2.
+  \end{align*}
+
+  \begin{enumerate}
+    \item To illustrate that this case can never happen, suppose to the contrary
+      that $D(a, b) > 0$ and $f_{xx}(a, b) = 0.$ Since
+      $D(a, b) = f_{xx}(a,b) f_{yy}(a,b) - f_{xy}(a,b)^2,$
+      we see that $0 < D(a, b) = - f_{xy}(a,b)^2$ which is a contradiction since
+      $f_{xy}(a,b)^2 > 0$. Therefore, this case cannot happen.
+    \item Now suppose that $D(a, b) = 0$ and $f_{xx}(a, b) = 0$. As
+      $D(a, b) = f_{xx}(a,b) f_{yy}(a,b) - f_{xy}(a,b)^2,$
+      it is true under our supposition that $f_{xy}(a,b)^2 = 0$, i.e.\ $f_{xy}(a,b) = 0$.
+      Without further knowledge of $f_{yy}(a,b)$ we cannot conclusively state whether the
+      point is a local extrema or saddle point.
+
+      To clarify, (basically state that if D = 0 then partials can have same or different signs, i.e. function increasing/decreasing in x and y or
+      one increasing other decreasing. since we don't know their signs, can't tell if it's a min or max or saddle point.)
+  \end{enumerate}
 \end{proof}
 \newpage
 
@@ -41,18 +64,47 @@
     \item $(a, b)$ is called an \textit{absolute maximum} of $f = f(x, y)$ on a domain
       $D \subset \mathbb{R}^2$ if $f(x, y) \leq f(a, b)$
       for every $(x, y) \in D$.
-    \item (The Extreme Value) If $f$ is continuous and $D$ is closed and bounded,
+    \item (The Extreme Value Theorem) If $f$ is continuous and $D$ is closed and bounded,
       then $f$ attains both an absolute maximum value and an absolute minimum value.
   \end{itemize}
   \begin{enumerate}
     \item Describe in steps (and in words) how one finds absolute extrema for a two-variable
       function $f = f(x, y)$ on a closed bounded $D \subset \mathbb{R}^2$.
-    \item Apply your procedure derived in (a) to find absolute extrema for $f(x, y) = 2x^3 + xy^2 + xy^2 + 5x^2 + y^2$
+    \item Apply your procedure derived in (a) to find absolute extrema for
+      $f(x, y) = 2x^3 + xy^2 + 5x^2 + y^2$
       over the rectangle $D := \{(x, y)\ | -2 \leq x \leq 3, 0 \leq y \leq 2\}$.
   \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item The steps below outline the process to obtain the absolute extreme for
+      a two-variable, continuous function $f = f(x, y)$ on a closed bounded $D \subset \mathbb{R}^2$.
+      \begin{enumerate}[label=\Roman*.]
+        \item First, identify the critical points of the function, i.e. find the points
+          $(x_i, y_i)$ such that $$\bigtriangledown f(x_i, y_i) = \langle f_x(x_i, y_i), f_y(x_i, y_i) \rangle = \langle 0, 0 \rangle$$
+          or the points $(x, y)$ such that $f_x(x_i, y_i)$ or $f_y(x_i, y_i)$ does not exist.
+        \item Suppose that $S_f$ is the set of critical points obtained in step I. Then
+          $P = S_f \cap D$ is the set of possible points at which
+          the function $f$ obtains its absolute minimum and maximum on the closed bounded domain $D$.
+        \item Note that our function satisfies
+          the assumptions of The Extreme Value Theorem and as a result, using the set $P$ obtained in step II,
+          $\max{f(P)}$ is the absolute maximum of the function $f$
+          and $\min{f(P)}$ is the absolute minimum of the function $f$.
+      \end{enumerate}
+    \item Let $f(x, y) = 2x^3 + xy^2 + 5x^2 + y^2$ where $f: D = \{(x, y)\ | -2 \leq x \leq 3, 0 \leq y \leq 2\} \to \mathbb{R}^2$. Then
+      \begin{align*}
+        \bigtriangledown f(x, y) = \langle f_x(x, y), f_y(x, y) \rangle = \langle 2x(3x + 5) + y^2, 2y(x + 1)\rangle.
+      \end{align*}
+      Note that $f_y(x,y) = 0$ if $x = -1$ or $y = 0$ as the real numbers form a field and thus form an integral domain.
+      Also note that $f_x(x, y) = 0$ if $x = -1$ and $y = \pm 2$ or $x = -5/3$ and $y = 0$ or $x = 0$ and $y = 0$. Thus,
+      $\bigtriangledown f(x, y) = \langle 0, 0 \rangle$ if $(x, y) \in \{(-5/3, 0), (-1, -2), (-1, 2), (0, 0)\} = S_f$.  Since the partial derivatives
+      of $f$ exist everywhere, the set $S_f$ contains every critical point of the function $f$.
+
+      Now, $P = S_f \cap D = \{(-5/3, 0), (-1, 2), (0, 0)\}$ and $f(P) = \{125/27, 3, 0\}$. Therefore,
+      the absolute maximum of $f$ is $\max{f(P)} = 125/27$ which occurs at the point $(-5/3, 0)$ and the absolute
+      minimum of $f$ is $\min{f(P)} = 0$ which occurs at the point $(0, 0)$.
+  \end{enumerate}
 \end{proof}
 \newpage
 
