@@ -157,6 +157,20 @@
 \end{problem}
 
 \begin{proof}
+  Recall that a function $f:S \to \mathbb{R}$ is convex if for all $\lambda \in [0, 1]$
+  and $x_1, x_2 \in S$, it is true that $f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda f(x_1) + (1-\lambda)f(x_2)$.
+
+  Suppose that $a \geq 0$ and $f:S \to \mathbb{R}$ is a convex function. From the above definition, the function
+  $af$ is convex if for all $\lambda \in [0, 1]$
+  and $x_1, x_2 \in S$ we have that
+  \begin{align*}
+    af(\lambda x_1 + (1-\lambda)x_2)
+    &\leq \lambda af(x_1) + (1-\lambda)af(x_2) \\
+    &= a(\lambda f(x_1) + (1-\lambda)f(x_2)).
+  \end{align*}
+  Since $a \geq 0$, this condition is satisfied as an immediate consequence
+  following the definition of the convexity of the function $f$. Therefore, for
+  $a \geq 0$ and a convex function $f$, the function $af$ is convex as well.
 \end{proof}
 \newpage
 
