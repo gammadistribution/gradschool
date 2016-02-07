@@ -28,6 +28,20 @@
 \end{problem}
 
 \begin{proof}
+  Note that this is a separable differential equation and after separating we
+  see that
+  \begin{align*}
+    \frac{dy}{y^2} &= \cos(x)dx \\
+    \int \frac{dy}{y^2} &= \int \cos(x)dx \\
+    -\frac{1}{y} &= \sin(x) + c_1
+  \end{align*}
+  so that $$y = -\frac{1}{\sin(x) + c_1}$$ is the general solution to the differential
+  equation. Using the initial value
+  $y(0) = 2$ and solving for $c_1$ we see that $c_1 = -1/2$ and the solution to the IVP
+  is given by
+  \begin{align*}
+    y = -\frac{1}{\sin(x) - 1/2}.
+  \end{align*}
 \end{proof}
 \newpage
 
