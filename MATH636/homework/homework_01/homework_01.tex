@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
 
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
@@ -146,6 +146,27 @@
 \end{problem}
 
 \begin{proof}
+  The linear program associated to the shipping problem with the replaced constraint
+  is presented below:
+  \begin{align*}
+    \begin{array} {lll}
+      \text{Maximize} & 13x + 9y & \\
+      \text{subject to} & 4x + 3y &\leq 300 \\
+      & x + 2y &\leq 625/6\\
+      & -2x + y &\leq 0 \\ \\
+      & x \geq 0, y \geq 0 & \\
+    \end{array}
+  \end{align*}
+
+  The following Mathematica commands plot the feasible region of the linear
+  program and find the solution to the linear program.
+  \begin{figure}[!h]
+    \centerline{\includegraphics[scale=1.0]{linear_program}}
+  \end{figure}
+
+  As we can see, the objective function is maximized under the given constraints
+  when $x = 75$ and $y = 0$ leading to an objective function value of 975.
+
 \end{proof}
 \newpage
 
@@ -209,6 +230,43 @@
 \end{problem}
 
 \begin{proof}
+  Recall that a function $f: D \to \mathbb{R}$ is convex if for all $\lambda \in [0, 1]$ and $x_1, x_2 \in D$
+  we have that $f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda f(x_1) + (1-\lambda)f(x_2)$
+  and similarly that a set $S$ is convex if for all $\lambda \in [0, 1]$ and $x_1, x_2 \in S$
+  we have that $\lambda x_1 + (1- \lambda) x_2 \in S$.
+
+  Suppose first that the function $f: \mathbb{R}^n \to \mathbb{R} \cup \{+\infty\}$ is convex.
+  Then for all $\lambda \in [0, 1]$ and $x_1, x_2 \in \mathbb{R}^n$ it is true that
+  $$f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda f(x_1) + (1-\lambda)f(x_2).$$
+  Let $y_1 = (x_1, \beta_1), y_2 = (x_2, \beta_2) \in \text{epi}\ f = \{(x, \beta) \in \mathbb{R}^n \times \mathbb{R} | f(x) \leq \beta \}$.
+  Then for $x_1, x_2 \in \mathbb{R}^n$, we have that $f(x_1) \leq \beta_1$ and
+  $f(x_2) \leq \beta_2$. Thus, using the convexity of the function $f$, we see that for all $\lambda \in [0,1]$ and
+  $y_1 = (x_1, \beta_1), y_2 = (x_2, \beta_2) \in \text{epi}\ f$,
+  \begin{align*}
+    \lambda x_1 + (1-\lambda) x_2
+    &\leq \lambda f(x_1) + (1-\lambda)f(x_2) \\
+    &\leq \lambda \beta_1 + (1-\lambda) \beta_2
+  \end{align*}
+  showing that $\lambda y_1 + (1-\lambda) y_2 \in \text{epi}\ f$. Therefore, if
+  $f$ is convex, the set $\text{epi}\ f$ is convex as well.
+
+  Now suppose that the set $\text{epi}\ f= \{(x, \beta) \in \mathbb{R}^n \times \mathbb{R} | f(x) \leq \beta \}$
+  is convex. Then for all $\lambda \in [0, 1]$ and
+  $y_1 = (x_1, \beta_1), y_2 = (x_2, \beta_2) \in \text{epi}\ f$, we have that
+  $\lambda y_1 + (1-\lambda) y_2 = (\lambda x_1 + (1-\lambda)x_2, \lambda \beta_1 + (1-\lambda)\beta_2) \in \text{epi}\ f$, i.e.\
+  \begin{align}\label{epi_convex}
+    f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda \beta_1 + (1-\lambda) \beta_2.
+  \end{align}
+  Note that in particular for any $x_1, x_2 \in \mathbb{R}^n$, we have that
+  $(x_1, f(x_1)), (x_2, f(x_2)) \in \text{epi}\ f$.
+  Thus, using \eqref{epi_convex} with $\beta_1 = f(x_1)$ and $\beta_2 = f(x_2)$,
+  we have that for all $\lambda \in [0,1]$ and $x_1, x_2 \in \mathbb{R}^n$
+  \begin{align*}
+    f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda f(x_1) + (1-\lambda) f(x_2),
+  \end{align*}
+  showing that $f$ is convex.
+  Therefore, if $\text{epi}\ f$ is convex, the function $f$ is convex as well.
+
 \end{proof}
 
 
