@@ -7,6 +7,7 @@
 \renewcommand*{\proofname}{Solution}
 \renewcommand{\theenumi}{\alph{enumi}}
 
+\newcommand{\vect}[1]{\boldsymbol{#1}}
 
 \title{Homework Assignment 1}
 \author{Matthew Tiger}
@@ -134,6 +135,57 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item The Lagrangean associated to the optimization problem is the equation
+      \begin{align*}
+        L(x_1, \dots, x_n, \lambda_1, \dots, \lambda_m) = f(x_1, \dots, x_n) + \sum_{i=1}^m \lambda_i (k_i -g_i(x_1, \dots, x_n)).
+      \end{align*}
+      Note that if the vector $(x_1, \dots, x_n)$ minimizes (maximizes) the objective
+      function, then there exists a vector $(\lambda_1, \dots, \lambda_m)$ such that
+      \begin{align}\label{gradient}
+        \bigtriangledown L(x_1, \dots, x_n, \lambda_1, \dots, \lambda_m) = (0, \dots, 0, 0, \dots, 0).
+      \end{align}
+      Thus, in order to find the optimal value of the objective function
+      we must find all vectors $(x_1, \dots, x_n, \lambda_1, \dots, \lambda_m)$
+      that satisfy \eqref{gradient}. Note that the partials of $L$ with respect to $\lambda_i$ return the original
+      constraints. Then from that collection of vectors, test the
+      values $(x_1, \dots, x_n)$ in the objective function
+      and the vector that minimizes (maximizes) the function is the optimal solution.
+    \item The Lagrangean associated to this problem is given by
+      \begin{align}
+        L(x, y, z, \lambda_1, \lambda_2) = x + 2y + 3z + \lambda_1(1 - (x - y + z)) + \lambda_2(1 - (x^2 + y^2))
+      \end{align}
+      It is straightforward to compute the partials of $L$ with respect to the variables
+      $x, y, z$ and these computations are presented below:
+      \begin{align*}
+        \begin{array}{lll}
+          L_x &= 1 - \lambda_1 - 2\lambda_2 x &= 0 \\
+          L_y &= 2 + \lambda_1 - 2\lambda_2 y &= 0 \\
+          L_z &= 3 - \lambda_1 &= 0
+        \end{array}
+      \end{align*}
+      From these equations we can see that the solution vector in terms of $\lambda_1$ and
+      $\lambda_2$ is given by
+      $$(x, y, z, \lambda_1, \lambda_2) = \left (-\frac{1}{\lambda_2}, \frac{5}{2\lambda_2}, z, 3, \lambda_2\right).$$
+      Using this vector, we solve the original constraints for the possible values of $z$ and $\lambda_2$ and
+      see that
+      \begin{align}
+        \begin{array}{lll}
+          \vect{v_1} &= (x_1, y_1, z_1, \lambda_{11}, \lambda_{12}) &=\left( -\frac{2}{\sqrt{29}}, \frac{5}{\sqrt{29}}, 1 + \frac{7}{\sqrt{29}}, 3, \frac{\sqrt{29}}{2} \right)\\
+          \vect{v_2} &= (x_2, y_2, z_2, \lambda_{21}, \lambda_{22}) &=  \left( \frac{2}{\sqrt{29}}, -\frac{5}{\sqrt{29}}, 1 - \frac{7}{\sqrt{29}}, 3, -\frac{\sqrt{29}}{2} \right)
+        \end{array}
+      \end{align}
+      are the possible values of $x, y, z, \lambda_1, \lambda_2$ that satisfy \eqref{gradient}.
+      Using $\vect{v_1}$ and $\vect{v_2}$ we see that
+      \begin{align*}
+        \begin{array}{lll}
+          f(x_1, y_1, z_1) &= 3 + \sqrt{29}  &\approx 8.38516\\
+          f(x_2, y_2, z_2) &= 3 - \sqrt{29} &\approx -2.38516\\
+        \end{array}
+      \end{align*}
+      so that $3 + \sqrt{29} $ is a relative maximum at $\left( -\frac{2}{\sqrt{29}}, \frac{5}{\sqrt{29}}, 1 + \frac{7}{\sqrt{29}}\right)$ and
+      $3 - \sqrt{29}$ is a relative minimum at $\left( \frac{2}{\sqrt{29}}, -\frac{5}{\sqrt{29}}, 1 - \frac{7}{\sqrt{29}}\right)$.
+  \end{enumerate}
 \end{proof}
 \newpage
 
@@ -166,7 +218,6 @@
 
   As we can see, the objective function is maximized under the given constraints
   when $x = 75$ and $y = 0$ leading to an objective function value of 975.
-
 \end{proof}
 \newpage
 
