@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\title{Homework Assignment 1}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Solve the IVP:
+  \begin{align*}
+    y' = y^2\cos(x),\quad y(0)=2.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  Review solutions of first-order linear ODEs (p. 14) and solve the IVP:'
+  \begin{align*}
+    y' - xy = x^3,\quad y(1) = \frac{1}{2}.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 3
+\begin{problem}
+  Let $Ly = y^{(4)} - 4 y''' + 3y'' +4y' -4y$.
+  \begin{enumerate}
+    \item Find the general solutions of the homogeneous ODE $Ly = 0$.
+    \item Solve the IVP:
+      \begin{align*}
+        Ly = 0,\quad y(0) = 0, \quad y'(0)= -7, \quad y''(0) = 5, \quad y'''(0) = 9.
+      \end{align*}
+    \item Solve the BVP:
+      \begin{align*}
+        Ly = 0,\quad y(0) = 1, \quad \lim_{x\to\infty}y(x) = 0.
+      \end{align*}
+      Is this BVP well-posed?
+    \item Solve the BVP:
+      \begin{align*}
+        Ly = 0,\quad y(0) = 1, \quad \lim_{x\to-\infty}y(x) = 0.
+      \end{align*}
+      Is this BVP well-posed?
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 4
+\begin{problem}
+  Read \S1.6 and then solve the ODEs:
+  $$xy' + 2y = x^2\sqrt{y}, \quad y' = \frac{4x^3-6xy^2-2xy}{x^2+6x^2y-3y^2}, \quad y' + y^2 +(2x+1)y + 1 + x + x^2 = 0.$$
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 5
+\begin{problem}
+  \begin{enumerate}
+    \item Use mathematical induction to prove Leibnitz's differentiation rule:
+      \begin{align*}
+        D^{k}(fg) = \sum_{j=0}^k \binom{k}{j}(D^j f) (D^{k-j}g).
+      \end{align*}
+      Here $f = f(x)$ and $g=g(x)$ are $k$-times differentiable functions and $D^k = \frac{d^k}{dx^k}$.
+    \item Consider the constant-coefficient ODE
+      \begin{align}\label{leibnitz_ode}
+        D^n y + p_{n-1}D^{n-1}y + \dots + p_1 Dy + p_0 y = 0,
+      \end{align}
+      where $p_0, p_1, \dots, p_{n-1}$ are real numbers. Let $r$ be a double root of the characteristic polynomial
+      $P(z) = z^n + p_{n-1} z^{n-1} + \dots + p_1 z + p_0.$ Use Leibnitz’'s rule to
+      show that the function $xe^{rx}$ is a solution of \eqref{leibnitz_ode}.
+    \item Let $r$ be a triple root of the characteristic polynomial $P(z)$ from part (b).
+      Use Leibnitz'’s rule to show that the function $x^2 e^{rx}$
+      is then also a solution of \eqref{leibnitz_ode}.
+    \item Let $r$ be a real number. Show that the functions $e^{rx}$, $xe^{rx}$, and $x^2 e^{rx}$
+      are linearly independent on $\mathbb{R}$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 6
+\begin{problem}
+  Use the formula for the derivative of a determinant from the lectures, other
+  properties of determinants, and the linear ODE (1.3.1) to verify identity
+  (1.3.4) in the textbook.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+
+
+
+\end{document}
