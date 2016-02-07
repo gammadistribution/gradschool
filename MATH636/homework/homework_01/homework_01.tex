@@ -171,6 +171,29 @@
   Since $a \geq 0$, this condition is satisfied as an immediate consequence
   following the definition of the convexity of the function $f$. Therefore, for
   $a \geq 0$ and a convex function $f$, the function $af$ is convex as well.
+
+  Now suppose that $f_1:S_1 \to \mathbb{R}$ and $f_2:S_2 \to \mathbb{R}$ are convex
+  functions.
+  The function $f_1 + f_2: S_1 \cap S_2 \to \mathbb{R}$ where $f_1 + f_2(x) := f_1(x) + f_2(x)$
+  is convex if for all $\lambda \in [0, 1]$ and $x_1, x_2 \in S_1 \cap S_2$
+  it is true that
+  \begin{align*}
+    (f_1 + f_2)(\lambda x_1 + (1-\lambda)x_2)
+    &\leq \lambda (f_1 + f_2)(x_1) + (1-\lambda)(f_1 + f_2)(x_2).
+  \end{align*}
+  Using the convexity of the functions $f_1$ and $f_2$ and the definition of the function
+  $f_1 + f_2$, we see that for all $\lambda \in [0, 1]$ and $x_1, x_2 \in S_1 \cap S_2$ we have that
+  \begin{align*}
+    f_1 + f_2(\lambda x_1 + (1-\lambda)x_2)
+    &= f_1(\lambda x_1 + (1-\lambda)x_2) + f_2(\lambda x_1 + (1-\lambda)x_2) \notag \\
+    &\leq \lambda f_1(x_1) + (1-\lambda)f_1(x_2) \notag \\
+    &\quad + \lambda f_2(x_1) + (1-\lambda)f_2(x_2) \notag \\
+    &= \lambda (f_1(x_1) + f_2(x_1)) \notag \\
+    &\quad + (1 - \lambda)(f_1(x_2) + f_2(x_2)) \notag \\
+    &= \lambda (f_1 + f_2)(x_1) + (1 - \lambda) (f_1 + f_2)(x_2).
+  \end{align*}
+  Therefore, if $f_1$ and $f_2$ are convex functions, the function $f_1 + f_2$
+  is convex as well.
 \end{proof}
 \newpage
 
