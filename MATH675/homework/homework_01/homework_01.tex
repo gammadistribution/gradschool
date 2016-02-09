@@ -48,13 +48,36 @@
 
 % Problem 2
 \begin{problem}
-  Review solutions of first-order linear ODEs (p. 14) and solve the IVP:'
+  Review solutions of first-order linear ODEs (p. 14) and solve the IVP:
   \begin{align*}
     y' - xy = x^3,\quad y(1) = \frac{1}{2}.
   \end{align*}
 \end{problem}
 
 \begin{proof}
+  The solution to the first-order linear ODE
+  \begin{align*}
+    y'(x) + p_0(x)y(x) = f(x)
+  \end{align*}
+  is given by
+  \begin{align*}
+    y(x) = \frac{c_1}{I(x)} + \frac{1}{I(x)} \int_0^x f(t)I(t)dt, \quad I(x) = \exp{\left(\int_0^x p_0(t) dt\right)}.
+  \end{align*}
+  For this problem, we set $p_0(x) = -x$ and $f(x) = x^3$ and see that
+  \begin{align*}
+    I(x) = \exp{\left(\int_0^x p_0(t) dt\right)} = \exp{\left(\int_0^x -t dt \right)} = \exp{\left(-\frac{x^2}{2}\right)}.
+  \end{align*}
+  Thus the general solution to the ODE $y' - xy = x^3$ is given by
+  \begin{align*}
+    y &= \frac{c_1}{\exp{\left(-\frac{x^2}{2}\right)}} + \frac{1}{\exp{\left(-\frac{x^2}{2}\right)}}\int_0^x t^3 \exp{\left(-\frac{t^2}{2}\right)}dt \\
+    &= \frac{c_1}{\exp{\left(-\frac{x^2}{2}\right)}} - \frac{\exp{\left(-\frac{x^2}{2}\right)}}{\exp{\left(-\frac{x^2}{2}\right)}}(2 + x^2) \\
+    &= \frac{c_1}{\exp{\left(-\frac{x^2}{2}\right)}} - (2+x^2)
+  \end{align*}
+  Using the initial value $y(1) = \frac{1}{2}$, we see that $c_1 = \frac{7}{2}\exp{\left(-\frac{1}{2}\right)}$
+  and the solution to the IVP is
+  \begin{align*}
+    y = \frac{7\exp{\left(-\frac{1}{2}\right)}}{2\exp{\left(-\frac{x^2}{2}\right)}} - (2 + x^2).
+  \end{align*}
 \end{proof}
 \newpage
 
@@ -82,6 +105,42 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item The characteristic equation associated to the homogeneous ODE $Ly=0$
+      is $m(x) = x^4 - 4 x^3 + 3x^2 + 4x - 4$. The roots of the characteristic
+      polynomial are $r_1 = -1$, $r_2=1$, $r_3=2$, and $r_4=2$.
+
+      Therefore, the general solution of the homogeneous ODE is
+      \begin{align}\label{homo_ode}
+        y(x) = c_1 e^{-x} + c_2 e^{x} + c_3e^{2x} +c_4xe^{2x}.
+      \end{align}
+    \item Through an abuse of notation, we note that the matrix associated to the Wronskian
+      of this equation as function of x is given by
+      \begin{align*}
+        W(x) =
+        \begin{bmatrix}
+          e^{-x} & e^{x} & e^{2x} & xe^{2x} \\
+          -e^{-x} & e^{x} & 2e^{2x} & e^{2x} + 2xe^{2x} \\
+          e^{-x} & e^{x} & 4e^{2x} & 4e^{2x} + 4xe^{2x} \\
+          -e^{-x} & e^{x} & 8e^{2x} & 12e^{2x} + 8xe^{2x} \\
+        \end{bmatrix}.
+      \end{align*}
+      The solution to the IVP is determined by particular values of the coefficients in the
+      general solution \eqref{homo_ode}. These coefficients are found as the
+      solution to the system of equations
+      $W(0)\vect{c} = \vect{b}$ where
+      \begin{align*}
+        \vect{c} = \begin{bmatrix}c_1 \\ c_2 \\ c_3 \\ c_4 \end{bmatrix}\quad\text{and}\quad
+        \vect{b} = \begin{bmatrix} 0 \\ -7 \\ 5 \\ 9 \end{bmatrix}.
+      \end{align*}
+      The solution to this system is given by $\vect{c} = \langle 4,-3,-1,2 \rangle$.
+      Therefore, the solution to the IVP is
+      \begin{align*}
+        y(x) = 4 e^{-x} -3e^{x} -e^{2x} +2xe^{2x}.
+      \end{align*}
+    \item
+    \item
+  \end{enumerate}
 \end{proof}
 \newpage
 
