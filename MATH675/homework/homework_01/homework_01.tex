@@ -158,6 +158,80 @@
 \end{problem}
 
 \begin{proof}
+  We begin with the differential equation
+  \begin{align*}
+    xy' + 2y = x^2\sqrt{y}.
+  \end{align*}
+  Note that this equation can be rewritten as
+  \begin{align}\label{bernoulli}
+    y' = \left(-\frac{2}{x}\right) y + x y^{1/2},
+  \end{align}
+  which is a Bernoulli equation with $P=1/2$. Dividing \eqref{bernoulli} by $y^{1/2}$
+  and making the substitution $u(x) = y(x)^{1-1/2}$ yields the new linear differential
+  equation
+  \begin{align*}
+    u'(x) = -\left(\frac{1}{x}\right)u(x) + \frac{x}{2}.
+  \end{align*}
+  The solution to this linear equation is $u(x) = x^2/6 + c_1/x$ suggesting that
+  \begin{align*}
+    y(x)=u(x)^2 = \left(\frac{x^2}{6} + \frac{c_1}{x}\right)^2
+  \end{align*}
+  is the solution to \eqref{bernoulli}.
+
+  Let us next investigate
+  \begin{align*}
+    y' = \frac{4x^3-6xy^2-2xy}{x^2+6x^2y-3y^2}.
+  \end{align*}
+  Note that this equation can be written as
+  \begin{align*}
+   -(4x^3-6xy^2-2xy) +(x^2+6x^2y-3y^2)y'(x) = 0.
+  \end{align*}
+  Identifying $M(x,y) = -(4x^3-6xy^2-2xy)$ and $N(x,y)=(x^2+6x^2y-3y^2)$, we notice
+  that
+  \begin{align*}
+    \frac{\partial M(x,y)}{\partial y} = 12xy + 2x = \frac{\partial N(x,y)}{\partial x}
+  \end{align*}
+  making this equation exact.
+  The solution to the exact differential equation is then $f(x,y) = c_1$ where
+  $f_x = M(x,y)$ and $f_y = N(x,y)$. Thus,
+  \begin{align}\label{exact}
+    f(x,y) = \int f_x(x,y) dx = -\int (4x^3-6xy^2-2xy) dx = -x^4 +3x^2y^2 +x^2y + h(y).
+  \end{align}
+  In order to find out what $h(y)$ is, we take the partial derivative of
+  \eqref{exact} and compare it with $N(x,y)$. Doing so, we see that
+  \begin{align*}
+    f_y(x,y) = x^2+6x^2y+h'(y) = x^2+6x^2y-3y^2 = N(x,y)
+  \end{align*}
+  implying that $h'(y) = -3y^2$ and that $h(y) = -y^3$. Therefore,
+  the solution to the differential equation is
+  \begin{align*}
+    f(x,y) = -x^4 +3x^2y^2 +x^2y -y^3 = c_1.
+  \end{align*}
+
+  Finally let us investigate the differential equation
+  \begin{align*}
+    y' + y^2 +(2x+1)y + 1 + x + x^2 = 0.
+  \end{align*}
+  This equation can be rewritten as
+  \begin{align}\label{ricatti}
+    y' = -y^2 -(2x+1)y - (1 + x + x^2)
+  \end{align}
+  which is a Riccati equation. The procedure to find the solution of such
+  equations is to produce a particular solution $y_p(x)$ to the equation and then find the
+  general solution which will be in the form $y(x) = y_p(x) + u(x)$ by using this formula in
+  the original equation. Note that $y_p(x) = -x$ is a particular solution
+  of \eqref{ricatti}. Thus the general solution is of the form $y(x) = -x + u(x)$.
+
+  Making this substitution reveals the following Bernoulli equation in $u(x)$:
+  \begin{align*}
+    u'(x) = -u(x) -u(x)^2
+  \end{align*}
+  The solution to this differential equation is $u(x) = -(e^{c_1}/(-e^x + e^{c_1}))$.
+  Therefore, the general solution to \eqref{ricatti} is
+  \begin{align*}
+    y(x)=-x-\frac{e^{c_1}}{-e^x + e^{c_1}}.
+  \end{align*}
+
 \end{proof}
 \newpage
 
