@@ -337,7 +337,6 @@
       are linearly independent on $\mathbb{R}$ if the Wronskian of these functions is nonzero. It is clear that
       \begin{align*}
         W(x) =
-        e^{rx}
         \begin{vmatrix}
           1 & x & x^2  \\
           r & (xr + 1) &  (rx^2 + 2x) \\
@@ -358,6 +357,86 @@
 \end{problem}
 
 \begin{proof}
+  We wish to show that
+  \begin{align}\label{identity}
+    W'(x) = -p_{n-1}(x)W(x).
+  \end{align}
+  We know for a set of functions $\{y_1, y_2, \dots, y_n\}$ that
+  \begin{align}\label{det}
+    W'(x) &=
+    \begin{vmatrix}
+      y_1' & y_2' & y_3' & \dots & y_n' \\
+      y_1' & y_2' & y_3' & \dots & y_n' \\
+      y_1'' & y_2'' & y_3''& \dots & y_n'' \\
+      \vdots & \vdots & \ddots & \vdots \\
+      y_1^{(n-1)} & y_2^{(n-1)} & y_3^{(n-1)} & \dots & y_n^{(n-1)} \\
+    \end{vmatrix}
+    +
+    \begin{vmatrix}
+      y_1 & y_2 & y_3 & \dots & y_n \\
+      y_1'' & y_2'' & y_3'' & \dots & y_n'' \\
+      y_1'' & y_2'' & y_3''& \dots & y_n'' \\
+      \vdots & \vdots & \ddots & \vdots \\
+      y_1^{(n-1)} & y_2^{(n-1)} & y_3^{(n-1)} & \dots & y_n^{(n-1)} \\
+    \end{vmatrix}
+    + \notag \\
+    &\quad +\dots +
+    \begin{vmatrix}
+      y_1 & y_2 & y_3 & \dots & y_n \\
+      y_1' & y_2' & y_3' & \dots & y_n' \\
+      y_1'' & y_2'' & y_3''& \dots & y_n'' \\
+      \vdots & \vdots & \ddots & \vdots \\
+      y_1^{(n)} & y_2^{(n)} & y_3^{(n)} & \dots & y_n^{(n)} \\
+    \end{vmatrix} \notag \\
+    &=
+    \begin{vmatrix}
+      y_1 & y_2 & y_3 & \dots & y_n \\
+      y_1' & y_2' & y_3' & \dots & y_n' \\
+      y_1'' & y_2'' & y_3''& \dots & y_n'' \\
+      \vdots & \vdots & \ddots & \vdots \\
+      y_1^{(n)} & y_2^{(n)} & y_3^{(n)} & \dots & y_n^{(n)} \\
+    \end{vmatrix}
+  \end{align}
+  since the determinant of a matrix with dependent rows is zero. Note that
+  the elementary row operation of adding a multiple of one row to another row does not
+  change the determinant. Thus, we perform the following $n-1$ row operations on
+  row $[n]$:  add $p_{i-1}[i]$ to row $[n]$ where $1\leq i \leq n-2$. Using the
+  identity found in \eqref{det}, we see that
+  after the row operations the determinant becomes
+  \begin{align*}\label{pn}
+    W'(x) &=
+    \begin{vmatrix}
+      y_1 & y_2 & y_3 & \dots & y_n \\
+      y_1' & y_2' & y_3' & \dots & y_n' \\
+      y_1'' & y_2'' & y_3''& \dots & y_n'' \\
+      \vdots & \vdots & \ddots & \vdots \\
+      y_1^{(n)} + \sum_{j=0}^{n-2} p_jy_1^{(j)} & y_2^{(n)} + \sum_{j=0}^{n-2} p_jy_2^{(j)}& y_3^{(n)} + \sum_{j=0}^{n-2} p_jy_3^{(j)} & \dots & y_n^{(n)} + \sum_{j=0}^{n-2} p_jy_n^{(j)} \\
+    \end{vmatrix} \notag \\
+    &=
+    \begin{vmatrix}
+      y_1 & y_2 & y_3 & \dots & y_n \\
+      y_1' & y_2' & y_3' & \dots & y_n' \\
+      y_1'' & y_2'' & y_3''& \dots & y_n'' \\
+      \vdots & \vdots & \ddots & \vdots \\
+      -p_{n-1}y_1^{(n-1)} & -p_{n-1}y_2^{(n-1)}& -p_{n-1}y_3^{(n-1)} & \dots & -p_{n-1}y_n^{(n-1)} \\
+    \end{vmatrix}
+  \end{align*}
+  where $y_i^{(n)} + \sum_{j=0}^{n-2} p_jy_i^{(j)} = -p_{n-1}y_i^{n-1}$ since each $y_i$
+  satisfies the original differential equation. Thus, after removing the
+  $p_{n-1}$ term from the determinant we have that
+  \begin{align*}
+     W'(x) &=
+     -p_{n-1}
+     \begin{vmatrix}
+       y_1 & y_2 & y_3 & \dots & y_n \\
+       y_1' & y_2' & y_3' & \dots & y_n' \\
+       y_1'' & y_2'' & y_3''& \dots & y_n'' \\
+       \vdots & \vdots & \ddots & \vdots \\
+       y_1^{(n-1)} & y_2^{(n-1)}& y_3^{(n-1)} & \dots & y_n^{(n-1)} \\
+     \end{vmatrix}
+     = -p_{n-1}W(x)
+  \end{align*}
+  and the original identity \eqref{identity} is satisfied.
 \end{proof}
 
 
