@@ -32,17 +32,84 @@
 \begin{problem}
   Convert the following linear programming problem to \textit{standard form}:
   \begin{align*}
-    \begin{array}{ll}
-      \text{maximize} & 2x_1 + x_2 \\
-      \text{subject to} & 0 \leq x_1 \leq 2 \\
-      & x_1 + x_2 \leq 3 \\
-      & x_1 + 2x_2 \leq 5 \\
-      & x_2 \geq 0
+    \begin{array}{rll}
+      \text{maximize} & 2x_1 + x_2 &\\
+      \text{subject to} & 0 \leq x_1 &\leq 2 \\
+      & x_1 + x_2 &\leq 3 \\
+      & x_1 + 2x_2 &\leq 5 \\
+      & x_2 \geq 0 &
     \end{array}
   \end{align*}
 \end{problem}
 
 \begin{proof}
+  In order to convert this linear programming problem into standard form, we
+  must transform the objective from \textit{maximize} to \textit{minimize} and
+  the constraints must be transformed from linear inequalities into linear equations.
+
+  Our first step will be to rewrite the objective function as a minimization problem
+  and write each constraint as a linear inequality as so:
+  \begin{align*}
+    \begin{array}{rll}
+      \text{minimize} & -2x_1 - x_2 &\\
+      \text{subject to} & x_1 &\leq 2 \\
+      & x_1 + x_2 &\leq 3 \\
+      & x_1 + 2x_2 &\leq 5 \\
+      & x_1 \geq 0, x_2 \geq 0 &
+    \end{array}
+  \end{align*}
+
+  We can then introduce three slack variables $x_3, x_4, x_5$ to turn the linear
+  inequalities into linear equations:
+  \begin{align*}
+    \begin{array}{rllllll}
+      \text{minimize} & -2x_1 &- x_2  & & & &\\
+      % \text{subject to} & x_1 & &+ x_3 & & &= 2 \\
+      \text{subject to} & x_1 &+ x_2 &+ x_3 & & &= 2 \\
+      & x_1 &+ x_2 & &+ x_4 & &= 3 \\
+      & x_1 &+ 2x_2 & & &+ x_5&= 5 \\
+      & x_1 \geq 0, &x_2 \geq 0, &x_3 \geq 0, &x_4 \geq 0, &x_5 \geq 0
+    \end{array}
+  \end{align*}
+
+  As the above linear programming problem is written as
+  \begin{align*}
+    \begin{array}{rl}
+      \text{minimize} & \vect{c}^\intercal \vect{x}\\
+      \text{subject to} & A\vect{x} = \vect{b} \\
+      & \vect{x} \geq 0
+    \end{array}
+  \end{align*}
+  where
+  \begin{align*}
+    \vect{c}^\intercal =
+    \begin{bmatrix}
+      -2 \\
+      -1 \\
+    \end{bmatrix}^\intercal,
+    \quad
+    A =
+    \begin{bmatrix}
+      1 & 1 & 1 & 0 & 0 \\
+      1 & 1 & 0 & 1 & 0 \\
+      1 & 2 & 0 & 0 & 1 \\
+    \end{bmatrix},\quad
+    \vect{x} =
+    \begin{bmatrix}
+      x_1 \\
+      x_2 \\
+      x_3 \\
+      x_4 \\
+      x_5 \\
+    \end{bmatrix}, \quad
+    \vect{b} =
+    \begin{bmatrix}
+      2 \\
+      3 \\
+      5 \\
+    \end{bmatrix}
+  \end{align*}
+  the linear programming problem is in standard form and we are done.
 \end{proof}
 \newpage
 
@@ -61,7 +128,7 @@
     b = \begin{bmatrix}
       14 \\
       5 \\
-      -10
+      -10 \\
     \end{bmatrix}.
   \end{align*}
   If possible, generate a non-basic feasible solution of the system from which
