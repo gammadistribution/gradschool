@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
 
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
@@ -8,6 +9,14 @@
 \renewcommand{\theenumi}{\alph{enumi}}
 
 \newcommand{\vect}[1]{\boldsymbol{#1}}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 2}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
 
 \title{Homework Assignment 1}
 \author{Matthew Tiger}

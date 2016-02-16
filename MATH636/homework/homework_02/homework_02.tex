@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 2}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 2}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Convert the following linear programming problem to \textit{standard form}:
+  \begin{align*}
+    \begin{array}{ll}
+      \text{maximize} & 2x_1 + x_2 \\
+      \text{subject to} & 0 \leq x_1 \leq 2 \\
+      & x_1 + x_2 \leq 3 \\
+      & x_1 + 2x_2 \leq 5 \\
+      & x_2 \geq 0
+    \end{array}
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  Solve the system $Ax = b$ where
+  \begin{align*}
+    A =
+    \begin{bmatrix}
+      2 & -1 & 2 & -1 & 3 \\
+      1 & 2 & 3 & 1 & 0 \\
+      1 & 0 & -2 & 0 & -5 \\
+    \end{bmatrix}
+    , \quad
+    b = \begin{bmatrix}
+      14 \\
+      5 \\
+      -10
+    \end{bmatrix}.
+  \end{align*}
+  If possible, generate a non-basic feasible solution of the system from which
+  you derive next a basic feasible one.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 3
+\begin{problem}
+  Does every linear programming problem in standard form have a nonempty feasible set?
+  If ``yes'', provide a proof. If ``no'', provide a counter-example.
+
+  Does every linear programming problem in standard form (assuming a nonempty feasible
+  set) have an optimal solution? If ``yes'', provide a proof. If ``no'', provide a counter-example.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 4
+\begin{problem}
+  \begin{enumerate}
+    \item Solve the following linear program graphically:
+      \begin{align*}
+        \begin{array}{ll}
+          \text{maximize} & 2x_1 + 5x_2 \\
+          \text{subject to} & 0 \leq x_1 \leq 4 \\
+          & 0 \leq x_2 \leq 6 \\
+          & x_1 + x_2 \leq 8
+        \end{array}
+      \end{align*}
+    \item Solve the linear program in (b) the same way Example 15.15 was solved in class.
+      Compute only the vertices that lead to the optimal vertex found at (a).
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+
+\end{document}
