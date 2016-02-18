@@ -10,6 +10,17 @@
 
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right]
+}
+
+\newcommand{\grstep}[2][\relax]{%
+   \ensuremath{\mathrel{
+       {\mathop{\longrightarrow}\limits^{#2\mathstrut}_{
+                                     \begin{subarray}{l} #1 \end{subarray}}}}}}
+\newcommand{\swap}{\leftrightarrow}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -109,14 +120,15 @@
       5 \\
     \end{bmatrix}
   \end{align*}
-  the linear programming problem is in standard form and we are done.
+  with $\vect{x} \geq 0$ and $\vect{b} \geq 0$ the linear programming problem
+  is in standard form and we are done.
 \end{proof}
 \newpage
 
 
 % Problem 2
 \begin{problem}
-  Solve the system $Ax = b$ where
+  Solve the system $A\vect{x} = \vect{b}$ where
   \begin{align*}
     A =
     \begin{bmatrix}
@@ -125,7 +137,7 @@
       1 & 0 & -2 & 0 & -5 \\
     \end{bmatrix}
     , \quad
-    b = \begin{bmatrix}
+    \vect{b} = \begin{bmatrix}
       14 \\
       5 \\
       -10 \\
@@ -136,6 +148,123 @@
 \end{problem}
 
 \begin{proof}
+  In order to solve the system $Ax=b$, we must perform row operations on the
+  augmented matrix to reduce it to reduced row form. We perform these operations below:
+
+  \begin{align*}
+    &\begin{amatrix}{5}
+      2 & -1 & 2 & -1 & 3 & 14 \\
+      1 & 2 & 3 & 1 & 0 & 5 \\
+      1 & 0 & -2 & 0 & -5 & -10 \\
+    \end{amatrix}
+    \begin{array}{c}
+    \grstep[{[2] - (1/2)[1]}]{(1/2)[1]} \\
+    \grstep[]{[3] - (1/2)[1]}
+    \end{array}
+    \begin{amatrix}{5}
+      1 & -1/2 & 1 & -1/2 & 3/2 & 7 \\
+      0 & 5/2 & 2 & 3/2 & -3/2 & -2 \\
+      0 & 1/2 & -3 & 1/2 & -13/2 & -17 \\
+    \end{amatrix}
+    \begin{array}{c}
+      \grstep[]{(2/5)[2]}
+    \end{array}
+    \\
+    &\begin{amatrix}{5}
+      1 & -1/2 & 1 & -1/2 & 3/2 & 7 \\
+      0 & 1 & 4/5 & 3/5 & -3/5 & -4/5 \\
+      0 & 1/2 & -3 & 1/2 & -13/2 & -17 \\
+    \end{amatrix}
+    \begin{array}{c}
+      \grstep[{[3] - (1/2)[2]}]{[1] + (1/2)[2]} \\
+    \end{array}
+    \begin{amatrix}{5}
+      1 & 0 & 7/5 & -1/5 & 6/5 & 33/5 \\
+      0 & 1 & 4/5 & 3/5 & -3/5 & -4/5 \\
+      0 & 0 & -17/5 & 1/5 & -31/5 & -83/5 \\
+    \end{amatrix}
+    \\
+    &\begin{array}{c}
+      \grstep[]{(-5/17)[3]}
+    \end{array}
+    \begin{amatrix}{5}
+      1 & 0 & 7/5 & -1/5 & 6/5 & 33/5 \\
+      0 & 1 & 4/5 & 3/5 & -3/5 & -4/5 \\
+      0 & 0 & 1 & -1/17 & 31/17 & 83/17 \\
+    \end{amatrix}
+    \begin{array}{c}
+      \grstep[{[2] - (4/5)[3]}]{[1] - (7/5)[3]} \\
+    \end{array}
+    \begin{amatrix}{5}
+      1 & 0 & 0 & -2/17 & -23/17 & -4/17 \\
+      0 & 1 & 0 & 11/17 & -35/17 & -80/17 \\
+      0 & 0 & 1 & -1/17 & 31/17 & 83/17 \\
+    \end{amatrix}.
+  \end{align*}
+
+  Using the above row-reduced augmented matrix, we see that the solution to the
+  system $A\vect{x} = \vect{b}$ is given by
+  \begin{align}\label{prob_2_x}
+    \vect{x} =
+    \begin{bmatrix}
+      -4/17 \\
+      -80/17 \\
+      83/17 \\
+      0 \\
+      0 \\
+    \end{bmatrix}
+    +
+    s
+    \begin{bmatrix}
+      2/17 \\
+      -11/17 \\
+      1/17 \\
+      1 \\
+      0 \\
+    \end{bmatrix}
+    +
+    t
+    \begin{bmatrix}
+      23/17 \\
+      35/17 \\
+      -31/17 \\
+      0 \\
+      1 \\
+    \end{bmatrix}
+  \end{align}
+  where $s\in\mathbb{R}$ and $t\in\mathbb{R}$.
+
+  Suppose that the matrix $A$ is written such that $A = [\vect{a}_i]$ for
+  $1 \leq i \leq 5$ where $\vect{a}_i$ corresponds to the $i$-th column of the original
+  matrix $A$. Recall that a solution $\vect{x}_0 \geq \vect{0}$ of the system $A\vect{x} = \vect{b}$ is a
+  basic feasible solution if the columns of the matrix
+  $A$ associated to the nonzero components of $\vect{x}_0$ are linearly
+  independent. Otherwise the solution is a non-basic feasible solution.
+
+  Using solution \eqref{prob_2_x}, we see that for $s = 0$ and $t = 82/31$, we get
+  the corresponding feasible solution $\vect{x}_0 = [1762/527, 390/527, 1/17, 0, 82/31]^\intercal$ to the system
+  $A\vect{x} = \vect{b}$. We know that this is a non-basic feasible solution since the vectors
+  $\vect{a}_1$, $\vect{a}_2$, $\vect{a}_3$, and $\vect{a}_5$ must be linearly
+  dependent as the $\text{rank}(A) = 3$, i.e.\ the maximum number of linearly independent columns of $A$ is 3.
+
+  The Fundamental Theorem of LP prescribes how to move from this non-basic feasible
+  solution $\vect{x}_0$ to a basic feasible solution $\vect{x}_1$. As $\vect{a}_1$, $\vect{a}_2$, $\vect{a}_3$, and $\vect{a}_5$
+  are linearly dependent, there exists constants $y_1, y_2, y_3, y_5$ not all zero such that
+  \begin{align*}
+    y_1\vect{a_1} + y_2\vect{a_2} + y_3\vect{a_3} + y_5\vect{a_5} = \vect{0},
+  \end{align*}
+  namely $y_1 = 1$, $y_2 = 35/23$, $y_3 = -31/23$, and $y_5 = 17/23$.
+  Thus, the vector $\epsilon\vect{y} = \epsilon[y_1, y_2, y_3, 0, y_5] ^ \intercal$ satisfies
+  $A[\epsilon\vect{y}] = \vect{0}$. As such, the vector $\vect{x}_0 - \epsilon\vect{y}$ satisfies
+  $A[\vect{x}_0 - \epsilon\vect{y}] = \vect{b}$, i.e.\ the vector $\vect{x}_0 - \epsilon\vect{y}$
+  is a solution of the original system $A\vect{x} = \vect{b}$. Choose
+  $$\epsilon = \min\{x_i/y_i| i=1,2,3,5\ y_i > 0\} = -23/527.$$
+  Then the vector $\vect{x}_1 = \vect{x}_0 - \epsilon\vect{y}$ will have 3 positive components and the rest of the components will be 0 showing that
+  the vector $\vect{x}_1$ is a basic feasible solution. Therefore,
+  \begin{align*}
+    \vect{x}_1 = \vect{x}_0 - \epsilon\vect{y} = \begin{bmatrix}105/31\\ 25/31\\ 0\\ 0\\ 83/31\end{bmatrix}
+  \end{align*}
+  is the desired basic feasible solution.
 \end{proof}
 \newpage
 
