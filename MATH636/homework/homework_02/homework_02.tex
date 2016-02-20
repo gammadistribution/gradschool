@@ -279,6 +279,51 @@
 \end{problem}
 
 \begin{proof}
+  Not every linear programming problem (LP) in standard form has a nonempty feasible set.
+  Take for instance the following LP:
+  \begin{align*}
+    \begin{array}{rl}
+      \text{minimize} & 2x_1 \\
+      \text{subject to} & x_1 \leq -1 \\
+      & x_1 \geq 0
+    \end{array}
+  \end{align*}
+  Clearly this problem has an empty feasible set due to the contradictory constraints.
+
+  The LP in standard form is stated as:
+  \begin{align*}
+    \begin{array}{rl}
+      \text{minimize} & 2x_1  \\
+      \text{subject to} & -x_1 - x_2  = 1  \\
+      & x_1 \geq 0,  x_2 \geq 0
+    \end{array}
+  \end{align*}
+  The equation $-x_1 - x_2 = 1$ for $x_1, x_2 \geq 0$ has no solutions
+  and the feasible set of the standard form LP is empty.
+  Therefore, not every LP in standard form has a nonempty feasible set.
+
+  Additionally, not every LP in standard form with a nonempty feasible set has
+  an optimal solution. Take for instance the following LP:
+  \begin{align*}
+    \begin{array}{rl}
+      \text{minimize} & -3x_1 \\
+      \text{subject to} & x_1 \geq 1  \\
+      & x_1 \geq 0
+    \end{array}
+  \end{align*}
+  The problem can be written in standard form as so:
+  \begin{align*}
+    \begin{array}{rl}
+      \text{minimize} & -3x_1  \\
+      \text{subject to} & x_1 - x_2 = 1  \\
+      & x_1 \geq 0, x_2 \geq 0
+    \end{array}
+  \end{align*}
+  The equation $x_1 - x_2 = 1$ for $x_1, x_2 \geq 0$ has an infinite number of
+  solutions so that $x_1$ can be chosen arbitrarily large. Consequently,
+  $-x_1$ can be made arbitrarily small and no point in
+  the feasible set of this LP in standard form is the smallest, i.e\ optimal.
+  Therefore, not every LP in standard form with a nonempty feasible set has an optimal solution.
 \end{proof}
 \newpage
 
