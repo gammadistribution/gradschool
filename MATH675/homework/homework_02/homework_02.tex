@@ -202,7 +202,7 @@
     y''' + p_2(x)y'' + p_1(x)y' + p_0(x) y = 0
   \end{align*}
   and $u_1$, $u_2$, $u_3$ are solutions of the system
-  \begin{align*}
+  \begin{align}\label{u_system}
     \left\{
       \begin{array}{lllllll}
         u_1'y_1 &+& u_2'y_2 &+& u_3'y_3 &=& 0, \\
@@ -210,14 +210,56 @@
         u_1'y_1'' &+& u_2'y_2'' &+& u_3'y_3'' &=& f(x), \\
       \end{array}
     \right.
-  \end{align*}
+  \end{align}
   then the function $u = u_1 y_1 + u_2 y_2 + u_3 y_3$ is a solution of
   \begin{align*}
-    y''' + p_2(x)y'' + p_1(x)y' + p_0(x) y = f(x)
+    Ly = y''' + p_2(x)y'' + p_1(x)y' + p_0(x) y = f(x)
   \end{align*}
 \end{problem}
 
 \begin{proof}
+  We wish to show that $y = \sum_{i=1}^3 u_i y_i$ is a solution of the equation
+  $Ly = f(x)$ given that $y_i$ are linearly independent solutions of the homogeneous
+  equation $Ly = 0$ and $u_i$ are solutions of the system \eqref{u_system}.
+  Using the form $y = \sum_{i=1}^3 u_i y_i$, we see that
+  \begin{align*}
+    y' &= \sum_{i=1}^3 u_i y_i' + u_i' y_i \\
+    y'' &= \sum_{i=1}^3 u_i y_i'' + 2u_i'y_i' + u_i'' y_i \\
+    y''' &= \sum_{i=1}^3 u_i y_i''' + 3u_i'y_i'' + 3u_i''y_i' + u_i''' y_i.
+  \end{align*}
+  Thus, we find that for $y = \sum_{i=1}^3 u_i y_i$,
+  \begin{align*}
+    Ly &= \sum_{i=1}^3 u_i y_i''' + 3u_i'y_i'' + 3u_i''y_i' + u_i''' y_i
+    + p_2(x)\sum_{i=1}^3 u_i y_i'' + 2u_i'y_i' + u_i'' y_i \\
+    &\quad + p_1(x)\sum_{i=1}^3 u_i y_i' + u_i' y_i
+    + p_0(x)\sum_{i=1}^3 u_i y_i \\
+    &= \sum_{i=1}^3 u_i[y_i''' + p_2(x)u_i'' + p_1(x)y_i' + p_0(x)y_i] \\
+    &\quad + \sum_{i=1}^3 3u_i'y_i'' + 3u_i''y_i' + u_i'''y_i + 2p_2(x)u_i'y_i' + p_2(x)u_i''y_i + p_1(x)u_i'y_i.
+  \end{align*}
+  Since $y_i$ are solutions of the homogeneous equation $Ly = 0$, we see that the first sum is 0 and
+  \begin{align}\label{pro}
+    Ly = \sum_{i=1}^3 3u_i'y_i'' + 3u_i''y_i' + u_i'''y_i + 2p_2(x)u_i'y_i' + p_2(x)u_i''y_i + p_1(x)u_i'y_i.
+  \end{align}
+  We also know that since $u_1$, $u_2$, and $u_3$ are solutions of the system \eqref{u_system} the following implications are true
+  \begin{align*}
+    \sum_{i=1}^3 u_i'y_i = 0 &\implies \sum_{i=1}^3 u_i''y_i + u_i'y_i' = 0 \\
+    \sum_{i=1}^3 u_i''y_i + u_i'y_i' = 0 &\implies \sum_{i=1}^3 u_i'''y_i + 2u_i''y_i' + u_i'y_i'' = 0 \\
+    \sum_{i=1}^3 u_i'y_i' = 0 &\implies \sum_{i=1}^3 u_i''y_i' + u_i'y_i'' = 0
+  \end{align*}
+  Rearranging the terms of \eqref{pro} and using the above relations we see that
+  \begin{align*}
+    Ly &= \sum_{i=1}^3 u_i' y_i'' + [u_i'''y_i + 2u_i''y_i' + u_i'y_i''] + [u_i'y_i'' + u_i''y_i'] \\
+    &\quad + \sum_{i=1}^{3} p_2(x)[u_i'y_i' + u_i''y_i] + p_2(x)[u_i'y_i'] + p_1(x)[u_i'y_i] \\
+    &= \sum_{i=1}^3 u_i' y_i''
+  \end{align*}
+  where every term in brackets is 0 as a consequence of the above derived relations or
+  the fact that $u_1$, $u_2$, and $u_3$ are solutions of the system \eqref{u_system}.
+  From the third equation of the system \eqref{u_system} we know that $\sum_{i=1}^3 u_i' y_i'' = f(x)$.
+  Therefore, for $y = \sum_{i=1}^{3} u_i y_i$ satisfying the assumptions of the problem,
+  \begin{align*}
+    Ly = \sum_{i=1}^3 u_i' y_i'' = f(x)
+  \end{align*}
+  showing that $y$ is a solution of the equation $Ly = f(x)$.
 \end{proof}
 \newpage
 
