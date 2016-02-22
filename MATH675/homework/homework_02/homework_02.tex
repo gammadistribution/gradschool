@@ -123,6 +123,60 @@
 \end{problem}
 
 \begin{proof}
+  Let $Ly = f(x)$ denote the differential equation $y'' + 2y' + 2y = f(x)$ together with the
+  initial conditions $y(0) = y'(0) = 0$.
+  The Green function $G(x, a)$ of the IVP $Ly = f(x)$ is defined by the equations
+  \begin{align*}
+    \frac{\partial^2 G(x, a)}{\partial x^2} + \frac{2\partial G(x, a)}{\partial x} + 2G(x, a) = \delta(x- a), \qquad G(0, a) = 0, \qquad \frac{\partial G}{\partial x}(0, a) = 0
+  \end{align*}
+  where $\delta(x-a)$ is the Dirac Delta function such that
+  $\int_{-\infty}^{\infty} \delta(x-a)f(x) dx = f(x)$. Note that $G(x, a)$ is continuous
+  at $x=a$ and $\partial G /\partial x$ has a jump discontinuity of magnitude 1 at $x=a$.
+
+  If $y_1$ and $y_2$ are linearly independent solutions of the homogeneous equation $Ly = 0$,
+  then
+  \begin{align*}
+    G(x, a) =
+    \begin{cases}
+      A_1 y_1 + A_2 y_2 & \text{if $x < a$} \\
+      B_1 y_1 + B_2 y_2 & \text{if $x > a$}
+    \end{cases}
+  \end{align*}
+  where $A_1, A_2, B_1$, and $B_2$ are undetermined functions.
+  The continuity of $G(x, a)$ at $x = a$ gives the equation
+  \begin{align*}
+    A_1 y_1(a) + A_2 y_2(a) = B_1 y_1(a) + B_2 y_2(a).
+  \end{align*}
+  Further, the fact that  $\partial G /\partial x$ has a jump discontinuity of magnitude 1 at $x=a$
+  yields the second equation
+  \begin{align*}
+    (B_1 y_1'(a) + B_2 y_2'(a)) - (A_1 y_1'(a) + A_2 y_2'(a)) = 1.
+  \end{align*}
+  Combining these equations, we see that $A_1$, $A_2$, $B_1$, and $B_2$ are
+  given by
+  \begin{align*}
+    B_1 &= A_1 - \frac{y_2(a)}{W[y_1(a),y_2(a)]} \\
+    B_2 &= A_2 + \frac{y_1(a)}{W[y_1(a),y_2(a)]}
+  \end{align*}
+
+  From \eqref{hom}, we know that the linearly independent solutions to the
+  homogeneous equation $Ly = 0$ are $y_1(x) = e^{-x}\sin x$ and $y_2(x) = e^{-x}\cos x$.
+  Also, the Wronskian of these solutions is $W[y_1(a), y_2(a)] = -e^{-2a}$. Thus,
+  \begin{align*}
+    B_1 &= A_1 - \frac{y_2(a)}{W[y_1(a),y_2(a)]} = A_1 + e^{a}\cos a \\
+    B_2 &= A_2 + \frac{y_1(a)}{W[y_1(a),y_2(a)]} = A_2 - e^{a}\sin a
+  \end{align*}
+  Using the two initial conditions, we can uniquely determine $A_1$ and $A_2$
+  since $G(x, a) = A_1y_1(a) + A_2y_2(a)$ satisfies $LG = f(x)$. Since $y(0) = 0$
+  we see that $A_2 = 0$ and since $y'(0) = 0$ we see that $A_1 - A_2 = 0$ implying that
+  $A_1 = A_2 = 0$. Therefore, the Green function for the IVP $Ly = f(x)$ is
+  \begin{align}\label{green}
+    G(x, a) =
+    \begin{cases}
+      0 & \text{if $x < a$} \\
+      e^{a-x}\left(\sin x\cos a  - \sin a \cos x\right)  & \text{if $x > a$}
+    \end{cases}
+  \end{align}
 \end{proof}
 \newpage
 
