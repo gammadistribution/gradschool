@@ -11,6 +11,12 @@
 
 \newcommand{\vect}[1]{\boldsymbol{#1}}
 
+\newenvironment{case}{%
+  \let\olditem\item%
+  \renewcommand\item[1][]{\olditem \textbf{##1} \\}%
+  \begin{enumerate}[label=\textbf{Case \arabic*:},itemindent=*,leftmargin=0em]}{\end{enumerate}%
+}
+
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Homework Assignment 2}
@@ -274,6 +280,55 @@
 \end{problem}
 
 \begin{proof}
+  The differential equation stated in this problem is an Euler differential
+  equation. The equation can be transformed into a constant coefficient second
+  order linear differential equation by making the substitution $x(t) = e^t$
+  and rewriting the differential equation in terms of the independent variable
+  $t$.
+
+  To see this, we note that
+  \begin{align*}
+    \frac{d}{dt}\left[y(x(t))\right]
+    &= \frac{dy(x(t))}{dx}\frac{dx(t)}{dt} \\
+    &= \frac{dy(x(t))}{dx}\frac{dx(t)}{dt} \\
+    &= y'(x(t)) x(t)
+  \end{align*}
+  since $x'(t) = [e^t]' = e^t = x(t)$. Similarly, using the above relation,
+  \begin{align*}
+    \frac{d^2}{dt^2}[y(x(t))]
+    &= \frac{d}{dt}\left[\frac{dy(x(t))}{dt}\right] \\
+    &= \frac{d}{dt}\left[\frac{dy(x(t))}{dx}\right] x(t) + \frac{dy(x(t))}{dx}\frac{d}{dt}\left[x(t)\right] \\
+    &= \left[\frac{dy(x(t))}{dx}\frac{dx(t)}{dt}\right] x(t) + \left[\frac{dy(x(t))}{dx}\right] x(t) \\
+    &= x(t)^2 \frac{d^2y(x(t))}{dx^2} + x(t)\frac{dy(x(t))}{dx} \\
+    &= x(t)^2 y''(x(t)) + x(t)y'(x(t)).
+  \end{align*}
+  Thus, the original differential equation in the independent variable $x$ can
+  be written as the following differential equation in the independent variable $t$
+  after making the substitution $x(t) = e^t$:
+  \begin{align}\label{second}
+    \left[x^2y''(x) + xy'(x)\right] + \lambda y(x) = \left[y''(x(t))\right] + \lambda y(x(t)) = 0.
+  \end{align}
+
+  The characteristic equation of the homogeneous second order linear differential
+  equation in the variable $t$ is given by
+  \begin{align*}
+    m(z) = z^2 + \lambda.
+  \end{align*}
+  The roots of $m(z)$ are $z_1=\sqrt{-\lambda}$ and $z_2=-\sqrt{-\lambda}$.
+  The solution to \eqref{second} is thus dependent on the value of $\lambda$
+  and as such there are three cases to consider, when $\lambda < 0$, $\lambda = 0$,
+  and $\lambda > 0$.
+
+  \begin{case}
+    \item[$\lambda < 0$] If $\lambda < 0$, then $\sqrt{-\lambda}$ is a positive real number
+      and the roots of $m(z)$ are real and distinct. Thus, the solution to \eqref{second}
+      is
+      \begin{align*}
+      \end{align*}
+    \item[$\lambda = 0$]
+    \item[$\lambda > 0$]
+  \end{case}
+
 \end{proof}
 
 
