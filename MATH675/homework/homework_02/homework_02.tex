@@ -180,7 +180,7 @@
     G(x, a) =
     \begin{cases}
       0 & \text{if $x < a$} \\
-      e^{a-x}\left(\sin x\cos a  - \sin a \cos x\right)  & \text{if $x > a$}
+      e^{a-x}\left(\sin x\cos a  - \cos x \sin a \right) = e^{a-x}\sin (x - a) & \text{if $x > a$}
     \end{cases}
   \end{align}
 \end{proof}
@@ -304,31 +304,114 @@
   \end{align*}
   Thus, the original differential equation in the independent variable $x$ can
   be written as the following differential equation in the independent variable $t$
-  after making the substitution $x(t) = e^t$:
+  after making the change of variables $x(t) = e^t$:
   \begin{align}\label{second}
     \left[x^2y''(x) + xy'(x)\right] + \lambda y(x) = \left[y''(x(t))\right] + \lambda y(x(t)) = 0.
   \end{align}
 
   The characteristic equation of the homogeneous second order linear differential
   equation in the variable $t$ is given by
-  \begin{align*}
+  \begin{align}\label{char}
     m(z) = z^2 + \lambda.
-  \end{align*}
+  \end{align}
   The roots of $m(z)$ are $z_1=\sqrt{-\lambda}$ and $z_2=-\sqrt{-\lambda}$.
   The solution to \eqref{second} is thus dependent on the value of $\lambda$
   and as such there are three cases to consider, when $\lambda < 0$, $\lambda = 0$,
   and $\lambda > 0$.
+  \rule{\textwidth}{1pt}
 
   \begin{case}
     \item[$\lambda < 0$] If $\lambda < 0$, then $\sqrt{-\lambda}$ is a positive real number
-      and the roots of $m(z)$ are real and distinct. Thus, the solution to \eqref{second}
-      is
+      and the roots of the characteristic equation \eqref{char} are real and distinct.
+      Thus, the solution to \eqref{second} is
       \begin{align*}
+        y(t) = c_1 e^{\sqrt{-\lambda}t} + c_2 e^{-\sqrt{-\lambda}t}.
       \end{align*}
-    \item[$\lambda = 0$]
-    \item[$\lambda > 0$]
-  \end{case}
+      Using the substitution $t = \log x$, the solution to the differential
+      equation with respect to $x$ becomes
+      \begin{align*}
+        y(t(x)) = y(x)
+        &= c_1 e^{\sqrt{-\lambda}\log x} + c_2 e^{-\sqrt{-\lambda}\log x} \\
+        &= c_1 x^{\sqrt{-\lambda}} + c_2 x^{-\sqrt{-\lambda}}
+      \end{align*}
+      For this solution, we see that
+      \begin{align*}
+        y'(x) = c_1\sqrt{-\lambda} x^{\sqrt{-\lambda} - 1} - c_2\sqrt{-\lambda} x^{-\sqrt{-\lambda} - 1}
+      \end{align*}
 
+      In this case, the initial condition $y'(1) = 0$ shows that
+      \begin{align*}
+        y'(1) = c_1 \sqrt{-\lambda} - c_2 \sqrt{-\lambda} = \sqrt{-\lambda}(c_1 - c_2) = 0.
+      \end{align*}
+      Since $\lambda < 0$, we know that $\sqrt{-\lambda} \neq 0$ and so $c_1 - c_2 = 0$
+      or that $c_1 = c_2$.
+
+      The initial condition $y'(b) = 0$ for $b > 1$ together with the fact that
+      $c_1 = c_2$ shows that
+      \begin{align*}
+        y'(b) &= c_1\sqrt{-\lambda} b^{\sqrt{-\lambda} - 1} - c_2\sqrt{-\lambda} b^{-\sqrt{-\lambda} - 1} \\
+        &= c_1\sqrt{-\lambda} \left(b^{\sqrt{-\lambda} - 1} - b^{-\sqrt{-\lambda} - 1}\right) = 0
+      \end{align*}
+      showing that since  $\lambda < 0$ we must have that $c_1 = 0$ since $\sqrt{-\lambda}\neq 0$
+      and $b^{\sqrt{-\lambda} - 1} \neq b^{-\sqrt{-\lambda} - 1}$. Therefore, for $\lambda < 0$,
+      the only solution to the differential equation is the trivial solution and
+      in this case there are no eigenvalues of this equation.
+    \item[$\lambda = 0$]
+      If $\lambda = 0$, then the root of the characteristic equation \eqref{char}
+      is $z = 0$ with multiplicity 2. As this is a repeated root, the solution to
+      \eqref{second} is
+      \begin{align*}
+        y(t) = c_1 + c_2 t.
+      \end{align*}
+      Making the substitution $t = \log x$, we see that
+      \begin{align*}
+        y(t(x)) = y(x) = c_1 + c_2 \log x.
+      \end{align*}
+      In this case, we see that $y'(x) = c_2x^{-1}$. Using the initial condition
+      that $y'(1) = 0$, we see that $c_2 = 0$. Similarly, the condition $y'(b) = 0$ for $b > 1$
+      yields the same result. Thus, $c_1$ is free
+      and we see that $y(x) = c_1$ is a non-trivial solution to this problem. Therefore,
+      $\lambda_0 = 0$ is an eigenvalue of this differential equation with associated
+      eigenfunction $y_{\lambda_0}(x) = 1$.
+    \item[$\lambda > 0$]
+      If $\lambda > 0$, then the roots to the characteristic equation \eqref{char}
+      are $z_1 = i \sqrt{\lambda}$ and $z_2 = -i \sqrt{\lambda}$ which are complex roots.
+      Thus, the solution to \eqref{second} is
+      \begin{align*}
+        y(t) = c_1\cos\left(t\sqrt{\lambda}\right) + c_2\sin\left(t\sqrt{\lambda}\right).
+      \end{align*}
+      Making the substitution $t = \log x$, we see that
+      \begin{align*}
+        y(t(x)) = y(x) = c_1\cos\left(\sqrt{\lambda}\log x\right) + c_2\sin\left(\sqrt{\lambda}\log x\right).
+      \end{align*}
+      In this case, we see that
+      \begin{align*}
+        y'(x) = -c_1x^{-1}\sqrt{\lambda}\sin\left(\sqrt{\lambda}\log x\right) + c_2x^{-1}\sqrt{\lambda}\cos\left(\sqrt{\lambda}\log x\right).
+      \end{align*}
+      The initial condition $y'(1) = 0$ shows that
+      \begin{align*}
+        y'(x) = -c_1\sqrt{\lambda}\sin\left(0\right) + c_2\sqrt{\lambda}\cos\left(0\right) = c_2\sqrt{\lambda} = 0.
+      \end{align*}
+      Since $\sqrt{\lambda} > 0$, we must have that $c_2 = 0$. This fact, combined
+      with $y'(b) = 0$ for $b>1$, shows that
+      \begin{align*}
+        y'(b) = -c_1\sqrt{\lambda}\sin\left(\sqrt{\lambda}\log b\right) = 0 \implies c_1\sin\left(\sqrt{\lambda}\log b\right) = 0.
+      \end{align*}
+      So either $c_1 = 0$, which leads to the trivial solution, or $\sqrt{\lambda}\log b = n\pi$ for $n=1,2,\dots$. Since $\lambda > 0$ no
+      other values of $n$ will yield $\sin\left(\sqrt{\lambda}\log b\right) = 0$. Thus,
+      \begin{align*}
+        \lambda_n = \left(\frac{n\pi}{\log b}\right)^2 \qquad \text{for $n=1,2,\dots$}
+      \end{align*}
+      are eigenvalues associated to this problem with associated eigenfunctions
+      \begin{align*}
+        y_{\lambda_n}(x) = \cos\left(\frac{n\pi\log x}{\log b}\right) \qquad \text{for $b>1$ and $n=1,2,\dots$}.
+      \end{align*}
+  \end{case}
+  \rule{\textwidth}{1pt}
+
+  We have therefore exhausted all cases and found all eigenvalues associated to
+  the differential equation $x^2y''(x) + xy'(x) + \lambda y(x) = 0$ along with
+  their eigenfunctions.
 \end{proof}
 
 
