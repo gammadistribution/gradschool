@@ -180,7 +180,7 @@
     G(x, a) =
     \begin{cases}
       0 & \text{if $x < a$} \\
-      e^{a-x}\left(\sin x\cos a  - \cos x \sin a \right) = e^{a-x}\sin (x - a) & \text{if $x > a$}
+      e^{a-x}\left(\sin x\cos a  - \cos x \sin a \right) = e^{a-x}\sin(x-a) & \text{if $x > a$}
     \end{cases}
   \end{align}
 \end{proof}
@@ -196,6 +196,28 @@
 \end{problem}
 
 \begin{proof}
+  If we can find the Green function $G(x,a)$ associated to the IVP we know that
+  the particular solution to the IVP can be represented as
+  \begin{align*}
+    y_p(x) &= \int_{-\infty}^{\infty}G(x,a)\sin(a) da.
+  \end{align*}
+  Note that in problem 2, the Green function \eqref{green} is precisely the function
+  we are after. For that Green function, we know that $G(x,a) = 0$ if $x>a$ so that
+  \begin{align*}
+    y_p(x) = \int_{-\infty}^{\infty}G(x,a)\sin(a)da = \int_{-\infty}^{x}G(x,a)\sin(a)da.
+  \end{align*}
+  Using the expression for the Green function found in \eqref{green}, we see that
+  \begin{align*}
+    y_p(x) &= \int_{-\infty}^{x}G(x,a)\sin(a)da \\
+    &= \int_{-\infty}^{x} e^{a-x}\sin(x-a)\sin(a)da\\
+    &= \frac{-2\cos x + \sin x}{5}.
+  \end{align*}
+  Since the homogeneous solution is equivalently zero under these initial values,
+  the solution to the differential equation is
+  \begin{align*}
+    y(x) = y_h(x) + y_p(x) = \frac{-2\cos x + \sin x}{5}.
+  \end{align*}
+
 \end{proof}
 \newpage
 
