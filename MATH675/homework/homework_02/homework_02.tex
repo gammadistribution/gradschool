@@ -212,12 +212,19 @@
     &= \int_{-\infty}^{x} e^{a-x}\sin(x-a)\sin(a)da\\
     &= \frac{-2\cos x + \sin x}{5}.
   \end{align*}
-  Since the homogeneous solution is equivalently zero under these initial values,
-  the solution to the differential equation is
+  Note that the homogeneous solution associated to this differential equation is
+  given by $y_h(x) = c_1e^{-x}\sin x + c_2 e^{-x} \cos x$ so that the general solution
+  to the differential equation is
   \begin{align*}
-    y(x) = y_h(x) + y_p(x) = \frac{-2\cos x + \sin x}{5}.
+    y(x) &= y_h(x) + y_p(x) \\
+    &= c_1e^{-x}\sin x + c_2 e^{-x}\cos x + \frac{-2\cos x + \sin x}{5}.
   \end{align*}
 
+  Using the initial conditions, we see that $c_1 =1/5 $ and $c_2 = 2/5$.
+  Thus, the solution to the IVP is
+  \begin{align}
+    y(x) = (1/5)e^{-x}\sin x + (2/5)e^{-x}\cos x + \frac{-2\cos x + \sin x}{5}
+  \end{align}
 \end{proof}
 \newpage
 
