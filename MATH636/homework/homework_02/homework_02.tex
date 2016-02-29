@@ -351,7 +351,7 @@
       plot the feasible region of this problem. Note, that the equation associated
       to the objective function forms a family of straight lines $O = \{2x_1 + 5x_2 = b\ |\ b\in \mathbb{R}\}$.
       We then wish to find a value $b$ such that the line $2x_1 + 5x_2 = b$ is within the
-      feasible region, i.e. satisfies the constraints and the value $b$ is the
+      feasible region, i.e.\ satisfies the constraints and the value $b$ is the
       largest such value that allows $x_1$ and $x_2$ to satisfy the constraints.
 
       After plotting the feasible region with Mathematica and trying various values of $b$,
@@ -365,6 +365,111 @@
       leave the feasible region, providing a geometric proof that $(x_1, x_2) = (2, 6)$
       is the optimal solution of this linear program leading to an optimal objective
       function value of $34$.
+    \item In order to solve this problem, we must first transform the problem into
+      standard form through the addition of slack variables and changing the
+      objective as follows:
+      \begin{align*}
+        \begin{array}{rllllll}
+          \text{minimize} & -2x_1 &-5x_2 & & & &\\
+          \text{subject to} & x_1 & &+ x_3& & &= 4 \\
+          & & \phantom{+}x_2 & &+ x_4 & &= 6 \\
+          & x_1 &+ x_2& &  &+ x_5 &= 8 \\
+          &x_1, &x_2, &x_3, &x_4, &x_5 &\geq 0
+        \end{array}.
+      \end{align*}
+
+      In matrix form, this linear program is represented as
+      \begin{align*}
+        \begin{array}{rl}
+          \text{minimize} & \vect{c}^\intercal \vect{x} = [-2, 5, 0, 0, 0] [x_1, x_2, x_3, x_4, x_5]^\intercal \\
+          \text{subject to} & A\vect{x} =
+          \begin{bmatrix}
+            1 & 0 & 1 & 0 & 0\\
+            0 & 1 & 0 & 1 & 0\\
+            1 & 1 & 0 & 0 & 1\\
+          \end{bmatrix}
+          \begin{bmatrix}
+            x_1 \\
+            x_2 \\
+            x_3 \\
+            x_4 \\
+            x_5 \\
+          \end{bmatrix} =
+          \begin{bmatrix}
+            4 \\
+            6 \\
+            8 \\
+          \end{bmatrix} = \vect{b} \\
+          & \vect{x} \geq 0
+        \end{array}.
+      \end{align*}
+    Note that we can represent the matrix $A$ in terms of its columns as follows:
+    \begin{align*}
+      A =
+      \begin{bmatrix}
+        1 & 0 & 1 & 0 & 0\\
+        0 & 1 & 0 & 1 & 0\\
+        1 & 1 & 0 & 0 & 1\\
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        \vect{a_1}
+        \vect{a_2}
+        \vect{a_3}
+        \vect{a_4}
+        \vect{a_5}
+      \end{bmatrix}.
+    \end{align*}
+
+    We begin by finding a basic feasible solution of the system. In order to find the optimal value for this linear program, we will move from
+    this basic feasible solution to an adjacent basic feasible solution. We keep moving
+    to adjacent basic feasible solutions until the objective function does not decrease any further.
+    The solution at which this occurs will be optimal.
+
+    Note that
+    $\vect{x} = [0, 0, 4, 6, 8]^\intercal$ is a basic feasible
+    solution as $\vect{a_3}, \vect{a_4}, \vect{a_5}$ are linearly independent and $\vect{x} \geq 0$.
+    The objective function's value for this basic feasible solution is $\vect{c}^\intercal \vect{x} = 0$.
+
+    To choose an adjacent basic feasible solution, we choose $\vect{a_2}$ as a basic
+    column in the new basis. We can express $\vect{a_2}$ as a linear combination
+    of the old basic columns $\vect{a_3}, \vect{a_4}, \vect{a_5}$:
+    \begin{align*}
+      \vect{a_2} = 0\vect{a_3} + 1\vect{a_4} + 1\vect{a_5}.
+    \end{align*}
+    We now wish to find an $\epsilon > 0$ such that
+    \begin{align*}
+      0\vect{a_1} + \epsilon\vect{a_2} + (4 - 0\epsilon)\vect{a_3} + (6-1\epsilon)\vect{a_4} + (8-1\epsilon)\vect{a_5} = \vect{b}
+    \end{align*}
+    and the coefficients of the above system are non-negative while also eliminating
+    either $\vect{a_3}, \vect{a_4}, \vect{a_5}$. The choice of $\epsilon = 6$ satisfies the
+    above requirements leading to the new basic feasible solution
+    \begin{align*}
+      \vect{x} = [0, 6, 4, 0, 2]^\intercal.
+    \end{align*}
+
+    We now repeat the procedure choosing to make $\vect{a_1}$ the new basic
+    column. We write $\vect{a_1}$ as a linear combination of the basic columns
+    $\vect{a_2}, \vect{a_4}, \vect{a_5}$ as follows:
+    \begin{align*}
+      \vect{a_1} = 0\vect{a_2} + 1\vect{a_3} + 1\vect{a_5}.
+    \end{align*}
+    We now need to find $\epsilon > 0$ such that
+    \begin{align*}
+      \epsilon\vect{a_1} + (6-0\epsilon)\vect{a_2} + (4-1\epsilon)\vect{a_3} + 0\vect{a_4} + (2-1\epsilon)\vect{a_5} = \vect{b}
+    \end{align*}
+    that maintains the non-negativity of the solution and eliminates either $\vect{a_2}, \vect{a_3}$, or $\vect{a_5}$.
+    The choice of $\epsilon = 2$ satisfies these requirements leading us to the new
+    basic feasible solution
+    \begin{align}\label{basic_solution}
+      \vect{x} = [2, 6, 2, 0, 0]^\intercal
+    \end{align}
+    Choosing either $\vect{a_4}$ or $\vect{a_5}$ to be the new basic columns will
+    reduce the value of $x_1$ or $x_2$ in \eqref{basic_solution} thereby leading to an objective function value greater than the current one. This would mean that the next solution
+    could not be optimal. Therefore,
+    \eqref{basic_solution} is the optimal solution to the linear program with
+    associated objective function value -34, or 34 in terms of the objective
+    function of the original linear program.
   \end{enumerate}
 \end{proof}
 
