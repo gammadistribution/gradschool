@@ -346,6 +346,26 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item In order to find the solution to this linear program, we must first
+      plot the feasible region of this problem. Note, that the equation associated
+      to the objective function forms a family of straight lines $O = \{2x_1 + 5x_2 = b\ |\ b\in \mathbb{R}\}$.
+      We then wish to find a value $b$ such that the line $2x_1 + 5x_2 = b$ is within the
+      feasible region, i.e. satisfies the constraints and the value $b$ is the
+      largest such value that allows $x_1$ and $x_2$ to satisfy the constraints.
+
+      After plotting the feasible region with Mathematica and trying various values of $b$,
+      we see that an objective function value $b=34$ is associated to the optimal solution of this LP
+      as the plot below shows:
+      \begin{figure}[!h]
+        \centerline{\includegraphics[scale=0.9]{geometric_solution}}
+      \end{figure}
+
+      It is easy to see that any $b > 34$ will cause the objective function to
+      leave the feasible region, providing a geometric proof that $(x_1, x_2) = (2, 6)$
+      is the optimal solution of this linear program leading to an optimal objective
+      function value of $34$.
+  \end{enumerate}
 \end{proof}
 
 \end{document}
