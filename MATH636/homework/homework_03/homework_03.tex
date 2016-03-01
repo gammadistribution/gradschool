@@ -2,6 +2,9 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
 \usepackage{fancyhdr}
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
@@ -48,13 +51,143 @@
       \text{maximize} & 2x_1 + 5x_2 &\\
       \text{subject to} & x_1 &\leq 4 \\
       & x_2 &\leq 6 \\
-      & x_1 + x_2 &\leq 0 \\
+      & x_1 + x_2 &\leq 8 \\
       & x_1, x_2 &\geq 0.
     \end{array}
   \end{align*}
 \end{problem}
 
 \begin{proof}
+  To start, we must transform this LP into standard form. This is achieved by
+  changing the objective from \textit{maximize} to \textit{minimize} and
+  adding three slack variables. In standard form,
+  the problem becomes
+  \begin{align*}
+    \begin{array}{rrl}
+      \text{minimize} & -2x_1 -5x_2&\\
+      \text{subject to} & x_1 + x_3 &= 4 \\
+      & x_2 + x_4 &= 6 \\
+      & x_1 + x_2 + x_5 &= 8 \\
+      & x_1, x_2, x_3, x_4, x_5 &\geq 0.
+    \end{array}
+  \end{align*}
+  The initial tableau associated to this problem is then:
+  \begin{align*}
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+      & 1 & 0 & 1 & 0 & 0 & 4 \\
+      & 0 & 1 & 0 & 1 & 0 & 6 \\
+      & 1 & 1 & 0 & 0 & 1 & 8 \\
+      \vect{c}^\intercal & -2 & -5  & 0 & 0 & 0 & 0 \\
+    \end{matrix}
+  \end{align*}
+  Note that this tableau is in canonical form with respect to the basis
+  $[\vect{a_3}, \vect{a_4}, \vect{a_5}]$. Thus, the last row of the tableau
+  contains the reduced cost coefficients. Bland's rule prescribes how to choose
+  the column-index $q$ and the row-index $p$ to pivot around. According to
+  Bland's rule, choose
+  \begin{align*}
+    q &= \min\{i\ |\ r_i < 0  \}\\
+    p &= \min\{j\ |\ y_{j0}/y_{jq} = \min_i\{y_{i0}/y_{iq}\ |\ y_{iq} > 0\} \}.
+  \end{align*}
+  Thus, we proceed by choosing the column-index to pivot around to be the smallest
+  index pertaining to negative reduced cost coefficients in the bottom vector of the
+  tableau and by then choosing the row-index to pivot around to be the
+  index pertaining to the row with the lowest ratio between the right hand side and
+  the positive coefficients of the $q$-th column in matrix $A$ of the tableau.
+  If there are two such row-indexes, choose the smaller one.
+
+  From the initial tableau, Bland's rule prescribes that we pivot around column
+  $q=1$ since this is the smallest index with a negative reduced cost coefficient.
+  The smallest ratio between the right hand side and the positive coefficients
+  of the $q$-th column in matrix $A$ is $4/1$ so we pivot around row $p =1$. Thus, $\vect{a_1}$
+  enters the basis, $\vect{a_3}$ leaves the basis, and we move from the initial tableau to the updated tableau:
+  \begin{align*}
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+      & \circled{1} & 0 & 1 & 0 & 0 & 4 \\
+      & 0 & 1 & 0 & 1 & 0 & 6 \\
+      & 1 & 1 & 0 & 0 & 1 & 8 \\
+      \vect{c}^\intercal & -2 & -5  & 0 & 0 & 0 & 0 \\
+      & \uparrow & & & & & \\
+    \end{matrix}
+    \quad
+    \begin{array}{c}
+    \grstep[{[4] + 2[1]}]{[3] - [1]} \\
+    \end{array}
+    \quad
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+                       & 1 & 0 & 1 & 0 & 0 & 4 \\
+                       & 0 & 1 & 0 & 1 & 0 & 6 \\
+                       & 0 & 1 & -1 & 0 & 1 & 4 \\
+      \vect{c}^\intercal & 0 & -5 & 2 & 0 & 0 & 8 \\
+      & & & & & & \\
+    \end{matrix}
+  \end{align*}
+
+  From this newly derived tableau, we notice that the only negative reduced cost coefficient
+  occurs in column $q=2$. Further, the smallest ratio between the right hand side
+  and the positive coefficients of the $q$-th column in matrix $A$ is $4/1$ so we pivot
+  around row $p=3$. Thus, $\vect{a_2}$ enters the basis, $\vect{a_5}$ leaves the basis, and we move from this tableau to the updated tableau:
+  \begin{align*}
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+                       & 1 & 0 & 1 & 0 & 0 & 4 \\
+                       & 0 & 1 & 0 & 1 & 0 & 6 \\
+                       & 0 & \circled{1} & -1 & 0 & 1 & 4 \\
+      \vect{c}^\intercal & 0 & -5 & 2 & 0 & 0 & 8 \\
+      & & \uparrow & & & & \\
+    \end{matrix}
+    \quad
+    \begin{array}{c}
+    \grstep[{[4] + 5[3]}]{[2] - [3]} \\
+    \end{array}
+    \quad
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+                       & 1 & 0 & 1 & 0 & 0 & 4 \\
+                       & 0 & 0 & 1 & 1 & -1 & 2 \\
+                       & 0 & 1 & -1 & 0 & 1 & 4 \\
+      \vect{c}^\intercal & 0 & 0 & -3 & 0 & 5 & 28 \\
+      & & & & & & \\
+    \end{matrix}
+  \end{align*}
+
+  From this newly derived tableau, we notice that the only negative reduced cost coefficient
+  occurs in column $q=3$. Further, the smallest ratio between the right hand side
+  and the positive coefficients of the $q$-th column in matrix $A$ is $2/1$ so we pivot
+  around row $p=2$. Thus, $\vect{a_3}$ enters the basis, $\vect{a_4}$ leaves the basis, and we move from this tableau to the updated tableau:
+  \begin{align*}
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+                       & 1 & 0 & 1 & 0 & 0 & 4 \\
+                       & 0 & 0 & \circled{1} & 1 & -1 & 2 \\
+                       & 0 & 1 & -1 & 0 & 1 & 4 \\
+      \vect{c}^\intercal & 0 & 0 & -3 & 0 & 5 & 28 \\
+      & & & \uparrow & & & \\
+    \end{matrix}
+    \quad
+    \begin{array}{c}
+    \grstep[{[3] + [2]}]{[1] - [2]} \\
+    \grstep[{[4] + 3[2]}]{} \\
+    \end{array}
+    \quad
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+                       & 1 & 0 & 0 & -1 & 1 & 2 \\
+                       & 0 & 0 & 1 & 1 & -1 & 2 \\
+                       & 0 & 1 & 0 & 1 & 0 & 6 \\
+      \vect{c}^\intercal & 0 & 0 & 0 & 3 & 2 & 34 \\
+      & & & & & & \\
+    \end{matrix}
+  \end{align*}
+
+  In the final tableau we have no negative reduced cost coefficients. Therefore,
+  the current basic feasible solution $\vect{x} = [2, 6, 2, 0, 0]^\intercal$ of the LP in
+  standard form is optimal with corresponding
+  objective function value $-34$. The solution to the original problem is then
+  $x_1 = 2$, $x_2 = 6$ with corresponding objective value 34.
 \end{proof}
 \newpage
 
