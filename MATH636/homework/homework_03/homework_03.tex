@@ -195,7 +195,7 @@
 % Problem 2
 \begin{problem}
   \begin{enumerate}
-    \item Prove that if (ALP) has a feasible solution $(x_1, \dots, x_n; y_1, \dots, y_m)$
+    \item Prove that if (ALP) has a feasible solution $[x_1, \dots, x_n, y_1, \dots, y_m]^\intercal$
       with objective function value zero then $y_1 = 0, \dots, y_m = 0$.
     \item What do you do if after Phase I (ALP) does not have any optimal feasible
       solution with objective function value zero?
@@ -203,6 +203,57 @@
 \end{problem}
 
 \begin{proof}
+  Suppose we have the following LP in standard form:
+  \begin{align*}
+    \begin{array}{rl}
+      \text{minimize} & \vect{c}^\intercal \vect{x}\\
+      \text{subject to} & A\vect{x} = \vect{b}\\
+      & \vect{x} \geq 0.
+    \end{array}
+  \end{align*}
+  The \textit{artificial problem} (ALP) associated to this problem is stated as
+  \begin{align}\label{alp}
+    \begin{array}{rl}
+      \text{minimize} & y_1 + y_2 + \dots + y_m \\
+      \text{subject to} & \begin{bmatrix}A, I_m\end{bmatrix} \begin{bmatrix}\vect{x} \\ \vect{y}\end{bmatrix} = \vect{b} \\
+      & \begin{bmatrix} \vect{x} \\ \vect{y} \end{bmatrix} \geq \vect{0},\\
+    \end{array}
+  \end{align}
+  where $\vect{y} = [y_1, \dots, y_m]^\intercal$.
+  \begin{enumerate}
+    \item Suppose that the (ALP) has the following feasible solution
+      $\begin{bmatrix}\vect{x}_0 \\ \vect{y}_0\end{bmatrix} = [x_1, \dots, x_n, y_1, \dots, y_m]^\intercal$
+      with corresponding objective function value zero. Then
+      $\begin{bmatrix}\vect{x}_0 \\ \vect{y}_0\end{bmatrix}$ is a solution of
+      \eqref{alp}, i.e.\ $A\vect{x}_0 + I_m\vect{y}_0 = \vect{b}$ where
+      $\vect{x}_0 \geq \vect{0}$ and $\vect{y}_0 \geq \vect{0}$.
+      As $\vect{y}_0 = [y_1, y_2, \dots, y_m]^\intercal \geq \vect{0}$, every
+      component of $\vect{y}_0$ is non-negative, i.e.\ $y_i \geq 0$ for
+      $i=1,\dots,m$. Since the corresponding objective function value of this
+      solution is zero, we know that
+      \begin{align*}
+        y_1 + y_2 + \dots + y_m = 0.
+      \end{align*}
+      Note that if $y_i \geq 0$ for $i = 1, \dots, m$ the sum $y_1 + y_2 + \dots + y_m = 0$
+      if and only each $y_i = 0$. Therefore, if
+      $\begin{bmatrix}\vect{x}_0 \\ \vect{y}_0\end{bmatrix} = [x_1, \dots, x_n, y_1, \dots, y_m]^\intercal$
+      is a feasible solution of the (ALP) with objective function value zero
+      then $y_1 = 0, \dots, y_m = 0$.
+    \item Proposition 16.1 found on p.\ 362 of \textit{An Introduction to Optimization}
+      states that the (ALP) has an optimal feasible solution with objective
+      function value zero if and only if the original LP problem has a basic feasible solution.
+      Thus, if the Phase I (ALP) does not have any optimal feasible solution with objective value zero,
+      then the original LP does not have a basic feasible solution.
+
+      The Fundamental Theorem of LP states that if there exists a feasible solution
+      of the LP, then there exists a basic feasible solution. Thus, if no basic
+      feasible solution of the LP exists, then no feasible solution of the LP exists.
+
+      Therefore, if the Phase I (ALP) does not have any optimal feasible solution
+      with objective value zero, then the original LP does not have a basic feasible
+      solution and consequently the original LP has no feasible solution, i.e.\ the original LP
+      is infeasible.
+  \end{enumerate}
 \end{proof}
 \newpage
 
