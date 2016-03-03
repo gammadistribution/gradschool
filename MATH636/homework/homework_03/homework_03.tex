@@ -273,6 +273,131 @@
 \end{problem}
 
 \begin{proof}
+  The linear program (LP) above can be converted to standard form by changing the
+  objective from \textit{maximize} to \textit{minimize} and introducing
+  slack variables. The LP in standard form is presented below
+  \begin{align*}
+    \begin{array}{rrl}
+      \text{minimize} & -2x_1 - x_2 & \\
+      \text{subject to} & x_1 + x_3 &= 5 \\
+      & x_2 + x_4 &= 7 \\
+      & x_1 + x_2 + x_5 &= 9 \\
+      & x_1, x_2, x_3, x_4, x_5 &\geq 0.  \\
+    \end{array}
+  \end{align*}
+  with associated matrix form:
+  \begin{align*}
+    \begin{array}{rrl}
+      \text{minimize} & \vect{c}^\intercal\vect{x} = [-2, -1, 0, 0, 0][x_1, x_2, x_3, x_4, x_5]^\intercal & \\
+      \text{subject to} & A\vect{x} =
+      \begin{bmatrix}
+        1 & 0 & 1 & 0 & 0 \\
+        0 & 1 & 0 & 1 & 0 \\
+        1 & 1 & 0 & 0 & 1 \\
+      \end{bmatrix}
+      \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        x_3 \\
+        x_4 \\
+        x_5\\
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        5 \\
+        7 \\
+        9 \\
+      \end{bmatrix}
+      &= \vect{b}
+      \\
+      &\vect{x} = [x_1, x_2, x_3, x_4, x_5]^\intercal &\geq \vect{0}.\\
+    \end{array}
+  \end{align*}
+  The initial tableau associated to this problem is then
+  \begin{align*}
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+      & 1 & 0 & 1 & 0 & 0 & 5 \\
+      & 0 & 1 & 0 & 1 & 0 & 7 \\
+      & 1 & 1 & 0 & 0 & 1 & 9 \\
+      \vect{c}^\intercal & -2 & -1  & 0 & 0 & 0 & 0 \\
+    \end{matrix}
+  \end{align*}
+  which is in canonical form with respect to the basis $[\vect{a_3}, \vect{a_4}, \vect{a_5}]$.
+
+  Following the Simplex Algorithm, we must find the $q$-th column and $p$-th row to pivot around
+  to move to the next tableau. To find the $q$-th column to pivot around, we find the column associated with
+  the most negative reduced cost coefficient. We then find the $p$-th row to pivot
+  around by finding the row with the lowest ratio between the right hand side and
+  the positive coefficients of the $q$-th column in matrix $A$ of the tableau.
+  If there are no positive entries in the $q-th$ column, then the problem is
+  unbounded and we can stop. Otherwise, we then pivot
+  around the entry $(p, q)$ and continue the above outlined process until all of the reduced
+  cost coefficients found in the bottom row of the tableau are positive.
+
+  From the initial tableau, we pivot around column
+  $q=1$ since this is index with the most negative reduced cost coefficient.
+  The smallest ratio between the right hand side and the positive coefficients
+  of the $q$-th column in matrix $A$ is $5/1$ so we pivot around row $p=1$. Thus, $\vect{a_1}$
+  enters the basis, $\vect{a_3}$ leaves the basis, and we move from the initial tableau to the updated tableau:
+  \begin{align*}
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+      & \circled{1} & 0 & 1 & 0 & 0 & 5 \\
+      & 0 & 1 & 0 & 1 & 0 & 7 \\
+      & 1 & 1 & 0 & 0 & 1 & 9 \\
+      \vect{c}^\intercal & -2 & -1 & 0 & 0 & 0 & 0. \\
+      & \uparrow & & & & & \\
+    \end{matrix}
+    \quad
+    \begin{array}{c}
+    \grstep[{[4] + 2[1]}]{[3] - [1]} \\
+    \end{array}
+    \quad
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+                       & 1 & 0 & 1 & 0 & 0 & 5 \\
+                       & 0 & 1 & 0 & 1 & 0 & 7 \\
+                       & 0 & 1 & -1 & 0 & 1 & 4 \\
+      \vect{c}^\intercal & 0 & -1 & 2 & 0 & 0 & 10 \\
+      & & & & & & \\
+    \end{matrix}
+  \end{align*}
+
+  From this newly derived tableau, we notice that the only negative reduced cost coefficient
+  occurs in column $q=2$. Further, the smallest ratio between the right hand side
+  and the positive coefficients of the $q$-th column in matrix $A$ is $4/1$ so we pivot
+  around row $p=3$. Thus, $\vect{a_2}$ enters the basis, $\vect{a_5}$ leaves the basis,
+  and we move from this tableau to the updated tableau:
+  \begin{align*}
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+                       & 1 & 0 & 1 & 0 & 0 & 5 \\
+                       & 0 & 1 & 0 & 1 & 0 & 7 \\
+                       & 0 & \circled{1} & -1 & 0 & 1 & 4 \\
+      \vect{c}^\intercal & 0 & -1 & 2 & 0 & 0 & 10 \\
+      & & \uparrow & & & & \\
+    \end{matrix}
+    \quad
+    \begin{array}{c}
+    \grstep[{[4] + [3]}]{[2] - [3]} \\
+    \end{array}
+    \quad
+    \begin{matrix}
+      & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{b} \\
+                       & 1 & 0 & 1 & 0 & 0 & 5 \\
+                       & 0 & 0 & 1 & 1 & -1 & 3 \\
+                       & 0 & 1 & -1 & 0 & 1 & 4 \\
+      \vect{c}^\intercal & 0 & 0 & 1 & 0 & 1 & 14 \\
+      & & & & & & \\
+    \end{matrix}
+  \end{align*}
+
+  Note that there are no negative reduced cost coefficients in this tableau so the current solution
+  is optimal, i.e.\ $\vect{x} = [5, 4, 0, 3, 0]^\intercal$ is optimal with objective function
+  value $-14$. Thus, the solution to the original problem is $x_1 = 5$ and $x_2 = 4$
+  with objective function value 14.
+
 \end{proof}
 \newpage
 
