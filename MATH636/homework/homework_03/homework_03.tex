@@ -338,7 +338,7 @@
   cost coefficients found in the bottom row of the tableau are positive.
 
   From the initial tableau, we pivot around column
-  $q=1$ since this is index with the most negative reduced cost coefficient.
+  $q=1$ since this is the index with the most negative reduced cost coefficient.
   The smallest ratio between the right hand side and the positive coefficients
   of the $q$-th column in matrix $A$ is $5/1$ so we pivot around row $p=1$. Thus, $\vect{a_1}$
   enters the basis, $\vect{a_3}$ leaves the basis, and we move from the initial tableau to the updated tableau:
@@ -691,9 +691,134 @@
       with objective function value 18. Therefore, the solution to the original problem
       is $x_1 = 3$, $x_2 = 2$ with objective function value $-18$.
 
+    \item In order to solve the linear program using the revised simplex method,
+      the problem must be converted to standard form by changing the objective
+      from \textit{maximize} to \textit{minimize} and adding slack variables.
+      The problem in standard form is thus
+      \begin{align*}
+        \begin{array}{rrl}
+          \text{minimize} & -6x_1 - 4x_2 - 7x_3 - 5x_4  &\\
+          \text{subject to}
+          & x_1 + 2x_2 + x_3 + 2x_4 + x_5 &= 20 \\
+          & 6x_1 + 5x_2 + 3x_3 + 2x_4 + x_6 &= 100 \\
+          & 3x_1 + 4x_2 + 9x_3 + 12x_4 + x_7 &= 75 \\
+          & x_1, x_2, x_3, x_4, x_5, x_6, x_7 &\geq 0.
+        \end{array}
+      \end{align*}
+
+      The initial tableau associated to the problem is:
+      \begin{align*}
+        \begin{matrix}
+          & \vect{a_1} & \vect{a_2} & \vect{a_3} & \vect{a_4} & \vect{a_5} & \vect{a_6} & \vect{a_7} & \vect{b} \\
+                         & 1 & 2 & 1 & 2 & 1 & 0 & 0 & 20 \\
+                         & 6 & 5 & 3 & 2 & 0 & 1 & 0 & 100 \\
+                         & 3 & 4 & 9 & 12 & 0 & 0 & 1 & 75 \\
+          \vect{c}^\tran  & -6 & -4 & -7 & -5 & 0 & 0 & 0 & 0 \\
+        \end{matrix}
+      \end{align*}
+
+      We start with an initial basic feasible solution to the above tableau
+      along with its associated $B^{-1}$ and write this information in the following tableau:
+      \begin{align*}
+        \begin{matrix}
+          \text{variable} & B^{-1} & & & \vect{y_0} \\
+          \hline \\
+          x_5 & 1 & 0 & 0 & 20 \\
+          x_6 & 0 & 1 & 0 & 100  \\
+          x_7 & 0 & 0 & 1 & 75 \\
+        \end{matrix}
+      \end{align*}
+      The next step is to compute the reduced cost coefficients:
+      \begin{align*}
+        \vect{r}_D^\tran &= \vect{c}_D^\tran - \vect{c}_B^\tran B^{-1} D \\
+        &= [-6, -4, -7, -5] - [0, 0, 0]
+        \begin{bmatrix}
+          1 & 2 & 1 & 2 \\
+          6 & 5 & 3 & 2 \\
+          3 & 4 & 9 & 12 \\
+        \end{bmatrix} \\
+        &= [-6, -4, -7, -5] = [r_1, r_2, r_3, r_4]
+      \end{align*}
+      Since $r_3$ is the most negative reduced cost coefficient, we bring $\vect{a_3}$ into the basis.
+      To do so, we compute $\vect{y}_3 = B^{-1}\vect{a_3} = \vect{a_3}$ and arrive
+      at the augmented revised tableau:
+      \begin{align*}
+        \begin{matrix}
+          \text{variable} & B^{-1} & & & \vect{y_0} & \vect{y_3} \\
+          \hline \\
+          x_5 & 1 & 0 & 0 & 20 & 1 \\
+          x_6 & 0 & 1 & 0 & 100& 3 \\
+          x_7 & 0 & 0 & 1 & 75 & 9 \\
+        \end{matrix}
+      \end{align*}
+      To determine which column leaves the basis, we compute
+      $p = \text{arg}\min_i = \{y_{i0} / y_{i3} \ | \ y_{i3} > 0\} = 3$ so that $\vect{a_7}$
+      leaves the basis and pivot around the last row of the last column and arrive at the updated revised tableau:
+      \begin{align*}
+        \begin{matrix}
+          \text{variable} & B^{-1} & & & \vect{y_0} \\
+          \hline \\
+          x_5 & 1 & 0 & -1/9 & 35/3 \\
+          x_6 & 0 & 1 & -3/9 & 75 \\
+          x_3 & 0 & 0 & 1/9 & 75/9 \\
+        \end{matrix}
+      \end{align*}
+
+      We continue by computing the reduced cost coefficients as follows:
+      \begin{align*}
+        \vect{r}_D^\tran &= \vect{c}_D^\tran - \vect{c}_B^\tran B^{-1} D \\
+        &= [-6, -4, -5, 0] - [0, 0, -7]
+        \begin{bmatrix}
+          1 & 2 & 1 & 2 \\
+          6 & 5 & 3 & 2 \\
+          3 & 4 & 9 & 12 \\
+        \end{bmatrix} \\
+        &= [-11/3, -8/9, 13/3, 7/9] = [r_1, r_2, r_4, r_7]
+      \end{align*}
+      Since $r_1$ is the most negative reduced cost coefficient, we bring $\vect{a_1}$ into the basis.
+      To do so, we compute $\vect{y}_1 = B^{-1}\vect{a_1}$ and arrive
+      at the augmented revised tableau:
+      \begin{align*}
+        \begin{matrix}
+          \text{variable} & B^{-1} & & & \vect{y_0} & \vect{y_1} \\
+          \hline \\
+          x_5 & 1 & 0 & -1/9 & 35/3 & 2/3\\
+          x_6 & 0 & 1 & -3/9 & 75 & 5\\
+          x_3 & 0 & 0 & 1/9 & 75/9 & 1/3\\
+        \end{matrix}
+      \end{align*}
+      To determine which column leaves the basis, we compute
+      $p = \text{arg}\min_i = \{y_{i0} / y_{i1} \ | \ y_{i1} > 0\} = 2$ so that $\vect{a_6}$
+      leaves the basis and pivot around the second row of the last column and arrive at the updated revised tableau:
+      \begin{align*}
+        \begin{matrix}
+          \text{variable} & B^{-1} & & & \vect{y_0} \\
+          \hline \\
+          x_5 & 1 & -2/15 & -1/15 & 5/3\\
+          x_1 & 0 & 1/5 & -3/45 & 15\\
+          x_3 & 0 & -1/15 & 2/15 & 10/3\\
+        \end{matrix}
+      \end{align*}
+
+      Note that the reduced cost coefficients are
+      \begin{align*}
+        \vect{r}_D^\tran &= \vect{c}_D^\tran - \vect{c}_B^\tran B^{-1} D \\
+        &= [-4, -5, 0, 0] - [0, -6, -7]
+        \begin{bmatrix}
+          16/15 & 14/15 & -2/15 & -1/15 \\
+          11/15 & -2/5 & 1/5 & -1/15 \\
+          1/5 & 22/15 & -1/15 & 2/15 \\
+        \end{bmatrix} \\
+        &= [9/5, 43/15, 11/15, 8/15] = [r_2, r_4, r_6, r_7]
+      \end{align*}
+      which are all positive implying that our current solution is optimal.
+      Thus, the solution to the problem in standard form is $\vect{x} = [15,0,10/3,0,5/3,0,0]^\tran$
+      with objective function value $-340/3$. Therefore, the solution to the original problem
+      is $x_1 = 15$, $x_2 = 0$, $x_3=10/3$, $x_4=0$ with objective function value $340/3$.
   \end{enumerate}
 \end{proof}
 \newpage
+
 
 % Problem 5
 \begin{problem}
