@@ -846,6 +846,28 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item The problem has no solution because the objective function values are
+      unbounded if the current pivot column has all non-positive entries. The only
+      possible pivot column is the second one. We would only continue the algorithm
+      if the associated reduced cost coefficient is negative. Thus, we must have
+      $2-\alpha < 0$, i.e.\ $2 < \alpha$ and $\beta, \gamma \leq 0$. Further,
+      since the objective function value is unbounded, we must have
+      $\delta \geq 0$.
+    \item The current basic feasible solution is optimal if all reduced cost
+      coefficients are non-negative. This requires that $2-\alpha \geq 0$, i.e.\
+      $\alpha \leq 2$. Since, the simplex algorithm terminates at this point no restrictions are placed
+      on $\beta$ or $\gamma$. Further, the objective function value is $7$ if $\delta = 7$.
+    \item The current basic feasible solution is not optimal if there there is at least
+      one negative reduced cost coefficient. This requires that $2-\alpha < 0$, i.e.\ $2 < \alpha$.
+      In order for the algorithm to continue and remove $\vect{a_1}$ from the basis,
+      we would need to pivot around the entry $(2,2)$. This can happen only if $\gamma \geq 0$.
+      Further, if $\beta > 0$ we would require $5/\gamma < 4/\beta$. If $\beta \leq 0$,
+      then no additional restrictions on $\gamma$ and $\beta$ are necessary. The objective function value would strictly decrease if after pivoting
+      $\delta \geq 0$ and $\delta - 5(2-\alpha)/\gamma < \delta$, i.e.\ $(2-\alpha)/\gamma > 0$. However, this condition is
+      contradictory to the requirement $(2-\alpha) < 0$ since $\gamma > 0$. Therefore, no value
+      of $\alpha$ satisfies this scenario.
+  \end{enumerate}
 \end{proof}
 
 
