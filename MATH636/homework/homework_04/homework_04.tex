@@ -1,0 +1,179 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\newcommand{\vc}[1]{\boldsymbol{#1}}
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right]
+}
+
+\newcommand{\grstep}[2][\relax]{%
+   \ensuremath{\mathrel{
+       {\mathop{\longrightarrow}\limits^{#2\mathstrut}_{
+                                     \begin{subarray}{l} #1 \end{subarray}}}}}}
+\newcommand{\swap}{\leftrightarrow}
+\newcommand{\tran}{\mathsf{T}}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 4}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 4}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Find the dual of the following linear programs via the symmetric form of duality:
+  \begin{enumerate}
+    \item Maximize $f(x) = c^\tran x$ subject to $Ax=b$.
+    \item Maximize $2x_1 + 5x_2 + x_3$ subject to $\begin{cases}
+        \ 2x_1 - x_2 + 7x_3 \leq 6 \\
+        \ x_1 + 3x_2 + 4x_3 \leq 9 \\
+        \ 3x_1 + 6x_2 + x_3 \leq 3 \\
+        \ x_1, x_2, x_3 \geq 0.
+      \end{cases}$
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  \begin{enumerate}
+    \item Prove (via the symmetric form of duality) that the dual of the dual problem in an asymmetric
+      form of duality is the primal (standard) problem.
+    \item Prove the weak duality proposition for the symmetric form of duality.
+    \item Prove that the primal problem is infeasible if and only if the dual problem is unbounded.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 3
+\begin{problem}
+  Prove the Duality Theorem for the symmetric case.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 4
+\begin{problem}
+  Consider the following linear program:
+  \begin{align*}
+    \begin{array}{rrl}
+      \text{maximize} & 2x_1 + 3x_2 & \\
+      \text{subject to} & x_1 + 2x_2 &\leq 4 \\
+      & 2x_1 + x_2 &\leq 5 \\
+      & x_1, x_2 &\geq 0.
+    \end{array}
+  \end{align*}
+  \begin{enumerate}
+    \item Use the simplex method to solve the problem.
+    \item Write down the dual of the linear program and solve the dual.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 5
+\begin{problem}
+  Consider the following primal problem:
+  \begin{align*}
+    \begin{array}{rllllll}
+      \text{maximize} & x_1 &+ 2x_2 & & & & \\
+      \text{subject to} & -2x_1 &+ x_2 &+ x_3 & & &= 2 \\
+      & -x_1 &+ 2x_2& &+ x_4 & &= 7 \\
+      & x_1 &&& &+ x_5 &= 3 \\
+      &x_i \geq 0 & i= 1,2,3,4,5.& & & \\
+    \end{array}
+    \begin{array}{ll}
+    \end{array}
+  \end{align*}
+  \begin{enumerate}
+    \item Construct the dual problem corresponding to the primal problem above.
+    \item It is known that the solution to the primal above is $\vc{x}^{*} = [3,5,3,0,0]^\tran$.
+      Find the solution to the dual.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 6
+\begin{problem}
+  Let $A$ be a given matrix and $\vc{b}$ a given vector. We wish to prove the
+  following result: There exists a vector $\vc{x}$ such that $A\vc{x} = \vc{b}$ and
+  $\vc{x} \geq \vc{0}$ if and only if for any given vector $\vc{y}$ satisfying $A^\tran \vc{y} \leq \vc{0}$
+  we have $\vc{b}^\tran \vc{y} \leq \vc{0}$. This result is known as \textit{Farkas's transposition theorem}.
+  Our program is based on duality theory, consisting of the parts listed below.
+  \begin{enumerate}
+    \item Consider the primal linear program
+      \begin{align*}
+        \begin{array}{rl}
+          \text{minimize} & \vc{0}^\tran \vc{x} \\
+          \text{subject to} & A\vc{x} = \vc{b} \\
+          & \vc{x} \geq \vc{0}.
+        \end{array}
+      \end{align*}
+      Write down the dual of this problem using the notation $\vc{y}$ for the dual variable.
+    \item Show that the feasible set of the dual problem is guaranteed to be nonempty.
+
+      \textit{Hint:} Think about an obvious feasible point.
+    \item Suppose that for any $\vc{y}$ satisfying $A^\tran \vc{y} \leq \vc{0}$,
+      we have $\vc{b}^\tran \vc{y} \leq 0$. In this case what can you say about whether
+      or not the dual has an optimal feasible solution.
+
+      \textit{Hint:} Think about the obvious feasible point in part b.
+    \item Suppose that for any $\vc{y}$ satisfying $A^\tran \vc{y} \leq \vc{0}$,
+      we have $\vc{b}^\tran \vc{y} \leq 0$. Use parts b and c to show that there exists
+      $\vc{x}$ such that $A\vc{x} = \vc{b}$ and $\vc{x} \geq \vc{0}$. (This proves one
+      direction of Farkas's transposition theorem.)
+    \item Suppose that $\vc{x}$ satisfies $A\vc{x} = \vc{b}$ and $\vc{x} \geq \vc{0}$.
+      Let $\vc{y}$ be an arbitrary vector satisfying $A^\tran \vc{y} \leq \vc{0}$.
+      (This proves the other direction of Farkas's transposition theorem.)
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+\end{document}
