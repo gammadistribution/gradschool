@@ -222,6 +222,135 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Suppose that we have the following primal problem in standard form
+      \begin{align*}
+        \begin{array}{lrl}
+          (P_a) & \text{minimize} & \vc{c}^\tran\vc{x} \\
+          & \text{subject to} & A\vc{x} = \vc{b} \\
+          & & \vc{x} \geq \vc{0}.
+        \end{array}
+      \end{align*}
+      The dual of this problem via an asymmetric form of duality is given by
+      \begin{align*}
+        \begin{array}{lrl}
+          (D_a) & \text{maximize} & \vc{b}^\tran\vc{\lambda} \\
+          & \text{subject to} & A^\tran\vc{\lambda} \leq \vc{c}.
+        \end{array}
+      \end{align*}
+      where $\vc{\lambda}$ is free. Making the substitution $\vc{\lambda} = \vc{\lambda_1} - \vc{\lambda_2}$
+      and performing some algebraic manipulation, we can transform this dual problem into the following
+      equivalent form
+      \begin{align*}
+        \begin{array}{lrl}
+          (D_a) & \text{minimize} & -\vc{b}^\tran(\vc{\lambda_1} - \vc{\lambda_2}) \\
+          & \text{subject to} & -A^\tran(\vc{\lambda_1} - \vc{\lambda_2}) \geq -\vc{c} \\
+          & & \vc{\lambda_1}, \vc{\lambda_2} \geq \vc{0}.
+        \end{array}
+      \end{align*}
+
+      From some more algebraic manipulation, we rewrite the dual problem into the following form
+      \begin{align}\label{dual}
+        \begin{array}{lrl}
+          (D_a) & \text{minimize} & \vc{B}^\tran\vc{\Lambda} \\
+          & \text{subject to} & \mathscr{A}^\tran\vc{\Lambda} \geq -\vc{c} \\
+          & & \vc{\Lambda} \geq \vc{0}
+        \end{array}
+      \end{align}
+      where
+      \begin{align*}
+        \mathscr{A} = \begin{bmatrix}-A\\ A\end{bmatrix}, \quad \vc{\Lambda} = \begin{bmatrix}\vc{\lambda_1} \\ \vc{\lambda_2}\end{bmatrix},
+        \quad \vc{B} = \begin{bmatrix}-\vc{b} \\ \vc{b}\end{bmatrix}.
+      \end{align*}
+      Therefore, by definition, the dual via the symmetric form of duality of the dual problem \eqref{dual} is
+      \begin{align*}
+        \begin{array}{lrl}
+          (P_s) & \text{maximize} & -\vc{c}^\tran \vc{x} \\
+          & \text{subject to} & \mathscr{A}\vc{x} \leq \vc{B}\\
+          & & \vc{x}\geq \vc{0}
+        \end{array}
+      \end{align*}
+      or equivalently
+      \begin{align}\label{primal_symmetric}
+        \begin{array}{lrl}
+          (P_s) & \text{maximize} & -\vc{c}^\tran \vc{x} \\
+          & \text{subject to} & -A\vc{x} \leq -\vc{b}\\
+          & & A\vc{x} \leq \vc{b}\\
+          & & \vc{x}\geq \vc{0}.
+        \end{array}
+      \end{align}
+      By rewriting the objective from \textit{maximize} to \textit{minimize}
+      and combining the inequalities into one equality in \eqref{primal_symmetric}, we see that the dual via the symmetric
+      form of duality of the dual in \eqref{dual} is
+      \begin{align*}
+        \begin{array}{lrl}
+          (P_s) & \text{minimize} & \vc{c}^\tran\vc{x} \\
+          & \text{subject to} & A\vc{x} = \vc{b} \\
+          & & \vc{x} \geq \vc{0}.
+        \end{array}
+      \end{align*}
+      which is equivalent to the standard form of the primal problem $(P_a)$
+      and we are done.
+    \item Suppose that we have the following primal problem in symmetric form and dual problem obtained in a symmetric form:
+      \begin{align*}
+        \begin{array}{lrl}
+          (P_s) & \text{minimize} & \vc{c}^\tran \vc{x} \\
+          & \text{subject to} & A\vc{x} \geq \vc{b} \\
+          & & \vc{x} \geq \vc{0}
+        \end{array}
+        \quad
+        \implies
+        \quad
+        \begin{array}{lrl}
+          (D_s) & \text{maximize} & \vc{\lambda}^\tran \vc{b} \\
+          & \text{subject to} & \vc{\lambda}^\tran A \leq \vc{c}^\tran \\
+          & & \vc{\lambda} \geq \vc{0}.
+        \end{array}
+      \end{align*}
+      We wish to show that if $\vc{x}$ and $\vc{\lambda}$ are feasible solutions
+      to the primal and dual problem, respectively, then $\vc{\lambda}^\tran \vc{b} \leq \vc{c}^\tran\vc{x}$.
+
+      Since $\vc{x}$ is a feasible solution to the primal problem, we know that
+      \begin{align*}
+        \vc{\lambda}^\tran \vc{b}\leq \vc{\lambda}^\tran (A\vc{x}).
+      \end{align*}
+      We also know, for $\vc{x} \geq \vc{0}$, that since $\vc{\lambda}$ is a feasible
+      solution to the dual problem,
+      \begin{align*}
+        \vc{\lambda}^\tran A \leq \vc{c}^\tran \implies \vc{\lambda}^\tran A\vc{x} \leq \vc{c}^\tran\vc{x}.
+      \end{align*}
+      Therefore, by combining the two obtained inequalities, we have that
+      \begin{align*}
+        \vc{\lambda}^\tran \vc{b}\leq \vc{\lambda}^\tran (A\vc{x}) \leq \vc{c}^\tran\vc{x}
+      \end{align*}
+      proving the weak duality proposition.
+    \item We wish to show that the primal problem is infeasible if and only if the dual problem is unbounded.
+      This is equivalent to showing that the primal problem is feasible if and only if the dual problem is bounded.
+      The primal problem in symmetric form and the dual problem obtained in a symmetric form are presented below:
+      \begin{align*}
+        \begin{array}{lrl}
+          (P_s) & \text{minimize} & \vc{c}^\tran \vc{x} \\
+          & \text{subject to} & A\vc{x} \geq \vc{b} \\
+          & & \vc{x} \geq \vc{0}
+        \end{array}
+        \quad
+        \implies
+        \quad
+        \begin{array}{lrl}
+          (D_s) & \text{maximize} & \vc{\lambda}^\tran \vc{b} \\
+          & \text{subject to} & \vc{\lambda}^\tran A \leq \vc{c}^\tran \\
+          & & \vc{\lambda} \geq \vc{0}.
+        \end{array}
+      \end{align*}
+      Suppose first that the primal problem is feasible. Then there exists $\vc{x_0} \geq \vc{0}$ with $A\vc{x_0} \geq \vc{b}$.
+      By the Weak Duality proposition, we know that for every feasible
+      $\vc{\lambda}$ that $\vc{\lambda}^\tran \vc{b} \leq \vc{c}^\tran\vc{x_0}$. Thus,
+      $\max\{\vc{\lambda}^\tran \vc{b} \ |\ \vc{\lambda}^\tran A \leq \vc{c}^\tran, \vc{\lambda}\geq \vc{0} \} \leq \vc{c}^\tran\vc{x_0}$
+      and the dual problem is bounded above.
+
+      Now suppose that the dual problem is bounded.
+  \end{enumerate}
+
 \end{proof}
 \newpage
 
