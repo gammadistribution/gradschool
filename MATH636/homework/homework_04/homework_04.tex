@@ -26,6 +26,8 @@
                                      \begin{subarray}{l} #1 \end{subarray}}}}}}
 \newcommand{\swap}{\leftrightarrow}
 \newcommand{\tran}{\mathsf{T}}
+\newtheorem{theorem}{Theorem}
+
 
 
 \pagestyle{fancy}
@@ -325,7 +327,7 @@
       \end{align*}
       proving the weak duality proposition.
     \item We wish to show that the primal problem is infeasible if and only if the dual problem is unbounded.
-      This is equivalent to showing that the primal problem is feasible if and only if the dual problem is bounded.
+      This is equivalent to showing that the dual problem is bounded if and only if the primal problem is feasible.
       The primal problem in symmetric form and the dual problem obtained in a symmetric form are presented below:
       \begin{align*}
         \begin{array}{lrl}
@@ -348,7 +350,8 @@
       $\max\{\vc{\lambda}^\tran \vc{b} \ |\ \vc{\lambda}^\tran A \leq \vc{c}^\tran, \vc{\lambda}\geq \vc{0} \} \leq \vc{c}^\tran\vc{x_0}$
       and the dual problem is bounded above.
 
-      Now suppose that the dual problem is bounded.
+      We now wish to show that if the dual problem is bounded, then the primal problem is feasible.
+      This is equivalent to showing that if the primal problem is infeasible, then the dual problem is unbounded.
   \end{enumerate}
 
 \end{proof}
@@ -361,6 +364,78 @@
 \end{problem}
 
 \begin{proof}
+  The Duality Theorem is presented below:
+  \begin{theorem}[\textbf{\emph{Duality Theorem}}] If the primal problem, in symmetric form,
+    has an optimal solution, then so does the dual, and the optimal values of their
+    respective objective functions are equal.
+  \end{theorem}
+
+  \emph{Proof.} We define the symmetric form for the primal problem below:
+  \begin{align*}
+    \begin{array}{lrl}
+      (P_s) & \text{minimize} & \vc{c}^\tran \vc{x} \\
+      & \text{subject to} & A\vc{x} \geq \vc{b} \\
+      & & \vc{x} \geq \vc{0}
+    \end{array}
+  \end{align*}
+
+  Note that we can transform the symmetric problem to an equivalent asymmetric form
+  by adding excess variables in the constraints:
+  \begin{align*}
+    \begin{array}{lrl}
+      (P_a) & \text{minimize} & \vc{C}^\tran \vc{X} \\
+      & \text{subject to} & \mathscr{A}\vc{X} = \vc{b} \\
+      & & \vc{X} \geq \vc{0}
+    \end{array}
+  \end{align*}
+  where
+  \begin{align*}
+    \mathscr{A} = \begin{bmatrix}A^\tran \\ -I\end{bmatrix}^\tran, \quad \vc{X} = \begin{bmatrix}\vc{x} \\ \vc{y}\end{bmatrix},
+    \quad \vc{C} = \begin{bmatrix}\vc{c} \\ \vc{0}\end{bmatrix}.
+  \end{align*}
+
+  We wish to show that $\vc{x}$ is optimal in $(P_s)$ if and only if $\vc{X} = \begin{bmatrix}\vc{x} \\ A\vc{x} - \vc{b}\end{bmatrix}$
+  is optimal in $(P_a)$.
+
+  Suppose first that $\vc{x}$ is optimal in $(P_s)$. We begin by showing that $\vc{X}$ is feasible, i.e.\ $\vc{X} \geq \vc{0}$. Since $\vc{x}$ is a feasible solution of $(P_s)$, we have that $\vc{x} \geq \vc{0}$ and since $\vc{x}$ satisfies $A\vc{x} \geq \vc{b}$, we have that $A\vc{x} - \vc{b} \geq \vc{0}$
+  showing indeed that $\vc{X} \geq \vc{0}$. Further, $\vc{X}$ is a feasible solution since
+  \begin{align*}
+    \mathscr{A}\vc{X} = \begin{bmatrix}A & -I\end{bmatrix}\begin{bmatrix}\vc{x} \\ A\vc{x} - \vc{b}\end{bmatrix} = A\vc{x} -(A\vc{x} - \vc{b}) = \vc{b}.
+  \end{align*}
+  Lastly, since $\vc{x}$ is optimal in $(P_s)$, we know that $\vc{X}$ is optimal in $(P_a)$ since
+  \begin{align}\label{same_obj}
+    \vc{C}^\tran\vc{X} = \begin{bmatrix}\vc{c} \\ \vc{0}\end{bmatrix}^\tran\begin{bmatrix}\vc{x} \\ A\vc{x} - \vc{b}\end{bmatrix} = \vc{c}^\tran\vc{x},
+  \end{align}
+  i.e.\ the minimum for both problems is the same.
+
+  The other direction is trivial since if $\vc{X}$ is an optimal solution to $(P_a)$, then $\vc{x}$ is clearly a feasible solution to $(P_s)$ since $\vc{X} \geq \vc{0}$ and from equation
+  \eqref{same_obj}, the objectives are equal so the problems obtain their optimum at the same point $ \vc{x}$.
+
+  Also note that the dual of $(P_s)$ is equivalent to the dual of $(P_a)$. Note that the dual of the primal in the symmetric form and asymmetric form are presented below:
+  \begin{align*}
+    \begin{array}{lrl}
+      (D_s) & \text{maximize} & \vc{\lambda}^\tran \vc{b} \\
+      & \text{subject to} & \vc{\lambda}^\tran A \leq \vc{c}^\tran \\
+      & & \vc{\lambda} \geq \vc{0}.
+    \end{array}
+    \qquad
+    \begin{array}{lrl}
+      (D_a) & \text{maximize} & \vc{\lambda}^\tran \vc{b} \\
+      & \text{subject to} & \vc{\lambda}^\tran \mathscr{A} \leq \vc{C}^\tran \\
+      & &
+    \end{array}
+  \end{align*}
+
+  To see that these two problems are equivalent, one merely needs to examine the constraint $\vc{\lambda}^\tran\mathscr{A} \leq \vc{C}^\tran$.
+  Note that
+  \begin{align*}
+    \vc{\lambda}^\tran\mathscr{A} \leq \vc{C}^\tran \implies \begin{bmatrix}\vc{\lambda}^\tran A & -\vc{\lambda}^\tran\end{bmatrix} \leq \begin{bmatrix}\vc{c}^\tran & \vc{0}^\tran\end{bmatrix}
+  \end{align*}
+  from which we deduce the two inequalities $\vc{\lambda}^\tran A \leq \vc{c}^\tran$ and $\vc{\lambda} \geq \vc{0}$, precisely the inequalities found in $(D_s)$.
+
+
+  As was shown in class the theorem's results hold in the asymmetric case. As was just shown, the symmetric case
+  can be transformed to its equivalent asymmetric case and therefore the theorem's results hold as well in the symmetric case.
 \end{proof}
 \newpage
 
