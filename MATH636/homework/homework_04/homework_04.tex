@@ -350,8 +350,15 @@
       $\max\{\vc{\lambda}^\tran \vc{b} \ |\ \vc{\lambda}^\tran A \leq \vc{c}^\tran, \vc{\lambda}\geq \vc{0} \} \leq \vc{c}^\tran\vc{x_0}$
       and the dual problem is bounded above.
 
-      We now wish to show that if the dual problem is bounded, then the primal problem is feasible.
-      This is equivalent to showing that if the primal problem is infeasible, then the dual problem is unbounded.
+      Now suppose that the dual problem is bounded above. Then the dual problem
+      is feasible and has a feasible solution. As such, the dual problem has a
+      basic feasible solution. The simplex method will then either generate an
+      optimal basic feasible solution or terminate because the problem is unbounded.
+      As the second case can never happen, this implies that the dual problem has
+      an optimal basic feasible solution. By the Duality Theorem, the primal
+      problem must also have an optimal solution implying that the primal
+      problem is feasible. Therefore, if the dual problem is bounded, the
+      primal problem is feasible and we are done.
   \end{enumerate}
 
 \end{proof}
