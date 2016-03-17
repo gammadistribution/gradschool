@@ -581,10 +581,16 @@
           & & \vc{\lambda} \geq \vc{0}.
         \end{array}
       \end{align*}
-      As $\vc{x}^{*} = [2,1]^\tran$ is optimal for the primal problem $(P_s)$ with $\vc{x}^{*} \neq \vc{0}$,
-      we know by the Complementary Slackness Condition that the optimal solution to the dual satisfies
-      $(\vc{c}^\tran - \vc{\lambda}^{*\tran} A)\vc{x}^{*} = \vc{0}$ if
-      and only if $\vc{c}^\tran - \vc{\lambda}^{*\tran} A$. Thus, $\vc{c}^\tran = \vc{\lambda}^{*\tran} A$ and since $\text{rank}\ A = 2$, the matrix $A$
+      By the Complementary Slackness Condition, we know that the optimal solutions to the primal and dual satisfy
+      the two equations
+      \begin{align*}
+        (\vc{c}^\tran - \vc{\lambda}^{*\tran} A)\vc{x}^{*} &= 0 \\
+        \vc{\lambda}^{*\tran}(A\vc{x}^{*} - \vc{b}) &= 0.
+      \end{align*}
+      As $\vc{x}^{*} = [2,1]^\tran$ is optimal for the primal problem $(P_s)$ with $A\vc{x}^{*} - \vc{b} = \vc{0}$
+      and for each $i$, the component $x_i^{*} \neq 0$,
+      we know that the second equation is satisfied and the first equation is satisfied if
+      and only if $\vc{c}^\tran - \vc{\lambda}^{*\tran} A = 0$. Thus, $\vc{c}^\tran = \vc{\lambda}^{*\tran} A$ and since $\text{rank}\ A = 2$, the matrix $A$
       is invertible so that $\vc{\lambda}^{*\tran} = \vc{c}^\tran A^{-1}$. Therefore, by the Complementary Slackness Condition
       the optimal solution to the dual problem $(D_s)$ is
       \begin{align*}
@@ -606,8 +612,6 @@
       & x_1 &&& &+ x_5 &= 3 \\
       &x_i \geq 0 & i= 1,2,3,4,5.& & & \\
     \end{array}
-    \begin{array}{ll}
-    \end{array}
   \end{align*}
   \begin{enumerate}
     \item Construct the dual problem corresponding to the primal problem above.
@@ -617,6 +621,79 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item The linear program found in this problem can be represented as
+      \begin{align*}
+        &\begin{array}{rllllll}
+          \text{minimize} & -x_1 &- 2x_2 & & & & \\
+          \text{subject to} & -2x_1 &+ x_2 &+ x_3 & & &= 2 \\
+          & -x_1 &+ 2x_2& &+ x_4 & &= 7 \\
+          & x_1 &&& &+ x_5 &= 3 \\
+          &x_i \geq 0 & i= 1,2,3,4,5.& & & \\
+        \end{array}
+        \\ \\
+        \quad &\implies \quad
+        \begin{array}{rrl}
+          (P_a) & \text{minimize} & \vc{c}^\tran\vc{x} \\
+          & \text{subject to} & A\vc{x} = \vc{b}  \\
+          & & \vc{x} \geq \vc{0} \\
+        \end{array}
+      \end{align*}
+      where
+      \begin{align*}
+        A = \begin{bmatrix}-2 & 1 & 1 & 0 & 0 \\ -1 & 2 & 0 & 1 & 0 \\ 1 & 0 & 0 & 0 & 1 \\\end{bmatrix},\quad
+        \vc{x} = \begin{bmatrix}x_1 \\ x_2 \\ x_3 \\x_4 \\ x_5\end{bmatrix},\quad \vc{c} = \begin{bmatrix}-1 \\ -2 \\ 0 \\ 0 \\ 0\end{bmatrix},\quad \vc{b} = \begin{bmatrix}2 \\ 7 \\ 3\end{bmatrix}.
+      \end{align*}
+
+      By definition, the dual to the primal problem $(P_a)$ in asymmetric form
+      is
+      \begin{align*}
+        \begin{array}{rrl}
+          (D_a) & \text{maximize} & \vc{\lambda}^\tran\vc{b} \\
+          & \text{subject to} & \vc{\lambda}^\tran A \leq \vc{c}  \\
+        \end{array}
+      \end{align*}
+    \item By the Complementary Slackness Condition, we know that the optimal solutions
+      to the primal and dual satisfy the two equations
+      \begin{align*}
+        (\vc{c}^\tran - \vc{\lambda}^{*\tran} A)\vc{x}^{*} &= 0 \\
+        \vc{\lambda}^{*\tran}(A\vc{x}^{*} - \vc{b}) &= 0.
+      \end{align*}
+      As $\vc{x}^{*} = [3,5,3,0,0]^\tran$ is optimal for the primal problem $(P_a)$ with $A\vc{x}^{*} - \vc{b} = \vc{0}$
+      we know that the second equation is satisfied. Note that the first equation is expressed as
+      \begin{align*}
+        \sum_{i=1}^5 (c_i -\vc{\lambda}^{*\tran} \vc{a_i}) x_i^{*} = 0
+      \end{align*}
+      where $\vc{a_i}$ is the $i$-th column of the matrix $A$.
+      Since $c_i -\vc{\lambda}^{*\tran} \vc{a_i} \geq 0$ and $\vc{x} \geq \vc{0}$,
+      we know that the sum is 0 if and only if each summand is 0. Thus, omitting summands where $x_i = 0$, as the product will be 0,
+      admits a linear system in $\vc{\lambda}^{*\tran}$ written as
+      \begin{align*}
+        \begin{cases}
+          \vc{\lambda}^{*\tran}\vc{a_1} = c_1 \\
+          \vc{\lambda}^{*\tran}\vc{a_2} = c_2 \\
+          \vc{\lambda}^{*\tran}\vc{a_3} = c_3 \\
+        \end{cases}
+        \implies
+        \begin{bmatrix}\vc{a_1} & \vc{a_2} & \vc{a_3}\end{bmatrix}^\tran \vc{\lambda}^{*} = \begin{bmatrix}c_1 \\ c_2 \\ c_3\end{bmatrix}.
+      \end{align*}
+      Thus, solving the above linear system will lead us to the optimal solution to the dual.
+      Rewriting the linear system in terms of our problem yields
+      \begin{align*}
+        \begin{bmatrix}-2 & 1 & 1 \\ -1 & 2 & 0 \\ 1 & 0 & 0 \\\end{bmatrix}^\tran\vc{\lambda}^{*} = \begin{bmatrix}-1 \\ -2 \\ 0\end{bmatrix}
+        \implies \mathscr{A}^\tran \vc{\lambda}^{*} = \vc{C}.
+      \end{align*}
+      Since $\mathscr{A}$ has full rank, it is invertible and the solution to
+      the system is
+      \begin{align*}
+        \vc{\lambda}^{*} = \begin{bmatrix}-2 & -1 & 1 \\ 1 & 2 & 0 \\ 1 & 0 & 0\end{bmatrix}^{-1}
+        \begin{bmatrix}-1 \\ -2 \\ 0\end{bmatrix}
+        = \begin{bmatrix}0 \\ -1 \\ -2\end{bmatrix}.
+      \end{align*}
+      Therefore, $\vc{\lambda}^{*\tran} = \begin{bmatrix}0 & -1 & -2\end{bmatrix}$ is the optimal solution to
+      the dual problem $(D_a)$.
+
+  \end{enumerate}
 \end{proof}
 \newpage
 
