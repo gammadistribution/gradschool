@@ -710,15 +710,15 @@
   Let $A$ be a given matrix and $\vc{b}$ a given vector. We wish to prove the
   following result: There exists a vector $\vc{x}$ such that $A\vc{x} = \vc{b}$ and
   $\vc{x} \geq \vc{0}$ if and only if for any given vector $\vc{y}$ satisfying $A^\tran \vc{y} \leq \vc{0}$
-  we have $\vc{b}^\tran \vc{y} \leq \vc{0}$. This result is known as \textit{Farkas's transposition theorem}.
+  we have $\vc{b}^\tran \vc{y} \leq 0$. This result is known as \textit{Farkas's transposition theorem}.
   Our program is based on duality theory, consisting of the parts listed below.
   \begin{enumerate}
     \item Consider the primal linear program
       \begin{align*}
-        \begin{array}{rl}
-          \text{minimize} & \vc{0}^\tran \vc{x} \\
-          \text{subject to} & A\vc{x} = \vc{b} \\
-          & \vc{x} \geq \vc{0}.
+        \begin{array}{rrl}
+          (P_a) & \text{minimize} & \vc{0}^\tran \vc{x} \\
+          & \text{subject to} & A\vc{x} = \vc{b} \\
+          & & \vc{x} \geq \vc{0}.
         \end{array}
       \end{align*}
       Write down the dual of this problem using the notation $\vc{y}$ for the dual variable.
@@ -736,11 +736,40 @@
       direction of Farkas's transposition theorem.)
     \item Suppose that $\vc{x}$ satisfies $A\vc{x} = \vc{b}$ and $\vc{x} \geq \vc{0}$.
       Let $\vc{y}$ be an arbitrary vector satisfying $A^\tran \vc{y} \leq \vc{0}$.
-      (This proves the other direction of Farkas's transposition theorem.)
+      Show that $\vc{b}^\tran\vc{y} \leq 0$. (This proves the other direction of Farkas's transposition theorem.)
   \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item The dual to the primal problem $(P_a)$ in asymmetric form is presented below:
+      \begin{align*}
+        \begin{array}{rrl}
+          (D_a) & \text{maximize} & \vc{b}^\tran\vc{y} \\
+          & \text{subject to} & A^\tran \vc{y} \leq \vc{0}. \\
+        \end{array}
+      \end{align*}
+    \item Note that the solution $\vc{y} = \vc{0}$ obviously satisfies the constraints
+      of the dual problem $(D_a)$ showing that the feasible set of the dual problem is nonempty.
+    \item If for any $\vc{y}$ satisfying $A^\tran \vc{y} \leq \vc{0}$,
+      we have that $\vc{b}^\tran \vc{y} \leq 0$, then the dual problem $(D_a)$ is bounded above. As shown in part b,
+      the dual problem has a feasible solution. By the Fundamental Theorem of LP, the dual
+      problem then has a basic feasible solution. The simplex method
+      will then either generate an optimal basic feasible solution for this problem or terminate because the problem is unbounded.
+      As the dual problem is bounded, the second case cannot happen and the dual problem has an optimal basic feasible solution.
+    \item If for any $\vc{y}$ satisfying $A^\tran \vc{y} \leq \vc{0}$,
+      we have that $\vc{b}^\tran \vc{y} \leq 0$, then the dual problem $(D_a)$ has an optimal solution. By the Duality Theorem,
+      the primal problem $(P_a)$ therefore has an optimal feasible solution. Thus, a feasible solution to the primal
+      problem $(P_a)$ exists, i.e.\ there exists $\vc{x}$ such that $A\vc{x} = \vc{b}$ and $\vc{x} \geq \vc{0}$.
+    \item Suppose that $\vc{x}$ satisfies $A\vc{x} = \vc{b}$ and $\vc{x} \geq \vc{0}$ and
+      let $\vc{y}$ be an arbitrary vector satisfying $A^\tran \vc{y} \leq \vc{0}$.
+      Then $\vc{x}$ and $\vc{y}$ are feasible solutions to the primal problem $(P_a)$ and the dual
+      problem $(D_a)$, respectively. By the Weak Duality Theorem, we know that
+      \begin{align*}
+        \vc{b}^\tran \vc{y} \leq \vc{0}^\tran \vc{x} = 0
+      \end{align*}
+      and we are done.
+  \end{enumerate}
 \end{proof}
 \newpage
 
