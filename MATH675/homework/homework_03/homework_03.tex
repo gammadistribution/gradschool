@@ -44,6 +44,34 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Note that for $x\to\infty$ we have that $e^{f(x)} \not\sim e^{g(x)}$ if and only if
+      \begin{align*}
+        \lim_{x \to \infty}\frac{e^{f(x)}}{e^{g(x)}} = \lim_{x \to \infty} e^{f(x) - g(x)} \neq 1.
+      \end{align*}
+      Thus, if $\lim_{x\to\infty} f(x) - g(x) \neq 0$, then $\lim_{x \to \infty} e^{f(x) - g(x)} \neq 1$ and $e^{f(x)} \not\sim e^{g(x)}$.
+      Therefore, take for instance the functions $f(x) = x + 1$ and $g(x) = x$. These functions are clearly asymptotic
+      as
+      \begin{align*}
+        \lim_{x\to\infty} \frac{f(x)}{g(x)} = \lim_{x\to\infty} \frac{x + 1}{x} = \lim_{x\to\infty} 1 + \frac{1}{x} = 1.
+      \end{align*}
+      However,
+      \begin{align*}
+        \lim_{x \to \infty}\frac{e^{f(x)}}{e^{g(x)}} =         \lim_{x \to \infty} e^{f(x) - g(x)} = \lim_{x \to \infty}e^{(x+1) - x} = e \neq 1
+      \end{align*}
+      so that the asymptotic relation between $f(x)$ and $g(x)$ cannot be exponentiated.
+    \item
+      Suppose that $f(x) - g(x) \ll 1$ as $x\to\infty$. Then
+      \begin{align*}
+        \lim_{x\to\infty}\frac{f(x) - g(x)}{1} = \lim_{x\to\infty} f(x) - g(x) = 0.
+      \end{align*}
+      If this is true then we must have that
+      \begin{align*}
+        \lim_{x \to \infty}\frac{e^{f(x)}}{e^{g(x)}} = \lim_{x \to \infty} e^{f(x) - g(x)} = e^{\lim_{x \to \infty} f(x) - g(x)} = e^{0} = 1
+      \end{align*}
+      or that $e^{f(x)} \sim e^{g(x)}$ and we are done.
+
+  \end{enumerate}
 \end{proof}
 \newpage
 
