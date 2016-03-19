@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+\usepackage{breqn}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\newenvironment{case}{%
+  \let\olditem\item%
+  \renewcommand\item[1][]{\olditem \textbf{##1} \\}%
+  \begin{enumerate}[label=\textbf{Case \arabic*:},itemindent=*,leftmargin=0em]}{\end{enumerate}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 3}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 3}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  \begin{enumerate}
+    \item Give an example of an asymptotic relation $f(x) \sim g(x)\ (x \to \infty)$
+      that cannot be exponentiated; that is $e^{f(x)} \sim e^{g(x)}\ (x \to \infty)$ is false.
+    \item Show that if $f(x) - g(x) \ll 1\ (x \to \infty)$, then $e^{f(x)} \sim e^{g(x)}\ (x \to \infty)$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  Find and classify all the singular points (including the point at $\infty$) of the equations:
+  \begin{align*}
+    x(1-x)y'' + [2-(a+b)x]y' - aby = 0, \qquad (x^2 + 1)y'' - xy = 0.
+  \end{align*}
+  Here, $a, b \in \mathbb{R}$.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 3
+\begin{problem}
+  Find the Taylor series solution of the IVP
+  \begin{align*}
+    (1-x^3)y''' + 2xy' = 0,\quad y(0) = 3, y'(0) = 3, y''(0) = 0.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 4
+\begin{problem}
+  Find two linearly independent solutions to $x(1-x)y'' - 3xy'-y = 0$.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 5
+\begin{problem}
+  Find two linearly independent solutions to $x^2y'' + 3xy' + (1-2x)y = 0$.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 6
+\begin{problem}
+  Find the leading behavior of both solutions of $x^5y'' - y = 0$ near $x=0$.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 7
+\begin{problem}
+  Find the first four terms in the asymptotic series for the solutions of $y'' = e^{-2/x}y$ as $x\to + \infty$.
+
+  \textbf{Hint:} When you are performing the asymptotic analysis to extract the leading
+  behavior of the solution as $x\to  + \infty$, you may (and probably want) to replace
+  $e^{-2/x}$ with a reasonable simpler approximation.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+\end{document}
