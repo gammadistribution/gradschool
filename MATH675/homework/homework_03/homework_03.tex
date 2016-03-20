@@ -173,11 +173,67 @@
 \begin{problem}
   Find the Taylor series solution of the IVP
   \begin{align*}
-    (1-x^3)y''' + 2xy' = 0,\quad y(0) = 3, y'(0) = 3, y''(0) = 0.
+    Ly = (1-x^3)y''' + 2xy' = 0,\quad y(0) = 3, y'(0) = 3, y''(0) = 0.
   \end{align*}
 \end{problem}
 
 \begin{proof}
+  Note that the point $x=0$ is an ordinary point of this differential equation. Therefore, we may assume the solution to the differential
+  equation is a Taylor series of the form
+  \begin{align*}
+    y(x) = \sum_{n=0}^\infty a_n x^n.
+  \end{align*}
+  Using this form, we see that the differential equation becomes
+  \begin{align}\label{series}
+    Ly &= (1-x^3)\sum_{n=0}^\infty n(n-1)(n-2) a_n x^{n-3} + 2x \sum_{n=0}^\infty n a_n x^{n-1} \notag \\
+    &= \sum_{n=0}^\infty n(n-1)(n-2) a_n x^{n-3} - \sum_{n=0}^\infty n(n-1)(n-2) a_n x^{n} + \sum_{n=0}^\infty 2n a_n x^{n} \notag \\
+    &= \sum_{n=0}^\infty n(n-1)(n-2) a_n x^{n-3} - \sum_{n=3}^\infty (n-3)(n-4)(n-5) a_{n-3} x^{n-3} + \sum_{n=3}^\infty 2(n-3) a_{n-3} x^{n-3} \notag \\
+    &= \sum_{n=3}^\infty \left[n(n-1)(n-2) a_n - ((n-3)(n-4)(n-5) - 2(n-3)) a_{n-3}\right] x^{n-3} = 0.
+  \end{align}
+  Thus, we see that the series in \eqref{series} satisfies the differential equation
+  if and only if the coefficients of the series are identically zero. From this we derive the recurrence relation
+  \begin{align*}
+      n(n-1)(n-2)a_{n} &= 0 &n &=0,1,2 \\
+      a_{n} &= \frac{\left[(n-3)(n-4)(n-5) - 2(n-3)\right]a_{n-3}}{n(n-1)(n-2)} &n &= 3,4,5,\dots
+  \end{align*}
+  where the coefficients $a_0$, $a_1$, and $a_2$ are arbitrary constants. The solutions
+  of the second equation are
+  \begin{align*}
+    a_{3n} &= 0, \\
+    a_{3n+1} &= a_1\left[\left(\frac{(1\cdot 0\cdot -1) - (2\cdot1)}{4\cdot 3\cdot 2}\right)\left(\frac{(4\cdot 3\cdot 2) - (2\cdot4)}{7\cdot 6\cdot 5}\right)\dots\right. \\
+    &\phantom{=}\ \ \dots\left(\frac{(3n-5)\cdot (3n-6)\cdot (3n-7) - 2\cdot(3n-5)}{(3n-2)(3n-3)(3n-4)}\right)\dots \\
+    &\phantom{=}\ \ \left.\dots\left(\frac{(3n-2)\cdot (3n-3)\cdot (3n-4) - 2\cdot(3n-2)}{(3n+1)(3n)(3n-1)}\right)\right] \\
+    &= a_1\left[\frac{\Pi_{k=1}^{n} (3k-2)(3k-3)(3k-4) - 2(3k-2)}{(3n+1)!}\right],\\
+  \end{align*}
+  \begin{align*}
+    a_{3n+2} &= a_2\left[\left(\frac{(2\cdot 1\cdot 0) - (2\cdot2)}{5\cdot 4\cdot 3}\right)\left(\frac{(5\cdot 4\cdot 3) - (2\cdot5)}{8\cdot 7\cdot 6}\right)\dots\right. \\
+    &\phantom{=}\ \ \dots\left(\frac{(3n-4)\cdot (3n-5)\cdot (3n-6) - 2\cdot(3n-4)}{(3n-1)(3n-2)(3n-3)}\right)\dots \\
+    &\phantom{=}\ \ \left.\dots\left(\frac{(3n-1)\cdot (3n-2)\cdot (3n-3) - 2\cdot(3n-1)}{(3n+2)(3n+1)(3n)}\right)\right] \\
+    &= a_2\left[\frac{2\Pi_{k=1}^{n} (3k-1)(3k-2)(3k-3) - 2(3k-1)}{(3n+2)!}\right].
+  \end{align*}
+
+  Therefore, the general solution to the differential equation $Ly = 0$ is
+  \begin{align}\label{gen_sol}
+    y(x) &= a_0 + a_1x + a_2x^2 + \sum_{n=3}^{\infty}a_nx^n \notag \\
+    &= a_0 + a_1x + a_2x^2 + \sum_{n=1}^{\infty}a_{3n+1}x^{3n+1} + \sum_{n=1}^\infty a_{3n+2}x^{3n+2} \notag\\
+    &= a_0 + a_1\left[x + \sum_{n=1}^{\infty}\frac{a_{3n+1}}{a_1}x^{3n+1}\right] + a_2\left[x^2 + \sum_{n=1}^\infty \frac{a_{3n+2}}{a_2}x^{3n+2} \right].
+  \end{align}
+  Using the initial conditions $y(0) = y'(0) = 3, y''(0) = 0$ and the general solution \eqref{gen_sol},
+  we see that
+  \begin{align*}
+    y'(x) &= a_1 + 2a_2x + \sum_{n=1}^\infty (3n+1)a_{3n+1} x^{3n} +\sum_{n=1}^\infty(3n+2)a_{3n+2}x^{3n+1} \\
+    y''(x) &= 2a_2 + \sum_{n=1}^\infty (3n+1)(3n)a_{3n+1} x^{3n-1} +\sum_{n=1}^\infty(3n+2)(3n+1)a_{3n+2}x^{3n}
+  \end{align*}
+  which implies that
+  \begin{align*}
+    y(0) &= a_0 = 3 \\
+    y'(0) &= a_1 = 3 \\
+    y'(0) &= 2a_2 = 0.
+  \end{align*}
+  Therefore, the solution to the IVP is
+  \begin{align*}
+    y(x) = 3 + 3x + 3\sum_{n=1}^{\infty}\left[\frac{\Pi_{k=1}^{n} (3k-2)(3k-3)(3k-4) - 2(3k-2)}{(3n+1)!}\right]x^{3n+1}.
+  \end{align*}
 \end{proof}
 \newpage
 
