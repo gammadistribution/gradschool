@@ -86,6 +86,85 @@
 \end{problem}
 
 \begin{proof}
+  If a homogeneous differential equation is of the form
+  \begin{align}\label{std_form}
+    y^{(n)}(x) + p_{n-1}(x)y^{(n-1)}(x) + \dots + p_1(x)y^{(1)}(x) + p_0(x)y = 0
+  \end{align}
+  then the point $x = x_0$ is:
+  \begin{itemize}
+    \item \emph{ordinary} if the coefficient functions $p_i(x)$ for $i=0,\dots,n-1$
+      are all analytic in a neighborhood of $x=x_0$.
+    \item \emph{singular} if some coefficient function $p_i(x)$ for $i=0,\dots,n-1$
+      is not analytic in some neighborhood of $x=x_0$.
+  \end{itemize}
+  If the point $x=x_0$ is singular, then the point is:
+  \begin{itemize}
+    \item \emph{regular singular} if the functions $(x-x_0)p_{n-1}(x),\dots,(x-x_0)^{n-1}p_1(x),(x-x_0)^n p_0(x)$ are all analytic in a neighborhood of $x=x_0$.
+    \item \emph{irregular singular} if one of the functions $(x-x_0)p_{n-1}(x),\dots,(x-x_0)^{n-1}p_1(x),(x-x_0)^n p_0(x)$ are not analytic in some neighborhood of $x=x_0$.
+  \end{itemize}
+
+  \begin{enumerate}
+    \item We begin by transforming the differential equation $x(1-x)y'' + [2-(a+b)x]y' - aby = 0$
+      into the form presented in \eqref{std_form}:
+      \begin{align*}
+        y'' + \left[\frac{2}{x(1-x)} - \frac{a+b}{1-x}\right]y' + \left[-\frac{ab}{x(1-x)}\right]y = 0.
+      \end{align*}
+      Thus, we identify the coefficient functions
+      \begin{align*}
+        p_1(x) = \frac{2}{x(1-x)} - \frac{a+b}{1-x},\quad p_0(x) = -\frac{ab}{x(1-x)}.
+      \end{align*}
+      In order to classify all finite points, we see that these coefficient functions are analytic everywhere on the real line except for the points
+      $x_0=0$ and $x_1=1$. To classify the singular points $x_i$ for $i=0,1$, we must determine if the functions
+      $(x-x_i)p_1(x)$ and $(x-x_i)^2 p_0(x)$ are analytic.
+
+      For the point $x_0 = 0$, we know that
+      \begin{align*}
+        x p_1(x) &= \frac{2}{(1-x)} - \frac{(a+b)x}{1-x} \\
+        x^2 p_0(x) &= -\frac{abx}{(1-x)}
+      \end{align*}
+      both of which are analytic at $x = 0$ showing that $x_0 = 0$ is a regular singular point.
+
+      For the point $x_0 = 1$, we know that
+      \begin{align*}
+        (x-1)p_1(x) &= -\frac{2}{x} + a + b \\
+        (x-1)^2 p_0(x) &= \frac{ab(x-1)}{x}
+      \end{align*}
+      both of which are analytic at $x = 1$ showing that $x_0 = 1$ is a regular singular point.
+
+      In order to classify the point at $\infty$, we make the transformation $x=\frac{1}{t}$ and classifying the point $t=0$.
+      Thus, the equation becomes
+      \begin{align*}
+        t^4 y'' + \left[2t^3 - \frac{2t^4}{t-1} + \frac{(a+b)t^3}{t-1}\right]y' + \left[-\frac{abt^2}{t-1}\right]y = 0.
+      \end{align*}
+      The coefficient functions are then
+      \begin{align*}
+        p_1(t) = \frac{2}{t} - \frac{2}{t-1} + \frac{a+b}{t(t-1)},\quad p_0(t) = -\frac{ab}{t^2(t-1)}.
+      \end{align*}
+      It is clear that $x_2 = \infty$ is a singular point since the coefficient functions are not analytic at $t=0$.
+      Since both $tp_1(t)$ and $t^2p_0(t)$ are analytic at $t=0$, the point $x_2 = \infty$ is a regular singular point.
+    \item We rewrite the differential equation $(x^2 + 1)y'' - xy = 0$ in the form presented in \eqref{std_form}:
+      \begin{align*}
+        y'' + \left[- \frac{x}{x^2+1}\right]y = 0.
+      \end{align*}
+      Thus, the coefficient function is
+      \begin{align*}
+        p_0(x) = -\frac{x}{x^2+1}=-\frac{x}{(x-i)(x+i)}.
+      \end{align*}
+      In order to classify all finite points, we see that this coefficient function is analytic everywhere
+      on the real line so that all finite real points are ordinary.
+
+      In order to classify the point at $\infty$, we make the transformation $x=\frac{1}{t}$ and classifying the point $t=0$.
+      Thus, the equation becomes
+      \begin{align*}
+        t^4 y'' + 2t^3y' - \frac{t}{t^2+1}y = 0.
+      \end{align*}
+      The coefficient functions are then
+      \begin{align*}
+        p_1(t) = \frac{2}{t},\quad p_0(t) = -\frac{1}{t^3(t^2+1)}.
+      \end{align*}
+      The point $t=0$ is clearly a singular point since both coefficient functions are not analytic at $t=0$.
+      Since $t^2p_0(t)$ is also not analytic at $t=0$, the point $x_2 = \infty$ is an irregular singular point.
+  \end{enumerate}
 \end{proof}
 \newpage
 
@@ -105,7 +184,7 @@
 
 % Problem 4
 \begin{problem}
-  Find two linearly independent solutions to $x(1-x)y'' - 3xy'-y = 0$.
+  Find two linearly independent solutions to $x(1-x)y'' - 3xy'-y = 0$ about $x=0$.
 \end{problem}
 
 \begin{proof}
@@ -115,7 +194,7 @@
 
 % Problem 5
 \begin{problem}
-  Find two linearly independent solutions to $x^2y'' + 3xy' + (1-2x)y = 0$.
+  Find two linearly independent solutions to $x^2y'' + 3xy' + (1-2x)y = 0$ about $x=0$.
 \end{problem}
 
 \begin{proof}
