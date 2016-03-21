@@ -4,6 +4,7 @@
 \usepackage{fancyhdr}
 \usepackage{tikz}
 \usepackage{mathrsfs}
+\usepackage{mathtools}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 
@@ -118,7 +119,7 @@
 
   More precisely, solve:
   \begin{align*}
-    \begin{array}{lll}
+    \begin{array}{lrl}
       \text{Maximize} & 9x_1 + 13x_2 & \\
       \text{subject to} & 4x_1 + 3x_2 &\leq 300 \\
        & x_1 + 2x_2 &\leq 625/6 \\
@@ -130,6 +131,163 @@
 \end{problem}
 
 \begin{proof}
+  We begin by transforming the shipping problem into the equivalent problem:
+  \begin{align}\label{initial}
+    \begin{array}{rlrl}
+      \text{ILP} & \text{Minimize} & -9x_1 - 13x_2 & \\
+      & \text{subject to} & 4x_1 + 3x_2 + x_3 &= 300\\
+      & & x_1 + 2x_2 +x_4 &= 625/6 \\
+      & & -2x_1 + x_2 + x_5 &= 0 \\
+      & & x_1, x_2, x_3, x_4, x_5 \geq 0 \\
+      & & x_1, x_2, x_3, x_4, x_5 \in \mathbb{Z}\\
+    \end{array}
+  \end{align}
+  The Gomory Cutting-Plane Method involves solving the LP \eqref{initial} without the integer constraints
+  using the Simplex Method.Once an optimal basic feasible solution is obtained, if the solution is a noninteger solution,
+  additional constraints are added that remove thee current optimal noninteger solution from the feasible set without eliminating any integer feasible solutions.
+  The process then begins anew on this system until an optimal integer solution is found.
+
+  Thus, we perform the simplex method on the initial tableau
+  \begin{align*}
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{b} \\
+      & 4 & 3 & 1 & 0 & 0 & 300 \\
+      & 1 & 2 & 0 & 1 & 0 & 625/6 \\
+      & -2 & 1 & 0 & 0 & 1 & 0 \\
+      \vc{c}^\tran & -9 & -13 & 0 & 0 & 0 & 0\\
+    \end{matrix}
+  \end{align*}
+  which is in canonical form. Moving from this tableau to the next we see that
+  $\vc{a_2}$ enters the basis and $\vc{a_5}$ leaves the basis:
+  \begin{align*}
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{b} \\
+      & 4 & 3 & 1 & 0 & 0 & 300 \\
+      & 1 & 2 & 0 & 1 & 0 & 625/6 \\
+      & -2 & \circled{1} & 0 & 0 & 1 & 0 \\
+      \vc{c}^\tran & -9 & -13 & 0 & 0 & 0 & 0\\
+      &&\uparrow &&&
+    \end{matrix}
+    \quad
+    \to
+    \quad
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{b} \\
+      & 10 & 0 & 1 & 0 & -3 & 300 \\
+      & 5 & 0 & 0 & 1 & -2 & 625/6 \\
+      & -2 & 1 & 0 & 0 & 1 & 0 \\
+      \vc{c}^\tran & -35 & 0 & 0 & 0 & 13 & 0\\
+      && &&&
+    \end{matrix}
+  \end{align*}
+  Moving from this tableau to the next, $\vc{a_1}$ enters the basis and $\vc{a_4}$ leaves the basis:
+  \begin{align*}
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{b} \\
+      & 10 & 0 & 1 & 0 & -3 & 300 \\
+      & \circled{5} & 0 & 0 & 1 & -2 & 625/6 \\
+      & -2 & 1 & 0 & 0 & 1 & 0 \\
+      \vc{c}^\tran & -35 & 0 & 0 & 0 & 13 & 0\\
+      &\uparrow& &&&&
+    \end{matrix}
+    \quad
+    \to
+    \quad
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{b} \\
+      & 0 & 0 & 1 & -2 & 1 & 275/3 \\
+      & 1 & 0 & 0 & 1/5 & -2/5 & 125/6 \\
+      & 0 & 1 & 0 & 2/5 & 1/5 & 125/3 \\
+      \vc{c}^\tran & 0 & 0 & 0 & 7 & -1 & 4375/6 \\
+      && &&&&
+    \end{matrix}
+  \end{align*}
+  Moving from this tableau to the next, $\vc{a_5}$ enters the basis and $\vc{a_3}$ leaves the basis:
+  \begin{align*}
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{b} \\
+      & 0 & 0 & 1 & -2 & \circled{1} & 275/3 \\
+      & 1 & 0 & 0 & 1/5 & -2/5 & 125/6 \\
+      & 0 & 1 & 0 & 2/5 & 1/5 & 125/3 \\
+      \vc{c}^\tran & 0 & 0 & 0 & 7 & -1 & 4375/6 \\
+      && &&&\uparrow &
+    \end{matrix}
+    \quad
+    \to
+    \quad
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{b} \\
+      & 0 & 0 & 1 & -2 & 1 & 275/3 \\
+      & 1 & 0 & 2/5 & -3/5 & 0 & 115/2 \\
+      & 0 & 1 & -1/5 & 4/5 & 0 & 70/3 \\
+      \vc{c}^\tran & 0 & 0 & 1 & 5 & 0 & 4925/6 \\
+      && &&&&
+    \end{matrix}
+  \end{align*}
+  so that the current tableau is optimal. This optimal basic feasible solution
+  does not satisfy the integer constraint in terms of the decision variables $x_1$ and $x_2$. Thus, we introduce the Gomory cut
+  \begin{align*}
+    [2/5 - \lfloor 2/5\rfloor]x_3 + [-3/5 - \lfloor -3/5 \rfloor] x_4  - x_6 &= 115/2 - \lfloor 115/2\rfloor \\
+    2/5 x_3 + 2/5x_4 - x_6 &= 1/2.
+  \end{align*}
+  The tableau then becomes
+  \begin{align*}
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{a_6} & \vc{b} \\
+      & 0 & 0 & 1 & -2 & 1 &  0 & 275/3 \\
+      & 1 & 0 & 2/5 & -3/5 & 0 & 0 & 115/2 \\
+      & 0 & 1 & -1/5 & 4/5 & 0 & 0 & 70/3 \\
+      & 0 & 0 & 2/5 & 2/5 & 0 & -1& 1/2 \\
+      \vc{c}^\tran & 0 & 0 & 1 & 5 & 0 & 0 &  4925/6 \\
+    \end{matrix}
+  \end{align*}
+  Pivoting around (4,3) yields
+  \begin{align*}
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{a_6} & \vc{b} \\
+      & 0 & 0 & 0 & -3 & 1 &  5/2 & 1085/12 \\
+      & 1 & 0 & 0 & -1 & 0 & 1 & 57 \\
+      & 0 & 1 & 0 & 1 & 0 & -1/2 & 283/12 \\
+      & 0 & 0 & 1 & 1 & 0 & -5/2 & 5/4 \\
+      \vc{c}^\tran & 0 & 0 & 0 & 4 & 0 & 5/2 &  9835/12 \\
+    \end{matrix}
+  \end{align*}
+  which is optimal, but the optimal basic feasible solution still does not satisfy the integer
+  constraints in terms of the decision variables $x_1$ and $x_2$. Thus, we introduce the Gomory cut
+  \begin{align*}
+    [-1/2 - \lfloor -1/2\rfloor]x_6 - x_7 &= 283/12 - \lfloor 283/12\rfloor \\
+    1/2x_6 - x_7 = 7/12.
+  \end{align*}
+  The tableau then becomes
+  \begin{align*}
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{a_6} & \vc{a_7} & \vc{b} \\
+      & 0 & 0 & 0 & -3 & 1 &  5/2 & 0 & 1085/12 \\
+      & 1 & 0 & 0 & -1 & 0 & 1 & 0 & 57 \\
+      & 0 & 1 & 0 & 1 & 0 & -1/2 & 0 & 283/12 \\
+      & 0 & 0 & 1 & 1 & 0 & -5/2 & 0 & 5/4 \\
+      & 0 & 0 & 0 & 0 & 0 & 1/2 & -1 & 7/12\\
+      \vc{c}^\tran & 0 & 0 & 0 & 4 & 0 & 5/2 & 0 & 9835/12
+    \end{matrix}
+  \end{align*}
+  Pivoting around (5,6) yields
+  \begin{align*}
+    \begin{matrix}
+      & \vc{a_1} & \vc{a_2} & \vc{a_3} & \vc{a_4} & \vc{a_5} & \vc{a_6} & \vc{a_7} & \vc{b} \\
+      & 0 & 0 & 0 & -3 & 1 &  0 & 5 & 175/2 \\
+      & 1 & 0 & 0 & -1 & 0 & 0 & 2 & 335/6 \\
+      & 0 & 1 & 0 & 1 & 0 & 0 & -1 & 145/6 \\
+      & 0 & 0 & 1 & 1 & 0 & 0 & -5 & 25/6 \\
+      & 0 & 0 & 0 & 0 & 0 & 1 & -2 & 7/6\\
+      \vc{c}^\tran & 0 & 0 & 0 & 4 & 0 & 0 & 5 & 2450/3\\
+    \end{matrix}
+  \end{align*}
+
+  which is optimal, but the optimal basic feasible solution still does not satisfy the integer
+  constraints in terms of the decision variables $x_1$ and $x_2$. Thus, we introduce the Gomory cut
+  \begin{align*}
+    -x_8 = 145/6 - \lfloor145/6\rfloor = 1/6.
+  \end{align*}
 \end{proof}
 \newpage
 
