@@ -54,7 +54,7 @@
       components, a general integer programming problem
       \begin{align*}
         \begin{array}{rlrl}
-          (GILP) & \text{Minimize (Maximize)} & f(\vc{x}) = \vc{c}^\tran \vc{x} & \\
+          (\text{GILP}) & \text{Minimize (Maximize)} & f(\vc{x}) = \vc{c}^\tran \vc{x} & \\
           & \text{subject to} & A\vc{x} &\leq (\geq, =) \vc{b} \\
           & & \vc{x} \geq (\leq) \vc{0}, \vc{x}\in\mathbb{Z}^n
         \end{array}
@@ -62,7 +62,7 @@
       can be reduced (or is equivalent) to a standard integer programming problem
       \begin{align*}
         \begin{array}{rlrl}
-          (ILP) & \text{Minimize (Maximize)} & f(\vc{X}) = \vc{C}^\tran\vc{X}& \\
+          (\text{ILP}) & \text{Minimize (Maximize)} & f(\vc{X}) = \vc{C}^\tran\vc{X}& \\
           & \text{subject to} & \mathscr{A}\vc{X} &= \vc{B} \\
           && \vc{X} \geq \vc{0}, \vc{X} \in \mathbb{Z}^n
         \end{array}
@@ -76,6 +76,37 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item In general, the transformations needed to change the constraints in the (GILP) to the standard form
+      (ILP) all involve operations on integers so that the requirement that the constraints all involve integer components is satisfied.
+      As such, if either the (GILP) or (ILP) has a solution, then the other is guaranteed
+      to have a feasible solution since the additional slack or excess variables all involve integer operations. Thus,
+      one of the feasible solutions will be the optimum and the other problem is solved.
+
+      To illustrate this idea, take the (GILP)
+      \begin{align*}
+        \begin{array}{rlrl}
+          (\text{GILP}) & \text{Minimize} & f(\vc{x}) = \begin{bmatrix}-4 & -3\end{bmatrix}\begin{bmatrix}x_1 & x_2\end{bmatrix}^\tran& \\
+          & \text{subject to} & \begin{bmatrix}2 & -1\\ -1 & 2\end{bmatrix}\begin{bmatrix}x_1\\x_2\\\end{bmatrix} &\leq \begin{bmatrix}5\\3\end{bmatrix} \\
+          & & \vc{x}\geq \vc{0}, \vc{x}\in\mathbb{Z}^n
+        \end{array}
+      \end{align*}
+      The solution to (GILP) is $\vc{x}^\tran = \begin{bmatrix}4&3\end{bmatrix}$.
+
+      In order to change the problem (GILP) to standard form (ILP) we need to add slack variables to the matrix $A$. Doing so
+      results in a matrix $\mathscr{A}$ that still has all integer components and $\vc{b}$ remains unchanged so that it too
+      still has all integer components. To see this, in standard form the problem becomes
+      \begin{align*}
+        \begin{array}{rlrl}
+          (\text{ILP}) & \text{Minimize} & f(\vc{x}) = \begin{bmatrix}-4 & -3 & 0 & 0\end{bmatrix}\begin{bmatrix}x_1 & x_2 & x_3 & x_4\end{bmatrix}^\tran& \\
+          & \text{subject to} & \begin{bmatrix}2 & -1 & 1 & 0\\ -1 & 2 & 0 & 1\end{bmatrix}\begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix} &= \begin{bmatrix}5\\3\\0\\0\end{bmatrix} \\
+          & & \vc{X}\geq \vc{0}, \vc{X}\in\mathbb{Z}^n
+        \end{array}.
+      \end{align*}
+      the solution of which is $\vc{x}^\tran = \begin{bmatrix}4 & 3 & 0 & 0\end{bmatrix}$.
+    \item When the matrix $A$ or the constraint column $\vc{b}$ do not have integer components, we can solve (GILP) by converting the problem to
+      standard form and performing the simplex method in conjunction with the Gomory Cutting-Plan Method to obtain an integer solution.
+  \end{enumerate}
 \end{proof}
 \newpage
 
