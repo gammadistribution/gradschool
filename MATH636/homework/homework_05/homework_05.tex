@@ -1,0 +1,118 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{mathrsfs}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\newcommand{\vc}[1]{\boldsymbol{#1}}
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right]
+}
+
+\newcommand{\grstep}[2][\relax]{%
+   \ensuremath{\mathrel{
+       {\mathop{\longrightarrow}\limits^{#2\mathstrut}_{
+                                     \begin{subarray}{l} #1 \end{subarray}}}}}}
+\newcommand{\swap}{\leftrightarrow}
+\newcommand{\tran}{\mathsf{T}}
+\newtheorem{theorem}{Theorem}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 5}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 5}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  \begin{enumerate}
+    \item Explain in a specific example why, when $A$ and $\vc{b}$ have integer
+      components, a general integer programming problem
+      \begin{align*}
+        \begin{array}{rlrl}
+          (GILP) & \text{Minimize (Maximize)} & f(\vc{x}) = \vc{c}^\tran \vc{x} & \\
+          & \text{subject to} & A\vc{x} &\leq (\geq, =) \vc{b} \\
+          & & \vc{x} \geq (\leq) \vc{0}, \vc{x}\in\mathbb{Z}^n
+        \end{array}
+      \end{align*}
+      can be reduced (or is equivalent) to a standard integer programming problem
+      \begin{align*}
+        \begin{array}{rlrl}
+          (ILP) & \text{Minimize (Maximize)} & f(\vc{X}) = \vc{C}^\tran\vc{X}& \\
+          & \text{subject to} & \mathscr{A}\vc{X} &= \vc{B} \\
+          && \vc{X} \geq \vc{0}, \vc{X} \in \mathbb{Z}^n
+        \end{array}
+      \end{align*}
+      by adding variables or any of the transformations discussed in class that change $\vc{x}$ into $\vc{X}$.
+
+      More precisely, explain why (GILP) has a solution $\vc{x} \in \mathbb{Z}^n$ if and only if
+      (ILP) has a solution $\vc{X} \in \mathbb{Z}^n$.
+    \item How do we solve (GILP) when $A$ or $\vc{b}$ do not have integer components?
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  Solve the shipping problem studied in MATH 111 with the replaced constraints over integers using the
+  Gomory Cutting-Plane Method.
+
+  More precisely, solve:
+  \begin{align*}
+    \begin{array}{lll}
+      \text{Maximize} & 9x_1 + 13x_2 & \\
+      \text{subject to} & 4x_1 + 3x_2 &\leq 300 \\
+       & x_1 + 2x_2 &\leq 625/6 \\
+       & -2x_1 + x_2 &\leq 0 \\
+       & x_1, x_2 \geq 0 & \\
+       & x_1, x_2 \in \mathbb{Z}&
+    \end{array}.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 3
+\begin{problem}
+  Let $f:\mathbb{R}^n \to \mathbb{R}^m$ and $\Omega \subset \mathbb{R}^n$ be an open subset.
+  Explain the meaning of $f\in C^1(\Omega)$. More precisely, give all the definitions needed and present some examples
+  and results concerning $C^1(\Omega)$ functions.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+\end{document}
