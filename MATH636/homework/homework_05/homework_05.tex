@@ -142,6 +142,38 @@
 \end{problem}
 
 \begin{proof}
+  The set $\Omega$ is open in $\mathbb{R}^n$ if $\Omega$ is a union of open balls where an open ball of radius $r$ centered at $\vc{x_0}$ is defined
+  to be the set $B_r(\vc{x_0}) = \{\vc{x}\in\mathbb{R}^n\ |\ ||\vc{x} - \vc{x_0}|| < r\}$ where $||\vc{x}-\vc{x_0}||$ can be taken to be the Euclidean distance.
+
+  The space $C^1(\Omega)$ is the set of all continuous functions that have continuous partial
+  derivatives over the open set $\Omega$. Thus, if $f\in C^1(\Omega)$, then the function $f:\Omega \subset \mathbb{R}^n \to \mathbb{R}^m$
+  is necessarily continuous and all partial derivatives of $f$ exist and are continuous.
+
+  Let us make this more precise.
+  If $f$ is a function from the open set $\Omega$ to $\mathbb{R}^m$, then $f$ has $m$ component functions $f_1, \dots, f_m$,i.e.\
+  $f(\vc{x}) = [f_1(\vc{x}),\dots,f_m(\vc{x})]$. We require first that $f$ be continuous. Thus, for every $\vc{x}, \vc{a} \in \Omega$,
+  we require that
+  \begin{align*}
+    \lim_{\vc{x}\to\vc{a}}f(\vc{x}) = \lim_{\vc{x}\to\vc{a}}[f_1(\vc{x}), \dots, f_m(\vc{x})]= [f_1(\vc{a}),\dots,f_m(\vc{a})] = f(\vc{a}),
+  \end{align*}
+  i.e.\ for all $\epsilon > 0$, there exists a $\delta >0$ such that if $||\vc{x}-\vc{a}|| < \delta$, then $||f(\vc{x}) - f(\vc{a})|| < \epsilon$.
+  We also require that all of the partial derivatives of $f$ to exist and be continuous. That is,
+  for all $1 \leq i \leq n$and $1\leq k \leq m$ the partial derivatives $\partial f_k(\vc{x})/\partial x_i$ exist and
+  \begin{align*}
+    \lim_{\vc{x}\to\vc{a}}\frac{\partial f(\vc{x})}{\partial x_i}
+    = \lim_{\vc{x}\to\vc{a}} \left[\frac{\partial f_1(\vc{x})}{\partial x_i},\dots,\frac{\partial f_m(\vc{x})}{\partial x_i}\right]
+    = \left[\left.\frac{\partial f_1(\vc{x})}{\partial x_i}\right|_{\vc{x}=\vc{a}}  ,\dots, \left.\frac{\partial f_m(\vc{x})}{\partial x_i}\right|_{\vc{x}=\vc{a}}\right]
+    = \left.\frac{\partial f(\vc{x})}{\partial x_i}\right|_{\vc{x}=\vc{a}}.
+  \end{align*}
+
+  An example of a function in this space, take for instance $f:\mathbb{R}^2 \to \mathbb{R}$
+  where $f(x_1,x_2) = x_1 + x_2$. This function is clearly $C^1$ smooth over the open
+  set $\Omega = \{\vc{x}\in\mathbb{R}^2\ |\ ||\vc{x}||<1\}$ since it is continuous over this set
+  and its partial derivatives are both the constant 1, guaranteeing that its partial derivatives are continuous as well.
+
+  One result concerning $C^1(\Omega)$ functions is that the set of all such functions forms a vector space.
+
+
 \end{proof}
 \newpage
 
