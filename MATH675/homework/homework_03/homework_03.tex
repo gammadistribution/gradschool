@@ -256,13 +256,13 @@
   Clearly $x=x_0$ is a regular singular point of the differential equation $Ly = 0$. As such, the results of Fuchs show that there is at least one solution to the
   differential equation $Ly = 0$ of the form
   \begin{align}\label{frob}
-    y(x) = (x-x_0)^\alpha \sum_{n=0}^\infty a_n (x-x_0)^n
+    y(x) = (x-x_0)^\alpha \sum_{n=0}^\infty a_n (x-x_0)^n =   \sum_{n=0}^\infty a_n (x-x_0)^{n+\alpha}
   \end{align}
   where $\alpha\in\mathbb{R}$. Substituting this expression for $y(x)$ into the differential equation $Ly=0$ yields
   \begin{align*}
     Ly &= (x-x_0)^{\alpha-2}\left[\sum_{n=0}^\infty\left[(n+\alpha)(n+\alpha-1)a_n + \sum_{k=0}^n(k+\alpha)p_{n-k}a_k + \sum_{k=0}^nq_{n-k}a_k\right](x-x_0)^n \right]
   \end{align*}
-  which implies that if $Ly=0$ then
+  which implies that if $Ly=0$ then the coefficients of the above series must be zero yielding the following recurrence relation:
   \begin{align}\label{rel}
     \left[\alpha(\alpha-1)+ \alpha p_{0} + q_{0}\right] a_0&= 0 &n &=0 \notag \\
     \left[(n+\alpha)(n+\alpha-1) + (n+\alpha)p_0 +q_0\right] a_n &= - \sum_{k=0}^{n-1}\left[(k+\alpha)p_{n-k} + q_{n-k}\right]a_k  &n &>1.
@@ -272,25 +272,26 @@
   \begin{align*}
     P(z) = z(z-1)+ z p_{0} + q_{0}
   \end{align*}
-  since $a_0 \neq 0$.
+  since $a_0 \neq 0$ by convention.
   This choice of $\alpha$ then ensures that the solution \eqref{frob} will then be a non-trivial solution that satisfies the differential equation $Ly=0$.
   Depending on the roots of the indicial polynomial, a second linearly independent solution of the same form of the differential equation can be found.
 
   Note that for the differential equation
-  \begin{align*}
+  \begin{align}\label{diff_eq_1}
     Ly = x(1-x)y'' - 3xy'-y = 0,
-  \end{align*}
+  \end{align}
   the point $x=0$ is a regular singular point. Thus, we begin by rewriting the equation $Ly=0$
   in the form presented in \eqref{form}:
   \begin{align*}
     Ly &= y'' + \left[\frac{-\frac{3x}{1-x}}{x}\right]y' + \left[\frac{-\frac{x}{1-x}}{x^2}\right]y \\
     &= y'' + \left[\frac{p(x)}{x}\right]y' + \left[\frac{q(x)}{x^2}\right]y = 0.
   \end{align*}
-  From this we identify the functions $p(x) = -\frac{3x}{1-x}$ and $q(x) = -\frac{x}{1-x}$. Note that
-  $p(x)$ and $q(x)$ have the following power series representations
+  From this we identify the functions $p(x) = -\frac{3x}{1-x}$ and $q(x) = -\frac{x}{1-x}$ which are
+  both analytic at the singular point $x=0$. Note that
+  $p(x)$ and $q(x)$ have the following power series representations centered at $x=0$
   \begin{align*}
     p(x) &= -3x\sum_{n=0}^\infty x^n = \sum_{n=1}^\infty -3 x^{n} \\
-    q(x) &= -x\sum_{n=0}^\infty x^n = \sum_{n=1}^\infty - x^{n}
+    q(x) &= -x\sum_{n=0}^\infty x^n = \sum_{n=1}^\infty - x^{n}.
   \end{align*}
   Using these power series representations, we see that $p_0 = q_0 = 0$, and that the indicial polynomial of
   the differential equation $Ly=0$ is
@@ -300,28 +301,29 @@
   the roots of which are $\alpha_1 = 1$ and $\alpha_2 = 0$. Using $\alpha_1 = 1$, we know that one solution of
   the differential equation is of the form \eqref{frob}, i.e.\ there is a solution $y_1(x)$ of the form
   \begin{align*}
-    y_1(x) = \sum_{n=0}^\infty = a_n x^{n+1}
+    y_1(x) = \sum_{n=0}^\infty a_n x^{n+1}
   \end{align*}
-  where $a_n$ satisfy the recurrence relation \eqref{rel} with $a_0 \neq 0$. Using the recurrence relation with $\alpha = 1$ we see that for $n>0$,
+  where the coefficients $a_n$ satisfy the recurrence relation \eqref{rel} with $a_0 \neq 0$. Using the recurrence relation with $\alpha = 1$ we see that for $n>0$,
   \begin{align*}
     a_n &= -\frac{\sum_{k=0}^{n-1} [(k+1)p_{n-k} + q_{n-k}]a_k}{n(n+1)} \\
     &= \frac{\sum_{k=0}^{n-1} (3k + 4)a_k}{n(n+1)}
   \end{align*}
   since $p_{n-k} = -3$ and $q_{n-k} = -1$ for $0\leq k \leq n-1$. It can easily be proven through induction that the solution to this newly obtained recurrence
-  relation is $a_n = (n+1)a_0$ for $n\geq0$. Therefore, the first solution to the differential equation $Ly=0$ is
+  relation is $a_n = (n+1)a_0$ for $n\geq0$. Therefore, the first solution to the differential equation \eqref{diff_eq_1} is
   \begin{align*}
     y_1(x) = a_0 \sum_{n=0}^\infty (n+1)x^{n+1}
   \end{align*}
 
-  Since the roots of the indicial polynomial differ by a positive integer,
-  there are two linearly independent solutions to the differential equation.
-  However, without further analysis, we are unable to tell if the other solution is in the form \eqref{frob}.
+  In order to find the second solution to the differential equation, we note that
+  the roots of the indicial polynomial differ by a positive integer. Since the roots of the indicial polynomial differ by a positive integer,
+  there are two linearly independent solutions to the differential equation;
+  however, without further analysis, we are unable to tell if the other solution is in the form \eqref{frob}.
   Since $P(\alpha_1) = P(N + \alpha_2) = 0$, we have from the recurrence relations \eqref{rel} that
   \begin{align*}
     P(N+\alpha_2)a_N = 0a_N = -\sum_{k=0}^{N-1}\left[(k+\alpha_2) p_{N-k} + q_{N-k}\right]a_k
   \end{align*}
   which is consistent only if the right hand side is equivalently zero. In our case, $N=1$, $\alpha_2 = 0$
-  and we see that the right hand side evaluates to $q_1a_0 \neq 0$ since $q_1 = -1 \neq 0$ and $a_0 \neq 0$. Thus, the second solution to the differential equation is not of the form
+  and we see that the right hand side evaluates to $-q_1a_0 \neq 0$ since $q_1 = -1 \neq 0$ and $a_0 \neq 0$ by assumption. Thus, the second solution to the differential equation is not of the form
   \eqref{frob}. To find the second solution we generalize the Frobenius solution
   and substitute the solution into the original differential equation to obtain
   \begin{align*}
@@ -355,11 +357,30 @@
     &= \frac{\sum_{k=0}^{n-1}(3k+1)c_k}{n(n-1)}
   \end{align*}
   It can be proven through induction that $c_n = n(c_0 + 4c_1)/4 = n(4c_1 - a_0)/4$ completely determining the coefficients of the power series in the second solution.
-  Thus, since the partial derivative with respect to $\alpha$ of $a_n(\alpha) = 0$ since $a_n$ does not depend on $\alpha$, we see that the second solution
-  to the homogeneous differential equation is
+
+  We now investigate the partial derivative of $a_n(\alpha)$ with respect to $\alpha$.
+  Recall that for this problem the indicial polynomial is given by $P(z) = z(z-1)$.
+  Looking, for a closed form representation of the solution to $a_n(\alpha)$ we see that for $a_0(\alpha) = a_0 \neq 0$,
   \begin{align*}
-    y_2(x) &= \sum_{n=0}^\infty\frac{n(4c_1-a_0)}{4}x^n - \log x \sum_{n=0}^\infty a_0(n+1)x^{n+1} \\
-    &= c_1\sum_{n=0}^\infty n x^n - a_0 \left[\sum_{n=0}^\infty \frac{n}{4} x^n+ \log x \sum_{n=0}^\infty (n+1)x^{n+1}\right].
+    a_1(\alpha) &= \frac{(3\alpha + 1)a_0}{P(1+\alpha)} &\text{for $n = 1$} \\
+    a_n(\alpha) &= \frac{(3\alpha + 1)a_0 \Pi_{k=1}^{n-1} [P(k+\alpha) + 3(k + \alpha) + 1]}{\Pi_{k=1}^n P(k+\alpha)} & \text{for $ n > 1$}
+  \end{align*}
+
+  Using this recurrence relation in conjunction with Mathematica we see that the sequence
+  \begin{align*}
+    \left.\frac{\partial a_n(\alpha)}{\partial \alpha}\right|_{\alpha=\alpha_1} = b_n =
+    \begin{cases}
+      a_0 &\text{for $n=0$} \\
+      -\frac{3a_0}{2} &\text{for $n=1$} \\
+      \frac{3a_0(2n^4 +11n^3+18n^2-71n+40)}{2n(n+1)^2(n+2)} &\text{for $n>1$}
+    \end{cases}.
+  \end{align*}
+
+  Therefore, the solution to the differential equation \eqref{diff_eq_1} is
+
+  \begin{align*}
+    y_2(x) &= \sum_{n=0}^\infty\frac{n(4c_1-a_0)}{4}x^n - \log x \sum_{n=0}^\infty a_0(n+1)x^{n+1} - \sum_{n=0}^\infty\left.\frac{\partial a_n(\alpha)}{\partial \alpha}\right|_{\alpha=\alpha_1} x^{n+\alpha_1}\\
+    &= c_1\sum_{n=0}^\infty n x^n - a_0 \left[\sum_{n=0}^\infty \frac{n}{4} x^n+ \log x \sum_{n=0}^\infty (n+1)x^{n+1} + \sum_{n=0}^\infty\frac{b_n}{a_0} x ^{n+1}\right].
   \end{align*}
 \end{proof}
 \newpage
