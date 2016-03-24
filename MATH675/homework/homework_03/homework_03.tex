@@ -458,6 +458,100 @@
 \end{problem}
 
 \begin{proof}
+  Note that the homogeneous linear differential equation
+  \begin{align*}
+    Ly = x^5y'' - y = y'' + [0]y' + \left[-\frac{1}{x^5}\right] y = 0
+  \end{align*}
+  has an irregular singular point at $x=0$. Thus, the previous methods used to obtain a solution may not be used.
+
+  In order to determine the leading behavior of the solutions to $Ly=0$ at the point $x=0$, we must determine the controlling
+  factor of these solutions. The controlling factor is usually in the form of an exponential which suggests we try the substitution $y(x) = e^{S(x)}$. Using this substitution in the original
+  differential equation yields the differential equation
+  \begin{align*}
+    S'' + (S')^2 - \frac{1}{x^5} = 0.
+  \end{align*}
+  Making the simplifying assumption that $S'' \ll (S')^2 $ the above differential equation becomes
+  \begin{align*}
+    (S')^2 \sim x^{-5}.
+  \end{align*}
+  Consider the asymptotic relation
+  \begin{align*}
+    (S')^2 \sim x^{-5} \quad (x\to 0^+) \implies
+    S' \sim \pm x^{-5/2} \quad (x\to 0^+)
+  \end{align*}
+  The solution to this equation is
+  \begin{align}\label{control}
+    S(x) \sim \mp\frac{2x^{-3/2}}{3} \quad (x\to 0^+).
+  \end{align}
+  Thus, from this relation we have that
+  \begin{align}\label{eq}
+    S(x) = \mp\frac{2x^{-3/2}}{3} + C(x) \quad (x\to 0^+)
+  \end{align}
+  for some function $C(x)$ that satisfies $C(x) \ll \mp x^{-3/2}$ as $x\to 0^+$.
+  This solution is only valid if the relation $S'' \ll (S')^2$. Thus, we will check the validity of the controlling factors \eqref{control}
+  by using the equation \eqref{eq} and verifying the relation $S'' \ll (S')^2$.
+
+  Suppose first that $S(x) = -\frac{2x^{-3/2}}{3} + C(x),\ C(x) \ll -x^{-3/2}, \ (x\to 0+)$. From this we see that
+  \begin{align*}
+    S'(x) &= x^{-5/2} + C'(x) \implies (S'(x))^2 = x^{-5} + 2x^{-5/2}C'(x) + (C'(x))^2 \\
+    S''(x) &= -\frac{5x^{-7/2}}{2} + C''(x).
+  \end{align*}
+  If $C(x) \ll -x^{-3/2}$ as $x\to 0^+$, then
+  \begin{align*}
+    C'(x) \ll x^{-5/2} \quad \text{and} \quad C''(x) \ll x^{-7/2}.
+  \end{align*}
+  From this it is clear that
+  \begin{align*}
+    S''(x) = -\frac{5x^{-7/2}}{2}+ C''(x) \ll x^{-5} \quad (x\to 0^+)
+  \end{align*}
+  since
+  \begin{align*}
+    \lim_{x\to 0^+} \frac{-\frac{5x^{-7/2}}{2}+ C''(x)}{x^{-5}} &=  \lim_{x\to 0+}-\frac{5x^{3/2}}{2} + x^{3/2}\left(\frac{C''(x)}{x^{-7/2}}\right) = 0.
+  \end{align*}
+  It is also clear that
+  \begin{align*}
+    (S'(x))^2 \sim x^{-5}\quad (x\to 0^+)
+  \end{align*}
+  since
+  \begin{align*}
+    \lim_{x\to 0^+} \frac{(S'(x))^2}{x^{-5}} = \lim_{x\to 0^+} = 1 + 2\left(\frac{C'(x)}{x^{-5/2}}\right) + \left(\frac{C'(x)}{x^{-5/2}}\right)^2 = 1
+  \end{align*}
+  Since $(S')^2 \sim x^{-5}$, we have that $S'' \ll x^{-5} \sim (S')^2$ and the solution is valid. Therefore, the leading behavior of the first solution is
+  \begin{align*}
+    y_1(x) \sim e^{-2(x^{-3/2})/3 + C(x)},\quad C(x) \ll -x^{-3/2} \quad(x\to 0^+).
+  \end{align*}
+
+  The leading behavior of the second solution is obtained similarly.
+  Suppose that $S(x) = \frac{2x^{-3/2}}{3} + C(x),\ C(x) \ll x^{-3/2}, \ (x\to 0+)$. From this we see that
+  \begin{align*}
+    S'(x) &= -x^{-5/2} + C'(x) \implies (S'(x))^2 = x^{-5} -2x^{-5/2}C'(x) + (C'(x))^2 \\
+    S''(x) &= \frac{5x^{-7/2}}{2} + C''(x).
+  \end{align*}
+  If $C(x) \ll x^{-3/2}$ as $x\to 0^+$, then
+  \begin{align*}
+    C'(x) \ll x^{-5/2} \quad \text{and} \quad C''(x) \ll x^{-7/2}.
+  \end{align*}
+  From this it is clear that
+  \begin{align*}
+    S''(x) = \frac{5x^{-7/2}}{2}+ C''(x) \ll x^{-5} \quad (x\to 0^+)
+  \end{align*}
+  since
+  \begin{align*}
+    \lim_{x\to 0^+} \frac{\frac{5x^{-7/2}}{2}+ C''(x)}{x^{-5}} &=  \lim_{x\to 0+}\frac{5x^{3/2}}{2} + x^{3/2}\left(\frac{C''(x)}{x^{-7/2}}\right) = 0.
+  \end{align*}
+  It is also clear that
+  \begin{align*}
+    (S'(x))^2 \sim x^{-5}\quad (x\to 0^+)
+  \end{align*}
+  since
+  \begin{align*}
+    \lim_{x\to 0^+} \frac{(S'(x))^2}{x^{-5}} = \lim_{x\to 0^+} = 1 - 2\left(\frac{C'(x)}{x^{-5/2}}\right) + \left(\frac{C'(x)}{x^{-5/2}}\right)^2 = 1
+  \end{align*}
+  Since $(S')^2 \sim x^{-5}$, we have that $S'' \ll x^{-5} \sim (S')^2$ and the solution is valid. Therefore, the leading behavior of the second solution is
+  \begin{align*}
+    y_2(x) \sim e^{2(x^{-3/2})/3 + C(x)},\quad C(x) \ll x^{-3/2} \quad(x\to 0^+).
+  \end{align*}
+
 \end{proof}
 \newpage
 
