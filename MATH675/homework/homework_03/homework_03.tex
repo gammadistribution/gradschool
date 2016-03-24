@@ -566,7 +566,63 @@
 \end{problem}
 
 \begin{proof}
+  Note that the point $+\infty$ is an irregular singular point of the differential equation
+  \begin{align*}
+    y'' = e^{-2/x}y.
+  \end{align*}
+  Since for $x\to+\infty$
+  \begin{align*}
+    e^{-2/x} = 1 - \frac{2}{x} + O\left(\frac{1}{x^2}\right),
+  \end{align*}
+  we know that $e^{-2/x} \sim 1 - \frac{2}{x}\ (x\to +\infty)$. We thus want to find the leading behavior of the
+  asymptotic relation
+  \begin{align*}
+    y'' \sim \left(1-\frac{2}{x}\right)y \quad (x\to+\infty).
+  \end{align*}
+  Assuming a solution of the form $y(x) = e^{S(x)}$ where $S'' \ll (S')^2$ as $x\to+\infty$, we receive the asymptotic
+  differential equation
+  \begin{align*}
+    S' \sim \pm \sqrt{\frac{2}{x} -1} \quad (x\to+\infty).
+  \end{align*}
+  Using Mathematica, the solution to this equation is
+  \begin{align*}
+    S(x) = \pm x\sqrt{\frac{2}{x} - 1}\mp \tan^{-1}\left(\frac{(x-1)\sqrt{\frac{2}{x} -1 }}{x-2}\right) + C(x)
+  \end{align*}
+  where $C(x) \ll \pm x\sqrt{\frac{2}{x} - 1}\mp \tan^{-1}\left(\frac{(x-1)\sqrt{\frac{2}{x} -1 }}{x-2}\right)$.
+  Thus the leading behavior of the solutions to the equation are
+  \begin{align*}
+    y(x) &\sim c_1 \exp{\left[ x\sqrt{\frac{2}{x} - 1}\- \tan^{-1}\left(\frac{(x-1)\sqrt{\frac{2}{x} -1 }}{x-2}\right)\right]} = c_1e^{S_1(x)} \\
+    y(x) &\sim c_2 \exp{\left[- x\sqrt{\frac{2}{x} - 1}+ \tan^{-1}\left(\frac{(x-1)\sqrt{\frac{2}{x} -1 }}{x-2}\right)\right]} = c_2e^{S_2(x)}
+  \end{align*}
+
+  We determine the asymptotic expansion for the solution with leading behavior, say $y(x) \sim c_1e^{S_1(x)}$,
+  by substituting
+  \begin{align*}
+    y(x) = c_1 e^{S_1(x)}w(x)
+  \end{align*}
+  into the original differential equation.
+  This yields the following differential equation
+  \begin{align*}
+    w'' + 2S_1' w' + [S_1'' + (S_1')^2-1]w = 0.
+  \end{align*}
+  We desire a solution to this differential equation of the form $w(x) = 1 + \varepsilon(x)$ with $\varepsilon(x) \ll 1$ as $(x\to+\infty)$. Note that $\varepsilon(x)$
+  satisfies
+  \begin{align*}
+    \varepsilon'' + 2S_1' \varepsilon' + [S_1'' + (S_1')^2-1]\varepsilon &= -[S_1'' + (S_1')^2-1] \implies\\
+    \varepsilon'' + 2\left[\sqrt{\frac{2}{x}-1}\right] \varepsilon' + \left[\frac{2}{x}-2-\frac{1}{x^2\sqrt{\frac{2}{x}-1}}\right]\varepsilon &= -\left[\frac{2}{x}-2-\frac{1}{x^2\sqrt{\frac{2}{x}-1}}\right]
+  \end{align*}
+  Making asymptotic assumptions on $\varepsilon$ will reduce the complexity of the
+  above differential equation. Assume $\varepsilon'' \ll \left[\sqrt{\frac{2}{x}-1}\right] \varepsilon'$.
+  Then, since $\varepsilon \ll 1$, the above equation reduces to
+  \begin{align*}
+    2\left[\sqrt{\frac{2}{x}-1}\right] \varepsilon' \sim -\left[\frac{2}{x}-2-\frac{1}{x^2\sqrt{\frac{2}{x}-1}}\right] \quad (x\to+\infty)
+  \end{align*}
+  so that, according to Mathematica, the leading behavior of $\varepsilon$ is
+  \begin{align*}
+    \varepsilon \sim - x\sqrt{-1 + \frac{2}{x}} - \frac{\log(2 - x)}{4} + \frac{\log(x)}{4} \quad (x\to+\infty).
+  \end{align*}
+  This process can be repeated to determine more terms in the asymptotic series of the solution.
 \end{proof}
-\newpage
+
 
 \end{document}
