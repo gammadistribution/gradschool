@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\newcommand{\vc}[1]{\boldsymbol{#1}}
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right]
+}
+
+\newcommand{\grstep}[2][\relax]{%
+   \ensuremath{\mathrel{
+       {\mathop{\longrightarrow}\limits^{#2\mathstrut}_{
+                                     \begin{subarray}{l} #1 \end{subarray}}}}}}
+\newcommand{\swap}{\leftrightarrow}
+\newcommand{\tran}{\mathsf{T}}
+\newtheorem{theorem}{Theorem}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 6}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 6}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  \begin{enumerate}
+    \item Where is the assumption ``$x^*$ is regular'' essential in the proof of the results of section: Lagrange Multipliers?
+    \item In the example on page 49 (Example 20.8 in \textit{An Introduction to Optimization}) explain in what way is $(P_0)$ equivalent to $(P_1)$.
+    \item State the SOSC Theorem on p.\ 51 (Theorem 20.5 p.\ 474 in the book) for $x^*$ a local maximizer.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  Find local extremizers for the following optimization problem:
+  \begin{align*}
+    \begin{array}{rl}
+      \text{maximize} & x_1x_2 \\
+      \text{subject to} & x_1^2 + 4x_2^2 = 1.
+    \end{array}
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 3
+\begin{problem}
+  Consider the problem
+  \begin{align*}
+    \begin{array}{rll}
+      \text{minimize} & 2x_1 + 3x_2 - 4, & x_1, x_2 \in \mathbb{R} \\
+      \text{subject to} & x_1 x_2 = 6.&
+    \end{array}
+  \end{align*}
+
+  \begin{enumerate}
+    \item Use Lagrange's theorem to find all possible local minimizers and maximizers.
+    \item Use the second-order sufficient conditions to specify which points are strict
+      local minimizers and which are strict local maximizers.
+    \item Are the points in part b global minimizers or maximizers? Explain.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 4
+\begin{problem}
+  Consider the problem of minimizing a general quadratic function subject to a linear constraint:
+  \begin{align*}
+    \begin{array}{rl}
+      \text{minimize} & \frac{1}{2} \vc{x}^\tran Q \vc{x} - \vc{c}^\tran \vc{x} + d\\
+      \text{subject to} & A\vc{x} = \vc{b},
+    \end{array}
+  \end{align*}
+  where $Q=Q^\tran > 0$, $A \in\mathbb{R}^{m \times n}$ with $m<n$, $\text{rank} A = m$ and $d$ a constant.
+  Derive a closed form solution to the problem.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 5
+\begin{problem}
+  Consider the discrete-time linear system $x_k = 2 x_{k-1} + u_k$, $k \geq 1$, with
+  $x_0 = 1$. Find the values of the control inputs $u_1$ and $u_2$ to minimize
+  $$x_2^2 + \frac{1}{2}u_1^2+ \frac{1}{3}u_2^2.$$
+\end{problem}
+
+\begin{proof}
+\end{proof}
+
+
+\end{document}
