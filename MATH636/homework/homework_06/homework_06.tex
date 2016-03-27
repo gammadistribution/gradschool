@@ -51,13 +51,89 @@
 % Problem 1
 \begin{problem}
   \begin{enumerate}
-    \item Where is the assumption ``$x^*$ is regular'' essential in the proof of the results of section: Lagrange Multipliers?
+    \item Where is the assumption ``$\vc{x}^*$ is regular'' essential in the proof of the results of section: Lagrange Multipliers?
     \item In the example on page 49 (Example 20.8 in \textit{An Introduction to Optimization}) explain in what way is $(P_0)$ equivalent to $(P_1)$.
-    \item State the SOSC Theorem on p.\ 51 (Theorem 20.5 p.\ 474 in the book) for $x^*$ a local maximizer.
+    \item State the SOSC Theorem on p.\ 51 (Theorem 20.5 p.\ 474 in the book) for $\vc{x}^*$ a local maximizer.
   \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item The assumption that $\vc{x}^*$ is regular is essential in  the proof of the Lagrange Multipliers Theorem
+      in applying the results of Theorem 20.1, i.e.\ assuming that $\vc{y}\in T(\vc{x}^*)$ if and only if
+      there exists a differentiable curve in $S$ passing through $\vc{x}^*$
+      with derivative $\vc{y}$ at $\vc{x}^*$.
+    \item The two problems to consider are:
+      \begin{align*}
+        \begin{array}{ll}
+          \begin{array}{rrl}
+            (P_0) & \text{maximize} & \frac{\vc{x}^\tran Q \vc{x}}{\vc{x}^\tran P \vc{x}}\\
+            & \text{subject to} & Q = Q^\tran \geq 0 \\
+            & & P = P^\tran > 0.
+          \end{array}
+          &
+          \begin{array}{rrl}
+            (P_1) & \text{maximize} & \vc{x}^\tran Q \vc{x}\\
+            & \text{subject to} & \vc{x}^\tran P \vc{x} = 1.
+          \end{array}
+        \end{array}
+      \end{align*}
+      Note that if $P$ is positive semi-definite and $Q$ is positive definite, then
+      $\vc{x}^\tran Q \vc{x} \geq 0$ and $\vc{x}^\tran P \vc{x} > 0$ for every $\vc{x}$. Consequently
+      \begin{align*}
+        \frac{\vc{x}^\tran Q \vc{x}}{\vc{x}^\tran P \vc{x}} \geq 0
+      \end{align*}
+      for every $\vc{x}$. From problem $(P_0)$ we see that if $\vc{x}$ is a solution to the problem,
+      then so is $t\vc{x}$ for any $t \neq 0$. Note that
+      \begin{align*}
+        \frac{(t\vc{x})^\tran Q (t\vc{x})}{(t\vc{x})^\tran P (t\vc{x})} = \frac{t^2 \vc{x}^\tran Q \vc{x}}{t^2 \vc{x}^\tran P \vc{x}} = \frac{\vc{x}^\tran Q \vc{x}}{\vc{x}^\tran P \vc{x}}
+      \end{align*}
+      showing that the above remark is true. Adding the additional constraint to problem $(P_0)$ that $\vc{x}^\tran P \vc{x} = 1$ removes the multiplicity of the solutions and transforms
+      the original problem into problem $(P_1)$. To see this, if the constraint $\vc{x}^\tran P \vc{x} = 1$
+      is satisfied then for any non-zero scalar multiple of $\vc{x}^*$ we have that
+      \begin{align*}
+        (t\vc{x})^\tran P (t\vc{x}) = t^2 \vc{x}^\tran P\vc{x} = \vc{x}^\tran P\vc{x}
+      \end{align*}
+      Since $\vc{x}^\tran P\vc{x} > 0$ we must have that $t=1$ removing the multiplicity of the solutions
+      and the problems are equivalent.
+
+    \item \begin{theorem}[\emph{\textbf{Second-Order Sufficient Conditions}}]
+        Suppose that $f, \vc{h} \in \mathcal{C}^2$ with $f:\mathbb{R}^n \to \mathbb{R}$
+        and $\vc{h}:\mathbb{R}^n \to \mathbb{R}^m$. Let $l(\vc{x},\vc{\lambda}) = f(\vc{x}) + \lambda_1 h_1(\vc{x}) + \lambda_2 h_2(\vc{x}) + \dots \lambda_m h_m(\vc{x})$
+        be the Lagrangian function. Let
+        \begin{align*}
+          \vc{F}(\vc{x}) =
+          \begin{bmatrix}
+            \frac{\partial^2 f}{\partial x_1^2}(\vc{x}) & \frac{\partial^2 f}{\partial x_2 \partial x_1}(\vc{x}) & \dots & \frac{\partial^2 f}{\partial x_n \partial x_1}(\vc{x}) \\
+            \frac{\partial^2 f}{\partial x_1 \partial x_2}(\vc{x}) & \frac{\partial^2 f}{\partial x_2^2}(\vc{x}) & \dots & \frac{\partial^2 f}{\partial x_n \partial x_2}(\vc{x}) \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \frac{\partial^2 f}{\partial x_1 \partial x_n}(\vc{x}) & \frac{\partial^2 f}{\partial x_2 \partial x_n}(\vc{x}) & \dots & \frac{\partial^2 f}{\partial x_n^2}(\vc{x})
+          \end{bmatrix}
+        \end{align*}
+        be the Hessian matrix of $f$ at $\vc{x}$ and
+        \begin{align*}
+          \vc{H_k}(\vc{x}) =
+          \begin{bmatrix}
+            \frac{\partial^2 h_k}{\partial x_1^2}(\vc{x}) & \frac{\partial^2 h_k}{\partial x_2 \partial x_1}(\vc{x}) & \dots & \frac{\partial^2 h_k}{\partial x_n \partial x_1}(\vc{x}) \\
+            \frac{\partial^2 h_k}{\partial x_1 \partial x_2}(\vc{x}) & \frac{\partial^2 h_k}{\partial x_2^2}(\vc{x}) & \dots & \frac{\partial^2 h_k}{\partial x_n \partial x_2}(\vc{x}) \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \frac{\partial^2 h_k}{\partial x_1 \partial x_n}(\vc{x}) & \frac{\partial^2 h_k}{\partial x_2 \partial x_n}(\vc{x}) & \dots & \frac{\partial^2 h_k}{\partial x_n^2}(\vc{x})
+          \end{bmatrix}
+        \end{align*}
+        be the Hessian matrix of $h_k$ at $\vc{x}$ for $k=1,\dots,m$. Define
+        \begin{align*}
+          \vc{L}(\vc{x},\vc{\lambda}) = \vc{F}(\vc{x}) + \lambda_1 \vc{H_1}(\vc{x}) + \dots + \lambda_m \vc{H_m}(\vc{x})
+        \end{align*}
+        to be the Hessian Matrix of $l(\vc{x}, \vc{\lambda})$ with respect to $\vc{x}$.
+
+        Suppose there exists a point $\vc{x}^* \in \mathbb{R}^n$ and $\vc{\lambda^*} \in \mathbb{R}^m$ such that
+        \begin{itemize}
+          \item $D f(\vc{x}^*) + \vc{\lambda}^{*\tran} D \vc{h}(\vc{x}^*) = \vc{0}^\tran$.
+          \item For all $\vc{y}\in T(\vc{x}^*)$, $\vc{y}\neq \vc{0}$, we have that $\vc{y}^\tran \vc{L}(\vc{x}^*, \vc{\lambda}^{*})\vc{y} < 0$, i.e.\ $\vc{L}(\vc{x}^*, \vc{\lambda}^{*})$ is negative definite on $T(\vc{x}^*)$.
+        \end{itemize}
+        Then $\vc{x}^*$ is a strict local maximizer of $f$ subject to $\vc{h}(\vc{x}) = \vc{0}.$
+      \end{theorem}
+  \end{enumerate}
 \end{proof}
 \newpage
 
