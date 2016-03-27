@@ -150,6 +150,59 @@
 \end{problem}
 
 \begin{proof}
+  Lagrange's Theorem prescribes how to find the local extremizers for the optimization problem. Let $f(\vc{x}) = x_1x_2$
+  and $h(\vc{x}) = x_1^2 + 4x_2^2 - 1$.
+  Note that we then have that
+  \begin{align*}
+    \triangledown f(\vc{x})^\tran =
+    \begin{bmatrix}
+      x_2 &
+      x_1
+    \end{bmatrix}
+    \quad \text{and} \quad
+    \triangledown h(\vc{x})^\tran =
+    \begin{bmatrix}
+      2x_1 &
+      8x_2
+    \end{bmatrix}.
+  \end{align*}
+  Since for every feasible $\vc{x}$, the Jacobian is of rank 1, i.e.\ of full rank,
+  every feasible point is a regular point. Using the Lagrange condition
+  $D f(\vc{x}^*) + \vc{\lambda}^{*\tran} D \vc{h}(\vc{x}^*) = \vc{0}^\tran$, we formulate
+  the system of equations
+  \begin{align*}
+    D f(\vc{x}^*) + \vc{\lambda}^{*\tran} D \vc{h}(\vc{x}^*) =
+    \begin{bmatrix}x_2 + 2\lambda x_1 & x_1 + 8\lambda x_2\end{bmatrix} =
+    \begin{bmatrix}0 & 0\end{bmatrix} = \vc{0}^\tran
+  \end{align*}
+  for $\lambda \in \mathbb{R}.$
+  Thus, an extremizer of the optimization problem must satisfy the following system of equations
+  \begin{align*}
+    x_2 + 2\lambda x_1 &= 0 \\
+    x_1 + 8 \lambda x_2 &= 0 \\
+    x_1^2 + 4x_2^2  &=1.
+  \end{align*}
+
+  From the first two equations, we see that $x_2 = -2\lambda x_1$ and $x_1 = -8\lambda x_2$.
+  These equations in conjunction show that either $x_1 = 0$, $x_2 = 0$, or $\lambda = \pm 1/4$. If $\vc{x}$ is a feasible point, then
+  we can't have that $x_1 = 0$ nor $x_2=0$. Thus, we must have that $\lambda=\pm 1/4$. In that case, from the first equation,
+  we have that $x_2 = \mp x_1/2$. Substituting this into the third equation yields that
+  \begin{align*}
+    x_1^2 + 4 (x_1^2/4) = 2x_1^2 = 1
+  \end{align*}
+  which implies that $x_1 = \pm 1 / \sqrt{2}$. Thus, $x_1 = \pm 1 /\sqrt{2}$ and $x_2 = \mp 1 / (2\sqrt{2})$ are the only solutions that satisfy the above system.
+  That is, the extremizers to the optimization problem are
+  \begin{align*}
+    \vc{x}^{(1)} = \begin{bmatrix}1 / \sqrt{2} \\ 1 / (2\sqrt{2})\end{bmatrix},\
+    \vc{x}^{(2)} = \begin{bmatrix}1 / \sqrt{2} \\ -1 / (2\sqrt{2})\end{bmatrix},\
+    \vc{x}^{(3)} = \begin{bmatrix}-1 / \sqrt{2} \\ 1 / (2\sqrt{2})\end{bmatrix},\
+    \vc{x}^{(4)} = \begin{bmatrix}-1 / \sqrt{2} \\ -1 / (2\sqrt{2})\end{bmatrix}.
+  \end{align*}
+  Since $f(\vc{x}^{(1)}) = f(\vc{x}^{(4)}) = 1/4$ and $f(\vc{x}^{(2)}) = f(\vc{x}^{(3)}) = -1/4$, we have that the possible
+  maximizers of the problem are located at $\vc{x}^{(1)}$ and $\vc{x}^{(4)}$ while the
+  possible minimizers of the problem are located at $\vc{x}^{(2)}$ and $\vc{x}^{(3)}$.
+  Inspecting graphically, we can see that these are the maximizers and minimizers of the
+  optimization problem.
 \end{proof}
 \newpage
 
