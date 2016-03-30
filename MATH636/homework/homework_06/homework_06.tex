@@ -294,13 +294,11 @@
         \vc{x}^{(1)} = \begin{bmatrix}-3 \\ -2\end{bmatrix} ,\
         \vc{x}^{(2)} = \begin{bmatrix}3 \\ 2\end{bmatrix}.
       \end{align}
-      Since $f(\vc{x}^{(1)}) = -16$ and $f(\vc{x}^{(2)}) = 8$, we have that $\vc{x}^{(1)}$ is a possible local
-      minimizer and $\vc{x}^{(2)}$ is a possible local maximizer.
     \item The second-order sufficient conditions allow us to specify whether
-      the possible local minimizers and maximizers \eqref{extremizers} are strict local minimizers or maximizers.
+      the possible extremizers \eqref{extremizers} are strict local minimizers or maximizers.
       We have already shown that these solutions satisfy the first condition, i.e.\ these solutions satisfy the Lagrange condition.
       We need to show that for the solutions $\vc{x}^{(i)}$, $i=1,2$, in \eqref{extremizers}, it is true that
-      for all $\vc{y} \in T(\vc{x}^{(i)})$, $\vc{y}\neq \vc{0}$, we have
+      for all $\vc{y}  \neq \vc{0} \in T(\vc{x}^{(i)})$, $\vc{y}\neq \vc{0}$, we have
       \begin{align*}
         \vc{y}^\tran \left(
           \begin{bmatrix}
@@ -315,35 +313,49 @@
       \end{align*}
       to show that $\vc{x}^{(i)}$ is a strict local minimizer (maximizer).
 
-      Take the solution $\vc{x}^{(1)} = \begin{bmatrix}-3 & -2\end{bmatrix}^\tran$ which was found to be
-      a possible local minimizer. The Lagrange multiplier associated to this solution was $\lambda=1$. We must
-      now check that for any $\vc{y} = \begin{bmatrix}y_1 & y_2\end{bmatrix}^\tran \in T(\vc{x}^{(1)})$, we have that
+      Take the solution $\vc{x}^{(1)} = \begin{bmatrix}-3 & -2\end{bmatrix}^\tran$.
+      The Lagrange multiplier associated to this solution was $\lambda=1$. We must
+      now check that for any $\vc{y} = \begin{bmatrix}y_1 & y_2\end{bmatrix}^\tran \neq \vc{0} \in T(\vc{x}^{(1)})$, we have that
       \begin{align*}
         \vc{y}^\tran \left(\begin{bmatrix}0 & 0 \\ 0 & 0\end{bmatrix} + 1 \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\right) \vc{y} =
-         \vc{y}^\tran \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix} \vc{y} = 2y_1 y_2 > 0.
+         \vc{y}^\tran \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix} \vc{y} = 2y_1 y_2 > (<)\ 0
       \end{align*}
+      for $\vc{x}^{(1)}$ to be a strict local minimizer (maximizer).
       Note that $\vc{y}\in T(\vc{x}^{(1)})$ if
       \begin{align*}
         D \vc{h}(\vc{x}^{(1)})\vc{y} = \triangledown \vc{h}(\vc{x}^{(1)})^\tran \vc{y} = \begin{bmatrix}-2 -3\end{bmatrix}\begin{bmatrix}y_1 \\ y_2\end{bmatrix} = 0
       \end{align*}
       From this equation we see that for $\vc{y}\in T(\vc{x}^{(1)})$, we have that $y_2 = (-2/3 )y_1$ and that $2y_1 y_2 = (-4/3)y_1^2< 0$.
-      Thus, this solution is not a strict local minimizer.
+      Thus, this solution is a strict local maximizer.
 
-      Take the solution $\vc{x}^{(2)} = \begin{bmatrix}3 & 2\end{bmatrix}^\tran$ which was found to be
-      a possible local maximizer. The Lagrange multiplier associated to this solution was $\lambda=-1$. We must
-      now check that for any $\vc{y} = \begin{bmatrix}y_1 & y_2\end{bmatrix}^\tran\in T(\vc{x}^{(2)})$, we have that
+      Now take the solution $\vc{x}^{(2)} = \begin{bmatrix}3 & 2\end{bmatrix}^\tran$.
+      The Lagrange multiplier associated to this solution was $\lambda=-1$. We must
+      now check that for any $\vc{y} = \begin{bmatrix}y_1 & y_2\end{bmatrix}^\tran \neq \vc{0}\in T(\vc{x}^{(2)})$, we have that
       \begin{align*}
         \vc{y}^\tran \left(\begin{bmatrix}0 & 0 \\ 0 & 0\end{bmatrix} -1 \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}\right) \vc{y} =
-        \vc{y}^\tran \begin{bmatrix}0 & -1 \\ -1 & 0\end{bmatrix} \vc{y} = -2y_1 y_2 < 0.
+        \vc{y}^\tran \begin{bmatrix}0 & -1 \\ -1 & 0\end{bmatrix} \vc{y} = -2y_1 y_2 > (<)\ 0.
       \end{align*}
+      for $\vc{x}^{(1)}$ to be a strict local minimizer (maximizer).
       Note that $\vc{y}\in T(\vc{x}^{(2)})$ if
       \begin{align*}
         D \vc{h}(\vc{x}^{(2)})\vc{y} = \triangledown \vc{h}(\vc{x}^{(2)})^\tran \vc{y} = \begin{bmatrix}2 & 3\end{bmatrix}\begin{bmatrix}y_1 \\ y_2\end{bmatrix} = 0
       \end{align*}
       From this equation we see that for $\vc{y}\in T(\vc{x}^{(2)})$, we have that $y_2 = (-2/3 )y_1$ and that $-2y_1 y_2 = (4/3)y_1^2 > 0$.
-      Thus, this solution is not a strict local maximizer.
+      Thus, this solution is a strict local minimizer.
 
-    \item
+    \item The strict local minimizer $\vc{x}^{(2)}$ is not a global minimizer and the strict local maximizer $\vc{x}^{(1)}$ is not a global maximizer.
+      To see why this is true, take note that if $\vc{x}^{*}$ is a global minimizer (maximizer),
+      then $f(\vc{x}^{*}) \leq (\geq)\ f(\vc{x})$ for all $\vc{x}$ such that $h(\vc{x})=\vc{0}$, i.e. $\vc{x}$ is feasible.
+      Also take note that $f(\vc{x}^{(2)}) = 8$ and $f(\vc{x}^{(1)}) = -16$.
+
+      If $\vc{x}^{(2)}$ were a global minimizer, then $f(\vc{x}^{(2)})=8 \leq  f(\vc{x})$
+      for all feasible $\vc{x}$. However, $\vc{x}^{(1)}$ is feasible, yet $f(\vc{x}^{(2)}) \nleq -16 = f(\vc{x}^{(1)})$
+      showing that $\vc{x}^{(2)}$ cannot be a global minimizer.
+
+      In a very similar fashion we argue that $\vc{x}^{(1)}$ is not a global maximizer.
+      For if $\vc{x}^{(1)}$ were a global maximizer, then $f(\vc{x}^{(1)})=-16 \geq  f(\vc{x})$
+      for all feasible $\vc{x}$. However, $\vc{x}^{(2)}$ is feasible, yet $f(\vc{x}^{(1)}) \ngeq 8 = f(\vc{x}^{(2)})$
+      showing that $\vc{x}^{(1)}$ cannot be a global maximizer.
   \end{enumerate}
 \end{proof}
 \newpage
