@@ -62,7 +62,7 @@
     \item The assumption that $\vc{x}^*$ is regular is essential in  the proof of the Lagrange Multipliers Theorem
       in applying the results of Theorem 20.1, i.e.\ assuming that $\vc{y}\in T(\vc{x}^*)$ if and only if
       there exists a differentiable curve in $S$ passing through $\vc{x}^*$
-      with derivative $\vc{y}$ at $\vc{x}^*$.
+      with derivative $\vc{y}$ at $\vc{x}^*$ for $\vc{x}^*$ a regular point.
     \item The two problems to consider are:
       \begin{align*}
         \begin{array}{ll}
@@ -150,7 +150,7 @@
 \end{problem}
 
 \begin{proof}
-  Lagrange's Theorem prescribes how to find the local extremizers for the optimization problem. Let $f(\vc{x}) = x_1x_2$
+  Lagrange's Theorem prescribes how to find the possible local extremizers for the optimization problem. Let $f(\vc{x}) = x_1x_2$
   and $h(\vc{x}) = x_1^2 + 4x_2^2 - 1$.
   Note that we then have that
   \begin{align*}
@@ -183,26 +183,64 @@
     x_1^2 + 4x_2^2  &=1.
   \end{align*}
 
-  From the first two equations, we see that $x_2 = -2\lambda x_1$ and $x_1 = -8\lambda x_2$.
-  These equations in conjunction show that either $x_1 = 0$, $x_2 = 0$, or $\lambda = \pm 1/4$. If $\vc{x}$ is a feasible point, then
-  we can't have that $x_1 = 0$ nor $x_2=0$. Thus, we must have that $\lambda=\pm 1/4$. In that case, from the first equation,
-  we have that $x_2 = \mp x_1/2$. Substituting this into the third equation yields that
-  \begin{align*}
-    x_1^2 + 4 (x_1^2/4) = 2x_1^2 = 1
-  \end{align*}
-  which implies that $x_1 = \pm 1 / \sqrt{2}$. Thus, $x_1 = \pm 1 /\sqrt{2}$ and $x_2 = \mp 1 / (2\sqrt{2})$ are the only solutions that satisfy the above system.
-  That is, the extremizers to the optimization problem are
+  Solving the above system leads to four distinct solutions.
+  Thus, the possible extremizers to the optimization problem are
   \begin{align*}
     \vc{x}^{(1)} = \begin{bmatrix}1 / \sqrt{2} \\ 1 / (2\sqrt{2})\end{bmatrix},\
     \vc{x}^{(2)} = \begin{bmatrix}1 / \sqrt{2} \\ -1 / (2\sqrt{2})\end{bmatrix},\
     \vc{x}^{(3)} = \begin{bmatrix}-1 / \sqrt{2} \\ 1 / (2\sqrt{2})\end{bmatrix},\
-    \vc{x}^{(4)} = \begin{bmatrix}-1 / \sqrt{2} \\ -1 / (2\sqrt{2})\end{bmatrix}.
+    \vc{x}^{(4)} = \begin{bmatrix}-1 / \sqrt{2} \\ -1 / (2\sqrt{2})\end{bmatrix}
   \end{align*}
+  where the Lagrange multiplier for $\vc{x}^{(1)}$ and $\vc{x}^{(4)}$ is $\lambda = -1/4$
+  while the Lagrange multiplier for $\vc{x}^{(2)}$ and $\vc{x}^{(3)}$ is $\lambda = 1/4$.
   Since $f(\vc{x}^{(1)}) = f(\vc{x}^{(4)}) = 1/4$ and $f(\vc{x}^{(2)}) = f(\vc{x}^{(3)}) = -1/4$, we have that the possible
   maximizers of the problem are located at $\vc{x}^{(1)}$ and $\vc{x}^{(4)}$ while the
   possible minimizers of the problem are located at $\vc{x}^{(2)}$ and $\vc{x}^{(3)}$.
-  Inspecting graphically, we can see that these are the maximizers and minimizers of the
-  optimization problem.
+
+  The Second Order Sufficient Conditions prescribe how to check if these extremizers
+  are strict local extremizers. We have already shown that these extremizers satisfy the first condition, i.e.\ the
+  Lagrange condition. We must now show that for $\vc{y} \neq \vc{0} \in T(\vc{x}^{(i)})$ for $i=1,\dots,4$
+  we have that
+  \begin{align}\label{second}
+    \vc{y}^\tran (D^2 f(\vc{x}^{(i)}) + \vc{\lambda}^{(i)\tran} D^2 \vc{h}(\vc{x}^{(i)}))\vc{y} &= \vc{y}^\tran\left(\begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix} + \vc{\lambda}^{(i)\tran}\begin{bmatrix}2 & 0 \\ 0 &8\end{bmatrix}\right)\vc{y} > (<) 0
+  \end{align}
+  for $\vc{x}^{(i)}$ to be a strict local minimum (maximum).
+
+  Note that if $\vc{y} \neq \vc{0} \in T(\vc{x})$ then
+  \begin{align*}
+    D\vc{h}(\vc{x})\vc{y} = \begin{bmatrix}2x_1 & 8x_2\end{bmatrix}\begin{bmatrix}y_1 \\ y_2\end{bmatrix} = 2(x_1y_1 + 4x_2y_2) = 0.
+  \end{align*}
+  We wish to see if $\vc{x}^{(1)}$ and $\vc{x}^{(4)}$ are strict local maximizers. Start with $\vc{x}^{(1)} = \begin{bmatrix}1/\sqrt{2} & 1/(2\sqrt{2})\end{bmatrix}^\tran$.
+  The Lagrange multiplier associated to this solution is $\vc{\lambda}^{(1)} = -1/4$. Then $\vc{y} \neq \vc{0} \in T(\vc{x}^{(1)}) = \{\vc{y}\ |\  \vc{y} = [y_1 \ -y_1/2]\}$. From this we see that \eqref{second} becomes
+  \begin{align*}
+    \begin{bmatrix}y_1 \\ -y_1/2\end{bmatrix}^\tran\left(\begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix} - 1/4\begin{bmatrix}2 & 0 \\ 0 &8\end{bmatrix}\right)\begin{bmatrix}y_1 \\ -y_1/2\end{bmatrix} &=
+    \begin{bmatrix}y_1 \\ -y_1/2\end{bmatrix}^\tran\begin{bmatrix}-1/2 & 1 \\ 1 & -2\end{bmatrix}\begin{bmatrix}y_1 \\ -y_1/2\end{bmatrix} = -2y_1^2 < 0
+  \end{align*}
+  showing indeed that $\vc{x}^{(1)}$ is a strict local maximizer.
+
+  Now let's check $\vc{x}^{(4)} = \begin{bmatrix}-1/\sqrt{2} & -1/(2\sqrt{2})\end{bmatrix}^\tran$.
+  The Lagrange multiplier associated to this solution is $\vc{\lambda}^{(4)} = -1/4$. Then $\vc{y} \neq \vc{0} \in T(\vc{x}^{(4)}) = \{\vc{y}\ |\  \vc{y} = [y_1 \ -y_1/2]\}$. From this we see that \eqref{second} becomes
+  \begin{align*}
+    \begin{bmatrix}y_1 \\ -y_1/2\end{bmatrix}^\tran\left(\begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix} - 1/4\begin{bmatrix}2 & 0 \\ 0 &8\end{bmatrix}\right)\begin{bmatrix}y_1 \\ -y_1/2\end{bmatrix} &=
+    \begin{bmatrix}y_1 \\ -y_1/2\end{bmatrix}^\tran\begin{bmatrix}-1/2 & 1 \\ 1 & -2\end{bmatrix}\begin{bmatrix}y_1 \\ -y_1/2\end{bmatrix} = -2y_1^2 < 0
+  \end{align*}
+  showing indeed that $\vc{x}^{(4)}$ is a strict local maximizer.
+
+  We wish to now see if $\vc{x}^{(2)}$ and $\vc{x}^{(3)}$ are strict local minimizers. Start with $\vc{x}^{(2)} = \begin{bmatrix}1/\sqrt{2} & -1/(2\sqrt{2})\end{bmatrix}^\tran$.
+  The Lagrange multiplier associated to this solution is $\vc{\lambda}^{(2)} = 1/4$. Then $\vc{y} \neq \vc{0} \in T(\vc{x}^{(2)}) = \{\vc{y}\ |\  \vc{y} = [y_1 \ y_1/2]\}$. From this we see that \eqref{second} becomes
+  \begin{align*}
+    \begin{bmatrix}y_1 \\ y_1/2\end{bmatrix}^\tran\left(\begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix} + 1/4\begin{bmatrix}2 & 0 \\ 0 &8\end{bmatrix}\right)\begin{bmatrix}y_1 \\ y_1/2\end{bmatrix} &=
+    \begin{bmatrix}y_1 \\ y_1/2\end{bmatrix}^\tran\begin{bmatrix}1/2 & 1 \\ 1 & 2\end{bmatrix}\begin{bmatrix}y_1 \\ y_1/2\end{bmatrix} = 2y_1^2 > 0
+  \end{align*}
+  showing indeed that $\vc{x}^{(2)}$ is a strict local minimizer.
+
+  Now let's check $\vc{x}^{(3)} = \begin{bmatrix}-1/\sqrt{2} & 1/(2\sqrt{2})\end{bmatrix}^\tran$.
+  The Lagrange multiplier associated to this solution is $\vc{\lambda}^{(3)} = 1/4$. Then $\vc{y} \neq \vc{0} \in T(\vc{x}^{(3)}) = \{\vc{y}\ |\  \vc{y} = [y_1 \ y_1/2]\}$. From this we see that \eqref{second} becomes
+  \begin{align*}
+    \begin{bmatrix}y_1 \\ y_1/2\end{bmatrix}^\tran\left(\begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix} + 1/4\begin{bmatrix}2 & 0 \\ 0 &8\end{bmatrix}\right)\begin{bmatrix}y_1 \\ y_1/2\end{bmatrix} &=
+    \begin{bmatrix}y_1 \\ y_1/2\end{bmatrix}^\tran\begin{bmatrix}1/2 & 1 \\ 1 & 2\end{bmatrix}\begin{bmatrix}y_1 \\ y_1/2\end{bmatrix} = 2y_1^2 > 0
+  \end{align*}
+  showing indeed that $\vc{x}^{(3)}$ is a strict local minimizer.
 \end{proof}
 \newpage
 
@@ -227,7 +265,7 @@
 
 \begin{proof}
   \begin{enumerate}
-    \item We use Lagrange's theorem to find the extremizers of this optimization problem.
+    \item We use Lagrange's theorem to find the possible extremizers of this optimization problem.
       To start, say $f(\vc{x}) = 2x_1 + 3x_2 - 4$ and $h(\vc{x}) = x_1 x_2 - 6$.
       Then
       \begin{align*}
@@ -237,7 +275,7 @@
       \end{align*}
       Since the Jacobian of $\vc{h}$ is of full rank only if $x_1 \neq 0$ and $x_2 \neq 0$, we have that for every
       feasible point the Jacobian of $\vc{h}$ is of full rank, i.e.\ every feasible point is regular.
-      The Lagrange condition states that $D f(\vc{x}^*) + \vc{\lambda}^{*\tran} D \vc{h}(\vc{x}^*) = \vc{0}^\tran$
+      The Lagrange condition states that the possible extremizers $\vc{x}^{*}$ satisfy $D f(\vc{x}^*) + \vc{\lambda}^{*\tran} D \vc{h}(\vc{x}^*) = \vc{0}^\tran$
       or
       \begin{align*}
         \begin{bmatrix}2 + \lambda x_2 & 3 + \lambda x_1\end{bmatrix} = \begin{bmatrix}0 & 0\end{bmatrix}.
@@ -266,12 +304,12 @@
       \begin{align*}
         \vc{y}^\tran \left(
           \begin{bmatrix}
-            \frac{\partial^2 f}{\partial x_1^2}(\vc{x}^{(i)}) & \frac{\partial^2 f}{\partial x_2x_1}(\vc{x}^{(i)}) \\
-            \frac{\partial^2 f}{\partial x_1x_2}(\vc{x}^{(i)}) & \frac{\partial^2 f}{\partial x_2^2}(\vc{x}^{(i)}) \\
+            \frac{\partial^2 f}{\partial x_1^2}(\vc{x}^{(i)}) & \frac{\partial^2 f}{\partial x_2\partial x_1}(\vc{x}^{(i)}) \\
+            \frac{\partial^2 f}{\partial x_1\partial x_2}(\vc{x}^{(i)}) & \frac{\partial^2 f}{\partial x_2^2}(\vc{x}^{(i)}) \\
           \end{bmatrix} + \lambda
           \begin{bmatrix}
-            \frac{\partial^2 \vc{h}}{\partial x_1^2}(\vc{x}^{(i)}) & \frac{\partial^2 \vc{h}}{\partial x_2x_1}(\vc{x}^{(i)}) \\
-            \frac{\partial^2 \vc{h}}{\partial x_1x_2}(\vc{x}^{(i)}) & \frac{\partial^2 \vc{h}}{\partial x_2^2}(\vc{x}^{(i)}) \\
+            \frac{\partial^2 \vc{h}}{\partial x_1^2}(\vc{x}^{(i)}) & \frac{\partial^2 \vc{h}}{\partial x_2\partial x_1}(\vc{x}^{(i)}) \\
+            \frac{\partial^2 \vc{h}}{\partial x_1\partial x_2}(\vc{x}^{(i)}) & \frac{\partial^2 \vc{h}}{\partial x_2^2}(\vc{x}^{(i)}) \\
           \end{bmatrix}
         \right) \vc{y} > (<)\ 0
       \end{align*}
@@ -302,8 +340,8 @@
       \begin{align*}
         D \vc{h}(\vc{x}^{(2)})\vc{y} = \triangledown \vc{h}(\vc{x}^{(2)})^\tran \vc{y} = \begin{bmatrix}2 & 3\end{bmatrix}\begin{bmatrix}y_1 \\ y_2\end{bmatrix} = 0
       \end{align*}
-      From this equation we see that for $\vc{y}\in T(\vc{x}^{(1)})$, we have that $y_2 = (-2/3 )y_1$ and that $2y_1 y_2 = (-4/3)y_1^2 < 0$.
-      Thus, this solution a strict local maximizer.
+      From this equation we see that for $\vc{y}\in T(\vc{x}^{(2)})$, we have that $y_2 = (-2/3 )y_1$ and that $-2y_1 y_2 = (4/3)y_1^2 > 0$.
+      Thus, this solution is not a strict local maximizer.
 
     \item
   \end{enumerate}
