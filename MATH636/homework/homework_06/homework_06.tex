@@ -375,6 +375,56 @@
 \end{problem}
 
 \begin{proof}
+  From the above problem, we wish to minimize $f(\vc{x}) = \frac{1}{2} \vc{x}^\tran Q \vc{x} - \vc{c}^\tran \vc{x} + d$
+  subject to $\vc{h}(\vc{x}) = \vc{b} - A\vc{x}= \vc{0}$. We need to identify the possible
+  minimizers of this optimization problem.
+
+  In order to proceed, we form the Lagrange function as
+  \begin{align*}
+    l(\vc{x}, \vc{\lambda}) &= f(\vc{x}) + \vc{\lambda}^\tran \vc{h}(\vc{x}) \\ &= \frac{1}{2} \vc{x}^\tran Q \vc{x} - \vc{c}^\tran \vc{x} + d + \vc{\lambda}^\tran(\vc{b} - A\vc{x}).
+  \end{align*}
+  By Lagrange's Theorem, the possible minimizers satisfy
+  \begin{align}\label{FONC}
+    D_x l(\vc{x}^{*}, \vc{\lambda}^{*}) = D_x f(\vc{x}^{*}) + \vc{\lambda}^{*}D_x \vc{h}(\vc{x}^{*}) = \vc{0}^\tran.
+  \end{align}
+  Note that
+  \begin{align*}
+    D_x \left(\frac{1}{2} \vc{x}^\tran Q \vc{x}\right) &= \frac{1}{2} D_x \left(\sum_{i=1}^n \sum_{j=1}^n q_{ij} x_i x_j\right) \\
+    &= \frac{1}{2} \begin{bmatrix}\sum_{i}\sum_{j} q_{ij} \frac{\partial}{\partial x_1}\left[x_ix_j\right], & \dots, & \sum_{i}\sum_{j} q_{ij} \frac{\partial}{\partial x_n}\left[x_ix_j\right]\end{bmatrix} \\
+    &= \frac{1}{2} \begin{bmatrix}\sum_{i}\sum_{j} q_{ij} \left[\frac{\partial x_i}{\partial x_1}x_j + \frac{\partial x_j}{\partial x_1}x_i\right], & \dots, & \sum_{i}\sum_{j} q_{ij}\left[\frac{\partial x_i}{\partial x_n}x_j + \frac{\partial x_j}{\partial x_n}x_i\right] \end{bmatrix} \\
+    &= \begin{bmatrix}x_1 \sum_{i}\sum_{j} q_{ij}, & \dots, & x_n\sum_{i}\sum_{j} q_{ij} \end{bmatrix} \\
+    &= \vc{x}^\tran Q
+  \end{align*}
+  since $\frac{\partial x_i}{\partial x_k} = 0$ if $i\neq k$. Therefore, we have that the FONC \eqref{FONC} become
+  \begin{align*}
+    D_x l(\vc{x}^{*}, \vc{\lambda}^{*}) = \vc{x}^{*\tran} Q - \left(\vc{\lambda}^{*\tran} A + \vc{c}^\tran\right) = \vc{0}^\tran
+  \end{align*}
+  and by Lagrange's Theorem, the only possible minimizer is
+  \begin{align}\label{minimizer}
+    \vc{x}^{*} = Q^{-1}A^\tran \vc{\lambda}^{*} + Q^{-1}\vc{c}.
+  \end{align}
+  In order to find a closed-form solution to the problem we must identify $\vc{\lambda}^{*}$. Multiplying
+  \eqref{minimizer} by $A$ and using the condition that $A\vc{x}^{*} = b$ we have that
+  \begin{align*}
+    \vc{b} = AQ^{-1}A^\tran \vc{\lambda}^{*} + AQ^{-1}\vc{c}.
+  \end{align*}
+  Since $Q$ is positive definite and $A$ is of full rank, $AQ^{-1}A^\tran$ is invertible and
+  \begin{align*}
+    \vc{\lambda}^{*} = (AQ^{-1}A^\tran)^{-1}(\vc{b} - AQ^{-1}\vc{c}).
+  \end{align*}
+  Therefore, from \eqref{minimizer}, the possible minimizer to the optimization problem in closed-form is
+  \begin{align}\label{closed}
+    \vc{x}^{*} = Q^{-1}A^\tran(AQ^{-1}A^\tran)^{-1}(\vc{b} - AQ^{-1}\vc{c}) + Q^{-1}\vc{c}.
+  \end{align}
+
+  In order to verify that the minimizer \eqref{closed} is in fact a minimizer,
+  we must check that the Hessian matrix of the Lagrange function is positive definite on the tangent space of $\vc{x}^{*}$.
+  We readily see that the Hessian matrix of the Lagrange function is
+  \begin{align*}
+    D^2_x l(\vc{x}^{*}, \vc{\lambda}^{*}) = D_x(\vc{x}^{*\tran} Q - \left(\vc{\lambda}^{*\tran} A + \vc{c}^\tran\right)) = Q.
+  \end{align*}
+  Since $Q$ is positive definite, we have that the Hessian matrix of the Lagrange function is most certainly
+  positive definite on the tangent space of $\vc{x}^{*}$ showing that the minimizer \eqref{closed} is indeed a minimizer by the Second Order Sufficient Conditions.
 \end{proof}
 \newpage
 
