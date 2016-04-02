@@ -39,9 +39,9 @@
   \begin{enumerate}
     \item Use the Frobenius method to find a series expansion of $x=-2$
       of the general solution of the equation
-      \begin{align*}
+      \begin{align}\label{diff_eq}
         x(x+2)y'' + (x+1)y' - 4y = 0.
-      \end{align*}
+      \end{align}
     \item Use your answer to part a.\ to find a series solution of the BVP
       \begin{align*}
         x(x+2)y'' + (x+1)y' - 4y = 0,\quad y(-2) = y(-1.5) = 1.
@@ -50,6 +50,151 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Note that the differential equation \eqref{diff_eq} may be written as
+      \begin{align*}
+        y'' + \left[\frac{x+1}{x(x+2)}\right] y' + \left[\frac{-4}{x(x+2)}\right]y = 0.
+      \end{align*}
+      Since the functions
+      \begin{align*}
+        p_1(x) = \frac{x+1}{x(x+2)}, \quad p_0(x) = \frac{-4}{x(x+2)}
+      \end{align*}
+      are not analytic at $x=-2$, but both $(x+2)p_1(x)$ and $(x+2)^2p_0(x)$ are
+      analytic at that point, we classify the point $x=-2$ as a regular singular point.
+
+      As such, we rewrite equation \eqref{diff_eq} as
+      \begin{align*}
+        y'' + \left[\frac{p(x)}{x+2}\right] y' + \left[\frac{q(x)}{(x+2)^2}\right]y = 0.
+      \end{align*}
+      where $p(x)$ and $q(x)$ are defined as the following analytic functions at $x=-2$:
+      \begin{align*}
+        p(x) = \frac{x+1}{x}, \quad q(x) = -\frac{4(x+2)}{x}.
+      \end{align*}
+      Using the following power series expansion of the function $f(x) = 1/x$ about $x=-2$,
+      \begin{align*}
+        \frac{1}{x} = \sum_{n=0}^{\infty}\left[\frac{-1}{2^{n+1}}\right](x+2)^n,
+      \end{align*}
+      we may write the power series expansions of the analytic functions $p(x)$ and $q(x)$ about $x=-2$ as follows:
+      \begin{align}\label{power}
+        p(x) &= \sum_{n=0}^{\infty} p_n (x+2)^n = \frac{1}{2} + \sum_{n=1}^{\infty} \left[\frac{-1}{2^{n+1}}\right] (x+2)^n \notag \\
+        q(x) &= \sum_{n=0}^{\infty} q_n (x+2)^n = \sum_{n=1}^{\infty} \left[\frac{1}{2^{n-2}}\right] (x+2)^n.
+      \end{align}
+      Identifying $p_0 = 1/2$ and $q_0 = 0$, the indicial polynomial associated to the differential equation \eqref{diff_eq} is
+      \begin{align*}
+        P(\alpha) = \alpha^2 + (p_0 - 1)\alpha + q_0 = \alpha\left(\alpha - \frac{1}{2}\right).
+      \end{align*}
+      The two roots to the indicial polynomial are $\alpha_1 = 1/2$ and $\alpha_2 = 0$. Since the roots of the indicial polynomial
+      do not differ by an integer, there exist two linearly independent solutions in Frobenius form.
+      Therefore, the two linearly independent solutions are
+      \begin{align}\label{lin_sol}
+        y_1(x) = \sum_{n=0}^\infty a_n (x+2)^{n + \alpha_1}, \quad y_2(x) = \sum_{n=0}^\infty b_n (x+2)^{n + \alpha_2}
+      \end{align}
+      where the sequence $a_n$ satisfies the recurrence relations
+      \begin{align}\label{a_rel}
+        P(\alpha_1)a_0 &= 0 & & \notag \\
+        P(\alpha_1 + n) a_n &= -\sum_{k=0}^{n-1}\left[(\alpha_1 + k)p_{n-k} + q_{n-k}\right]a_k, &n&=1,2,\dots
+      \end{align}
+      with $a_0 \neq 0$ and the sequence $b_n$ satisfies the recurrence relations
+      \begin{align}\label{b_rel}
+        P(\alpha_2)b_0 &= 0 & & \notag \\
+        P(\alpha_2 + n) b_n &= -\sum_{k=0}^{n-1}\left[(\alpha_2 + k)p_{n-k} + q_{n-k}\right]b_k, &n&=1,2,\dots
+      \end{align}
+      with $b_0 \neq 0$.
+      Thus, we need only solve the recurrence relations \eqref{a_rel} and \eqref{b_rel} to completely determine the
+      linearly independent solutions \eqref{lin_sol}.
+
+      % Find solution y_1(x)
+      The sequence defining the solution $y_1(x)$ associated to the root $\alpha_1 = 1/2$ satisfies recurrence relation \eqref{a_rel}.
+      Since $P(\alpha_1) = 0$, the first equation of the recurrence relation \eqref{a_rel} is satisfied and
+      using the sequences defining the analytic functions $p(x)$ and $q(x)$, we have that the other equation becomes
+      \begin{align}\label{a_rel_red}
+        P(n + 1/2) a_n &= -\sum_{k=0}^{n-1}\left[-\frac{(k + 1/2)}{2^{n-k+1}} + \frac{1}{2^{n-k-2}}\right]a_k & & \notag\\
+        &=\sum_{k=0}^{n-1}\left[\frac{2k-15}{2^{n-k+2}}\right]a_k, &n&=1,2,\dots.
+      \end{align}
+      We can prove through induction that the above relation satisfies the formula
+      \begin{align*}
+        a_n &= \frac{4n^2-4n-15}{8n^2+4n}a_{n-1}, &n&=1,2,\dots.
+      \end{align*}
+      To see this we can note that
+      \begin{align*}
+        a_1 &= \frac{4 - 4 - 15}{8 + 4}a_0 = -\frac{5}{4}a_0
+      \end{align*}
+      and have established that the formula holds for $n=1$. Now suppose the formula
+      holds for general $n > 1$. Using our supposition, we see from relation \eqref{a_rel_red} that
+      \begin{align*}
+        P(n + 1 + 1/2) a_{n+1} &= \sum_{k=0}^{n}\left[\frac{2k-15}{2^{n-k+3}}\right]a_k \\
+        &= \frac{1}{2}\sum_{k=0}^{n-1}\left[\frac{2k-15}{2^{n-k+2}}\right]a_k + \frac{2n-15}{8}a_n \\
+        &= \left[\frac{P(n + 1/2)}{2} + \frac{2n-15}{8}\right]a_n.
+      \end{align*}
+      Performing some algebra on this expression we see that
+      \begin{align*}
+        a_{n+1} = \frac{4(n+1)^2-4(n+1)-15}{8(n+1)^2+4(n+1)}a_{n}
+      \end{align*}
+      and the formula holds for $n+1$ completing the proof.
+      Mathematica reports that the solution to this recurrence relation is
+      \begin{align*}
+        a_n = \left[-\frac{\Gamma(2)}{\Gamma(-1/2)}\frac{(2n+3)\Gamma(n-3/2)}{2^{n+1}\Gamma(n+1)}\right]a_0 = \frac{1}{\sqrt{2\pi}}\left[\frac{(2n+3)\Gamma(n-3/2)}{2^{n+1}\Gamma(n+1)}\right]a_0
+      \end{align*}
+      Therefore, using \eqref{lin_sol}, the solution to the differential equation \eqref{diff_eq} associated to the root $\alpha_1 = 1/2$
+      is
+      \begin{align}\label{y1_sol}
+        y_1(x) &= a_0 \sum_{n=0}^\infty \left[\frac{(2n+3)\Gamma(n-3/2)}{\sqrt{2\pi}2^{n+1}\Gamma(n+1)}\right](x+2)^{n+1/2} \notag \\
+        &= a_0\left[\frac{-(x+1)\sqrt{-x(x+2)}}{\sqrt{2}}\right]
+      \end{align}
+      which has radius of convergence 2 centered at $x=-2$.
+
+      % Find solution y_2(x)
+      We now look to identify the solution $y_2(x)$.
+      The sequence defining the solution $y_2(x)$ associated to the root $\alpha_2 = 0$ satisfies recurrence relation \eqref{b_rel}.
+      Since $P(\alpha_2) = 0$, the first equation of the recurrence relation \eqref{b_rel} is satisfied and
+      using the sequences defining the analytic functions $p(x)$ and $q(x)$, we have that the other equation becomes
+      \begin{align}\label{b_rel_red}
+        P(n) b_n &= -\sum_{k=0}^{n-1}\left[-\frac{k}{2^{n-k+1}} + \frac{1}{2^{n-k-2}}\right]b_k & & \notag\\
+        &=\sum_{k=0}^{n-1}\left[\frac{k-8}{2^{n-k+1}}\right]b_k, &n&=1,2,\dots.
+      \end{align}
+      We can prove through induction that the above relation satisfies the formula
+      \begin{align*}
+        b_n &= \frac{-n^2+2n+3}{-2n^2+n}b_{n-1}, &n&=1,2,\dots.
+      \end{align*}
+      To see this we can note that
+      \begin{align*}
+        b_1 &= \frac{-1 +2 +3}{-2 + 1}b_0 = -4b_0
+      \end{align*}
+      and have established that the formula holds for $n=1$. Now suppose the formula
+      holds for general $n > 1$. Using our supposition, we see from relation \eqref{b_rel_red} that
+      \begin{align*}
+        P(n + 1) b_{n+1} &= \sum_{k=0}^{n}\left[\frac{k-8}{2^{n-k+2}}\right]b_k \\
+        &= \frac{1}{2}\sum_{k=0}^{n-1}\left[\frac{k-8}{2^{n-k+1}}\right]b_k + \frac{n-8}{4}b_n \\
+        &= \left[\frac{P(n)}{2} + \frac{n-8}{4}\right]b_n.
+      \end{align*}
+      Performing some algebra on this expression we see that
+      \begin{align*}
+        b_{n+1} = \frac{-(n+1)^2+2(n+1)+3}{-2(n+1)^2+(n+1)}b_{n}
+      \end{align*}
+      and the formula holds for $n+1$ completing the proof.
+
+      Note that $b_3 = 0$ which implies that $b_n = 0$ for $n\geq 3$ and that
+      \begin{align*}
+        b_n =
+        \begin{cases}
+          b_1 = -4b_0 \\
+          b_2 = 2b_0 \\
+          b_n = 0 &\text{for $n\geq 3$}
+        \end{cases}.
+      \end{align*}
+      Therefore, using \eqref{lin_sol}, the solution to the differential equation \eqref{diff_eq} associated to the root $\alpha_2 = 0$
+      is
+      \begin{align}\label{y2_sol}
+        y_2(x) &= \sum_{n=0}^\infty b_n(x+2)^{n} \notag \\
+        &= b_0\left[1 -4(x+2) +2(x+2)^2\right]\notag\\
+        &= b_0\left[2x^2+4x+1\right].
+      \end{align}
+
+      The general solution to the differential equation is then
+      \begin{align}\label{gen_sol}
+        y(x) = a_0\left[\frac{-(x+1)\sqrt{-x(x+2)}}{\sqrt{2}}\right] + b_0\left[2x^2+4x+1\right].
+      \end{align}
+  \end{enumerate}
 \end{proof}
 \newpage
 
@@ -74,7 +219,7 @@
 \newpage
 
 
-% Problem 2
+% Problem 3
 \begin{problem}
   Find the first three terms in the asymptotic expansion as $x \to +\infty$
   of a solution of the equation
