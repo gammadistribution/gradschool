@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+\usepackage{breqn}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\newenvironment{case}{%
+  \let\olditem\item%
+  \renewcommand\item[1][]{\olditem \textbf{##1} \\}%
+  \begin{enumerate}[label=\textbf{Case \arabic*:},itemindent=*,leftmargin=0em]}{\end{enumerate}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Test 1}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Test 1}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  \begin{enumerate}
+    \item Use the Frobenius method to find a series expansion of $x=-2$
+      of the general solution of the equation
+      \begin{align*}
+        x(x+2)y'' + (x+1)y' - 4y = 0.
+      \end{align*}
+    \item Use your answer to part a.\ to find a series solution of the BVP
+      \begin{align*}
+        x(x+2)y'' + (x+1)y' - 4y = 0,\quad y(-2) = y(-1.5) = 1.
+      \end{align*}
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  \begin{enumerate}
+    \item Transform the equation $x(x+2)y'' + (x+1)y' - 4y = 0$ to the form
+      \begin{align}\label{transform}
+        \ddot{y} + t^{-1}p(t)\dot{y} + t^{-2}q(t)y = 0
+      \end{align}
+      and use the result to determine whether the point at $\infty$ is an ordinary, regular
+      singular, or irregular singular point for the original equation.
+    \item Apply an appropriate method to equation \eqref{transform}  to obtain
+      two series that represent linearly independent solutions of the original
+      equation as $x \to +\infty$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  Find the first three terms in the asymptotic expansion as $x \to +\infty$
+  of a solution of the equation
+  \begin{align*}
+    y''' + \frac{y'}{x^3} = x.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+
+
+\end{document}
