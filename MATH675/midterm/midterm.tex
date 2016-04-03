@@ -194,6 +194,23 @@
       \begin{align}\label{gen_sol}
         y(x) = a_0\left[\frac{-(x+1)\sqrt{-x(x+2)}}{\sqrt{2}}\right] + b_0\left[2x^2+4x+1\right].
       \end{align}
+
+      \item Note that \eqref{gen_sol} is the general solution to the BVP.
+        So, for $-2 \leq x \leq -3/2$,
+        \begin{align*}
+          y(x) = a_0\left[\frac{-(x+1)\sqrt{-x(x+2)}}{\sqrt{2}}\right] + b_0\left[2x^2+4x+1\right].
+        \end{align*}
+        satisfies the differential equation. From the boundary conditions $y(-2) = y(-3/2) = 1$
+        we see that
+        \begin{align*}
+          y(-2) &= b_0 = 1 \\
+          y(-3/2) &= \frac{a_0\sqrt{3}}{4\sqrt{2}}  - \frac{b_0}{2} = 1
+        \end{align*}
+        from which we readily see that $a_0 = 2\sqrt{6}$ and $b_0 = 1$. Therefore,
+        the solution to the BVP is
+        \begin{align*}
+          y(x) = 2\sqrt{6}\left[\frac{-(x+1)\sqrt{-x(x+2)}}{\sqrt{2}}\right] + \left[2x^2+4x+1\right].
+        \end{align*}
   \end{enumerate}
 \end{proof}
 \newpage
