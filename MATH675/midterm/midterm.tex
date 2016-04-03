@@ -198,7 +198,7 @@
       \item Note that \eqref{gen_sol} is the general solution to the BVP.
         So, for $-2 \leq x \leq -3/2$,
         \begin{align*}
-          y(x) = a_0\left[\frac{-(x+1)\sqrt{-x(x+2)}}{\sqrt{2}}\right] + b_0\left[2x^2+4x+1\right].
+          y(x) = a_0\left[\frac{-(x+1)\sqrt{-x(x+2)}}{\sqrt{2}}\right] + b_0\left[2x^2+4x+1\right]
         \end{align*}
         satisfies the differential equation. From the boundary conditions $y(-2) = y(-3/2) = 1$
         we see that
@@ -232,6 +232,36 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item In order to investigate the point at $+\infty$, we map the point at
+      $+\infty$ into $0$ and identify the point at $0$ in the resulting equation.
+      We can complete the mapping by making the following transformations
+      \begin{align*}
+        x &= \frac{1}{t} \\
+        y' &= -t^2 \dot{y} \\
+        y'' &= t^4 \ddot{y} + 2t^3 \dot{y}.
+      \end{align*}
+      Thus, the differential equation \eqref{diff_eq} becomes
+      \begin{align*}
+        Ly &= x(x+2)y'' + (x+1)y' - 4y \notag \\
+        &= \left(\frac{2t+1}{t^2}\right)\left(t^4 \ddot{y} + 2t^3 \dot{y}\right) -t(t + 1)\dot{y} - 4y \notag \\
+        &= t^2(2t+1)\ddot{y} + t(3t+1)\dot{y} - 4y.
+      \end{align*}
+      We can write this differential equation in the form
+      \begin{align}\label{diff_eq_mapped}
+        t^2(2t+1)\ddot{y} + t(3t+1)\dot{y} - 4y = \ddot{y} + \left[\frac{3t+1}{t(2t+1)}\right]\dot{y} + \left[-\frac{4}{t^2(2t+1)}\right]y=0.
+      \end{align}
+      Identifying $p(t) = (3t+1)/(2t+1)$ and $q(t) = -4/(2t+1)$, we see that the equation is written as
+      \begin{align*}
+        \ddot{y} + \left[\frac{3t+1}{t(2t+1)}\right]\dot{y} + \left[-\frac{4}{t^2(2t+1)}\right]y = \ddot{y} + \left[\frac{p(t)}{t}\right]\dot{y} + \left[\frac{q(t)}{t^2}\right]y = 0.
+      \end{align*}
+      Note that $p(t)$ and $q(t)$ are both analytic at $t=0$.
+      Since $t^{-1}p(t)$ and $t^{-2}q(t)$ are not analytic at $t=0$ but both
+      $t(t^{-1}p(t))$ and $t^2(t^{-2}q(t))$ are analytic at that point, we
+      see that the point $t=0$ is a regular singular point. As a result
+      we conclude that $x=+\infty$ is also a regular singular point.
+
+  \end{enumerate}
 \end{proof}
 \newpage
 
