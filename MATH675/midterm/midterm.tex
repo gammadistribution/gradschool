@@ -260,14 +260,170 @@
       $t(t^{-1}p(t))$ and $t^2(t^{-2}q(t))$ are analytic at that point, we
       see that the point $t=0$ is a regular singular point. As a result
       we conclude that $x=+\infty$ is also a regular singular point.
+    \item After identifying that the point $t=0$ is a regular singular point of
+      equation \eqref{diff_eq_mapped} we can expect that at least one solution to the equation
+      is of Frobenius form. We begin by finding the power series expansions
+      of the functions $p(t)$ and $q(t)$. Using the following power series expansion
+      of $f(t) = 1/(2t+1)$ about $t=0$,
+      \begin{align*}
+        \frac{1}{2t+1} = \sum_{n=0}^\infty (-2)^n t^n,
+      \end{align*}
+      we see that the power series expansions of the analytic functions $p(t)$
+      and $q(t)$ about $t=0$ are
+      \begin{align}\label{pq_expansion}
+        p(t) &= \sum_{n=0}^{\infty}p_n t^n = 1 + \sum_{n=1}^\infty \left[3(-2)^{n-1} + (-2)^{n}\right]t^n  = 1 + \sum_{n=1}^\infty \left[(-1)^{n+1}2^{n-1}\right]t^n \notag \\
+        q(t) &= \sum_{n=0}^{\infty}q_n t^n = \sum_{n=0}^\infty2(-2)^{n+1}t^n = \sum_{n=0}^\infty(-1)^{n+1}2^{n+2}t^n.
+      \end{align}
+      Identifying $p_0 = 1$ and $q_0 = -4$, the indicial polynomial associated to the differential equation \eqref{diff_eq_mapped} is
+      \begin{align*}
+        P(\alpha) = \alpha^2 + (p_0 - 1)\alpha + q_0 = (\alpha-2)(\alpha+2).
+      \end{align*}
+      The two roots to the indicial polynomial are $\alpha_1 = 2$ and $\alpha_2 = -2$. Since these roots
+      differ by a positive integer, the solution to the differential equation associated to the root $\alpha_1$ exists in Frobenius
+      form and further analysis is needed to determine if the other solution to the differential equation associated to the root $\alpha_2$
+      is also in Frobenius form. Using the sequences defining the power series expansions of $p(t)$ and $q(t)$ and setting $N = \alpha_1 - \alpha_2 = 4$, if
+      \begin{align*}
+        -\sum_{k=0}^{N-1} \left[(k + \alpha_2)p_{N-k} + q_{N-k}\right]a_k = 0
+      \end{align*}
+      with $a_0 \neq 0$, then the solution to the differential equation associated to the root $\alpha_2$ is
+      in Frobenius form, otherwise only the solution associated to the root $\alpha_1$ is
+      in Frobenius form.
 
+      We proceed by finding $y_1(t)$, the solution to the differential equation associated to
+      the root $\alpha_1 = 2$. This solution is in Frobenius form, i.e.\
+      \begin{align}\label{frob_sol}
+        y_1(t) = \sum_{n=0}^\infty a_n t^{n+2}
+      \end{align}
+      where $a_0\neq 0$ and $a_n$ satisfies the recurrence relation
+      \begin{align}
+        P(2)a_0 &= 0 & & \notag \\
+        P(n+2) a_n &= -\sum_{k=0}^{n-1}\left[(k + 2)p_{n-k} + q_{n-k}\right]a_k, &n&=1,2,\dots
+      \end{align}
+      and $p_n, q_n$ are the sequences defining the power series expansions of $p(t)$ and $q(t)$.
+      Thus, solving the recurrence relation completely identifies the first solution.
+      The first equation of the recurrence relation is satisfied since $\alpha_1=2$ is a root
+      of the indicial polynomial $P(z) = (z-2)(z+2)$. The other recurrence relation
+      reduces to
+      \begin{align}\label{a_y1_rel}
+        P(n+2)a_n &= -\sum_{k=0}^{n-1}\left[(k + 2)p_{n-k} + q_{n-k}\right]a_k & & \notag \\
+        &= \sum_{k=0}^{n-1} (-1)^{n-k+2}2^{n-k-1}(k+10)a_k&n&=1,2,\dots.
+      \end{align}
+      We can prove through induction that the above relation satisfies the formula
+      \begin{align*}
+        a_n &= \frac{-2n^2-5n-3}{n^2+4n}a_{n-1}, &n&=1,2,\dots.
+      \end{align*}
+      To see this we can note that
+      \begin{align*}
+        a_1 &= \frac{-2 - 5 - 3}{1 + 4}a_0 = -2a_0
+      \end{align*}
+      and have established that the formula holds for $n=1$. Now suppose the formula
+      holds for general $n > 1$. Using our supposition, we see from relation \eqref{a_y1_rel} that
+      \begin{align*}
+        P(n + 3) a_{n+1} &= \sum_{k=0}^{n}(-1)^{n-k+2}2^{n-k-1}(k+10)a_k \\
+        &= -2\sum_{k=0}^{n-1}(-1)^{n-k+2}2^{n-k-1}(k+10)a_k - (n+10)a_n \\
+        &= -\left[2P(n+2) + (n+10) \right]a_n.
+      \end{align*}
+      Performing some algebra on this equation we see that
+      \begin{align*}
+        a_{n+1} = \frac{-2(n+1)^2-5(n+1)-3}{(n+1)^2+4(n+1)}a_{n-1}
+      \end{align*}
+      and the formula holds for $n+1$ completing the proof. Mathematica reports that
+      the solution to this new recurrence relation is
+      \begin{align*}
+        a_n &= \left[\frac{\Gamma(5)}{\Gamma(5/2)}\frac{(-2)^{n}(n+1)\Gamma(n+5/2)}{\Gamma(n+5)}\right]a_0 \notag \\
+        &= \left[\frac{32(-2)^{n}(n+1)\Gamma(n+5/2)}{\sqrt{\pi}\Gamma(n+5)}\right]a_0.
+      \end{align*}
+      Therefore, the solution to the differential equation associated to the root $\alpha_1=2$ is
+      \begin{align*}
+        y_1(t) &= a_0 \sum_{n=0}^\infty \left[\frac{32(-2)^{n}(n+1)\Gamma(n+5/2)}{\sqrt{\pi}\Gamma(n+5)}\right]t^{n+2} \\
+        &= \begin{cases}
+          0 & \text{for $t=0$}\\
+          a_0\left[\frac{4\left(2+4t+t^2-2\sqrt{2t+1}-2t\sqrt{2t+1}\right)}{t^2}\right] & \text{for $0 < |t|\ < 1/2$}
+          \end{cases}.
+      \end{align*}
+      which has radius of convergence $1/2$ centered at $t=0$.
+
+      %Find y_2 solution
+      To find the second solution we generalize the Frobenius solution
+      and substitute the solution into the original differential equation to obtain
+      \begin{align*}
+        Ly(t,\alpha) = a_0 t^{\alpha - 2}P(\alpha).
+      \end{align*}
+      Note that if $\alpha=\alpha_1 = 2$, then the solution is the solution already obtained to the homogeneous equation $Ly(t,\alpha) = 0$.
+      Differentiating both sides of the equation with respect to $\alpha$ yields that
+      \begin{align}\label{gen_eqn}
+        L\left[\left.\frac{\partial}{\partial\alpha}y(t,\alpha)\right|_{\alpha=\alpha_1}\right] = a_0P'(\alpha_1) t^{\alpha_2+N-2}
+      \end{align}
+      so that $\left.\frac{\partial}{\partial\alpha}y(t,\alpha)\right|_{\alpha=\alpha_1}$ is a particular solution of the above differential equation.
+      We can construct a second particular solution and subtract it from this particular solution to obtain the solution to the homogeneous equation. Note that the second particular
+      solution has a Frobenius expansion $\sum_{n=0}^{\infty}c_n t^{n+\alpha_2}$.
+      Using this form of the solution and substituting into \eqref{gen_eqn} and equating coefficients with $t^{\alpha_2+N-2}$ yields the following
+      relations
+      \begin{align}\label{sec_rel}
+        P(n + \alpha_2)c_n &=-\sum_{k=0}^{n-1} [(k + \alpha_2)p_{n-k} + q_{n-k}]c_k &n&\neq0,N \notag\\
+        a_0 &= \frac{1}{P'(\alpha_1)}\sum_{k=0}^{N-1}[(k + \alpha_2)p_{N-k} + q_{N-k}]c_k &n&=N
+      \end{align}
+      where $c_0 \neq 0$ and $c_N\neq 0$ are arbitrary. The second solution to the homogeneous differential equation  $Ly=0$ is then
+      \begin{align*}
+        y_2(t) &= \sum_{n=0}^\infty c_n t^{n+\alpha_2} - \left.\frac{\partial}{\partial\alpha}y(t,\alpha)\right|_{\alpha=\alpha_1} \\
+        &= \sum_{n=0}^\infty c_n t^{n+\alpha_2} - \log t\sum_{n=0}^{\infty}a_n t^{n+\alpha_1} - \sum_{n=0}^\infty\left.\frac{\partial a_n(\alpha)}{\partial \alpha}\right|_{\alpha=\alpha_1} t^{n+\alpha_1}
+      \end{align*}
+      where $a_n$ is the sequence of coefficients defining the first solution to the homogeneous differential equation.
+
+      We begin by determining the sequence $c_n$. For this particular differential equation
+      we have that $\alpha_1 = 2$, $\alpha_2 = -2$, and $N = \alpha_1 - \alpha_2 = 4$.
+      We can see that the first equation of the recurrence relation \eqref{sec_rel} becomes
+      \begin{align*}
+        P(n - 2)c_n &=-\sum_{k=0}^{n-1} [(k - 2)p_{n-k} + q_{n-k}]c_k && \\
+        &= \sum_{k=0}^{n-1} (-1)^{n-k+2}2^{n-k-1}(k+6)c_k &n&\neq0,4.
+      \end{align*}
+      We can see from this relation that $c_1 = 2c_0$, $c_2 = c_0 /2$, and $c_3=0$.
+      This implies that the second equation of the recurrence relation \eqref{sec_rel} becomes
+      \begin{align*}
+        a_0 &= \frac{1}{P'(2)}\sum_{k=0}^{4-1}[(k - 2)p_{4-k} + q_{4-k}]c_k = \frac{1}{4} \sum_{k=0}^3(-1)^{4-k}2^{3-k}(k+6)c_k = 0.
+      \end{align*}
+
+      Continuing from the first equation for $n>4$, we see that the recurrence relation becomes
+      \begin{align*}
+        P(n - 2)c_n &= \sum_{k=0}^{n-1} (-1)^{n-k+2}2^{n-k-1}(k+6)c_k \\
+        &= \sum_{k=0}^{4-1} (-1)^{n-k+2}2^{n-k-1}(k+6)c_k + \sum_{k=4}^{n-1} (-1)^{n-k+2}2^{n-k-1}(k+6)c_k\\
+        &= \sum_{k=4}^{n-1} (-1)^{n-k+2}2^{n-k-1}(k+6)c_k
+      \end{align*}
+      since $\sum_{k=0}^{4-1} (-1)^{n-k+2}2^{n-k-1}(k+6)c_k = (-1)^{n-1}2^{n-3}(24c_0 - 28c_0 + 4 c_0) = 0$ from our definitions of
+      $c_k$ for $0\leq k \leq 3$. Thus $c_n$ only depends on $c_4$ for $n>4$.
+      In a very similar fashion as was shown for the sequence $a_n$, we see that
+      \begin{align*}
+        c_n = \frac{-2n^2 +11n-15}{n^2-4n}c_{n-1} \quad \text{for $n > 4$}.
+      \end{align*}
+      Mathematica reports that the solution to this recurrence relation
+      is
+      \begin{align*}
+        c_n &= c_4\left[\frac{\Gamma(5)}{\Gamma(5/2)}\frac{(-1)^n 2^{n-4}(n-3)\Gamma(n-4+5/2)}{\Gamma(n-4+5)}\right] \\
+        &= c_4\left[\frac{32(-1)^n 2^{n-4}(n-3)\Gamma(n-4+5/2)}{\sqrt{\pi}\Gamma(n-4+5)}\right] \\
+      \end{align*}
+      Thus, we have that $c_0, c_4 \neq 0$ and
+      \begin{align*}
+        c_n =
+        \begin{cases}
+          c_1 = 2c_0& \\
+          c_2 = c_0/2&\\
+          c_3 = 0&\\
+          c_n = c_4\left[\frac{32(-1)^n 2^{n-4}(n-3)\Gamma(n-4+5/2)}{\sqrt{\pi}\Gamma(n-4+5)}\right] & \text{for $n\geq 4$}
+        \end{cases}.
+      \end{align*}
+      Therefore, we have that the solution associated to the root $\alpha_2 = -2$ is
+      \begin{align*}
+        y_2(t) &= c_0t^{-2} + 2c_0 t^{-1} + \frac{c_0}{2} + c_4\sum_{n=4}^\infty\left[\frac{32(-1)^n 2^{n-4}(n-3)\Gamma(n-4+5/2)}{\sqrt{\pi}\Gamma(n-4+5)}\right]t^{n-2} \\
+        &= c_0\left[t^{-2} + 2t^{-1} + \frac{1}{2}\right] + c_4 \left[\frac{4(2+4t+t^2-2\sqrt{2t+1}-2t\sqrt{2t+1})}{t^2}\right]
+      \end{align*}
+      and we have found both linearly independent solutions.
   \end{enumerate}
 \end{proof}
 \newpage
 
 
 % Problem 3
-\begin{problem}
+\begin{problem}+
   Find the first three terms in the asymptotic expansion as $x \to +\infty$
   of a solution of the equation
   \begin{align*}
