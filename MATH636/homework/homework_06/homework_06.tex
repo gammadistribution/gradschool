@@ -437,6 +437,161 @@
 \end{problem}
 
 \begin{proof}
+  Note that it can easily be proven that the recurrence relation
+  $x_k = 2 x_{k-1} + u_k$, $k \geq 1$ has the closed form solution
+  \begin{align*}
+    x_n = 2^n x_0 + \sum_{k=1}^n 2^{n-k} u_k \quad \text{for $n\geq 1$}.
+  \end{align*}
+  Thus, our control inputs are subject to the constraints
+  \begin{align*}
+    x_1 &= 2x_0 + u_1 \\
+    x_1 &= 4x_0 + 2u_1 + u_2
+  \end{align*}
+  which can be reformulated as
+  \begin{align}\label{con}
+    2x_0 &= x_1 - u_1 \notag \\
+    4x_0 &= x_2 - 2u_1 - u_2.
+  \end{align}
+  Forming the vector of decision variables as $\vc{z}^\tran = \begin{bmatrix}x_1 & x_2 & z_1 & z_2\end{bmatrix}$,
+  we can write the constraints \eqref{con} as
+  \begin{align*}
+    \begin{bmatrix}
+      1 & 0 & -1 & 0 \\
+      0 & 1 & -2 & -1 \\
+    \end{bmatrix}
+    \vc{z}
+    =
+    \begin{bmatrix}
+      2 x_0 \\
+      4 x_0
+    \end{bmatrix}.
+  \end{align*}
+  Using the same decision variable vector $\vc{z}$, we can write the object function
+  as
+  \begin{align*}
+    x_2^2 + \frac{1}{2}u_1^2+ \frac{1}{3}u_2^2
+    = \frac{1}{2}\vc{z}^\tran
+    \begin{bmatrix}
+      0 & 0 & 0 & 0 \\
+      0 & 2 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & \frac{2}{3} \\
+   \end{bmatrix}\vc{z}.
+  \end{align*}
+  Combining these facts, we can write the original problem as the following
+  quadratic programming problem
+  \begin{align}\label{quad_prob}
+    \begin{array}{rl}
+      \text{minimize} & \frac{1}{2} \vc{z}^\tran Q \vc{z}\\
+      \text{subject to} & A \vc{z} = \vc{b}\\
+    \end{array}
+  \end{align}
+  where the objective is $f(\vc{z}) = \frac{1}{2} \vc{z}^\tran Q \vc{z}$, the constraint is $\vc{h}(\vc{x}) = \vc{b}-A \vc{z} $, and
+  \begin{align}\label{defs}
+    \vc{z} = \begin{bmatrix}x_1 \\ x_2 \\ u_1 \\ u_2\end{bmatrix}, \quad
+    Q =
+    \begin{bmatrix}
+      0 & 0 & 0 & 0 \\
+      0 & 2 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & \frac{2}{3} \\
+   \end{bmatrix}, \quad
+   A =
+   \begin{bmatrix}
+      1 & 0 & -1 & 0 \\
+      0 & 1 & -2 & -1 \\
+   \end{bmatrix}, \quad
+   \vc{b} =
+   \begin{bmatrix}
+     2x_0 \\
+     4x_0 \\
+   \end{bmatrix}.
+  \end{align}
+
+  Note that for this problem the matrix $Q$ is singular. The Lagrangian associated
+  to this problem is
+  \begin{align*}
+    l(\vc{z}, \vc{\lambda}) = \frac{1}{2}\vc{z}^\tran Q \vc{z} + \vc{\lambda}^\tran(\vc{b} - A \vc{z}).
+  \end{align*}
+  The Lagrange condition shows that
+  \begin{align*}
+    D_z l(\vc{z}, \vc{\lambda}) = \vc{z}^\tran Q - \vc{\lambda}^\tran A = \vc{0}^\tran \implies
+    D_z l(\vc{z}, \vc{\lambda}) = Q\vc{z}  = A^\tran \vc{\lambda}.
+  \end{align*}
+  Using our definitions of the above matrices we see that for $\vc{\lambda}^\tran = \begin{bmatrix}\lambda_1 & \lambda_2\end{bmatrix}$
+  that
+  \begin{align*}
+    0 = \lambda_2, \quad
+    x_2 = \frac{\lambda_2}{2}, \quad
+    u_1 = -\lambda_1-2\lambda_2, \quad
+    u_2 = -\frac{3}{2}\lambda_2
+  \end{align*}
+  from which we see that the possible minimizer of the problem is
+  \begin{align*}
+    \vc{z}^{*\tran} =
+    \begin{bmatrix}
+      x_1 &
+      0 &
+      -\lambda_1 &
+      0
+    \end{bmatrix}.
+  \end{align*}
+  Using the fact that $A\vc{z}^{*} = \vc{b}$ we see that
+  \begin{align*}
+    A\vc{z}^{*}=
+       \begin{bmatrix}
+      1 & 0 & -1 & 0 \\
+      0 & 1 & -2 & -1 \\
+   \end{bmatrix}
+    \begin{bmatrix}
+      x_1 \\
+      0 \\
+      -\lambda_1 \\
+      0\\
+    \end{bmatrix}
+    =\begin{bmatrix}
+      x_1 + \lambda_1 \\
+      2\lambda_1
+    \end{bmatrix}
+    =\begin{bmatrix}
+     2x_0 \\
+     4x_0 \\
+   \end{bmatrix} = \vc{b}.
+  \end{align*}
+  Thus, $\lambda_1 = 2x_0$ and $x_1 = 0$. Therefore, the possible minimizer is
+  \begin{align}\label{minimizer}
+    \vc{z}^{*\tran} =
+    \begin{bmatrix}
+      0 &
+      0 &
+      -2x_0 &
+      0
+    \end{bmatrix}.
+  \end{align}
+
+  In order to show that this is in fact a strict local minimizer, we must show that
+  the Hessian matrix of the Lagrange function,
+  $D^2_z l(\vc{z}^{*},\vc{\lambda}^{*}) = Q$, satisfies
+  \begin{align*}
+    \text{For all $\vc{y} \in T(\vc{z}^{*})$, $\vc{y}\neq\vc{0}$ we have, }  \vc{y}^\tran Q \vc{y} > 0.
+  \end{align*}
+  Note that $y\in T(\vc{z}^{*})$ where $T(\vc{z}^{*}) = \{\vc{y}\ |\ D\vc{h}(\vc{z}^{*})\vc{y}=-A\vc{y}=\vc{0}\}$.
+  This translates into the null space of the matrix $A$. Thus, we must have that if $y\in T(\vc{z}^{*})$, then
+  \begin{align*}
+    \vc{y}^\tran =  \begin{bmatrix}y_1 & y_2 & y_1 & -2y_1+y_2\end{bmatrix}.
+  \end{align*}
+  Using this expression we readily see that for $\vc{y} \neq \vc{0}\in T(\vc{z}^{*})$,
+  \begin{align*}
+    \vc{y}^\tran Q \vc{y} = y_1^2 + 2 y_2^2 + \frac{2}{3} (-2 y_1 + y_2)^2 > 0
+  \end{align*}
+  since $y_1 \neq 0$, $y_2 \neq 0$, and $-2 y_1 + y_2\neq 0$ and the SOSCs are satisfied.
+  Thus, the minimizer \eqref{minimizer} is in fact a strict local minimizer and
+  the values of the control input to minimize
+  $$x_2^2 + \frac{1}{2}u_1^2+ \frac{1}{3}u_2^2$$ subject to   $x_k = 2 x_{k-1} + u_k$, $k \geq 1$, with
+  $x_0 = 1$ are
+  \begin{align*}
+    u_1 = -2x_0 = -2 \quad \text{and} \quad u_2 = 0.
+  \end{align*}
 \end{proof}
 
 
