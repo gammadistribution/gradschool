@@ -427,11 +427,79 @@
   Find the first three terms in the asymptotic expansion as $x \to +\infty$
   of a solution of the equation
   \begin{align*}
-    y''' + \frac{y'}{x^3} = x.
+    Ly = y''' + \frac{y'}{x^3} = x.
   \end{align*}
 \end{problem}
 
 \begin{proof}
+  We investigate the leading behavior of the solution $y(x)$ as $x\to + \infty$
+  by employing the method of dominant balance. We begin by checking the balance
+  $y''' \ll y'/x^3$ and $y'/x^3 \sim x$ as $x\to + \infty$. Thus, we have the asymptotic differential equation
+  $y' \sim x^4$, of which the solution is $y \sim x^5/5$ as $x\to + \infty$. So, we see that
+  \begin{align}\label{first_balance}
+    y(x) = \frac{x^5}{5} + C_1(x), \qquad C_1(x) \ll x^5, \qquad (x\to+\infty).
+  \end{align}
+  We must check to see if this solution satisfies the assumption that $y''' \ll y'/x^3$ as $x\to + \infty$.
+  If $y(x)$ is of the form presented in \eqref{first_balance}, then
+  \begin{align*}
+    y'(x) &= x^4 + C_1'(x), \qquad C_1'(x) \ll x^4, \qquad (x\to+\infty)  \\
+    y'''(x) &= 12x^2 + C_1'''(x), \qquad C_1'''(x) \ll x^2, \qquad (x\to+\infty)
+  \end{align*}
+  Note, that these equations contradict the assumption that $y''' \ll y'/x^3$ as $x\to + \infty$, so this balance cannot happen.
+
+  We proceed by checking the balance $y''' \sim x$ and $y' / x^3 \ll x$ as $x\to + \infty$. The solution to
+  this asymptotic differential equation is given by $y \sim x^4 / 24$ as $x \to + \infty$. So we have that
+  \begin{align}\label{second_balance}
+    y(x) = \frac{x^4}{24} + C_1(x), \qquad C_1(x) \ll x^4, \qquad (x\to+\infty).
+  \end{align}
+  We now must check to see if this solution agrees with the assumption that $y' / x^3 \ll x$ as $x\to + \infty$.
+  From equation \eqref{second_balance} we see that
+  \begin{align*}
+    y'(x) = \frac{x^3}{6} + C_1'(x), \qquad C_1'(x) \ll x^3, \qquad (x\to+\infty)
+  \end{align*}
+  from which we conclude that $y'(x)/x^3$ is indeed much much less than $x$ as $x\to + \infty$.
+  Therefore, we have that the leading behavior of the solution is given by \eqref{second_balance}.
+
+  We continue by using this form of $y(x)$ and replacing it into the original differential equation so that
+  \begin{align*}
+    Ly = C_1''' + \frac{C_1'}{x^3} = -1/6, \qquad C_1(x) \ll x^4, \qquad (x\to+\infty).
+  \end{align*}
+  Continuing with the method of dominant balance and taking cue from the previous equation,
+  we check the balance $C_1''' \sim -1/6$ and $C_1'/x^3 \ll -1/6$ as $x\to + \infty$.
+  The solution to this asymptotic differential equation is given by $C_1 \sim - x^3/36$ as $x\to + \infty$. Thus,
+  \begin{align}\label{third}
+    C_1(x) = -\frac{x^3}{36} + C_2(x), \qquad C_2(x) \ll x^3, \qquad (x\to+\infty).
+  \end{align}
+  We proceed by checking this solution against the assumption that $C_1'/x^3 \ll -1/6$. From equation \eqref{third} we see that
+  \begin{align*}
+    C_1'(x) = -\frac{x^2}{12} + C_2'(x), \qquad C_2'(x) \ll x^2, \qquad (x\to+\infty).
+  \end{align*}
+  This indeed shows that $C_1' / x^3 \ll -1/6$ and this solution is consistent with our assumptions.
+  Thus, we have so far that the leading behavior of the solution to $Ly=x$ is
+  \begin{align*}
+    y(x) = \frac{x^4}{24} - \frac{x^3}{36} + C_2(x), \qquad C_2(x) \ll x^3, \qquad (x\to+\infty).
+  \end{align*}
+
+  We now peel off one final term by assuming $y(x)$ is of the form above so that the original
+  differential equation becomes
+  \begin{align*}
+    Ly = C_2''' + \frac{C_2'}{x^3} = \frac{1}{12x}, \qquad C_2(x) \ll x^3, \qquad (x\to+\infty).
+  \end{align*}
+  Using the method of dominant balance we assume that $C_2''' \sim 1/(12x)$ and $C_2'/x^3 \ll 1/(12x)$ as $x\to + \infty$.
+  The solution to this asymptotic differential equation is given by $C_2 \sim -x^2/16 +(x^2\log x)/24$ as $x\to + \infty$. Thus,
+  \begin{align}\label{fourth}
+    C_2(x) = -\frac{x^2}{16} +\frac{x^2\log x}{24} + C_3(x), \qquad C_3(x) \ll x^2\log x, \qquad (x\to+\infty).
+  \end{align}
+  From equation \eqref{fourth} we see that
+  \begin{align*}
+    C_2'(x) =-\frac{x}{12} + \frac{x\log x}{12} + C_3'(x), \qquad C_3'(x) \ll x + 2x\log x, \qquad (x\to+\infty)
+  \end{align*}
+  which indeed satisfies $C_2'/x^3 \ll 1/(12x)$ as $x\to + \infty$.
+
+  Therefore, we have that the first three terms in the asymptotic expansion of $Ly = x$ as $x \to +\infty$ is
+  \begin{align*}
+    y(x) = \frac{x^4}{24} - \frac{x^3}{36} -\frac{x^2}{16} +\frac{x^2\log x}{24} + C_3(x), \qquad C_3(x) \ll x^2\log x.
+  \end{align*}
 \end{proof}
 
 
