@@ -400,7 +400,7 @@
     D_x l(\vc{x}^{*}, \vc{\lambda}^{*}) = \vc{x}^{*\tran} Q - \left(\vc{\lambda}^{*\tran} A + \vc{c}^\tran\right) = \vc{0}^\tran
   \end{align*}
   and by Lagrange's Theorem, the only possible minimizer is
-  \begin{align}\label{minimizer}
+  \begin{align}\label{minimizer_1}
     \vc{x}^{*} = Q^{-1}A^\tran \vc{\lambda}^{*} + Q^{-1}\vc{c}.
   \end{align}
   In order to find a closed-form solution to the problem we must identify $\vc{\lambda}^{*}$. Multiplying
@@ -412,7 +412,7 @@
   \begin{align*}
     \vc{\lambda}^{*} = (AQ^{-1}A^\tran)^{-1}(\vc{b} - AQ^{-1}\vc{c}).
   \end{align*}
-  Therefore, from \eqref{minimizer}, the possible minimizer to the optimization problem in closed-form is
+  Therefore, from \eqref{minimizer_1}, the possible minimizer to the optimization problem in closed-form is
   \begin{align}\label{closed}
     \vc{x}^{*} = Q^{-1}A^\tran(AQ^{-1}A^\tran)^{-1}(\vc{b} - AQ^{-1}\vc{c}) + Q^{-1}\vc{c}.
   \end{align}
