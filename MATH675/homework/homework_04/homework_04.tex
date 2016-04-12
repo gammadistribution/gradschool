@@ -1,0 +1,155 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+\usepackage{breqn}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+\newenvironment{case}{%
+  \let\olditem\item%
+  \renewcommand\item[1][]{\olditem \textbf{##1} \\}%
+  \begin{enumerate}[label=\textbf{Case \arabic*:},itemindent=*,leftmargin=0em]}{\end{enumerate}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 4}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 4}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Find the first three terms in the asymptotic expansions of $x \to 0^+$ of the following
+  integrals:
+  \begin{align*}
+    \int_x^1 \cos(xt)dt, \qquad \int_0^{1/x} e^{-t^2}dt.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  Find the full asymptotic behavior as $x \to 0^+$ of the following integral:
+  \begin{align*}
+    \int_{0}^1 \frac{e^{-t}}{1 + x^2t^3}dt
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+% Problem 3
+\begin{problem}
+  Find the full asymptotic expansion of $\int_0^x \text{Bi}(t) dt$ as $x \to +\infty$.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 4
+\begin{problem}
+  Find the first five terms in the asymptotic expansion as $x \to +\infty$ of the integral
+  \begin{align*}
+    \int_0^{\pi/4} e^{-xt^2}\sqrt{\tan t}   dt
+  \end{align*}
+  \begin{enumerate}
+    \item by using a suitable change of variables and then applying Watson's lemma.
+    \item by applying Laplace's method directly to the given integral.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 5
+\begin{problem}
+  Use Laplace's method of moving maxima to obtain the first two terms in the asymptotic
+  expansion as $x \to +\infty$ of the integral
+  \begin{align}\label{exp_int}
+    \int_{0}^\infty \exp\left[-t - \frac{x}{\sqrt{t}}\right] dt.
+  \end{align}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 6
+\begin{problem}
+  Let $f(x, t)$ be differentiable in $x$ and continuous in $(x, t)$ on $I \times J$,
+  where $I$ and $J$ are intervals, and suppose that there exist functions $g(t)$ and $g_1(t)$
+  that are integrable on $J$ such that for all $(x,t) \in I \times J$ we have that
+  \begin{align*}
+    |f(x,t)|\leq g(t) \quad \text{and} \quad |\partial_x f(x,t)| \leq g_1(t).
+  \end{align*}
+  Then
+  \begin{align*}
+    \frac{d}{dx} \int_J f(x,t) dt = \int_J \partial_x f(x,t) dt.
+  \end{align*}
+  \begin{enumerate}
+    \item Let $0 < a < b < \infty$. Use the above theorem to show that if $x \in (a,b)$, then
+      \begin{align*}
+        \frac{d^3}{dx^3} \int_0^\infty \exp\left[-t - \frac{x}{\sqrt{t}}\right] dt = -\int_0^\infty t^{-3/2}\exp\left[-t - \frac{x}{\sqrt{t}}\right] dt.
+      \end{align*}
+    \item Use integration by parts to show that
+      \begin{align*}
+        \int_0^\infty \exp\left[-t - \frac{x}{\sqrt{t}}\right] dt = \frac{x}{2}\int_0^\infty t^{-3/2}\exp\left[-t - \frac{x}{\sqrt{t}}\right] dt.
+      \end{align*}
+    \item Combine parts (a) and (b) to prove that integral \eqref{exp_int} is a solution of the
+      differential equation $xy''' + 2y = 0$ that also satisfies the initial condition $y(0) = 1$.
+      Then use integration by parts to give an easy direct proof that the integral also satisfies
+      the condition $y(+\infty) = 0$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 7
+\begin{problem}
+  \begin{enumerate}
+    \item Find the leading behavior as $x\to + \infty$ of Laplace integrals of the form
+      \begin{align*}
+        \int_a^b (t-a) ^\alpha g(t) e^{x\phi(t)} dt
+      \end{align*}
+      where $\phi(t)$ has a maximum at $t = a$, $g(a) = 1$. Suppose further that $\alpha > -1$ and $\phi'(a) < 0$.
+    \item Repeat the analysis of part (a) when $\alpha > -1$
+      and $\phi'(a) = \phi''(a) = \dots = \phi^{(p-1)}(a) = 0$ and $\phi^{(p)}(a) < 0$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+\end{document}
