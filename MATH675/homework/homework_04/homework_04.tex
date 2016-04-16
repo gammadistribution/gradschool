@@ -10,7 +10,7 @@
 \renewcommand{\theenumi}{\alph{enumi}}
 
 \newcommand{\vect}[1]{\boldsymbol{#1}}
-
+\newcommand{\bairy}{\text{Bi}}
 \newenvironment{case}{%
   \let\olditem\item%
   \renewcommand\item[1][]{\olditem \textbf{##1} \\}%
@@ -136,10 +136,73 @@
 
 % Problem 3
 \begin{problem}
-  Find the full asymptotic expansion of $\int_0^x \text{Bi}(t) dt$ as $x \to +\infty$.
+  Find the full asymptotic expansion of $\int_0^x \bairy(t) dt$ as $x \to +\infty$.
 \end{problem}
 
 \begin{proof}
+  Note that for $x\to + \infty$, the integral above can be written as
+  \begin{align}\label{bairy_eqn}
+    \int_0^x \bairy(t) dt = \int_0^1 \bairy(t) dt + \int_1^x \bairy(t) dt
+  \end{align}
+  Thus, the asymptotic expansion of the integral depends only on the second integral on the right.
+  The Airy function $\bairy(t)$ satisfies the differential equation $y'' = ty$. Using this differential equation and integrating
+  the integral on the right by parts we see that
+  \begin{align*}
+    \int_1^x \bairy(t) dt &= \int_1^x \frac{1}{t}\bairy''(t) dt \\
+    &= \frac{1}{x}\bairy'(x) - \bairy'(1) + \int_1^x \frac{1}{t^2} \bairy'(t) dt.
+  \end{align*}
+  Note that it is clear that as $x\to + \infty$ the following relations hold
+  \begin{align*}
+    \bairy'(1) &\ll \frac{1}{x}\bairy'(x)\\
+    \int_0^1 \bairy(t)dt &\ll \int_0^x \bairy(t)dt.
+  \end{align*}
+  Thus, from equation \eqref{bairy_eqn} and the above relations, we have that as $x\to + \infty$
+  \begin{align}\label{double_asym}
+    \int_0^x \bairy(t) dt \sim \frac{1}{x}\bairy'(x) + \int_1^x \frac{1}{t^2} \bairy'(t) dt.
+  \end{align}
+  However, upon further investigation we see that as $x \to +\infty$
+  \begin{align}\label{lhosp}
+    \int_1^x \frac{1}{t^2} \bairy'(t) dt \ll \frac{1}{x}\bairy'(x).
+  \end{align}
+  To see that this is true, we integrate the integral on the left by parts which yields
+  \begin{align*}
+    f(x) = \int_1^x \frac{1}{t^2} \bairy'(t) dt = x^{-2}\bairy(x) - \bairy(1) + 2\int_{1}^x t^{-3}\bairy(t)dt.
+  \end{align*}
+  In comparing the function $f(x)$ with the function $g(x) = x^{-1}\bairy'(x)$ as $x \to +\infty$, we see that
+  \begin{align*}
+    \lim_{x\to+\infty} \frac{f(x)}{g(x)} = \frac{+\infty}{+\infty}
+  \end{align*}
+  an indeterminate form. Thus, applying L\rq H\^opital's rule, we see that derivatives of $f(x)$ and $g(x)$ are
+  \begin{align*}
+    f'(x) &= -2x^{-3}\bairy(x) + x^{-2}\bairy'(x) + 2\left[x^{-3}\bairy(x) - \bairy(1) \right] \\
+    &= x^{-2}\bairy'(x) - 2 \bairy(1) \\
+    g'(x) &= -x^{-2}\bairy'(x) + x^{-1}\bairy''(x)
+  \end{align*}
+  and that
+  \begin{align*}
+    \lim_{x\to + \infty}\frac{f'(x)}{g'(x)} =\frac{x^{-2}\bairy'(x) -2\bairy(1)}{-x^{-2}\bairy'(x) + x^{-1}\bairy''(x)} = \frac{1}{1 + \frac{x^{-1}\bairy''(x)}{x^{-2}\bairy'(x)}} = 0
+  \end{align*}
+  Therefore, we must have that relation \eqref{lhosp} is true and that relation \eqref{double_asym} reduces to
+  \begin{align*}
+    \int_0^x \bairy(t) dt \sim \frac{1}{x}\bairy'(x) \qquad (x \to +\infty).
+  \end{align*}
+  Note that the asymptotic expansion of $\bairy(x)$ as $x \to +\infty$ is given by
+  \begin{align*}
+    \bairy(x) \sim \pi^{-1/2}x^{-1/4} \exp{\left(\frac{2x^{3/2}}{3}\right)} \sum_{n=0}^\infty c_n x^{-3n/2}
+  \end{align*}
+  where
+  \begin{align*}
+    c_n = \frac{1}{2\pi}\left(\frac{3}{4}\right)^n \frac{\Gamma(n + 5/6)\Gamma(n + 1/6)}{n!}.
+  \end{align*}
+  Thus, we readily see that as $x \to +\infty$,
+  \begin{align*}
+    \bairy'(x) &\sim \pi^{-1/2}\exp{\left(\frac{2x^{3/2}}{3}\right)}\left[\left(x^{3/2} - \frac{1}{4}\right)x^{-5/4} \sum_{n=0}^{\infty}c_n x^{-3n/2}  + x^{-1/4}\sum_{n=0}^{\infty}\frac{-3n c_n}{2} x^{-3n/2 - 1}\right] \\
+    &= \pi^{-1/2}\exp{\left(\frac{2x^{3/2}}{3}\right)}\left(x^{3/2} + \frac{3}{4}\right)\sum_{n=0}^{\infty}\left(1 - \frac{3n}{2}\right)c_n x^{-3n/2-5/4}.
+  \end{align*}
+  Therefore, we can readily see that the full asymptotic behavior as $x \to +\infty$ of the integral of the problem is given by
+  \begin{align*}
+    \int_0^x \bairy(t) dt \sim     \frac{\bairy'(x)}{x} \sim \pi^{-1/2}\exp{\left(\frac{2x^{3/2}}{3}\right)}\left(x^{3/2} + \frac{3}{4}\right)\sum_{n=0}^{\infty}\left(1 - \frac{3n}{2}\right)c_n x^{-3n/2-9/4}.
+  \end{align*}
 \end{proof}
 \newpage
 
