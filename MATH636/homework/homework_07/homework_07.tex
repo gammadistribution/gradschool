@@ -56,6 +56,53 @@
 \end{problem}
 
 \begin{proof}
+  For the following theorems, we assume $(N\text{-}\max)$ has the following form
+  \begin{align*}
+    \begin{array}{rrll}
+      (N\text{-}\max) & \text{maximize} & f(\vc{x}) & \\
+      & \text{subject to} & \vc{h}(\vc{x}) &= \vc{0} \\
+      & & \vc{g}(\vc{x}) &\leq \vc{0} \\
+    \end{array}
+  \end{align*}
+  where $f:\mathbb{R}^n\to\mathbb{R}$, $\vc{h}:\mathbb{R}^n \to \mathbb{R}^m$, and $\vc{g}:\mathbb{R}^n \to \mathbb{R}^p$ with $m \leq n$.
+  Additionally, define the following Lagrangian function to be
+  $\vc{L}(\vc{x}, \vc{\lambda}, \vc{\mu}) := f(\vc{x}) - \vc{\lambda}^\tran\vc{h}(\vc{x}) - \vc{\mu}^\tran\vc{g}(\vc{x})$.
+
+  \begin{theorem}[KKT-FONC for $(N\text{-}\max)$]
+    Let $f$, $\vc{g}$, $\vc{h} \in C^1$ and let
+    $\vc{x}^*$ be a regular point and local maximizer for the problem $(N\text{-}\max)$. Then,
+    there exist $\vc{\lambda}^*\in\mathbb{R}^m$
+    and $\vc{\mu}^* \in \mathbb{R}^p$ such that:
+    \begin{enumerate}[label=\roman*.]
+      \item $\vc{\mu}^* \geq \vc{0}.$
+      \item $D_x\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*) = Df(\vc{x}^*) - \vc{\lambda}^{*\tran}D\vc{h}(\vc{x}^*) - \vc{\mu}^{*\tran}D\vc{g}(\vc{x}^*)= \vc{0}^\tran$.
+      \item $\mu^{*\tran}\vc{g}(\vc{x}^*) = 0$.
+    \end{enumerate}
+  Note that there are no explicit first-order conditions that are sufficient
+  in general to show optimality.
+  \end{theorem}
+
+  \begin{theorem}[KKT-SONC for $(N\text{-}\max)$]
+    Let $f$, $\vc{g}$, $\vc{h} \in C^2$ and let
+    $\vc{x}^*$ be a regular point and local maximizer for the problem $(N\text{-}\max)$. Then,
+    there exist $\vc{\lambda}^*\in\mathbb{R}^m$
+    and $\vc{\mu}^* \in \mathbb{R}^p$ such that:
+    \begin{enumerate}[label=\roman*.]
+      \item $\vc{\mu}^* \geq \vc{0}, D_x\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*) = \vc{0}^\tran, \mu^{*\tran}\vc{g}(\vc{x}^*) = 0$.
+      \item For all $\vc{y}\in T(\vc{x}^*)$, we have that $\vc{y}^\tran D_x^2\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*)\vc{y} \leq 0$.
+    \end{enumerate}
+  \end{theorem}
+
+  \begin{theorem}[KKT-SOSC for $(N\text{-}\max)$]
+    Let $f$, $\vc{g}$, $\vc{h} \in C^2$ and suppose there exists a feasible point
+    $\vc{x}^*$ and vectors $\vc{\lambda}^*\in\mathbb{R}^m$
+    and $\vc{\mu}^* \in \mathbb{R}^p$ such that:
+    \begin{enumerate}[label=\roman*.]
+      \item $\vc{\mu}^* \geq \vc{0}, D_x\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*) = \vc{0}^\tran, \mu^{*\tran}\vc{g}(\vc{x}^*) = 0$.
+      \item For all $\vc{y}\in T(\vc{x}^*)$, we have that $\vc{y}^\tran D_x^2\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*)\vc{y} < 0$.
+    \end{enumerate}
+    Then $\vc{x}^*$ is a strict local maximizer for the problem $(N\text{-}\max)$.
+  \end{theorem}
 \end{proof}
 \newpage
 
