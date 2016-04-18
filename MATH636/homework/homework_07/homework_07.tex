@@ -388,20 +388,17 @@
       \frac{\partial f(\vc{x})}{\partial x_m} + \sum_{i=1}^m \mu_i h_i(\vc{x}) \frac{\partial h_i(\vc{x})}{\partial x_m}
     \end{bmatrix}^\tran.
   \end{align*}
-  The KKT condition for the equivalent problem can be stated as $\vc{x}^*$ is a local minimizer if
+  Suppose that $f, \vc{h} \in C^1$ and $\vc{x}^*$ is a feasible regular point and a local minimizer.
+  Then the KKT condition for the equivalent problem can be stated as
+  there exists $\vc{\mu}^{*} \in \mathbb{R}^m$ such that
   \begin{enumerate}[label=\roman*.]
-    \item The functions $f, \vc{h} \in C^1$.
-    \item The point $\vc{x}^*$ is a regular point.
-    \item There exist $\vc{\mu}^{*} \in \mathbb{R}^m$ such that
-      \begin{enumerate}
-        \item $\vc{\mu}^* \geq \vc{0}$.
-        \item $D_{\vc{x}}L(\vc{x}^*,\vc{\mu}^*) = 0$.
-        \item $\vc{\mu}^{*\tran}\frac{1}{2}\norm{\vc{h}(\vc{x}^*)}^2 = \mu_1 h_1(\vc{x})^2 + \dots + \mu_m h_m(\vc{x})^2 =0.$
-      \end{enumerate}
+    \item $\vc{\mu}^* \geq \vc{0}$.
+    \item $D_{\vc{x}}L(\vc{x}^*,\vc{\mu}^*) = 0$.
+    \item $\vc{\mu}^{*\tran}\frac{1}{2}\norm{\vc{h}(\vc{x}^*)}^2 = \mu_1 h_1(\vc{x})^2 + \dots + \mu_m h_m(\vc{x})^2 =0.$
   \end{enumerate}
 
   The KKT condition may not be applied here since no feasible point is also a regular point. To see why this
-  is true, assume the point $\vc{x}$ is feasible. Then $(1/2)\norm{\vc{h}(\vc{x})}^2 \leq \vc{0}$ or
+  is true, assume the point $\vc{x}$ is feasible. Then $(1/2)\norm{\vc{h}(\vc{x})}^2 \leq 0$ or
   \begin{align*}
     h_1(\vc{x})^2 + \dots + h_m(\vc{x})^2 \leq 0.
   \end{align*}
