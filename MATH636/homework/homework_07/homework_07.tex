@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{nth}
 \usepackage{fancyhdr}
 \usepackage{tikz}
 \usepackage{mathrsfs}
@@ -66,7 +67,7 @@
   \end{align*}
   where $f:\mathbb{R}^n\to\mathbb{R}$, $\vc{h}:\mathbb{R}^n \to \mathbb{R}^m$, and $\vc{g}:\mathbb{R}^n \to \mathbb{R}^p$ with $m \leq n$.
   Additionally, define the following Lagrangian function to be
-  $\vc{L}(\vc{x}, \vc{\lambda}, \vc{\mu}) := f(\vc{x}) - \vc{\lambda}^\tran\vc{h}(\vc{x}) - \vc{\mu}^\tran\vc{g}(\vc{x})$.
+  $\vc{L}(\vc{x}, \vc{\lambda}, \vc{\mu}) := -f(\vc{x}) + \vc{\lambda}^\tran\vc{h}(\vc{x}) + \vc{\mu}^\tran\vc{g}(\vc{x})$.
 
   \begin{theorem}[KKT-FONC for $(N\text{-}\max)$]
     Let $f$, $\vc{g}$, $\vc{h} \in C^1$ and let
@@ -75,7 +76,7 @@
     and $\vc{\mu}^* \in \mathbb{R}^p$ such that:
     \begin{enumerate}[label=\roman*.]
       \item $\vc{\mu}^* \geq \vc{0}.$
-      \item $D_x\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*) = Df(\vc{x}^*) - \vc{\lambda}^{*\tran}D\vc{h}(\vc{x}^*) - \vc{\mu}^{*\tran}D\vc{g}(\vc{x}^*)= \vc{0}^\tran$.
+      \item $D_{\vc{x}}\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*) = - Df(\vc{x}^*) + \vc{\lambda}^{*\tran}D\vc{h}(\vc{x}^*) + \vc{\mu}^{*\tran}D\vc{g}(\vc{x}^*)= \vc{0}^\tran$.
       \item $\mu^{*\tran}\vc{g}(\vc{x}^*) = 0$.
     \end{enumerate}
   Note that there are no explicit first-order conditions that are sufficient
@@ -88,8 +89,8 @@
     there exist $\vc{\lambda}^*\in\mathbb{R}^m$
     and $\vc{\mu}^* \in \mathbb{R}^p$ such that:
     \begin{enumerate}[label=\roman*.]
-      \item $\vc{\mu}^* \geq \vc{0}, D_x\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*) = \vc{0}^\tran, \mu^{*\tran}\vc{g}(\vc{x}^*) = 0$.
-      \item For all $\vc{y}\in T(\vc{x}^*)$, we have that $\vc{y}^\tran D_x^2\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*)\vc{y} \leq 0$.
+      \item $\vc{\mu}^* \geq \vc{0}$, $D_{\vc{x}}\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*) = \vc{0}^\tran$, $\mu^{*\tran}\vc{g}(\vc{x}^*) = 0$.
+      \item For all $\vc{y}\in T(\vc{x}^*) = \{\vc{y}\ |\ D\vc{h}(\vc{x}^*)\vc{y}=\vc{0}, Dg_j(\vc{x}^*)\vc{y} = 0, j \in J(\vc{x}^*)\}$, we have that $\vc{y}^\tran D_{\vc{x}}^2\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*)\vc{y} \leq 0$.
     \end{enumerate}
   \end{theorem}
 
@@ -98,8 +99,12 @@
     $\vc{x}^*$ and vectors $\vc{\lambda}^*\in\mathbb{R}^m$
     and $\vc{\mu}^* \in \mathbb{R}^p$ such that:
     \begin{enumerate}[label=\roman*.]
-      \item $\vc{\mu}^* \geq \vc{0}, D_x\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*) = \vc{0}^\tran, \mu^{*\tran}\vc{g}(\vc{x}^*) = 0$.
-      \item For all $\vc{y}\in T(\vc{x}^*)$, we have that $\vc{y}^\tran D_x^2\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*)\vc{y} < 0$.
+      \item $\vc{\mu}^* \geq \vc{0}$, $D_x\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*) = \vc{0}^\tran$, $\mu^{*\tran}\vc{g}(\vc{x}^*) = 0$.
+      \item For all
+        \begin{align*}
+          \vc{y}\in \widetilde{T}(\vc{x}^*, \vc{\mu}^*) = \{\vc{y}\ |\ D\vc{h}(\vc{x}^*)\vc{y} = \vc{0}, Dg_i(\vc{x}^*)\vc{y} = 0, \text{for $i \in \{i\ |\ g_i(\vc{x}^*) = 0, \mu_i^* > 0\}$}\},
+        \end{align*}
+        with $\vc{y} \neq \vc{0}$, we have that $\vc{y}^\tran D_{\vc{x}}^2\vc{L}(\vc{x}^*, \vc{\lambda}^*, \vc{\mu}^*)\vc{y} < 0$.
     \end{enumerate}
     Then $\vc{x}^*$ is a strict local maximizer for the problem $(N\text{-}\max)$.
   \end{theorem}
@@ -120,6 +125,99 @@
 \end{problem}
 
 \begin{proof}
+  We begin by rewriting the above problem as follows:
+  \begin{align*}
+    \begin{array}{rrl}
+      (N\text{-}\min) & \text{minimize} & f(\vc{x}) = x_1^2 + 6x_1x_2 -4x_1 -2x_2\\
+      & \text{subject to} & g_1(\vc{x}) = x_1^2 + 2x_2 -1 \leq 0\\
+      & & g_2(\vc{x}) = 2x_1 -2x_2 - 1 \leq 0.
+    \end{array}
+  \end{align*}
+  We proceed by using the KKT-FONC to determine the possible local minimizers for this problem.
+  The Lagrangian associated to this problem is given by
+  \begin{align*}
+    \vc{L}(\vc{x}, \vc{\mu})
+    &= f(\vc{x}) + \vc{\mu}^\tran \vc{g(x)} \\
+    &= f(\vc{x}) + \mu_1 g_1(\vc{x}) + \mu_2 g_2(\vc{x}) \\
+    &= x_1^2 + 6x_1x_2 -4x_1 -2x_2 + \mu_1(x_1^2 + 2x_2 -1) + \mu_2(2x_1 -2x_2 - 1).
+  \end{align*}
+  This implies that
+  \begin{align}\label{dx}
+    D_xL(\vc{x}, \vc{\mu}) =
+    \begin{bmatrix}
+      2x_1 + 6x_2 - 4 + 2\mu_1x_1 + 2\mu_2\\
+      6x_1 - 2 + 2\mu_1 -2\mu_2
+    \end{bmatrix}^\tran
+    =
+    \begin{bmatrix}
+      0 \\
+      0
+    \end{bmatrix}^\tran.
+  \end{align}
+  Thus, the KKT-FONC are then written as
+  \begin{enumerate}[label=\roman*.]
+    \item $\mu_1, \mu_2 \geq 0$.
+    \item $2x_1 + 6x_2 - 4 + 2\mu_1x_1 + 2\mu_2 = 0$.
+    \item $6x_1 - 2 + 2\mu_1 -2\mu_2 = 0$.
+    \item $\mu_1 g_1(\vc{x}) + \mu_2 g_2(\vc{x})  = \mu_1(x_1^2 + 2x_2 -1) + \mu_2(2x_1 -2x_2 - 1) = 0$.
+    \item $g_1(\vc{x}) = x_1^2 + 2x_2 -1 \leq 0$.
+    \item $g_2(\vc{x}) = 2x_1 -2x_2 - 1 \leq 0$.
+  \end{enumerate}
+  Solving the system \eqref{dx} for $x_1, x_2$ yields that
+  \begin{align}\label{x_def}
+    x_1 &= \frac{\mu_2-\mu_1+1}{3} \notag\\
+    x_2 &=\frac{\mu_1^2-\mu_1\mu_2-4\mu_2+5}{9}
+  \end{align}
+  with $\mu_1, \mu_2\geq 0$. Using these representations of $x_1, x_2$ we see that condition iv.\
+  yields three possible solutions in terms of $\mu_1, \mu_2$:
+  \begin{align*}
+    \text{Case 1}&: \mu_2 = \frac{13 + 12 \mu_1 + 6 \mu_1^2 - \sqrt{169 + 200 \mu_1 + 388 \mu_1^2}}{2 (14 + 3 \mu_1)}\\
+    \text{Case 2}&: \mu_2 = \frac{13 + 12 \mu_1 + 6 \mu_1^2 + \sqrt{169 + 200 \mu_1 + 388 \mu_1^2}}{2 (14 + 3 \mu_1)}\\
+    \text{Case 3}&: \mu_1 = -\frac{14}{3},\ \mu_2 = -\frac{3220}{789}
+  \end{align*}
+  We readily see that Case 3 cannot happen in light of condition i.
+
+  Assuming Case 1 is true and using the representations of $x_1, x_2$ in \eqref{x_def},
+  we see that $g_1(\vc{x}) < 0$ for $\mu_1, \mu_2 \geq 0$ implying that this constraint is inactive and that $\mu_1 = 0$.
+  This implies that $\mu_2 = 0$ which in turn implies that $x_1 = 1/3$, $x_2 =  5/9$.
+  However, $g_1(x_1,x_2) = 2/9 \nleq 0$ violating condition v. Thus, Case 1 cannot happen.
+
+  Assuming Case 2 is true and using the representations of $x_1, x_2$ in \eqref{x_def},
+  we again see that $g_1(\vc{x}) < 0$ for $\mu_1, \mu_2 \geq 0$ implying that this constraint is inactive and that $\mu_1 = 0$.
+  This implies that $\mu_2 = 13/14$ which in turn implies that $x_1 = 9/14$, $x_2 =  1/7$.
+  These values of $x_1, x_2$ satisfy conditions v.\ and vi.
+
+  Therefore, the only vector $\vc{x}^*$ that satisfies conditions
+  i.\ - vi., i.e.\ the only possible local minimizer for this problem is
+  \begin{align*}
+    \vc{x}^* = \begin{bmatrix}9/14 \\ 1/7\end{bmatrix}
+  \end{align*}
+  with associated KKT multiplier
+  \begin{align*}
+    \vc{\mu}^* = \begin{bmatrix}0 \\ 13/14\end{bmatrix}.
+  \end{align*}
+
+  To verify whether or not this vector is a strict local minimizer, we check the KKT-SOSC.
+  For the vectors $\vc{x}^*$ and $\vc{\mu}^*$ defined above, we see that $\{i\ |\ g_i(\vc{x}^*) = 0, \mu_i^* > 0\} = \{2\}$ and that
+  \begin{align*}
+    \widetilde{T}(\vc{x}^*, \vc{\mu}^*) &= \{\vc{y}\in\mathbb{R}^2 \ |\ Dg_2(\vc{x}^*)\vc{y} = 0\} \\
+    &= \{\vc{y}\in\mathbb{R}^2 \ |\ [2, -2]\vc{y} = 0\} \\
+    &= \{\vc{y} = [y_1, y_2]^\tran\in\mathbb{R}^2 \ |\ y_1 = y_2\}.
+  \end{align*}
+  Further, we have, for these vectors, that
+  \begin{align*}
+    D_{\vc{x}}^2L(\vc{x}^*, \vc{\mu}^*) = \begin{bmatrix}2 + 2\mu_1 & 6 \\ 6 & 0 \end{bmatrix} = \begin{bmatrix}2 & 6 \\ 6 & 0 \end{bmatrix}.
+  \end{align*}
+  Combining we see that for $\vc{0}\neq\vc{y}\in\widetilde{T}(\vc{x}^*, \vc{\mu}^*)$, we have that
+  \begin{align*}
+    \vc{y}^\tran D_{\vc{x}}^2L(\vc{x}^*, \vc{\mu}^*) \vc{y} =
+    \begin{bmatrix}y_1 \\ y_1\end{bmatrix}^\tran
+    \begin{bmatrix}2 & 6 \\ 6 & 0 \end{bmatrix}
+    \begin{bmatrix}y_1 \\ y_1\end{bmatrix}
+    = 14 y_1^2 > 0
+  \end{align*}
+  for $y_1 \neq 0$. Therefore, $\vc{x}^* = [9/14, 1/7]^\tran$ is
+  a strict local minimizer.
 \end{proof}
 \newpage
 
