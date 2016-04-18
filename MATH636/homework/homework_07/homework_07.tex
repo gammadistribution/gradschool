@@ -143,7 +143,7 @@
   \end{align*}
   This implies that
   \begin{align}\label{dx}
-    D_xL(\vc{x}, \vc{\mu}) =
+    D_{\vc{x}}L(\vc{x}, \vc{\mu}) =
     \begin{bmatrix}
       2x_1 + 6x_2 - 4 + 2\mu_1x_1 + 2\mu_2\\
       6x_1 - 2 + 2\mu_1 -2\mu_2
@@ -236,15 +236,110 @@
       \end{array}
     \end{array}
   \end{align*}
-  Let $x^* = [0, 0]$.
+  Let $\vc{x}^* = [0, 0]^\tran$.
   \begin{enumerate}
-    \item Does $x^*$ satisfy the KKT-FONC for minimization or maximization? What are the KKT
+    \item Does $\vc{x}^*$ satisfy the KKT-FONC for minimization or maximization? What are the KKT
       multipliers?
-    \item Does $x^*$ satisfy the KKT-SOSC? Justify your answer.
+    \item Does $\vc{x}^*$ satisfy the KKT-SOSC? Justify your answer.
   \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  We begin by rewriting the problem $(N)$ as
+  \begin{align*}
+    \begin{array}{rll}
+      (N_1) & \text{minimize $($maximize$)$} & f(\vc{x}) =(x_1 - 2)^2 + (x_2 -1)^2 \\
+      & \text{subject to} &
+      \begin{array}{ll}
+        g_1(\vc{x}) = -x_2 + x_1^2 &\leq 0\\
+        g_2(\vc{x}) = -2 + x_1 + x_2 &\leq 0 \\
+        g_3(\vc{x}) = -x_1 &\leq 0.
+      \end{array}
+    \end{array}
+  \end{align*}
+  For both problems, the vector $\vc{x}^*=[0,0]^\tran$ is a regular point. To see this, we note that
+  $\vc{x}^*$ is feasible and the constraints $g_1(\vc{x}^*)\leq 0$ and $g_3(\vc{x}^*) \leq 0$ are both active for this vector. Since
+  $\triangledown g_1(\vc{x}^*) = [0,-1]^\tran$ and $\triangledown g_3(\vc{x}^*) = [-1,0]^\tran$ are linearly independent,
+  we have that $\vc{x}^*$ is a regular point as desired.
+
+  The Lagrangian function associated to problem $(N_1\text{-min})$ is given by
+  \begin{align*}
+    L_{\min}(\vc{x}, \vc{\mu}) &= f(\vc{x}) + \mu_1g_1(\vc{x)} + \mu_2 g_2(\vc{x}) +\mu_3 g_3(\vc{x})\\
+    &= (x_1 - 2)^2 + (x_2 -1)^2 + \mu_1(-x_2 + x_1^2) + \mu_2(-2 + x_1 + x_2) + \mu_3(-x_1)
+  \end{align*}
+  while the Lagrangian associated to the problem $(N_1\text{-max})$ is given by
+  \begin{align*}
+    L_{\max}(\vc{x}, \vc{\mu}) &= -f(\vc{x}) + \mu_1g_1(\vc{x)} + \mu_2 g_2(\vc{x}) +\mu_3 g_3(\vc{x})\\
+    &= -(x_1 - 2)^2 - (x_2 -1)^2 + \mu_1(-x_2 + x_1^2) + \mu_2(-2 + x_1 + x_2) + \mu_3(-x_1).
+  \end{align*}
+
+  \begin{enumerate}
+    \item Note that for problem $(N_1\text{-min})$, we have that
+      \begin{align*}
+        D_{\vc{x}}L_{\min}(\vc{x}, \vc{\mu}) =
+        \begin{bmatrix}
+          2 (x_1-2)+ 2\mu_1 x_1 + \mu_2 -\mu_3\\
+          2 (x_2 - 1) + \mu_2 -\mu_1
+        \end{bmatrix}^\tran,
+      \end{align*}
+      while for the problem $(N_1\text{-max})$, we have that
+      \begin{align*}
+        D_{\vc{x}}L_{\max}(\vc{x}, \vc{\mu}) =
+        \begin{bmatrix}
+          -2 (x_1-2)+ 2\mu_1 x_1 + \mu_2 -\mu_3 \\
+          -2 (x_2 - 1) + \mu_2 -\mu_1
+        \end{bmatrix}^\tran.
+      \end{align*}
+
+      The KKT-FONC for problem $(N_1\text{-min})$ then require that the following conditions hold
+      \begin{enumerate}[label=\roman* a.]
+        \item $\mu_1, \mu_2, \mu_3 \geq 0$.
+        \item $2 (x_1-2)+ 2\mu_1 x_1 + \mu_2 -\mu_3 = 0$.
+        \item $2 (x_2 - 1) + \mu_2 -\mu_1 = 0$.
+        \item $\mu_1 g_1(\vc{x}) + \mu_2 g_2(\vc{x}) + \mu_3 g_3(\vc{x}) = \mu_1(-x_2 + x_1^2) + \mu_2(-2 + x_1 + x_2) + \mu_3(-x_1) = 0$.
+        \item $g_1(\vc{x}) = -x_2 + x_1^2 \leq 0$.
+        \item $g_2(\vc{x}) = -2 + x_1 + x_2 \leq 0$.
+        \item $g_2(\vc{x}) = -x_1 \leq 0$.
+      \end{enumerate}
+      while the KKT-FONC for problem $(N_1\text{-max})$ require that the following similar conditions hold
+      \begin{enumerate}[label=\roman* b.]
+        \item $\mu_1, \mu_2, \mu_3 \geq 0$.
+        \item $-2 (x_1-2)+ 2\mu_1 x_1 + \mu_2 -\mu_3 = 0$.
+        \item $-2 (x_2 - 1) + \mu_2 -\mu_1 = 0$.
+        \item $\mu_1 g_1(\vc{x}) + \mu_2 g_2(\vc{x}) + \mu_3 g_3(\vc{x}) = \mu_1(-x_2 + x_1^2) + \mu_2(-2 + x_1 + x_2) + \mu_3(-x_1) = 0$.
+        \item $g_1(\vc{x}) = -x_2 + x_1^2 \leq 0$.
+        \item $g_2(\vc{x}) = -2 + x_1 + x_2 \leq 0$.
+        \item $g_2(\vc{x}) = -x_1 \leq 0$.
+      \end{enumerate}
+      Now suppose that $\vc{x}^* = [0,0]^\tran$. For both problems, since $\vc{x}^*$ is a
+      regular point, conditions v a.\ - vii a.\ and v b.\ - vii b.\ are satisfied.
+      Also, for both problems, since the constraint $g_2(\vc{x}^*)$ is inactive we have that
+      by condition iv a.\ and iv b.\ that $\mu_2 = 0$.
+
+      For the problem $(N_1\text{-min})$, conditions
+      ii a.\ and iii a.\ imply that $\mu_2 - \mu_3 = -\mu_3 = 4$ and $\mu_2 - \mu_1 = -\mu_1 = 2$
+      or that $\mu_1 = -2$, $\mu_2 = 0$, and $\mu_3 = -4$. However, this violates condition i a.\
+      so the point $\vc{x}^*$ does not satisfy the KKT-FONC for the problem $(N_1\text{-min})$.
+
+      For the problem $(N_1\text{-min})$, conditions
+      ii a.\ and iii a.\ imply that $\mu_2 - \mu_3 = -\mu_3 = -4$ and $\mu_2 - \mu_1 = -\mu_1 = -2$
+      or that $\mu_1 = 2$, $\mu_2 = 0$, and $\mu_3 = 4$. Therefore, the vector $\vc{x}^* = [0,0]^\tran$
+      satisfies the KKT-FONC for the problem $(N_1\text{-max})$ with associated KKT multiplier $\vc{\mu}^* = [2,0,4]^\tran$.
+    \item We now check to see if $\vc{x}^* = [0,0]^\tran$ satisfies the KKT-SOSC for the problem $(N_1\text{-max})$.
+      Note that for $\vc{x}^*=[0,0]^\tran$, we have that
+      \begin{align*}
+        D_{\vc{x}}^2L_{\max}(\vc{x}^*, \vc{\mu}^*) = \begin{bmatrix}-2 + 2\mu_1 & 0 \\ 0 & -2 \end{bmatrix} = \begin{bmatrix}2 & 0 \\ 0 & -2 \end{bmatrix}.
+      \end{align*}
+      We also see that for the vectors $\vc{x}^*$ and $\vc{\mu}^*$ defined above, $\{i\ |\ g_i(\vc{x}^*) = 0, \mu_i^* > 0\} = \{1,3\}$, and that
+      \begin{align*}
+        \widetilde{T}(\vc{x}^*, \vc{\mu}^*) &= \{\vc{y}\in\mathbb{R}^2 \ |\ Dg_1(\vc{x}^*)\vc{y} = 0, Dg_3(\vc{x}^*)\vc{y} = 0\} \\
+        &= \{\vc{y}\in\mathbb{R}^2 \ |\ [0, -1]\vc{y} = 0, [-1, 0]\vc{y} = 0\} \\
+        &= \{\vc{0}\in\mathbb{R}^2\}.
+      \end{align*}
+
+      Therefore, we trivially have that the second condition in the KKT-SOSC is satisfied
+      and $\vc{x}^{*} = [0,0]^\tran$ is a strict local maximizer.
+  \end{enumerate}
 \end{proof}
 \newpage
 
