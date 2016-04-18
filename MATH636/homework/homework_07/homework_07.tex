@@ -341,7 +341,7 @@
       and $\vc{x}^{*} = [0,0]^\tran$ is a strict local maximizer.
   \end{enumerate}
 \end{proof}
-\newpage
+
 
 
 % Problem 4
@@ -365,6 +365,68 @@
 \end{problem}
 
 \begin{proof}
+  Assume $f:\mathbb{R}^n\to\mathbb{R}$ and $\vc{h}:\mathbb{R}^n \to \mathbb{R}^m$ with $m \leq n$.
+  The Lagrangian associated to the equivalent problem is given by
+  \begin{align*}
+    L(\vc{x}, \vc{\mu}) &= f(\vc{x}) + \frac{1}{2}\vc{\mu}^\tran\norm{\vc{h}(\vc{x})}^2 \\
+    &= f(\vc{x})+ \frac{\mu_1}{2}h_1(\vc{x})^2 + \dots + \frac{\mu_m}{2}h_m(\vc{x})^2.
+  \end{align*}
+  From this we readily see that
+  \begin{align*}
+    D_{\vc{x}}L(\vc{x},\vc{\mu}) =
+    \begin{bmatrix}
+      \frac{\partial f(\vc{x})}{\partial x_1} + \mu_1 h_1(\vc{x}) \frac{\partial h_1(\vc{x})}{\partial x_1} + \dots + \mu_m h_m(\vc{x}) \frac{\partial h_m(\vc{x})}{\partial x_1}\\
+      \frac{\partial f(\vc{x})}{\partial x_2} + \mu_1 h_1(\vc{x}) \frac{\partial h_1(\vc{x})}{\partial x_2} + \dots + \mu_m h_m(\vc{x}) \frac{\partial h_m(\vc{x})}{\partial x_2}\\
+      \vdots \\
+      \frac{\partial f(\vc{x})}{\partial x_m} + \mu_1 h_1(\vc{x}) \frac{\partial h_1(\vc{x})}{\partial x_m} + \dots + \mu_m h_m(\vc{x}) \frac{\partial h_m(\vc{x})}{\partial x_m}\\
+    \end{bmatrix}^\tran
+    =
+    \begin{bmatrix}
+      \frac{\partial f(\vc{x})}{\partial x_1} + \sum_{i=1}^m \mu_i h_i(\vc{x}) \frac{\partial h_i(\vc{x})}{\partial x_1}\\
+      \frac{\partial f(\vc{x})}{\partial x_2} + \sum_{i=1}^m \mu_i h_i(\vc{x}) \frac{\partial h_i(\vc{x})}{\partial x_2}\\
+      \vdots\\
+      \frac{\partial f(\vc{x})}{\partial x_m} + \sum_{i=1}^m \mu_i h_i(\vc{x}) \frac{\partial h_i(\vc{x})}{\partial x_m}
+    \end{bmatrix}^\tran.
+  \end{align*}
+  The KKT condition for the equivalent problem can be stated as $\vc{x}^*$ is a local minimizer if
+  \begin{enumerate}[label=\roman*.]
+    \item The functions $f, \vc{h} \in C^1$.
+    \item The point $\vc{x}^*$ is a regular point.
+    \item There exist $\vc{\mu}^{*} \in \mathbb{R}^m$ such that
+      \begin{enumerate}
+        \item $\vc{\mu}^* \geq \vc{0}$.
+        \item $D_{\vc{x}}L(\vc{x}^*,\vc{\mu}^*) = 0$.
+        \item $\vc{\mu}^{*\tran}\frac{1}{2}\norm{\vc{h}(\vc{x}^*)}^2 = \mu_1 h_1(\vc{x})^2 + \dots + \mu_m h_m(\vc{x})^2 =0.$
+      \end{enumerate}
+  \end{enumerate}
+
+  The KKT condition may not be applied here since no feasible point is also a regular point. To see why this
+  is true, assume the point $\vc{x}$ is feasible. Then $(1/2)\norm{\vc{h}(\vc{x})}^2 \leq \vc{0}$ or
+  \begin{align*}
+    h_1(\vc{x})^2 + \dots + h_m(\vc{x})^2 \leq 0.
+  \end{align*}
+  This implies that $h_i(\vc{x}) = 0$ for $1\leq i \leq m$. Hence, the constraint is active for this
+  problem. Note that
+  \begin{align*}
+    \bigtriangledown \frac{1}{2}\norm{\vc{h}(\vc{x})}^2 =
+    \begin{bmatrix}
+      h_1(\vc{x}) \frac{\partial h_1(\vc{x})}{\partial x_1} + \dots + h_m(\vc{x}) \frac{\partial h_m(\vc{x})}{\partial x_1}\\
+      h_1(\vc{x}) \frac{\partial h_1(\vc{x})}{\partial x_2} + \dots + h_m(\vc{x}) \frac{\partial h_m(\vc{x})}{\partial x_2}\\
+      \vdots \\
+      h_1(\vc{x}) \frac{\partial h_1(\vc{x})}{\partial x_m} + \dots + h_m(\vc{x}) \frac{\partial h_m(\vc{x})}{\partial x_m}\\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \sum_{i=1}^m h_i(\vc{x}) \frac{\partial h_i(\vc{x})}{\partial x_1}\\
+      \sum_{i=1}^m h_i(\vc{x}) \frac{\partial h_i(\vc{x})}{\partial x_2}\\
+      \vdots\\
+      \sum_{i=1}^m h_i(\vc{x}) \frac{\partial h_i(\vc{x})}{\partial x_m}
+    \end{bmatrix}.
+  \end{align*}
+  From this we clearly see that since $h_i(\vc{x}) = 0$ for $1\leq i \leq m$, we have that
+  $\bigtriangledown \frac{1}{2}\norm{\vc{h}(\vc{x})}^2 = \vc{0}$ or that the vector
+  $\bigtriangledown \frac{1}{2}\norm{\vc{h}(\vc{x})}^2$ is linearly dependent. Therefore, no feasible point is regular
+  and the KKT condition is not applicable.
 \end{proof}
 
 
