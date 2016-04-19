@@ -311,15 +311,45 @@
   \end{align*}
   which is in the form needed to apply Laplace's method.
   Identifying the functions $f(s) = 1$ and $\phi(s) = -2^{-2/3}s-2^{1/3}s^{-1/2}$, we see that $\phi(s)$ is maximal when $s=1$ so that it is only
-  in a small neighborhood of this point that contributes to the integral. Thus, for small $\epsilon > 0$,
+  in a small neighborhood of this point that contributes to the integral. Thus, for small $\epsilon > 0$, we have that as $x \to +\infty$,
   \begin{align*}
     I(x) &\sim \left(\frac{x}{2}\right)^{2/3}\int_{1-\epsilon}^{1+\epsilon} \exp\left[ \left(-2^{-2/3}s-2^{1/3}s^{-1/2}\right)x^{2/3}\right]ds \qquad (x\to +\infty) \\
-    &\sim \left(\frac{x}{2}\right)^{2/3}\int_{1-\epsilon}^{1+\epsilon} \exp\left[ \left(-\frac{3}{2^{2/3}}-\frac{3(s-1)^2}{2\cdot2^{5/3}} + \frac{15(s-1)^3}{6\cdot2^{8/3}} - \frac{105(s-1)^4}{24\cdot2^{11/3}} \right)x^{2/3}\right]ds \qquad (x\to +\infty).
+    &\sim \left(\frac{x}{2}\right)^{2/3}\int_{1-\epsilon}^{1+\epsilon} \exp\left[ \left(-\frac{3}{2^{2/3}}-\frac{3(s-1)^2}{2\cdot2^{5/3}} + \frac{15(s-1)^3}{6\cdot2^{8/3}} - \frac{105(s-1)^4}{24\cdot2^{11/3}} \right)x^{2/3}\right]ds \\
+    &= \left(\frac{x}{2}\right)^{2/3}e^{-\frac{3x^{2/3}}{2^{2/3}}}\int_{1-\epsilon}^{1+\epsilon} \exp\left[ -\frac{3(s-1)^2}{2\cdot2^{5/3}}x^{2/3}\right]\exp\left[\left(\frac{15(s-1)^3}{6\cdot2^{8/3}} - \frac{105(s-1)^4}{24\cdot2^{11/3}} \right)x^{2/3}\right]ds
   \end{align*}
   where we have replaced $\phi(s)$ with the approximation
   \begin{align*}
     \phi(s) &\sim \phi(1) + \frac{\phi''(1)(s-1)^2}{2} + \frac{\phi^{(3)}(1)(s-1)^3}{6} + \frac{\phi^{(4)}(1)(s-1)^4}{24} \qquad (x \to +\infty).
   \end{align*}
+  Note for small $\epsilon$, we can expand the right exponential in a power series centered at one so that as $x \to +\infty$
+  \begin{align*}
+    \exp\left[ \left(\frac{15(s-1)^3}{6\cdot2^{8/3}} - \frac{105(s-1)^4}{24\cdot2^{11/3}} \right)x^{2/3}\right] \sim 1 + x^{2/3}\left(\frac{15(s-1)^3}{6\cdot2^{8/3}} - \frac{105(s-1)^4}{24\cdot2^{11/3}} \right) + x^{4/3}\frac{225(s-1)^6}{72\cdot 2^{16/3}}.
+  \end{align*}
+  Thus, as $x \to +\infty$, the integral above reduces to
+  \begin{align*}
+    I(x) \sim \left(\frac{x}{2}\right)^{2/3}e^{-\frac{3x^{2/3}}{2^{2/3}}}\int_{1-\epsilon}^{1+\epsilon} \exp\left[ -\frac{3(s-1)^2}{2\cdot2^{5/3}}x^{2/3}\right]\left[1 - x^{2/3}\frac{105(s-1)^4}{24\cdot2^{11/3}} + x^{4/3}\frac{225(s-1)^6}{72\cdot 2^{16/3}}\right]ds
+  \end{align*}
+  where we have dropped the term associated to $(s-1)^3$ since it will integrate to 0 over the interval $[1-\epsilon, 1+\epsilon]$. To evaluate
+  this integral we substitute $u = x^{1/3}(s-1)$ and extend the range of the integral over the entire real line so that, as $x \to +\infty$,
+  \begin{align*}
+    I(x) \sim \left(\frac{x}{2}\right)^{2/3} \frac{1}{x^{1/3}}e^{-\frac{3x^{2/3}}{2^{2/3}}} \int_{-\infty}^{\infty} \exp\left[ -\frac{3u^2}{2\cdot2^{5/3}}\right]\left[1 + \frac{1}{x^{2/3}}\left(- \frac{105 u^4}{24\cdot2^{11/3}} + \frac{225u^6}{72\cdot 2^{16/3}}\right)\right]du.
+  \end{align*}
+  It can be shown using integration by parts that
+  \begin{align*}
+    \int_{-\infty}^\infty e^{-s^2/2}s^{2n}ds = \sqrt{2\pi}(2n-1)\cdots(5)(3)(1).
+  \end{align*}
+  Thus, making the substitution $w=\sqrt{3/2^{5/3}}u$ we see that $dw = \sqrt{3/2^{5/3}}du$ and that for $n>0$
+  \begin{align*}
+    \int_{-\infty}^\infty \exp\left[ -\frac{3u^2}{2\cdot2^{5/3}}\right]u^{2n}du
+    &= \frac{1}{\sqrt{3/2^{5/3}}}\int_{-\infty}^\infty \exp\left[-\frac{w^2}{2}\right]\left(\frac{w}{\sqrt{3/2^{5/3}}}\right)^{2n}dw \\
+    &= \frac{1}{(3/2^{5/3})^{n+1/2}}\int_{-\infty}^\infty \exp\left[-\frac{w^2}{2}\right]w^{2n}dw \\
+    &= \frac{\sqrt{2\pi}(2n-1)\cdots(5)(3)(1)}{{(3/2^{5/3})^{n+1/2}}}.
+  \end{align*}
+  Therefore, as $x\to+\infty$,
+  \begin{align*}
+    I(x) \sim \left(\frac{x}{2}\right)^{2/3} \frac{1}{x^{1/3}}e^{-\frac{3x^{2/3}}{2^{2/3}}} \left[\frac{\sqrt{2\pi}}{{(3/2^{5/3})^{1/2}}} + \frac{1}{x^{2/3}}\left(- \frac{105\cdot3\sqrt{2\pi}}{24\cdot2^{11/3}(3/2^{5/3})^{5/2}} + \frac{225\cdot15\sqrt{2\pi}}{72\cdot 2^{16/3}(3/2^{5/3})^{7/2}}\right)\right].
+  \end{align*}
+
 \end{proof}
 \newpage
 
