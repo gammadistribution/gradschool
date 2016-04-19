@@ -383,6 +383,71 @@
 \end{problem}
 
 \begin{proof}
+  Let $f(x, t) : = \exp\left[-t - \frac{x}{\sqrt{t}}\right]=\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right]$ for $(x, t) \in (a, b) \times [0, \infty) := I \times J$.
+  Note that since the function $f(s) = e^{-s}$ is monotonically
+  decreasing and for $x\in(a,b)$ we have that $t + \frac{a}{\sqrt{t}} \leq t + \frac{x}{\sqrt{t}}$, the function $f(x,t)$ satisfies
+  \begin{align}
+    \left|f(x,t)\right| \leq \exp\left[-\left(t + \frac{a}{\sqrt{t}}\right)\right] = g(t).
+  \end{align}
+  For similar reasons, we see that
+  \begin{align}\label{g1_def}
+    \left|\partial_x f(x,t)\right| = (1/\sqrt{t})\left|f(x,t)\right| \leq (1/\sqrt{t})\exp\left[-\left(t + \frac{a}{\sqrt{t}}\right)\right] = g_1(t).
+  \end{align}
+  Since both $g(t)$ and $g_1(t)$ are both integrable on $J$, we have that the assumptions of the above theorem are satisfied and
+  \begin{align}\label{step_1}
+    \frac{d}{dx} \int_0^\infty \exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right] dt = -\int_0^\infty t^{-1/2}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right] dt.
+  \end{align}
+
+  Now suppose that
+  \begin{align*}
+    f_1(x,t) = \frac{d}{dx} \int_0^\infty \exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right] dt.
+  \end{align*}
+  By relations \eqref{g1_def} and \eqref{step_1}, we see that
+  \begin{align*}
+    \left|f_1(x,t)\right| &\leq \int_0^\infty \left|t^{-1/2}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right]\right| dt \\
+    &\leq \int_0^\infty g_1(t) dt  = g_2(t)
+  \end{align*}
+  Similarly, we see that
+  \begin{align*}
+    \partial_x f_1(x,t) &= -\frac{\partial}{\partial x} \int_0^\infty t^{-1/2}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right] dt \\
+    &= t^{-1}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right].
+  \end{align*}
+  Using a similar reasoning as used above, we note that
+  \begin{align}\label{g3_def}
+    \left|\partial_x f_1(x,t)\right| &\leq \left|t^{-1}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right]\right| \notag \\
+    &\leq t^{-1}\exp\left[-\left(t + \frac{a}{\sqrt{t}}\right)\right]  = g_3(t).
+  \end{align}
+  Since $g_2(t)$ and $g_3(t)$ are both integrable on $J$, we have that
+  \begin{align}\label{step_2}
+    \frac{d^2}{dx^2} \int_0^\infty \exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right] dt = \int_0^\infty t^{-1}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right] dt.
+  \end{align}
+
+  Finally suppose that
+  \begin{align*}
+    f_2(x,t) = \frac{d^2}{dx^2} \int_0^\infty \exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right] dt.
+  \end{align*}
+  By relations \eqref{g3_def} and \eqref{step_2}, we see that
+  \begin{align*}
+    \left|f_2(x,t)\right| &\leq \int_0^\infty \left|t^{-1}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right]\right| dt \\
+    &\leq \int_0^\infty g_3(t) dt  = g_4(t)
+  \end{align*}
+  Similarly, we see that
+  \begin{align*}
+    \partial_x f_1(x,t) &= \frac{\partial}{\partial x} \int_0^\infty t^{-1}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right] dt \\
+    &= -t^{-3/2}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right].
+  \end{align*}
+  Using a similar reasoning as used above, we note that
+  \begin{align*}
+    \left|\partial_x f_1(x,t)\right| &\leq \left|t^{-1}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right]\right| \\
+    &\leq t^{-1}\exp\left[-\left(t + \frac{a}{\sqrt{t}}\right)\right]   = g_3(t).
+  \end{align*}
+  Since $g_2(t)$ and $g_3(t)$ are both integrable on $J$, we have that
+  \begin{align*}
+    \frac{d^3}{dx^3} \int_0^\infty \exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right] dt = -\int_0^\infty t^{-3/2}\exp\left[-\left(t + \frac{x}{\sqrt{t}}\right)\right] dt.
+  \end{align*}
+  Therefore, we have now shown part (a).
+
+  Did not finish.
 \end{proof}
 \newpage
 
@@ -392,15 +457,62 @@
   \begin{enumerate}
     \item Find the leading behavior as $x\to + \infty$ of Laplace integrals of the form
       \begin{align*}
-        \int_a^b (t-a) ^\alpha g(t) e^{x\phi(t)} dt
+        I(x) = \int_a^b (t-a) ^\alpha g(t) e^{x\phi(t)} dt
       \end{align*}
-      where $\phi(t)$ has a maximum at $t = a$, $g(a) = 1$. Suppose further that $\alpha > -1$ and $\phi'(a) < 0$.
+      where $\phi(t)$ has a maximum at $t = a$, $g(a) = 1$ and that $\alpha > -1$ and $\phi'(a) < 0$.
     \item Repeat the analysis of part (a) when $\alpha > -1$
       and $\phi'(a) = \phi''(a) = \dots = \phi^{(p-1)}(a) = 0$ and $\phi^{(p)}(a) < 0$.
   \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  Let $f(t) = (t-a) ^\alpha g(t)$ and suppose $\phi(t)$ has a maximum at $t = a$.
+  Then we have by Laplace's method that as $x \to \infty$, for small $\epsilon$,
+  \begin{align*}
+    I(x) \sim \int_{a}^{a+\epsilon}f(t)e^{x\phi(t)}dt.
+  \end{align*}
+  Since $\phi'(a) < 0$, we can approximate $\phi(t)$ by $\phi(a) + (t-a)\phi'(a)$. Thus,
+  as $x \to \infty$,
+  \begin{align*}
+    I(x) \sim \int_{a}^{a+\epsilon}f(t)e^{x\phi(a) + x(t-a)\phi'(a)}dt.
+  \end{align*}
+  Note $f(a) = 0$, however, the contribution to the integral outside the interval $a\leq t \leq a +\epsilon$
+  is subdominant for any $\epsilon > 0$, so we approximate as $t\to a^+$ by $f(t) \sim t^\alpha g(t)$.
+  Since $\phi'(a) < 0$, we have that for $a\leq t \leq a +\epsilon$ that $-x\phi'(a) > 0$ which implies that
+  \begin{align*}
+    \int_{a}^{\infty}e^{x(t-a)\phi'(a)}dt = -\frac{1}{x\phi'(a)}
+  \end{align*}
+  so that as $x\to \infty$
+  \begin{align*}
+    I(x) &\sim a^\alpha e^{x\phi(a)} \int_{a}^{a+\epsilon}e^{x(t-a)\phi'(a)}dt \sim a^\alpha e^{x\phi(a)} \int_{a}^{\infty}e^{x(t-a)\phi'(a)}dt \sim -\frac{a^\alpha e^{x\phi(a)}}{x\phi'(a)}.
+  \end{align*}
+
+  Now suppose that $\phi'(a) = \phi''(a) = \dots = \phi^{(p-1)}(a) = 0$ and $\phi^{(p)}(a) < 0$. Then we approximate $\phi(t)$ by
+  \begin{align*}
+    \phi(t) \sim \phi(a) + \frac{(t-a)^p\phi^{(p)}(a)}{p!}.
+  \end{align*}
+  By Laplace's method we have that as $x \to \infty$, for small $\epsilon$,
+  \begin{align*}
+    I(x) \sim \int_{a}^{a+\epsilon}f(t)e^{x\phi(t)}dt \sim \int_{a}^{a+\epsilon}f(t)e^{x\phi(a) + x\frac{(t-a)^p\phi^{(p)}(a)}{p!}}dt.
+  \end{align*}
+  Note $f(a) = 0$, however, the contribution to the integral outside the interval $a\leq t \leq a +\epsilon$
+  is subdominant for any $\epsilon > 0$, so we approximate as $t\to a^+$ by $f(t) \sim t^\alpha g(t)$ so that
+  as $x\to \infty$
+  \begin{align*}
+    I(x) &\sim a^\alpha e^{x\phi(a)} \int_{a}^{a+\epsilon}e^{x\frac{(t-a)^p\phi^{(p)}(a)}{p!}}dt \sim a^\alpha e^{x\phi(a)} \int_{a}^{\infty}e^{x\frac{(t-a)^p\phi^{(p)}(a)}{p!}}dt
+  \end{align*}
+  Since $\phi^{(p)}(a) < 0$, we have that for $a\leq t \leq a +\epsilon$ that $-\frac{x\phi^{(p)}(a)}{p!} > 0$ which implies that
+  as $x\to \infty$,
+  \begin{align*}
+    \int_{a}^{\infty} e^{x\frac{(t-a)^p\phi^{(p)}(a)}{p!}}dt &= \left(\int_{0}^{\infty} - \int_{0}^{a} \right)e^{x\frac{(t-a)^p\phi^{(p)}(a)}{p!}}dt\\
+    &\sim -\frac{p!}{x\phi^{(p)}(a)}\frac{1}{p}\left(\frac{x\phi^{(p)}(a)}{p!}\right)^{-1/p} \Gamma\left(\frac{1}{p}\right)\\
+    &= -\frac{(p-1)!\Gamma\left(\frac{1}{p}\right)}{x\phi^{(p)}(a)}\left(\frac{x\phi^{(p)}(a)}{p!}\right)^{-1/p} .
+  \end{align*}
+  Therefore, as $x\to \infty$
+  \begin{align*}
+    I(x)  \sim a^\alpha e^{x\phi(a)} \int_{a}^{\infty}e^{x\frac{(t-a)^p\phi^{(p)}(a)}{p!}}dt \sim -a^\alpha e^{x\phi(a)}  \frac{(p-1)!\Gamma\left(\frac{1}{p}\right)}{x\phi^{(p)}(a)}\left(\frac{x\phi^{(p)}(a)}{p!}\right)^{-1/p}.
+  \end{align*}
+
 \end{proof}
 \newpage
 
