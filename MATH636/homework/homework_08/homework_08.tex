@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{nth}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\newcommand{\vc}[1]{\boldsymbol{#1}}
+
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right]
+}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\grstep}[2][\relax]{%
+   \ensuremath{\mathrel{
+       {\mathop{\longrightarrow}\limits^{#2\mathstrut}_{
+                                     \begin{subarray}{l} #1 \end{subarray}}}}}}
+\newcommand{\swap}{\leftrightarrow}
+\newcommand{\tran}{\mathsf{T}}
+\newtheorem{theorem}{Theorem}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 7}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 7}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Write at least two necessary conditions and at least two sufficient conditions for
+  a function $f$ to be concave.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  Let $S \subset \mathbb{R}^n$ be a convex set and let $\vc{x}^* \in S$. Prove that a vector
+  $\vc{d} \in \mathbb{R}^n$ is a feasible direction at $\vc{x}^*$ (relative to $S$) if and only
+  there exists $t_0 > 0$ such that $\vc{x}^* + t_0 \vc{d} \in S$ with $\vc{d} \neq \vc{0}$.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 3
+\begin{problem}
+  Recall that
+  \begin{align*}
+    \max\{\alpha, \beta\} :=
+    \begin{cases}
+      \alpha & \text{if $\alpha \geq \beta$} \\
+      \beta & \text{if $\alpha < \beta$} \\
+    \end{cases}.
+  \end{align*}
+  Given two convex functions $f_1: \mathbb{R}^n \to \mathbb{R} \cup \{+\infty\}$
+  and $f_2: \mathbb{R}^n \to \mathbb{R} \cup \{+\infty\}$, prove that for
+  $\vc{x} \in \mathbb{R}^n$, the function
+  \begin{align*}
+    f(\vc{x}) := \max\{f_1(\vc{x}), f_2(\vc{x})\}
+  \end{align*}
+  is convex.
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 4
+\begin{problem}
+  Consider the pair of linear programming problems in asymmetric duality:
+  \begin{align*}
+    \begin{array}{ll}
+      \begin{array}{rrl}
+        (P_a) & \text{minimize} & f(\vc{x}) = \vc{c}^\tran\vc{x} \\
+        & \text{subject to} & A\vc{x} = \vc{b} \\
+        & & \vc{x} \geq \vc{0} \\
+      \end{array}
+      &
+      \begin{array}{rrl}
+        (D_a) & \text{maximize} & F(\vc{\lambda}) = \vc{\lambda}^\tran\vc{b} \\
+        & \text{subject to} & \vc{\lambda}^\tran A \leq \vc{c}^\tran \\
+        & & \\
+      \end{array}
+    \end{array}
+  \end{align*}
+  \begin{enumerate}
+    \item Prove that $(D_a)$ is a convex programming problem.
+    \item Write the KKT conditions for $(D_a)$.
+    \item Suppose that $\vc{x}^*$ is feasible for $(P_a)$ and $\vc{\lambda}^*$ is
+      feasible for $(D_a)$. Use the KKT conditions to prove that if $(\vc{c}^\tran - \vc{\lambda}^{*\tran}A)\vc{x}^* = 0$,
+      then $\vc{\lambda}^*$ is optimal for $(D_a)$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+
+
+\end{document}
