@@ -53,10 +53,32 @@
 % Problem 1
 \begin{problem}
   Write at least two necessary conditions and at least two sufficient conditions for
-  a function $f$ to be concave.
+  a function $f: \mathbb{R}^n \to \mathbb{R}$ to be concave.
 \end{problem}
 
 \begin{proof}
+  By definition, a function $f: \mathbb{R}^n \to \mathbb{R}$ is concave over the convex
+  set $\Omega \subset \mathbb{R}^n$ if $-f$ is convex over $\Omega$. This
+  definition will allow us to obtain results for concave functions by replacing
+  $f$ with $-f$ in previously obtained results concerning convex functions.
+
+  Using this definition and Theorem 22.2, we see that the condition that if for all
+  $\alpha \in (0, 1)$ and for all $\vc{x}, \vc{y} \in \Omega$, we have that
+  \begin{align*}
+    f(\alpha\vc{x} + (1-\alpha)\vc{y}) \geq \alpha f(\vc{x}) + (1-\alpha)f(\vc{y})
+  \end{align*}
+  is a necessary and sufficient condition for $f$ to be concave on the convex set $\Omega$.
+
+  Further, if the function $f$ is $\mathcal{C}^1$-smooth, we see from the above definition and Theorem 22.4 that the condition that
+  if for all $\vc{x}, \vc{y} \in \Omega$, we have that
+  \begin{align*}
+    f(\vc{x}) \leq f(\vc{y}) + D f(\vc{x}) (\vc{x} - \vc{y})
+  \end{align*}
+  is a necessary and sufficient condition for $f$ to be concave on the open convex set $\Omega$.
+
+  Going one last step further, if the function $f$ is $\mathcal{C}^2$-smooth, we see from the above definition and Theorem
+  22.5 that the condition that if for all $\vc{x}\in\Omega$, the Hessian matrix $\vc{F}(\vc{x})$ of $f$ at $\vc{x}$ is a negative semi-definite matrix
+  is a necessary and sufficient condition for $f$ to be concave on the open convex set $\Omega$.
 \end{proof}
 \newpage
 
