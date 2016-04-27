@@ -35,12 +35,12 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{Homework Assignment 7}
+\rhead{Homework Assignment 8}
 \lhead{Matthew Tiger}
 \cfoot{\thepage}
 
 
-\title{Homework Assignment 7}
+\title{Homework Assignment 8}
 \author{Matthew Tiger}
 
 
@@ -115,6 +115,41 @@
 \end{problem}
 
 \begin{proof}
+  Note that it is clear that the set $\mathbb{R}^n$ is convex. Therefore, the
+  function $f(\vc{x}) := \max\{f_1(\vc{x}), f_2(\vc{x})\}$ is convex if for all
+  $\alpha \in (0, 1)$ and for all $\vc{x}, \vc{y} \in \mathbb{R}^n$ we have that
+  \begin{align}\label{convex_ineq}
+    f(\alpha\vc{x} + (1-\alpha)\vc{y}) \leq \alpha f(\vc{x}) + (1-\alpha)f(\vc{y}).
+  \end{align}
+
+  If either $f(\vc{x}) = +\infty$ or $f(\vc{y}) = +\infty$, then for all
+  $\alpha \in (0, 1)$ and for all $\vc{x}, \vc{y} \in \mathbb{R}^n$ we see that
+  $\alpha f(\vc{x}) + (1-\alpha)f(\vc{y}) = + \infty$ and inequality \eqref{convex_ineq}
+  holds showing the convexity of $f$ in this case.
+
+  Now suppose that both $f(\vc{x})$ and $f(\vc{y})$ are finite. Without loss of generality,
+  we may assume that at the point $\alpha\vc{x} + (1-\alpha)\vc{y}$, we have that
+  the max of $f_1$ and $f_2$ at that point occurs at $f_1$, i.e.\
+  \begin{align*}
+    f(\alpha\vc{x} + (1-\alpha)\vc{y})
+    &= \max\{f_1(\alpha\vc{x} + (1-\alpha)\vc{y}), f_2(\alpha\vc{x} + (1-\alpha)\vc{y})\} \\
+    &= f_1(\alpha\vc{x} + (1-\alpha)\vc{y}).
+  \end{align*}
+  Then, due to the convexity of $f_1$, we have that for all $\alpha \in (0, 1)$ and for all $\vc{x}, \vc{y} \in \mathbb{R}^n$,
+  \begin{align*}
+    f_1(\alpha\vc{x} + (1-\alpha)\vc{y}) \leq \alpha f_1(\vc{x}) + (1-\alpha)f_1(\vc{y}).
+  \end{align*}
+  From the above definition of max, we readily see that
+  \begin{align*}
+    \alpha f_1(\vc{x}) + (1-\alpha)f_1(\vc{y})
+    &\leq \alpha \max\{f_1(\vc{x}), f_2(\vc{x})\} + (1-\alpha)\max\{f_1(\vc{y}), f_2(\vc{y})\} \\
+    &=\alpha f(\vc{x}) + (1-\alpha) f(\vc{y}).
+  \end{align*}
+  Therefore, combining, we have that for all $\alpha \in (0, 1)$ and for all $\vc{x}, \vc{y} \in \mathbb{R}^n$,
+  \begin{align*}
+    f(\alpha\vc{x} + (1-\alpha)\vc{y}) = f_1(\alpha\vc{x} + (1-\alpha)\vc{y}) \leq \alpha f(\vc{x}) + (1-\alpha) f(\vc{y})
+  \end{align*}
+  showing that inequality \eqref{convex_ineq} holds and that the function $f$ is convex.
 \end{proof}
 \newpage
 
