@@ -92,7 +92,29 @@
 
 \begin{proof}
   Suppose first that the vector $\vc{d} \in \mathbb{R}^n$ is a feasible
-  direction at $\vc{x}^*$ (relative to $S$)
+  direction at $\vc{x}^*$ (relative to $S$). By definition, the vector
+  $\vc{d}$ is a feasible direction at $\vc{x}^*\in S$ if there exists
+  $t_0 > 0$ such that $\vc{x}^* + t \vc{d} \in S$ for all $t \in [0, t_0]$
+  with $\vc{d} \neq \vc{0}$. Thus, choosing $t=t_0$, we have by the above definition that there
+  exists $t_0 > 0$ such that $\vc{x}^* + t_0\vc{d} \in S$ with $\vc{d} \neq \vc{0}$, proving the first implication.
+
+  Now suppose that there exists $t_0 > 0$ such that $\vc{x}^* + t_0 \vc{d} \in S$
+  with $\vc{d} \neq \vc{0}$. Since $S$ is convex and $\vc{x}^* \in S$, any convex combination
+  of $\vc{x}^*$ and $\vc{x}^* + t_0 \vc{d}$ will also be in $S$, i.e.\ for all
+  $\alpha \in [0, 1]$, we have that
+  \begin{align*}
+    \alpha \vc{x}^* + (1-\alpha)(\vc{x}^* + t_0 \vc{d}) = \vc{x}^* + (1-\alpha)t_0 \vc{d} \in S.
+  \end{align*}
+  Since $t_0 > 0$, we have that the following two sets are equal:
+  \begin{align*}
+    \{(1-\alpha)t_0 \ | \ 0 \leq \alpha \leq 1\} = \{ t \ |\ 0 \leq t \leq t_0\}.
+  \end{align*}
+  Thus, if $\vc{x}^* + (1-\alpha)t_0 \vc{d} \in S$ for all $\alpha \in [0, 1]$, then
+  $\vc{x}^* + t \vc{d} \in S$ for all $t \in [0, t_0]$. Therefore, if
+  $\vc{x}^* \in S$ with $S$ a convex set and there exists $t_0 > 0$ such that
+  $\vc{x}^* + t_0 \vc{d} \in S$ with $\vc{d} \neq \vc{0}$, then
+  $\vc{x}^* + t \vc{d} \in S$ for all $t \in [0, t_0]$, i.e.\
+  the vector $\vc{d}$ is a feasible direction at $\vc{x}^*$ (relative to $S$).
 \end{proof}
 \newpage
 
