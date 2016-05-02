@@ -206,6 +206,54 @@
 \end{problem}
 
 \begin{proof}
+  For the problem above, we assume that $\vc{x} \in \mathbb{R}^n$ and that $A$ is an $m \times n$
+  matrix with $m < n$. This implies that $\vc{\lambda} \in \mathbb{R}^m$.
+  \begin{enumerate}
+    \item Note that $(D_a)$ is a convex programming problem if the
+      constraint set
+      $$\Omega = \{\vc{\lambda} \in \mathbb{R}^m \ |\ \vc{\lambda}^\tran A \leq \vc{c}^\tran\}$$
+      is a convex set and if $F: \Omega \to \mathbb{R}^m \cup \{+\infty\}$ where
+      $F(\vc{\lambda}) := \vc{\lambda}^\tran \vc{b}$ is a convex function.
+
+      It is straight-forward to show that $\Omega$ is a convex set. Let $\vc{x}, \vc{y} \in \Omega$ be given.
+      Then $\vc{x}^\tran A \leq \vc{c}^\tran, \vc{y}^\tran A \leq \vc{c}^\tran$ and for all $\alpha \in [0,1]$
+      \begin{align*}
+        \alpha \vc{x}^\tran A \leq \alpha \vc{c}^\tran \quad \text{and} \quad (1 -\alpha)\vc{y}^\tran A \leq (1-\alpha)\vc{c}^\tran.
+      \end{align*}
+      Thus, for all $\alpha \in [0, 1]$
+      \begin{align*}
+        (\alpha\vc{x}^\tran + (1-\alpha)\vc{y}^\tran)A = \alpha \vc{x}^\tran A + (1-\alpha)\vc{y}^\tran A \leq \alpha \vc{c}^\tran + (1-\alpha)\vc{c}^\tran = \vc{c}^\tran,
+      \end{align*}
+      i.e.\ the convex combination $\alpha\vc{x} + (1-\alpha)\vc{y} \in \Omega$ and that $\Omega$ is a convex set.
+
+      Since $F$ is a linear function, it is of course convex showing that the problem $(D_a)$ is a convex programming problem.
+    \item The KKT conditions for the convex programming problem $(D_a)$ are stated below:
+
+      If the function $F \in \mathcal{C}^1$ is a convex function on the convex set of feasible points
+      \begin{align*}
+        \Omega = \{\vc{\lambda}\in \mathbb{R}^m\ |\ \vc{\lambda}^\tran A \leq \vc{c}^\tran \} = \{\vc{\lambda} \in \mathbb{R}^m \ | \ \vc{g}(\vc{\lambda}) = A^\tran \vc{\lambda} - \vc{c} \leq \vc{0}\}
+      \end{align*}
+      where $\vc{g} \in \mathcal{C}^1$ and
+      if there exists $\vc{\lambda}^* \in \Omega$, $\vc{\mu}^* \in \mathbb{R}^n$ such that
+      \begin{enumerate}[label = \roman*]
+        \item $\vc{\mu}^* \geq \vc{0}$.
+        \item $-D F(\vc{\lambda}^*) + \vc{\mu}^{*\tran}D \vc{g}(\vc{\lambda}^*) = -\vc{b}^\tran + \vc{\mu}^{*\tran}A^\tran = \vc{0}^\tran$.
+        \item $\vc{\mu}^{*\tran}\vc{g}(\vc{\lambda}) = \vc{\mu}^{*\tran} (A^\tran \vc{\lambda}^* - \vc{c})= (\vc{\lambda}^{*\tran} A - \vc{c}^\tran)\vc{\mu}^{*}  = 0$.
+      \end{enumerate}
+      then $\vc{\lambda}^*$ is a global maximizer of $F$ over $\Omega$.
+    \item Suppose that $\vc{x}^*$ is feasible for $(P_a)$ and $\vc{\lambda}^*$
+      is feasible for $(D_a)$ and that $(\vc{c}^\tran - \vc{\lambda}^{*\tran}A)\vc{x}^* = 0$. Since $\vc{\lambda}^*$ is feasible for $(D_a)$, we know that $\vc{\lambda}^* \in \Omega$.
+      Choose $\vc{\mu}^* = \vc{x}^*$. Then $\vc{\mu}^*$ satisfies the KKT conditions above, which we will now demonstrate.
+
+      Since $\vc{x}^*$ is feasible for $(P_a)$, condition i.\ is readily seen to be true and since $A\vc{x}^* = \vc{b}$ or $\vc{b} - A\vc{x}^* = \vc{0}$, we see that
+      \begin{align*}
+        \vc{0}^\tran = \vc{b}^{*\tran} - (A\vc{x}^*)^\tran = \vc{b}^{*\tran} - \vc{x}^{*\tran}A^\tran = \vc{b}^{*\tran} - \vc{\mu}^{*\tran}A^\tran
+      \end{align*}
+      or that $-\vc{b}^{*\tran} + \vc{\mu}^{*\tran}A^\tran = \vc{0}^\tran$ and condition ii.\ is satisfied.
+      Since by assumption we have that $(\vc{c}^\tran - \vc{\lambda}^{*\tran}A)\vc{x}^* = (\vc{c}^\tran - \vc{\lambda}^{*\tran}A)\vc{\mu}^* =0$, we see
+      also that $(\vc{\lambda}^{*\tran}A - \vc{c}^\tran)\vc{\mu}^* = 0$ and condition iii.\ is satisfied.
+      Therefore, since $\vc{\lambda}^*$ and $\vc{\mu}^*$ both satisfy the KKT conditions stated above, $\vc{\lambda}^*$ is optimal for $(D_a)$.
+  \end{enumerate}
 \end{proof}
 
 
