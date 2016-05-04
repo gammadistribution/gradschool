@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+\usepackage{breqn}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+\newcommand{\bairy}{\text{Bi}}
+\newenvironment{case}{%
+  \let\olditem\item%
+  \renewcommand\item[1][]{\olditem \textbf{##1} \\}%
+  \begin{enumerate}[label=\textbf{Case \arabic*:},itemindent=*,leftmargin=0em]}{\end{enumerate}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 5}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 5}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\begin{problem}
+  Use the method of stationary phase to find the leading behavior of the following
+  integral as $x\to +\infty$:
+  \begin{align*}
+    \int_0^1 e^{ixt^2}\cosh t^2 dt.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 2
+\begin{problem}
+  Use second-order perturbation theory to find approximations to the roots of the following equation:
+  \begin{align*}
+    x^3 + \varepsilon x^2 - x = 0.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 3
+\begin{problem}
+  Analyze in the limit $\varepsilon \to 0$ the roots of the polynomial
+  \begin{align*}
+    \varepsilon x^8 - \varepsilon^2 x^6 + x -2 = 0.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 4
+\begin{problem}
+  Solve perturbatively
+  \begin{align*}
+    \begin{cases}
+      y'' = (\sin x)y &\\
+      y(0) = 1 &\\
+      y'(0) = 1
+    \end{cases}.
+  \end{align*}
+  Is the resulting perturbation series uniformly valid for $0\leq x \leq \infty$? Why?
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 5
+\begin{problem}
+  Find leading-order uniform asymptotic approximations to the solution of the
+  following equation in the limit $\varepsilon \to 0^+$:
+  \begin{align*}
+    &\varepsilon y'' + (x^2 + 1)y' - x^3y=0 \\
+    &y(0) = 1,\ y(1) = 1.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 6
+\begin{problem}
+  Obtain a uniform approximation accurate to order $\varepsilon ^2$ as $\varepsilon \to 0^+$
+  for the problem
+  \begin{align*}
+      &\varepsilon y'' + (1+x)^2 y' + y = 0 \\
+      &y(0) = 1,\ y(1) = 1.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+% Problem 7
+\begin{problem}
+  For what real values of the constant $\alpha$ does the singular perturbation
+  problem
+  \begin{align*}
+    &\varepsilon y''(x) + y'(x) - x^\alpha y(x) = 0  \\
+    &y(0) = 1,\ y(1) = 1.
+  \end{align*}
+  have a solution with a boundary layer near $x=0$ as $\varepsilon \to 0^+$?
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+\end{document}
