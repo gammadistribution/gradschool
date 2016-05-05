@@ -96,6 +96,51 @@
 \end{problem}
 
 \begin{proof}
+  If we assume that the roots of the above equation are functions of $\varepsilon$,
+  then the roots $x_i$ for $i=0,1,2$ of the equation are of the form
+  \begin{align*}
+    x_i(\varepsilon) = \sum_{k=0}^\infty a_{i_k} \varepsilon ^k.
+  \end{align*}
+  Second-order perturbation theory prescribes that the roots are of the form
+  $$x_i(\varepsilon) = a_{i_0} + a_{i_1} \varepsilon + a_{i_2} \varepsilon^2 + O(\varepsilon^3)$$
+  where we disregard terms of order $\varepsilon^3$ or greater. Substituting $\varepsilon = 0$
+  into the equation yields the new equation $x^-3 -x = 0$, the roots of which are $-1, 0$, and $1$
+  which we will say correspond to the coefficients $a_{0_0} = -1, a_{1_0} = 0, $ and $a_{2_0} = 1$.
+
+  In order to find the values of the coefficients $a_{i_k}$ for $k \geq 1$, we substitute the expression
+  $x_i(\varepsilon) = a_{i_0} + a_{i_1} \varepsilon + a_{i_2} \varepsilon^2 + O(\varepsilon^3)$ into the original equation
+  yielding
+  \begin{align*}
+    a_{i_0}^3-a_{i_0} + (a_{i_0}^2  -a_{i_1} + 3a_{i_0}^2a_{i_1})\varepsilon + (2a_{i_0}a_{i_1} + 3a_{i_0}a_{i_1}^2 - a_{i_2} + 3a_{i_0}^2a_{i_2})\varepsilon^2 = O(\varepsilon^3).
+  \end{align*}
+  Since $\varepsilon$ is variable we must have that the coefficients of $\varepsilon$ in the above equation are 0.
+  This yields two equations for each root:
+  \begin{align*}
+    a_{i_0}^2  -a_{i_1} + 3a_{i_0}^2a_{i_1} &= 0 \\
+    2a_{i_0}a_{i_1} + 3a_{i_0}a_{i_1}^2 - a_{i_2} + 3a_{i_0}^2a_{i_2} &= 0.
+  \end{align*}
+  For the root $x_0$, we have that $a_{0_0} = -1$ and the two equations become
+  \begin{align*}
+    (-1)^2  -a_{0_1} + 3(-1)^2a_{0_1} &= 0 \\
+    -2a_{0_1} - 3a_{0_1}^2 - a_{0_2} + 3(-1)^2a_{0_2} &= 0.
+  \end{align*}
+  The first equation yields that $a_{0_1} = -1/2$ and substituting into the second
+  equation yields that $a_{0_2} = -1/8$. Thus, $x_0 = -1 + (-1/2)\varepsilon + (-1/8)\varepsilon^2 + O(\varepsilon^3)$.
+
+  For the root $x_1 = 0$, we see that $a_{1_0} = 0$ and consequently from the equations that $a_{1_1} = 0$ and $a_{1_2} = 0$. Thus,
+  $x_1 = 0 + 0\varepsilon + 0\varepsilon^2 + O(\varepsilon^3)$.
+
+  Proceeding in the same way above we see for the root $x_2$, we have that $a_{2_0} = 1$ and the above two
+  equations become
+  \begin{align*}
+    (1)^2  -a_{2_1} + 3(1)^2a_{2_1} &= 0 \\
+    2a_{2_1} + 3a_{2_1}^2 - a_{2_2} + 3(1)^2a_{2_2} &= 0.
+  \end{align*}
+  The first equation yields that $a_{2_1} = -1/2$ and substituting into the second
+  equation yields that $a_{2_2} = 1/8$. Therefore,   $x_2 = 1 + (-1/2)\varepsilon + (1/8)\varepsilon^2 + O(\varepsilon^3)$
+  and we have found second-order approximations for all of the roots of the original equation.
+
+
 \end{proof}
 \newpage
 
