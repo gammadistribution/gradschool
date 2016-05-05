@@ -39,11 +39,50 @@
   Use the method of stationary phase to find the leading behavior of the following
   integral as $x\to +\infty$:
   \begin{align*}
-    \int_0^1 e^{ixt^2}\cosh t^2 dt.
+    I(x) = \int_0^1 e^{ixt^2}\cosh t^2 dt.
   \end{align*}
 \end{problem}
 
 \begin{proof}
+  We begin by noting that the integral $I(x)$ is a generalized Fourier integral
+  which can be written as
+  \begin{align*}
+    I(x) = \int_0^1 f(t) e^{ix\psi(t)} dt
+  \end{align*}
+  where $f(t) = \cosh t^2$ and $\psi(t) = t^2$. The leading asymptotic behavior of
+  such integrals as $x\to+\infty$ may be found, in general, using integration by parts.
+  However, this method may fail at \emph{stationary points}, i.e.\ any point on
+  the interval of definition such that $\psi'(t) = 0$. For the integral $I(x)$ we note that
+  $t=0$ is a stationary point. Thus, we proceed by writing $I(x)$ as follows:
+  \begin{align*}
+    I(x) = I_1(x) + I_2(x) = \int_0^\varepsilon f(t) e^{ix\psi(t)} dt + \int_\varepsilon^1 f(t) e^{ix\psi(t)} dt
+  \end{align*}
+  for some $\varepsilon > 0$.
+  Since $I_2(x)$ does not have any stationary points and the
+  function $f(t) = \cosh t^2 \in L^1$ over the interval $[0, 1]$, i.e.\ we have that $\int_0^1\left|f(t)\right|dt < +\infty,$
+  integration by parts works on $I_2(x)$ and by the Riemann-Lebesgue lemma, $I_2(x) \to 0$ as $x \to +\infty$. Thus,
+  as $x\to +\infty$,
+  \begin{align*}
+    I(x) \sim I_1(x) = \int_0^\varepsilon f(t) e^{ix\psi(t)} dt = \int_0^\varepsilon \cosh t^2 e^{ix t^2} dt.
+  \end{align*}
+  We continue by replacing $f(t)$ with $f(0) = \cosh 0 = 1$ and $\varepsilon$ with $\infty$, since
+  these are the parts that contribute the most to the integral, introducing
+  error terms that vanish as $x \to +\infty$ so that
+  \begin{align*}
+    I(x) \sim \int_0^\infty e^{ixt^2}dt
+  \end{align*}
+  Making the substitution
+  \begin{align*}
+    t = e^{i\pi/4}\left[\frac{u}{x}\right]^{1/2}
+  \end{align*}
+  yields that
+  \begin{align*}
+    \int_0^\infty e^{ixt^2}dt = e^{i\pi/4}\left[\frac{1}{x}\right]^{1/2}\frac{\Gamma(1/2)}{2} = \frac{e^{i\pi/4}}{2}\sqrt{\frac{\pi}{x}}.
+  \end{align*}
+  Therefore, as $x \to +\infty$,
+  \begin{align*}
+    I(x) \sim \int_0^\infty e^{ixt^2}dt = \frac{e^{i\pi/4}}{2}\sqrt{\frac{\pi}{x}}.
+  \end{align*}
 \end{proof}
 \newpage
 
