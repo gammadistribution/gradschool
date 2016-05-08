@@ -104,7 +104,7 @@
   Second-order perturbation theory prescribes that the roots are of the form
   $$x_i(\varepsilon) = a_{i_0} + a_{i_1} \varepsilon + a_{i_2} \varepsilon^2 + O(\varepsilon^3)$$
   where we disregard terms of order $\varepsilon^3$ or greater. Substituting $\varepsilon = 0$
-  into the equation yields the new equation $x^-3 -x = 0$, the roots of which are $-1, 0$, and $1$
+  into the equation yields the new equation $x^{+3} -x = 0$, the roots of which are $-1, 0$, and $1$
   which we will say correspond to the coefficients $a_{0_0} = -1, a_{1_0} = 0, $ and $a_{2_0} = 1$.
 
   In order to find the values of the coefficients $a_{i_k}$ for $k \geq 1$, we substitute the expression
@@ -154,6 +154,48 @@
 \end{problem}
 
 \begin{proof}
+  When $\varepsilon = 0$, the unperturbed equation only has one root while
+  the original equation has eight roots implying that this is a singular perturbation problem.
+
+  The root of the unperturbed problem is given by $x_0 = 2$. To find the other
+  roots, we employ the method of dominant balance to the original equation and
+  find a consistent balance in order to understand the order of magnitude of the roots
+  as $\varepsilon \to 0$.
+
+  As there are four terms in the original equation, there are 6
+  possible dominant balances to consider:
+  \begin{enumerate}[label=\roman*.]
+    \item Suppose $\varepsilon x^8 \sim \varepsilon^2 x^6$ as $\varepsilon \to 0$ is the dominant balance.
+      Then $x=O(\varepsilon^{1/2})$ as $\varepsilon \to 0$. However, $\varepsilon x^8 \ll 2$ as $\varepsilon \to 0$ violating the assumption
+      that $\varepsilon x^8$ and $\varepsilon^2 x^6$ are the dominant terms showing that the original balance is inconsistent.
+    \item Suppose $\varepsilon x^8 \sim x$ as $\varepsilon \to 0$ is the dominant balance.
+      Then $x=O(\varepsilon^{-1/7})$ as $\varepsilon \to 0$. Since $2 \ll x$ and $\varepsilon^2 x^6 = O(\varepsilon^{8/7})$ is such that
+      $\varepsilon^2 x^6 \ll x$, this dominant balance is consistent.
+    \item Suppose $\varepsilon x^8 \sim 2$ as $\varepsilon \to 0$ is the dominant balance. Then $x=O(\varepsilon^{-1/8})$  as $\varepsilon \to 0$. However,
+      $2 \ll x$ as $\varepsilon \to 0$ violating the assumption that $\varepsilon x^8$ and 2 are the dominant
+      terms showing that the original balance is inconsistent.
+    \item Suppose $\varepsilon^2 x^6 \sim x$ as $\varepsilon \to 0$ is the dominant balance. Then $x=O(\varepsilon^{-2/5})$  as $\varepsilon \to 0$.
+      However, $\varepsilon x^8 = O(\varepsilon^{-11/5})$ is such that $x \ll \varepsilon x^8$ violating the assumption that $\varepsilon^2 x^6$ and $x$ are
+      the dominant terms showing that the original balance is inconsistent.
+    \item Suppose $\varepsilon^2 x^6 \sim 2$ as $\varepsilon \to 0$ is the dominant balance. Then $x=O(\varepsilon^{-1/3})$ as $\varepsilon \to 0$.
+      However, $\varepsilon x^8 = O(\varepsilon^{-5/3})$ is such that $2 \ll \varepsilon x^8$ violating the assumption that $\varepsilon^2 x^6$ and $2$ are
+      the dominant terms showing that the original balance is inconsistent.
+    \item Suppose $x \sim 2$ as $\varepsilon \to 0$ is the dominant balance. This balance is consistent since $x=O(1)$ and we recover the original root with this equation.
+  \end{enumerate}
+
+  The above analysis suggests that, from the only consistent dominant balance that
+  provides additional information, the magnitudes of the missing roots are
+  $O(\varepsilon^{-1/7})$ as $\varepsilon \to 0$. Making the scale transformation
+  $x = \varepsilon^{-1/7}y$ and substituting into the original equation yields
+  \begin{align}\label{regular}
+    y^8 - \varepsilon^{9/7}y^6 + y - 2\varepsilon^{1/7} = 0
+  \end{align}
+  The unperturbed problem now does not vanish and the problem is now a regular perturbation problem.
+  Thus, a perturbation expansion exists for the roots $y$ in terms of powers of $\varepsilon^{1//7}$, i.e.\
+  the roots to \eqref{regular} are of the form
+  \begin{align*}
+    y = \sum_{n=0}^\infty y_n \left(\varepsilon^{1/7}\right)^n.
+  \end{align*}
 \end{proof}
 \newpage
 
