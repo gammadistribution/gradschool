@@ -214,6 +214,52 @@
 \end{problem}
 
 \begin{proof}
+  We begin by introducing the small perturbation factor $\varepsilon$ into the problem as follows:
+  \begin{align*}
+    y'' = \varepsilon(\sin x) y,\quad y(0) = 1,\ y'(0) = 1.
+  \end{align*}
+  Next, we assume a solution $y(x)$ exists in the form
+  \begin{align}\label{ivp}
+    y(x) = \sum_{n=0}^\infty \varepsilon^n y_n(x)
+  \end{align}
+  where $y_0(0) = 1$, $y_0'(0) = 1$, and $y_n(0) = y_n'(0) = 0$ for $n > 0$. Using
+  the perturbation expansion \eqref{ivp} and substituting into the perturbed problem
+  yields after comparing the coefficients of $\varepsilon$ that
+  \begin{align*}
+    \begin{cases}
+      y_0''(x) = 0 & y_0(0) = 1,\ y_0'(0) = 1 \\
+      y_n''(x) = (\sin x) y_{n-1}(x) & y_n(0) = 0,\ y_n'(0) =0\quad \text{for $n>0$}.
+    \end{cases}
+  \end{align*}
+  Thus, the solution to the zeroth-order problem is simply $y_0(x) = c_1x + c_2$
+  where the values of $c_1$ and $c_2$ are determined by the initial conditions
+  $y_0(0) = 1,\ y_0'(0) = 1$. Therefore,  the solution
+  to the zeroth order problem is $y_0(x) = x + 1$.
+
+  The solution to the $n$-th order problem can be found simply by integration:
+  \begin{align*}
+    y_n(x) = \int_{0}^{x} dx_2\int_{0}^{x_2} (\sin x_1) y_{n-1}(x_1) dx_1.
+  \end{align*}
+  Thus, from this equation we can see that for $n > 0$
+  \begin{align*}
+    y_n(x) &= \int_0^{x}d{x_{2n}}\int_0^{x_{x_{2n}}}d{x_{2n-1}}(\sin x_{2n-1})\int_0^{x_{2n-1}}d_{x_{2n-2}}\int_0^{x_{x_{2n-2}}}d_{x_{2n-3}}(\sin x_{2n-3})\cdots \\
+    &\quad \cdots\int_{0}^{x_3} dx_2\int_{0}^{x_2} (\sin x_1) (1 + x_1) dx_1
+  \end{align*}
+  and therefore that our perturbation series is
+  \begin{align*}
+    y(x) = 1 + x + \left(\int_{0}^{x} dx_2\int_{0}^{x_2} (\sin x_1) (1+ x_1) dx_1\right)\varepsilon + y_2(x)\varepsilon^2 + \dots .
+  \end{align*}
+
+  Since $\left|\sin x\right| \leq 1$, using the above formula, we see that the   $N$-th term of the perturbation series is bounded above, i.e.\
+  \begin{align*}
+    \left|\varepsilon^N y_N(x)\right| \leq \frac{\varepsilon^N x^{2N} (1 + |x|)}{(2N)!}.
+  \end{align*}
+  Thus, the series is convergent for all finite $x$. However, this series is not uniformly valid over the interval
+  $0 \leq x \leq \infty$. To see why, note that the leading behavior of the perturbation series
+  is that of $1 + x = O(x)$. However, for $\varepsilon > 0$, we see that for large $x$  the perturbation series
+  is a linear combination of $\sin $ and $\cos$ functions and therefore a linear combination of exponentially increasing and decreasing functions.
+  This is a change in character of the perturbation series from the unperturbed problem and thus we may
+  conclude that the perturbation series is not uniformly valid over the interval $0 \leq x \leq \infty$.
 \end{proof}
 \newpage
 
