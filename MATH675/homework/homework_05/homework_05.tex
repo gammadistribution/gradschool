@@ -344,6 +344,63 @@
 \end{problem}
 
 \begin{proof}
+  In order to ensure that the approximation is accurate to order $\varepsilon^2$ as $\varepsilon \to 0^+$,
+  we seek an outer solution in the form of the following perturbation series
+  \begin{align*}
+    y_{\text{out}} \sim y_0(x) + \varepsilon y_1(x) + \varepsilon^2 y_2(x).
+  \end{align*}
+  Since $(1+x)^2>0$ for $0\leq x\leq 1$, we expect a boundary layer only at $x=0$.
+  The perturbation series above must satisfy the boundary condition $y_{\text{out}}(1) = 1$.
+  Thus,
+  \begin{align*}
+    y_0(1) = 1, \quad y_1(1) = 0, \quad y_2(1) = 0.
+  \end{align*}
+  Replacing the perturbation series into the original equation yields the following three equations
+  \begin{align*}
+    (1+x)^2 y_0' + y_0 &= 0 \\
+    (1+x)^2 y_1' + y_1 &= -y_0''\\
+    (1+x)^2 y_2' + y_2 &= -y_1''.
+  \end{align*}
+  From these equations and the boundary conditions, we see that
+  \begin{align*}
+    y_0(x) &= e^{1/(1+x) - 1/2} \\
+    y_1(x) &= -\frac{e^{1/(1+x) - 1/2}\left(-53 - 25 x + 30 x^2 + 30 x^3 + 15 x^4 + 3 x^5\right)}{80 (1 + x)^5}\\
+    y_2(x) &= -\frac{e^{1/(1+x) - 1/2}\left(-5005759 - 11370550 x - 7410195 x^2 + 1474680 x^3 + 5856690 x^4\right)}{1612800 (1 + x)^{10}} +\\
+    &\quad - \frac{e^{1/(1+x) - 1/2}\left( 6604668 x^5 + 5372850 x^6 + 3052920 x^7 + 1144845 x^8 + 254410 x^9 + 25441 x^{10}\right)}{1612800 (1 + x)^{10}}
+  \end{align*}
+  Thus, as $\varepsilon \to 0^+$,
+  \begin{align*}
+    y_{\text{out}}(x) \sim e^{1/(1+x) - 1/2} + \varepsilon \left[\frac{e^{1/(1+x) - 1/2}\left(-53 - 25 x + 30 x^2 + 30 x^3 + 15 x^4 + 3 x^5\right)}{80 (1 + x)^5}\right] + \varepsilon^2 y_2(x).
+  \end{align*}
+
+  In order to determine the inner solution, we expect the boundary layer to be of thickness $\varepsilon$
+  and introduce the variables $X= \frac{x}{\varepsilon}$ and $Y_{\text{in}}(X) \equiv y_{\text{in}}(x)$. The original equation is then
+  \begin{align*}
+    \frac{\varepsilon}{\varepsilon^2} \frac{d^2 Y_{\text{in}}}{dX^2} + \frac{(1+X\varepsilon)^2 }{\varepsilon}\frac{d Y_{\text{in}}}{dX} + Y_{\text{in}} = 0 \implies \frac{d^2 Y_{\text{in}}}{dX^2} + (1+X\varepsilon)^2\frac{d Y_{\text{in}}}{dX} + \varepsilon Y_{\text{in}} = 0.
+  \end{align*}
+  If we express $Y_{\text{in}}(x)$ as a perturbation series as $\varepsilon \to 0^+$, then
+  \begin{align*}
+    Y_{\text{in}}(x) \sim Y_0(x) + \varepsilon Y_1(x) + \varepsilon^2 Y_2(X)
+  \end{align*}
+  and the boundary condition $y(0) = 1$ is then
+  \begin{align*}
+    Y_0(0) = 1, \quad Y_1(0) = 0, \quad Y_2(0) = 0.
+  \end{align*}
+  Substituting the above perturbation series into the derived equation yields the following
+  three equations:
+  \begin{align*}
+    \frac{d^2Y_0}{dX^2} +\frac{dY_0}{dX} &= 0\\
+    \frac{d^2Y_1}{dX^2} +\frac{dY_1}{dX} &= -2X\frac{dY_0}{dX} - Y_0\\
+    \frac{d^2Y_2}{dX^2} +\frac{dY_2}{dX} &= -X^2\frac{dY_0}{dX} -2X\frac{dY_1}{dX}- Y_1.
+  \end{align*}
+  From these equations and the boundary conditions we see that
+  \begin{align*}
+    Y_0(X) &= 1 + c_0(e^{-X} - 1)\\
+    Y_1(X) &= -X + c_0 e^{-X}\left(-1+e^X-X+Xe^X-X^2\right) + c_1 e^{-X}(e^{X} - 1) \\
+    Y_2(X) &=  - \frac{1}{6} c_0 e^{-X} (-12 + 12 e^X - 12 X - 12 e^X X - 9 X^2 + 9 e^X X^2 - 4 X^3 - 3 X^4) + \\
+    &\quad - e^{-X} (3 e^X X - \frac{3}{2} e^X X^2) - c_1 e^{-X} (-1 + e^X - X + e^X X - X^2) + c_2 e^{-X} (e^X-1).
+  \end{align*}
+  We must now determine the constants $c_0, c_1, c_2$ through asymptotically matching the inner and outer solutions.
 \end{proof}
 \newpage
 
