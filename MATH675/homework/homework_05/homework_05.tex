@@ -256,9 +256,11 @@
   \end{align*}
   Thus, the series is convergent for all finite $x$. However, this series is not uniformly valid over the interval
   $0 \leq x \leq \infty$. To see why, note that the leading behavior of the perturbation series
-  is that of $1 + x = O(x)$. However, for $\varepsilon > 0$, we see that for large $x$  the perturbation series
-  is a linear combination of $\sin $ and $\cos$ functions and therefore a linear combination of exponentially increasing and decreasing functions.
-  This is a change in character of the perturbation series from the unperturbed problem and thus we may
+  is that of $1 + x = O(x)$. However, for $\varepsilon > 0$, the perturbation series
+  is a linear combination of $\sin $ and $\cos$ functions and therefore a
+  linear combination of exponentially increasing and decreasing functions.
+  For large $x$ these exponentially increasing and decreasing functions are not negligible and contribute to
+  the perturbation series. This is a change in character of the perturbation series from the unperturbed problem and thus we may
   conclude that the perturbation series is not uniformly valid over the interval $0 \leq x \leq \infty$.
 \end{proof}
 \newpage
@@ -275,6 +277,58 @@
 \end{problem}
 
 \begin{proof}
+  In obtaining a leading-order uniform asymptotic approximation to the solution
+  of the above differential equation, we make the assumption that $y(x)$ develops
+  an isolated boundary layer in the neighborhood of $x=0$.
+
+  Outside of this boundary layer there are no rapid variations of $y(x)$ and we
+  may assume that $\varepsilon y''(x)$ is negligible as $\varepsilon \to 0^+$.
+  Thus, we obtain the approximation
+  \begin{align*}
+    (x^2+1)y'_{\text{out}}(x) = x^3 y_{\text{out}}(x),
+  \end{align*}
+  the solution of which is
+  \begin{align*}
+    y_{\text{out}}(x) &= c_1\exp\left[\int_x^1 \frac{t^3}{t^2+1} dt\right] = \frac{c_1\sqrt{x^2+1}e^{\frac{1-x^2}{2}}}{\sqrt{2}}.
+  \end{align*}
+  Since $x=1$ is outside of the boundary layer we have that $y_{\text{out}}(x)$ must satisfy the boundary condition
+  $y_{\text{out}}(1)=1$. This implies that $c_1 = 1$. This solution is a uniform aproximation
+  to the solution $y(x)$ as $\varepsilon \to 0^+$ on the interval $\delta \ll x \leq 1$ for some $\delta > 0$.
+
+  In order to determine the behavior of the solution near the boundary layer, we make the following
+  approximations $(x^2 + 1)y' \sim y'$ and $-x^3y \sim 0$ so that the approximation of the inner solution becomes
+  \begin{align*}
+    \varepsilon y''_{\text{in}}(x) + y'_{\text{in}}(x) = 0.
+  \end{align*}
+  The solution to this second-order differential equation with constant cofficients is simply
+  \begin{align*}
+    y_{\text{in}}(x) = c_1 + c_2 e^{-x/\varepsilon}.
+  \end{align*}
+  Since we must have that the boundary condition is met, we see that $y_{\text{in}}(0) = 1$.
+  This implies that $c_1 + c_2 = 1$ or that
+  \begin{align*}
+    y_{\text{in}}(x) = 1 + c_2\left(e^{-x/\varepsilon}-1\right).
+  \end{align*}
+
+  The boundary layer occurs when $x=O(\varepsilon)$. In order to asymptotically match the inner and outer solutions,
+  let's assume that $x=O(\varepsilon^{1/2})$. Thus, as $\varepsilon \to 0^+$, we see that
+  \begin{align*}
+    y_{\text{in}}(x) &\sim 1 - c_2 \\
+    y_{\text{out}}(x) &\sim y_{\text{out}}(0) = \frac{e^{1/2}}{\sqrt{2}}.
+  \end{align*}
+  In order for the approximation to be valid, we require that $c_2 = 1 - \frac{e^{1/2}}{\sqrt{2}}$.
+  Thus, as $\varepsilon \to 0^+$, the boundary layer approximation is given by
+  \begin{align*}
+    y(x) &\sim \frac{   \sqrt{x^2+1}e^{\frac{1-x^2}{2}}}{\sqrt{2}} \quad \text{for $0<x\leq 1$} \\
+    y(x) &\sim e^{-x/\varepsilon} + \frac{e^{1/2}}{\sqrt{2}}\left(1-e^{-x/\varepsilon}\right)
+  \end{align*}
+  A uniform approximation valid for all $0\leq x \leq 1$ is then given by
+  \begin{align*}
+    y(x) &= y_{\text{out}}(x) + y_{\text{in}}(x) - y_{\text{match}}(x) \\
+    &= \frac{   \sqrt{x^2+1}e^{\frac{1-x^2}{2}}}{\sqrt{2}} + e^{-x/\varepsilon} + \frac{e^{1/2}}{\sqrt{2}}\left(1-e^{-x/\varepsilon}\right) - \frac{e^{1/2}}{\sqrt{2}}\\
+    &= \frac{   \sqrt{x^2+1}e^{\frac{1-x^2}{2}}}{\sqrt{2}} + \left(1 - \frac{e^{1/2}}{\sqrt{2}}\right)e^{-x/\varepsilon},
+  \end{align*}
+  where $y_{\text{match}}(x) = 1 - (1 -y_{\text{out}}(0))$.
 \end{proof}
 \newpage
 
