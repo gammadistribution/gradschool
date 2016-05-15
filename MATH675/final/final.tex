@@ -124,6 +124,96 @@
   \end{align*}
   all accurate to precision $O(\varepsilon^2)$.
 \end{proof}
+\newpage
 
+
+\begin{problem}
+  Let
+  \begin{align*}
+    I(x) = \int_0^\infty \frac{t^{x-1}e^{-t}}{t^2+x^2} dt.
+  \end{align*}
+
+  \begin{enumerate}
+    \item Use the method of movable maxima to transform $I(x)$ into an integral
+      of the form
+      \begin{align*}
+        J(x) = g(x) \int_{0}^\infty f(s) e^{-x\phi(s)} ds
+      \end{align*}
+      which is amenable to analysis by Laplace's method.
+    \item Use the result of part a.\ to obtain a three term approximation to $I(x)$ for
+      $x\to +\infty$ by Laplace's method.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
+
+
+\begin{problem}
+  Use the method of stationary phase to obtain the leading behavior for $x\to+\infty$
+  of the integral
+  \begin{align*}
+    I(x) = \int_0^1 e^{i x (t-\sin t)} dt.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+  We begin by noting that the integral $I(x)$ is a generalized Fourier integral
+  which can be written as
+  \begin{align*}
+    I(x) = \int_0^1 f(t) e^{ix\psi(t)} dt
+  \end{align*}
+  where $f(t) = 1$ and $\psi(t) = t - \sin t$. The leading asymptotic behavior of
+  such integrals as $x\to+\infty$ may be found, in general, using integration by parts.
+  However, this method may fail at \emph{stationary points}, i.e.\ any point on
+  the interval of definition such that $\psi'(t) = 0$. Note that $\psi'(t) = 0$
+  when $t=2 \pi k$ for $k\in \mathbb{Z}$. Thus, for the integral
+  $I(x)$, we note that $t = 0$ is the only stationary point.
+  Thus, we proceed by writing $I(x)$ as follows:
+
+  \begin{align*}
+    I(x) = I_1(x) + I_2(x) = \int_0^\varepsilon f(t) e^{ix\psi(t)} dt + \int_\varepsilon^1 f(t) e^{ix\psi(t)} dt
+  \end{align*}
+  for some $\varepsilon > 0$.
+
+  Since $I_2(x)$ does not have any stationary points and the
+  function $f(t) = 1 \in L^1$ over the interval $[0, 1]$, we have by the Riemann-Lebesgue lemma that $I_2(x) \to 0$ as $x \to +\infty$. Thus,
+  as $x\to +\infty$,
+  \begin{align*}
+    I(x) \sim I_1(x) = \int_0^\varepsilon f(t) e^{ix\psi(t)} dt = \int_0^\varepsilon e^{ix (t-\sin t)} dt.
+  \end{align*}
+  The leading behavior of $I(x)$ can be obtained by replacing $f(t)$ with $f(0) = 1$
+  and $\psi(t) = t - \sin t$ with
+  \begin{align*}
+    \psi(0) + \frac{\psi'''(0)t^3}{6} = (0 - \sin 0) + \frac{(\cos 0) t^3}{6} = \frac{t^3}{6},
+  \end{align*}
+  since these are the parts that contribute the most to the integral. Thus,
+  \begin{align*}
+    I(x) \sim \int_0^\varepsilon e^{ix t^3/6} dt.
+  \end{align*}
+  Replacing $\varepsilon$ with $\infty$ introduces error terms that vanish as $x \to +\infty$ so that
+  \begin{align*}
+    I(x) \sim \int_0^\infty e^{ix t^3/6} dt.
+  \end{align*}
+
+  Making the substitution $u = x^{1/3}t/6^{1/3}$, we see that $du = (x^{1/3}/6^{1/3}) dt$, $u^3 = x t^3 / 6$ and that
+  \begin{align*}
+    I(x) \sim \int_0^\infty e^{ix t^3/6} dt = \left(\frac{6}{x}\right)^{1/3}\int_0^\infty e^{iu^3} du.
+  \end{align*}
+  Using the identity
+  \begin{align*}
+    \int_0^\infty e^{iu^3} du = e^{i \pi/6}\Gamma(4/3),
+  \end{align*}
+  we see that
+  \begin{align*}
+    I(x) \sim \left(\frac{6}{x}\right)^{1/3}\int_0^\infty e^{iu^3} du = \left(\frac{6}{x}\right)^{1/3}e^{i \pi/6}\Gamma(4/3).
+  \end{align*}
+
+  Therefore, as $x \to +\infty$,
+  \begin{align*}
+    I(x) \sim \left(\frac{6}{x}\right)^{1/3}e^{i \pi/6}\Gamma(4/3).
+  \end{align*}
+\end{proof}
 
 \end{document}
