@@ -146,6 +146,7 @@
 \end{problem}
 
 \begin{proof}
+  Omitted.
 \end{proof}
 \newpage
 
@@ -215,5 +216,62 @@
     I(x) \sim \left(\frac{6}{x}\right)^{1/3}e^{i \pi/6}\Gamma(4/3).
   \end{align*}
 \end{proof}
+\newpage
+
+
+\begin{problem}
+  \begin{enumerate}
+    \item Show that the BVP
+      \begin{align*}
+        \varepsilon y'' + x^{1/3} y' -y = 0, \qquad y(0)=0,\ y(1) = e^2
+      \end{align*}
+      has a boundary layer of thickness $\varepsilon^{3/4}$ at $x=0$.
+    \item Find a leading order uniform asymptotic approximation to the solution of the BVP.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Note that for this BVP $x^{1/3} > 0$ for all $0 < x \leq 1$. From section 9.1 we conclude then
+      that no boundary layer appears for $0 < x \leq 1$ and that the only other possible
+      appearance of a boundary layer must occur at $x=0$.
+
+      Assume that the boundary layer is of thickness $\delta(\varepsilon)$. In
+      the inner region, i.e. when $x \ll \delta(\varepsilon)$, let
+      $y(x) = Y_{\text{in}}(Z)$ where $Z = x / \delta(\varepsilon)$. Thus, the original
+      differential equation becomes
+      \begin{align*}
+        \frac{\varepsilon}{\delta(\varepsilon)^2} \frac{d^2Y_{\text{in}}(Z)}{dZ^2} + \frac{Z^{1/3}}{\delta(\varepsilon)^{2/3}}\frac{dY_{\text{in}}(Z)}{dZ} - Y_{\text{in}}(Z) = 0
+      \end{align*}
+
+      There are three distinguished limits to consider as $\varepsilon \to 0^+$:
+      \begin{itemize}
+        \item[i.] $\varepsilon/\delta(\varepsilon)^2 \sim 1$ with $\delta(\varepsilon)^{-2/3} \ll 1$.
+        \item[ii.] $\delta(\varepsilon)^{-2/3} \sim 1$ with $\varepsilon/\delta(\varepsilon)^2 \ll 1$.
+        \item[iii.] $\varepsilon/\delta(\varepsilon)^2 \sim \delta(\varepsilon)^{-2/3}$ with $1 \ll \delta(\varepsilon)^{-2/3}$.
+      \end{itemize}
+
+      In case i.\ we see that if $\varepsilon/\delta(\varepsilon)^2 \sim 1$ as $\varepsilon \to 0^+$,
+      then $\delta(\varepsilon) \sim \varepsilon^{1/2}$. However, if
+      $\delta(\varepsilon) \sim \varepsilon^{1/2}$ as $\varepsilon \to 0^+$,
+      then $\delta(\varepsilon)^{-2/3} \sim \varepsilon^{-1/3}$ which is inconsistent with the assumption
+      that $\delta(\varepsilon)^{-2/3} \ll 1$ as $\varepsilon \to 0^+$.
+
+      In case ii.\ we see that if $\delta(\varepsilon)^{-2/3} \sim 1$ as $\varepsilon \to 0^+$,
+      then $\delta(\varepsilon)^2 \sim 1$ which is consistent with the assumption that $\varepsilon/\delta(\varepsilon)^2 \ll 1$
+      as $\varepsilon \to 0^+$. This distinguished limit will reproduce the assumptions used to create the outer solution.
+
+      In case iii.\ we see that if $\varepsilon/\delta(\varepsilon)^2 \sim \delta(\varepsilon)^{-2/3}$
+      as $\varepsilon \to 0^+$, then $\delta(\varepsilon) \sim \varepsilon^{3/4}$.
+      If $\delta(\varepsilon) \sim \varepsilon^{3/4}$ as $\varepsilon \to 0^+$,
+      then $\delta(\varepsilon)^{-2/3} \sim \varepsilon^{-1/2}$. This is consistent
+      with the assumption that $1 \ll \delta(\varepsilon)^{-2/3}$ as $\varepsilon \to 0^+$.
+      This distinguished limit is the only consistent choice of boundary layer scale.
+
+      Therefore, the boundary layer must be of thickness $\varepsilon^{3/4}$ at $x=0$.
+    \item
+  \end{enumerate}
+\end{proof}
+
 
 \end{document}
