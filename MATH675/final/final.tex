@@ -269,7 +269,88 @@
       This distinguished limit is the only consistent choice of boundary layer scale.
 
       Therefore, the boundary layer must be of thickness $\varepsilon^{3/4}$ at $x=0$.
-    \item
+    \item In order to find a uniform asymptotic approximation to the solution
+      of the BVP, we must first find the leading-order outer solution outside
+      the boundary and the leading-order inner solution in the boundary layer
+      and then asymptotically match the two solutions.
+
+      Outside of the boundary layer, i.e.\ for $\varepsilon^{3/4} \ll x \leq 1$, we have
+      that the leading-order outer solution satisfies $x^{1/3}y_0' - y_0 = 0$.
+      Thus, when $\varepsilon^{3/4}\ll x \leq 1$, we have that
+      \begin{align*}
+        y_0(x) = c_0 e^{\frac{3x^{2/3}}{2}}.
+      \end{align*}
+      Note that $y_0(x)$ must satisfy the condition that $y(1) = e^2$. Thus,
+      \begin{align*}
+        y_0(1) = c_0 e^{\frac{3}{2}} = e^2
+      \end{align*}
+      so that $c_0 = e^{1/2}$ and for $\varepsilon^{3/4} \ll x \leq 1$ the outer solution is given by
+      \begin{align*}
+        y_0(x) = e^{\frac{1}{2}} e^{\frac{3x^{2/3}}{2}} = e^{\frac{3x^{2/3} + 1}{2}}.
+      \end{align*}
+
+      When $x$ is inside the boundary layer, i.e.\ for
+      $x \ll \delta(\varepsilon)$, let $y(x) = Y(Z)$ where $Z = x / \delta(\varepsilon)$.
+      As shown above the original differential equation satisfies
+      \begin{align*}
+        \frac{\varepsilon}{\delta(\varepsilon)^2} \frac{d^2Y(Z)}{dZ^2} + \frac{Z^{1/3}}{\delta(\varepsilon)^{2/3}}\frac{dY(Z)}{dZ} - Y(Z) = 0.
+      \end{align*}
+      Using the distinguished limit $\delta(\varepsilon) \sim \varepsilon^{3/4}$
+      as $\varepsilon \to 0^+$, the above differential equation becomes
+      \begin{align*}
+        \frac{d^2Y(Z)}{dZ^2} + Z^{1/3}\frac{dY(Z)}{dZ} = \varepsilon^{1/2}Y(Z).
+      \end{align*}
+      Thus, for $0 \leq x \ll \varepsilon^{3/4}$ as $\varepsilon \to 0^+$, the
+      leading-order inner solution $Y_0(Z)$ satisfies
+      \begin{align*}
+        \frac{d^2Y_0(Z)}{dZ^2} + Z^{1/3}\frac{dY_0(Z)}{dZ} = 0,
+      \end{align*}
+      the solution of which is
+      \begin{align*}
+        Y_0(Z) = d_0 - d_1\left[\frac{3^{1/4}\Gamma(3/4, 3Z^{4/3}/4)}{\sqrt{2}}\right]
+      \end{align*}
+      where $\Gamma(3/4, 3Z^{4/3}/4)$ is the incomplete Gamma function
+      \begin{align*}
+        \Gamma(3/4, 3Z^{4/3}/4) = \Gamma(3/4) - \int_0^{3Z^{4/3}/4} t^{-1/4} e^{-t}dt.
+      \end{align*}
+      The boundary condition $y(0) = 0$ implies that
+      \begin{align*}
+        Y_0(0) = d_0 - d_1\left[\frac{3^{1/4}\Gamma(3/4, 0)}{\sqrt{2}}\right] = 0
+      \end{align*}
+      or that
+      \begin{align*}
+        d_0 = d_1\left[\frac{3^{1/4}\Gamma(3/4)}{\sqrt{2}}\right]
+      \end{align*}
+      so that for $0 \leq x \ll \varepsilon^{3/4}$ as $\varepsilon \to 0^+$ the leading-order
+      inner solution is
+      \begin{align*}
+        Y_0(Z) = d_1\left[\frac{3^{1/4}\left(\Gamma(3/4) - \Gamma(3/4, 3Z^{4/3}/4)\right)}{\sqrt{2}}\right].
+      \end{align*}
+
+      In order to determine the constant $d_1$, we must asymptotically match the
+      left edge of the outer solution $y_0(x)$ to the right edge of the inner solution $Y_0(Z)$ as $\varepsilon \to 0^+$.
+      In this area, say that $x=O(\varepsilon^{5/8})$. For such $x$, we know since $Z = x/\varepsilon^{3/4}$ that $Z \to \infty$
+      as $\varepsilon \to 0^+$ and the inner solution satisfies
+      \begin{align*}
+        Y_0(Z) \sim d_1\left[\frac{3^{1/4}\Gamma(3/4)}{\sqrt{2}}\right].
+      \end{align*}
+      Similarly for $x=O(\varepsilon^{5/8})$, we have that as $\varepsilon \to 0^+$
+      the outer solution is asymptotic to $y_0(0)$, i.e.\
+      \begin{align*}
+        y_0(x) \sim y_0(0) = e^{1/2}.
+      \end{align*}
+      Thus, for the two solutions to agree at these edges, we require that
+      \begin{align*}
+        d_1 = \frac{e^{1/2}\sqrt{2}}{3^{1/4}\Gamma(3/4)}.
+      \end{align*}
+
+      Therefore, a leading order uniform asymptotic approximation to the solution of the BVP
+      is given by
+      \begin{align*}
+        y_{\text{unif}}(x) &= y_0(x) + Y_0\left(\frac{x}{\varepsilon^{3/4}}\right) - y_{\text{match}}(x) \\
+        &=e^{\frac{3x^{2/3} + 1}{2}} + \frac{e^{1/2}\sqrt{2}}{3^{1/4}\Gamma(3/4)}\left[\frac{3^{1/4}\left(\Gamma\left(\frac{3}{4}\right) - \Gamma\left(\frac{3}{4}, \frac{3x^{4/3}}{4\varepsilon}\right)\right)}{\sqrt{2}}\right] - e^{1/2} \\
+        &=e^{\frac{3x^{2/3} + 1}{2}} - e^{1/2}\left[\frac{\Gamma\left(\frac{3}{4}, \frac{3x^{4/3}}{4\varepsilon}\right)}{\Gamma\left(\frac{3}{4}\right)}\right].
+      \end{align*}
   \end{enumerate}
 \end{proof}
 
