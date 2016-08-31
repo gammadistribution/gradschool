@@ -7,5 +7,37 @@
 \end{problem}
 
 \begin{proof}
+  Consider the affine map $f: \mathbb{R} \to \mathbb{R}$ with $f(x) = ax + b$. Define
+  the sequence $x_{n+1} = f(x_n) = ax_n + b$ where $x_0 \in \mathbb{R}$ is given.
+  As was shown in the reading, the closed form solution to the above recurrence
+  relation is given by
+  \begin{align}\label{rec_sol}
+    x_n = \left(x_0 - \frac{b}{1 - a}\right) a^n + \frac{b}{1 - a}.
+  \end{align}
+
+  Thus, the solutions to the provided difference equations can be solved by
+  rewriting the equation in the form of an affine map, identifying $a, b,$ and $x_0$, and using the closed solution \eqref{rec_sol}.
+  \begin{enumerate}
+    \item For the difference equation $x_{n+1} - \frac{x_n}{3} = 2,\ x_0 = 2$,
+      we readily see by rewriting the equation that $a = 1/3$ and $b=2$ with
+      $x_0 = 2$ given. Therefore, using \eqref{rec_sol}, the solution to the difference
+      equation is
+      \begin{align*}
+        x_n &= \left(x_0 - \frac{b}{1 - a}\right) a^n + \frac{b}{1 - a} \\
+        &= \left(2 - \frac{2}{1 - 1/3}\right) \left(\frac{1}{3}\right)^n + \frac{2}{1 - 1/3} \\
+        &= 3-3^{-n}
+      \end{align*}
+    \item For the difference equation  $x_{n+1} + 3x_n = 4,\ x_0 = -1$,
+      we readily see by rewriting the equation that $a = -3$ and $b=4$ with
+      $x_0 = -1$ given. Therefore, using \eqref{rec_sol}, the solution to the difference
+      equation is
+      \begin{align*}
+        x_n &= \left(x_0 - \frac{b}{1 - a}\right) a^n + \frac{b}{1 - a} \\
+        &= \left(-1 - \frac{4}{1 - (-3)}\right) \left(-3\right)^n + \frac{4}{1 - (-3)} \\
+        &= 1 - 2 (-3)^n.
+      \end{align*}
+  \end{enumerate}
+
+
 \end{proof}
 \newpage
