@@ -1,0 +1,47 @@
+\begin{problem}{1}
+  Suppose that the number of claims each policy holder will have in a given year is
+  Poisson distributed with mean randomly distributed with density function $g(\lambda) = e^{-\lambda}$
+  for $\lambda \geq 0$.
+  What is the probability that a policy holder will have $n$ claims in that year?
+\end{problem}
+
+\begin{proof}
+  Let $X$ be the discrete random variable representing the number of claims
+  a policy holder will have in a given year. Let $Y$ be the continuous random
+  variable representing the Poisson parameter $\lambda$ with density function
+  $g(\lambda) = e^{-\lambda}$ with $\lambda \geq 0$.
+
+  Conditioning the probability that $X = n$ on the random variable $Y$ shows
+  that
+  \begin{align*}
+    P(X = n) &= \int_{-\infty}^{\infty} P(X=n | Y=\lambda) g(\lambda) d \lambda \\
+    &= \int_{0}^{\infty} P(X=n | Y=\lambda) e^{-\lambda} d \lambda
+  \end{align*}
+  where the limits of integration have changed since $P(X=n | Y=\lambda) = 0$ for
+  $\lambda < 0$ given our initial assumptions. Using the probability mass function
+  for the Poisson random variable $X$ in conjunction with the fact that for
+  $Y=\lambda$ the random variable $X$ will have parameter $\lambda$,
+  we see that
+  \begin{align*}
+    P(X=n | Y=\lambda) = \frac{e^{-\lambda}\lambda^n}{n!}.
+  \end{align*}
+  Thus, from the above computation, we have that
+  \begin{align*}
+    P(X = n) &= \int_{0}^{\infty}  e^{-\lambda} \left[\frac{e^{-\lambda}\lambda^n}{n!}\right] d \lambda \\
+    &= \frac{1}{n!}\int_{0}^{\infty} \lambda^n e^{-2\lambda} d\lambda.
+  \end{align*}
+  Making the $u$-substitution $u=2\lambda$, the previous integral transforms into
+  \begin{align*}
+    P(X = n) &= \frac{1}{n!}\int_{0}^{\infty} 2^{-(n+1)}u^{n} e^{-u} du \\
+    &= \frac{2^{-(n+1)}}{n!}\int_{0}^{\infty} u^{n} e^{-u} du \\
+    &= \frac{2^{-(n+1)}\Gamma(n+1)}{n!} \\
+    &= 2^{-(n+1)},
+ \end{align*}
+ where we have used the fact that, for an integer $k$,
+ \begin{align*}
+   \Gamma(k) = \int_0^\infty x^{k-1} e^{-x} dx = (k-1)!.
+ \end{align*}
+
+ Therefore, the probability a policy holder will have $n$ claims in that year is $2^{-(n+1)}$.
+\end{proof}
+\newpage
