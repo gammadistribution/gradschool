@@ -7,5 +7,31 @@
 \end{problem}
 
 \begin{proof}
+  Let $A(n)$ be the amount owed on the loan at the end of month $n$. If the principal
+  amount of the loan is $\$P$, then $A(0) = P$. If the annual interest rate is $r\%$,
+  then the monthly interest rate is $r/12 \%$. Assuming each month a payment of $\$M$ is
+  made on the loan, a difference equation representing the amount owed on the loan
+  at the end of month $n$ is given by
+  \begin{align*}
+    A(n + 1) &= A(n) + A(n)\left[\frac{r}{12(100)}\right] - M \\
+    &= \left[1 + \frac{r}{12(100)}\right]A(n) - M
+  \end{align*}
+  for $n\in\mathbb{N}$.
+
+  Using the closed form solution for difference equations in the form of affine maps,
+  the solution to the difference equation is given by
+  \begin{align*}
+    A(n) &= \left(A(0) + \frac{M}{1 - \left(1 + \frac{r}{12(100)}\right)}\right) \left(1 + \frac{r}{12(100)}\right)^n - \frac{M}{1 - \left(1 + \frac{r}{12(100)}\right)} \\
+    &= \left(P - \frac{1200M}{r}\right)\left(1 + \frac{r}{1200}\right)^n + \frac{1200M}{r}.
+  \end{align*}
+
+  The loan will be paid off after $k \in \mathbb{R}$ months when $A(k) = 0$ from which
+  we can gather that the loan will be paid off after $n = \lceil k \rceil$ full months.
+  Solving
+  \begin{align*}
+    A(k) = \left(100000 - \frac{1200(1000)}{4}\right)\left(1 + \frac{4}{1200}\right)^n + \frac{1200(1000)}{4} =0
+  \end{align*}
+  shows that $k = 121.842$. Therefore,
+  the loan will be paid off in full after 122 months.
 \end{proof}
 \newpage
