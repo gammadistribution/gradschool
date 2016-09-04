@@ -27,6 +27,29 @@
       \begin{align*}
         x_{n+1} = \frac{1 - (1- 2x_0)^{2^{n+1}}}{2}.
       \end{align*}
+    \item Let $x_n = \sin^2(\theta_n)$ for $n \in \mathbb{N}$ with $x_0$ given.
+      We may assume without loss of generality that $\theta_n \in [0, \pi)$ for
+      if the angle $\theta_n$ isn't in the stated range, we can find an integer $k$ such that
+      $\theta_n + k \pi \in [0, \pi)$ and $\sin^2(\theta_n) = \sin^2(\theta_n + k\pi)$. We then declare the sum $\theta_n + k \pi$ to be the new angle $\theta_n$.
+      Substituting the above expression for $x_n$ into the original difference equation yields the new
+      difference equation
+      \begin{align*}
+        \sin^2(\theta_{n+1}) &= 4 \sin^2(\theta_{n}) \left( 1 - \sin^2(\theta_{n})\right)\\
+        &= \left(2 \sin(\theta_n) \cos(\theta_n)\right)^2 \\
+        &= \sin^2(2\theta_n).
+      \end{align*}
+      Knowing that for $x, y \in [0, \pi)$ we have that $\sin^2(x) = \sin^2(y)$ if and only if $x = y$,
+      the new difference equation reduces to $\theta_{n+1} = 2\theta_n$ for $n\in\mathbb{N}$ where it is implicitly
+      understood that $\theta_{n+1}$ will be mapped to the corresponding angle between 0 and $\pi$ if
+      $2\theta_n \geq \pi$.
+      Using the closed form solution for difference equations in the form of linear maps,
+      the solution to the reduced difference equation is given by $\theta_{n+1} = 2^{n+1}\theta_0$
+      for $n\in\mathbb{N}$. Making the substitution $\theta_n =  \sin^{-1}(\sqrt{x_n})$ shows that, for $n\in\mathbb{N}$,
+      the solution to the original difference equation is given by
+      \begin{align*}
+        x_{n+1} = \sin^2(2^{n+1}\sin^{-1}(\sqrt{x_0})).
+      \end{align*}
+
   \end{enumerate}
 \end{proof}
 \newpage
