@@ -6,5 +6,21 @@
 \end{problem}
 
 \begin{proof}
+  The function $f(x) = x^2 + bx + c$ for $f: [0, 1] \to [0, 1]$ is a dynamical
+  system if $f([0,1]) \subseteq [0,1]$. The minimum and maximum values of the function occur either at the end points of
+  the domain or at the critical points of the function. Thus, for the continuous
+  function $f$, if we ensure that the evaluation of $f$ at $x=0$, $x=1$, and
+  the critical points of $f$ are contained in $[0, 1]$ then the image of $f$ will necessarily
+  be contained in $[0, 1]$ and $f$ will be a dynamical system.
+
+  At the end points of the domain we have that $f(0) = c$ and $f(1) = b + c + 1$. Thus, in order for $f$ to be
+  a dynamical system, we must have that $c \in [0, 1]$ and $b + c \in [-1, 0]$.
+
+  The only critical point of the function $f$ is found when $f'(x) = 0$ or when $x = -b/2$.
+  Thus, we require that $f(-b/2) = -b^2/4 + c \in [0, 1]$. Under the assumption
+  that $c\in[0, 1]$, this translates to requiring that $-4 \leq b^2 \leq 4$. Since the domain of the function is real,
+  we also require that $bx \in \mathbb{R}$  so the previous requirement reduces to
+  the constraint $0 \leq b \leq 2$.
+
 \end{proof}
 \newpage
