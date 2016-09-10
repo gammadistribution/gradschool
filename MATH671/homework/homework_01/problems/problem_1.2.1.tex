@@ -5,5 +5,19 @@
 \end{problem}
 
 \begin{proof}
+  Let $g(x) = f(x) - x = x^2 + (b-1)x + c$ for $g: \mathbb{R} \to \mathbb{R}$.
+  From our definition of $g$, it is clear that the roots of the function $g$ are
+  the fixed points of the function $f$. Note that $g(x) = 0$ if
+  \begin{align}\label{xx}
+    x = \frac{-b + 1 \pm \sqrt{(b-1)^2 - 4c}}{2}.
+  \end{align}
+  However, in order for $x$ to be a root of $g(x)$, we must have that $x \in \mathbb{R}$, i.e.
+  we must have that $(b-1)^2 - 4c \geq 0$. Thus, $x$ is a fixed point of the function $f$ if
+  $x$ is of the form \eqref{xx} and for $b, c \in \mathbb{R}$ we have that $c \leq (b-1)^2/4$.
+
+  Take the function $f_c(x) = x^2 + c$ for $f_c: \mathbb{R} \to \mathbb{R}$. Note that
+  $f_c$ has the same form as the function $f$ if $b=0$. Thus, according to the
+  conditions described above, we see that $f_c$ has a fixed point if $c \leq (0 - 1)^2/4 = 1/4$.
+
 \end{proof}
 \newpage
