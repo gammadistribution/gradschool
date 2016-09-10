@@ -15,13 +15,31 @@
 \begin{proof}
   \begin{enumerate}
     \item It is clear that $x=1$ is an eventual fixed
-      point since $x=0$ is a fixed point and $L_\mu(1) = 0$. To see that this
-      is the only eventual fixed point associated to $x=0$, it suffices to see that no point
+      point since $x=0$ is a fixed point and $L_\mu(1) = 0$.
+      This is the only eventual fixed point associated to $x=0$ since no point
       in the interval $(0, 1)$ maps to either 0 or 1 under $L_\mu$, i.e.\
-      for $y\in(0,1)$, the equations $L_\mu(y) = 0$ and $L_\mu(y) = 1$ have no solutions.
-      Therefore, since no $y \in D_L_\mu = [0, 1]$ besides $y=0$ and $y=1$ maps to 0 or 1,
-      there are no other eventual fixed points associated to $x=0$.
-    \item
+      for $y\in(0,1)$, the equations $L_\mu(y) = 0$ and $L_\mu(y) = 1$
+      have no solutions. Therefore, since no $y \in D_{L_\mu} = [0, 1]$ besides
+      $y=0$ and $y=1$ maps to 0 or 1, there are no other eventual fixed points
+      associated to $x=0$.
+    \item Let $1 < \mu \leq 2$. It is clear that $x = 1/\mu$ is an eventual
+      fixed point since $x = 1 - 1/\mu$ is a fixed point and
+      $L_\mu(1/\mu) = 1 - 1/\mu$.
+      We will now demonstrate that this is the only eventual fixed point
+      associated to $x = 1 - 1/\mu$. Note that
+      for $x \in [0, 1]$, the only solution to $L_\mu(x) = 1 - 1/\mu$ is $x = 1/\mu$.
+      Therefore, in order for a point $x \in [0, 1]$ to be an eventual fixed point
+      associated to $x = 1 - 1/\mu$, we must have that $x$ either maps to $1/\mu$
+      or eventually maps to $1/\mu$, i.e.\ for $x \in [0, 1]$ we must have that
+      $L_\mu(x) = 1/\mu$ has a solution. However, if $1 < \mu \leq 2$,
+      then $L_\mu(x) = 1/\mu$ has no real solutions for $x \in [0, 1]$ and  so
+      there are no other eventual fixed points associated to $x = 1 - 1/\mu$.
+    \item Now suppose that $2 < \mu < 3$. Recall that $x = 1/\mu$ is an eventual fixed point.
+      Note that
+      $$y = \frac{1}{2} - \frac{1}{2}\sqrt{1 - \frac{4}{m^2}} \in [0, 1]$$
+      satisfies $L_\mu(y) = 1/\mu$. Thus, $L_\mu^2(y) = 1 - 1/\mu$ where $1 - 1/\mu$ is a fixed point.
+      Therefore, if $2 < \mu < 3$, then there are additional eventual fixed points associated
+      to $x = 1 - 1/\mu$ besides $x = 1/\mu$.
   \end{enumerate}
 \end{proof}
 \newpage
