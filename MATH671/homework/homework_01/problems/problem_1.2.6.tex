@@ -40,6 +40,50 @@
       satisfies $L_\mu(y) = 1/\mu$. Thus, $L_\mu^2(y) = 1 - 1/\mu$ where $1 - 1/\mu$ is a fixed point.
       Therefore, if $2 < \mu < 3$, then there are additional eventual fixed points associated
       to $x = 1 - 1/\mu$ besides $x = 1/\mu$.
+    \item We proceed to describe all eventual
+      fixed points of $L_\mu$ by first identifying all fixed points of the function.
+      Suppose $\{x_{0_n}\}$ is the set of fixed points of $L_\mu$ where $n$ is the number
+      of fixed points. To find all eventual fixed
+      points associated to the fixed point $x_{0_k}$,
+      first find the pre-image of $x_{0_k}$ minus the point $x_{0_k}$, i.e.\ find
+      $$L_\mu^{-1}\left(x_{0_k}\right) = \{x \neq x_{0_k}\ |\ L_\mu(x) = x_{0_k} \}.$$
+      Note that each point in $L_\mu^{-1}(x_{0_k})$ will be an eventual fixed point of $x_{0_k}$.
+      Denote the set of eventual fixed points associated to $x_{0_k}$ by $x_{1_k}$.
+      If the set is empty, then there are no eventual fixed points associated to $x_{0_k}$.
+      If the set is non-empty, continue the process by finding for each point in
+      the set of eventual fixed points $x_{1_k}$, the set
+      of eventual fixed points associated to the eventual fixed point $x_{1_k}$,
+      i.e.\ $x_{2_k} = L_\mu^{-1}\left(x_{1_k}\right) = L_\mu^{-1}\left(L_\mu^{-1}\left(x_{0_k}\right)\right)$.
+      Again, every point in $x_{2_k}$ is an eventual fixed point of $x_{0_k}$.
+      Continue this process indefinitely until the pre-image $x_{m_k}$ is empty.
+
+      Now suppose that $\mu = 5/2$. The fixed points of $L_\mu$ are found by finding
+      the roots of $g(x) = L_\mu(x) - x = (3/2)x - (5/2)x^2$ for $g:[0, 1] \to [0, 1]$.
+      It is clear that the two roots of $g$ are given by $x=0$
+      and $x =3/5$. Thus, denote the fixed points of $L_\mu$ by $\{x_{0_0}, x_{0_1}\} = \{0, 3/5\}$.
+
+      We will now find all eventual fixed points associated to the fixed point
+      $x_{0_0} = 0$. As was shown previously, the only eventual fixed points associated to
+      $x_{0_0}$ is $x = 1$. Thus, $x_{1_0} = \{1\}$ and we are done.
+
+      Now we will find all eventual fixed points associated to the fixed point
+      $x_{0_1} = 3/5$.  Solving the equation $L_\mu(x) = x_{0_1}$ shows us that the pre-image
+      of $x_{0_1}$ minus the point $x_{0_1}$ is given by $L_\mu^{-1}\left(x_{0_1}\right) = \{2/5 \}$, i.e.\
+      $x_{1_1} = \{2/5\}$. Continuing, we solve the equation $L_\mu(x) = 2/5$ and find that
+      $L_\mu^{-1}(x_{1_1}) = \{1/5, 4/5\}$. Thus $x_{2_1} = \{1/5, 4/5\}$.
+      Since, $L_\mu(x) =  4/5$ has no real solutions, there are no eventual fixed points associated to the eventual fixed point $4/5$.
+      However, solving $L_\mu(x) =  1/5$ we see that there are real solutions associated to this eventual fixed point
+      so $x_{3_1} = \{1/10 (5 - \sqrt{17}), 1/10 (5 + \sqrt{17})\}$.
+
+      Under further investigation the above sequence continues in a similar pattern. The equation
+      $L_\mu(x) =  1/10 (5 + \sqrt{17})$ will have no real solutions but
+      $L_\mu(x) =  1/10 (5 - \sqrt{17})$ does. Thus, we see using these solutions that
+      $x_{4_1} = \{1/10 (5 - \sqrt{5 + 4 \sqrt{17}}), 1/10 (5 +  \sqrt{5 + 4 \sqrt{17}})\}$.
+      This process repeats indefinitely
+      so that two more eventual fixed points are found with the set of eventual fixed points $x_{k_1}$.
+      The union of all such points as described above  make up the eventual
+      fixed points associated to $x = 3/5$.
+
   \end{enumerate}
 \end{proof}
 \newpage
