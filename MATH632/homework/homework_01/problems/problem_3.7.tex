@@ -14,5 +14,62 @@
 \end{problem}
 
 \begin{proof}
+  Recall that the conditional probability mass function of $X$ given that $Y = y$
+  is given by
+  \begin{align*}
+    p_{X|Y}(x|y) = P\{X=x|Y=y\} = \frac{P\{X=x, Y=y\}}{P\{Y=y\}}.
+  \end{align*}
+  As a natural extension, we have that the conditional expectation of $X$ given
+  that $Y=y$ is given by
+  \begin{align*}
+    E[X|Y=y] = \sum_x x P\{X=x|Y=y\} = \sum_x x p_{X|Y}(x|y).
+  \end{align*}
+
+  Thus, in order to find the conditional expectation of $X$ given that $Y=2$, i.e.\ $E[X | Y=2]$,
+  we first need to determine $p_{X|Y}(x|2)$. We note from the above joint probability mass function
+  that
+  \begin{align*}
+    P\{Y=2\} = \sum_{x,z}p(x,2,z) = p(1, 2, 1) + p(2, 2, 1) + p(1, 2, 2) + p(2, 2, 2) = \frac{5}{16}.
+  \end{align*}
+  Similarly, we have from the above joint probability mass function that
+  \begin{align*}
+    P\{X=x, Y=2\} = \sum_z p(x, 2, z) = p(x, 2, 1) + p(x, 2, 2).
+  \end{align*}
+  Thus, the conditional probability mass function of $X$ given that $Y=2$ is given by
+  \begin{align*}
+    p_{X|Y}(x|2) = \frac{P\{X=x, Y=2\}}{P\{Y=2\}} =
+    \begin{cases}
+      \frac{p(1,2,1) + p(1,2,2)}{5/16} = \frac{1}{5} \text{\quad if $x=1$}\\
+      \frac{p(1,2,1) + p(1,2,2)}{5/16} = \frac{4}{5} \text{\quad if $x=2$}.
+    \end{cases}
+  \end{align*}
+  Using $p_{X|Y}(x|2)$, we readily see that
+  \begin{align*}
+    E[X|Y=2] = \sum_x x p_{X|Y}(x|2) = 1 \cdot p_{X|Y}(1|2)  + 2 \cdot p_{X|Y}(2|2) = \frac{9}{5}.
+  \end{align*}
+
+  In order to find the conditional expectation of $X$ given that $Y=2$ and $Z=1$, i.e.\ $E[X | Y=2, Z=1]$,
+  we proceed in a similar manner as previously by first finding $p_{X|Y,Z}(x|2,1)$. We note from the above joint probability mass function
+  that
+  \begin{align*}
+    P\{Y=2, Z=1\} = \sum_{x}p(x,2,1) = p(1, 2, 1) + p(2, 2, 1) = \frac{1}{16}
+  \end{align*}
+  Similarly, we have from the above joint probability mass function that
+  \begin{align*}
+    P\{X=x, Y=2, Z=1\} = p(x, 2, 1).
+  \end{align*}
+  Thus, the conditional probability mass function of $X$ given that $Y=2$ and $Z=1$ is given by
+  \begin{align*}
+    p_{X|Y,Z}(x|2,1) = \frac{P\{X=x, Y=2, Z=1\}}{P\{Y=2, Z=1\}} =
+    \begin{cases}
+      \frac{p(1,2,1)}{1/16} = 1 \text{\quad if $x=1$}\\
+      \frac{p(2,2,1)}{1/16} = 0 \text{\quad if $x=2$}.
+    \end{cases}
+  \end{align*}
+  Using $p_{X|Y,Z}(x|2,1)$, we readily see that
+  \begin{align*}
+    E[X|Y=2,Z=1] = \sum_x x p_{X|Y,Z}(x|2,1) = 1 \cdot p_{X|Y,Z}(1|2,1)  + 2 \cdot p_{X|Y,Z}(2|2,1) = 1.
+  \end{align*}
+
 \end{proof}
 \newpage
