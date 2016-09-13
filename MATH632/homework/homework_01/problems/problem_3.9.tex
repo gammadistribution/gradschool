@@ -6,5 +6,18 @@
 \end{problem}
 
 \begin{proof}
+  Suppose that $X$ and $Y$ are discrete, independent random variables. Then, due to
+  the independence of the random variables, we know that
+  \begin{align}\label{ind}
+    P\{X=x|Y=y\} &= \frac{P\{X=x, Y=y\}}{P\{Y=y\}} \notag\\
+    &= \frac{P\{X=x\}P\{Y=y\}}{P(Y=y)} \notag\\
+    &= P\{X=x\}.
+  \end{align}
+  Therefore, combining the definition of conditional expectation for discrete random variables
+  and result \eqref{ind}, we have that for any $y$,
+  \begin{align*}
+    E[X|Y=y] &= \sum_x x P\{X=x | Y=y\} = \sum_x x P\{X=x\} = E[X]
+  \end{align*}
+  and we are done.
 \end{proof}
 \newpage
