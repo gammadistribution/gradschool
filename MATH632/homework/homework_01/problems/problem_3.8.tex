@@ -4,10 +4,28 @@
   \begin{enumerate}
     \item $E[X]$,
     \item $E[X|Y=1]$,
-    \item $E[X]Y=5]$.
+    \item $E[X|Y=5]$.
   \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  The experiment of rolling a die, assuming the die is six-sided, has
+  six possible outcomes: the die lands oriented such that the side with 1, 2, 3, 4, 5, or 6
+  pips is face-up. Assuming the die is unbiased, each outcome occurs with probability
+  $p=1/6$ and each trial of rolling the die is independent of any other trial.
+  If $X$ and $Y$ denote, respectively, the number
+  of rolls necessary to obtain a six and a five, then under the given assumptions,
+  $X$ and $Y$ are both geometric random variables with parameter $p=1/6$.
+  The probability mass function for these random variables is given by $p(n) = (1-p)^{n-1}p = (5/6)^{n-1}(1/6)$.
+
+  \begin{enumerate}
+    \item By definition, we have that the expectation of $X$ is given by
+      \begin{align*}
+        E[X] = \sum_{n=1}^\infty n p(n) = 1/6\sum_{n=1}^\infty n(5/6)^{n-1}.
+      \end{align*}
+      We know that the power series $\sum_{n=1}^\infty (5/6)^{n}$ converges uniformly
+    \item
+    \item
+  \end{enumerate}
 \end{proof}
 \newpage
