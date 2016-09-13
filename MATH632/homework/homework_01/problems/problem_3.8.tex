@@ -18,12 +18,37 @@
   $X$ and $Y$ are both geometric random variables with parameter $p=1/6$.
   The probability mass function for these random variables is given by $p(n) = (1-p)^{n-1}p = (5/6)^{n-1}(1/6)$.
 
+  For the following computations, we make use the fact that that the infinite series
+  of a geometric sequence $a_n = q^n$ is uniformly convergent on its interval of convergence,
+  in particular on the interval $[0, 1)$, given that $|q| < 1$. To demonstrate this, take $0 \leq q < 1$.
+  Note that for $q < 1$, there exists $\varepsilon > 0$ such that $q < q + \varepsilon < 1$.
+  Now let $a_n = q ^ n$ and $M_n = (q + \varepsilon) ^ n$ and note that for $n > 0$,
+  we have that $|a_n| <  M_n$ and that $\sum_{n=1}^{\infty}M_n$ converges since $q + \varepsilon$
+  is in the interval of convergence of the infinite series. Thus, the sequence
+  $a_n$ meets the criteria of Weierstrass's M-test and $\sum_{n=1}^\infty a_n = \sum_{n=1}^\infty q^n$ converges uniformly on $[0, 1)$.
+  Since the series $\sum_{n=1}^\infty q^n$ is uniformly convergent for $0 \leq q < 1$, we
+  may switch the order of summation and differentiation on this series.
+
   \begin{enumerate}
-    \item By definition, we have that the expectation of $X$ is given by
+    \item Suppose that $Z$ is a geometric random variable with parameter $p$.
+      Then, by definition, we have that the probability mass function of $Z$ is
+      given by $p(n) = (1-p)^{n-1}p$ and that the expectation of $Z$ is given by
       \begin{align*}
-        E[X] = \sum_{n=1}^\infty n p(n) = 1/6\sum_{n=1}^\infty n(5/6)^{n-1}.
+        E[Z] = \sum_{n=1}^\infty n p(n) = \sum_{n=1}^\infty np(1-p)^{n-1} = p\sum_{n=1}^\infty nq^{n-1}.
       \end{align*}
-      We know that the power series $\sum_{n=1}^\infty (5/6)^{n}$ converges uniformly
+      We know that since $0 \leq q < 1$ the power series $\sum_{n=1}^\infty q^{n}$ converges uniformly. Thus,
+      \begin{align}\label{uniform}
+        \frac{d}{dq}\left[\sum_{n=1}^\infty q^n\right] = \sum_{n=1}^\infty \frac{d}{dq}\left[q^n\right] = \sum_{n=1}^\infty n q^{n-1}
+      \end{align}
+      Using \eqref{uniform}, we see that
+      \begin{align*}
+        E[Z] &= p\sum_{n=1}^\infty nq^{n-1} = p \frac{d}{dq}\left[\sum_{n=1}^\infty q^n\right] = p \frac{d}{dq}\left[\frac{1}{1-q}\right] = \frac{p}{(1-q)^2}.
+      \end{align*}
+      Therefore, since $q = 1 - p$ we have that $E[Z] = 1/p$.
+
+      This result shows that for the random geometric variable $X$ with parameter $p = 1/6$,
+      we have that $E[X] = 1 / (1/6) = 6$. Therefore, we expect to have to cast the die 6
+      times in order to roll a six.
     \item
     \item
   \end{enumerate}
