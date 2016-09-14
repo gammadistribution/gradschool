@@ -1,0 +1,52 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+
+\theoremstyle{definition}
+\newtheorem{innercustomthm}{Problem}
+\newenvironment{problem}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\roman{enumi}}
+
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 1}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 1}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+% Problem 1
+\input{problems/problem_1.4.1}
+
+% Problem 2
+\input{problems/problem_1.4.2}
+
+% Problem 3
+\input{problems/problem_1.4.4}
+
+% Problem 4
+\input{problems/problem_1.4.7}
+
+% Problem 5
+\input{problems/problem_1.4.8}
+
+
+
+\end{document}
