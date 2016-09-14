@@ -7,5 +7,49 @@
 \end{problem}
 
 \begin{proof}
+  Suppose that $X$ is an exponential random variable with mean $1/\lambda$. Let $Y$
+  be the discrete random variable defined as
+  \begin{align*}
+    Y =
+    \begin{cases}
+      1 & \text{if $X > 1$} \\
+      0 & \text{if $0 < X \leq 1$}
+    \end{cases}
+  \end{align*}
+  with probability mass function
+  \begin{align*}
+    p_Y(y) =
+    \begin{cases}
+      P\{X > 1\} & \text{if $Y = 1$} \\
+      P\{X \leq 1\} & \text{if $Y = 0$}
+    \end{cases}
+  \end{align*}
+  From these definitions of $X$ and $Y$, we see that the conditional density function of $X$ given $Y=1$ is
+  given by
+  \begin{align*}
+    f_{X|Y}(x|1) = \frac{f(x, 1)}{p_Y(1)} =
+    \begin{cases}
+      \frac{f_X(x)}{P\{Y=1\}} & \text{if $x > 1$}\\
+      0 & \text{if $0 < x \leq 1$} \\
+    \end{cases}
+  \end{align*}
+  where we know that if $x > q$ then
+  \begin{align*}
+    \frac{f_X(x)}{P\{Y=1\}}
+    &= \frac{\lambda e^{-\lambda x}}{1 - P\{X \leq 1\}} \\
+    &= \frac{\lambda e^{-\lambda x}}{P\{X > 1\}}\\
+    &= \frac{\lambda e^{-\lambda x}}{1 - \int_0^1\lambda e^{-\lambda x}dx }\\
+    &= \frac{\lambda e^{-\lambda x}}{e^{-\lambda}}.
+  \end{align*}
+
+  Thus, by definition, we now have that
+  \begin{align*}
+    E[X | X > 1] &= E[X | Y = 1] \\
+    &= \int_{-\infty}^\infty x f_{X|Y}(x|1) dx \\
+    &= \int_{1}^\infty x \frac{\lambda e^{-\lambda x}}{e^{-\lambda}} dx \\
+    &= \lambda {e^{\lambda}}\int_{1}^\infty x e^{-\lambda x} dx \\
+    &= \lambda {e^{\lambda}}\left[\frac{e^{-\lambda}(1 + \lambda)}{\lambda^2}\right]\\
+    &= \frac{1 + \lambda}{\lambda}.
+  \end{align*}
 \end{proof}
 \newpage
