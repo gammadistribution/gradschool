@@ -3,5 +3,45 @@
 \end{problem}
 
 \begin{proof}
+  Suppose that $X$ is a uniform random variable over $(0, 1)$. Let $Y$
+  be the discrete random variable defined as
+  \begin{align*}
+    Y =
+    \begin{cases}
+      1 & \text{if $0 < X < 1/2$} \\
+      0 & \text{if $1/2 \leq X < 1$}
+    \end{cases}
+  \end{align*}
+  with probability mass function
+  \begin{align*}
+    p_Y(y) =
+    \begin{cases}
+      P\{0 < X < 1/2\} & \text{if $y = 1$} \\
+      P\{1/2 \leq X < 1\} & \text{if $y = 0$}
+    \end{cases}.
+  \end{align*}
+  From these definitions of $X$ and $Y$, we see that the conditional density function of $X$ given $Y=1$ is
+  given by
+  \begin{align*}
+    f_{X|Y}(x|1) = \frac{f(x, 1)}{p_Y(1)} =
+    \begin{cases}
+      \frac{f_X(x)}{P\{Y=1\}} & \text{if $0 < x < 1/2$}\\
+      0 & \text{if $1/2 \leq x < 1$} \\
+    \end{cases}
+  \end{align*}
+  where we know that if $0 < x < 1/2$ then
+  \begin{align*}
+    \frac{f_X(x)}{P\{Y=1\}}
+    &= \frac{1}{P\{0 < X < 1/2\}}\\
+    &= \frac{1}{\int_{0}^{1/2}dx} \\
+    &= \frac{1}{1/2} = 2.
+  \end{align*}
+
+  Thus, by definition, we now have that
+  \begin{align*}
+    E[X | X < 1/2] &= E[X | Y = 1] \\
+    &= \int_{-\infty}^\infty x f_{X|Y}(x|1) dx \\
+    &= \int_{0}^{1/2} 2x dx = \frac{1}{4}.
+  \end{align*}
 \end{proof}
 \newpage

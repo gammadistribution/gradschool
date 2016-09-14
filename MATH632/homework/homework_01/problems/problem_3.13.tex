@@ -20,8 +20,8 @@
   \begin{align*}
     p_Y(y) =
     \begin{cases}
-      P\{X > 1\} & \text{if $Y = 1$} \\
-      P\{X \leq 1\} & \text{if $Y = 0$}
+      P\{X > 1\} & \text{if $y = 1$} \\
+      P\{X \leq 1\} & \text{if $y = 0$}.
     \end{cases}
   \end{align*}
   From these definitions of $X$ and $Y$, we see that the conditional density function of $X$ given $Y=1$ is
@@ -33,11 +33,11 @@
       0 & \text{if $0 < x \leq 1$} \\
     \end{cases}
   \end{align*}
-  where we know that if $x > q$ then
+  where we know that if $x > 1$ then
   \begin{align*}
     \frac{f_X(x)}{P\{Y=1\}}
-    &= \frac{\lambda e^{-\lambda x}}{1 - P\{X \leq 1\}} \\
     &= \frac{\lambda e^{-\lambda x}}{P\{X > 1\}}\\
+    &= \frac{\lambda e^{-\lambda x}}{1 - P\{X \leq 1\}} \\
     &= \frac{\lambda e^{-\lambda x}}{1 - \int_0^1\lambda e^{-\lambda x}dx }\\
     &= \frac{\lambda e^{-\lambda x}}{e^{-\lambda}}.
   \end{align*}
