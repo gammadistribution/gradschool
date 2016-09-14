@@ -6,5 +6,22 @@
 \end{problem}
 
 \begin{proof}
-\end{proof}
+  Suppose that $X$ and $Y$ are continuous, independent random variables with probability
+  density functions $f_X(x)$ and $f_Y(y)$, respectively. The conditional probability density
+  function of $X$ given that $Y=y$ is given by
+  \begin{align*}
+    f_{X|Y}(x|y) = \frac{f(x, y)}{f_Y(y)}
+  \end{align*}
+  where $f(x, y)$ is the joint probability density function of $X$ and $Y$. Due to the independence
+  of the random variables $X$ and $Y$, we have that $f(x, y) = f_X(x)f_Y(y)$. Thus, if $X$ and $Y$ are independent, then
+  the conditional probability density function of $X$ given that $Y=y$ is
+  \begin{align}\label{ind_con}
+    f_{X|Y}(x|y) = \frac{f(x, y)}{f_Y(y)} = \frac{f_X(x)f_Y(y)}{f_Y(y)} = f_X(x).
+  \end{align}
+  Therefore, combining the definition of conditional expectation for continuous random variables
+  and result \eqref{ind_con}, we have that for any $y$,
+  \begin{align*}
+    E[X|Y=y] = \int_{-\infty}^\infty x f_{X|Y}(x|y) dx = \int_{-\infty}^\infty x f_X(x) dx = E[X]
+  \end{align*}
+  and we are done.\end{proof}
 \newpage
