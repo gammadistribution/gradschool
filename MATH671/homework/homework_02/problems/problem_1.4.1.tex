@@ -3,5 +3,30 @@
 \end{problem}
 
 \begin{proof}
+  The fixed points of the function $f(x)$ are the roots of the function
+  \begin{align*}
+    g(x)
+    &= f(x) - x \\
+    &= \frac{6}{x} - 1 - x \\
+    &= -\frac{(x+3)(x+2)}{6}.
+  \end{align*}
+  We readily see that the roots of $g(x)$, which are the fixed points of $f(x)$,
+  are given by $x=-3$ and $x=2$.
+
+  According to Theorem 1.4.4, since $f(x)$ is a $C^1$ function, we may use the derivative
+  of $f(x)$ to classify its fixed points. If $c$ is a fixed point of $f$ and
+  $\left|f'(c)\right| < 1$, then $c$ is an asymptotically stable fixed point, while $\left|f'(c)\right| > 1$
+  indicates that $c$ is a repelling (unstable) fixed point.
+
+  Note that $f'(x) = -6/x^2.$ For the fixed point $x=-3$, we see that
+  \begin{align*}
+    \left|f'(-3)\right| = \left|- \frac{6}{(-3)^2}\right| = \frac{2}{3} < 1
+  \end{align*}
+  from which we classify the point $x=-3$ as an asymptotically stable fixed point.
+  On the other hand, for the fixed point $x=2$, we see that
+  \begin{align*}
+    \left|f'(2)\right| = \left|- \frac{6}{(2)^2}\right| = \frac{3}{2} > 1
+  \end{align*}
+  from which we classify the point $x=-3$ as a repelling (unstable) fixed point.
 \end{proof}
 \newpage
