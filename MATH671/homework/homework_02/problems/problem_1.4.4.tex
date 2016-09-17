@@ -1,6 +1,6 @@
 \begin{problem}{1.4.4}
   Let $S_\mu (x) = \mu \sin(x)$, $0 \leq x \leq 2\pi$, $0 < \mu \leq \pi$ and $C_\mu (x) = \mu \cos(x)$,
-  $−\pi \leq x \leq \pi$ and $−\pi \leq \mu \leq \pi$, $\mu \neq 0$.
+  $-\pi \leq x \leq \pi$ and $-\pi \leq \mu \leq \pi$, $\mu \neq 0$.
   \begin{enumerate}
     \item Show that $S_\mu$ has a super-attracting fixed point at $x = \pi/2$, when $\mu = \pi/2$.
     \item Find the corresponding values for $C_\mu$ having a super-attracting fixed point.
@@ -8,5 +8,31 @@
 \end{problem}
 
 \begin{proof}
+  Recall that if $c$ is a fixed point of a differentiable function $f$, then $c$ is a super-attracting
+  fixed point if $f'(c) = 0$.
+
+  \begin{enumerate}
+    \item Suppose that $\mu = \pi/2$. Since $S_\mu(\pi/2) = (\pi/2) \sin(\pi/2) = \pi/2$,
+      we readily see that if $\mu = \pi/2,$ then $x=\pi /2$ is a fixed point of $S_\mu(x)$.
+      Note that $S_\mu '(x) = \mu \cos(x)$. From this we gather that if $\mu = \pi/2$,
+      then for the fixed point $x = \pi/2$, we have that $S_\mu ' (x) = (\pi/2) \cos(\pi/2) = 0$.
+      Therefore, the fixed point $x=\pi/2$ is a super-attracting fixed point.
+    \item We now investigate the super-attracting fixed points of $C_\mu(x)$. The
+      definition of $C_\mu(x)$ shows that $C_\mu'(x) = - \mu\sin(x)$ from which
+      we can gather that $C_\mu'(x) = 0$ for $x\in [-\pi, \pi]$ if $x = k \pi$ for
+      $k\in \{-1, 0, 1\}$. Note that these are the possible super-attracting
+      fixed points of $C_\mu(x)$, we must still determine which
+      of these possible super-attracting fixed points are indeed fixed points, i.e.\ we
+      must determine which points satisfy $C_\mu(x) = x$. If $x = k \pi$ for
+      $k\in \{-1, 0, 1\}$, then
+      \begin{align*}
+        C_\mu(k\pi ) = \mu\cos(k\pi) =(-1)^k\mu.
+      \end{align*}
+      Thus, $C_\mu(k\pi) = (-1)^k \mu = k \pi$, if $\mu = (-1)^k k\pi$. Therefore, if $x, \mu \in [-\pi, \pi]$ with $\mu \neq 0$,
+      then the points $x_1 = -\pi$ and $x_2 = \pi$, with corresponding
+      $\mu$-values $\mu_1=\pi$ and $\mu_2 = -\pi$, are super-attracting fixed points.
+      Note that $x = 0$ is not a super-attracting fixed point
+      since it is not a fixed point, that is $C_\mu(0) = 0$ only if $\mu = 0$, which violates our initial conditions.
+  \end{enumerate}
 \end{proof}
 \newpage
