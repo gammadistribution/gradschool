@@ -5,5 +5,30 @@
 \end{problem}
 
 \begin{proof}
+  The Newton function for a function $f$ is defined by
+  \begin{align*}
+    N_f(x) = x - \frac{f(x)}{f'(x)}
+  \end{align*}
+  whenever $f'(x) \neq 0.$ Thus, for the function $f(x) = x^2 + 1$,
+  we have that
+  \begin{align*}
+    N_f(x) &= x - \frac{f(x)}{f'(x)}\\
+    &= x - \frac{x^2 + 1}{2x} \\
+    &= \frac{x^2 - 1}{2x}.
+  \end{align*}
+  Using this definition of $N_f(x)$, we can readily see that
+  \begin{align*}
+    N_f^2(x) = N_f(N_f(x))
+    &= \frac{\left(\frac{x^2 - 1}{2x}\right)^2 - 1}{2\left(\frac{x^2 - 1}{2x}\right)} \\
+    &= \frac{x^4-2x^2 - 4x^2 +1}{4x^2} \cdot \frac{x}{x^2-1} \\
+    &= \frac{x^4 - 6x^2 +1}{4x(x^2 - 1)}.
+  \end{align*}
+
+  The points $x$ such that $N_f^2(x) = x$ are the solutions to the equation
+  \begin{align*}
+    N_f^2(x) - x = \frac{x^4 - 6x^2 +1}{4x(x^2 - 1)} - x = \frac{-3x^4-2x^2+1}{4x(x^2-1)} = 0.
+  \end{align*}
+  We readily see that $x = \pm 3^{-1/2}$ are the real solutions to the above equation.
+  Therefore, $x = \pm 3^{-1/2}$ satisfy $N_f^2(x) = x$ and are period 2-points.
 \end{proof}
 \newpage
