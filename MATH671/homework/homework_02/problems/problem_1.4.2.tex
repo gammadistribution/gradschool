@@ -1,9 +1,33 @@
 \begin{problem}{1.4.2}
-  Let $f : \mathbb{R} \to \mathbb{R}$. If $f'(x)$ exists with $f'(x) \neq 1$ for
+  Let $f: \mathbb{R} \to \mathbb{R}$. If $f'(x)$ exists with $f'(x) \neq 1$ for
   all $x \in \mathbb{R}$, prove that $f$ has at most one fixed point.
   (Hint: Use the Mean Value Theorem).
 \end{problem}
 
 \begin{proof}
+  Suppose to the contrary that for all $x\in\mathbb{R}$ we have that $f'(x)$ exists
+  with $f'(x) \neq 1$, but $f$ has at least two distinct fixed points, $c_1$ and $c_2$, say.
+  The Mean Value Theorem states that if a function $g$ is continuous on an interval
+  $[a, b]$ and differentiable on the interval $(a, b)$, then there exists a point $c \in (a, b)$
+  such that
+  \begin{align*}
+    g'(c) = \frac{g(b)- g(a)}{b - a}.
+  \end{align*}
+  By our supposition, we have that the function $f$ is continuous and differentiable
+  on any interval and, in particular, it is continuous on $[c_1, c_2]$ and differentiable
+  on $(c_1, c_2)$. By the Mean Value Theorem, there exists a point $c_3 \in (c_1, c_2)$
+  such that
+  \begin{align}\label{MVT}
+    f'(c_3) = \frac{f(c_2)- f(c_1)}{c_2 - c_1}.
+  \end{align}
+  However, since $c_1$ and $c_2$ are fixed points of $f$, we know that $f(c_2)- f(c_1) = c_2 - c_1$
+  and we gather from \eqref{MVT} that
+  \begin{align*}
+    f'(c_3) = \frac{f(c_2)- f(c_1)}{c_2 - c_1} = \frac{c_2 - c_1}{c_2 - c_1} = 1.
+  \end{align*}
+  However, this is in contradiction to our supposition that $f'(x) \neq 1$ for
+  any $x \in \mathbb{R}$. Therefore, we must conclude that for a function
+  $f: \mathbb{R} \to \mathbb{R}$, if for all $x\in\mathbb{R}$ we have that $f'(x)$ exists
+  with $f'(x) \neq 1$, then $f$ has at most one fixed point.
 \end{proof}
 \newpage
