@@ -2,13 +2,96 @@
   \begin{enumerate}
     \item Suppose that $f(c) = f'(c) = 0$ and $f''(c) \neq 0$. If $f''(x)$ is continuous at $x = c$,
       show that the Newton function $N_f (x)$ has a removable discontinuity at $x = c$. (Hint:
-      Apply L’Hopital’s rule to $N_f$ at $x = c$.)
+      Apply L'Hopital's rule to $N_f$ at $x = c$.)
     \item If in addition, $f'''(x)$ is continuous at $x = c$ with $f'''(c) \neq 0$,
       show that $N_f'(c) = 1/2$, so that $x = c$ is not a super-attracting fixed point in this case.
-    \item Check the above for the function $f(x) = x^3 − x^2$ with $c = 0$.
+    \item Check the above for the function $f(x) = x^3 - x^2$ with $c = 0$.
   \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Suppose that $\lim_{x\to c} N_f(x) = L$. The function $N_f(x)$ will have a
+      removable discontinuity at $x = c$ if $N_f(c)$ is undefined or $N_f(c) \neq L$ and
+      the following function defined as
+      \begin{align}\label{remove}
+        F(x) :=
+        \begin{cases}
+          N_f(x) & \text{if $x \neq c$}\\
+          L & \text{if $x = c$}
+        \end{cases}
+      \end{align}
+      is continuous everywhere. Throughout, we assume without loss of generality that  $x=c$ is the only point such that $f'(x) = 0$.
+
+      Note that if $x_0 \neq c$, then the differentiability of $f'$ implies that both $f$
+      and $f'$ are continuous so that
+      \begin{align*}
+        \lim_{x\to x_0} N_f(x) = \lim_{x\to x_0} x - \frac{f(x)}{f'(x)} = x_0 - \frac{f(x_0)}{f'(x_0)} = N_f(x_0),
+      \end{align*}
+      i.e.\ the function $N_f(x)$ is continuous.
+
+      On the other hand, at the point $x = c$, we see from the continuity of $f$ and $f'$
+      that
+      \begin{align*}
+        \lim_{x\to c} N_f(x) &= \lim_{x\to c} x - \frac{f(x)}{f'(x)} \\
+        &= \lim_{x\to c} \frac{xf'(x) - f(x)}{f'(x)} \\
+        &= \frac{c f'(c) - f(c)}{f'(c)}.
+      \end{align*}
+      From our supposition that $f(c) = f'(c) = 0$, we see that $c f'(c) - f(c) = 0$ and $f'(c) = 0$
+      implying that $\lim_{x\to c} N_f(x) = 0/0$, an indeterminate form. By L'Hospital's rule
+      in conjunction with our supposition that $f''$ is continuous and $f''(c) \neq 0$,
+      since $\lim_{x\to c} x f'(x) - f(x) = \lim_{x\to c} f'(x) = 0$, we know that
+      \begin{align*}
+        \lim_{x\to c} N_f(x) &= \lim_{x\to c} \frac{xf'(x) - f(x)}{f'(x)} \\
+        &= \lim_{x\to c} \frac{[xf'(x) - f(x)]'}{[f'(x)]'} \\
+        &= \lim_{x\to c} \frac{x f''(x)}{f''(x)} = c.
+      \end{align*}
+
+      Therefore, the function
+      \begin{align*}
+        F(x) :=
+        \begin{cases}
+          N_f(x) & \text{if $x \neq c$}\\
+          c & \text{if $x = c$}
+        \end{cases}
+      \end{align*}
+      is continuous everywhere and $x = c$ is a removable discontinuity for the
+      function $N_f(x)$.
+
+    \item Suppose that $f'''(x)$ is continuous at $x = c$ with $f'''(c) \neq 0$. From the definition of $N_f(x)$,
+      we see that
+      \begin{align*}
+        N_f'(x) = \left[\frac{xf'(x) - f(x)}{f(x)}\right]' = \frac{f(x)f''(x)}{f'(x)^2}.
+      \end{align*}
+      Thus, we have from our initial assumptions that
+      \begin{align*}
+        \lim_{x\to c} N_f'(x) = \lim_{x\to c}\frac{f(x)f''(x)}{f'(x)^2} = \frac{0}{0},
+      \end{align*}
+      an indeterminate form. The assumptions to use L'Hospital's rule are met and we see
+      from the continuity of $f$ and its derivatives combined with our initial suppositions that
+      \begin{align*}
+        \lim_{x\to c} N_f'(x) &= \lim_{x\to c}\frac{[f(x)f''(x)]'}{[f'(x)^2]'} \\
+        &= \lim_{x\to c}\frac{f'(x)f''(x) + f(x)f'''(x)}{2f'(x)f''(x)} = \frac{0}{0},
+      \end{align*}
+      another indeterminate form. Applying L'Hospital's rule one last time we see
+      that
+      \begin{align*}
+        \lim_{x\to c} N_f'(x) &= \lim_{x\to c}\frac{[f'(x)f''(x) + f(x)f'''(x)]'}{[2f'(x)f''(x)]'}\\
+        &= \lim_{x\to c}\frac{f''(x)^2 + 2f'(x)f'''(x) + f(x) f^{(4)}(x)}{2f''(x)^2 + 2 f'(x)f'''(x)} = \frac{1}{2}.
+      \end{align*}
+      Therefore, since $|N_f'(c)| \neq 0$, the point $x=c$ is not a super-attracting
+      fixed point.
+    \item Let $f(x) = x^3 - x^2$. Note that $f'(x) = 3x^2 - 2x$, $f''(x) = 6x - 2$, and $f'''(x) = 6$, all of which are continuous.
+      Further, we know that
+      \begin{align*}
+        N_f(x) = x - \frac{f(x)}{f'(x)} = \frac{2x^2 - x}{3x - 2}.
+      \end{align*}
+      It is clear that the point $c = 0$ is a fixed point of the function $f$. Note that
+      $f(c) = f'(c) = 0$ with $f''(c) \neq 0$ and $f'''(c) \neq 0$. However, the point $x=c$ is
+      not a removable discontinuity since $\lim_{x\to c}N_f(x) = 0 = N_f(c)$, i.e.\
+      the Newton function is actually continuous at $x=c$ so there is no discontinuity to remove. Since $|N_f'(c)| = 1/2$,
+      the result that $c = 0$ is not a super-attracting fixed point still holds.
+
+  \end{enumerate}
 \end{proof}
 \newpage
