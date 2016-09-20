@@ -1,0 +1,6 @@
+\begin{{problem}}{{{problem_number}}}
+\end{{problem}}
+
+\begin{{proof}}
+\end{{proof}}
+\newpage
