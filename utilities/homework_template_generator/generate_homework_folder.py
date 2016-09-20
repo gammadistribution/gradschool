@@ -43,7 +43,9 @@ def get_directories(root_path, homework_number):
         subpath = settings.generate.FILE_SUBPATHS[template]
         subpath = subpath.format(**{'homework_number': homework_number})
 
-        directories.update({template: os.path.join(root_path, subpath)})
+        directories.update({
+            template: os.path.join(os.path.abspath(root_path), subpath)
+        })
 
     for name in directories:
         directory = directories[name]
