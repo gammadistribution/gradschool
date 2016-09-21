@@ -1,0 +1,44 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+
+\theoremstyle{definition}
+\newtheorem{innercustomthm}{Problem}
+\newenvironment{problem}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\roman{enumi}}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 3}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 3}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\input{problems/problem_1.5.1}
+
+\input{problems/problem_1.5.2}
+
+\input{problems/problem_1.5.3}
+
+\input{problems/problem_1.5.6}
+
+\input{problems/problem_1.5.9}
+
+
+\end{document}
