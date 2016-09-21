@@ -4,5 +4,35 @@
 \end{problem}
 
 \begin{proof}
+  Recall that the Schwarzian derivative of a function $h(x)$ is given by
+  \begin{align*}
+    Sh(x) = \frac{h'''(x)}{h'(x)} - \frac{3}{2}\left[\frac{h''(x)}{h'(x)}\right]^2
+  \end{align*}
+  and this derivative exists if $h'''(x)$ exists and $h'(x) \neq 0$.
+
+  Suppose that $f(x) = e^x$. Then we know that $f^{(n)}(x) = e^x = f(x)$
+  for any positive integer $n$. Therefore,
+  \begin{align*}
+    Sf(x) = \frac{e^x}{e^x} - \frac{3}{2}\left[\frac{e^x}{e^x}\right]^2 = 1 - \frac{3}{2} = -\frac{1}{2} < 0
+  \end{align*}
+  and we are done.
+
+  Now suppose that $g(x) = \sin(x)$. The successive derivatives of $g$ are given by
+  \begin{align*}
+    g'(x) &= \cos(x)\\
+    g''(x) &= -\sin(x)\\
+    g'''(x) &= -\cos(x).
+  \end{align*}
+  Computing the Schwarzian derivative of $g(x)$, we see that
+  \begin{align*}
+    Sg(x)
+    &= -\frac{\cos(x)}{\cos(x)} - \frac{3}{2}\left[-\frac{\sin(x)}{\cos(x)}\right]^2 \\
+    &= -1 - \frac{3\tan^2(x)}{2}.
+  \end{align*}
+  Since $\tan^2(x) \geq 0$ for any $x\in\mathbb{R}$, we have that $1 + (3/2)\tan^2(x) \geq 1$ so that
+  \begin{align*}
+    Sg(x) = -1 - \frac{3\tan^2(x)}{2} \leq -1 < 0
+  \end{align*}
+  and we are done.
 \end{proof}
 \newpage
