@@ -11,5 +11,89 @@
 \end{problem}
 
 \begin{proof}
+  Note that a point $x=c$ is a fixed point of $f$ if $c$ is a solution to the equation $g(x) = f(x) - x = 0$.
+  If $x=c$ is a fixed point, then the behavior of the derivatives of $f$ at the point $x=c$ will allow us
+  to classify the stability of the fixed point.
+
+  \begin{enumerate}
+    \item The solutions to the equation
+      \begin{align*}
+        g(x) &= f(x) - x \\
+        &= \frac{x^3}{2} + \frac{x}{2} - x \\
+        &= \frac{x^3}{2} - \frac{x}{2} - x = 0
+      \end{align*}
+      are given by $x = -1,$ $x = 0$, and $x = 1$. Note that $f'(x) = 3x^2/{2} + 1/2$.
+
+      For the fixed point $x=-1$, we see that $|f'(-1)| = 2 > 1$ so that $x=-1$ is a hyperbolic fixed point
+      and by theorem 1.4.4, this fixed point is unstable.
+
+      For the fixed point $x=0$, we see that $|f'(0)| = 1/2 < 1$ so that $x=0$ is a hyperbolic fixed point
+      and by theorem 1.4.4, this fixed point is stable.
+
+      For the fixed point $x=1$, we see that $|f'(1)| = 2 > 1$ so that $x=1$ is a hyperbolic fixed point
+      and by theorem 1.4.4, this fixed point is unstable.
+
+    \item Note that for any $x\in\mathbb{R}$, we have that $-\pi/2 < \arctan(x) < \pi/2$.
+      Thus, if $|x| > \pi/2$, then $|\arctan(x)| < \pi/2 < |x|$ so that for any such $x$ we have
+      that $\arctan(x) \neq x$, i.e. $f(x) = \arctan(x)$ has no fixed points.
+
+      Since $f(x)$ is continuous
+      on the interval $[-\pi/2, \pi/2]$, we know that $f(x)$ must have a fixed point on this interval.
+      Note that if $x > 0$, we can show that $0 < x/(x^2+1) < f(x) = \arctan(x) < x$. From this identity, we can show that
+      $$0 < f^{n+1}(x) < f^{n}(x) < \dots < x,$$ i.e. the iterates of $f$
+      are monotonically decreasing and bounded below. Thus, the limit converges to the infimum, i.e.\
+      $\lim f^n(x) = 0$. Therefore, we must have $x=0$ is a fixed point.
+
+      Using a similar inequality, we can show that the iterates of $f$ form a monotonically increasing sequence that is bounded above.
+      Thus, the limit converges to the supremum, i.e.\ $\lim f^n(x) = 0$ and $x =0$ is a fixed point. Therefore, $x=0$ is the only fixed point of $f(x) = \arctan(x)$.
+
+      Note that
+      \begin{align*}
+        f'(x) = 1/(x^2+1), \quad f''(x) = -2 x/(1 + x^2)^2, \quad f'''(x) = 8 x^2/(1 + x^2)^3 - 2/(1 + x^2)^2.
+      \end{align*}
+      Thus, for the fixed point $x = 0$, we see that $f'(0) = 1$, $f''(0) = 0$, and $f'''(0) = -2$. Therefore,
+      according to theorem 1.5.3 (iii), this fixed point is non-hyperbolic and stable.
+
+    \item The solutions to the equation
+      \begin{align*}
+        g(x) &= f(x) - x \\
+        &= x^3+x^2 + x - x \\
+        &= x^2(x + 1) = 0
+      \end{align*}
+      are given by $x = -1$ and $x = 0$. Note that $f'(x) = 3x^2 + 2x + 1$,
+      $f''(x) = 6x + 2$, and $f'''(x) = 6$.
+
+      For the fixed point $x=-1$, we see that $|f'(-1)| = 2 > 1$ so that $x=-1$ is a hyperbolic fixed point
+      and by theorem 1.4.4, this fixed point is unstable.
+
+      For the fixed point $x=0$, we see that $f'(0) = 1$ so that $x=0$ is a non-hyperbolic fixed point.
+      Since $f''(0) = 2 > 0$, we have by theorem 1.5.3 (i)(a) that this fixed point is one-sided stable to the left of $x=0$.
+
+    \item The solutions to the equation
+      \begin{align*}
+        g(x) &= f(x) - x \\
+        &= x^3-x^2 + x - x \\
+        &= x^2(x - 1) = 0
+      \end{align*}
+      are given by $x = 1$ and $x = 0$. Note that $f'(x) = 3x^2 - 2x + 1$,
+      $f''(x) = 6x - 2$, and $f'''(x) = 6$.
+
+      For the fixed point $x=1$, we see that $|f'(1)| = 2 > 1$ so that $x=1$ is a hyperbolic fixed point
+      and by theorem 1.4.4, this fixed point is unstable.
+
+      For the fixed point $x=0$, we see that $f'(0) = 1$ so that $x=0$ is a non-hyperbolic fixed point.
+      Since $f''(0) = - 2 < 0$, we have by theorem 1.5.3 (i)(b) that this fixed point is one-sided stable to the right of $x=0$.
+
+    \item If $x\leq 1/2$, then
+      $$f(x) -x = \frac{3x}{4} - x = -\frac{x}{4} = 0$$
+      if $x=0$. Since $x = 0 \leq 1/2$, we have that $x=0$ is a fixed point of $f(x)$.
+
+      If $x > 1/2$, then
+      $$f(x) -x = \frac{3(1-x)}{4} - x = \frac{3 - 7 x}{4} = 0$$
+      if $x=3/7$. Since $3/7 < 1/2$, we have that $x = 3/7$ is not a fixed point of $f(x)$.
+
+      If $x \leq 1/2$, then $f'(x) = 3/4$. Thus, for the fixed point $x=0$, we see
+      that $|f'(0)| < 1$ and $x=0$ is a non-hyperbolic stable fixed point by theorem 1.4.4.
+  \end{enumerate}
 \end{proof}
 \newpage
