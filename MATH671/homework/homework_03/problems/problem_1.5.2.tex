@@ -9,5 +9,64 @@
 \end{problem}
 
 \begin{proof}
+  As was shown in problem 1.2.1, we know that $f_c:\mathbb{R}\to\mathbb{R}$ with $f_c(x) = x^2 + c$
+  has two fixed points given by
+  \begin{align}\label{fixed}
+    x_1 = \frac{1 - \sqrt{1 - 4c}}{2}, \qquad         x_2 = \frac{1 + \sqrt{1 - 4c}}{2}
+  \end{align}
+  provided that $c \leq 1/4$.
+
+  \begin{enumerate}
+    \item Suppose that $c \leq 1/4$. Then the fixed points of
+      $f_c$ are provided by \eqref{fixed}. Recall that a fixed point $x = a$ is a hyperbolic fixed point of
+      a function $g$ if $|g(a)| \neq 1$. In particular, $x = a$ will be asymptotically stable if $|g(a)| < 1$
+      and unstable if $|g(a)| > 1$.
+
+      We begin by assuming the fixed point of the function $f_c$ has the form $x_1$. Then $x_1$ will be stable
+      if
+      \begin{align}\label{stable}
+        |f_c'(x_1)| = |1 - \sqrt{1-4c}| < 1.
+      \end{align}
+      However, this is only true if $-3/4 < c < 1/4$. Thus, $x_1$ will be asymptotically stable if $-3/4 < c < 1/4$.
+      Similarly, by reversing the inequality in \eqref{stable},
+      we can easily see that the fixed point $x_1$ will be unstable if $c < -3/4$.
+
+      Now, assuming that the fixed point of $f_c$ has the form $x_2$, then the fixed point $x_2$ will be stable if
+      \begin{align*}
+        |f_c'(x_2)| = |1 + \sqrt{1-4c}| < 1.
+      \end{align*}
+      However, this has no real solutions if $c \leq 1/4$. On the other hand, we can see that
+      \begin{align*}
+        |f_c'(x_2)| = |1 + \sqrt{1-4c}| > 1
+      \end{align*}
+      if $c < 1/4$. Therefore, every hyperbolic fixed point of $f_c$ of the form $x_2$ is unstable.
+
+    \item A fixed point $x = a$ is a non-hyperbolic fixed point of a function $g$ if $|g(a)| =1$.
+
+      We first investigate fixed points of the form $x_1$. Assuming the fixed point of $f_c$ is of the form $x_1$,
+      then $x_1$ is non-hyperbolic if
+      \begin{align*}
+        |f_c'(x_1)| = \left|1-\sqrt{1-4c}\right| = 1
+      \end{align*}
+      from which we see that $1-\sqrt{1-4c} = 1$ if $c = 1/4$ and that $1-\sqrt{1-4c} = -1$ if $c=-3/4$.
+      Thus, $x_1$ is a non-hyperbolic fixed point if $c= 1/4$ or $c=-3/4$.
+
+      In the case that $c=1/4$, then $f_c'(x_1) = 1$ and $f_c''(x_1) = 2$. Thus, since $f_c''(x_2) > 0$, applying theorem 1.5.3 (i) (a), we see that
+      this fixed point is one-sided stable to the left of $x_1$. On the other hand, if $c=-3/4$, then $f_c'(x_1) = -1$ with $f_c''(x_1) = 2$ and $f_c'''(x_1) = 0$.
+      Since $f_c'(x_1) = -1$, the Schwarzian derivative of $f_c$ is given by
+      $$Sf_c(x) = -f_c'''(x) - \frac{3 \left(f_c''(x)\right)^2}{2} = -6.$$
+      Note that $Sf_c(x_1) < 0$, so applying theorem 1.5.7 (i) we find that the fixed point $x_1$ is asymptotically stable
+      if $c = -3/4$.
+
+      We now investigate fixed points of the form $x_2$. Assuming the fixed point of $f_c$ is of the form $x_2$,
+      then
+      \begin{align*}
+        |f_c'(x_2)| = \left|1+\sqrt{1-4c}\right| = 1
+      \end{align*}
+      only if $c = 1/4$. Thus, $x_2$ is a non-hyperbolic fixed point if $c= 1/4$.
+
+      In this case, we see that $f_c'(x_2) = 1$ and $f_c''(x_2) = 2$. Thus, since $f_c''(x_2) > 0$, applying theorem 1.5.3 (i) (a), we see that
+      this fixed point is one-sided stable to the left of $x_2$ if $c = 1/4$.
+  \end{enumerate}
 \end{proof}
 \newpage
