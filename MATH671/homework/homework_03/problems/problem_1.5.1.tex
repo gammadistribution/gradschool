@@ -35,17 +35,28 @@
 
     \item Note that for any $x\in\mathbb{R}$, we have that $-\pi/2 < \arctan(x) < \pi/2$.
       Thus, if $|x| > \pi/2$, then $|\arctan(x)| < \pi/2 < |x|$ so that for any such $x$ we have
-      that $\arctan(x) \neq x$, i.e. $f(x) = \arctan(x)$ has no fixed points.
+      that $\arctan(x) \neq x$, i.e. $f(x) = \arctan(x)$ has no fixed points for $|x| > \pi/2$.
 
-      Since $f(x)$ is continuous
-      on the interval $[-\pi/2, \pi/2]$, we know that $f(x)$ must have a fixed point on this interval.
-      Note that if $x > 0$, we can show that $0 < x/(x^2+1) < f(x) = \arctan(x) < x$. From this identity, we can show that
-      $$0 < f^{n+1}(x) < f^{n}(x) < \dots < x,$$ i.e. the iterates of $f$
-      are monotonically decreasing and bounded below. Thus, the limit converges to the infimum, i.e.\
-      $\lim f^n(x) = 0$. Therefore, we must have $x=0$ is a fixed point.
+      Since $f(x)$ is continuous on the interval $[-\pi/2, \pi/2]$, we know that
+      $f(x)$ must have a fixed point on this interval.
+      By the Mean Value Theorem, we know that if $x > 0$, then
+      \begin{align*}
+        0 < \frac{x}{x^2+1} < \arctan(x).
+      \end{align*}
+      It can be shown that for $g(x) = \arctan(x) - x$, if $x >0$, then $g'(x) < 0$. This implies that the function $g(x)$ is monotonically decreasing
+      and that $g(x) < g(0) = 0$, i.e.\ $\arctan(x) < x$. Combining, we see that
+      \begin{align*}
+        0 < \arctan(x) < x.
+      \end{align*}
+      From this inequality, we gather that if $x \in (0, \pi/2)$, we have that $\arctan(x) > 0$ and that
+      \begin{align*}
+        0 < f^{n}(x) < f^{n-1}(x) < \dots < f(x) < x,
+      \end{align*}
+      i.e. the iterates of $f$ are monotonically decreasing and bounded below. Thus, the limit converges to the infimum, i.e.\
+      $\lim f^n(x) = 0$. Therefore, we must have $x=0$ is a fixed point if $x \in (0, \pi/2)$.
 
-      Using a similar inequality, we can show that the iterates of $f$ form a monotonically increasing sequence that is bounded above.
-      Thus, the limit converges to the supremum, i.e.\ $\lim f^n(x) = 0$ and $x =0$ is a fixed point. Therefore, $x=0$ is the only fixed point of $f(x) = \arctan(x)$.
+      Using a similar inequality, we can show that if $x \in (-\pi/2, 0)$, then the iterates of $f$ form a monotonically increasing sequence that is bounded above.
+      Thus, the limit in this case converges to the supremum, i.e.\ $\lim f^n(x) = 0$ and $x =0$ is a fixed point if $x \in (-\pi/2, 0)$. Therefore, $x=0$ is the only fixed point of $f(x) = \arctan(x)$.
 
       Note that
       \begin{align*}
