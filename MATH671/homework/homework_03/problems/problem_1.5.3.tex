@@ -8,5 +8,116 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item The fixed points of $f(x)$ are the roots of the function
+      \begin{align*}
+        g(x) &= f(x) - x \\
+        &= -2x^3 + 2x^2 + x - x \\
+        &= -2x^2(x-1).
+      \end{align*}
+      From the factorization of $g(x)$, we clearly see that its roots are given by $x=0$ and $x=1$.
+      Note that $f'(x) = -6x^2 + 4x + 1$. From this we see that $f'(0) = 1$ and $f'(1)=-1$, implying that both
+      fixed points are non-hyperbolic fixed points.
+
+      Using $f''(x) = -12x + 4$, we see that $f''(0) = 4 > 0$ so that by theorem 1.5.3 (i) the fixed point $x=0$ is one-sided stable to the left of $x =0$.
+
+      To determine the stability of $x=1$, we note that the Schwarzian derivative of $f(x)$
+      when $f'(x) = -1$ is given by $Sf(x) = -f'''(x) - 3f''(x)^2/2$. Thus, $f'(1) = -1$ and
+      $Sf(1) = 12 - 96 < 0$ so that by
+      theorem 1.5.7, the fixed point $x=1$ is asymptotically stable.
+    \item Suppose that $f(x) = ax^3 + bx^2 + cx + d$. We know that if $x=0$ and $x=1$ are fixed points
+      of $f(x)$ then
+      \begin{align}\label{co_fixed}
+        \begin{array}{lll}
+          f(0) &= d &= 0 \\
+          f(1) &= a + b + c &= 1.
+        \end{array}
+      \end{align}
+      The fixed points $x=0$ and $x=1$ are non-hyperbolic fixed points if $|f'(0)| = |f'(1)| = 1$.
+      Using $f(x)$, we see that $f'(x) = 3ax^2 + 2bx + c$. Thus, the fixed points are non-hyperbolic
+      if
+      \begin{align}\label{co_hyper}
+        \begin{array}{lll}
+          \left|f'(0)\right| &= |c| &= 1 \\
+          \left|f'(1)\right| &= |3a + 2b + c| &= 1.
+        \end{array}
+      \end{align}
+      From \eqref{co_fixed}, we see that $a = 1 -b -c$ and substituting into \eqref{co_hyper} we have that $|f'(1)|$ reduces to
+      \begin{align}\label{red_hyper}
+        \left|f'(1)\right| = |3(1 - b - c) + 2b + c| = |3 -b - 2c| = 1.
+      \end{align}
+      Note that \eqref{co_hyper} tells us there are two cases to consider, the case that
+      $c = 1$ and the case that $c=-1$.
+
+      If $c=1$, then \eqref{red_hyper} tells us that
+      \begin{align*}
+        |3-b-2c| = |1 -b| = 1
+      \end{align*}
+      from which we gather that $b=0$ or $b=2$. If $b=0$, then using \eqref{co_fixed}, we see that $a=0$. On the other hand, if
+      $b=2$, we see that we must have that $a=-2$.
+
+      If $c=-1$, then \eqref{red_hyper} tells us that
+      \begin{align*}
+        |3-b-2c| = |5 -b| = 1
+      \end{align*}
+      from which we gather that $b=4$ or $b=6$. If $b=4$, then using \eqref{co_fixed}, we see that $a=-2$. On the other hand, if
+      $b=6$, we see that we must have that $a=-4$.
+    \item The previous remarks allow us to explicitly write
+      out the function $f:\mathbb{R}\to\mathbb{R}$ for $f(x) = ax^3 + bx^2 + cx + d$ when $f(x)$ has two non-hyperbolic fixed points $x=0$ and $x=1$.
+      We write the four possibilities as follows:
+      \begin{align*}
+        f_1(x) &= x \\
+        f_2(x) &= -2x^3 + 2x^2 + x \\
+        f_3(x) &= -2x^3 + 4x^2 - x \\
+        f_4(x) &= -4x^3 + 6x^2 - x.
+      \end{align*}
+      We now evaluate the stability of the fixed points $x = 0$ and $x = 1$ for $f_1(x)$.
+      From the definition of stability, we have that a point $c$ is stable for $f$ if for all $\epsilon > 0$,
+      there exists $\delta >0$ such that if $x \in I = \mathbb{R}$ and $|x - c| < \delta$, then
+      $|f^n(x) - c| < \epsilon$ for every positive integer $n$. Note that $f_1^n(x) = x$ for every positive integer $n$. It is clear from the
+      definition of stability that by taking $\delta = \epsilon$, the fixed points $x=0$ and $x=1$ are stable. They are not however asymptotically stable since
+      these are not attracting fixed points. This is clear because there is no neighborhood of either fixed points such that
+      the iterates of $f_1$ for points in that neighborhood converge to $x=0$ or $x=1$. Intuitively, this is because
+      every point of $f_1(x)$ is a fixed point.
+
+      We will now evaluate the stability of $x=0$ and $x=1$ for the remaining three functions.
+      Recall that the Schwarzian derivative of a function $g(x)$ when $g'(x)=-1$ is given by
+      \begin{align*}
+        Sg(x) = -g'''(x) - \frac{3g''(x)^2}{2}.
+      \end{align*}
+      Now, if $f(x) = ax^3 + bx^2 + cx$, then
+      \begin{align*}
+        f'(x) &= 3ax^2 + 2bx + c\\
+        f''(x) &= 6ax + 2b \\
+        f'''(x) &= 6a.
+      \end{align*}
+      Thus, for $x =0$, we can see that
+      \begin{align*}
+        \begin{array}{rlrlrl}
+          f_2'(0) &= \phantom{-}1  & f_3'(0) &= -1            & f_4'(0) &= -1 \\
+          f_2''(0) &= \phantom{-}4 & f_3''(0) &= \phantom{-}8 & f_4''(0) &= \phantom{-}12 \\
+          f_2'''(0) &= -12         & f_3'''(0) &= -12         & f_4'''(0) &= -24
+        \end{array}
+      \end{align*}
+      We see that for $f_2$, we have that $f_2'(0) = 1$ and $f_2'(0) > 0$ so
+      by theorem 1.5.3 we have that the fixed point $x=0$ is one-sided stable to the left of $x=0$.
+      For $f_3$ and $f_4$, we have that $f_3'(0) = f_4'(0) = -1$ as well as $Sf_3(0) = -84 < 0$
+      and $Sf_4(0) = -192 < 0$. Thus, by theorem 1.5.7, $x=0$
+      is an asymptotically stable fixed point for $f_3$ and $f_4$.
+
+      Similarly, for $x=1$, we can see that
+      \begin{align*}
+        \begin{array}{rlrlrl}
+          f_2'(1) &= -1    & f_3'(1) &= \phantom{-}1  & f_4'(1) &= -1 \\
+          f_2''(1) &= -8   & f_3''(1) &= -4           & f_4''(1) &= -12 \\
+          f_2'''(1) &= -12 & f_3'''(1) &= -12         & f_4'''(1) &= -24
+        \end{array}
+      \end{align*}
+      We see that for $f_3$, we have that $f_3'(1) = 1$ and $f_3''(1) < 0$ so
+      by theorem 1.5.3 we have that the fixed point $x=1$ is one-sided stable to the right of $x=1$.
+      For $f_2$ and $f_4$, we have that $f_2'(1) = f_4'(1) = -1$ as well as $Sf_2(1) = -84 < 0$
+      and $Sf_4(1) = -192 < 0$. Thus, by theorem 1.5.7, $x=1$
+      is an asymptotically stable fixed point for $f_2$ and $f_4$.
+  \end{enumerate}
 \end{proof}
 \newpage
