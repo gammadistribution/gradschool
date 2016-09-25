@@ -19,25 +19,25 @@
   \begin{enumerate}
     \item Suppose that $c \leq 1/4$. Then the fixed points of
       $f_c$ are provided by \eqref{fixed}. Recall that a fixed point $x = a$ is a hyperbolic fixed point of
-      a function $g$ if $|g(a)| \neq 1$. In particular, $x = a$ will be asymptotically stable if $|g(a)| < 1$
-      and unstable if $|g(a)| > 1$.
+      a function $g$ if $|g'(a)| \neq 1$. In particular, $x = a$ will be asymptotically stable if $|g'(a)| < 1$
+      and unstable if $|g'(a)| > 1$.
 
-      We begin by assuming the fixed point of the function $f_c$ has the form $x_1$. Then $x_1$ will be stable
-      if
+      We begin by assuming the fixed point of the function $f_c$ has the form $x_1$. Then $x_1$ will be a stable hyperbolic
+      fixed point if
       \begin{align}\label{stable}
-        |f_c'(x_1)| = |1 - \sqrt{1-4c}| < 1.
+        |f_c'(x_1)| = \left|1 - \sqrt{1-4c} \right| < 1.
       \end{align}
-      However, this is only true if $-3/4 < c < 1/4$. Thus, $x_1$ will be asymptotically stable if $-3/4 < c < 1/4$.
+      However, this is only true if $-3/4 < c < 1/4$. Thus, $x_1$ will be an asymptotically stable hyperbolic fixed point if $-3/4 < c < 1/4$.
       Similarly, by reversing the inequality in \eqref{stable},
-      we can easily see that the fixed point $x_1$ will be unstable if $c < -3/4$.
+      we can easily see that the fixed point $x_1$ will be an unstable hyperbolic fixed point if $c < -3/4$.
 
-      Now, assuming that the fixed point of $f_c$ has the form $x_2$, then the fixed point $x_2$ will be stable if
+      Now, assuming that the fixed point of $f_c$ has the form $x_2$, then the fixed point $x_2$ will be a stable hyperbolic fixed point if
       \begin{align*}
-        |f_c'(x_2)| = |1 + \sqrt{1-4c}| < 1.
+        |f_c'(x_2)| = \left|1 + \sqrt{1-4c}\right| < 1.
       \end{align*}
       However, this has no real solutions if $c \leq 1/4$. On the other hand, we can see that
       \begin{align*}
-        |f_c'(x_2)| = |1 + \sqrt{1-4c}| > 1
+        |f_c'(x_2)| = \left|1 + \sqrt{1-4c}\right| > 1
       \end{align*}
       if $c < 1/4$. Therefore, every hyperbolic fixed point of $f_c$ of the form $x_2$ is unstable.
 
