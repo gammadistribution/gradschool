@@ -1,5 +1,5 @@
 \begin{problem}{4.5}
-  A Markov chain $\{X_n, n \geq 0\}$ with states 0,1,2, has the transition
+  A Markov chain $\{X_n: n \geq 0\}$ with states 0,1,2, has the transition
   probability matrix
   \begin{align*}
     \renewcommand\arraystretch{1.5}
@@ -15,5 +15,77 @@
 \end{problem}
 
 \begin{proof}
+  If $\{X_n: n \geq 0\}$ is a Markov chain with state space $\mathcal{M}=\{0, 1, 2\}$,
+  then we know that $\{X_n: n \geq 0\}$ is a stochastic process and that
+  this stochastic process has the property that
+  \begin{align*}
+    P\{X_{n} = j\ |\ X_{n-1} = i, X_{n-2} =i_{n-2}, \dots, X_0 = i_0\} = P\{X_{n}=j\ |\ X_{n-1} = i\}
+  \end{align*}
+  for any time $n\in\mathbb{Z}^+$, i.e.\ the probability that $X_{n}$ is in state $j$
+  depends only on the probability that $X_{n-1}$ is in state $i$.
+  We denote $P\{X_{n}=j\ |\ X_{n-1} = i\}$ by $P_{ij}$ and $P\{X_{n}=j\ |\ X_{0} = i\}$ by $P_{ij}^n$.
+
+  We wish to find
+  \begin{align*}
+    E[X_3] = \sum_{j=0}^2 x P\{X_3 = j\}.
+  \end{align*}
+  If we know the probability that $X_0 = i$ for all states $i\in\mathcal{M}$,
+  then we can condition $P\{X_3 = j\}$ on the probability that $X_0$ is in state $i\in\mathcal{M}$ for all states, i.e.\
+  \begin{align}\label{prob_state}
+    P\{X_3 = j\} &= \sum_{i\in\mathcal{M}} P\{X_3 = j \ |\ X_0 = i\} P\{X_0 = i\} \notag \\
+    &= \sum_{i\in\mathcal{M}} P_{ij}^3 P\{X_0 = i\}
+  \end{align}
+  By assumption, we know that $P\{X_0 = 0\} = P\{X_0 = 1\} = 1/4$.
+  Since $\{X_n: n \geq 0\}$ is a stochastic process, $X_0$ is
+  a random variable so that $P\{X_0 = 2\} > 0$ and in particular
+  \begin{align*}
+    P\{X_0 = 2\} = 1 - \sum_{i\in\mathcal{M}, i\neq 2}P\{X_0 = i\} = \frac{1}{2}.
+  \end{align*}
+  With this, we are able to compute $P\{X_0 = i\}$ for all $i\in\mathcal{M}$ and use these
+  probabilities to find \eqref{prob_state}.
+
+  Lastly, in order to compute \eqref{prob_state}, we need to compute $P_{ij}^3$.
+  Note that the transition matrix gives the probability of transitioning from state $i$ to state $j$
+  i.e.\ $\boldsymbol{P} = (P_{ij})$. Let $\boldsymbol{P}^{(n)}$ be the matrix
+  of $n$-step transition probabilities $P_{ij}^n$. By the Chapman-Kolmogorov
+  equations, we have that $\boldsymbol{P}^{(n)} = \boldsymbol{P}^n$
+  so that the $n$-step transition probability matrix can be found through multiplication
+  of the transition matrix $\boldsymbol{P}$. Thus,
+  \begin{align}\label{trans}
+    \renewcommand\arraystretch{1.5}
+    \boldsymbol{P}^{(3)} =
+    \begin{bmatrix}
+      \frac{1}{2} & \frac{1}{3} & \frac{1}{6} \\
+      0 & \frac{1}{3} & \frac{2}{3} \\
+      \frac{1}{2} & 0 & \frac{1}{2} \\
+    \end{bmatrix}^3
+    =
+    \begin{bmatrix}
+      \frac{13}{36} & \frac{11}{54} & \frac{47}{108} \\
+      \frac{4}{9} & \frac{4}{27} & \frac{11}{27} \\
+      \frac{5}{12} & \frac{2}{9} & \frac{13}{36} \\
+    \end{bmatrix}
+  \end{align}
+  and $P_{ij}^3$ is the $ij$-th entry of $\boldsymbol{P}^{(3)}$.
+
+  Using the transition matrix \eqref{trans} and equation \eqref{prob_state}, we thus
+  have that
+  \begin{align*}
+        P\{X_3 = 0 \} &= \sum_{i\in\mathcal{M}} P_{i0}^3 P\{X_0 = i\} \\
+        &= \frac{13}{36} \cdot \frac{1}{4} + \frac{4}{9} \cdot \frac{1}{4} + \frac{5}{12}\cdot\frac{1}{2} \\
+        &= \frac{59}{144} \\ \\
+        P\{X_3 = 1 \} &= \sum_{i\in\mathcal{M}} P_{i1}^3 P\{X_0 = i\} \\
+        &= \frac{11}{54} \cdot \frac{1}{4} + \frac{4}{27} \cdot \frac{1}{4} + \frac{2}{9}\cdot\frac{1}{2} \\
+        &= \frac{43}{216} \\ \\
+        P\{X_3 = 2 \} &= \sum_{i\in\mathcal{M}} P_{i2}^3 P\{X_0 = i\} \\
+        &= \frac{47}{108} \cdot \frac{1}{4} + \frac{11}{27} \cdot \frac{1}{4} + \frac{13}{36}\cdot\frac{1}{2} \\
+        &= \frac{169}{432}.
+  \end{align*}
+  Therefore,
+  \begin{align*}
+    E[X_3] &= \sum_{j=0}^2 x P\{X_3 = j\} \\
+    &= P\{X_3 = 1\} + 2 P\{X_3 = 2\} \\
+    &= \frac{43}{216} + 2 \cdot \frac{169}{432} = \frac{53}{54}.
+  \end{align*}
 \end{proof}
 \newpage
