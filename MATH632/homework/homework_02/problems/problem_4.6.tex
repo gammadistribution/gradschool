@@ -10,16 +10,80 @@
     \end{Vmatrix}.
   \end{align*}
   Show by mathematical induction that
-  \begin{align*}
+  \begin{align}\label{induction}
     \renewcommand\arraystretch{1.5}
-    \boldsymbol{P^{(n)}} =
+    \boldsymbol{P}^{(n)} =
     \begin{Vmatrix}
       \frac{1}{2} + \frac{1}{2}(2p - 1)^n & \frac{1}{2} - \frac{1}{2}(2p - 1)^n  \\
       \frac{1}{2} - \frac{1}{2}(2p - 1)^n & \frac{1}{2} + \frac{1}{2}(2p - 1)^n \\
     \end{Vmatrix}.
-  \end{align*}
+  \end{align}
 \end{problem}
 
 \begin{proof}
+  Recall by the Chapman-Kolmogorov equations that the $n$-step transition matrix
+  of a Markov chain can be found through repeated multiplication of its initial
+  transition matrix i.e.\ $\boldsymbol{P}^{(n)} = \boldsymbol{P}^n$.
+
+  In order to show that equation \eqref{induction} is true by induction, we must
+  first show that the equation holds if $n=1$. Note that by our definition of the transition matrix $\boldsymbol{P}$ we have that
+  \begin{align*}
+    \renewcommand\arraystretch{1.5}
+    \boldsymbol{P}^{(1)} =
+    \begin{Vmatrix}
+      \frac{1}{2} + \frac{1}{2}(2p - 1)^{1} & \frac{1}{2} - \frac{1}{2}(2p - 1)^{1}  \\
+      \frac{1}{2} - \frac{1}{2}(2p - 1)^{1} & \frac{1}{2} + \frac{1}{2}(2p - 1)^{1} \\
+    \end{Vmatrix} =
+    \begin{Vmatrix}
+      p    & 1-p \\
+      1-p  & p   \\
+    \end{Vmatrix} = \boldsymbol{P}^{1}
+  \end{align*}
+  and we have established the initial step of the induction.
+
+  Now suppose that \eqref{induction} holds for $n$. As mentioned, by the Chapman-Kolmogorov equations,
+  we have that
+  \begin{align*}
+    \boldsymbol{P}^{(n+1)} = \boldsymbol{P}^{n+1} = \boldsymbol{P}\boldsymbol{P}^n.
+  \end{align*}
+  Thus, by our supposition, we have that
+  \begin{align*}
+    \boldsymbol{P}^{(n+1)} &= \boldsymbol{P}\boldsymbol{P}^n \\
+    &=
+    \renewcommand\arraystretch{1.5}
+    \begin{Vmatrix}
+      p    & 1-p \\
+      1-p  & p   \\
+    \end{Vmatrix}
+    \begin{Vmatrix}
+      \frac{1}{2} + \frac{1}{2}(2p - 1)^n & \frac{1}{2} - \frac{1}{2}(2p - 1)^n  \\
+      \frac{1}{2} - \frac{1}{2}(2p - 1)^n & \frac{1}{2} + \frac{1}{2}(2p - 1)^n \\
+    \end{Vmatrix} \\
+    &=
+    \renewcommand\arraystretch{1.5}
+    \begin{Vmatrix}
+      \frac{p}{2} + \frac{p}{2}(2p - 1)^n + (1-p)\left(\frac{1}{2} - \frac{1}{2}(2p - 1)^n\right) & \frac{p}{2} - \frac{p}{2}(2p - 1)^n + (1-p)\left(\frac{1}{2} + \frac{1}{2}(2p - 1)^n\right)  \\
+      (1-p)\left(\frac{1}{2} + \frac{1}{2}(2p - 1)^n\right) + \frac{p}{2} - \frac{p}{2}(2p - 1)^n & (1-p)\left(\frac{1}{2} - \frac{1}{2}(2p - 1)^n\right) + \frac{p}{2} + \frac{p}{2}(2p - 1)^n\\
+    \end{Vmatrix} \\
+    &=
+    \renewcommand\arraystretch{1.5}
+    \begin{Vmatrix}
+      p(2p - 1)^n + \frac{1}{2} - \frac{1}{2}(2p - 1)^n & -p(2p - 1)^n + \frac{1}{2} + \frac{1}{2}(2p - 1)^n \\
+      \frac{1}{2} + \frac{1}{2}(2p - 1)^n - p(2p - 1)^n & \frac{1}{2} - \frac{1}{2}(2p - 1)^n + p(2p - 1)^n \\
+    \end{Vmatrix} \\
+    &=
+    \renewcommand\arraystretch{1.5}
+    \begin{Vmatrix}
+      \frac{1}{2} + \left(p - \frac{1}{2}\right)(2p - 1)^n & \frac{1}{2} - \left(p - \frac{1}{2}\right)(2p - 1)^n \\
+      \frac{1}{2} - \left(p - \frac{1}{2}\right)(2p - 1)^n & \frac{1}{2} + \left(p - \frac{1}{2}\right)(2p - 1)^n \\
+    \end{Vmatrix} \\
+    &=
+    \renewcommand\arraystretch{1.5}
+    \begin{Vmatrix}
+      \frac{1}{2} + \frac{1}{2}(2p - 1)^{n+1} & \frac{1}{2} - \frac{1}{2}(2p - 1)^{n+1}  \\
+      \frac{1}{2} - \frac{1}{2}(2p - 1)^{n+1} & \frac{1}{2} + \frac{1}{2}(2p - 1)^{n+1} \\
+    \end{Vmatrix}
+  \end{align*}
+  and the equation holds for $n+1$. Therefore, \eqref{induction} is true by induction.
 \end{proof}
 \newpage
