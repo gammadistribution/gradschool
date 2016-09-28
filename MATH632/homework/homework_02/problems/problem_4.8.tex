@@ -9,5 +9,79 @@
 \end{problem}
 
 \begin{proof}
+  Define $\{X_n : n \geq 0\}$ to be the stochastic process representing the
+  coin flipped on the $n$-th day. Let state 0 be the state that the coin
+  flipped on a given day is coin 1 and let state 1 be the state that the coin
+  flipped on a given day is coin 2. Since for this model we see
+  that the probability that the coin flipped on the $n$-th day depends only on
+  the previous day, this stochastic model may be modeled as a Markov chain with state
+  space $\mathcal{M} = \{0, 1\}$. Thus, to fully define the Markov chain, we must
+  specify its transition matrix $\boldsymbol{P}$.
+
+  To determine the initial transition matrix
+  we must find $P_{ij} = P\{X_1 = j \ |\ X_0 = i\}$ for $i, j \in \mathcal{M}$. To begin, assume first that the coin
+  flipped initially is coin 1, i.e.\ $X_0 = 0$. Then the probability that the flipped coin lands on heads is 0.7 so
+  that there is a 0.7 chance that the coin flipped tomorrow is coin 1 given that we have flipped coin 1 today, i.e.\ $P\{X_1 = 0 \ |\ X_0 = 0\} = 0.7$.
+  Similarly, there is a 0.3 chance that the coin flipped tomorrow is coin 2 given that we
+  have flipped coin 1 today, i.e. $P\{X_1 = 1 \ |\ X_0 = 0\} = 0.3$. Using the assumptions of
+  the model, we similarly arrive at $P\{X_1 = 0 \ |\ X_0 = 1\} = 0.6$ and
+  $P\{X_1 = 1 \ |\ X_0 = 1\} = 0.4$. Therefore,
+  the initial transition matrix is given by
+  \begin{align*}
+    \boldsymbol{P} =
+    \begin{Vmatrix}
+      0.7 & 0.3 \\
+      0.6 & 0.4 \\
+    \end{Vmatrix}.
+  \end{align*}
+  We wish to find the probability that the coin flipped on the third day is coin 1 ignoring the initial flip.
+  That is, we wish to find
+  \begin{align*}
+    P\{X_3=0\} &= \sum_{i\in\mathcal{M}}P\{X_3 = 0 \ |\ X_0 = i\}P\{X_0 = i\} \\
+    &= \sum_{i\in\mathcal{M}}P_{i0}^3P\{X_0 = i\}.
+  \end{align*}
+
+  As shown earlier, we know that the $n$-step transition matrix can be found
+  through successive multiplication of the initial transition matrix. Thus, we have that
+  \begin{align*}
+    \boldsymbol{P}^{(3)} =
+    \begin{Vmatrix}
+      0.7 & 0.3 \\
+      0.6 & 0.4 \\
+    \end{Vmatrix}^3
+    =
+    \begin{Vmatrix}
+      0.667 & 0.333 \\
+      0.666 & 0.334 \\
+    \end{Vmatrix}.
+  \end{align*}
+  Therefore, using the initial assumption that the initial coin tossed is equally likely to
+  be coin 1 or coin 2, we have that
+  \begin{align*}
+    P\{X_3=0\} &= \sum_{i\in\mathcal{M}}P_{i0}^3P\{X_0 = i\} \\
+    &= \frac{1}{2}\left[0.667 + 0.666\right] =0.6665.
+  \end{align*}
+
+  Now, consider Monday to be the initial day, that is time 0 corresponds with Monday.
+  We wish to find the probability that the coin flipped on Friday came up heads
+  given that the coin flipped on Monday came up heads. This may be answered
+  by our Markov Chain model. More precisely, we wish to find the probability
+  that $X_4 = 0$ given that $X_0 = 0$, i.e.\ $P\{X_4 = 0 \ | \ X_0 = 0\}$.
+  Therefore, we have that
+  \begin{align*}
+    \boldsymbol{P}^{(4)} =
+    \begin{Vmatrix}
+      0.7 & 0.3 \\
+      0.6 & 0.4 \\
+    \end{Vmatrix}^4
+    =
+    \begin{Vmatrix}
+      0.6667 & 0.3333 \\
+      0.6666 & 0.3334 \\
+    \end{Vmatrix}
+  \end{align*}
+  and $P\{X_4 = 0 \ | \ X_0 = 0\} = P_{00}^4 = 0.6667$.
+
+
 \end{proof}
 \newpage
