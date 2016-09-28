@@ -40,5 +40,166 @@
 \end{problem}
 
 \begin{proof}
+  In order to determine the equivalence classes of a Markov chain with state space $\mathcal{M}$,
+  we must partition the state space by the relation communicates, i.e.
+  states $i$ and $j$ are in the same equivalence class if there are $m, n \in \mathbb{N}$ with $P_{ij}^m > 0$ and $P_{ji}^n > 0$.
+  From there, we classify the classes as transient or recurrent depending on whether
+  $\sum_{n=1}^\infty P_{ii}^n$ is finite or infinite, respectively.
+
+  We begin with the Markov chain defined by the transition matrix $\boldsymbol{P_1}$ with state space $\mathcal{M}_1 = \{0, 1, 2\}$.
+  Note that from the definition of $\boldsymbol{P_1}$, we readily see that $P_{01} = 1/2 > 0$ and that $P_{10} = 1/2 > 0$ so that state 0 communicates with state 1.
+  Similarly, we see that $P_{02} = 1/2 > 0$ and that $P_{20} = 1/2 > 0$ so that state 0 communicates with state 2. Since
+  every state communicates with itself by definition, we have that state 0 communicates with all $i\in\mathcal{M}_1$.
+  Therefore the only equivalence class of the Markov chain is $\mathcal{M}_1$ itself and this Markov chain is
+  irreducible. From a previous result, since $\mathcal{M}_1$ is finite and the Markov chain is irreducible,
+  every state is recurrent.
+
+  Consider now the Markov chain defined by the transition matrix $\boldsymbol{P_2}$ with state space $\mathcal{M}_2 = \{0, 1, 2, 3\}$.
+  It can be shown that $\boldsymbol{P_2}^4 = \boldsymbol{P_2}$. Thus, we must have for $m > 0 $ that $\boldsymbol{P_2}^m = \boldsymbol{P_2}^n$
+  where $n = 1,2,3$. So in order to classify the states of $\mathcal{M}_2$ we need only look at $\boldsymbol{P_2}, \boldsymbol{P_2}^2$, and $\boldsymbol{P_2}^3$.
+  Computing these powers of the initial transition matrix show that
+  \begin{align*}
+    \renewcommand\arraystretch{1.5}
+    \begin{array}{lll}
+      \boldsymbol{P_2} =
+      \begin{Vmatrix}
+        0           & 0           & 0           & 1 \\
+        0           & 0           & 0           & 1 \\
+        \frac{1}{2} & \frac{1}{2} & 0           & 0 \\
+        0           & 0           & 1           & 0\\
+      \end{Vmatrix},
+      &
+      \boldsymbol{P_2}^2 =
+      \begin{Vmatrix}
+        0           & 0           & 1           & 0 \\
+        0           & 0           & 1           & 0 \\
+        0           & 0           & 0           & 1 \\
+        \frac{1}{2} & \frac{1}{2} & 0           & 0\\
+      \end{Vmatrix},
+      &
+      \boldsymbol{P_2}^3 =
+      \begin{Vmatrix}
+        \frac{1}{2} & \frac{1}{2} & 0           & 0 \\
+        \frac{1}{2} & \frac{1}{2} & 0           & 0 \\
+        0           & 0           & 1           & 0 \\
+        0           & 0           & 0           & 1 \\
+      \end{Vmatrix}.
+    \end{array}
+  \end{align*}
+  From these transition matrices we see that:
+  \begin{align*}
+    P_{01}^3 = 1/2 > 0 &\text{ and } P_{10}^3 = 1/2 >0, \\
+    P_{02}^2 = 1 > 0 &\text{ and } P_{20} = 1/2 >0, \\
+    P_{03} = 1 > 0 &\text{ and } P_{30}^2 = 1/2 >0.
+  \end{align*}
+  Thus, state 0 communicates with all states $i\in\mathcal{M}_2$ and $\mathcal{M}_2$
+  is the only equivalence class of this Markov chain. Therefore, as mentioned above,
+  the Markov chain is irreducible and every state is recurrent.
+
+  Now consider now the Markov chain defined by the transition matrix $\boldsymbol{P_3}$ with state space $\mathcal{M}_3 = \{0, 1, 2, 3, 4\}$.
+  Note that
+  \begin{align*}
+    \renewcommand\arraystretch{1.5}
+    \boldsymbol{P_3} =
+    \begin{Vmatrix}
+      \frac{1}{2} & 0           & \frac{1}{2} & 0           & 0           \\
+      \frac{1}{4} & \frac{1}{2} & \frac{1}{4} & 0           & 0           \\
+      \frac{1}{2} & 0           & \frac{1}{2} & 0           & 0           \\
+      0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} \\
+      0           & 0           & 0           & \frac{1}{2} & \frac{1}{2} \\
+    \end{Vmatrix}
+    =
+    \begin{Vmatrix}
+      \boldsymbol{A} & \boldsymbol{0} \\
+      \boldsymbol{0} & \boldsymbol{B}
+    \end{Vmatrix},
+  \end{align*}
+  a diagonal matrix. Thus, for any $n > 0$,
+  \begin{align}\label{power}
+    \boldsymbol{P_3}^n
+    =
+    \begin{Vmatrix}
+      \boldsymbol{A} & \boldsymbol{0} \\
+      \boldsymbol{0} & \boldsymbol{B}
+    \end{Vmatrix}^n
+    =
+    \begin{Vmatrix}
+      \boldsymbol{A}^n & \boldsymbol{0} \\
+      \boldsymbol{0} & \boldsymbol{B}^n
+    \end{Vmatrix}.
+  \end{align}
+  Note that $P_{34} = 1/2 > 0$ and $P_{43} = 1/2 > 0$ so that state 3 communicates with state 4.
+  We can readily see from \eqref{power} that for all $m\geq 0$ we have that
+  $P_{i3}^m =0$ and $ P_{i4}^m = 0$ for $i=0,1,2$ so that states 0, 1, and 2 do not communicate with states 3 and 4.
+  Thus $\{3, 4\}$ forms an equivalence class of this Markov chain.
+
+  We can also see that $P_{02} = 1/2 > 0$ and $P_{20} = 1/2 > 0$ so that state 0 communicates with state 2.
+  However, it can be shown through induction that
+  \begin{align}\label{a_n}
+    \renewcommand\arraystretch{1.5}
+    \boldsymbol{A}^n =
+    \begin{bmatrix}
+      \frac{1}{2}           & 0             & \frac{1}{2} \\
+      \frac{2^{n}-1}{2^{n+1}} & \frac{1}{2^n} & \frac{2^{n}-1}{2^{n+1}} \\
+      \frac{1}{2}           & 0             & \frac{1}{2}
+    \end{bmatrix}
+  \end{align}
+  so that it is clear for all $m\geq 0$ that $P_{01}^m = 0$ and $P_{21}^m = 0$. Thus,
+  states 0 and 2 do not communicate with state 1. Thus, the other equivalence classes are formed
+  by $\{0, 2\}$ and $\{1\}$. In order to classify these equivalences classes
+  of this Markov chain we examine the probabilities $P_{ii}^n$. Recall by a previous proposition that a state
+  $i$ is recurrent if
+  \begin{align*}
+    \sum_{n=1}^{\infty} P_{ii}^n = \infty
+  \end{align*}
+  and is transient if the sum is finite. Note that $\boldsymbol{B}$ is an idempotent
+  matrix, i.e.\ $\boldsymbol{B}^2 = \boldsymbol{B}$. Thus, $\boldsymbol{B}^n = \boldsymbol{B}$ and for $n > 0$, we have
+  that $P_{33}^n = P_{44}^n = 1/2$. From \eqref{a_n} we see that for $n > 0$ we have that
+  $P_{00}^n = P_{22}^n = 1/2$ while $P_{11} = 2^{-n}$. Now,
+  we see that for $i=0,2,3,4$ we have that
+  \begin{align*}
+    \sum_{n=1}^{\infty} P_{ii}^n = \sum_{n=1}^{\infty} \frac{1}{2} = \infty
+  \end{align*}
+  so that states $i=0,2,3,4$ are recurrent. However,
+  \begin{align*}
+    \sum_{n=1}^{\infty} P_{11}^n = \sum_{n=1}^{\infty} \frac{1}{2^n} = 1 < \infty
+  \end{align*}
+  so that state 1 is transient. Therefore, the classes $\{0, 2\}$ and $\{3, 4\}$
+  are recurrent and $\{1\}$ is transient.
+
+  Lastly, consider the Markov chain defined by the transition matrix $\boldsymbol{P_4}$ with state space $\mathcal{M}_4 = \{0, 1, 2, 3, 4\}$.
+  It can be shown that $\boldsymbol{P_4}$ is a lower-triangular block matrix and that by induction we have that
+  \begin{align}\label{power_4}
+    \renewcommand\arraystretch{1.5}
+    \boldsymbol{P_4}^n =
+    \begin{Vmatrix}
+      \frac{3}{5} \left(4 + (-1)^n\left(\frac{1}{4}\right)^n\right)     & -\frac{3}{5} \left(4 + (-1)^n\left(\frac{1}{4}\right)^n\right) & 0           & 0           & 0           \\
+      \frac{2}{5} \left(6 + (-1)^{n+1} \left(\frac{1}{4}\right)^n\right) & \frac{2}{5} \left(-6 + \left(-\frac{1}{4}\right)^n\right) & 0           & 0           & 0           \\
+      0           & 0           & 1           & 0           & 0           \\
+      0           & 0           & 1 - \left(\frac{2}{3}\right)^n & \left(\frac{2}{3}\right)^n & 0           \\
+      \frac{12}{5} \left(1 + (-1)^{n+1} \left(\frac{1}{4}\right)^n\right)           & \frac{12}{5} \left(-1 + \left(-\frac{1}{4}\right)^n\right)             & 0           & 0           & 0           \\
+    \end{Vmatrix}.
+  \end{align}
+  Thus, from the initial transition matrix we see that $P_{01} = 3/4 > 0$ and $P_{10} = 1/2 > 0$
+  so that state 0 communicates with state 1. From \eqref{power_4} we see that for all $m \geq 0$ we have that
+  $P_{0i}^m = 0$ and $P_{1i}^m = 0$ for $i=2,3,4$ so that states 0 and 1 do not communicate with state 2,3, nor 4.
+  Thus, $\{0, 1\}$ forms an equivalence class.
+  We also see from \eqref{power_4} that for all $m\geq 0$ we have that $P_{2i}^m = 0$ for $i = 0, 1, 3, 4$
+  so that state 2 does not communicate with states 0, 1, 3, nor 4 and $\{2\}$ forms an equivalence class.
+  Similarly, we see from \eqref{power_4} that for all $m\geq 0$ we have that $P_{i3}^m = 0$ and $P_{j4}^m = 0$
+  for $i=0,1,2,4$ and $j=0,1,2,3$. Thus state 3 does not communicate with any other states and state 4 does not communicate
+  with any other states. Thus, the last equivalence classes are formed by $\{3\}$ and $\{4\}$.
+  Finally, from \eqref{power_4} we can see that
+  \begin{align*}
+    \sum_{n=1}^\infty P_{00}^n &= \sum_{n=1}^\infty \frac{3}{5} \left(4 + (-1)^n\left(\frac{1}{4}\right)^n\right) =\infty \\
+    \sum_{n=1}^\infty P_{22}^n &= \sum_{n=1}^\infty 1 =\infty \\
+  \end{align*}
+  and the equivalence classes $\{0,1\}$ and $\{2\}$ are recurrent while
+  \begin{align*}
+    \sum_{n=1}^\infty P_{33}^n &= \sum_{n=1}^\infty \left(\frac{2}{3}\right)^n = 2 < \infty \\
+    \sum_{n=1}^\infty P_{44}^n &= 0 < \infty
+  \end{align*}
+  so the equivalence classes $\{3\}$ and $\{4\}$ are transient.
+
 \end{proof}
 \newpage
