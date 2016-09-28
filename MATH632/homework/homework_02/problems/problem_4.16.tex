@@ -6,5 +6,21 @@
 \end{problem}
 
 \begin{proof}
+  Suppose that state $i$ is recurrent and that state $i$ does not communicate with state $j$.
+  If state $i$ does not communicate with state $j$, then either state $j$ is not accessible
+  from state $i$ or state $i$ is not accessible from state $j$, i.e.\ for all $m\in\mathbb{N}$,
+  either $P_{ij}^m = 0$ or $P_{ji}^m = 0$.
+
+  If $P_{ij}^m = 0$ for all $m\in\mathbb{N}$, then it is true in particular for $m=1$ so
+  that $P_{ij} = 0$ and we are done.
+
+  Now, suppose to the contrary that state $i$ is not accessible from state $j$, i.e.\
+  $P_{ji}^m = 0$ for all $m\in\mathbb{N}$, but $P_{ij} > 0$  with state $i$ a recurrent state.
+  If $P_{ij} > 0$, then there is a non-zero probability of entering state $j$ from state $i$. However,
+  if $P_{ji}^m = 0$ for all $m\in\mathbb{N}$, then once entering state $j$ from state $i$
+  we will never re-enter state $i$. However, this contradicts the assumption that
+  state $i$ is recurrent, i.e.\ that it occurs with probability 1 that starting from state $i$ we
+  will eventually transition to state $i$. Therefore, in either case, if state $i$ is
+  recurrent and state $i$ does not communicate with state $j$, then $P_{ij} = 0$.
 \end{proof}
 \newpage
