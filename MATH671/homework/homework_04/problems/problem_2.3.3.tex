@@ -4,11 +4,70 @@
   \begin{enumerate}
     \item $f(x) = ax + b$, $a\neq 0$.
     \item $f(x) = ax^2 - x + c$, $a, c > 0$.
-    \item $f(x) = a - \frac{b}{x}$, $b \neq 0$.
-    \item $f(x) = \frac{ax + b}{cx-a}$, $b \neq 0$.
+    \item $f(x) = a - \frac{b}{x}$, $a\neq 0, b \neq 0$.
+    \item $f(x) = \frac{ax + b}{cx-a}$, $a^2 + bc \neq 0$.
   \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  As outlined in a previous problem, a 2-cycle for a function $f$ exists if there is a period
+  2 point of $f$, i.e.\ if there is a point $x=x_0$ such that $f^2(x_0)-x_0 = 0$ but $f(x_0) - x_0 \neq 0$.
+  Thus, to identify the period 2 points, we first identify the fixed points $c_0, \dots, c_n$ of a function.
+  The fixed points $x=c_0, \dots, c_n$ will satisfy $f(x) - x = 0$ and thus must satisfy $f^2(x) - x = 0$
+  so that $(x-c_i)$ is a factor of $f^2(x) - x$ for $i=0,\dots,n$. Therefore, the remaining solutions of
+  $f^2(x) - x$, if they exist, form the 2-cycles of $f$.
+
+  \begin{enumerate}
+    \item Suppose that $f(x) = ax + b$ with $a\neq 0$. We readily see that $f(x) - x = 0$
+      has the solution $x = -b/(a-1)$ if $a\neq 1$ and is the only fixed point of $f$. Note that if $a=1$,
+      then $f(x) -x = 0$ only if $b=0$ giving rise to the identity map for which the solution is trivial.
+      However, note that
+      \begin{align*}
+        f^2(x) -x = (a^2 -1)x +b(a+1) = (a+1)(b + (a-1)x) = 0
+      \end{align*}
+      from which the only solution is $x = - b/(a-1)$. Since this is the fixed point of $f,$ it cannot be a period
+      2 point. Therefore, there are no 2-cycles for $f(x) = ax +b$ for $a\neq 0, 1$.
+
+    \item Suppose that $f(x) = ax^2 - x + c$ with $a, c > 0$. Note that $f(x) - x = ax^2 -2x + c = 0$
+      has real solutions $x = \left(1 \pm \sqrt{1 - a c}\right)/a$ if $ac \leq 1$. Since $a$ and $c$ are positive,
+      this is equivalent to requiring that $a,c \in (0, 1]$. Then $\left(x - \frac{1 + \sqrt{1 - a c}}{a}\right)$ and $\left(x - \frac{1 - \sqrt{1 - a c}}{a}\right)$
+      are factors of $f^2(x) - x$ and we see that
+      \begin{align*}
+        f^2(x) - x &= a\left(ax^2 - x + c\right)^2 - x + c \\
+        &= \left(x - \frac{1 + \sqrt{1 - a c}}{a}\right)\left(x - \frac{1 - \sqrt{1 - a c}}{a}\right)\left(a^2x^2+ca\right) = 0.
+      \end{align*}
+      However, if $a, c > 0$, then the only real solutions of this equation are given by  $x = \left(1 \pm \sqrt{1 - a c}\right)/a$ where $a,c \in (0,1]$.
+      But these are the fixed points of $f$. Therefore, there are no 2-cycles of $f(x) = ax^2 - x + c$ with $a,c > 0$.
+
+    \item Suppose that $f(x) = a - \frac{b}{x}$ with $a\neq 0, b \neq 0$. It is easily seen
+      that if $x\neq 0$, then $f(x) - x = x^2 -ax + b = 0$ has real
+      solutions $x = (a \pm \sqrt{a^2 - 4 b})/2$ if $a^2 \geq 4b$. Then
+      $\left(x - \frac{a + \sqrt{a^2 - 4 b}}{2}\right)$ and $\left(x - \frac{a - \sqrt{a^2 - 4 b}}{2}\right)$
+      are factors of $f^2(x) - x$ and we see that
+      \begin{align*}
+        f^2(x) - x &= a - \frac{b}{\left(a - \frac{b}{x}\right)} - x\\
+        &= \left(x - \frac{a + \sqrt{a^2 - 4 b}}{2}\right)\left(x - \frac{a - \sqrt{a^2 - 4 b}}{2}\right) \left(\frac{a}{b - a x}\right) = 0
+      \end{align*}
+      only when $x = (a \pm \sqrt{a^2 - 4 b})/2$ which are precisely the fixed points of $f$. Therefore, there are no 2-cycles of $f(x) = a - \frac{b}{x}$ with $a\neq 0, b \neq 0$
+
+    \item Suppose that $f(x) = \frac{ax + b}{cx-a}$ with $a^2 + bc \neq 0$.
+      Note that $f(x)$ is only defined if $x\neq a/c$. We readily see that
+      \begin{align*}
+        f(x) - x &= \frac{ax + b}{cx-a} - x = \frac{-cx^2 + 2ax + b}{cx-a} = 0
+      \end{align*}
+      if $x = \left(a \pm \sqrt{a^2 + b c}\right)/c$ which is real and in the domain of $f$
+      if $a^2 + bc > 0$. These are precisely the
+      fixed points of $f$.
+      Note that for any $x\neq a/c$ we have that
+      \begin{align*}
+        f^2(x) = \frac{ b + \frac{ a(b + ax)}{ cx - a } }{ -a + \frac{ c(b + ax)}{ cx - a} } = \frac{(a^2 + bc)x}{a^2 + bc} = x
+      \end{align*}
+      if $a^2 + bc \neq 0$. Thus, every defined point satisfies $f^2(x) = x$. Therefore,
+      every point in this function's domain generates a 2-cycle if that point
+      is different from the fixed points
+      \begin{align*}
+        c_0 = \frac{a + \sqrt{a^2 + b c}}{c}, \quad c_1 = \frac{a - \sqrt{a^2 + b c}}{c}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
