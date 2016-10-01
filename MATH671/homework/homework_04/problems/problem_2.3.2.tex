@@ -4,5 +4,42 @@
 \end{problem}
 
 \begin{proof}
+  Note that $f_c$ has a 2-cycle if it has a period 2 point, i.e.\ if $f_c^2(x) - x = 0$
+  has a solution $x = x_0$ with $f_c(x_0) - x_0 \neq 0$. Thus, we must have that
+  \begin{align}\label{period_poly}
+    f_c^2(x) - x = (x^2+c)^2 + c - x = x^4 + 2cx^2 - x + c^2 + c = 0
+  \end{align}
+  has a solution. As was shown earlier, $x = \left(1 \pm \sqrt{-4c}\right) / 2$
+  are fixed points of $f_c$ and thus must satisfy $f_c^2(x) - x = 0$. This allows to easily
+  factor \eqref{period_poly} and we see that
+  \begin{align*}
+    x^4 + 2cx^2 - x + c^2 + c= \left(x - \frac{1 + \sqrt{-4c}}{2} \right)\left(x - \frac{1 - \sqrt{-4c}}{2} \right)(x^2+x+c+1).
+  \end{align*}
+  Since a period 2 point $x_0$ is such that $f_c(x_0) - x_0 \neq 0$, we know that
+  \begin{align*}
+    \left(x_0 - \frac{1 + \sqrt{-4c}}{2} \right) \neq 0,\quad
+    \left(x_0 - \frac{1 - \sqrt{-4c}}{2} \right) \neq 0
+  \end{align*}
+  so that $x^4 + 2cx^2 - x + c^2 + c = 0$ only if $x^2+x+c+1 = 0$.
+  We readily see that since $c < -3/4$, the polynomial
+  $x^2+x+c+1$ has real solutions, and that
+  \begin{align*}
+    x^2+x+c+1 = \left(x - \frac{-1+\sqrt{-3-4c}}{2}\right)\left(x - \frac{-1-\sqrt{-3-4c}}{2}\right)
+  \end{align*}
+  from which we identify the 2-cycle of $f_c$ as
+  \begin{align*}
+    \{c_0, f_c(c_0)\} = \left\{\frac{-1+\sqrt{-3-4c}}{2}, \frac{-1-\sqrt{-3-4c}}{2}\right\}.
+  \end{align*}
+
+  This 2-cycle will be attracting for $f_c$ if $c_0$ is attracting for $f^2_c$, i.e.\ if
+  \begin{align*}
+    \left|\left(f_c^2(c_0)\right)'\right| = \left|f_c'(c_0)f_c'(f_c(c_0))\right| < 1.
+  \end{align*}
+  Note that $f_c'(x) = 2x$ from which we see that
+  \begin{align*}
+    \left|f_c'(c_0)f_c'(f_c(c_0))\right| &= \left|\left(-1+\sqrt{-3-4c}\right)\left(-1-\sqrt{-3-4c}\right)\right| = \left|4(1 + c)\right|
+  \end{align*}
+  Therefore, the 2-cycle of $f_c$ is attracting if $\left|4(1 + c)\right| < 1$, which occurs if and only if $-5/4 < c < -3/4$.
+
 \end{proof}
 \newpage
