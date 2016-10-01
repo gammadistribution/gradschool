@@ -1,13 +1,51 @@
 \begin{problem}{2.3.1}
-  For each of the following functions, $c=0$ lies on a periodic circle. Classify
+  For each of the following functions, $c=0$ lies on a periodic cycle. Classify
   this cycle as attracting, repelling, or neutral (non-hyperbolic). State if
   it is super attracting.
-  \begin{enumerate}
-    \item $f(x) = \frac{\pi}{2} \cos(x)$,
-    \item $g(x) = -\frac{1}{2}x^3 - \frac{3}{2}x^2 + 1$.
-  \end{enumerate}
+  \begin{align*}
+    \text{i}.\  f(x) = \frac{\pi}{2} \cos(x),\quad \text{ii}.\ g(x) = -\frac{1}{2}x^3 - \frac{3}{2}x^2 + 1.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Recall that if $c$ is a point of period $r$, then $c$ is stable, asymptotically stable, unstable,
+  if $f^r(c)$ is stable, asymptotically stable, unstable, respectively. Thus,
+  if $c$ is a point of period $r$ and $f'(x)$ is continuous at $x=c$,
+  then $c$ is asymptotically stable (attracting) if
+  \begin{align*}
+    \left|f'(f^0(c))\cdot f'(f^1(c)) \cdot \dots \cdot f'(f^{r-1}(c))\right| < 1
+  \end{align*}
+  and $c$ is unstable (repelling) if
+  \begin{align*}
+    \left|f'(f^0(c))\cdot f'(f^1(c)) \cdot \dots \cdot f'(f^{r-1}(c))\right| > 1.
+  \end{align*}
+
+  \begin{enumerate}
+    \item Let $f(x) = \frac{\pi}{2} \cos(x)$. It is clear that $f^2(0) = 0$ so that $c=0$ is a period 2 point and
+      $\{0, f(0)\}$ forms a 2-cycle.
+      Note that $f'(x) = -\frac{\pi}{2}\sin(x)$, which is continuous, and that
+      \begin{align*}
+        \left|f'(0)\cdot f'(f(0))\right| &= \left|\left(-\frac{\pi}{2}\sin(0)\right)\left(-\frac{\pi}{2}\sin\left(\frac{\pi}{2}\right)\right)\right| = 0 < 1
+      \end{align*}
+      so that the 2-cycle $\{0, f(0)\}$ is asymptotically stable. Since
+      \begin{align*}
+        (f^2(0))' = (f(f(0)))' = f'(0)\cdot f'(f(0)) = 0,
+      \end{align*}
+      we have that $c=0$ is a super-attracting point of $f^2$ and the 2-cycle
+      $\{0, f(0)\}$ is a super-attracting, asymptotically stable cycle.
+    \item Let $g(x) = -\frac{1}{2}x^3 - \frac{3}{2}x^2 + 1.$ It is
+      clear that $g^3(0) = 0$ so that $c=0$ is a period 3 point and $\{0, g(0), g^2(0)\}$
+      forms a 3-cycle. Note that $g'(x) = -\frac{3}{2}x^2 - 3x$, which is continuous,
+      and that
+      \begin{align*}
+        \left|g'(0)\cdot g'(g(0))\cdot g'(g^2(0))\right| &= \left|0 \left(-\frac{9}{2}\right)\left(\frac{3}{2}\right)\right| = 0 < 1
+      \end{align*}
+      so that the 2-cycle $\{0, g(0), g^2(0)\}$ is asymptotically stable. Since
+      \begin{align*}
+        (g^3(0))' = (g(g(g(0))))' = g'(0)\cdot g'(g(0))\cdot g'(g^2(0)) = 0,
+      \end{align*}
+      we have that $c=0$ is a super-attracting point of $g^3$ and the 3-cycle
+      $\{0, g(0), g^2(0)\}$ is a super-attracting, asymptotically stable cycle.
+  \end{enumerate}
 \end{proof}
 \newpage
