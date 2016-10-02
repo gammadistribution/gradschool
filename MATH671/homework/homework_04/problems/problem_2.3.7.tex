@@ -4,5 +4,73 @@
 \end{problem}
 
 \begin{proof}
+  Note that $\{0, 1\}$ is a 2-cycle of $f$ if $f(0) = 1$ and $f(1) = 0$, i.e.\ if
+  \begin{align*}
+    f(1) = a + b + 1 = 0.
+  \end{align*}
+  Thus, $a = -b - 1.$
+  The 2-cycle is non-hyperbolic if $\left|f'(0)f'(1)\right| = 1$. We see that
+  $f'(x) = 3a x^2 + b$ so that
+  \begin{align*}
+    \left|f'(0)f'(1)\right| = |b(3a + b)| = |-(2b^2 + 3b)| = 1.
+  \end{align*}
+  Thus, either $2b^2 + 3b = 1$ which implies that $b=(-3\pm\sqrt{17})/4$ or
+  that $2b^2 + 3b = -1$ which implies that $b=-1$ or $b=-1/2$. Note that if $b=-1$, then $a = 0$ which violates our
+  assumptions
+  so we eliminate this choice. The other three possible functions are listed below:
+  \begin{align*}
+    f_1(x) &= \left(\frac{-1 - \sqrt{17}}{4}\right)x^3 + \left(\frac{-3 + \sqrt{17}}{4}\right)x + 1 \\
+    f_2(x) &= \left(\frac{-1 + \sqrt{17}}{4}\right)x^3 + \left(\frac{-3 - \sqrt{17}}{4}\right)x + 1 \\
+    f_3(x) &= -\frac{1}{2} x^3 - \frac{1}{2} x + 1.
+  \end{align*}
+
+  Recall that a period 2 point $c$ is stable if $f^2(c)$ is stable. Note that by construction
+  this 2-cycle is non-hyperbolic for $f$ and in particular $(f_1^2(0))' = (f_2^2(0))' = -1$
+  and $(f_3^2(0))' = 1$.
+
+  A previous result allows us to determine the stability of $f_i^2$ by evaluating the derivatives of $f_i^2$ at $c=0$.
+  In general, for $f(x) = a x^3 + bx + 1$ we have that
+  $f'(x) = 3a x^2  +b$, $f''(x) = 6ax$, and $f'''(x) = 6a$ so that
+  \begin{align*}
+    \begin{array}{lll}
+      (f^2(0))' &= f'(f(0))f'(0) &= b^2 + 3 a b  \\
+      (f^2(0))'' &= f''(f(0))f'(0)^2 + f''(0) f'(f(0)) &= 6ab^2 \\
+      (f^2(0))''' &= f'''(f(0))f'(0)^3 + f'''(0)f'(f(0)) + 3f''(f(0))f''(0)f'(0) &= 6ab^3 + 6a(3a + b).
+    \end{array}
+  \end{align*}
+  Thus, we see that
+  \begin{align*}
+    \begin{array}{lll}
+      \begin{array}{ll}
+        (f_1^2(0))' &= -1 \\
+        (f_1^2(0))'' &= \frac{3(19 - 5 \sqrt{17})}{8}\\
+        (f_1^2(0))'' &= \frac{9(3 + 11 \sqrt{17})}{16}
+      \end{array}
+      &
+      \begin{array}{ll}
+        (f_2^2(0))' &= -1 \\
+        (f_2^2(0))'' &= \frac{3(19 + 5 \sqrt{17})}{8}\\
+        (f_2^2(0))'' &= \frac{-9(-3 + 11 \sqrt{17})}{16}
+      \end{array}
+      &
+      \begin{array}{ll}
+        (f_3^2(0))' &= 1 \\
+        (f_3^2(0))'' &= -3/4 \\
+        (f_3^2(0))'' &= 51/8 .
+      \end{array}
+    \end{array}
+  \end{align*}
+  Since $f_3^2(0)' = 1$ and $f_3^2(0)'' < 0$, we have by a previous theorem
+  that the point 0 is one-sided stable to the left of 0 for $f_3^2(x)$ and hence
+  the 2-cycle $\{0, 1\}$ is one-sided asymptotically stable to the left of 0.
+
+  Note that when $g'(x) = -1$, the Schwarzian derivative of a function is given by
+  $Sg(x) = -g'''(x) -(3/2)g''(x)^2$. Thus, we see that
+  \begin{align*}
+    Sf_1^2(0) &= -(f_1^2(0))''' - \frac{3}{2}((f_1^2(0))'')^2 =\frac{9(-1191 + 241 \sqrt{17})}{64} < 0 \\
+    Sf_2^2(0) &= -(f_2^2(0))''' - \frac{3}{2}((f_2^2(0))'')^2 =\frac{9(-1191 - 241 \sqrt{17})}{64} < 0
+  \end{align*}
+  so that by a previous theorem, the point 0 is asymptotically stable for $f_1^2(x)$ and $f_2^2(x)$. Thus, the
+  2-cycle $\{0, 1\}$ is asymptotically stable for $f_1(x)$ and $f_2(x)$.
 \end{proof}
 \newpage
