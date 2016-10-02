@@ -15,5 +15,64 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item As was shown in problem 1.2.1, we know that $f_c:\mathbb{R}\to\mathbb{R}$ with $f_c(x) = x^2 + c$
+      has two fixed points given by
+      \begin{align}\label{fixed}
+        x_1 = \frac{1 - \sqrt{1 - 4c}}{2}, \qquad         x_2 = \frac{1 + \sqrt{1 - 4c}}{2}
+      \end{align}
+      provided that $ c \leq 1/4$.
+
+      The fixed point $x$ will be a super-attracting fixed point if $f_c'(x) = 0$.
+      We note that $f_c'(x) = 2x$ so that $f_c'(x) = 0$ only if $x=0$.
+      There is no real value of $c$ that will allow $x_2=0$ so $x_2$ is never a
+      super-attracting fixed point. On the other hand, if $c=0$,
+      then $x_1 = 0$ is a super-attracting fixed point.
+    \item Note that $f_c$ will have a super-attracting 2-cycle if $f_c^2$ has a super-attracting
+      period 2 point. A point $x$ will be a super-attracting period 2 point
+      if $f_c^2(x) = x$ with $f_c(x) \neq x$ and if $(f_c^2(x))' = 0$.
+
+      Since \eqref{fixed} are fixed points, we know that $(x- x_1)$ and $(x- x_2)$ must factor
+      $f_c^2(x) - x$ so that
+      \begin{align*}
+        f_c^2(x) - x &= \left(x^2 + c\right)^2 + c - x \\
+        &= \left(x-x_1\right)\left(x-x_2\right)
+        \left(x - \frac{-1 + \sqrt{-3 - 4 c}}{2}\right)\left(x - \frac{-1 - \sqrt{-3 - 4 c}}{2}\right).
+      \end{align*}
+      Thus,
+      $$\{x_3, x_4\} = \left\{\frac{-1 + \sqrt{-3 - 4 c}}{2}, \frac{-1 - \sqrt{-3 - 4 c}}{2}\right\}$$
+      forms a 2-cycle of $f_c$. To analyze when this 2-cycle is super attracting, we analyze when
+      \begin{align*}
+        (f_c^2(x_3))' &= f_c'(x_3)f_c'(x_4) \\
+        &= \left(-1 - \sqrt{-3 - 4 c}\right)\left(-1 + \sqrt{-3 - 4 c}\right) \\
+        &= 4(1 + c) = 0.
+      \end{align*}
+      We readily see that $(f_c^2(x_3))' = 0$ only if $c= -1$ so that only $f_c(x) = x^2 - 1$
+      has a super-attracting 2-cycle given by $\{0, -1\}$.
+    \item If $f_c$ has a 3-cycle
+      then $f_c$ has a period 3 point $x_0$ with $f_c^3(x_0) = x_0$ such that $f_c(x_0) = x_1 \neq x_0$
+      and $f_c^2(x_0) = x_2 \neq x_0$. Note that $f_c'(x) = 2x$. Thus, this 3-cycle is super attracting
+      if
+      \begin{align*}
+        (f_c^3(x_0))' = f_c'(x_0)f_c'(x_1)f_c'(x_2) = 2^3 x_0x_1x_2 = 0
+      \end{align*}
+      which implies that $x_0 = 0$, $x_1=0$, or $x_2=0$. Without loss of generality,
+      we may assume that $x_0 = 0$. Using the fact that $f_c(x_0) = x_1 \neq x_0$ and $f_c^2(x_0) = x_2 \neq x_0$,
+      we see that
+      \begin{align*}
+        x_1 &= f_c(x_0) = x_0^2 + c = c \\
+        x_2 &= f_c^2(x_0) = (x_0^2 + c)^2 + c = c^2 + c
+      \end{align*}
+      In order for this to be a 3-cycle, we require that $f^3(x_0) = x_0 = 0$, i.e.\
+      we require that
+      \begin{align*}
+        f_c^3(x_0) = f_c(f_c^2(x_0)) &= (c^2 + c)^2 + c \\
+        &= c^4 + 2c^3 + c^2 + c \\
+        &= c(c^3 + 2c^2 + c + 1) = 0.
+      \end{align*}
+      However we must have that $c \neq 0$ or $x_0 = 0$ would not generate a 3-cycle. Thus, we require that
+      $(c^3 + 2c^2 + c + 1) = 0$. If this condition is met and $f_c$ has a super-attracting 3-cycle,
+      then that 3-cycle is given by $\{0, c, c^2 + c\}$.
+  \end{enumerate}
 \end{proof}
 \newpage
