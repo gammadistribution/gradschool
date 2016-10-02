@@ -6,5 +6,23 @@
 \end{problem}
 
 \begin{proof}
+  Suppose that $f(x)$ is a polynomial with $g(x) = f^2(x) - x$. Let $x_0$ be a repeated
+  root of $g(x)$ such that $f(x_0) = x_1 \neq x_0$. Since $x_0$ is a repeated root of $g(x)$
+  with $g(x)$ a polynomial, we have that $g(x_0) = 0$ and $g'(x_0) = 0$. If $g(x_0) = 0$,
+  then $f^2(x_0) = x_0$ with $f(x_0) \neq x_0$ implying that $x_0$ is a period 2 point
+  and $\{x_0, x_1\}$ is a 2-cycle. Note that
+  \begin{align}\label{derivative}
+    g'(x) = (f^2(x)-x)' = f'(f(x))f'(x) - 1.
+  \end{align}
+  Since $g'(x_0) = 0$ and $f(x_0) = x_1$, we have that
+  \begin{align*}
+    g'(x_0) = f'(f(x_0))f'(x_0) - 1 = f'(x_1)f'(x_0) - 1 = 0
+  \end{align*}
+  which implies that $f'(x_1)f'(x_0) = 1$ and the 2-cycle is non-hyperbolic.
+
+  If on the other hand $\{x_0, x_1\}$ is a 2-cycle such that $f(x_0) = x_1 \neq x_0$
+  with $f'(x_1)f'(x_0) = 1$, then by \eqref{derivative} we have that $g'(x_0) = 0$.
+  Since $x_0$ is a period 2 point, $f^2(x_0) = x_0$ and $g(x_0) = 0$ so that $x_0$
+  is a repeated root of $g(x)$.
 \end{proof}
 \newpage
