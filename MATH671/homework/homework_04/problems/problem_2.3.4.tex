@@ -9,5 +9,50 @@
  \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Suppose that $\{x_0, x_1\}$ is a 2-cycle of the continuous function $f$. Then
+      we have that $f(x_0) = x_1$ and $f(x_1) = x_0$ with $x_0 \neq x_1$. Consider
+      the function $g(x) = f(x) - x$, which is continuous by the continuity of $f$.
+      Without loss of generality, we may assume that $x_0 < x_1$.
+
+      The Intermediate Value Theorem states that for a continuous function $f$,
+      for any interval $I= [a,b]$, if there is a point $u$ such that $f(a) < u < f(b)$ or $f(a) > u > f(b)$,
+      then there is a point $c \in (a, b)$ with $f(c) = u$.
+
+      Now, for $g$ continuous, define $I = [x_0, x_1]$. Since $\{x_0, x_1\}$ forms
+      a 2-cycle of $f$ we have that
+      \begin{align*}
+        g(x_0) &= f(x_0) - x_0 = x_1 - x_0 > 0\\
+        g(x_1) &= f(x_1) - x_1 = x_0 - x_1 = - g(x_0) < 0.
+      \end{align*}
+      Therefore, by the Intermediate Value Theorem, since $0 \in (g(x_1), g(x_0)) = (-g(x_0), g(x_0))$,
+      there is some point $c\in(x_0,x_1)$ such that $g(c) = f(c) - c = 0$, i.e.\
+      $c$ is a fixed point of $f$.
+    \item Suppose that $f$ is a continuous function meeting the assumptions of the problem.
+      Consider the function $g(x) = f(x) - x$, which is continuous by the continuity of $f$.
+
+      In a manner similar to the one used above, we may use the Intermediate Value Theorem
+      to show that $f$ has a fixed point on the interval $I = [x_1, x_2]$. By assumption
+      we have that $f(x_1) = x_2$ and $f(x_2) = x_0$ with $x_0 < x_1 < x_2$. Thus, we have that
+      \begin{align*}
+        g(x_1) &= f(x_1) - x_1 = x_2 - x_1 > 0\\
+        g(x_2) &= f(x_2) - x_2 = x_0 - x_2 < 0.
+      \end{align*}
+      Therefore, by the Intermediate Value Theorem, since $0 \in (g(x_2), g(x_1))$,
+      there is some point $y_0\in(x_1,x_2)$ such that $g(y_0) = f(y_0) - y_0 = 0$, i.e.\
+      $y_0$ is a fixed point of $f$.
+
+      Now, define the function $h(x) = f^2(x) - x$. This function is continuous since
+      $f$ is continuous and the composition of continuous functions is continuous.
+      Consider the interval $I = [x_0, x_1]$. By assumption we have
+      that $f(x_0) = x_1$, $f(x_1) = x_2$, and $f(x_2) = x_0$ with $x_0 < x_1 < x_2$. Thus, we have that
+      \begin{align*}
+        h(x_0) &= f(f(x_0)) - x_0 = f(x_1) - x_0 = x_2 - x_0 > 0\\
+        h(x_1) &= f(f(x_1)) - x_1 = f(x_2) - x_1 = x_0 - x_1 < 0
+      \end{align*}
+      Therefore, by the Intermediate Value Theorem, since $0 \in (h(x_1), h(x_0))$,
+      there is some point $y_1\in(x_0,x_1)$ such that $h(y_1) = f^2(y_1) - y_1 = 0$, i.e.\
+      there is a point $x_0 < y_1 < x_1$ such that $f^2(y_1) = y_1$.
+  \end{enumerate}
 \end{proof}
 \newpage
