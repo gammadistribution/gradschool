@@ -1,9 +1,47 @@
 \begin{problem}{2.3.17}
   Suppose that $f(x) = ax^2 + bx + c$, $a\neq 0$ has a 2-cycle $\{x_0, x_1\}$.
   Show that the 2-cycle cannot be non-hyperbolic of the type $f'(x_0)f'(x_1) = 1$.
-
 \end{problem}
 
 \begin{proof}
+  If $x_0$ is a period 2 point then we have that $f^2(x_0) = 0$ with $f(x_0) \neq x_0$.
+  Consider $g(x) = f^2(x) - x$ where $g(x_0) = 0$. Knowing that the fixed points of
+  $f$ must also be roots of $g$, we can use the fixed points to factor $g$.
+  Note that the fixed points of $f$ are the solutions to the equation
+  \begin{align*}
+    f(x)-x = ax^2 + (b-1)x + c = 0.
+  \end{align*}
+  Thus, we have that
+  \begin{align*}
+    g(x) &= a(ax^2 + bx+ c)^2 + b(ax^2 + bx+ c) + c -x \\
+    &= (ax^2 + (b-1)x+ c)(a^2 x^2 + a(b + 1) x  + a c + b + 1 ) \\
+    &= (ax^2 + (b-1)x+ c) p(x).
+  \end{align*}
+  If $x_0$ is a period 2 point then $g(x_0) =0$ and $f(x_0) - x_0 \neq 0$. Thus, $g(x_0)=0$
+  implies that $x_0$ is a root of $p(x) = a^2 x^2 + a(b + 1) x  + a c + b + 1$ where the roots of $p(x)$
+  are given by
+  \begin{align}\label{2cycle}
+    x_0 &= \frac{-a - a b + \sqrt{(a + a b)^2 - 4 a^2 (1 + b + a c)}}{2 a^2} \notag \\
+    x_1 &= \frac{-a - a b - \sqrt{(a + a b)^2 - 4 a^2 (1 + b + a c)}}{2 a^2}.
+  \end{align}
+  These roots form a 2-cycle $\{x_0, x_1\}$ of $f$ if and only if $x_0 \neq x_1$. Thus,
+  a 2-cycle is present for $f$ if
+  $$(a + a b)^2 - 4 a^2 (1 + b + a c) = a^2 b^2 - 2 a^2 b - a^2(4 a c +3)   \neq 0.$$
+  Since $a\neq 0$, this is equivalent to requiring that
+  \begin{align}\label{condition}
+    b^2 - 2b - (4 a c +3)   \neq 0.
+  \end{align}
+
+  We have that $f'(x) = 2 a x + b$, so that by \eqref{2cycle}
+  \begin{align*}
+    f'(x_0) f'(x_1)
+    &= (2a x_0 +b) (2a x_1 + b) \\
+    &= -b^2 + 2b +4ac + 4.
+  \end{align*}
+  Note that $f'(x_0)f'(x_1) = 1$ if $-b^2 + 2b +4ac + 3 = 0$, i.e.\ if $b^2 - 2b -(4ac + 3) = 0$.
+  However, since $\{x_0, x_1\}$ forms a 2-cycle, we require equation \eqref{condition} to be true and thus the
+  preceding equation cannot be true. Therefore,
+  we have that if $\{x_0, x_1\}$ is a 2-cycle of $f(x) = ax^2 +bx + c$ with $a\neq 0$ then $f'(x_0)f'(x_1) \neq 1$.
+
 \end{proof}
 \newpage
