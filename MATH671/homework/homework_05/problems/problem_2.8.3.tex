@@ -7,5 +7,50 @@
 \end{problem}
 
 \begin{proof}
+  The tent map is defined as
+  \begin{align*}
+    T_\mu(x) :=
+    \begin{cases}
+      \mu x & 0 \leq x \leq 1/2 \\
+      \mu (1- x) & 1/2 < x \leq 1
+    \end{cases}.
+  \end{align*}
+
+  Now suppose that $\mu \geq (1+\sqrt{5})/2 > 1$ and let $x_1 = \frac{\mu}{1+\mu^3}$.
+  We will now show that
+  \begin{align*}
+    T_\mu(x_1) = \frac{\mu^2}{1+\mu^3} = x_2, \quad T_\mu^2(x_1) = T_\mu(x_2) = \frac{\mu^3}{1+\mu^3} = x_3, \quad T_\mu^3(x_1) = T_\mu(x_3) = \frac{\mu}{1+\mu^3} = x_1
+  \end{align*}
+  demonstrating that $\{x_1, x_2, x_3\}$ is a 3-cycle.
+
+  Note that $\mu / (1+\mu^3)$ is monotonically decreasing if $\mu \geq (1 + \sqrt{5})/2$. Thus,
+  \begin{align*}
+    0 \leq \frac{\mu}{1+\mu^3} \leq \frac{\frac{1 + \sqrt{5}}{2}}{1 + \left(\frac{1 + \sqrt{5}}{2}\right)^3} = \frac{-1 + \sqrt{5}}{4} \leq \frac{1}{2}.
+  \end{align*}
+  Hence,
+  \begin{align*}
+    T_\mu(x_1) = \mu\left(\frac{\mu}{1 + \mu^3}\right) = \frac{\mu^2}{1 + \mu^3} = x_2.
+  \end{align*}
+  Similarly, we see that $\mu^2 / (1+\mu^3)$ is monotonically decreasing if $\mu\geq (1 + \sqrt{5})/2$ so
+  \begin{align*}
+    0 \leq \frac{\mu^2}{1+\mu^3} \leq \frac{\left(\frac{1 + \sqrt{5}}{2}\right)^2}{1 + \left(\frac{1 + \sqrt{5}}{2}\right)^3} = \frac{1}{2}.
+  \end{align*}
+  Thus,
+  \begin{align*}
+    T_\mu(x_2) = \mu\left(\frac{\mu^2}{1 + \mu^3}\right) = \frac{\mu^3}{1 + \mu^3} = x_3.
+  \end{align*}
+  Lastly, if $\mu \geq (1 + \sqrt{5})/2$ then $\mu^3 / (1+\mu^3)$ is monotonically
+  increasing so that
+  \begin{align*}
+    \frac{1}{2} \leq \frac{1 + \sqrt{5}}{4} = \frac{\left(\frac{1 + \sqrt{5}}{2}\right)^3}{1 + \left(\frac{1 + \sqrt{5}}{2}\right)^3} \leq \frac{\mu^3}{1+\mu^3} \leq 1
+  \end{align*}
+
+  Therefore,
+  \begin{align*}
+    T_\mu(x_3)
+    &= \mu\left(1-\frac{\mu^3}{1 + \mu^3}\right) = \frac{\mu }{1 + \mu^3} = x_1
+  \end{align*}
+  and $\{x_1, x_2, x_3\}$ is a 3-cycle.
+
 \end{proof}
 \newpage
