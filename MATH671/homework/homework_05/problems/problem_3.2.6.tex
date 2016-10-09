@@ -5,5 +5,48 @@ is continuous and piece-wise linear. Show that $f$ has a 7-cycle but no 5-cycle.
 \end{problem}
 
 \begin{proof}
+  The definition of $f$ shows that $f^7(1) = 1$ with $f^n(1) \neq 1$ for $0 < n < 7$.
+  Thus, $1$ is a period 7 point of $f$ and $\{1, 4, 5, 3, 6, 2, 7\}$ is a 7-cycle of $f$.
+
+  Let $I_k = [k, k+1]$ for $k=1,\dots,6$. Note that $f$ has one fixed point $c \in I_4$.
+  Suppose to the contrary that $x_1\neq c$ is a period 5 point of $f$ and $\{x_1, x_2, x_3, x_4, x_5\}$ is a 5-cycle.
+
+  Now, suppose that $x_1 \in I_1$. Then the definition of $f$ tells us that
+  $$f(x_1) \in \bigcup_{k=4}^6 I_k.$$
+  This then implies that
+  \begin{align*}
+    f^2(x_1) \in \bigcup_{k=1}^4 I_k, \quad
+    f^3(x_1) \in \bigcup_{k=3}^6 I_k, \quad
+    f^4(x_1) \in \bigcup_{k=1}^5 I_k, \quad\text{and}\quad
+    f^5(x_1) \in \bigcup_{k=2}^6 I_k = [2,7].
+  \end{align*}
+  But if $f^5(x_1) \in [2,7]$, then $f^5(x_1) \neq x_1$ since $x_1 \in [1,2]$ and $f^5(2) = 5$.
+
+  Using reasoning similar to that used above, we see for $k=2,3,5,6$ that
+  \begin{align*}
+    f^5(I_2) = \bigcup_{k=3}^6 I_k, \quad
+    f^5(I_3) = \bigcup_{k=4}^6 I_k, \quad
+    f^5(I_5) = \bigcup_{k=1}^4 I_k, \quad\text{and}\quad
+    f^5(I_6) = \bigcup_{k=1}^5 I_k.
+  \end{align*}
+  Thus, for $k=2,3,5,6$, we have that if $x_1 \in I_k$ and $x_1\neq k,k+1$, then
+  $x_1 \notin f^5(I_k)$ and $f^5(x_1) \neq x_1$. Similarly,
+  if $x_1 = k, k+1$, we see from the definition of $f$ that $f^5(x_1) \neq x_1$.
+
+  Thus, if $x_1$ is a period 5 point, then $x_1 \in I_4$ and $f(x_1) \in I_3 \cup I_4$.
+  However, if $f(x_1) \in I_3$, then $f^5(x_1) \in I_1$ so that
+  $f^5(x_1) \neq x_1$ violating the assumption that $x_1$ is a period 5 point.
+  Thus, we must have that $f(x_1) \in I_4$. This in turn implies that $f^2(x_1) = I_3 \cup I_4$.
+  However, if $f^2(x_1) \in I_3$, then $f^5(x_1) \in I_6$ so that
+  $f^5(x_1) \neq x_1$ again violating the assumption that $x_1$ is a period 5 point.  So we must have that $f^2(x_1) \in I_4$.
+  We can similarly show that we also have that $f^3(x_1), f^4(x_1) \in I_4$. Note
+  that if $x \in I_4$, then $f(x) = -2x + 13$ with fixed point $c = 13/3$. Thus, we see that
+  \begin{align*}
+    f^2(x) &= 4x -13\\
+    f^3(x) &= - 8 x + 39\\
+    f^4(x) &= 16 x-65\\
+    f^5(x) &=  - 32 x + 143.
+  \end{align*}
+  Hence, $f^5(x) - x = -32x + 143 - x = 0$ if and only if $x=13/3 = c$, a contradiction. Therefore, $f$ has no 5-cycle.
 \end{proof}
 \newpage
