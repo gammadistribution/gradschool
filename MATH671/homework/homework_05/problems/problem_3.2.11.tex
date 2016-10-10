@@ -1,9 +1,28 @@
 \begin{problem}{3.2.11}
-  Use Sharkovsky’s Theorem to prove that if $f : [a, b] \to [a, b]$ is a continuous
+  Use Sharkovsky's Theorem to prove that if $f: [a, b] \to [a, b]$ is a continuous
   function and $\lim_n f^n(x)$ exists for every $x \in [a, b]$, then $f$ can have no points of
   period $n > 1$.
 \end{problem}
 
 \begin{proof}
+  Suppose to the contrary that $f: [a, b] \to [a, b]$ is a continuous
+  function and $\lim_n f^n(x)$ exists for every $x \in [a, b]$ but there is a
+  point $y\in [a,b]$ of period $n>1$. Then we have that $f^n(y) = y$ with $f^k(y) \neq y$ for $0 < k < n$.
+  As a result, for every $m > n$, we will have that $f^m(y) = f^k(y)$ where $m \equiv k \mod n$.
+
+  Since $y\in [a,b]$ we have that $\lim_n f^n(y) = L$ exists by assumption. Thus, for all $\varepsilon >0$,
+  there exists an $N$ such that if $n \geq N$, then $|f^n(y) - L | < \varepsilon$. Suppose that $N \equiv k \mod n$.
+  This implies that if $|f^N(y) - L| < \varepsilon$ then $|f^k(y) - L| < \varepsilon$.
+  Since for $m > 0$ we have that $N + m > N$, we require that if
+  $|f^N(y) - L| < \varepsilon$, then $|f^{N+m}(y) - L| = |f^{k+m}(y) - L| < \varepsilon$.
+  However, if these inequalities are true for all $\varepsilon >0$, then
+  this implies that $f^k(y) = f^{k+m}(y) = L$ for $m > 0$.
+  If $k=0$, then we have that $y = f^0(y) = f^m(y)$ for some $0 < m < n$.
+  If on the other hand $k > 0$, we have for $m = n-k > 0$, that $f^k(y) = f^{n}(y) = y$.
+  So in either case, we can find some $0 < k < n$ such that $f^k(y) = y$.
+  This is contradictory to the assumption that $y$ is a point of period $n$ and so our assumption must be false.
+  Therefore, $f$ has no points of period $n  > 1$.
+
+
 \end{proof}
 \newpage
