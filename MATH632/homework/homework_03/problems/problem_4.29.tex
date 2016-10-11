@@ -3,6 +3,7 @@
   has one of three possible job classifications and changes classifications (independently)
   according to a Markov chain with transition probabilities
   \begin{align*}
+    \bold{P} =
     \begin{bmatrix}
       0.7 & 0.2 & 0.1 \\
       0.2 & 0.6 & 0.2 \\
@@ -13,5 +14,31 @@
 \end{problem}
 
 \begin{proof}
+  Let $\mathcal{M} = \{0,1,2\}$ be the states of this Markov process.
+  If $N$ is large, the percentage of employees in classification $0, 1, 2$ are given by the long-run
+  proportions of the stated Markov chain $\pi_0, \pi_1, \pi_2$, respectively.
+  It is clear that this Markov chain is ergodic and irreducible. Thus, the long-run
+  proportions of the Markov chain satisfy the following equations:
+  \begin{align*}
+     \bold{P}^\intercal \begin{bmatrix} \pi_0 \\ \pi_1 \\ \pi_2 \\ \end{bmatrix} &= \begin{bmatrix} \pi_0 \\ \pi_1 \\ \pi_2 \\\end{bmatrix},\\
+     \sum_{j\in \mathcal{M}} \pi_j &= 1.
+  \end{align*}
+
+  Thus, we must solve the system of equations
+  \begin{align*}
+    0.2 \pi_0 + 0.6 \pi_1 + 0.4 \pi_2 &= \pi_1 \\
+    0.1 \pi_0 + 0.2 \pi_1 + 0.5 \pi_2 &= \pi_2 \\
+    \pi_0 + \pi_1 + \pi_2 &= 1.
+  \end{align*}
+  Using a computer algebra system we see that the solution to the system is given
+  by
+  \begin{align*}
+    \pi_0 &= \frac{6}{17} \approx 0.352941 \\
+    \pi_1 &= \frac{7}{17} \approx 0.411765 \\
+    \pi_2 &= \frac{4}{17} \approx 0.235294.
+  \end{align*}
+
+  Therefore, if $N$ is large, approximately 35.29\% of employees are in classification 0,
+  41.18\% of employees are in classification 1, and 23.53\% of employees are in classification 2.
 \end{proof}
 \newpage
