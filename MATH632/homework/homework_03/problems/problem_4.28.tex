@@ -7,5 +7,62 @@
 \end{problem}
 
 \begin{proof}
+  Let $\{X_n: n\geq 0\}$ be the stochastic process of the outcomes of the team's games
+  where if $X_n = 1$, then the team won game $n$ and if $X_n = 0$, then the team lost game $n$.
+  Since the outcome of each game is dependent only upon the previous game, this stochastic
+  process may be modeled as a Markov chain with state space $\mathcal{M} = \{0, 1\}$.
+
+  From the assumptions of the model, if the team wins a game, the probability
+  it wins the next game is 0.8 so that
+  \begin{align*}
+    P_{11} = P\{X_{n+1} = 1\ |\ X_n = 1\} = 0.8
+  \end{align*}
+  which implies that
+  \begin{align*}
+    P_{10} = P\{X_{n+1} = 1\ |\ X_n = 0\} = 0.2.
+  \end{align*}
+  Similarly, from the assumptions of the model, if the team loses a game, it wins
+  its next game with probability 0.3 so that
+  \begin{align*}
+    P_{01} = P\{X_{n+1} = 1\ |\ X_n = 0\} = 0.3
+  \end{align*}
+  which implies that
+  \begin{align*}
+    P_{00} = P\{X_{n+1} = 0\ |\ X_n = 0\} = 0.7.
+  \end{align*}
+  Thus, the trasition matrix $\bold{P}$ of the Markov chain is given by
+  \begin{align*}
+    \bold{P} =
+    \begin{bmatrix}
+      P_{00} & P_{01} \\
+      P_{10} & P_{11}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      0.7 & 0.3 \\
+      0.2 & 0.8
+    \end{bmatrix}.
+  \end{align*}
+
+  Note that state 0 communicates with state 1 and that the expected number of transitions
+  this Markov chain must make before transitioning from state 0 to state 1 or vice versa is finite.
+  This implies that this Markov chain is irreducible and ergodoic. Therefore, if $\pi_i$ represents
+  the long term proportion that the Markov chain spends in state $i$, then the
+  long term proportions of the Markov chain satisfy the following equations:
+  \begin{align*}
+     \bold{P}^\intercal \begin{bmatrix} \pi_0 \\ \pi_1 \\ \end{bmatrix} &= \begin{bmatrix} \pi_0 \\ \pi_1 \\ \end{bmatrix},\\
+     \sum_{j\in \mathcal{M}} \pi_j &= 1.
+  \end{align*}
+  Solving the matrix equation we see that $\pi_1 = 3\pi_0/2$. Thus, by the second equation we have that $\pi_0 = 2/5$ and $\pi_1 = 3/5$.
+  and the Markov chain will spend 2/5 of its time in state 0 and 3/5 of its time in state 1. Therefore,
+  the team will win 3/5 of its games and lose 2/5 of its games after playing a large number of games.
+
+  Since the team will have dinner with probability 0.7 if the team wins and the team will have
+  dinner with probability 0.2 if the team loses, we have that the proportion of games
+  that result in a team dinner is given by 20\% of its losses plus 70\% of its wins, i.e.\
+  \begin{align*}
+    0.2 \pi_0 + 0.7 \pi_1 = \frac{1}{2}.
+  \end{align*}
+  Therefore, half of the team's games will result in a team dinner.
 \end{proof}
 \newpage
