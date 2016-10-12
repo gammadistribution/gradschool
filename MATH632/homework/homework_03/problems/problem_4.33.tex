@@ -9,5 +9,93 @@
 \end{problem}
 
 \begin{proof}
+  Let $\{X_n : n\geq 0\}$ be the stochastic process of test types assigned on the $n$-th
+  test where if $X_n = i$, then the $n$-test is of type $i$. The assumptions of the problem
+  imply that the probability that the next test is of a certain type depends only on the
+  type of the previous test so that this stochastic process may be modeled as
+  a Markov chain with state space $\mathcal{M} = \{1, 2, 3\}$.
+
+  Since the probability that the next test is of type $j$ is dependent upon the
+  knowledge that the current test is of type $i$ and also whether or not the class does
+  well on the current test, we can find $P_{ij}$ by conditioning on the stochastic process
+  $\{S_n : n \geq 0\}$ where we define $S_n = 1$ to indicate that the class does
+  well on test $n$ and $S_n = 0$ to indicate that the class does not do well on test $n$.
+  Thus,
+  \begin{align*}
+    P_{ij} &= P\{X_{n+1} = j \ |\ X_n = i\} \\
+    &= \sum_{k}P\{X_{n+1} = j \ |\ X_n = i, S_n = k\}P\{S_n = k\}.
+  \end{align*}
+
+  Note that if the current test is of type $i$ then the class does well on the exam
+  with probability $p_i$, i.e.\ $P\{S_n = 1\} = p_i$ and hence $P\{S_n = 0\} = 1 - p_i$.
+  We now examine $P\{X_{n+1} = j \ |\ X_n = i, S_n = k\}$ for $k=0,1$. It is clear
+  that
+  \begin{align*}
+    P\{X_{n+1} = j \ |\ X_n = i, S_n = k\} = \frac{P\{X_{n+1} = j, X_n = i, S_n = k\}}{P\{X_n = i, S_n = k\}}.
+  \end{align*}
+  If $k = 0$, then the class does not do well on the current exam so that $P\{X_n = i, S_n = 0\} = 1 - p_i$.
+  If the class does not do well on the exam, then the next test they receive is of type 1.
+  Thus,
+  \begin{align*}
+    P\{X_{n+1} = j, X_n = i, S_n = 0\} =
+    \begin{cases}
+     1 - p_i & \text{if $j = 1$} \\
+     0 & \text{if $j \neq 1$}
+    \end{cases}.
+  \end{align*}
+  Similarly, if $k=1$, then the class does well on the exam so that $P\{X_n = i, S_n = 1\} = p_i$.
+  If the class does not do well on the exam, then the next test is of type 1, 2, 3 and occurs with equal probability.
+  Thus,
+  \begin{align*}
+    P\{X_{n+1} = j, X_n = i, S_n = 1\} = \frac{p_i}{3}.
+  \end{align*}
+  Using these relations, we see that
+  \begin{align*}
+    P\{X_{n+1} = j \ |\ X_n = i, S_n = k\} =
+    \begin{cases}
+      \frac{1-p_i}{1-p_i}(1 - p_i) & \text{if $k=0$ and $j = 1$}\\
+      0 & \text{if $k=0$ and $j \neq 1$}\\
+      \frac{p_i}{3p_i}(p_i) & \text{if $k=1$}
+    \end{cases}.
+  \end{align*}
+  Therefore, the transition matrix $\bold{P}$ of the Markov chain is given by
+  \begin{align*}
+    \bold{P}
+    =
+    \renewcommand\arraystretch{1.5}
+    \begin{bmatrix}
+      \frac{p_1}{3} + 1 - p_1 & \frac{p_1}{3} & \frac{p_1}{3} \\
+      \frac{p_2}{3} + 1 - p_2 & \frac{p_2}{3} & \frac{p_2}{3} \\
+      \frac{p_3}{3} + 1 - p_2 & \frac{p_3}{3} & \frac{p_3}{3} \\
+    \end{bmatrix}
+    = \
+    \begin{bmatrix}
+      \frac{4}{5} & \frac{1}{10} & \frac{1}{10} \\
+      \frac{3}{5} & \frac{1}{5} & \frac{1}{5} \\
+      \frac{2}{5} & \frac{3}{10} & \frac{3}{10} \\
+    \end{bmatrix}.
+  \end{align*}
+
+  It is clear that this Markov chain is irreducible and positive recurrent. Thus,
+  the long-run proportions of the Markov chain satisfy the following equations:
+  \begin{align*}
+     \bold{P}^\intercal \begin{bmatrix} \pi_1 \\ \pi_2 \\ \pi_3 \\ \end{bmatrix} &= \begin{bmatrix} \pi_1 \\ \pi_2 \\ \pi_3 \\ \end{bmatrix},\\
+     \sum_{j\in \mathcal{M}} \pi_j &= 1.
+  \end{align*}
+  Thus, in order to determine the long-run proportions we must solve the system of
+  equations
+  \begin{align*}
+    \begin{array}{rrrrrrr}
+      (1/10)\pi_1 &+& (1/5)\pi_2 &+& (3/10)\pi_3 &=& \pi_2 \\
+      (1/10)\pi_1 &+& (1/5)\pi_2 &+& (3/10)\pi_3 &=& \pi_3 \\
+      \pi_1       &+& \pi_2      &+& \pi_3       &=& 1 \\
+    \end{array}.
+  \end{align*}
+  Using a computer algebra system, we see that the solution to the above system is given
+  by
+  \begin{align*}
+    \pi_1 = \frac{5}{7}, \quad \pi_2 = \frac{1}{7}, \quad \pi_3 = \frac{1}{7}.
+  \end{align*}
+Therefore, 5/7 of the exams are of type 1, and the rest of the exams are split equally between types 2 and 3.
 \end{proof}
 \newpage
