@@ -5,5 +5,67 @@
 \end{problem}
 
 \begin{proof}
+  Let $\{X_n : n\geq 0\}$ be the stochastic process representing the $n$-th vehicle
+  on the road where if $X_n = 0$, then the $n$-th vehicle is a car and if $X_n = 1$,
+  then the $n$-th vehicle is a truck. From the assumptions of the model, the probability
+  that the $n$-th vehicle is either a car or truck is dependent only upon the previous vehicle
+  so that this stochastic process may be modeled as a Markov chain with state space
+  $\mathcal{M} = \{0, 1\}$.
+
+  If three out of every four trucks is followed by a car as per the model, then
+  \begin{align*}
+    P_{10} = P\{X_{n+1} = 0 \ |\ X_n = 1\} = \frac{3}{4}
+  \end{align*}
+  and thus,
+  \begin{align*}
+    P_{11} = P\{X_{n+1} = 1 \ |\ X_n = 1\} = \frac{1}{4}.
+  \end{align*}
+  Similarly, if one out of every five cars is followed by a truck as per the model,
+  then
+  \begin{align*}
+    P_{01} = P\{X_{n+1} = 1 \ |\ X_n = 0\} = \frac{1}{5}
+  \end{align*}
+  and thus,
+  \begin{align*}
+    P_{00} = P\{X_{n+1} = 0 \ |\ X_n = 0\} = \frac{4}{5}.
+  \end{align*}
+  Therefore, the transition matrix $\bold{P}$ of this Markov chain is given by
+  \begin{align*}
+    \bold{P} =
+    \begin{bmatrix}
+      P_{00} & P_{01} \\
+      P_{10} & P_{11} \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      4/5 & 1/5 \\
+      3/4 & 1/4 \\
+    \end{bmatrix}.
+  \end{align*}
+
+  If there are a large number of vehicles on the road, then the long-run proportions
+  associated to this Markov chain $\pi_0$ and $\pi_1$ will represent the fraction of vehicles
+  on the road that are cars and trucks, respectively.
+  Note that this Markov chain is irreducible and ergodoic. Therefore, $\pi_0$ and $\pi_1$
+  satisfy the following equations:
+  \begin{align*}
+     \bold{P}^\intercal \begin{bmatrix} \pi_0 \\ \pi_1 \\ \end{bmatrix} &= \begin{bmatrix} \pi_0 \\ \pi_1 \\ \end{bmatrix},\\
+     \sum_{j\in \mathcal{M}} \pi_j &= 1.
+  \end{align*}
+  Thus, to find the long-run proportions, we must solve the system of equations:
+  \begin{align*}
+    \begin{array}{lll}
+      \frac{1}{5}\pi_0 &+ \frac{1}{4}\pi_1 &= \pi_1 \\
+      \phantom{\frac{1}{5}}\pi_0 &+ \phantom{\frac{1}{4}}\pi_1 &= 1
+    \end{array}.
+  \end{align*}
+  Using a computer algebra system, we see that the solution of the system is given
+  by
+  \begin{align*}
+    \pi_0 &= \frac{15}{19} \approx 0.7895\\
+    \pi_1 &= \frac{4}{19} \approx 0.2105.
+  \end{align*}
+  Therefore, if the number of vehicles on the road is large,
+  approximately 21.05\% of the vehicles will be trucks.
 \end{proof}
 \newpage
