@@ -6,5 +6,63 @@
 \end{problem}
 
 \begin{proof}
+  In order to find the limiting probabilities we must first find the transition
+  matrix of this Markov chain. Note that if $P_{04} = 1$, then $P_{0j} = 0$ for $0 \leq j < 4$.
+  Now suppose that $i > 0$. If the next state is equally likely to be any of the $i$ number of states
+  $0, 1, \dots, i-1$ given that the chain is currently in state $i$, then the probability of transitioning from $i$ to one of the listed states
+  is $1/i$ and 0 otherwise. Thus,
+  \begin{align*}
+    P_{ij} =
+    \begin{cases}
+      \frac{1}{i} & \text{if $j < i$} \\
+      0 & \text{if $j \geq i$}
+    \end{cases}.
+  \end{align*}
+  Therefore, the transition matrix $\bold{P}$ of this Markov chain is given by
+  \begin{align*}
+    \bold{P} =
+    \renewcommand\arraystretch{1.5}
+    \begin{bmatrix}
+      0           & 0           & 0           & 0           & 1 \\
+      1           & 0           & 0           & 0           & 0 \\
+      \frac{1}{2} & \frac{1}{2} & 0           & 0           & 0 \\
+      \frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0           & 0 \\
+      \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 \\
+    \end{bmatrix}.
+  \end{align*}
+  Since we can see that $P_{ij}^n > 0$ for $n=5$, every state communicates with every other state and
+  this Markov chain is irreducible. We can also see that the expected number
+  of transitions each state must make before it returns to that respective state
+  is finite so that this Markov chain is positive recurrent. Further, since
+  $P_{ij}^n > 0$ for $n>5$, this Markov chain is aperiodic.
+  Therefore, the long-run proportions give the limiting probabilities of this
+  Markov chain and the limiting probabilities $\pi_i$ must satisfy
+    \begin{align*}
+     \bold{P}^\intercal
+     \begin{bmatrix} \pi_0 & \pi_1 & \pi_2 & \pi_3 & \pi_4\end{bmatrix}^\intercal &= \begin{bmatrix} \pi_0 & \pi_1 & \pi_2 & \pi_3 & \pi_4\end{bmatrix}^\intercal,\\
+     \sum_{j\in \mathcal{M}} \pi_j &= 1.
+  \end{align*}
+
+  Thus, in order to find the limiting probabilities we must solve the system of equations
+  \begin{align*}
+    \begin{array}{rrrrrrrrrrr}
+                 & &            & & (1/2)\pi_2 &+& (1/3)\pi_3 &+& (1/4)\pi_4 &=& \pi_1 \\
+                 & &            & &            & & (1/3)\pi_3 &+& (1/4)\pi_4 &=& \pi_2 \\
+                 & &            & &            & &            & & (1/4)\pi_4 &=& \pi_3 \\
+      \pi_0      & &            & &            & &            & &            &=& \pi_4 \\
+      \pi_0      &+& \pi_1      &+& \pi_2      &+& \pi_3      &+& \pi_4      &=& 1 \\
+    \end{array}.
+  \end{align*}
+  Using a computer algebra system, we see that the solution to the above system,
+  and hence the limiting probabilities of this Markov chain, are given by
+  \begin{align*}
+    \begin{bmatrix}
+      \pi_0 & \pi_1 & \pi_2 & \pi_3 & \pi_4
+    \end{bmatrix}^\intercal
+    =
+    \begin{bmatrix}
+      12/37 & 6/37 & 4/37 & 3/37 & 12/37
+    \end{bmatrix}^\intercal.
+  \end{align*}
 \end{proof}
 \newpage
