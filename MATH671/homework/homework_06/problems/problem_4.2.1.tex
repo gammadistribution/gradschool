@@ -4,5 +4,38 @@
 \end{problem}
 
 \begin{proof}
+  Recall that a set $A \subseteq X$ is an open set if for all $a \in A$, there
+  exists an $\varepsilon > 0$ such that $B_\varepsilon(a) \subseteq A$. Thus, to
+  show that $B_\varepsilon(a)$ is an open set, we will show that for each point in the open
+  ball of radius $\varepsilon$ centered at $a$ there exists a neighborhood of
+  that point that is completely contained in the open ball.
+
+  So, let $x \in B_\varepsilon(a) = \{x \in X \ |\ d(x, a) < \varepsilon\}$ and
+  suppose that $d(x, a) = \delta < \varepsilon$. We wish to find some $\varepsilon_1 > 0$
+  such that $B_{\varepsilon_1}(x) \subseteq B_\varepsilon(a)$. Consider $B_{\varepsilon_1}(x)$,
+  the open ball centered at $x$ of radius $\varepsilon_1 = \varepsilon - \delta > 0$
+  and let $y \in B_{\varepsilon_1}(x)$. If $y\in B_{\varepsilon_1}(x)$, then $y\in X$ and $d(y, x) < \varepsilon_1 = \varepsilon - \delta$.
+  Since $a, x, y \in X$ and $X$ is a metric space, we must have that
+  \begin{align*}
+    d(y, a) \leq d(y, x) + d(x, a) < \varepsilon - \delta + \delta = \varepsilon.
+  \end{align*}
+  Therefore, we have that $d(y, a) < \varepsilon$ and $y \in B_\varepsilon(a)$ so that $B_{\varepsilon_1}(x) \subseteq B_\varepsilon(a)$
+  and the set $B_\varepsilon(a)$ must be open.
+
+  We now wish to show that a finite subset $A = \{a_0, a_1, \dots, a_n\} \subseteq X$ is a closed set.
+  Recall that a set $A \subseteq X$ is closed if and only if $X \setminus A$ is open. Let $x \in X \setminus A$
+  and consider $B_{\varepsilon}(x)$, the open ball centered at $x$ of radius $\varepsilon = \min_i\{d(x, a_i)\}$.
+  Since $x \in X$ and $x \neq a_0, \dots, a_n$, we know that $\varepsilon = \min_i\{d(x, a_i)\} > 0$.
+
+  Suppose to the contrary that $y \in B_{\varepsilon}(x)$ and $y = a_i$ for some $i=0,\dots, n$.
+  Since $y, a_i \in X$ and $X$ is a metric space with $y = a_i$, we have that $d(y, a_i) = 0$.
+  Thus, under the properties of the distance function of this metric space, we must have that
+  \begin{align*}
+    d(x, a_i) \leq d(x, y) + d(y, a_i) < \varepsilon = \min_i\{d(x, a_i)\}.
+  \end{align*}
+  However, this is a contradiction since an element of a set cannot be strictly
+  less than the minimum of that set. Thus, if $y \in B_{\varepsilon}(x)$, then $y \neq a_i$ for any $i=0,\dots, n$.
+  Therefore, $B_{\varepsilon}(x) \subseteq X \setminus A$ and $X \setminus A$ is open so that $A$ is closed.
 \end{proof}
+
 \newpage
