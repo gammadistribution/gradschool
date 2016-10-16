@@ -5,5 +5,40 @@
 \end{problem}
 
 \begin{proof}
+  We wish to show that $B_\varepsilon[a]$ is closed, i.e.\ that $X \setminus B_\varepsilon[a]$ is open. Suppose that
+  $x \in X \setminus B_\varepsilon[a]$. Then we have that $d(x, a) = \delta > \varepsilon$.
+  Consider $B_{\varepsilon_1}(x)$, the open ball centered at $x$ of radius $\varepsilon_1 = \delta - \varepsilon$.
+  Suppose to the contrary that $y \in B_{\varepsilon_1}(x)$ and $y\in B_\varepsilon[a]$.
+  Since $a, x, y \in X$ with $X$ a metric space, we have that
+  \begin{align*}
+    d(x, a) \leq d(x, y) + d(y, a) < \delta - \varepsilon + \varepsilon = \delta = d(x, a).
+  \end{align*}
+
+  However, this is a contradiction since the distance between two points cannot be less than itself.
+  Thus, we must have that if $y \in B_{\varepsilon_1}(x)$,
+  then $y \notin B_{\varepsilon}[a]$. Therefore, for every $x\in X \setminus B_\varepsilon[a]$,
+  there exists an $\varepsilon_1 > 0$ such that $B_{\varepsilon_1}(x) \subseteq X \setminus B_\varepsilon[a]$
+  and $X \setminus B_\varepsilon[a]$ is open so that $B_\varepsilon[a]$ is closed.
+
+  Recall that $\overline{A}$, the closure of a set $A$, is the union of the set $A$ with its limit points,
+  i.e.\ $\overline{A} = A \cup \text{Lim}\{A\}$ where $a \in X$ is a limit point if every open ball
+  centered at $a$ contains a point in $A$ different from $a$.
+  We wish to show that the closed ball centered at $a$ of a given radius
+  does not necessarily coincide with the closure of the open ball centered at $a$ of the same radius.
+
+  To see this, consider the metric space $X = \{0, 1\}$ equipped with the discrete metric
+  and consider the point $0\in X$. The only open ball centered at 0 is given by
+  \begin{align*}
+    B_1(0)= \{x \in X \ |\ d(x, 0) < 1\} = \{0\}.
+  \end{align*}
+  Since the point $1$ is not in any open ball centered at $0$, we see that there are no limit points of
+  $0$ and that $\overline{B_1(0)} = \{0\}$. However, the only closed ball centered at $0$ is given by
+  \begin{align*}
+    B_1[0] = \{x \in X \ |\ d(x, 0) \leq 1\} = \{0, 1\}
+  \end{align*}
+  and we see that $\overline{B_1(0)} \neq B_1[0]$.
+  Therefore, we can clearly see that the closure of the open ball centered at a point $a\in X$
+  of any radius is not necessarily equal to the closed ball centered at $a$ of the same radius.
+
 \end{proof}
 \newpage
