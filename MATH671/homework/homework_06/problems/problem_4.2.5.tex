@@ -6,5 +6,22 @@
 \end{problem}
 
 \begin{proof}
+  We wish to show that the set $A = \bigcap_{i=1}^n A_i$ is open where $A_i$ for $i=1,\dots, n$ is open.
+  Suppose that $a \in A$ so that $a \in A_i$ for $i=1,\dots, n$.
+  Note that each $A_i$ is open, so we must have that for every $x \in A_i$, there exists some
+  $\varepsilon > 0$ such that $B_\varepsilon(x) \subseteq A_i$. Thus, since $a\in A_i$ for $i=1,\dots, n$,
+  there exists some $\varepsilon_i > 0$ such that $B_{\varepsilon_i}(a) \subseteq A_i$ for each $i$.
+
+  Consider $B_\delta(a)$, the open ball centered at $a$ of radius $\delta = \min_i\{\varepsilon_i\} > 0$ and
+  let $x \in B_\delta(a)$. Then $d(x, a) < \delta \leq \varepsilon_i$ for $i = 1, \dots, n$.
+  This implies that $x \in B_{\varepsilon_i}(a)$ and hence that $x \in A_i$ for $i = 1, \dots, n$, i.e.\
+  that $x \in \bigcap_{i=1}^n A_i = A$.
+  Therefore, for every $a \in A$, there exists a $\delta > 0$ such that $B_\delta(a) \subseteq A$
+  and thus the set $A$ is open.
+
+  Now consider the set $B = \bigcap_{i=1}^\infty (-1/n, 1/n)$. It is clear by the Archimedean property of the real numbers
+  that $B = \{0\}$. However, as was proven previously, every finite subset of a metric space is closed. Therefore, we
+  have that $B$ is closed and the intersection of infinitely many open sets need not be open.
+
 \end{proof}
 \newpage
