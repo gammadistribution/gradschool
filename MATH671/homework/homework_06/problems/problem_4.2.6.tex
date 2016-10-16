@@ -5,9 +5,9 @@
     \mathcal{A}^\mathbb{N} = \{\omega = (a_0, a_1, a_2, \dots) \ |\ \text{$a_i = 0$ or $a_i = 1$}\},
   \end{align*}
   with metric:
-  \begin{align*}
+  \begin{align}\label{metric}
     d(\omega_1, \omega_2) = \sum_{k=0}^\infty\frac{|s_k - t_k|}{2^k},
-  \end{align*}
+  \end{align}
   where $\omega_1 = (s_0, s_1, s_2, \dots)$ and $\omega_2 = (t_0, t_1, t_2, \dots)$.
 
   Show that $\mathcal{A}^\mathbb{N}$ is a metric space. Find $d(\omega_1, \omega_2)$ if:
@@ -18,5 +18,61 @@
 \end{problem}
 
 \begin{proof}
+  In order for $(\mathcal{A}^\mathbb{N}, d)$ to be a metric space
+  with $d: \mathcal{A}^\mathbb{N} \times \mathcal{A}^\mathbb{N} \to \mathbb{R}_{\geq 0}$
+  defined as in \eqref{metric}, we require for every $x, y, z \in \mathcal{A}^\mathbb{N}$ that the metric $d$ satisfies:
+  \begin{enumerate}
+    \item $d(x, y) \geq 0$,
+    \item $d(x, y) = 0$ if and only if $x = y$,
+    \item $d(x, y) = d(y, x)$
+    \item $d(x, z) \leq d(x, y) + d(y, z)$.
+  \end{enumerate}
+
+  Suppose that $x = (x_0, x_1, \dots) \in \mathcal{A}^\mathbb{N}$ and $y = (y_0, y_1, \dots) \in \mathcal{A}^\mathbb{N}$. Note
+  that $|x_k - y_k| \geq 0$ for every $k \in \mathbb{N}$ which implies that $|x_k - y_k| / 2^k \geq 0$. Thus,
+  $d(x, y) = \sum_{k=0}^\infty |x_k - y_k| / 2^k \geq 0$ and property i.\ is satisfied.
+
+  It is clear that if $x = y$ then $x_k = y_k$ for every $k\in \mathbb{N}$ which implies that
+  $|x_k - y_k| = 0$. Hence, $d(x, y) = 0$. On the other hand, suppose that $d(x, y) = 0$.
+  Since $|x_k - y_k| \geq 0$ for each $k\in\mathbb{N}$, we have that $d(x, y) = \sum_{k=0}^\infty |x_k - y_k|/2^k = 0$
+  if and only if $|x_k - y_k| = 0$ for all $k\in\mathbb{N}$. This implies that
+  $x_k = y_k$ for all $k \in \mathbb{N}$ and therefore $x = y$ and property ii.\ is satisfied.
+
+  Since $|x_k - y_k| = |y_k- x_k|$ it is clear that $d(x, y) = d(y, x)$ and property iii.\ is satisfied.
+
+  Now suppose that $z = (z_0, z_1, \dots) \in \mathcal{A}^\mathbb{N}$. Since $|x_k - z_k| \leq |x_k - y_k| + |y_k - z_k|$,
+  it is clear that
+  \begin{align*}
+    d(x, z) = \sum_{k=0}^\infty\frac{|x_k - z_k|}{2^k} &\leq \sum_{k=0}^\infty\frac{|x_k - y_k| + |y_k - z_k|}{2^k} \\
+    &=\sum_{k=0}^\infty\frac{|x_k - y_k|}{2^k} + \sum_{k=0}^\infty\frac{|y_k - z_k|}{2^k} = d(x, y) + d(y, z)
+  \end{align*}
+  and property iv.\ is satisfied. Hence, the metric $d$ satisfies all four required properties.
+  Since it is clear that $d: \mathcal{A}^\mathbb{N} \times \mathcal{A}^\mathbb{N} \to \mathbb{R}_{\geq 0}$
+  is well defined and $0 \leq d(x, y) \leq 2$, the relation $d$ is in fact a function
+  onto the non-negative reals and therefore $(\mathcal{A}^\mathbb{N}, d)$ is a metric space.
+
+  We now wish to find the distance between two points $\omega_1 = (s_0, s_1, s_2, \dots)$ and $\omega_2 = (t_0, t_1, t_2, \dots)$
+  in $\mathcal{A}^\mathbb{N}$ for various representations of $\omega_1$ and $\omega_2$.
+  \begin{enumerate}
+    \item Suppose that $\omega_1 = (0, 1, 1, 1, 1, \dots)$ and $\omega_2 = (1, 0, 1, 1, 1, \dots )$. Then
+      we have that
+      \begin{align*}
+        |s_k - t_k| =
+        \begin{cases}
+          1 & \text{if $0 \leq k \leq 1$} \\
+          0 & \text{if $1 < k$}
+        \end{cases}.
+      \end{align*}
+      Therefore, we have that
+      \begin{align*}
+        d(\omega_1, \omega_2) = \sum_{k=0}^\infty\frac{|s_k - t_k|}{2^k} = \frac{1}{2^0} + \frac{1}{2^1} = \frac{3}{2}.
+      \end{align*}
+    \item Suppose that $\omega_1 = (0, 1, 0, 1, 0, \dots)$ and $\omega_2 = (1, 0, 1, 0, 1, \dots )$. Then
+      we have that $|s_k - t_k| = 1$ for all $k \in\mathbb{N}$.
+      Therefore, we have that
+      \begin{align*}
+        d(\omega_1, \omega_2) &= \sum_{k=0}^\infty\frac{|s_k - t_k|}{2^k} = \sum_{k=0}^\infty\frac{1}{2^k} = 2.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
