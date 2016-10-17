@@ -14,5 +14,84 @@
 \end{problem}
 
 \begin{proof}
+  Throughout, we assume that $f: I \to I$ is a continuous function defined on an interval $I$.
+
+  \begin{enumerate}
+    \item Let $A = \{x \in I \ |\ f^2(x) = x\}$ and suppose that $A$
+      is dense in $I$. Then for every $y\in I$ and for all $\varepsilon >0$,
+      there is some $x\in(y-\varepsilon, y+\varepsilon)$ such that $x \in A$, i.e. $x= f^2(x)$.
+      This also implies that for every $x \in I$, there is a sequence $(x_n)$ in $A$
+      such that $\lim_n x_n = x$. So, suppose that $(x_n)$ is a sequence in $A$.
+      By the continuity of $f$, we have that
+      \begin{align*}
+        \lim_n f(x_n) = f(\lim_n x_n).
+      \end{align*}
+      which implies that
+      \begin{align*}
+        \lim_n f^2(x_n) = \lim_n f(f(x_n)) = f(\lim_n f(x_n)) = f^2(\lim_n x_n).
+      \end{align*}
+      Since $A$ is dense in $I$, we have for every $x\in I$ that $\lim_n x_n = x$ and thus
+      \begin{align*}
+        x = \lim_n x_n = \lim_n f^2(x_n) = f^2(\lim_n x_n) = f^2(x).
+      \end{align*}
+      This implies that every point in the domain is in $A$.
+
+      The graph of $f$ is given by $G(f) = \{ (x, f(x)) \in I \times I \ |\ x = f(x)\}$. If
+      every point $x \in I$ satisfies $f^2(x) = x$, then for all $(x, f(x)) \in G(f)$, we must have
+      that $(f(x), x) \in G(f)$ since $f(x) \in I$ if $x \in I$ and
+      $f^2(x) = x$.
+
+    \item We will show that if every point in the domain of $f$ is a period-2 point,
+      then $f$ must be injective and surjective and hence must be invertible.
+
+      Suppose that $f(x) = f(y)$ with $f(x), f(y) \in I$. Since $f$ is a function, we must have
+      that $f^2(x) = f^2(y)$, but this implies that $x =y$ since every point in the domain of $f$ is a period-2 point.
+      Thus, $f$ is injective.
+
+      It is clear that $f$ is surjective since it is injective and the codomain of the function $f$ is
+      the same as its domain. Therefore, $f$ must have an inverse.
+
+      As was shown previously, a continuous function from an interval onto itself
+      must have a fixed point.
+
+    \item It follows from the Intermediate Value Theorem that if
+      $f$ is a continuous function that is not strictly monotonic, then $f$ is not
+      injective. Therefore, since $f$ is a continuous, injective function we must have
+      that it is a strictly monotonic function.
+
+      Suppose that there exists an $x\in I$ such that $f(x) \neq x$. Since $f^2(x) = x$ with
+      $f(x) \neq x$, we have that $x$ is a period 2 point and $\{x, f(x)\}$ is a 2-cycle.
+      Without loss of generality, assume that $x < f(x)$. Since $f$ is injective,
+      we either have that $f(x) < f^2(x)$ or $f(x) > f^2(x)$. However, $f^2(x) = x$,
+      so we cannot have that $f(x) < f^2(x) = x$ if $x < f(x)$. Thus, we must have
+      that $f(x) > f^2(x)$ or that $f$ is strictly decreasing on the interval $[x, f(x)]$.
+      Therefore, since $f$ is monotonic, we must have that $f$ is strictly monotonically
+      decreasing.
+
+    \item Suppose that $f'(x)$ exists for every $x \in I$. We know that $f^2(x) = x$
+      for all $x\in I$. Then we have that
+      \begin{align}\label{der}
+        |f^2(x)'| = |f'(f(x))f'(x)| = |x'| = 1
+      \end{align}
+      and the 2-cycle $\{x, f(x)\}$ is non-hyperbolic. Suppose on the other hand that
+      $f(x_0) = x_0$ for some $x_0\in I$. Note that since $f$ is strictly decreasing we have that $f'(x) < 0$
+      for all $x\in I$. Since $f^2(x_0) = x_0$, we see from equation \eqref{der} that
+      \begin{align*}
+        |f^2(x_0)'| = |f'(x_0)^2| = 1.
+      \end{align*}
+      This implies that $f'(x_0)^2 = 1$. Since $f'(x_0) < 0$ we must have that $f'(x_0) = -1$
+      and the fixed point $x_0$ is non-hyperbolic.
+
+    \item The function $f: (0, \infty) \to (0, \infty)$
+      with $f(x) = 1/x$ is an example of the type appearing in iv. It is clear that $f$ is strictly decreasing
+      on this interval. Note that if
+      $x\in (0, \infty)$ with $x\neq 1$, then $f^2(x) = x$ with $f(x) \neq x$ so that $\{x, f(x)\}$ is a 2-cycle.
+      Since $f'(x) = -x^{-2}$, we see that
+      \begin{align*}
+        |f'(f(x))f(x)| = \left| \left(- \frac{1}{(1/x)^2}\right) \left(- \frac{1}{x^2}\right)\right| = \left|\frac{x^2}{x^2}\right| = 1
+      \end{align*}
+      and the 2-cycle is non-hyperbolic. The only fixed point of this function is $x_0 = 1$, we clearly see
+      that $f'(1) = -1$ and it is non-hyperbolic.
+  \end{enumerate}
 \end{proof}
 \newpage
