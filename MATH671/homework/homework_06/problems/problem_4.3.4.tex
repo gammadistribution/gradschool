@@ -4,5 +4,24 @@
 \end{problem}
 
 \begin{proof}
+  Suppose that $f: [a, b] \to [a,b]$ is a homeomorphism, i.e.\ $f$ is a continuous
+  bijection with a continuous inverse. It was shown previously that a continuous, injective function
+  must either be strictly monotonically increasing or decreasing.
+
+  Suppose first that $f(a) \neq a$. Note in this case that $f$ cannot be strictly monotonically increasing
+  for otherwise we would contradict the fact that $f$ is a bijection. To demonstrate,
+  suppose to the contrary that $f$ is a homeomorphism with $f(a) \neq a$ but $f$
+  is strictly monotonically increasing. Since $a < x$ for all $x\in(a,b]$ we have
+  that $f(a) < f(x)$. Since $f$ is a bijection that is monotonically increasing,
+  we must have that each $x \in (a, b]$ gets mapped to some $f(x) \in (a, b]$.
+  However, if $f(a) < f(x)$ for all $f(x) \in (a, b]$, then $f(a) = a$ if $f$ is a bijection, a contradiction.
+  Therefore, we have that if $f(a) \neq a$, then $f$ is strictly monotonically decreasing.
+  If $f$ is a strictly monotonically decreasing bijection, then we must have that $f(a) = b$ and $\{a, b\}$
+  is a 2-cycle.
+
+  On the other hand, if $f(a) = a$, then following an argument similar to the one posited above,
+  we have that $f$ must be strictly monotonically increasing. Thus, if $f$ is a bijection, we must have
+  that $f(b) = b$ so that $a$ and $b$ are both fixed points.
+
 \end{proof}
 \newpage
