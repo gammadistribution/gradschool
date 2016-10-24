@@ -6,7 +6,7 @@
       $\mu(3 - 2\sqrt{2})$.
     \item Deduce that $g_\mu$ is a dynamical system on $[0, 1]$
       for $0 \leq \mu \leq 3 + 2\sqrt{2}$, i.e. $g_\mu([0,1])\subseteq[0,1]$.
-    \item Find the fixed points of $g_\mu$ for $mu \geq 1$.
+    \item Find the fixed points of $g_\mu$ for $\mu \geq 1$.
     \item Find $g_\mu'$ and determine whether the fixed points are attracting
       or repelling.
     \item Use a graphing utility to graph $g_\mu^2$ and $g_\mu^3$
@@ -15,5 +15,81 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item If $\displaystyle g_\mu(x) = \mu x \frac{(1-x)}{(1+x)}$, then we see that
+      \begin{align}\label{gmu}
+        g_\mu'(x) &= \mu \left[\frac{(1-x)}{(1+x)} - \frac{2x}{(1+x)^2} \right] \notag \\
+        &= \mu\left[\frac{-x^2-2x+1}{(1+x)^2}\right].
+      \end{align}
+      Thus, $g_\mu'(x) = 0$ if $x = \pm \sqrt{2} - 1$. Since $g_\mu'(0) = \mu > 0$ with $0 < \sqrt{2} - 1$
+      and $g_\mu'(1) = -\mu/2 < 0$ for $\sqrt{2} -1 < 1$, we see that $x = \sqrt{2} - 1$ is a local maximum
+      of $g_\mu(x)$. The maximum value is thus given by
+      \begin{align*}
+        g_\mu(\sqrt{2} - 1) = \mu (\sqrt{2} - 1) \frac{(1-(\sqrt{2} - 1))}{(1+(\sqrt{2} - 1))} = \mu(3 - 2\sqrt{2}).
+      \end{align*}
+    \item The function $g_\mu: [0, 1] \to [0, 1]$ will be a dynamical
+      system for $0 \leq \mu \leq 3 + 2\sqrt{2}$ if $g_\mu([0,1]) \subseteq [0,1]$.
+      Note that on $[0, 1]$, we have that the global minimum of $g_\mu$ is 0
+      and can easily see using the previous result that the global maximum
+      of $g_\mu$ is $\mu(3 - 2\sqrt{2})$. Thus, since $g_\mu$ is continuous, we must have that
+      $g_\mu([0,1]) = [0, \mu(3 - 2\sqrt{2})]$. If $0 \leq \mu \leq 3 + 2\sqrt{2}$, we see that
+      $$0 \leq \mu(3 - 2\sqrt{2}) \leq (3 + 2\sqrt{2})(3 - 2\sqrt{2}) = 1.$$
+      Therefore,
+      $g_\mu([0,1]) = [0, \mu(3 - 2\sqrt{2})] \subseteq [0, 1]$ and $g_\mu$ is a
+      dynamical system on $[0, 1]$.
+    \item Suppose that $\mu \geq 1$. The fixed points of $g_\mu$ are the roots of
+      the function
+      \begin{align*}
+        f(x) = g_\mu(x) - x = - \frac{x[x(\mu+1) - (\mu - 1)]}{(x+1)}.
+      \end{align*}
+      Thus, the fixed points of $g_\mu$ are given by
+      \begin{align}\label{gmu_fixed}
+        x_0 = 0 \text{\quad and\quad} x_1 = \frac{\mu-1}{\mu+1}.
+      \end{align}
+    \item Recall that a fixed point $c$ of a function $f$ that is hyperbolic is attracting if $|f'(c)| < 1$ and
+      repelling if $|f'(c)| > 1$. The derivative of $g_\mu$ is provided by \eqref{gmu}.
+      Thus, we readily see that for the fixed points provided by \eqref{gmu_fixed}
+      that
+      \begin{align*}
+        |g_\mu'(x_0)| = |g_\mu'(0)| = |\mu|
+      \end{align*}
+      and
+      \begin{align*}
+        |g_\mu'(x_1)| &= \left|g_\mu'\left(\frac{\mu-1}{\mu+1}\right)\right| \\
+        &= \frac{1}{2}\left|\left(-\mu + \frac{1}{\mu} + 2\right)\right|.
+      \end{align*}
+
+      Since $\mu \geq 1$, we see that if $\mu > 1$ then the fixed point $x_0$ will
+      be a hyperbolic fixed point and will be repelling. If, however, $\mu = 1$, we see that $g_\mu'(x_0) = 1$
+      and $x_0$ is a non-hyperbolic fixed point. We rely on a previous theorem that states that
+      we can use the second and third derivative of $g_\mu$ in order to classify the non-hyperbolic fixed point.
+      Note that
+      \begin{align}\label{gmu_derivs}
+        g_\mu''(x) = - \frac{4\mu}{(1 + x)^3} \text{\quad and\quad} g_\mu'''(x) = \frac{12\mu}{(1+x)^4}.
+      \end{align}
+      Since $g_\mu''(x_0) = -4\mu < 0$, the fixed point $x_0 = 0$ is one-sided asymptotically stable to the right of 0
+      for $\mu = 1$.
+
+      For the fixed point $x_1$, we see that if
+      $1 < \mu < 2 + \sqrt{5}$, then $|g_\mu'(x_1)| < 1$ so that
+      $x_1$ is a hyperbolic, attracting fixed point. On the other hand, if $2 + \sqrt{5} < \mu$,
+      then $|g_\mu'(x_1)| > 1$ so that $x_1$ is a hyperbolic, repelling fixed point.
+      In the case that $\mu = 1$ or $\mu = 2 + \sqrt{5}$, the fixed point $x_1$
+      is non-hyperbolic.
+
+      If $\mu = 1$, we see that $x_1 = 0 = x_0$ and so it must have the same classification as $x_0$ when $\mu = 1$, i.e.\
+      it is a non-hyperbolic fixed point that is one-sided asymptotically stable to the right of 0.
+      If $\mu = 2 + \sqrt{5}$, then we see that $g_\mu'(x_1) = -1$.
+      Note that we can use the Schwarzian derivative of $g_\mu$ to classify this non-hyperbolic fixed point.
+      The Schwarzian derivative of $g_\mu$ evaluated at $x_1$ is given by
+      \begin{align*}
+        Sg_\mu(x_1) &= -g_\mu'''(x_1) - \frac{3g_\mu''(x_1)^2}{2} \\
+        &= 6-6\sqrt{5} - \frac{3(-4)^2}{2}\\
+        &= -18 - 6\sqrt{5}.
+      \end{align*}
+      Since $Sg_\mu(x_1) <0$, the fixed point $x_1$ is asymptotically stable
+      when $\mu = 2 + \sqrt{5}$.
+    \item
+  \end{enumerate}
 \end{proof}
 \newpage
