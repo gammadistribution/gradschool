@@ -14,5 +14,74 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item The fixed points of $f_\lambda$ are the roots of the function
+      \begin{align*}
+        g_\lambda(x) &= f_\lambda(x) - x\\
+        &= x(x^2 - \lambda  - 1).
+      \end{align*}
+      Thus, the fixed points of $f_\lambda$ are $x_0 = 0$, $x_1 = \sqrt{\lambda + 1}$, and $x_2 = -\sqrt{\lambda + 1}$.
+      Note that the points $x_1$ and $x_2$ are real only if $\lambda \geq -1$, i.e.\
+      the points are only fixed points of the dynamical system if $\lambda \geq -1$.
+
+      Using the first derivative of $f_\lambda$, we can classify the above fixed points
+      when they are hyperbolic. If the fixed point is non-hyperbolic, we can use
+      the second and third derivatives when the fixed point is non-hyperbolic
+      of the type $f_\lambda'(x) = 1$, and the Schwarzian derivative when the fixed point is non-hyperbolic
+      of the type $f_\lambda'(x) = -1$.      Note that
+      \begin{align*}
+        f_\lambda'(x) &= 3x^2 - \lambda \\
+        f_\lambda''(x) &= 6x \\
+        f_\lambda'''(x) &= 6.
+      \end{align*}
+      If $f_\lambda'(x) = -1$, we see that the Schwarzian derivative of $f_\lambda$ is given by
+      \begin{align*}
+        Sf_\lambda(x) &= -f_\lambda'''(x) - \frac{3}{2} \left[f_\lambda''(x)\right]^2 \\
+        &= -6 - 54x^2.
+      \end{align*}
+
+      For the fixed point $x_0 = 0$, we see that $|f_\lambda'(x_0)| = |\lambda|$. Thus, the fixed point $x_0$ is
+      a hyperbolic fixed point if $\lambda \neq -1$ or $\lambda \neq 1$. If $|\lambda| < 1$, then $x_0$ is asymptotically stable
+      and if $|\lambda| > 1$, then $x_0$ is an unstable fixed point. If $\lambda = -1$, then $f_\lambda'(x_0) = 1$.
+      Since $f_\lambda''(x_0) = 0$ and $f_\lambda'''(x_0) = 6 > 0$, the fixed point $x_0$ is unstable. If $\lambda = 1$,
+      then $f_\lambda'(x_0) = -1$. The Schwarzian derivative of $f_\lambda$ at $x_0$ is then $Sf_\lambda(x_0) = -6 < 0$. Therefore,
+      the fixed point $x_0$ is an asymptotically stable fixed point.
+
+      Consider now the fixed point $x_1 = \sqrt{\lambda + 1}$ for $\lambda \geq -1$. We readily see that $|f_\lambda'(x_1)| = |3 + 2\lambda|$.
+      If $\lambda > -1$, then $|f_\lambda'(x_1)| > 1$ and $x_1$ is
+      hyperbolic and unstable. If $\lambda = -1$, then $x_1 = 0 = x_0$ and from the previous
+      classification of the fixed point $x_0$, we know that $x_1$ is unstable.
+
+      Lastly, consider the fixed point $x_2 = -\sqrt{\lambda + 1}$ for $\lambda \geq -1$.
+      We thus have that $|f_\lambda'(x_2)| = |3 + 2\lambda|$ and the same classification for $x_1$ holds for $x_2$, i.e.\
+      the fixed point $x_2$ is hyperbolic and unstable if $\lambda > -1$ and non-hyperbolic and unstable if $\lambda = -1$.
+
+    \item Recall that a point $x$ is a period 2 point of $f_\lambda$ if $f_\lambda^2(x) = x$ and $f_\lambda(x) \neq x$. The 2-cycle associated to the period 2 point
+      is then $\{x, f_\lambda(x)\}$. We thus look for solutions to the equation
+      \begin{align}\label{period2}
+        f_\lambda^2(x) - x &= \left(x^3 - \lambda x\right)^3 - \lambda \left(x^3 - \lambda x\right) - x \notag\\
+        &= x^9 -3 \lambda x^7 + 3 \lambda ^2 x ^5 - \lambda ^3 x^3 - \lambda x^3 + \lambda^2 x - x \notag\\
+        &= x (x^4- \lambda x^2 + 1)(x^2 - \lambda -1) (x^2 - \lambda + 1) = 0.
+      \end{align}
+      Suppose first that $\lambda < -1$. Then the only fixed point of the function $f_\lambda$
+      is $x_0 = 0$ so that $x=0$ can be factored out of \eqref{period2} since the solutions we seek satisfy $f_\lambda(x) \neq x$. After factoring $x$ out from the above polynomial we have that
+      \begin{align*}
+        (x^4- \lambda x^2 + 1)(x^2 - \lambda -1) (x^2 - \lambda + 1) = 0.
+      \end{align*}
+      However, if $\lambda < -1$, then $(x^4- \lambda x^2 + 1) = 0$, $(x^2 - \lambda -1) = 0$,
+      and $(x^2 - \lambda + 1) = 0$, all have no real solutions. Therefore, if $\lambda < -1$,
+      then $f_\lambda$ has no period 2 points.
+
+      Now consider $\lambda \geq -1$. Then for similar reasons we can factor $(x - x_0)(x - x_1)(x - x_2)$
+      out of \eqref{period2} and thus see that
+      \begin{align*}
+        (x^4- \lambda x^2 + 1)(x^2 - \lambda + 1) = 0
+      \end{align*}
+
+      To continue, first polynomial has real solutions only if $\lambda \geq 2$. Second polynomial only has real solutions if $\lambda \geq 1$.
+      Thus $-1 \leq \lambda \leq 1$ there are no period 2 points.
+
+    \item
+  \end{enumerate}
 \end{proof}
 \newpage

@@ -27,6 +27,7 @@
       \begin{align*}
         g_\mu(\sqrt{2} - 1) = \mu (\sqrt{2} - 1) \frac{(1-(\sqrt{2} - 1))}{(1+(\sqrt{2} - 1))} = \mu(3 - 2\sqrt{2}).
       \end{align*}
+
     \item The function $g_\mu: [0, 1] \to [0, 1]$ will be a dynamical
       system for $0 \leq \mu \leq 3 + 2\sqrt{2}$ if $g_\mu([0,1]) \subseteq [0,1]$.
       Note that on $[0, 1]$, we have that the global minimum of $g_\mu$ is 0
@@ -37,6 +38,7 @@
       Therefore,
       $g_\mu([0,1]) = [0, \mu(3 - 2\sqrt{2})] \subseteq [0, 1]$ and $g_\mu$ is a
       dynamical system on $[0, 1]$.
+
     \item Suppose that $\mu \geq 1$. The fixed points of $g_\mu$ are the roots of
       the function
       \begin{align*}
@@ -46,6 +48,7 @@
       \begin{align}\label{gmu_fixed}
         x_0 = 0 \text{\quad and\quad} x_1 = \frac{\mu-1}{\mu+1}.
       \end{align}
+
     \item Recall that a fixed point $c$ of a function $f$ that is hyperbolic is attracting if $|f'(c)| < 1$ and
       repelling if $|f'(c)| > 1$. The derivative of $g_\mu$ is provided by \eqref{gmu}.
       Thus, we readily see that for the fixed points provided by \eqref{gmu_fixed}
@@ -59,7 +62,7 @@
         &= \frac{1}{2}\left|\left(-\mu + \frac{1}{\mu} + 2\right)\right|.
       \end{align*}
 
-      Since $\mu \geq 1$, we see that if $\mu > 1$ then the fixed point $x_0$ will
+      Consider $\mu \geq 1$. We see that if $\mu > 1$ then the fixed point $x_0$ will
       be a hyperbolic fixed point and will be repelling. If, however, $\mu = 1$, we see that $g_\mu'(x_0) = 1$
       and $x_0$ is a non-hyperbolic fixed point. We rely on a previous theorem that states that
       we can use the second and third derivative of $g_\mu$ in order to classify the non-hyperbolic fixed point.
@@ -67,8 +70,8 @@
       \begin{align}\label{gmu_derivs}
         g_\mu''(x) = - \frac{4\mu}{(1 + x)^3} \text{\quad and\quad} g_\mu'''(x) = \frac{12\mu}{(1+x)^4}.
       \end{align}
-      Since $g_\mu''(x_0) = -4\mu < 0$, the fixed point $x_0 = 0$ is one-sided asymptotically stable to the right of 0
-      for $\mu = 1$.
+      Since $g_\mu''(x_0) = -4\mu =-4 < 0$ for $\mu = 1$, the fixed point $x_0 = 0$ is
+      one-sided asymptotically stable to the right of 0.
 
       For the fixed point $x_1$, we see that if
       $1 < \mu < 2 + \sqrt{5}$, then $|g_\mu'(x_1)| < 1$ so that
