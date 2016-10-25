@@ -1,0 +1,21 @@
+\begin{problem}{4.59}
+  For the gambler's ruin problem of Section 4.5.1, let $M_i$ denote the mean number
+  of games that must be played until the gambler either goes broke or reaches a
+  fortune of $N$, given that he starts with $i$ for $i=0,1,\dots, N$. Show that
+  $M_i$ satisfies
+  \begin{align*}
+    M_0 = M_N = 0; \quad M_i = 1 + p M_{i+1} + q M_{i-1}, \quad i=1,\dots, N - 1.
+  \end{align*}
+  Solve these equations to obtain
+  \begin{align*}
+    M_i &=
+    \begin{cases}
+      i(N-i) & \text{if $p = 1/2$} \\
+      \displaystyle \frac{i}{q-p} - \frac{N}{q-p}\frac{1-(q/p)^i}{1- (q/p)^N} & \text{if $p \neq 1/2$}
+    \end{cases}.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+\end{proof}
+\newpage
