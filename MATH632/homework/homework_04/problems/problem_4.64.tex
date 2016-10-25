@@ -5,5 +5,28 @@
 \end{problem}
 
 \begin{proof}
+  If $X_n$ represents the size of the $n$-th generation, then the sum of the sizes of all generations represents
+  the total number of individuals that ever exist in the population. Thus, the expected number
+  of individuals is given by $E\left[\sum_{i=0}^\infty X_i\ |\ X_0 = 1 \right]$ if the size of the first generation is 1.
+  By definition,
+  \begin{align*}
+    E\left[\sum_{i=0}^\infty X_i\ |\ X_0 = 1 \right] &= E\left[\lim_{n\to \infty} \sum_{i=0}^n X_i\ |\ X_0 = 1 \right] \\
+    &= \lim_{n\to \infty} E\left[ \sum_{i=0}^n X_i\ |\ X_0 = 1 \right] \\
+    &= \lim_{n\to \infty} \sum_{i=0}^n E\left[ X_i\ |\ X_0 = 1 \right].
+  \end{align*}
+  It was shown previously that $E\left[ X_i\ |\ X_0 = 1 \right] = \mu^i$. Therefore, if $0 \leq \mu < 1$, then
+  \begin{align*}
+    E\left[\sum_{i=0}^\infty X_i\ |\ X_0 = 1 \right] &= \lim_{n\to\infty}\sum_{i=0}^n \mu^i = \frac{1}{1-\mu}.
+  \end{align*}
+
+  Now suppose that $X_0 = n$. Using the previous result that $E[X_i] = \mu E[X_{i-1}]$, we have
+  \begin{align*}
+    E\left[ X_i\ |\ X_0 = n \right] = n \mu^i.
+  \end{align*}
+  Therefore, if $X_0 = n$ and $0 \leq \mu < 1$, then
+  \begin{align*}
+    E\left[\sum_{i=0}^\infty X_i\ |\ X_0 = 1 \right]     &= \lim_{k\to \infty} \sum_{i=0}^k E\left[ X_i\ |\ X_0 = n \right]\\
+    &= n\left[\lim_{k\to\infty}\sum_{i=0}^k \mu^i\right] = \frac{n}{1-\mu}.
+  \end{align*}
 \end{proof}
 \newpage

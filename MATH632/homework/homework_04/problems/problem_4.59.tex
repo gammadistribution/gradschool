@@ -17,5 +17,27 @@
 \end{problem}
 
 \begin{proof}
+  It is clear that if $M_i$ is the mean number of games that must be played until
+  the gambler either goes broke or reaches a fortune of $N$ given that he
+  starts with $i$ for $i =0,1,\dots,N$,
+  then $M_0 = M_N = 0$ since if the gambler starts with either $0$ or $N$ the process ends, i.e.\
+  no games will be played.
+
+  So suppose that $i = 1, \dots, N -1$.
+
+  Note that $p + q = 1$ so that $M_i = 1 + p M_{i+1} + q M_{i-1}$ is equivalent to
+  \begin{align*}
+    p M_i + q M_i = pM_{i+ 1} + q M_{i-1} + 1
+  \end{align*}
+  for $i = 1, \dots N-1$. Hence, we have that
+  \begin{align*}
+    M_{i+1}- M_i  = \frac{q}{p}(M_i - M_{i-1}) - \frac{1}{p}.
+  \end{align*}
+  Since $M_0 = 0$, we easily see that
+  \begin{align*}
+    M_2 - M_1 &= \frac{q}{p}(M_1 - M_0) - \frac{1}{p} = \frac{q}{p}M_1 - \frac{1}{p}\\
+    M_3 - M_2 &= \frac{q}{p}(M_2 - M_1) - \frac{1}{p} = \left(\frac{q}{p}\right)^2 M_1 - \frac{q}{p^2} - \frac{1}{p}\\
+    &\vdots
+  \end{align*}
 \end{proof}
 \newpage
