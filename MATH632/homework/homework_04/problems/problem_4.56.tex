@@ -5,5 +5,27 @@
 \end{problem}
 
 \begin{proof}
+  Note that the described scenario is a modified gambler's ruin problem where the game
+  ends if the fortune of the player is either $N = n + m$ or $0$ and the starting fortune
+  of the gambler is given by $m$. We know that the probability
+  that the gambler will quit a winner given that the initial fortune of the gambler is $i$ is given by
+  \begin{align*}
+    P_i =
+    \begin{cases}
+      \displaystyle
+      \frac{1 - \left(\frac{1-p}{p}\right)^i}{1 - \left(\frac{1-p}{p}\right)^{m+n}} & \text{if $p = 1 - p$} \\
+      \frac{1}{m+n} & \text{if $p \neq 1- p$}
+    \end{cases}.
+  \end{align*}
+
+  Therefore, the probability that the gambler will quit a winner is given by
+  \begin{align*}
+    P_m =
+    \begin{cases}
+      \displaystyle
+      \frac{1 - \left(\frac{1-p}{p}\right)^m}{1 - \left(\frac{1-p}{p}\right)^{m+n}} & \text{if $p = 1 - p$} \\
+      \frac{m}{m+n} & \text{if $p \neq 1- p$}
+    \end{cases}.
+  \end{align*}
 \end{proof}
 \newpage
