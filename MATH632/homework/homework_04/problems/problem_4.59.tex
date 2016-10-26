@@ -23,7 +23,24 @@
   then $M_0 = M_N = 0$ since if the gambler starts with either $0$ or $N$ the process ends, i.e.\
   no games will be played.
 
-  So suppose that $i = 1, \dots, N -1$.
+  So suppose that $i = 1, \dots, N -1$ and let $X_n$ denote the number of games that will be played
+  and let $Y = \{0, 1\}$ indicate whether the initial game is won or lost.
+  Assuming that the initial start for the gambler is $i$, we have that $M_i = E[X_n \ |\ X_0 = i]$.
+  Conditioning on the initial outcome of the game, i.e.\ that the gambler either wins or loses, we have that
+  \begin{align*}
+    E[X_n \ |\ X_0 = i] &= p E[X_n \ |\ X_0 = i, Y=1] + q E[X_n \ |\ X_0 = i, Y= 0].
+  \end{align*}
+  If the gambler starts with fortune $i$ and the outcome of the game is a win, then the
+  number of games that will be played is 1 plus the expected number of games
+  to be played given that the gambler starts with fortune $i+1$. Similarly, if the
+  outcome of the game is a loss, the number of games to be played is 1 plus the expected number
+  of games to be played given that the gambler starts with fortune $i -1$.
+  Thus,
+  \begin{align*}
+    M_i = E[X_n \ |\ X_0 = i] &= p(1 + E[X_n \ |\ X_0 = i+1]) + q(1 + E[X_n \ |\ X_0 = i-1]) \\
+    &= p + q + pE[X_n \ |\ X_0 = i+1] + qE[X_n \ |\ X_0 = i-1] \\
+    &= 1 + p M_{i+1} + q M_{i-1}.
+  \end{align*}
 
   Note that $p + q = 1$ so that $M_i = 1 + p M_{i+1} + q M_{i-1}$ is equivalent to
   \begin{align*}
@@ -37,7 +54,50 @@
   \begin{align*}
     M_2 - M_1 &= \frac{q}{p}(M_1 - M_0) - \frac{1}{p} = \frac{q}{p}M_1 - \frac{1}{p}\\
     M_3 - M_2 &= \frac{q}{p}(M_2 - M_1) - \frac{1}{p} = \left(\frac{q}{p}\right)^2 M_1 - \frac{q}{p^2} - \frac{1}{p}\\
-    &\vdots
+    &\vdots \\
+    M_{i+1} - M_i &= \frac{q}{p}(M_i - M_{i-1}) - \frac{1}{p} = \left(\frac{q}{p}\right)^i M_1 - \frac{1}{q}\sum_{k=1}^i \left(\frac{q}{p}\right)^k\\
+    &\vdots \\
+    M_{N} - M_{N-1} &= \frac{q}{p}(M_{N-1} - M_{N-2}) - \frac{1}{p} = \left(\frac{q}{p}\right)^{N-1} M_1 - \frac{1}{q}\sum_{k=1}^{N-1} \left(\frac{q}{p}\right)^k
+  \end{align*}
+
+  Adding the first $i$ equations shows that
+  \begin{align}\label{mi_equation}
+    M_{i} - M_1 &= \sum_{j=1}^{i-1} \left[\left(\frac{q}{p}\right)^j M_1 - \frac{1}{q}\sum_{k=1}^j \left(\frac{q}{p}\right)^k\right]\notag\\
+    &= M_1 \sum_{j=1}^{i-1} \left(\frac{q}{p}\right)^j - \frac{1}{q}\sum_{j=1}^{i-1} \sum_{k=1}^j \left(\frac{q}{p}\right)^k.
+  \end{align}
+  These sums are finite geometric progressions, so it is easy to find their closed forms. Thus, if $p\neq 1/2$, then
+  \begin{align*}
+    M_{i} &=M_1 -M_1 \left[\frac{-q+p(q/p)^i}{p-q}\right] + \frac{1}{q}\sum_{j=1}^i\frac{q(-1 + (q/p)^j)}{p-q} \\
+    &=M_1 -M_1 \left[\frac{-q+p(q/p)^i}{p-q}\right] - \frac{-iq + p(-1 + i + (q/p)^i)}{(p-q)^2}
+  \end{align*}
+  Since $M_N = 0$, we know that
+  \begin{align*}
+    0 = M_1 - M_1 \left[\frac{-q+p(q/p)^{N}}{p-q}\right] - \frac{-Nq + p(-1 + N + (q/p)^N)}{(p-q)^2}.
+  \end{align*}
+  Solving this equation shows that
+  \begin{align*}
+    M_1 = \frac{p - Np + Nq - p(q/p)^N}{p(p-q)(-1+(q/p)^N)}.
+  \end{align*}
+  Therefore, if $p\neq 1/2$, we have that
+  \begin{align*}
+    M_i &= \frac{i - i(q/p)^N + N(-1+(q/p)^N)}{(p-q)(-1+(q/p)^N)}\\
+    &= \frac{i(1 - (q/p)^N)}{(q-p)(1-(q/p)^N)} - \frac{N(1-(q/p)^N)}{(q-p)(1-(q/p)^N)}\\
+    &=\frac{i}{q-p} - \frac{N}{q-p}\frac{1-(q/p)^i}{1- (q/p)^N}.
+  \end{align*}
+
+  If on the other hand we have that $p = q = 1/2$, then from \eqref{mi_equation}, we have that
+  \begin{align*}
+    M_{i} - M_1 &= \sum_{j=1}^{i-1} \left[\left(\frac{q}{p}\right)^j M_1 - \frac{1}{q}\sum_{k=1}^j \left(\frac{q}{p}\right)^k\right]\notag\\
+    &= M_1 (i-1) - i(i-1).
+  \end{align*}
+  Using the fact that $M_N = 0$, we see that $M_1 = N - 1$. Therefore, if $p=q$, then
+  $M_i = i(N-1) - i(i-1)= i(N-i)$ and we have that
+  \begin{align*}
+    M_i &=
+    \begin{cases}
+      i(N-i) & \text{if $p = 1/2$} \\
+      \displaystyle \frac{i}{q-p} - \frac{N}{q-p}\frac{1-(q/p)^i}{1- (q/p)^N} & \text{if $p \neq 1/2$}
+    \end{cases}.
   \end{align*}
 \end{proof}
 \newpage
