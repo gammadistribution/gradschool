@@ -8,5 +8,36 @@
 \end{problem}
 
 \begin{proof}
+  If $N_f(x) = x - f(x)/f'(x)$, then we see that since $f\in C^4(-\infty, \infty)$,
+  $N_f'(x)$ exists and
+  \begin{align*}
+    N_f'(x) &= 1 - \left[\frac{f(x)}{f'(x)}\right]' \\
+    &= 1 - \frac{f'(x)^2-f(x)f''(x)}{f'(x)^2} \\
+    &= \frac{f(x)f''(x)}{f'(x)^2}.
+  \end{align*}
+  Similarly, we see that
+  \begin{align*}
+    N_f''(x) &= \left[\frac{f(x)f''(x)}{f'(x)^2}\right]' \\
+    &= \frac{f''(x)}{f'(x)} - \frac{2f(x)f''(x)^2}{f'(x)^3} + \frac{f(x)f'''(x)}{f'(x)^2}
+  \end{align*}
+  and that
+  \begin{align*}
+    N_f'''(x) &= \left[\frac{f''(x)}{f'(x)} - \frac{2f(x)f''(x)^2}{f'(x)^3} + \frac{f(x)f'''(x)}{f'(x)^2}\right]'\\
+    &= - \frac{3f''(x)^2}{f'(x)^2} + \frac{6f(x)f''(x)^3}{f'(x)^4} + \frac{2f'''(x)}{f'(x)} - \frac{6f(x)f''(x)f'''(x)}{f'(x)^3}+\frac{f(x)f''''(x)}{f'(x)^2}.
+  \end{align*}
+
+  Recall that $Sf(c)$ is given by
+  \begin{align*}
+    S f(x) = \frac{f'''(x)}{f'(x)} - \frac{3}{2}\left(\frac{f''(x)}{f'(x)}\right)^2.
+  \end{align*}
+  Using the fact that if $f(c) = 0$, we see that
+  \begin{align*}
+    N_f'''(c) = 2 \left(\frac{f'''(c)}{f'(c)}\right)-3\left(\frac{f''(c)}{f'(c)}\right)^2.
+  \end{align*}
+  Therefore, we have that
+  \begin{align*}
+    N_f'''(c) &= 2 \left(\frac{f'''(c)}{f'(c)}\right)-3\left(\frac{f''(c)}{f'(c)}\right)^2\\
+    &= 2 \left[\frac{f'''(x)}{f'(x)} - \frac{3}{2}\left(\frac{f''(x)}{f'(x)}\right)^2\right] = 2 Sf(c).
+  \end{align*}
 \end{proof}
 \newpage
