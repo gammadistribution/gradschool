@@ -1,6 +1,6 @@
 \begin{problem}{1}
   You pay into an annuity a sum of $\$P$ dollars. This annuity
-  pays you $\$\alpha$ per month. The annual interest is $r%$ and is calculated
+  pays you $\$\alpha$ per month. The annual interest is $r\%$ and is calculated
   as simple interest on the remaining balance at the end of each year. If $A(n)$
   is the amount remaining at the end of the $n$-th month, with $A(0) = P$,
   write down $A(n+1)$ in terms of $A(n)$ and deduce a closed form solution
@@ -11,6 +11,32 @@
 \end{problem}
 
 \begin{proof}
+  Let $A(n)$ be the amount remaining in the annuity at the end of month $n$. If the
+  amount initially paid into the annuity is $\$P$, then $A(0) = P$. If the annual interest rate is $r\%$,
+  then the monthly interest rate is $r/12 \%$. Assuming each month a payment of $\$\alpha$ is
+  taken from the annuity, a difference equation representing the amount remaining in the annuity
+  at the end of month $n$ is given by
+  \begin{align*}
+    A(n + 1) &= A(n) + A(n)\left[\frac{r}{12(100)}\right] - \alpha \\
+    &= \left[1 + \frac{r}{12(100)}\right]A(n) - \alpha
+  \end{align*}
+  for $n\in\mathbb{N}$.
+
+  Using the closed form solution for difference equations in the form of affine maps,
+  the solution to the difference equation is given by
+  \begin{align*}
+    A(n) &= \left(A(0) + \frac{\alpha}{1 - \left(1 + \frac{r}{12(100)}\right)}\right) \left(1 + \frac{r}{12(100)}\right)^n - \frac{\alpha}{1 - \left(1 + \frac{r}{12(100)}\right)} \\
+    &= \left(P - \frac{1200\alpha}{r}\right)\left(1 + \frac{r}{1200}\right)^n + \frac{1200\alpha}{r}.
+  \end{align*}
+
+  The annuity will run out after $k \in \mathbb{R}$ months when $A(k) = 0$ from which
+  we can gather that the annuity will run out after $n = \lceil k \rceil$ full months.
+  Solving
+  \begin{align*}
+    A(k) = \left(100000 - \frac{1200(500)}{4}\right)\left(1 + \frac{4}{1200}\right)^k + \frac{1200(500)}{4} =0
+  \end{align*}
+  shows that $k = 330.133$. Therefore,
+  the annuity will last for 331 months.
 
 \end{proof}
 \newpage
