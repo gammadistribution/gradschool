@@ -9,5 +9,23 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Recall that the fixed points of $N_f$ are the roots of $f$.
+      The discriminant of the polynomial $f$ is given by $D = -4 ab^3 -27 a^2 c^2$. Note that
+      if $a/b > 0$ then $D < 0$. Therefore, $f$ only has one real root
+      and as a consequence, $N_f$ has a unique fixed point, say $p$.
+    \item If $f(x) = ax^3+bx+c$, then $f'(x) \neq 0$ for any $x\in\mathbb{R}$ if $a/b > 0$.
+      Thus, all iterates of $N_f$ are well-defined. Since $f''(x)$ is bounded and the derivative of $f$ is non-zero on any finite interval,
+      we have that the iterates of $N_f$ will converged to a root of $f$. Since $p$ is the only root,
+      it must be a globally attracting fixed point of $N_f$. Thus,
+      we have that $N_f^n(x)$ will converge to $p$ for all finite $x$.
+      This implies that $\lim_n N_f^n(x) = p$ for all $x\neq p$.
+      Therefore, since the limit of the iterates exist, we cannot have that $N_f$ has a period 2 point.
+    \item If to the contrary, $N_f$ has a point of period $n > 2$,
+      then since $n \triangleright 2$ in Sharkovsky's ordering, we must have
+      by Sharkovsky's Theorem that $N_f$ has a point of period 2 . However, this is
+      contradictory to the fact that $N_f$ has no points of period 2. Therefore,
+      $N_f$ has no points of period $n > 2$.
+  \end{enumerate}
 \end{proof}
 \newpage
