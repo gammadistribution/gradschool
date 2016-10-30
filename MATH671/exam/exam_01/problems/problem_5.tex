@@ -4,11 +4,65 @@
 
   \begin{enumerate}
     \item Prove that $f$ has a unique fixed point $p$ in $[0,1]$.
-    \item Prove that $f$ cannot have a point of period 2 in $[a,b]$.
+    \item Prove that $f$ cannot have a point of period 2 in $[0,1]$.
     \item Prove that $f^n(x) \to p$ as $n\to\infty$ for all $x\in(0,1)$.
   \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item We know that $f$ must have at least one fixed point in $[0, 1]$ because it is a
+      continuous function from an interval onto itself. Let $p$ be a fixed point of $f$.
+      Suppose to the contrary that there is another fixed point $c$ with $c \neq p$
+      and without loss of generality assume that $c < p$.
+
+      Since $f$ is continuous and differentiable, we have by the Mean Value Theorem
+      that there must exist $x \in (c, p)$ such that
+      \begin{align*}
+        f'(x) = \frac{f(p) - f(c)}{p - c}.
+      \end{align*}
+      Thus, since $p$ and $c$ are fixed points, we have that
+      \begin{align*}
+        f'(x) = \frac{f(p) - f(c)}{p - c} = \frac{p - c}{p - c} = 1.
+      \end{align*}
+      However, this is contradictory to the assumption that $|f'(x)| < 1$ for all $x\in (0,1)$.
+      Therefore, we must have that $p$ is a unique fixed point.
+    \item We will show that no $x \in (0,1)$ is a period 2 point and then show that $\{0,1\}$, the only other possibility,
+      is not a 2-cycle.
+
+      Suppose to the contrary that $x\in(0,1)$ is a period 2-point so that $\{x, f(x)\}$ is a 2-cycle.
+      This implies that $\lim_n f^n(x)$ does not exist since the iterates of $f$ will cycle between
+      $x$ and $f(x)$ and will not converge to a single point. However,
+      as is shown in part c), we have for all $x \in (0, 1)$ that $\lim_n f^n(x)$ exists, a contradiction. Therefore,
+      no $x\in(0,1)$ is a period 2 point.
+
+      Now suppose to the contrary that $\{0, 1\}$ is a 2-cycle with $f(0) = 1$ and $f(1) = 0$.
+      By the Mean Value Theorem, there exists $c\in(0, 1)$ such that
+      \begin{align*}
+        f'(c) = \frac{f(1) - f(0)}{1 - 0} = -1.
+      \end{align*}
+      However, this is contradictory to the assumption that $|f'(x)| < 1$ for all $x\in (0,1)$.
+      Therefore, we must have that $\{0, 1\}$ is not a 2-cycle and no period 2 point exists for $f$.
+    \item If $|f'(x)| < 1$ for $x \in (0, 1)$, then we have that $|f'(p)| < 1$.
+      From a previous theorem, this implies that the fixed point $p$ is asymptotically stable, i.e.\
+      the fixed point is both stable and attracting. Thus, $\lim_n f^n(x) = p$ if $x$ is sufficiently close to $p$.
+
+      We will now show more precisely that all $x\in (0, 1)$ are sufficiently close to $p$ for this limiting behavior to occur.
+      Let $x\in(0, 1)$. Then we have that $|f'(x)| < \lambda < 1$ for all $x\in(0,1)$. By the Mean Value Theorem, there exists some $c \in (0, 1)$
+      that lies between $x$ and $p$ such that
+      \begin{align*}
+        f'(c) = \frac{f(x) - f(p)}{x - p}
+      \end{align*}
+      so that, with $p$ a fixed point,
+      \begin{align*}
+        |f(x) - p| = |f'(c)||x-p| < \lambda |x-p|.
+      \end{align*}
+      It can be shown inductively, using the reasoning above, that
+      \begin{align*}
+        |f^n(x) - p| < \lambda^n |x-p|.
+      \end{align*}
+      Since $\lambda < 1$, we have that $\lambda^n \to 0$ as $n\to\infty$. Therefore, $f^n(x) \to p$ as $n\to\infty$
+      for all $x\in(0,1)$.
+  \end{enumerate}
 \end{proof}
 \newpage
