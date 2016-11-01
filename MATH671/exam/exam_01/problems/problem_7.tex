@@ -21,5 +21,60 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Let $x\neq -1, 0$. Then we see that for $f(x) = -1/(x+1)$, we have that
+      \begin{align*}
+        f^2(x) = f(f(x)) = -\frac{1}{-\frac{1}{x+1}+1} = \frac{-x-1}{x} = -1 - \frac{1}{x}
+      \end{align*}
+      and
+      \begin{align*}
+        f^3(x) = f(f^2(x)) = -\frac{1}{-1 - \frac{1}{x} +1} = x.
+      \end{align*}
+    \item Suppose that for all $x\in I$, with $I$ an interval, $f^3(x) = x$. Define $g(x) = f^2(x)$.
+      Then we see that
+      \begin{align*}
+        g^3(x) = g(g(f^2(x)))=g(f^4(x))=f^6(x).
+      \end{align*}
+      Since $f^3(x) = x$, we have that
+      \begin{align*}
+        g^3(x) = f^6(x) = f^3(f^3(x)) = f^3(x) = x.
+      \end{align*}
+      Thus, a function with the property that $g^3(x) = x$ is given by $g:\mathbb{R} \to \mathbb{R}$
+      defined by $g(x) = f^2(x)$ where $f(x) = -1/(x+1)$. Explicitly,
+      \begin{align*}
+        g(x) = f^2(x) = -1 - \frac{1}{x}
+      \end{align*}
+    \item Suppose to the contrary that for $f$ with $f^3(x) = x$
+      that $f$ has a 2-cycle $\{x, f(x)\}$. Then we have that $f^2(x) = x$ with $f(x) \neq x$.
+      Since $f^3(x) = x$, we see that
+      \begin{align*}
+        x = f^3(x) = f(f^2(x)) = f(x).
+      \end{align*}
+      However, this contradicts the assumption that $\{x, f(x)\}$ is a 2-cycle. Therefore, $f$ with
+      such a property cannot have a 2-cycle.
+    \item By Sharkovsky's Theorem, we see that if $f$ is a continuous function
+      that has a period 3 point, then it must have a period 2 point since $3 \triangleright 2$
+      in Sharkovsky's ordering. Since a function $f$ with the property that $f^3(x) = x$ for
+      all $x\in I$, where $I$ is an interval, does not have a period 2 point,
+      it must follow from Sharkovsky's Theorem that $f$ is not continuous.
+    \item Let $f:\mathbb{R}\to\mathbb{R}$ satisfy $f^3(x) = x$. This function is injective and surjective.
+      To see that $f$ is injective, suppose that $f(x_1) = f(x_2)$. Then we have that
+      $f^2(f(x_1)) = f^2(f(x_2))$ since $f$ is a well-defined function. But this implies that
+      $x_1 = f^3(x_1) = f^3(x_2) = x_2$, and so $f$ is injective.
+
+      To see that $f$ is surjective, take $y \in \mathbb{R}$. Then $x = f^2(y)$
+      satisfies $f(x) = f(f^2(y) = f^3(y) = y$ or that $y$ is in the range of $f$
+      and so $f$ is surjective since $y$ was arbitrary.
+
+      Therefore, since $f$ is injective and surjective, it must be a bijection
+      and must have an inverse.
+    \item Suppose that $f$ is not identically the identity map with $f^3(x) = x$.
+      Let $\{x, f(x), f^2(x)\}$ be a 3-cycle of $f$. If $f^3(x) = x$, then $(f^3(x))' = 1$.
+      This implies that
+      \begin{align*}
+        \left|f^3(x)'\right| = \left|f'(x)f'(f(x))f'(f^2(x))\right| = 1
+      \end{align*}
+      or that $\{x, f(x), f^2(x)\}$ is a non-hyperbolic 3-cycle.
+  \end{enumerate}
 \end{proof}
 \newpage
