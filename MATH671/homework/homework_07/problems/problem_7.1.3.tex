@@ -1,0 +1,43 @@
+\begin{problem}{7.1.3}
+  Prove that if $f:X\to X $ and $g: Y\to Y$ are conjugate maps of metric spaces,
+  then $f$ is one-to-one if and only if $g$ is one-to-one and $f$ is onto
+  if and only if $g$ is onto.
+\end{problem}
+
+\begin{proof}
+    If $f$ and $g$ are conjugate maps of metric spaces, then there exists a map
+    $h : X \to Y$, with $h$ a bijection, such that $g \circ h = h \circ f $.
+
+    Suppose that $f$ is one-to-one and that $g(y_1) = g(y_2)$. Since $h$ is onto,
+    there exist $x_1\in X$ and $x_2 \in X$ such that $h(x_1) = y_1$ and $h(x_2) = y_2$.
+    Thus, if $g(y_1) = g(y_2)$, then $g \circ h (x_1) = g \circ h (x_2)$. By
+    the conjugacy of $h$, we then have that $h \circ f (x_1) = h \circ f (x_2)$
+    and since $h$ and $f$ are one-to-one, we have that $x_1 = x_2$. Due to the fact
+    that $h$ is a well-defined function, if $x_1 = x_2$, then
+    $y_1 = h(x_1) = h(x_2) = y_2$ and we therefore have that $g$ is one-to-one.
+
+    Now suppose that $g$ is one-to-one and that $f(x_1) = f(x_2)$. Since $h$ is well-defined,
+    we have that $h \circ f(x_1) = h \circ f(x_2)$. By the conjugacy of $h$, we then have
+    that $g \circ h(x_1) = g  \circ h(x_2)$. Since $g$ and $h$ are one-to-one, it follows
+    that $x_1 = x_2$ and $f$ is therefore one-to-one.
+
+    Suppose that $f$ is onto and let $y_2 \in Y$ be given. Since $h$ is onto,
+    there exists $x_2 \in X$ such that $h(x_2) = y_2$. Thus, since $f$ is onto,
+    there exists $x_1 \in X$ such that $f(x_1) = x_2$ which implies that
+    $h \circ f (x_1) = y_2$. By the conjugacy of $h$ we have that
+    \begin{align*}
+      g \circ h (x_1) = h \circ f (x_1) = y_2.
+    \end{align*}
+    Hence, there exists $y_1 = h(x_1) \in Y$ such that $g(y_1) = y_2$. Therefore, since
+    $y_2 \in Y$ was arbitary, we have that $h$ is onto.
+
+    Now suppose that $g$ is onto. Since $g$ and $h$ are onto,
+    for every $y\in Y$, there exists $x_1 \in X$ such that $g \circ h(x_1) = y$.
+    By the conjugacy of $h$, we then have that $h \circ f(x_1) = y$. So, for every $y\in Y$,
+    there exists $f(x_1) \in X$ such that $h \circ f (x_1) = y$. However,
+    since $h$ is onto, we also have that for every $y\in Y$, there exists $x_2 \in X$
+    such that $h(x_2) = y$. Thus, for every $x_2 \in X$ we have that $h(x_2) = y = h(f(x_1))$
+    for some $x_1 \in X$. The fact that $h$ is one-to-one then shows that $f(x_1) = x_2$
+    or that $f$ is onto.
+\end{proof}
+\newpage
