@@ -2,13 +2,13 @@
   \begin{enumerate}
     \item Define $f_a: \mathbb{R} \to \mathbb{R}$ by $f_a(x) = ax$ for $a\in\mathbb{R}$.
       Show that $f_{1/2}$ and $f_{1/4}$ are conjugate via the map
-      \begin{align*}
+      \begin{align}\label{h_homeo}
         h(x) =
         \begin{cases}
           \sqrt{x} & x \geq 0 \\
           -\sqrt{-x} & x < 0
         \end{cases}.
-      \end{align*}
+      \end{align}
     \item More generally, show that $f_a, f_b: [0, \infty) \to [0, \infty)$ for $0< a, b < 1$,
       the $f_a$ and $f_b$ are conjugate via the map $h(x) = x^p$ for $p > 0$ and similarly if $a, b > 1$.
     \item Discuss the cases where $a > 1$ and $0 < b < 1$. What happens when $a = 1/2$ and $b = 2$?
@@ -16,5 +16,71 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item We begin by showing that $h: \mathbb{R}\to\mathbb{R}$ where $h$ is defined as in \eqref{h_homeo}
+      is a homeomorphism, i.e. it is a continuous bijection with continuous inverse.
+
+      It is clear from the definition of $h$ that if $x_1 \neq x_2$ then $h(x_1) \neq h(x_2)$ due to the
+      uniqueness of the square root operator. Thus, $h$ is injective.
+
+      To show that $h$ is surjective, suppose that $y\in\mathbb{R}$ and that $y_1 = |y|$.
+      If $y \geq 0$, then $y = y_1$, otherwise $y = -y_1$.
+      Now, if $y \geq 0$, then set $x = y_1^2 \geq 0$, otherwise set $x = -y_1^2 < 0$.
+      Then we have from the definition of $h$
+      that if $y\geq 0$, then
+      \begin{align*}
+        h(x) = \sqrt{y_1^2} = y_1 = y.
+      \end{align*}
+      Similarly, we have that if $y < 0$, then
+      \begin{align*}
+        h(x) = -\sqrt{-\left(-y_1^2\right)} = -y_1 = y.
+      \end{align*}
+      Therefore, $h$ is surjective.
+
+      It is clear that $h$ and its inverse are continuous so that $h$ is a homemorphism.
+
+      Now, we see that
+      \begin{align*}
+        h \circ f_{1/4}(x) = h\left(\frac{x}{4}\right) =
+        \begin{cases}
+          \frac{\sqrt{x}}{2} & x \geq 0 \\
+          -\frac{\sqrt{-x}}{2}& x < 0
+        \end{cases}
+      \end{align*}
+      and that
+      \begin{align*}
+        f_{1/2} \circ h(x) &=
+        \begin{cases}
+          f_{1/2}\left(\sqrt{x}\right) & x \geq 0 \\
+          f_{1/2}\left(-\sqrt{-x}\right) & x < 0
+        \end{cases}\\
+        &=
+        \begin{cases}
+          \frac{\sqrt{x}}{2} & x \geq 0 \\
+          -\frac{\sqrt{-x}}{2}& x < 0
+        \end{cases}
+      \end{align*}
+      so that $h$ is a conjugate map of $f_{1/4}$ and $f_{1/2}$.
+
+    \item From the previous remarks, we see that if $p >0$,
+      then $h: [0, \infty) \to [0, \infty) $ with $h(x) = x^p$ is a homeomorphism.
+      Let $f_c: [0, \infty) \to [0, \infty)$ be a function defined by $f_c(x) = cx$.
+      Consider the maps $f_a$ and $f_b$. Then we see that
+      \begin{align*}
+        h \circ f_a (x)= h(ax) = (ax)^p = a^p x^p
+      \end{align*}
+      and that
+      \begin{align*}
+        f_b \circ h(x) = f_b(x^p) = b x^p.
+      \end{align*}
+      Thus, if $a^p = b$, then $h \circ f_a = f_b \circ h$ so that $f_a$ and $f_b$ are conjugate via $h$.
+      Note that for $a,b > 0$ we have that  $a^p = b$ if and only if $0 < a,b < 1$ or $a, b > 1$.
+
+    \item Suppose that $a > 1$ and $0 < b < 1$. Then for any $p > 0$, $a^p > 1$,
+      so that $a^p > b$. Thus, $f_a$ and $f_b$ will not be conjugate via $h$.
+
+      Suppose that $a=1/2$ and $b=2$. Then $a^p=1/2^p < 2 = b$ for any positive $p$ and $f_{1/2}$ and $f_2$ are
+      not conjugate via $h$.
+  \end{enumerate}
 \end{proof}
 \newpage
