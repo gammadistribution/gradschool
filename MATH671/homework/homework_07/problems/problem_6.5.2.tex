@@ -3,13 +3,74 @@
   space of zeroes and ones with the metric defined previously. Let $C$ be the
   Cantor set and define $f: \Sigma \to C$ by
   \begin{align*}
-    f((a_1, a_2, a_3, \dots)) = .b_1b_2b_3\dots \quad \text{where $b_i = 0$ if $a_i = 0$ and $b_i = 2$ if $a_i = 1$}
+    f((a_1, a_2, a_3, \dots)) = .b_1b_2b_3\ldots \quad \text{where $b_i = 0$ if $a_i = 0$ and $b_i = 2$ if $a_i = 1$}
   \end{align*}
   giving the ternary expansion of a real number in $[0, 1]$. Show that $f$ defines
-  a homeomorphism between $Sigma$ and $C$, the Cantor set.
+  a homeomorphism between $\Sigma$ and $C$, the Cantor set.
 \end{problem}
 
 
 \begin{proof}
+  Note that $f: \Sigma \to C$ is a homemorphism if $f$ is a continuous bijection
+  with continuous inverse.
+
+  We begin by showing that $f$ is a bijection.
+  Suppose that $x_1 = (a_{11}, a_{12}, a_{13}, \dots) \in \Sigma$ and $x_2 = (a_{21}, a_{22}, a_{23}, \dots) \in \Sigma$
+  with $x_1 \neq x_2$. Then $a_{1k} \neq a_{2k}$ for some $k \in \mathbb{Z}^+$. Since $x_1, x_2 \in \Sigma$,
+  this implies that if $a_{1k} = 1$ then $a_{2k} = 0$ and if $a_{1k} = 0$ then $a_{2k} = 1$.
+  Now, we see from the definition of $f$ that
+  \begin{align*}
+    f(x_1) =  .b_{11}b_{12}b_{13}\ldots b_{1k}\ldots \neq .b_{21}b_{22}b_{23}\ldots b_{2k}\ldots = f(x_2)
+  \end{align*}
+  since if $a_{1k} = 0$ then
+  $b_{1k} = 0 \neq 2 = b_{2k}$ and if $a_{1k} = 1$ then
+  $b_{1k} = 2 \neq 0 = b_{2k}$. Thus, $f(x_1) \neq f(x_2)$ and $f$ is injective.
+
+  Now let $y = .b_1b_2b_3\ldots \in C$ be the ternary expansion of a real number in $[0, 1]$.
+  Then $b_i \in \{0,2\}$ for all $i \in \mathbb{Z}^+$.
+  Take $x = (a_1, a_2, a_3, \dots)$ where $a_i = 0$ if $b_i = 0$ and $a_i = 1$ if $b_i = 2$.
+  Then $x\in \Sigma$ and we see from the definition of $f$ that
+  \begin{align*}
+    f(x) = f((a_1, a_2, a_3, \dots)) = .b_1b_2b_3\ldots = y
+  \end{align*}
+  so that $f$ is surjective, making $f$ a bijection.
+
+  To show that $f$ is continuous, we must show that if the distance between two points is small
+  in the metric space $\Sigma$, then the distance between their mapped points in $C$ is small, i.e.\
+  if for every $\varepsilon > 0$, there exists $\delta > 0$ such that if $d(x_1, x_2) < \delta$,
+  then $d(f(x_1), f(x_2)) < \varepsilon$.
+  So, suppose that $x_1 = (a_{11}, a_{12}, a_{13}, \dots) \in \Sigma$ and $x_2 = (a_{21}, a_{22}, a_{23}, \dots) \in \Sigma$.
+  Then,
+  \begin{align*}
+    f(x_k) &= .b_{k1}b_{k2}b_{k3}\ldots = \sum_{n=1}^\infty \frac{b_{kn}}{3^n} \in C
+  \end{align*}
+  for $k = 1, 2$. Let $S = \{k\ \in \mathbb{Z}^+ \ |\ a_{1k} \neq a_{2k}\}$. Then
+  \begin{align*}
+    d(x_1, x_2) = \sum_{n=1}^\infty \frac{|a_{1n} - a_{2n}|}{2^n} = \sum_{k\in S} \frac{1}{2^k}.
+  \end{align*}
+  Similarly, if $a_{1k} \neq a_{2k}$, then $b_{1k} \neq b_{2k}$ so that
+  \begin{align*}
+    d(f(x_1), f(x_2)) = |f(x_1) - f(x_2)| = \sum_{n=1}^\infty \frac{|b_{1n} - b_{2n}|}{2^n} = \sum_{k\in S} \frac{2}{3^k}.
+  \end{align*}
+  Choose $\delta = \varepsilon / 2 > 0$. Then we have that
+  \begin{align*}
+    d(x_1, x_2) = \sum_{k\in S} \frac{1}{2^k} < \delta = \frac{\varepsilon}{2}
+  \end{align*}
+  which implies that
+  \begin{align*}
+    d(f(x_1), f(x_2)) = \sum_{k\in S} \frac{2}{3^k} < \sum_{k\in S} \frac{2}{2^k} < \varepsilon.
+  \end{align*}
+  Therefore, $f$ is continuous.
+
+  The above argument extends to show that for every point $x \in \Sigma$ and every neighborhood
+  $U$ of $x$, there exists a neighborhood $V$ of $f(x)$ such that $V \subseteq f(U)$. Explicitly,
+  let $x = (a_1, a_2, a_3, \ldots)\in \Sigma$ and let $\varepsilon > 0$ be given.
+  Then $B_{\varepsilon/2}(x) = \{a \in \Sigma \ |\ d(a, x) < \varepsilon/2\}$ is a neighborhood of $x$
+  and we see that $f(B_{\varepsilon/2}(x)) = \{y \in C \ |\ d(y, f(x)) < \varepsilon\}$. Thus,
+  the open ball of radius $\varepsilon$ is a neighborhood of $f(x)$ contained in $f(B_{\varepsilon/2}(x))$.
+
+  Since $f$ maps open sets to open sets, we have that $f$ is an open map. Therefore, since
+  $f$ is a continuous bijection, we must have that its inverse is continuous or that
+  $f$ is a homeomorphism.
 \end{proof}
 \newpage
