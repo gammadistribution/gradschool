@@ -4,5 +4,39 @@
 \end{problem}
 
 \begin{proof}
+  Note that if $f$ is a transitive map, then there exists some $x \in I$ such that
+  $O(x) = \{x, f(x), f^2(x), \ldots\}$, the orbit of $x$, is dense in $I$. This
+  implies that every point in the interval $I$ is either in $O(x)$ or is a limit point
+  of $O(x)$, i.e.\ if $y \in I$ with $y \neq x$, then for some $m\in\mathbb{Z}^+$ either $y = f^m(x)$
+  or $|y - f^m(x)| < \varepsilon$ for every $\varepsilon > 0$. So in either case, there exists
+  some $m \in \mathbb{Z}^+$ such that $y = f^m(x)$.
+
+  Suppose that $U$ and $V$ are non-empty open sets in $I$. Then both $U$ and $V$ are unions of pairwise disjoint
+  open intervals contained in $I$. So say
+  \begin{align*}
+    U = \bigcup_{n \in \mathbb{N}} J_n, \quad V = \bigcup_{n \in \mathbb{N}} K_n
+  \end{align*}
+  where $J_n$ and $K_n$ are open intervals contained in $I$ with $J_p \cap J_q = \emptyset$
+  and $K_p \cap K_q = \emptyset$ for all $p \neq q$.
+
+  Let $y \in U$. Then $y\in J_n$ for some $n \in \mathbb{N}$. Since $y \in J_n \subseteq I$,
+  there exists some $k \in \mathbb{Z}^+$ such that $y = f^k(x)$ due to the fact that $O(x)$ is
+  dense in $I$.
+
+  Now let $y \in f^m (V)$ for some $m \in \mathbb{Z}^+$. Then $y \in f^m(K_n)$ for some $n \in \mathbb{N}$.
+  This implies that $y = f^m(z)$ for some $z\in K_n \subseteq I$. Thus, since $O(x)$
+  is dense in $I$, there exists $p\in\mathbb{Z}^+$ such that $z = f^p(x)$. Therefore,
+  $y \in f^m(V)$ if and only if $y = f^{m+p}(x)$ for some $p \in \mathbb{Z}^+$.
+
+  If $k > p$, then choose $m = k - p \in \mathbb{Z}^+$. It is then clear that $f^k(x) \in U \cap f^m(V)$ so
+  that $U \cap f^m(V) \neq \emptyset$. If on the other hand, suppose that $k \leq p$.
+  Note that if $f$ is transitive, then there is a dense set of transitive points in $I$, since each member of $O(x)$
+  is a transitive point.
+  This implies that for some $l_1 \in\mathbb{Z}^+$, we have that $|f^k(x) - f^{l_1}(x)| < \varepsilon$ for every $\varepsilon > 0$.
+  Thus, we can eventually find some sequence $l_i \in \mathbb{Z}$ such that $|f^{l_i}(x) - f^{l_{i-1}}(x)| < \varepsilon$ for every $\varepsilon > 0$
+  with $l_j > p$ for some $l_j$. This implies that $|f^k(x) - f^{l_j}(x)| < \varepsilon$ for every $\varepsilon > 0$
+  so that $f^k(x) = f^{l_j}(x)$. We can then choose $m = l_j - p \in \mathbb{Z}^+$ which implies that
+  $f^{l_j}(x) \in U \cap f^m(V)$ so that $U \cap f^m(V) \neq \emptyset$.
+
 \end{proof}
 \newpage

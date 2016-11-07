@@ -4,14 +4,43 @@
 \end{problem}
 
 \begin{proof}
-  Note that
+  Let $x_0 \in [0, 1)$ be defined using its ternary expansion as all possible combinations of $n$-blocks
+  written in lexicographical order where an $n$-block is all possible permutations of $\{0, 1, 2\}$
+  of length $n$. Thus, the 1-blocks are $0,1,2$, the 2-blocks are
+  $00$, $01$, $02$, $10$, $11$, $12$, $20$, $21$, $22$,
+  the 3-blocks are $000$, $001$, $002$, $010$, $011$, $012$, $020$, $021$, $022$,
+  $100$, $101$, $102$, $110$, $111$, $112$, $120$, $121$, $122$,
+  $200$, $201$, $202$, $210$, $211$, $212$, $220$, $221$, $222$, etc.\ so that
   \begin{align*}
-    F(x):=
-    \begin{cases}
-      3x    & \text{if $x \in [0, 1/3)$ }\\
-      3x -1 & \text{if $x \in [1/3, 2/3)$ }\\
-      3x -2 & \text{if $x \in [2/3, 1)$ }
-    \end{cases}
+    x_0 = .0 1 2
+    00 01 02
+    10 11 12
+    20 21 22\ldots \in [0, 1).
   \end{align*}
+  Let $y \in [0, 1)$ with ternary expansion
+  \begin{align*}
+    y = .y_1y_2y_3\ldots = \sum_{n=1}^\infty \frac{y_1}{3^n}
+  \end{align*}
+  where $y_i \in \{0, 1, 2\}$ and let $\delta > 0$.
+
+  Choose $N$ so large that $1/3^N < \delta$. All possible finite strings of 0's,
+  1's, and 2's appear in the ternary expansion of $x_0$, so the string
+  $y_1y_2y_3\ldots y_N$ must also appear in the ternary expansion of $x_0$.
+
+  It follows that $F^r(x_0) = .y_1y_2y_3\ldots y_N a_{N+1}a_{N+2}\ldots$
+  for some $r\in\mathbb{Z}^+$ since $F^r$ removes the first $r$ places of
+  a ternary expansion. Thus,
+  \begin{align*}
+    |F^r(x_0) - y| &= |.y_1y_2y_3\ldots y_N a_{N+1}a_{N+2}\ldots - .y_1y_2y_3\ldots y_N y_{N+1} y_{N+2} \ldots| \\
+    &\leq \sum_{n = N+1}^\infty\frac{2}{3^n} = \frac{1}{3^N} < \delta
+  \end{align*}
+  Therefore, the orbit of $x_0$ is arbitrarily close to all points in $[0, 1)$ so that $F$ is transitive
+  and its periodic points are dense in $[0, 1)$.
+
+  The points of period $n$ are
+  the sequences of $\{0, 1, 2\}$ that have an infinite repeating pattern, i.e.\
+  the points that have repeating $n$-blocks. For instance, the point $y_1 = .202020\ldots$ consisting
+  of an infinite repeating sequence of the 2-block $20$ is a period 2 point.
+  To demonstrate, $F(y_1) = .02020\ldots$ and $F^2(y_1) = .20202\ldots = y_1$.
 \end{proof}
 \newpage
