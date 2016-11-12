@@ -1,0 +1,37 @@
+\begin{problem}{7.2.2}
+  If $D: [0, 1) \to [0, 1)$ is the doubling map $D(x) = 2x \mod 1$ and
+  $f: S^1 \to S^1$ is the angle doubling map, $f(z) = z^2$, show that $f$ is a factor of $D$.
+\end{problem}
+
+\begin{proof}
+  Recall that a dynamical system $f: S^1 \to S^1$ is a factor of the dynamical
+  system $D:[0, 1) \to [0, 1)$ if there exists a continuous, onto function
+  $h:[0,1) \to S^1$ such that $h \circ D = f \circ h$.
+
+  Define $h:[0,1) \to S^1$ by $h(x) = e^{2\pi i x}$. Then it is easy to see that
+  $h$ is continuous. To show that it is onto, let $z \in S^1$ be given. Then
+  $z = e^{it}$ for some $t\in [0, 2\pi)$. Choose $x\in [0, 1)$ such that
+  $t = 2\pi x$. Then it is clear that $h(x) = e^{2\pi i x} = e^{i t} = z$
+  and $h$ is onto.
+
+  Now, we see that
+  \begin{align*}
+    f \circ h(x) = f(e^{2\pi i x}) = e^{2\pi i x}
+  \end{align*}
+  and
+  \begin{align*}
+    h \circ D(x) &=
+    \begin{cases}
+      h(2x) & \text{if $x \in [0, 1/2)$}\\
+      h(2x - 1) & \text{if $x \in [1/2, 1)$}
+    \end{cases}\\
+    &= \begin{cases}
+      e^{4\pi i x} & \text{if $x \in [0, 1/2)$}\\
+      e^{4\pi i x - 2\pi i } & \text{if $x \in [1/2, 1)$}
+    \end{cases}.
+  \end{align*}
+  However, $e^{4\pi i x - 2\pi i } = e^{- 2\pi i }e^{4\pi i x} = e^{4\pi i x}$
+  so in either case $h \circ D(x) = e^{4\pi i x} = f \circ h(x)$ and $f$ is a factor of $D$.
+
+\end{proof}
+\newpage
