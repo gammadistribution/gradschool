@@ -1,6 +1,72 @@
 \begin{problem}{7.2.3}
+  \begin{enumerate}
+    \item If $g: S^1 \to S^1$ is defined by $g(z) = z^3$, show that $g$ is the
+      angle-tripling map
+    \item Find the periodic points of $g$ and show they are dense in $S^1$.
+    \item Let $F: [0, 1) \to [0, 1)$ be defined by $F(x) = 3x \mod 1$. Show
+      that $g$ is a factor of $F$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item If $z \in S^1$, then $z = e^{i \theta}$ for some $\theta \in (-\pi, \pi]$.
+      Note that if $z = x + i y$ for $x, y \in \mathbb{R}$, then $\theta$ is
+      the angle between the vector $<x, y>$ and the real line measured counter-clockwise.
+
+      So, if $z = e^{i \theta}$, then
+      $$g(z) = \left(e^{i\theta}\right)^3 = e^{i 3\theta}$$
+      and the angle between the vector $<x, y>$ and the real line measured counter-clockwise
+      has now tripled. Therefore, $g$ is the angle-tripling map.
+
+    \item For the map $g$, note that $0$ is a fixed point and so it cannot be periodic. It is easy to see
+      that if $g(z) = z^3$, then $g^n(z) = z^{3^n}$. Thus, for $z\neq 0$, we have that
+      $g^n(z) = z$ if and only if $z^{3^n} = z$
+      or $z^{3^n -1} = 1$. Therefore, the period $n$ points are the $(3^n-1)$-th roots
+      of unity.
+
+      Having identified the periodic points, we see that the periodic points of
+      $g$ are dense in $S^1$ if for every $z \in S^1$ either $z$ is a $(3^n-1)$-th
+      root of unity for some $n$ or $z$ is arbitrarily close to some $(3^n-1)$-th
+      root of unity, i.e.\ if for every $z\in S^1$ and every $\varepsilon > 0$,
+      there exists some period $n$ point $x$ such that $|z - x| < \varepsilon$.
+
+      If $x \in S^1$ then $x = e^{i\theta}$ for some $-\pi < \theta \leq \pi$.
+      If $x$ is a period $n$ point, then $\left(e^{i\theta}\right)^{3n-1} = e^{2\pi i}$ implies
+      that $x = e^{2k\pi i / 3^n-1}$ for some $0 \leq k < 3^n-1$. Note that the $(3n-1)$-th roots of unity
+      are evenly spaced on the unity circle a distance $2\pi / (3^n - 1)$ apart.
+      Taking $n$ arbitrarily large shows that this distance is arbitrarily small and
+      the distance between any point on the unit circle will be arbitrarily close to a $(3^n - 1)$-th root of unity.
+
+    \item
+      Recall that a dynamical system $g: S^1 \to S^1$ is a factor of the dynamical
+      system $F:[0, 1) \to [0, 1)$ if there exists a continuous, onto function
+      $h:[0,1) \to S^1$ such that $h \circ F = g \circ h$.
+
+      Define $h:[0,1) \to S^1$ by $h(x) = e^{2\pi i x}$. As was shown earlier,
+      this function is continuous and onto.
+
+      Now, we see that
+      \begin{align*}
+        g \circ h(x) = g(e^{2\pi i x}) = e^{6\pi i x}
+      \end{align*}
+      and
+      \begin{align*}
+        h \circ F(x) &=
+        \begin{cases}
+          h(3x) & \text{if $x \in [0, 1/3)$}\\
+          h(3x - 1) & \text{if $x \in [1/3, 2/3)$}\\
+          h(3x - 2) & \text{if $x \in [2/3, 1)$}
+        \end{cases}\\
+        &= \begin{cases}
+          e^{6\pi i x} & \text{if $x \in [0, 1/3)$}\\
+          e^{6\pi i x - 2\pi i } & \text{if $x \in [1/3, 2/3)$}\\
+          e^{6\pi i x - 4\pi i } & \text{if $x \in [2/3, 1)$}
+        \end{cases}.
+      \end{align*}
+      Note that $e^{2 k\pi i} = 1$ for all $k \in \mathbb{Z}$,
+      so in either case $h \circ F(x) = e^{6\pi i x} = g \circ h(x)$ and $g$ is a factor of $F$.
+
+  \end{enumerate}
 \end{proof}
 \newpage
