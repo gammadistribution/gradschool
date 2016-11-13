@@ -1,6 +1,23 @@
 \begin{problem}{7.3.2}
+  Check that for $0 < \mu \leq 4$, if $f_c(x) =x^2 + c$ with $c = (2\mu - \mu^2)/4$,
+  then $f_c$ is a dynamical system on $[-\mu/2, \mu/2]$.
 \end{problem}
 
 \begin{proof}
+  Recall that $f_c$ is a dynamical system on $[-\mu/2, \mu/2]$ if $f_c([-\mu/2, \mu/2]) \subseteq [-\mu/2, \mu/2]$.
+  Note that $f_c'(x) = 2x = 0$ if $x=0$ so it is at this point that a relative extremum exists for $f_c$.
+  It is easy to see that $f_c(0) = c$ is the absolute minimum of $f_c$ on $[-\mu/2, \mu/2]$.
+
+  The maximum on the bounded interval $[-\mu/2, \mu/2]$ must therefore occur at one of the end points. In either case,
+  $f_c(\mu/2) = f_c(-\mu/2) = \mu/2$. Since $f_c$ is continuous, we have by the Intermediate Value Theorem
+  that $f_c([-\mu/2, \mu/2]) = [(2\mu - \mu^2)/4, \mu/2]$.
+
+  If $0 < \mu \leq 4$, then we have that $\mu^2 \leq 4\mu$ which implies that
+  $0 \leq \mu - \mu^2/4$. Thus, $-\mu/2 \leq (2\mu - \mu^2)/4$ and we have that
+  $[(2\mu - \mu^2)/4, \mu/2] \subseteq [-\mu/2, \mu/2]$.
+
+  Therefore, $f_c([-\mu/2, \mu/2]) \subseteq [-\mu/2, \mu/2]$ and $f_c$ is a dynamical
+  system.
+
 \end{proof}
 \newpage
