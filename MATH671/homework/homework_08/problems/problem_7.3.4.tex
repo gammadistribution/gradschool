@@ -1,6 +1,66 @@
 \begin{problem}{7.3.4}
+  \begin{enumerate}
+    \item Let $f_a(x) = ax$ and $f_b(x) = bx$ with $a,b \in \mathbb{R}$ be defined on $\mathbb{R}$.
+      Under which conditions are $f_a$ and $f_b$ linearly conjugate?
+    \item Show that any conjugation $h$ between $f_a$ and $f_b$ cannot be a diffeomorphism
+      unless $a=b$.
+    \item Let $0 < a, b < 1$ and $f_a, f_b: [0, 1] \to [0, 1]$. Show that any conjugacy $h$ between
+      $f_a$ and $f_b$ must satisfy $h(0) = 0$, $h(1) = 1$, and $h(a^n) = b^n$ for all $n \in \mathbb{Z}^+$
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Recall that $f_a$ and $f_b$ are linearly conjugate if there exists a function
+      $h: \mathbb{R} \to \mathbb{R}$ defined by $h(x) = c_1 x + c_0$ with $c_1 \neq 0$
+      such that $f_a \circ h = h \circ f_b$. Thus, $f_a$ and $f_b$ are linearly conjugate
+      if
+      \begin{align*}
+        f_a \circ h (x) = a c_1 x + a c_0 = b c_1 x + c_0 = h \circ f_b (x).
+      \end{align*}
+      Equating the coefficients of these polynomials, we see that we must have that
+      $a c_1 = b c_1$ and $a c_0 = c_0$. Since $c_1 \neq 0$, we must have that $a = b$.
+      If $c_0 \neq 0$, then we must have that $a = 1 = b$, otherwise no additional restrictions
+      are necessary for $f_a$ and $f_b$ to be linearly conjugate. Thus, $f_a$ and $f_b$ are linearly
+      conjugate if $a = b$ and if the conjugate map is such that $c_0 \neq 0$, then
+      we must have that $a = b = 1$.
+
+    \item Suppose that $h$ is a continuous bijection such that $f_a \circ h = h \circ f_b$.
+      Suppose to the contrary that $h$ is a diffeomorphism but $a \neq b$.
+      Then we have that $h$ and its inverse are differentiable so that
+      \begin{align*}
+        (f_a \circ h)'(x) = (a h(x))' = a h'(x)
+      \end{align*}
+      and that
+      \begin{align*}
+        (h \circ f_b)'(x) = (h(bx))' = b h'(bx).
+      \end{align*}
+      Since $h$ is the conjugate map, we have that $a h'(x) = b h' (bx)$.
+      If $a\neq b$, then we must have that $h'(0) = 0$. However,
+      this contradicts the assumption that $h$ is a diffeomorphism since
+      $$
+        \left(h^{-1}(y)\right)' = \frac{1}{h'(x)}
+      $$
+      for any $h(x)=y$, i.e. the derivative of $h^{-1}$ is defined only if $h'(x) \neq 0$.
+      Therefore, we must have that $a=b$ if $h$ is a diffeomorphism.
+
+    \item Suppose that $h: [0, 1] \to [0, 1]$ is a conjugate map between $f_a$ and
+      $f_b$, i.e. $f_b \circ h = h \circ f_a$. Then
+      we have that $f_b \circ h(0) = b h(0) = h(0) = h \circ f_a(0)$. Since $0 < b < 1$, this implies
+      that $h(0) = 0$.
+
+      Note that $h$ is continuous and one-to-one on $[0, 1]$ and so it is either
+      strictly increasing or strictly decreasing. Since $h(0) = 0$, it must be strictly increasing.
+      Thus, since $h$ maps $[0,1]$ onto $[0,1]$, we must have that $h(1) = 1$.
+
+      Since $h(1) = 1$, we have by the conjugacy of $h$ that
+      $$f_b \circ h(1) = b h(1) = h(a) = h \circ f_a(1)$$
+      or that $h(a) = b$ .
+      So now suppose that $h(a^n) = b^n$ for $n\in\mathbb{Z}^+$. By the conjugacy of $h$,
+      we then see that
+      $$h(f_a(a^n)) = h(a^{n+1}) = b^{n+1} = f_b(b^n) = f_b(h(a^n))$$
+      and the formula holds for $n+1$.
+      Therefore, we have that $h(a^n) = b^n$ for any $n\in \mathbb{Z}^+$.
+  \end{enumerate}
 \end{proof}
 \newpage
