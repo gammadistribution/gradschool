@@ -10,7 +10,7 @@
 
   Checking, we have that
   \begin{align*}
-    h \circ p (x) &= b_1 p(x) + b-0 \\
+    h \circ p (x) &= b_1 p(x) + b_0 \\
     &= b_1(a_2 x^2 + a_1 x + a_0) + b_0 \\
     &= a_2b_1 x^2 + a_1b_1 x + a_0b_1 + b_0
   \end{align*}
@@ -38,30 +38,17 @@
   via $h(x) = a_2 x + a_1 /2$ if $c = a_0a_2 + a_1/2 - a_1^2/4$.
 
   To show that $f_c$ is unique, suppose that $p(x) = a_2 x^2 + a_1 x + a_0$
-  is linearly conjugate to some other quadratic polynomial $g(x) = d_2 x^2 + d_1 x + d_0$
-  via $h(x) = b_1 x + b_0 =a_2 x + a_1 /2$. Then we have that $h \circ p = g \circ h$
-  and equating coefficients we see that
+  is linearly conjugate to both $f_{c_1}(x) = x^2 + c_1$ and $f_{c_2}(x) = x^2 + c_2$.
+  Then there exist linear functions $h_1(x) = d_1 x + d_0$ and $h_2(x) = e_1 x + e_0$
+  with $d_1, e_1 \neq 0$
+  such that
   \begin{align*}
-    d_0 &= \frac{a_2 b_0^2 + b_0 b_1 - a1 b_0 b_1 + a_0 b_1^2}{b_1}\\
-    d_1 &= \frac{-2 a_2 b_0 + a_1 b_1}{b_1} \\
-    d_2 &= \frac{a_2}{b_1}.
+    h_1 \circ p &= f_{c_1} \circ h_1\\
+    h_2 \circ p &= f_{c_2} \circ h_2.
   \end{align*}
-  Using the fact that $b_1 = a_2$ and $b_0 = a_1/2$, we have that $d_0 = a_0a_2 + a_1/2 - a_1^2/4$,
-  $d_1 = 0$, and $d_2 = 1$. Thus, $g(x) = x^2 + a_0a_2 + a_1/2 - a_1^2/4= f_c(x)$ and
-  $f_c(x)$ is unique.
-
-  % To show that $f_c$ is unique, suppose that $p(x) = a_2 x^2 + a_1 x + a_0$
-  % is linearly conjugate to both $f_{c_1}(x) = x^2 + c_1$ and $f_{c_2}(x) = x^2 + c_2$.
-  % Then there exist linear functions $h_1(x) = d_1 x + d_0$ and $h_2(x) = e_1 x + e_0$
-  % with $d_1, e_1 \neq 0$
-  % such that
-  % \begin{align*}
-  %   h_1 \circ p &= f_{c_1} \circ h_1\\
-  %   h_2 \circ p &= f_{c_2} \circ h_2.
-  % \end{align*}
-  % Equating the resulting polynomials from the above two equations shows that
-  % $c_1 = a_0d_1 + d_0 - d_0^2$ and $c_2 = a_0e_1 + e_0 - e_0^2$. However, we also have
-  % that $d_1 = a_2 = e_1$ and $d_0 = a_1/2 = e_0$. Therefore, $c_1 = c_2$ and the polynomial $f_c$ that is
-  % linearly conjugate to $p(x)$ is unique.
+  Equating the resulting polynomials from the above two equations shows that
+  $c_1 = a_0d_1 + d_0 - d_0^2$ and $c_2 = a_0e_1 + e_0 - e_0^2$. However, we also have
+  that $d_1 = a_2 = e_1$ and $d_0 = a_1/2 = e_0$. Therefore, $c_1 = c_2$ and the polynomial $f_c$ that is
+  linearly conjugate to $p(x)$ is unique.
 \end{proof}
 \newpage
