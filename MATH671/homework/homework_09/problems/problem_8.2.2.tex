@@ -1,0 +1,22 @@
+\begin{problem}{8.2.2}
+  If $Sf(x)$ is the Schwarzian derivative of $f(x)$ with $f \in C^3$ and
+  $\displaystyle F(x) = \frac{f''(x)}{f'(x)}$, show that
+  $Sf(x) = F'(x) - (F(x))^2/2$.
+\end{problem}
+
+\begin{proof}
+  Recall that the Schwarzian derivative of $f$ is given by
+  \begin{align*}
+    Sf(x) = \frac{f'''(x)}{f'(x)} - \frac{3}{2}\left[\frac{f''(x)}{f'(x)}\right]^2.
+  \end{align*}
+
+  We readily see from the definition of $F(x)$ that
+  \begin{align*}
+    F'(x) - \frac{1}{2}\left[F(x)\right]^2
+    &= \frac{f'(x)f'''(x) - f''(x)^2}{f'(x)^2} - \frac{1}{2}\left[\frac{f''(x)}{f'(x)}\right]^2 \\
+    &= \frac{f'''(x)}{f'(x)} - \frac{3}{2}\left[\frac{f''(x)}{f'(x)}\right]^2 \\
+    &= Sf(x)
+  \end{align*}
+  and we are done.
+\end{proof}
+\newpage
