@@ -1,6 +1,32 @@
 \begin{problem}{8.2.5}
+  \begin{enumerate}
+    \item Show that if $p$ is a polynomial of degree $n$ having $n$ distinct
+      fixed points, and negative Schwarzian derivative, then not all of the fixed points can
+      be attracting.
+    \item On the other hand, show that the logistic maps $L_\mu: \mathbb{R} \to \mathbb{R}$
+      for $\mu > 2 + \sqrt{5}$ have negative Schwarzian derivative but have no attracting periodic orbits.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Suppose to the contrary that $p$ is a polynomial of degree $n$ with $n$
+      distinct fixed points and negative Schwarzian derivative but all of its fixed points
+      are attracting. Let $x_1, \dots, x_n$ denote these attracting fixed points.
+
+      Since $p$ is a polynomial, it is continuous, which implies that for each attracting
+      fixed point $x_k$, its immediate basin of attraction $W_k$ is an open interval.
+      Note that these fixed points are distinct and attracting so that the immediate basins of attraction
+      of two fixed points $x_j$ and $x_k$ with $j\neq k$ are mutually exclusive, i.e.\ $W_j \cap W_k = \emptyset$
+      for any $j\neq k$.
+
+      Since $p\in C^3$ with negative Schwarzian derivative, we have by Singer's theorem
+      that for every fixed point $x_k$, either $W_k$ is an unbounded interval,
+      or the orbit of some critical point of $p$ is attracted to the orbit of $x_k$ under $f$.
+
+
+
+    \item
+  \end{enumerate}
 \end{proof}
 \newpage
