@@ -1,6 +1,54 @@
 \begin{problem}{10.3.4}
+  The Sierpinski carpet is a 2-dimensional version of the Cantor set and the Menger sponge.
+  Start with the unit square $[0, 1] \times [0,1]$ partitioned into nine equal squares.
+  Remove the ``open middle third'' square $(1/3, 2/3) \times (1/3, 2/3)$.
+  From each of the remaining eight squares of side length $1/3$, remove the open middle third squares and continue indefinitely.
+  \begin{enumerate}
+    \item Show that the resulting area removed is equal to one square unit.
+    \item Show that the box counting dimension of the Sierpinski carpet is $\log 8 / \log 3$.
+    \item Show that the Sierpinski carpet has no interior, i.e.\ contains no open balls in $\mathbb{R}^2$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item On the first iteration, one square of dimension $1/3 \times 1/3$ is removed.
+      Each subsequent iteration removes 8 times as many squares that were removed in the previous
+      iteration where the length of each square to be removed is $1/3$ of the length of the previous squares removed.
+      Therefore, $A_n$, the area removed at each iteration $n$ for $n=1,2,\dots$, is $A_n = 8^{n-1}/3^{2n}$
+      and the total area removed, $A$, is given by
+      \begin{align*}
+        A = \sum_{n=1}^\infty A_n = \sum_{n=1}^\infty \frac{8^{n-1}}{3^{2n}} = \frac{1}{8}\sum_{n=1}^\infty \left(\frac{8}{9}\right)^n = 1.
+      \end{align*}
+
+    \item Let $K$ is a non-empty subset of $\mathbb{R}^n$ and let $N_\delta(K)$ be the
+      minimum number of boxes of equal length $\delta > 0$ needed to cover the set $K$.
+      Then the box-counting dimension of $K$ is given by
+      \begin{align*}
+        \dim(K) = \lim_{\delta \to 0^+} \frac{\log N_\delta(K)}{\log 1/\delta}.
+      \end{align*}
+
+      Now let $K \subseteq \mathbb{R}^2$ be the Sierpinski carpet. We will construct a sequence
+      For the first iteration, we see that we would need 8 squares with side-length $1/3$ in order to completely cover
+      the Sierpinski carpet. The next iteration would require 64 squares of side-length $1/9$ in order to
+      completely cover the Sierpinski carpet. In general, for the $n$-th iteration, we would require
+      $N_{\delta_n}(K) = 8^n$ squares of length $\delta_n = 3^{-n}$. Therefore,
+      \begin{align*}
+        \dim(K) &= \lim_{\delta \to 0^+} \frac{\log N_\delta(K)}{\log 1/\delta} = \lim_{n\to\infty}\frac{\log N_{\delta_n}(K)}{\log 1/\delta_n} = \lim_{n\to\infty}\frac{\log 8^n}{\log 3^n} = \frac{\log 8}{\log 3}.
+      \end{align*}
+
+    \item Suppose to the contrary that the interior of $K$, the Sierpinski carpet,
+      is non-empty, i.e. there is some point $x\in K$ such that a square centered at
+      $x$ is contained completely in $K$. Since this square is completely within the Sierpinski carpet,
+      it contains a square defined by the coordinates
+      $\displaystyle
+      \left(\frac{j}{3^n}, \frac{k}{3^n}\right),
+      \left(\frac{j}{3^n}, \frac{k+1}{3^n}\right),
+      \left(\frac{j+1}{3^n}, \frac{k}{3^n}\right),
+      \left(\frac{j+1}{3^n}, \frac{k+1}{3^n}\right)$
+      for some $0 < j,k < 3^n$ that are not multiples of 3. However, after the $n$-th iteration this square will be
+      removed from $K$, contradicting the fact that the square centered at $x$ is completely inside $K$.
+      Therefore, the interior of the Sierpinski carpet is empty.
+  \end{enumerate}
 \end{proof}
 \newpage
