@@ -1,6 +1,24 @@
 \begin{problem}{10.3.7}
+  The first three steps in the construction of the fractal shown are indicated below.
+  Determine the fractal dimension.
 \end{problem}
 
 \begin{proof}
+  To begin, partition the unit square into nine equal squares and
+  let the bottom left corner of the unit square be positioned at coordinate $(0, 0)$. For the first
+  iteration, remove
+  the ``outer middle squares'', i.e.\ the squares of side-length 1/3 with top left upper-coordinate in the set
+  $\{(0, 2/3), (1/3, 1), (1/3, 1/3), (2/3, 2/3)\}$. For each subsequent iteration, remove the outer middle squares of the
+  squares remaining from the previous iteration.
+
+  Thus, in the first iteration, in order to cover the fractal, we would require 5 squares of side-length 1/3.
+  In the second iteration, in order to cover the fractal, we would require 25 squares of side-length 1/9
+  and for the third iteration we would require 125 squares of side-length 1/27.
+
+  Let $K$ be the fractal shown. In general, for the $n$-th iteration, we would require $N_{\delta_n}(K) = 5^n$
+  squares of length $\delta_n = 3^{-n}$ in order to completely cover $K$. Therefore, we see that the fractal dimension of $K$ is
+  \begin{align*}
+    \dim(K) = \lim_{\delta \to 0^+} \frac{\log N_\delta(K)}{\log 1/\delta} = \lim_{n\to\infty}\frac{\log N_{\delta_n}(K)}{\log 1/\delta_n} = \lim_{n\to\infty}\frac{\log 5^n}{\log 3^n} = \frac{\log 5}{\log 3}.
+  \end{align*}
 \end{proof}
 \newpage
