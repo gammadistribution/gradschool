@@ -1,6 +1,44 @@
 \begin{problem}{8.2.10}
+  Suppose that $f$ is a function such that $Sf(x) = 0$. Show that:
+  \begin{enumerate}
+    \item $\displaystyle \frac{f''(x)^2}{f'(x)^3} = k$ for some $k\in\mathbb{R}$,
+    \item the function $f(x)$ is of the form $\displaystyle f(x) = \frac{ax + b}{cx+d}$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item We readily see that if $Sf(x) = 0$, then we have that $2f'''(x)f'(x) = 3f''(x)^2$
+      from the definition of the Schwarzian derivative.
+
+      We will now show that for $F(x) = \displaystyle \frac{f''(x)^2}{f'(x)^3}$, we have that $F'(x) = 0$ for all $x\in\mathbb{R}$ implying that
+      $F(x) = k$ for some $k\in\mathbb{R}$. Calculating, we see, using the identity $2f'''(x)f'(x) = 3f''(x)^2$
+      we obtained from our assumption, that
+      \begin{align*}
+        F'(x) &= \frac{f'(x)^3\left( 2f''(x)f'''(x) \right) - f''(x)^2\left( 3 f'(x)^2f''(x) \right)}{f'(x)^6} \\
+        &= \frac{f''(x)f'(x)^2 (2f'''(x)f'(x)) - 3f''(x)^3f'(x)^2}{f'(x)^6} \\
+        &= \frac{3f''(x)^3f'(x)^2 - 3f''(x)^3f'(x)^2}{f'(x)^6} \\
+        &= 0
+      \end{align*}
+      for all $x\in\mathbb{R}$. Therefore, we must have that $F(x) = \displaystyle \frac{f''(x)^2}{f'(x)^3} = k$
+      for some $k\in\mathbb{R}$.
+
+    \item Let $y(x) = f'(x)$. Then, from the equation $\displaystyle \frac{f''(x)^2}{f'(x)^3} = k$,
+      we have that $y'(x)^2 = ky(x)^3$, i.e.\ $y'(x) = k_1y(x)^{3/2}$ where $k_1 = k^{1/2}$.
+
+      Solving this differential equation, we see that $-2y(x)^{-1/2} = k_1x + k_2$ or that
+      $$y(x) = \frac{4}{(k_1x + k_2)^2}$$
+      for some $k_2\in\mathbb{R}$. Replacing $y(x) = f'(x)$, we readily see that
+      $$f(x) = \int \frac{4dx}{(k_1x + k_2)^2}$$
+      or that
+      $$f(x) = -\frac{4}{k_1(k_1 x + k_2)} + k_3.$$
+
+      Simplifying, we have that
+      \begin{align*}
+        f(x) &= -\frac{4}{k_1(k_1 x + k_2)} + \frac{k_3k_1(k_1 x + k_2)}{k_1(k_1 x + k_2)}\\
+        &= \frac{k_1^2 k_3 x + k_1k_2k_3 - 4}{k_1^2 x + k_1k_2}
+      \end{align*}
+      and $f(x)$ is of the form $\displaystyle f(x) = \frac{ax + b}{cx+d}$.
+  \end{enumerate}
 \end{proof}
 \newpage
