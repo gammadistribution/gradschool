@@ -24,9 +24,32 @@
       that for every fixed point $x_k$, either $W_k$ is an unbounded interval,
       or the orbit of some critical point of $p$ is attracted to the orbit of $x_k$ under $f$.
 
+      From the above remarks, we see that $p$ can have at most 2 fixed points with unbounded basins of attraction of the form $(-\infty, a]$ or $[a, \infty)$.
+      Without loss of generality, assume that $x_1 < \dots < x_n$ and that the fixed points $x_1$ and $x_n$ have unbounded basins of attraction, i.e.\
+      $W_1 = (-\infty, a_1]$ and $W_n = [a_n, \infty)$ for some $a_1, a_n\in\mathbb{R}$.
+
+      Consider the fixed points $x_{k-1} < x_k < x_{k+1}$ of $p$. Then since all of these fixed points are attracting
+      and $Sp(x) < 0$, we will have that $p$ has a critical point in $(x_{k-1}, x_{k+1})$. Thus, for $k=2,\dots,n-1$,
+      we have that $p$ has a critical point in $(x_{k-1}, x_{k+1})$ and since $x_k \in (x_{k-1}, x_{k+1})$,
+      we see that $W_k \cap (x_{k-1}, x_{k+1}) \neq \emptyset$.
 
 
-    \item
+    \item Suppose that $\mu > 2 + \sqrt{5}$ and consider $L_\mu: \mathbb{R} \to \mathbb{R}$ where $L_\mu(x) = \mu x(1 - x)$.
+      We readily see that $L_\mu'(x) = \mu(1-2x)$, $L_\mu''(x)= -2\mu$, and $L_\mu'''(x) = 0$ so
+      that
+      \begin{align*}
+        S L_\mu(x) &= \frac{L_\mu'''(x)}{L_\mu'(x)}-\frac{3}{2}\left[\frac{L_\mu''(x)}{L_\mu'(x)}\right]^2 \\
+        &= -\frac{3}{2}\left[\frac{4\mu^2}{\mu^2(1-2x)^2}\right] \\
+        &= -\frac{6}{(1-2x)^2}.
+      \end{align*}
+      Therefore, we see that $SL_\mu(x) < 0$. Suppose that $\{c_0,\dots,c_{n-1}\}$ is an $n$-cycle of $L_\mu(x)$
+      and that $x=c_0$ is the period $n$ point that generates the cycle. If $\mu > 2 + \sqrt{5}$, then
+      $x=1/2$ is not a periodic point of $L_\mu$ since $L_\mu^2(1/2) \neq 1/2$ and $L_\mu^{n+1}(1/2) < L_\mu^n(1/2) < 0$ for all $n > 2$.
+      Then we see that
+      \begin{align*}
+        \left| L_\mu^n(c_0)' \right| = \left| L_\mu'(c_0) \cdots L_\mu'(c_{n-1})\right| = \mu^n \left| (1-2c_0)\cdots (1-2c_{n-1}) \right| \geq \mu^n > 1
+      \end{align*}
+      so that $L_\mu$ has no attracting periodic orbit.
   \end{enumerate}
 \end{proof}
 \newpage
