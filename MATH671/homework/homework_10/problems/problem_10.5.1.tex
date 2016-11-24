@@ -1,0 +1,32 @@
+\begin{problem}{10.5.1}
+  Show that the Cantor set $C$ is a fixed point of the map $F: \mathcal{C}(\mathbb{R}) \to \mathcal{C}(\mathbb{R})$
+  defined by
+  \begin{align*}
+    F(A) = f_1(A) \cup f_2(A)
+  \end{align*}
+  where $f_1(x) = x/3$ and $f_2(x) = x/3 + 2/3$ are contractions on $\mathbb{R}$.
+\end{problem}
+
+\begin{proof}
+  Recall that the Cantor set C is defined as
+  \begin{align}\label{cantor}
+    C =\left\{ x\in [0,1]\ \middle|\ x = \sum_{n=1}^\infty \frac{a_n}{3^n}, \quad \text{$a_n \in \{0,2\}$} \right\}.
+  \end{align}
+  We wish to show that $F(C) = C$. From the definitions of $f_1$ and $f_2$, we have that
+  \begin{align}\label{contractions}
+    f_1(C)
+    &= \left\{ x \in [0, 1]\ \middle|\ x = \sum_{n=1}^\infty \frac{a_n}{3^{n+1}}, \quad \text{$a_n \in \{0,2\}$} \right\} \notag \\
+    &= \left\{ x \in [0, 1]\ \middle|\ x = \sum_{n=1}^\infty \frac{b_n}{3^n}, \quad \text{$b_1 = 0$, $b_n = a_{n-1}$ for $n > 1$} \right\} \notag \\
+    f_2(C)
+    &= \left\{ x \in [0, 1]\ \middle|\ x = \frac{2}{3} + \sum_{n=1}^\infty \frac{a_n}{3^{n+1}},  \quad \text{$a_n \in \{0,2\}$} \right\} \notag \\
+    &= \left\{ x \in [0, 1]\ \middle|\ x = \sum_{n=1}^\infty \frac{b_n}{3^n}, \quad \text{$b_1 = 2$, $b_n = a_{n-1}$ for $n > 1$} \right\}
+  \end{align}
+  From \eqref{contractions} and the definition of $F$, we see that
+  \begin{align*}
+    F(C) &= f_1(C) \cup f_2(C)\\
+    &= \left\{ x \in [0, 1]\ \middle|\ x = \sum_{n=1}^\infty \frac{b_n}{3^n},  \quad \text{$b_n \in \{0,2\}$} \right\}.
+  \end{align*}
+  But this is precisely the definition of the Cantor set $C$ given in \eqref{cantor}. Therefore, $F(C) = C$ and the Cantor set $C$ is a
+  fixed point of $F$.
+\end{proof}
+\newpage
