@@ -1,6 +1,30 @@
 \begin{problem}{10.5.2}
+  Show that the box-counting dimension of the Sierpinski triangle is $\log 3 / \log 2$.
 \end{problem}
 
 \begin{proof}
+  The Sierpinski triangle is formed by iteratively removing smaller and smaller
+  equilateral triangles from an equilateral triangle of side-length 1. For an
+  equilateral triangle of side-length $d$, the minimum size square that completely covers
+  the triangle is the square of side-length $d$.
+
+  For the first iteration of the Sierpinski triangle, we remove the open middle
+  equilateral triangle, leaving 3 equilateral triangles of side-length $1/2$.
+  Thus, we would require, at a minimum, 3 squares of side-length $1/2$ in order to completely
+  cover the Sierpinski triangle. In the next iteration, we remove the open middle
+  equilateral triangles of the remaining equilateral triangles, leaving 9 equilateral
+  triangles of side-length $1/4$. Thus, we would, at a minimum, require 9 squares of side-length $1/4$
+  in order to completely cover the Sierpinski triangle.
+
+  In general, the $n$-th iteration will leave $3^n$ equilateral triangles of side length $1/2^n$ and
+  we would require, at a minimum, $3^n$ squares of side-length $1/2^n$ in order to completely cover the Sierpinski triangle.
+  Let $K$ be the Sierpinski triangle and let $N_{\delta_n}(K)$ be the minimum number of boxes of equal length $\delta_n > 0$
+  needed to completely cover $K$ at iteration $n$. Then from our previous discussions, $N_{\delta_n}(K) = 3^n$
+  with $\delta_n = 1/2^n$.
+
+  Therefore, the box-counting dimension of the Sierpinski triangle $K$ is
+  \begin{align*}
+    \dim(K) = \lim_{\delta \to 0^+}\frac{\log N_\delta(K)}{\log 1/\delta} = \lim_{n\to\infty} \frac{\log N_{\delta_n}(K)}{\log 1/\delta_n} = \lim_{n\to\infty} \frac{\log 3^n}{\log 2^n} = \frac{\log 3}{\log 2}.
+  \end{align*}
 \end{proof}
 \newpage
