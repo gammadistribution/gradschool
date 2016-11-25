@@ -1,6 +1,52 @@
 \begin{problem}{10.5.4}
+  Let $f(x) = x^2- a$ with $1 < a < 3$ and let $N_f$ be the corresponding Newton
+  function of $f$. Show that $N_f$ satisfies the hypothesis of the Contraction Mapping
+  Theorem on $[1, \infty)$. What is the fixed point?
 \end{problem}
 
 \begin{proof}
+  Recall that the Newton function $N_f$ of a function $f$ is defined by
+  \begin{align*}
+    N_f(x) = x - \frac{f(x)}{f'(x)}.
+  \end{align*}
+  If $f(x) = x^2- a$, then we see that
+  \begin{align}\label{newton}
+    N_f(x) = x - \frac{x^2-a}{2x} = \frac{x^2 + a}{2x}.
+  \end{align}
+
+  The function $N_f$ will satisfy the hypothesis of the Contraction Mapping Theorem on
+  $Y = [1, \infty)$ if $(Y, d)$ is a complete metric space with $d$ the usual metric on $\mathbb{R}$
+  and if $N_f: Y \to Y$ is a contraction mapping.
+
+  Since $Y$ is a closed subset of $\mathbb{R}$, a complete metric space, we know that
+  $Y$ must be a complete metric space. This is since any Cauchy sequence in $Y$ will
+  converge to some point $x\in \mathbb{R}$, but since $Y$ is closed, i.e.\ it contains
+  all of its limit points, the point $x$ must be in $Y$.
+
+  All that is left is to show that $N_f$ is a contraction mapping, i.e.\ for all $x, y \in Y$,
+  there is some $\alpha \in (0, 1)$ such that
+  \begin{align*}
+    |N_f(x) - N_f(y)| \leq \alpha |x - y|.
+  \end{align*}
+  Note that
+  \begin{align*}
+    |N_f(x) - N_f(y)| &= \left| \frac{x^2+a}{2x} - \frac{y^2+a}{2y} \right| \\
+    &= \left|\frac{x^2y + ay - xy^2 - ax}{2xy}\right| \\
+    &= \left|\frac{(x-y)(xy-a)}{2xy}\right| \\
+    &= \frac{|x-y|}{2}\left|\frac{xy - a}{xy}\right|.
+  \end{align*}
+  Since $a > 1$ we have that $|xy-a| < |xy| $ which implies that $|(xy-a)/xy|\leq 1$.
+  Thus,
+  \begin{align*}
+    |N_f(x) - N_f(y)| &= \frac{|x-y|}{2}\left|\frac{xy - a}{xy}\right| \leq \frac{1}{2}|x-y|
+  \end{align*}
+  and $N_f$ is a contraction mapping with contraction constant $\alpha = 1/2$. Therefore, $N_f$
+  satisfies the hypothesis of the Contraction Mapping Theorem on
+  $Y = [1, \infty)$.
+
+  By the Contraction Mapping Theorem, the fixed point of $N_f$ is the limit of its iterates.
+  Since $N_f$ is the Newton function, we know that its iterates converge to a root of the function $f(x) = x^2-a$.
+  Note that the iterates of $N_f$ are positive so they will converge to the positive root of $f$, i.e.\
+  the fixed point of $N_f$ is $p=\sqrt{2}$.
 \end{proof}
 \newpage
