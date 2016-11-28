@@ -1,6 +1,42 @@
 \begin{problem}{10.5.7}
+  Find the distance between the sets $A=\{0, 1/n, 2/n , \dots, (n-1)/n, 1\}$ and $B = [0,1]$
+  in the Hausdorff metric. Deduce that the distance between an infinite set and a finite set can be arbitrarily small.
 \end{problem}
 
 \begin{proof}
+  For a compact subset $A$ of $\mathbb{R}$, let $U_\delta(A)$ be the closed set
+  containing $A$ whose boundary lies within $\delta >0$ of $A$, i.e.\
+  \begin{align*}
+    U_\delta(A) = \{x \in X \mid d(x, y) \leq \delta \text{ for some $x\in A$} \}.
+  \end{align*}
+
+  Then the distance between two compact subsets $A$ and $B$ in the Hausdorff metric is given by
+  the smallest $\delta >0$ such that $A$ is contained in the closed set containing $B$ whose boundary lies
+  within $\delta$ of $B$ and vice versa. More precisely,
+  \begin{align}
+    D(A, B) = \inf\{\delta > 0 \mid A \subseteq U_\delta(B) \text{ and } B \subseteq U_\delta(A)\}.
+  \end{align}
+
+  It is clear that for any $\delta > 0$, $A \subseteq U_\delta(B)$ since $A\subseteq B$.
+  However, if $A$ is the set of $n + 1$ equally spaced points a distance of $1/n$ apart on $[0, 1]$,
+  then the smallest $\delta > 0$ such that $B \subseteq U_\delta(A)$ is $\delta= 1 / 2n$.
+  To demonstrate this, if $\delta = 1/ 2n$, then we see that
+  \begin{align*}
+    U_\delta(A) = \bigcup_{k=0}^n \left[\frac{k}{n} - \frac{1}{2n}, \frac{k}{n} + \frac{1}{2n}\right]
+    = \bigcup_{k=0}^n \left[\frac{2k - 1}{2n}, \frac{2k + 1}{2n}\right] = \left[-\frac{1}{2n}, 1 + \frac{1}{2n}\right]
+  \end{align*}
+  so that $B = [0, 1] \subseteq U_\delta(A)$. If on the other hand,
+  $\delta < 1/2n$, then $\delta = 1/2n - \varepsilon$ for some $\varepsilon > 0$
+  and we see that
+  \begin{align*}
+    U_\delta(A) = \bigcup_{k=0}^n \left[\frac{k}{n} - \left(\frac{1}{2n} - \varepsilon\right), \frac{k}{n} + \left(\frac{1}{2n} - \varepsilon\right)\right]
+  \end{align*}
+  Note that $x = 1/2n \in B$, but $x \notin U_\delta(A)$. This shows that $\delta = 1/ 2n$
+  is the smallest $\delta > 0$ such that $B \subseteq U_\delta(A)$.
+
+  Therefore, we see that $D(A, B) = 1/ 2n$. We then see that
+  as the size of the finite set $A$ tends towards infinity, the distance between
+  $A$ and $B$ tends to 0 and can be made small.
+
 \end{proof}
 \newpage
