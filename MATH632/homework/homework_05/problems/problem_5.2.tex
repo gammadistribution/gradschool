@@ -1,0 +1,27 @@
+\begin{problem}{5.2}
+  Suppose that you arrive at a single-teller bank to find five other customers in
+  the bank, one being served and the other four waiting in line. You join the end of the line.
+  If the service times are exponential with rate $\mu$, what is the expected amount of time
+  you will spend in the bank?
+\end{problem}
+
+\begin{proof}
+  Let $T_i$ denote the time that the $i$-th person spends at the teller in order to complete his
+  or her transaction.
+  Then the total amount of time I will spend in the bank is the amount of time the other
+  five customers spend at the teller plus the time that I, the sixth customer, will spend at the teller.
+  If $S$ denotes the total amount of time that I spend at the bank, then
+  \begin{align*}
+    S = \sum_{i=1}^6 T_i.
+  \end{align*}
+
+  Note that even though the first customer is currently being served, the service time is
+  exponentially distributed with rate $\mu$, i.e.\ the waiting time is memory-less so that
+  the expected service time of the first customer is still $1/\mu$.
+  Since the other $T_i$ are exponential random variables with mean $1/\mu$,
+  we have that
+  \begin{align*}
+    E[S] = \sum_{i=1}^6 E[T_i] = \frac{6}{\mu}.
+  \end{align*}
+\end{proof}
+\newpage
