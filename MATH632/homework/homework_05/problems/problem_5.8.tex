@@ -4,19 +4,29 @@
 \end{problem}
 
 \begin{proof}
-  Let $E$ be the event such that $X < Y$. Recall from Bayes' Theorem that the conditional distribution
+  Let $E$ be the event such that $X < Y$. Recall from Bayes' Theorem that the conditional density function
   of $X$ given $E$ is given by
   \begin{align*}
-    f_{X\mid E}(x|E) = \frac{f_X(x)P(E \mid X=x)}{\int_0^\infty f_X(s)P(E\mid X=s) ds }.
+    f_{X\mid E}(x\mid  x < y) = \frac{f_X(x)P(E \mid X=x)}{\int_0^\infty f_X(s)P(E\mid X=s) ds }.
   \end{align*}
 
   Note that since $X$ and $Y$ are independent we have that
-  $P(X < Y | X = x) = P(x < Y) = e^{-\mu x}$. Therefore,
+  $P(X < Y | X = x) = P(x < Y) = e^{-\mu x}$. Thus,
   \begin{align*}
     f_{X\mid E}(x|E) &= \frac{\lambda e^{-\lambda x} e^{-\mu x}}{\int_{0}^\infty \lambda e^{-\lambda s} e^{-\mu s} ds}\\
     &= \frac{\lambda e^{-\lambda x} e^{-\mu x}}{\frac{\lambda}{\lambda + \mu}} \\
-    &= (\lambda + \mu) e^{-(\lambda + \mu)x}.
+    &= (\lambda + \mu) e^{-(\lambda + \mu)x},
   \end{align*}
+  if $x \geq 0$, and we see that $f_{X\mid E}(x\mid x < y)$ has the density function that
+  of an exponential random variable with rate $\lambda + \mu$.
 
+  Therefore, the conditional distribution of $X$ given $E$ is
+  \begin{align*}
+    F_{X\mid E}(x \mid x < y ) =
+    \begin{cases}
+      1 - e^{-(\lambda + \mu) x} & x \geq 0 \\
+      0 & x < 0
+    \end{cases}.
+  \end{align*}
 \end{proof}
 \newpage
