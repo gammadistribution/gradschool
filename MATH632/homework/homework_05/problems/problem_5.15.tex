@@ -1,6 +1,36 @@
 \begin{problem}{5.15}
+  One hundred items are simultaneously put on a life test. Suppose the lifetimes of the
+  individual items are independent exponential random variables with mean 200 hours.
+  The test will end when there have been a total of 5 failures. If $T$ is the time at which the test
+  ends, find $E[T]$ and $\text{Var}[T]$.
 \end{problem}
 
 \begin{proof}
+  Let $T_i$ be the time between the $(i-1)$-th and the $i$-th failure.
+  Note that from a previous proposition, we have that if $X_1, \dots, X_n$
+  are independent exponential random variables all with rate $\lambda = 1/200$,
+  then $\min_i X_i$ is exponential with rate $n \lambda$. Thus, the shortest lifetime
+  among the $100$ initial items is exponential with rate $100 \lambda$, i.e. the time that
+  it takes for the first failure to occur, $T_1$, is exponential with rate $100\lambda$.
+
+  In general, after the $(i-1)$-th failure, there will be $101 - i$ items left to test. Thus,
+  the shortest lifetime among the $101 - i$ items is exponential with rate $(101 - i) \lambda$, i.e. the time that
+  it takes for the $i$-t failure to occur, $T_i$, is exponential with rate $(101-i)\lambda$.
+
+  Since each $T_i$ is exponential with rate $(101-i)\lambda$, we have that
+  \begin{align*}
+    E[T_i] = \frac{1}{(101-i)\lambda} = \frac{200}{(101-i)}, \quad \text{Var}[T_i] = \frac{1}{(101-i)^2\lambda^2} = \frac{200^2}{(101-i)^2}.
+  \end{align*}
+
+  If the test ends after 5 failures and if $T$ is the total time that the test takes,
+  then $T = T_1 +\dots + T_5$ and
+  \begin{align*}
+    E[T] = \sum_{i=1}^5 E[T_i] = \sum_{i=1}^5 \frac{200}{(101-i)} = 10.2062.
+  \end{align*}
+
+  Since each $T_i$ is independent, we have that
+  \begin{align*}
+    \text{Var}[T] = \sum_{i=1}^5  \text{Var}[T_i] = \sum_{i=1}^5 \frac{200^2}{(101-i)^2} = 20.8377.
+  \end{align*}
 \end{proof}
 \newpage
