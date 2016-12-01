@@ -9,5 +9,39 @@
 \end{problem}
 
 \begin{proof}
+  If $t_0$ is the time that the woman arrives at the location, then the event $E$
+  that her waiting time is 0 occurs if no car passes the street during the time $(t_0, t_0 + T]$.
+  Thus, the probability that her waiting time is 0 is given by
+  \begin{align*}
+    P(E) = P(0 \text{ events in $(t_0, t_0+T]$}) = e^{-\lambda T}
+  \end{align*}
+  by the memory-less property of the exponential distribution.
+
+  In order to find the expected waiting time of the woman, let $X$ be the woman's waiting time.
+  If $Y$ is the time until the first car arrives, then we can find the expected value
+  of $X$ by conditioning over all possible values of $Y$. Note that $Y$ is exponentially
+  distributed with rate $\lambda$. Thus,
+  \begin{align*}
+    E[X] = \int_0^\infty E[X | Y = y] \lambda e^{-\lambda y} dy
+  \end{align*}
+
+  Note that if $Y > T$, then the first car arrives some time
+  after $T$ and the expected wait time given that $Y=y$ with $y > T$is $T$, i.e.\  $E[X \mid Y = y] = T$.
+  If on the other hand $Y < T$, then the expected wait time given that $Y =y$ with $y < T$
+  is however long it takes for
+  the first car to arrive plus the expected wait time, i.e.\ $E[X \mid Y=y] = y + E[X]$.
+  This implies that
+  \begin{align*}
+    E[X] &= \int_0^\infty E[X | Y = y] \lambda e^{-\lambda y} dy \\
+    &= \int_0^T E[X | Y = y] \lambda e^{-\lambda y} dy + \int_T^\infty E[X | Y = y] \lambda e^{-\lambda y} dy \\
+    &= \int_0^T (y + E[X]) \lambda e^{-\lambda y} dy + T \int_T^\infty  \lambda e^{-\lambda y} dy \\
+    &= \frac{(1 - e^{-\lambda T})(1 + \lambda T)}{\lambda} + E[X](1 - e^{-\lambda T}) + T e^{-\lambda T}.
+  \end{align*}
+
+  Solving for $E[X]$ shows that
+  \begin{align*}
+    E[X] = \frac{(e^{\lambda T} - 1)(1+\lambda T)}{\lambda} + T
+  \end{align*}
+
 \end{proof}
 \newpage
