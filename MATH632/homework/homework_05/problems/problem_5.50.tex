@@ -1,6 +1,33 @@
 \begin{problem}{5.50}
+  The number of hours between successive train arrivals at the station is uniformly
+  distributed on $(0, 1)$. Passengers arrive according to a Poison process
+  with rate $\lambda = 7$ per hour. Suppose a train has just left the station. Let $X$ denote
+  the number of people who get on the next train. Find $E[X]$ and $\text{Var}[X]$.
 \end{problem}
 
 \begin{proof}
+  Let $T$ denote the time that elapses from the moment the train leaves the station
+  until the next train arrives. Then $T\sim \mathcal{U}(0, 1)$. Since the number of passengers that arrive is a
+  Poisson process, we have that $X$, the number of people who get on the next train
+  during any length of time $t$ is a Poisson random variable with parameter $\lambda t$.
+  We can obtain $E[X]$ by conditioning over all of the possible values of $T$.
+  Thus, noting that $X$ and $T$ are independent, we have that
+  \begin{align*}
+    E[X] &= \int_0^1 E[X|T=t] f_T(t) dt = \int_0^1 \lambda t dt = \frac{\lambda}{2}.
+  \end{align*}
+  Since $\lambda = 7$, we have that $E[X] = 7/2$.
+
+  Using similar reasoning, since $X$ is Poisson during any length of time $t$
+  with parameter $t\lambda$, we have that $\text{Var}[X | T = t] = \lambda t $.
+  Thus, by the formula for conditional variance and using our previous results, we have that
+  \begin{align*}
+    \text{Var}[X]
+    &= E\left[\text{Var}[X \mid T]\right] + \text{Var}\left[E[X \mid T]\right] \\
+    &= E\left[\lambda T\right] + \text{Var}\left[ \lambda T \right] \\
+    &= \lambda E[T] + \lambda^2\text{Var}[T] \\
+    &= \frac{\lambda}{2} + \lambda^2\left[\int_0^1 t^2 dt - \left(\int_0^1 t dt\right)^2\right] \\
+    &= \frac{\lambda}{2} + \frac{\lambda^2}{12}.
+  \end{align*}
+  Again, since $\lambda = 7$, we have that $\text{Var}[X] = 7/2 + 49/12$.
 \end{proof}
 \newpage
