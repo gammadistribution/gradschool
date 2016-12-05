@@ -1,6 +1,42 @@
 \begin{problem}{14.3.3}
+  Let $p(z)$ be a polynomial of degree $n \geq 2$. Show that $z=\infty$ is a repelling
+  fixed point for the Newton function $N_p(z)$, with $N_p'(\infty) = n/(n-1) > 1$. What
+  happens if $p(z) = a_1 z + a_0$ for some $a_0, a_1 \in\mathbb{C}$?
 \end{problem}
 
 \begin{proof}
+  Note that the Newton function of a polynomial $p(z)$ is given by
+  \begin{align*}
+    N_p(z) = z - \frac{p(z)}{p'(z)}.
+  \end{align*}
+  Let $p(z) = \sum_{k=0}^n a_k z^k$.
+  Note that $N_p$ is conjugate to the polynomial $q$ under $h(z) = 1/z$ where
+  \begin{align}\label{homo}
+    q(z) = h^{-1} \circ N_p \circ h(z) &= \frac{1}{N_p(1/z)} \notag \\
+    &= \frac{zp'(1/z)}{p'(1/z)-zp(1/z)} \notag \\
+    &= \frac{z\sum_{k=1}^{n} k a_k z^{n-k}}{\sum_{k=1}^{n} k a_k z^{n-k} -z\sum_{k=0}^{n} a_k z^{n-k-1}} \notag \\
+    &= \frac{\sum_{k=1}^{n} k a_k z^{n-k+1}}{\sum_{k=1}^{n} a_k(k-1) z^{n-k} -a_0 z^n}
+  \end{align}
+  Note that $q(0) = 0$ so that 0 is a fixed point of $q$. Since $q$ and $N_p$ are conjugate,
+  $h$ maps fixed points of $q$ to fixed points of $N_p$ and since $h(0) = \infty$
+  we have $z=\infty$ is a fixed point of $N_p$, i.e.\ $N_p(\infty) = \infty$.
+
+  Using \eqref{homo} we see that
+  \begin{align*}
+    q'(z) &= \frac{\left[\sum_{k=1}^{n} a_k(k-1) z^{n-k} -a_0 z^n\right]\left[\sum_{k=1}^{n} k (n-k+1) a_k z^{n-k}\right]}{\left[\sum_{k=1}^{n} a_k(k-1) z^{n-k} -a_0 z^n\right]^2} - \\
+          &\phantom{==} \frac{\left[\sum_{k=1}^{n} k a_k z^{n-k+1}\right]\left[\sum_{k=1}^{n} a_k(k-1)(n-k) z^{n-k-1} -n a_0 z^{n-1}\right]}{\left[\sum_{k=1}^{n} a_k(k-1) z^{n-k} -a_0 z^n\right]^2}.
+  \end{align*}
+  In particular, we see that
+  \begin{align*}
+    q'(0) = \frac{n(n-1)a_n^2}{(n-1)^2 a_n^2} = \frac{n}{n-1}.
+  \end{align*}
+  Thus, $|N_p'(\infty)| = |q'(0)| = n/(n-1) > 1$, since $n > 2$, and $z=\infty$ is a repelling fixed point.
+
+  If $p(z) = a_1 z + a_0$ for some $a_0, a_1 \in \mathbb{C}$, then
+  \begin{align*}
+    N_p(z) = z - \frac{a_1 z + a_0}{a_1} = -\frac{a_0}{a_1}.
+  \end{align*}
+  Note that in this case $z=\infty$ is not a fixed point of $N_p$ as the only fixed point of $N_p(z)$ is
+  $-a_0/a_1$.
 \end{proof}
 \newpage
