@@ -1,0 +1,103 @@
+\begin{problem}{14.2.2}
+  Let $f_c: \mathbb{C} \to \mathbb{C}$, $f_c(z) = z^2 + c$ for $c\in\mathbb{C}$. Recall that
+  a period $n$ point $z_0$ is super attracting if $(f^n)'(z_0) = 0$.
+  \begin{enumerate}
+    \item If $z_0$ and $z_1$ are the fixed points of $f_c$, show that $f'(z_0) + f'(z_1) = 2$.
+      Deduce that there can be at most one attracting fixed point. Give an example
+      to show that $f_c$ may not have any attracting fixed points.
+    \item Show that if $f_c$ has a super-attracting fixed point $z_0$, then $z_0 = 0$ and $c=0$.
+    \item Find the value of $c$ such that $f_c$ has a super-attracting 2-cycle and give
+      the associated 2-cycle.
+    \item Why is it that $z=0$ is a point in the orbit of a cycle if and only
+      if the cycle is super-attracting?
+    \item If $f_c$ has a super-attracting 3-cycle, show that $c$ satisfies the equation
+      \begin{align*}
+        c^3 + 2c + c + 1 = 0
+      \end{align*}
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $z_0$ and $z_1$ are fixed points of $f_c$, then they are the roots
+      of the equation $z^2 -z + c = 0$. Note that the solutions to this equation are of the
+      form
+      \begin{align}\label{roots}
+        z_0 = \frac{1 + \sqrt{1-4c}}{2}, \quad z_1 = \frac{1 - \sqrt{1-4c}}{2}.
+      \end{align}
+      Since $f_c'(z) = 2z$, we see from \eqref{roots} that
+      \begin{align*}
+        f_c'(z_0) + f_c'(z_1) &= 2(z_0 + z_1) = 2\left(\frac{1 + \sqrt{1-4c}}{2} + \frac{1 - \sqrt{1-4c}}{2}\right) = 2.
+      \end{align*}
+
+      Suppose that $z_0 = r_0 e^{i \theta_0}$ is an attracting fixed point and
+      let $z_1 = r_1 e^{i \theta_1}$. Since $z_0$ is attracting, we have that
+      $\left|f_c'(z_0)\right| = 2 |z_0| \leq 1$ which implies that $r_0 \leq 1/2$.
+      Note that by the relation $f_c'(z_0) + f_c'(z_1) = 2$ we have that $z_1 = 1 - z_0 = 1 - r_0 e^{i\theta_0}$.
+      Thus,
+      \begin{align*}
+        |z_1| = \left|1 - r_0 e^{i\theta_0}\right| \geq \left||1| - \left|r_0 e^{i\theta_0}\right| \right| = |1 - r_0|.
+      \end{align*}
+      If $r_0 = 1/2$, then $z_1 = z_0$ and there is at most one fixed point, otherwise if $r_0 < 1/2$,
+      then $|z_1| \geq |1 - r_0| > 1/2$ which implies that $\left|f_c'(z_1)\right| > 1$
+      or that $z_1$ is repelling.
+
+      If $c = 5/4$, then we see that $|f_c'(z_0)| = |f_c'(z_1)| = \sqrt{5}/2$ where $\sqrt{5}/2 > 1$. Thus, $f_c$
+      may not have any attracting fixed points.
+
+    \item Suppose that $z_0$ is a super attracting fixed point of $f_c$. Then $|f_c'(z_0)| = 2 |z_0| = 0$.
+      Since $|z_0| = 0$ if and only $z_0 =0$, we readily see that $z_0 = 0$.
+      Note that $z_0$ is of the form presented in \eqref{roots}. Thus,
+      $(1 \pm \sqrt{1 - 4c})/2 = 0$ which implies that $1- 4c = 1$ or that $c=0$.
+
+    \item The 2-cycles of $f_c$ are solutions of the equation
+      $f_c^2(z) - z =0$ that are also not solutions of $f_c(z) - z = z^2-z + c = 0$. Factoring $f_c^2(z) - z$
+      we see that
+      \begin{align*}
+        f_c^2(z) - z = (z^2 -z + c)(z^2 + z + c + 1) = 0
+      \end{align*}
+      if and only if $z$ is a fixed point or if
+      \begin{align*}
+        z_2 = \frac{-1 - \sqrt{-3 - 4 c}}{2}, \quad        z_3 = \frac{-1 + \sqrt{-3 - 4 c}}{2}.
+      \end{align*}
+      Thus, $\{z_2, z_3\}$ forms a 2-cycle of $f_c$. This 2-cycle will be super-attracting
+      if and only if
+      \begin{align*}
+        \left|(f_c^2)'(z_2)\right| &= \left|f_c'(z_2)f_c'(z_3)\right| = |\left(-1 - \sqrt{-3 - 4 c}\right)\left(-1 + \sqrt{-3 - 4 c}\right)| = 4|1 + c| = 0
+      \end{align*}
+      Thus, the 2-cycle is super-attracting if and only if $c = -1$. Therefore, the super attracting
+      2-cycle is $\{0,-1\}$.
+
+    \item For an $n$-cycle $\{z_0, \dots, z_{n-1}\}$ of $f_c$ we see that
+      \begin{align}\label{ncycle}
+        \left|(f_c^n)'(z_0)\right| &= \left|f_c'(z_0)\cdots f_c'(z_{n-1})\right| =2^n \left|z_0 \cdots z_{n-1}\right|.
+      \end{align}
+      Thus, from \eqref{ncycle}, we have that
+      $\{z_0, \dots, z_{n-1}\}$ is a super-attracting $n$-cycle of $f_c$ if and only if
+      $\left|(f_c^n)'(z_0)\right| = 0$
+      if and only if $z_i = 0$ for some $i=0,\dots,n-1$.
+
+    \item Suppose that $\{z_0, z_1, z_2\}$ is a super-attracting 3-cycle of $f_c$.
+      Thus, we must have that
+      \begin{align*}
+        \left|f_c'(z_0)f_c'(z_1)f_c'(z_2)\right| = 2^3 \left|z_0z_1z_2\right| = 0
+      \end{align*}
+      Without loss of generality, we may assume that $z_0 = 0$.
+      Using the fact that $f_c(z_0) = z_1 \neq z_0$ and $f_c^2(z_0) = z_2 \neq z_0$,
+      we see that
+      \begin{align*}
+        z_1 &= f_c(z_0) = z_0^2 + c = c \\
+        z_2 &= f_c^2(z_0) = (z_0^2 + c)^2 + c = c^2 + c
+      \end{align*}
+      In order for this to be a 3-cycle, we require that $f^3(z_0) = z_0 = 0$, i.e.\
+      we require that
+      \begin{align*}
+        f_c^3(z_0) = f_c(f_c^2(z_0)) &= (c^2 + c)^2 + c \\
+        &= c^4 + 2c^3 + c^2 + c \\
+        &= c(c^3 + 2c^2 + c + 1) = 0.
+      \end{align*}
+      However, we must have that $c \neq 0$ or $z_0 = 0$ would not generate a 3-cycle. Therefore,
+      $\{z_0, z_1, z_2\}$ is a super-attracting 3-cycle if and only if $c^3 + 2c^2 + c + 1 = 0$.
+  \end{enumerate}
+\end{proof}
+\newpage
