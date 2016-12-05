@@ -1,6 +1,37 @@
 \begin{problem}{14.3.1}
+  Show that if $p(z)$ is a polynomial having degree at least 2, then $p(\infty) = \infty$.
+  Use the definition of $p'(\infty)$ to show that $|p'(\infty)| < 1$ so that $\infty$
+  is an attracting point of $p$. What happens if $p(z) = a_1z + a_0$ for some $a_1,a_0 \in \mathbb{C}$.
 \end{problem}
 
 \begin{proof}
+  If $p(z)$ is a polynomial of degree at least 2, then $p$ is conjugate to the polynomial $q$
+  under the map $h(z) = 1/z$ where
+  \begin{align}\label{conj}
+    q(z) = h^{-1} \circ p \circ h (z) = \frac{z^n}{a_0 z^n + a_1z^{n-1} + \dots + a_n}.
+  \end{align}
+  Since $q(0) = 0$, we see that $0$ is a fixed point of $q$. Note that $p$ and $q$
+  are conjugate so that the map $h$ preserves fixed points. Under $h$, we see that $0$ maps to $\infty$
+  so that $\infty$ is a fixed point of $p$, i.e.\ $p(\infty) = \infty$.
+
+  From \eqref{conj}, we see that
+  \begin{align*}
+    |q'(z)| = \left|\frac{n z^{n-1} \sum_{k=0}^n a_k z^{n-k} - z^n \sum_{k=0}^{n-1} a_k(n-k) z^{n-k-1}  }{\left( \sum_{k=0}^n a_k z^{n-k} \right)^2}\right|.
+  \end{align*}
+  Thus, by definition, we have that $|p'(\infty)| = |q'(0)| = 0 < 1$ and $\infty$
+  is an attracting fixed point.
+
+  If $p(z) = a_1 z + a_0$ for some $a_1,a_0 \in \mathbb{C}$, then we see that $p$
+  is conjugate to $q$ under the map $h(z) = 1/z$ where
+  \begin{align*}
+    q(z) = \frac{z}{a_0z + a_1}.
+  \end{align*}
+  Since $q(0)=0$, we know that $p(\infty) = \infty$ so that $\infty$ is a fixed point of $p$.
+  However, we see that
+  \begin{align*}
+    q'(z) = \frac{(a_0z + a_1) - a_0z}{(a_0z + a_1)^2} = \frac{a_1}{(a_0z + a_1)^2}
+  \end{align*}
+  which implies that $|p'(\infty)| = |q'(0)| = |a_1|$.
+  Thus, $\infty$ will be attracting under $p$ if and only if $|a_1| < 1$.
 \end{proof}
 \newpage
