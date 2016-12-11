@@ -4,5 +4,38 @@
 \end{problem}
 
 \begin{proof}
+  The fixed points of $f$ are the solutions to the equation
+  \begin{align*}
+    f(z) - z = z^8 - z = z(z^7 - 1) = 0.
+  \end{align*}
+  Thus, the fixed points of $f$ are $z=0$ and the $7$-th roots of unity, i.e.\
+  the points $z = e^{2\pi k i/ 7}$ for $k = 0, 1, \dots, 6$.
+
+  Note that for $z, \alpha \in \mathbb{C}$, we have that
+  \begin{align*}
+    (z- \alpha)(z-\overline{\alpha}) = z^2 - \overline{\alpha}z - \alpha z + \alpha \overline{\alpha} = z^2 - 2 \text{Re}(\alpha)z + |\alpha|^2
+  \end{align*}
+  is a polynomial with real coefficients.
+
+  Using the $7$-th roots of unity, we can obtain the following factorization of $p(z)$:
+  \begin{align*}
+    p(z) = \prod_{k=0}^6 \left(z - e^{2\pi k i / 7}\right).
+  \end{align*}
+  Let $\alpha_k = e^{2\pi k i  / 7}$. From the previous note, the real quadratic factors of $p(z)$ are obtained by multiplying
+  each factor $(z - \alpha_k)$ with $(z - \overline{\alpha_k})$, if $\alpha_k$ and $\overline{\alpha_k}$ are both roots of $p(z)$. For $k = 1, \dots, 6$,
+  we have that $\alpha_k$ is a root of $p(z)$ and
+  \begin{align*}
+    \overline{\alpha_k} = e^{-2\pi k i / 7} = e ^{2\pi(7-k)i/7} = \alpha_{7-k},
+  \end{align*}
+  which is also a root of $p(z)$.
+  Therefore,
+  the real linear and quadratic factors of $p(z)$ are given by
+  \begin{align*}
+    p(z) &= (z-\alpha_0) \left(z - \alpha_1\right)\left(z - \alpha_6\right) \left(z - \alpha_2\right)\left(z - \alpha_5\right) \left(z - \alpha_3\right)\left(z - \alpha_4\right) \\
+    &= (z-1) \left(z - \alpha_1\right)\left(z - \overline{\alpha_1}\right) \left(z - \alpha_2\right)\left(z - \overline{\alpha_2}\right) \left(z - \alpha_3\right)\left(z - \overline{\alpha_3}\right) \\
+    &= (z-1)\left(z^2 - 2\text{Re}(\alpha_1)z + 1\right) \left(z^2 - 2\text{Re}(\alpha_2) z  + 1\right) \left(z^2 - 2\text{Re}(\alpha_3)z + 1\right),
+  \end{align*}
+  where $\text{Re}(\alpha_k) = \cos(2\pi k / 7)$.
+
 \end{proof}
 \newpage
