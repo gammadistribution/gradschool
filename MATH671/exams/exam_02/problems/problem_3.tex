@@ -1,8 +1,46 @@
 \begin{problem}{3}
-  Let $f(z) = z^2 + c$. Find the values of $c$ so that $z=i$ is a period 2 point.
+  Let $f_c(z) = z^2 + c$. Find the values of $c$ so that $z=i$ is a period 2 point.
   Find the fixed points in each case and determine their stability. Is $c \in \mathcal{M}$?
 \end{problem}
 
 \begin{proof}
+  As was shown previously, the fixed points of
+  $f_c(z) = z^2 + c$ are the solutions to $f_c(z) - z = 0$ which are the points
+  \begin{align}\label{roots}
+    z_0 = \frac{1 + \sqrt{1-4c}}{2}, \quad z_1 = \frac{1 - \sqrt{1-4c}}{2}.
+  \end{align}
+  The period 2 points of $f_c$ are the solutions to $f_c^2(z) - z = 0$ that are also not the fixed points \eqref{roots}.
+  The period 2 points are thus given by
+  \begin{align*}
+    z_2 = \frac{-1 - \sqrt{-3 - 4 c}}{2}, \quad        z_3 = \frac{-1 + \sqrt{-3 - 4 c}}{2}.
+  \end{align*}
+
+  We wish to find the values of $c\in\mathbb{C}$ such that $z_2 = i$ or $z_3 = i$.
+  Using Mathematica, we see that the only value of $c\in\mathbb{C}$ such that
+  $z_2 = i$ or $z_3 = i$ is $c = -i$. If $c = -i$, we see that $f_c(i) = -1 - i$
+  and $f_c^2(i) = i$ so that $z = i$ is in fact a period 2 point.
+
+  From \eqref{roots}, the fixed points of $f_c$ when $c = -i$ are given by
+  \begin{align*}
+    z_0 = \frac{1 + \sqrt{1+4i}}{2}, \quad z_1 = \frac{1 - \sqrt{1+4i}}{2}.
+  \end{align*}
+  For a differentiable function $f$, the fixed point $z$ of $f$ is asymptotically stable
+  if $|f'(z)| < 1$ and asymptotically unstable if $|f'(z)| > 1$. For $f_c(z) = z^2 + c$, we note that
+  $f_c'(z) = 2z$. Consider $\displaystyle z_0 = \frac{1 + \sqrt{1+4i}}{2}$.
+  Note that
+  \begin{align*}
+    |f'(z_0)| = \left|1+ \sqrt{1+4i}\right| = \sqrt{1 + \sqrt{17} + \sqrt{2(1 + \sqrt{17})}} > 1
+  \end{align*}
+  so that $z_0$ is an unstable fixed point. Now consider $\displaystyle z_1 = \frac{1 - \sqrt{1+4i}}{2}$.
+  Then we have that
+  \begin{align*}
+    |f'(z_1)| = \left|1- \sqrt{1+4i}\right| = \sqrt{1 + \sqrt{17} - \sqrt{2(1 + \sqrt{17})}} > 1
+  \end{align*}
+  so that $z_1$ is also an unstable fixed point.
+
+  Note that 0 is an eventual periodic point of $f_{-i}$, i.e.\
+  $f_{-i}(0) = -i$ and $f^2_{-i}(0) = - 1 - i$ which is a period 2 point of $f_{-i}$. Thus,
+  the orbit of 0 under iteration of $f_{-i}$ will be bounded and we have that $-i \in \mathcal{M}$.
+
 \end{proof}
 \newpage
