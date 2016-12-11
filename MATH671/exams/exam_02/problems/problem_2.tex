@@ -10,5 +10,50 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item The fixed points of $f_{-6}$ are the solutions to
+      \begin{align*}
+        f_{-6}(z) - z = z^2 - z - 6  = 0.
+      \end{align*}
+      Thus, the fixed points of $f_{-6}$ are $z_0 = 3$ and $z_1 = -2$.
+      The period 2 points are the solutions to
+      \begin{align*}
+        f_{-6}^2(z) - z = (z^2 - 6)^2 - z - 6  = 0
+      \end{align*}
+      that are also not fixed points of $f_{-6}$. Factoring $f_{-6}^2(z) - z$, we see that
+      \begin{align*}
+        f_{-6}^2(z) - z = (z- 3)(z + 2)(z^2 + z - 5).
+      \end{align*}
+      Thus, the period 2 points of $f_{-6}$ are the solutions to $z^2 + z - 5 = 0$, i.e.\
+      the period 2 points of $f_{-6}$ are
+      \begin{align*}
+        z_2 = \frac{-1 - \sqrt{21}}{2}, \quad z_3 = \frac{-1 + \sqrt{21}}{2}.
+      \end{align*}
+
+    \item Recall that for a polynomial $p(z)$ with $\text{deg}(p) > 1$, the filled-in Julia
+      set of $p(z)$ is the set of all points that do not converge to $\infty$ under iteration of $p$.
+
+      Note that $2\sqrt{2}$ is an eventual fixed point of $f_{-6}$. We see that
+      $f^{2}_{-6}(2\sqrt{2}) = -2$ so that $f^{k}_{-6}(2\sqrt{2}) = -2$ for $k > 2$.
+      This implies that $2\sqrt{2}$ does not converge to $\infty$ under iteration of
+      $f_{-6}$ so that $2\sqrt{2}$ is in the filled-in Julia set of $f_{-6}$, i.e.\
+      $2\sqrt{2} \in K_{-6}$.
+
+      For reasons similar to those listed above, we see that $-3$ is an eventual fixed point of
+      $f_{-6}$, i.e.\ $f_{-6}(-3) = 3$, so that $-3 \in K_{-6}$.
+
+    \item For a polynomial $p(z)$ with $\text{deg}(p) > 1$, the Julia
+      set of $p(z)$ is the boundary of the basin of attraction of $\infty$.
+
+      Since all of the points listed do not converge to $\infty$ under iteration of $f_{-6}$,
+      we see that none of the listed points belong to the Julia set of $f_{-6}$.
+
+    \item The definition of the Mandelbrot set
+      is the set of all $c \in \mathbb{C}$ such that the orbit of 0 is bounded under iteration by $f_{c}$.
+      For $f_{-6}$, we see that $f_{-6}(0) = -6$ and $f_{-6}^2(0) = 30$. By a previously proven escape criterion,
+      since $|30| > 2$ and $|30| > |-6|$, we have that $f_{-6}^n(30) \to \infty$ as $n \to \infty$.
+      This implies that the orbit of $0$ is not bounded under iteration by $f_{-6}$. Therefore,
+      we must have that $-6 \notin \mathcal{M}$.
+  \end{enumerate}
 \end{proof}
 \newpage
