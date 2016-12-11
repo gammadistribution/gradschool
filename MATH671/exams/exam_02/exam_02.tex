@@ -1,0 +1,50 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
+\usepackage{fancyhdr}
+
+\theoremstyle{definition}
+\newtheorem{innercustomthm}{Problem}
+\newenvironment{problem}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\alph{enumi}}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Exam 2}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Exam 2}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\input{problems/problem_1}
+
+\input{problems/problem_2}
+
+\input{problems/problem_3}
+
+\input{problems/problem_4}
+
+\input{problems/problem_5}
+
+\input{problems/problem_6}
+
+\input{problems/problem_7}
+
+\input{problems/problem_8}
+
+
+\end{document}
