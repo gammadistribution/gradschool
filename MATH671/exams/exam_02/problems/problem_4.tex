@@ -5,5 +5,59 @@
 \end{problem}
 
 \begin{proof}
+  Note that the Newton function $N_{f_1}$ of $f_1(z) = z^2 + 1$
+  is given by
+  \begin{align*}
+    N_{f_1}(z) = z - \frac{f(z)}{f'(z)} = z - \frac{z^2+1}{2z} = \frac{z^2 - 1}{2z}.
+  \end{align*}
+
+  Let $D = \{ w \in \mathbb{C} \mid |w| > 1 \}$ and consider $f_0(z) = z^2$. Note
+  that, $B_{f_0}(\infty)$, the basin of attraction of infinity for $f_0$, is $D$.
+  Define $\displaystyle H(z) = \frac{z-i}{z+i}$. Then $H: H^{-1}(D) \to D$ is a homeomorphism,
+  where $H^{-1}(D) = \{z\in\mathbb{C} \mid w = H(z),\ |w| > 1\}$.
+
+  To see this, we will show that $H$ is a continuous
+  bijection with continuous inverse. Suppose first that $H(z_1) = H(z_2)$. Then we have that
+  \begin{align*}
+    H(z_1) = \frac{z_1 - i}{z_1 + i} = \frac{z_2 - i}{z_2 + i} = H(z_2).
+  \end{align*}
+  This implies that
+  \begin{align*}
+    z_1 z_2 + i z_1 - i z_2 + 1 = z_1 z_2 -i z_1 + i z_2 + 1
+  \end{align*}
+  or that $2i(z_1 - z_2) = 0$. Since the complex numbers form an integral domain, we must
+  have that $z_1 - z_2 = 0$ or that $z_1 = z_2$. Thus, $H$ is injective.
+
+  Let $w\in D$ and let $\displaystyle z = - \frac{i(w+1)}{w-1} \in H^{-1}(D)$. Then we see that
+  \begin{align*}
+    H(z) = H\left(- \frac{i(w+1)}{w-1}\right) = \frac{- \frac{i(w+1)}{w-1} - i}{- \frac{i(w+1)}{w-1} + i} =  w
+  \end{align*}
+  so that $H$ is surjective.
+
+  Thus $H$ is a bijection and we see that $H^{-1}: D \to H^{-1}(D)$ defined by
+  $$H^{-1}(w) = - \frac{i(w+1)}{w-1}$$
+  is the inverse of $H$. It is clear that $H$ is continuous at all points except at
+  $z=-i$. However, $z=-i\notin H^{-1}(D)$ and so $H$ is continuous everywhere in its domain.
+  Similarly, $H^{-1}$ is continuous everywhere except at $w=1$, but $w=1\notin D$. Therefore,
+  $H^{-1}$ is continuous everywhere in its domain and $H$ is a homeomorphism.
+
+  Now, the function $H$ will give a conjugacy between $N_{f_1}$ and $f_0$ if $f_0 \circ H = H \circ N_{f_1}$.
+  We can easily verify that
+  \begin{align*}
+    f_0 \circ H (z) = f_0\left(\frac{z-i}{z+i}\right) = \frac{(z-i)^2}{(z+i)^2}
+  \end{align*}
+  and
+  \begin{align*}
+    H \circ N_{f_1}(z) = H\left(\frac{z^2-1}{2z}\right) &= \frac{\frac{z^2-1}{2z} - i}{\frac{z^2-1}{2z}+i} \\
+    &= \frac{\frac{(z-i)^2}{2z}}{\frac{(z+i)^2}{2z}} \\
+    &= \frac{(z-i)^2}{(z+i)^2}.
+  \end{align*}
+  Therefore, $f_0 \circ H = H \circ N_{f_1}$ and $H$ gives a conjugacy between $N_{f_1}$ and $f_0$.
+
+  Since $D$ is the basin of attraction of infinity of $f_0$ and $H$ is a conjugacy between $N_{f_1}$ and $f_0$,
+  we must have that $H^{-1}(D)$ is the basin of attraction of infinity for $N_{f_1}$. By definition, $K(N_{f_1})$,
+  the filled-in Julia set of $N_{f_1}$, must be $K(N_{f_1}) = \mathbb{C} \ H^{-1}(D)$. The Julia set is then the
+  boundary of this set.
+
 \end{proof}
 \newpage
