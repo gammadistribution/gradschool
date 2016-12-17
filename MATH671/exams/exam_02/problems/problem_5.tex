@@ -11,5 +11,32 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item If $N_p(z)$ is the Newton function of the polynomial $p(z)$ of degree $n > 1$, then
+      \begin{align}\label{newton}
+        N_p(z) - \alpha = z - \alpha - \frac{p(z)}{p'(z)} = \frac{(z-\alpha)p'(z) - p(z)}{p'(z)}.
+      \end{align}
+
+      Note that if $p(\alpha) = 0$, then
+      \begin{align*}
+        p(z) = (z-\alpha)\sum_{k=0}^{n-1}a_k z^k.
+      \end{align*}
+      This implies that
+      \begin{align*}
+        p'(z) &= \sum_{k=0}^{n-1}a_k z^k + (z-\alpha)\sum_{k=1}^{n-1}k a_k z^{k-1} \\
+        &= \frac{p(z)}{z-\alpha} + (z-\alpha)m(z),
+      \end{align*}
+      say. Thus, from \eqref{newton}, we see that
+      \begin{align*}
+        N_p(z) - \alpha &= \frac{(z-\alpha)p'(z) - p(z)}{p'(z)} \\
+        &= \frac{p(z) + (z-\alpha)^2m(z) - p(z)}{p'(z)} \\
+        &= \frac{(z-\alpha)^2m(z)}{p'(z)}.
+      \end{align*}
+      Since $p'(\alpha) \neq 0$, set $n(z) = p'(z)$. Then we have from the above
+      equation that
+      $$N_p(z) - \alpha = (z-\alpha)^2 \frac{m(z)}{n(z)},$$ or that $\alpha$
+      is a fixed point of multiplicity two for $N_p$.
+    \item
+  \end{enumerate}
 \end{proof}
 \newpage
