@@ -24,7 +24,7 @@
       This implies that
       \begin{align*}
         p'(z) &= \sum_{k=0}^{n-1}a_k z^k + (z-\alpha)\sum_{k=1}^{n-1}k a_k z^{k-1} \\
-        &= \frac{p(z)}{z-\alpha} + (z-\alpha)m(z),
+        &= \sum_{k=0}^{n-1}a_k z^k + (z-\alpha)m(z),
       \end{align*}
       say. Thus, from \eqref{newton}, we see that
       \begin{align*}
@@ -36,7 +36,27 @@
       equation that
       $$N_p(z) - \alpha = (z-\alpha)^2 \frac{m(z)}{n(z)},$$ or that $\alpha$
       is a fixed point of multiplicity two for $N_p$.
-    \item
+
+    \item Suppose that $p(\alpha) = 0$ and $p'(\alpha) \neq 0$.
+      Then as shown previously,
+      \begin{align*}
+        p'(z) &= \sum_{k=0}^{n-1}a_k z^k + (z-\alpha)\sum_{k=1}^{n-1}k a_k z^{k-1} \\
+        &= \sum_{k=0}^{n-1}a_k z^k + (z-\alpha)m(z),
+      \end{align*}
+      and
+      $$N_p(z) - \alpha = (z-\alpha)^2 \frac{m(z)}{p'(z)}.$$
+      Thus, $\alpha$ will be a fixed point of multiplicity three for $N_p(z)$
+      if $(z-\alpha)$ is a factor of $m(z) = \sum_{k=1}^{n-1}k a_k z^{k-1}$.
+
+      Suppose that $p''(\alpha) = 0$. Then from previous calculations, we see that
+      \begin{align*}
+        p''(z) &= \left(\sum_{k=0}^{n-1}a_k z^k + (z-\alpha)\sum_{k=1}^{n-1}k a_k z^{k-1}\right)' \\
+        &= \sum_{k=1}^{n-1}k a_k z^{k-1} + \sum_{k=1}^{n-1}k a_k z^{k-1} + (z-\alpha)\sum_{k=2}^{n-1}k (k-1) a_k z^{k-2} \\
+        &= 2m(z) + (z-\alpha)m'(z).
+      \end{align*}
+      Now, if $p''(\alpha) = 0$, this implies that $2m(\alpha) = 0$ or that $m(\alpha) = 0$.
+      Thus, $\alpha$ is a root of $m(z)$ which implies that $(z-\alpha)$ is a factor of $m(z)$.
+      Therefore, $\alpha$ is a fixed point of multiplicity three for $N_p(z)$.
   \end{enumerate}
 \end{proof}
 \newpage
