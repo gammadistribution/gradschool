@@ -2,11 +2,47 @@
   \begin{enumerate}
     \item Show that for $p_\alpha(z) = z(z-1)(z-\alpha)$, the Newton function $N_{p_\alpha}$
       has a critical point where $z=(\alpha + 1)/3$.
-    \item For what values of $\alpha$ does $p_\alpha$ satisfy $p(\alpha) = 0$, $p'(\alpha) \neq = 0$,
-      and $p''(\alpha) = 0$?
+    \item For what values of $\alpha$ does $p_\alpha$ satisfy $p_\alpha(\alpha) = 0$, $p_\alpha'(\alpha) \neq 0$,
+      and $p_\alpha''(\alpha) = 0$?
   \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item Suppose that $p_\alpha(z) = z(z-1)(z-\alpha)$. Then we see that
+      \begin{align*}
+        N_{p_\alpha}(z) &= z - \frac{p_\alpha(z)}{p_\alpha'(z)} \\
+        &= z - \frac{z^3 -z^2 - \alpha z^2 + \alpha z}{3 z^2 -2z(1 + \alpha) + \alpha} \\
+        &= \frac{z^2(2z-(\alpha+1))}{3z^2- 2z(\alpha + 1)+\alpha}.
+      \end{align*}
+
+      Thus, we have that
+      \begin{align*}
+        N_{p_\alpha}'(z)
+        &= -\frac{z^2(2z - \alpha - 1)(6z - 2(\alpha + 1))}{(3z^2+\alpha-2z(\alpha + 1))^2}
+        + \frac{2z^2 + 2z(2z -\alpha - 1)}{3z^2 + \alpha -2z(\alpha + 1)} \\
+        &= \frac{2z(z-1)(3z^2-z-4z\alpha+\alpha+\alpha^2)}{(3z^2+\alpha-2z(\alpha + 1))^2}.
+      \end{align*}
+
+      Therefore, $N_{p_\alpha}'(z) = 0$ if $z=0$, $z=1$, $z=\alpha$, or $z=(\alpha+1)/3$
+      and we have that $z=(\alpha+1)/3$ is a critical point of $N_{p_\alpha}(z)$.
+
+    \item As $\alpha$ is a root of $p_\alpha(z)$, every value of $\alpha$ satisfies $p_\alpha(\alpha) = 0$.
+      We see from previous calculations that
+      \begin{align*}
+        p_\alpha'(z) &= z(z-1) + (z-1) (z - \alpha) + z (z - \alpha)\\
+        &= 3z^2 -2z(\alpha+1) + \alpha.
+      \end{align*}
+      Thus, $p_\alpha'(\alpha) = \alpha(\alpha-1)$ and $p_\alpha'(\alpha)\neq 0$ if $\alpha \neq 0$ and $\alpha \neq 1$.
+      Similarly, we see that
+      \begin{align*}
+        p_\alpha''(z) = 6z - 2(\alpha + 1).
+      \end{align*}
+      Thus, $p_\alpha''(\alpha) = 4\alpha -2$ and $p_\alpha''(\alpha) = 0$ if $\alpha = 2$.
+
+      Therefore, the only value of $\alpha$ such that $p_\alpha(\alpha) = 0$, $p_\alpha'(\alpha) \neq 0$,
+      and $p_\alpha''(\alpha) = 0$ is $\alpha = 2$.
+
+  \end{enumerate}
 \end{proof}
 \newpage
