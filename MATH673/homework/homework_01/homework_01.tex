@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx}
-\usepackage{fancyhdr}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx, mathrsfs}
+\usepackage{fancyhdr, xifthen}
 
 \theoremstyle{definition}
 \newtheorem{innercustomthm}{Problem}
@@ -11,6 +11,15 @@
 
 \renewcommand*{\proofname}{Solution}
 \renewcommand{\theenumi}{\roman{enumi}}
+\newcommand{\fourier}[1]{\mathscr{F}\left\{ {#1} \right\}}
+\newcommand{\der}[2]{
+  \ifthenelse{\equal{#2}{}}{
+    \frac{d}{d #1}
+  }{
+    \frac{d^#2}{d #1^#2}
+  }
+}
+
 
 
 \pagestyle{fancy}
