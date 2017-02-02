@@ -16,7 +16,27 @@
   where $k\in\mathbb{R}$.
 
   \begin{enumerate}
-    \item [c.]
+    \item [c.] The Dirac delta function $\delta(x)$ is defined such that for any good function $g(x)$ we have that
+      \begin{align*}
+        \int_{-\infty}^{\infty} \delta(x) g(x) dx = g(0).
+      \end{align*}
+
+      A good function is defined as a function in $C^{\infty}$ that decays sufficiently rapidly.
+      Since it is clear that $\delta(x) \to 0$ as $|x| \to \infty$, we have by a previous theorem that
+      \begin{align}\label{delta_der}
+        \fourier{\delta'(x)} = ik \fourier{\delta(x)}.
+      \end{align}
+
+      By \eqref{fourier} and the definition of the Dirac delta function, we see that
+      \begin{align*}
+        \fourier{\delta(x)} &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} e^{- i k x}\delta(x) dx = \frac{1}{\sqrt{2\pi}}.
+      \end{align*}
+
+      Thus, using \eqref{delta_der}, we can easily see by induction for $n > 1$ that
+      \begin{align*}
+        \fourier{\delta^{(n)}(x)} = ik \fourier{\delta^{(n-1)}(x)} = \dots = \frac{(ik)^n}{\sqrt{2 \pi}}.
+      \end{align*}
+
     \item [f.] Using \eqref{fourier}, we see that
       \begin{align*}
         \fourier{f(x)} &= \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x \exp(-ikx) \exp\left(-\frac{ax^2}{2}\right) dx \\
