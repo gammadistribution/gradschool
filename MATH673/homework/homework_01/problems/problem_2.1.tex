@@ -8,5 +8,48 @@
 \end{problem}
 
 \begin{proof}
+  Recall that, by definition, we have that for a function $f(x) \in L^1(\mathbb{R})$,
+  its Fourier transform is given by
+  \begin{align}\label{fourier}
+    \fourier{f(x)} = F(k) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} e^{-ikx}f(x) dx
+  \end{align}
+  where $k\in\mathbb{R}$.
+
+  \begin{enumerate}
+    \item [c.]
+    \item [f.] Using \eqref{fourier}, we see that
+      \begin{align*}
+        \fourier{f(x)} &= \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x \exp(-ikx) \exp\left(-\frac{ax^2}{2}\right) dx \\
+        &= \frac{\exp\left( \frac{(ik)^2}{2a} \right)}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x \exp\left(-\frac{ax^2}{2} - ikx - \frac{(ik)^2}{2a}\right)  dx \\
+        &= \frac{\exp\left( -\frac{k^2}{2a} \right)}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x \exp\left(-\frac{a}{2} \left(x + \frac{ik}{a}\right)^2 \right)  dx.
+      \end{align*}
+
+      Making the substitution $u = x + ik/a$, where $du = dx$, we have that
+      \begin{align}\label{subst}
+        \fourier{f(x)} &= \frac{\exp\left( -\frac{k^2}{2a} \right)}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \left(u - \frac{ik}{a}\right) \exp\left(-\frac{au^2}{2}  \right)  du \notag \\
+        &= \frac{\exp\left( -\frac{k^2}{2a} \right)}{\sqrt{2 \pi}} \left[\int_{-\infty}^{\infty} u\exp\left(-\frac{au^2}{2}  \right) du - \frac{ik}{a}\int_{-\infty}^{\infty} \exp\left(-\frac{au^2}{2}  \right)du\right].
+      \end{align}
+
+      Since the function $g(x) = u\exp\left(-\frac{au^2}{2}\right)$ is odd, we know that
+      \begin{align*}
+        \int_{-\infty}^{\infty} u\exp\left(-\frac{au^2}{2}  \right) du = 0.
+      \end{align*}
+
+      Using the formula for the general Gaussian integral we have that
+      \begin{align*}
+        \int_{-\infty}^{\infty} \exp\left(-\frac{au^2}{2}  \right) = \frac{\sqrt{2\pi}}{\sqrt{a}}
+      \end{align*}
+      when $a > 0$.
+
+      Combining, we see from \eqref{subst} that the Fourier transform of $\displaystyle f(x) = x \exp \left( -\frac{a x^2}{2} \right)$ for $a > 0$
+      is
+      \begin{align*}
+        \fourier{f(x)} &= \frac{\exp\left( -\frac{k^2}{2a} \right)}{\sqrt{2 \pi}} \left[\int_{-\infty}^{\infty} u\exp\left(-\frac{au^2}{2}  \right) du - \frac{ik}{a}\int_{-\infty}^{\infty} \exp\left(-\frac{au^2}{2}  \right)du\right] \\
+        &= \frac{\exp\left( -\frac{k^2}{2a} \right)}{\sqrt{2 \pi}} \left(- \frac{ik}{a}\right) \left(\frac{\sqrt{2\pi}}{\sqrt{a}}\right) \\
+        &= - \frac{ik\exp\left( -\frac{k^2}{2a} \right)}{a\sqrt{a}} .
+      \end{align*}
+
+    \item [g.]
+  \end{enumerate}
 \end{proof}
 \newpage
