@@ -3,7 +3,7 @@
   \begin{enumerate}
     \item [c.] $f(x) = \delta ^{(n)}(x),$
     \item [f.] $\displaystyle f(x) = x \exp \left( -\frac{a x^2}{2} \right), a > 0,$
-    \item [g.] $\displaystyle f(x) = x^2 \exp \left( -\frac{1}{2}x^2 \right).$
+    \item [g.] $\displaystyle f(x) = x^2 \exp \left( -\frac{x^2}{2} \right).$
   \end{enumerate}
 \end{problem}
 
@@ -37,7 +37,7 @@
         \fourier{\delta^{(n)}(x)} = ik \fourier{\delta^{(n-1)}(x)} = \dots = \frac{(ik)^n}{\sqrt{2 \pi}}.
       \end{align*}
 
-    \item [f.] Using \eqref{fourier}, we see that
+    \item [f.] From \eqref{fourier}, we see that
       \begin{align*}
         \fourier{f(x)} &= \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x \exp(-ikx) \exp\left(-\frac{ax^2}{2}\right) dx \\
         &= \frac{\exp\left( \frac{(ik)^2}{2a} \right)}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x \exp\left(-\frac{ax^2}{2} - ikx - \frac{(ik)^2}{2a}\right)  dx \\
@@ -69,7 +69,39 @@
         &= - \frac{ik\exp\left( -\frac{k^2}{2a} \right)}{a\sqrt{a}} .
       \end{align*}
 
-    \item [g.]
+    \item [g.] From \eqref{fourier}, we see that
+      \begin{align*}
+        \fourier{f(x)} &= \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x^2 \exp(-ikx) \exp \left( -\frac{x^2}{2} \right) dx \\
+        &= \frac{\exp\left( \frac{(ik)^2}{2} \right)}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x^2 \exp\left(-\frac{x^2}{2} - ikx - \frac{(ik)^2}{2}\right)  dx \\
+        &= \frac{\exp\left( -\frac{k^2}{2} \right)}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x^2 \exp\left(-\frac{1}{2} \left(x + ik\right)^2 \right)  dx.
+      \end{align*}
+
+      Making the substitution $u = x + ik$, where $du = dx$, we have that
+      \begin{align}\label{subst_g}
+        \fourier{f(x)} &= \frac{\exp\left( -\frac{k^2}{2} \right)}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \left(u - ik\right)^2 \exp\left(-\frac{u^2}{2}  \right)  du \notag \\
+        &= \frac{\exp\left( -\frac{k^2}{2} \right)}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \left(u^2 -2 i k u - k^2\right) \exp\left(-\frac{u^2}{2}  \right)  du.
+      \end{align}
+
+      After distributing the exponential term to the polynomial in \eqref{subst_g} and splitting the integral using the operator's linearity,
+      the first integral may be computed by parts by setting $w = u$ and $dv = -u \exp\left(-\frac{u^2}{2}\right) du$ as so:
+      \begin{align*}
+        \int_{-\infty}^{\infty} u^2 \exp\left(-\frac{u^2}{2}  \right) du = -\left[ \left. u \exp\left(-\frac{u^2}{2}\right) \right\rvert_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \exp\left(-\frac{u^2}{2}\right) du \right] = \sqrt{2\pi}
+      \end{align*}
+      where the last equality follows from the formula for the general Gaussian integral.
+
+      The other two resulting integrals in \eqref{subst_g} are calculated very similarly to their corresponding integrals in 2.1.f, i.e.\
+      \begin{align*}
+        2 i k \int_{-\infty}^{\infty} u \exp\left(-\frac{u^2}{2}  \right) du &= 0, \\
+        k^2 \int_{-\infty}^{\infty} \exp\left(-\frac{u^2}{2}  \right) du &= k^2\sqrt{2\pi}.
+      \end{align*}
+
+      Therefore, we have that the Fourier transform of $\displaystyle f(x) = x^2 \exp \left( -\frac{x^2}{2} \right)$ is given by
+      \begin{align*}
+        \fourier{f(x)} &= \frac{\exp\left( -\frac{k^2}{2} \right)}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} \left(u^2 -2 i k u - k^2\right) \exp\left(-\frac{u^2}{2}  \right)  du \\
+        &= \frac{\exp\left( -\frac{k^2}{2} \right)}{\sqrt{2 \pi}}  \left[\sqrt{2\pi} -k^2\sqrt{2\pi}\right] \\
+        &= (1-k^2)\exp\left( -\frac{k^2}{2} \right).
+      \end{align*}
+
   \end{enumerate}
 \end{proof}
 \newpage
