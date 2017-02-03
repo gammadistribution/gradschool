@@ -23,7 +23,26 @@
         &= \sqrt{\frac{2}{\pi}}\cos(kct)
       \end{align*}
       where the last equality follows using the definition of the complex exponential.
-    \item[b.]
+    \item[b.] Recall from the definitions of the Heaviside function $H$ and
+      the characteristic function $\chi$ that
+      \begin{align*}
+        H(ct - |x|) = \chi_{[-ct, ct]}(x) =
+        \begin{cases}
+          1 & |x| < ct \\
+          0 & |x| > ct
+        \end{cases}.
+      \end{align*}
+      Since the Fourier transform is a well-defined operation, this implies that
+      $$\displaystyle \fourier{ H \left( ct - |x| \right) } = \fourier{ \chi_{[-ct, ct]}(x) }.$$
+
+      Now, from the definition of the Fourier transform in \eqref{fourier}, we see that
+      \begin{align*}
+        \displaystyle \fourier{ H \left( ct - |x| \right) } &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} e^{-ik x} H \left( ct - |x| \right) dx\\
+        &= \frac{1}{\sqrt{2\pi}}\int_{-ct}^{ct} e^{-ik x} dx\\
+        &= \frac{2}{k\sqrt{2\pi}} \left(\frac{e^{ikct} - e^{-ikct}}{2i}\right) \\
+        &= \sqrt{\frac{2}{\pi}}\frac{\sin(kct)}{k}
+      \end{align*}
+      where again the last equality follows from the definition of the complex exponential.
   \end{enumerate}
 \end{proof}
 \newpage
