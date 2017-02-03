@@ -10,14 +10,15 @@
   For two functions functions $f, g \in L^1(\mathbb{R})$, the convolution of $f$ and $g$,
   denoted by $(f \ast g )(x)$, is defined to be
   \begin{align*}
-    (f \ast g )(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(x - \xi) g(\xi) d\xi.
+    (f \ast g )(x) = \int_{-\infty}^{\infty} f(x - \xi) g(\xi) d\xi.
   \end{align*}
+
   \begin{enumerate}
     \item [c.] Using the definition of the convolution of $f$ and $g$, we have that
       \begin{align*}
-        \der{x}{}\left[f(x) \ast g(x)\right] &= \frac{1}{\sqrt{2\pi}}\der{x}{}\int_{-\infty}^{\infty} f(x - \xi) g(\xi) d\xi \\
-        &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \frac{\partial}{\partial x}\left[f(x - \xi) g(\xi)\right] d\xi \\
-        &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f'(x - \xi) g(\xi)d\xi \\
+        \der{x}{}\left[f(x) \ast g(x)\right] &= \der{x}{}\int_{-\infty}^{\infty} f(x - \xi) g(\xi) d\xi \\
+        &= \int_{-\infty}^{\infty} \frac{\partial}{\partial x}\left[f(x - \xi) g(\xi)\right] d\xi \\
+        &= \int_{-\infty}^{\infty} f'(x - \xi) g(\xi)d\xi \\
         &= f'(x) \ast g(x).
       \end{align*}
 
@@ -27,7 +28,28 @@
         &= g'(x) \ast f(x) \\
         &= f(x) \ast g'(x).
       \end{align*}
-    \item [d.]
+
+    \item [d.] From the definition of the convolution of $f$ and $g$, we have that
+      \begin{align*}
+        \int_{-\infty}^{\infty} (f \ast g)(x) dx &= \int_{-\infty}^{\infty} \left[\int_{-\infty}^{\infty} f(x - \xi) g(\xi) d\xi\right] dx.
+      \end{align*}
+      Since $f, g \in L^1(\mathbb{R})$, we may interchange the order of integration above. Doing so yields
+      \begin{align*}
+        \int_{-\infty}^{\infty} (f \ast g)(x) dx
+        &= \int_{-\infty}^{\infty} \left[\int_{-\infty}^{\infty} f(x - \xi) g(\xi) d\xi\right] dx\\
+        &= \int_{-\infty}^{\infty} g(\xi)\left[\int_{-\infty}^{\infty} f(x - \xi) dx\right] d\xi.
+      \end{align*}
+      Making the substitution $u= x- \xi$ with $du = dx$, the above becomes
+      \begin{align*}
+        \int_{-\infty}^{\infty} (f \ast g)(x) dx &= \int_{-\infty}^{\infty} g(\xi)\left[\int_{-\infty}^{\infty} f(x - \xi) dx\right] d\xi\\
+        &= \int_{-\infty}^{\infty} g(\xi)\left[\int_{-\infty}^{\infty} f(u) du\right] d\xi \\
+        &= \int_{-\infty}^{\infty} g(\xi) d\xi \int_{-\infty}^{\infty} f(u) du.
+      \end{align*}
+      The variables $u$ and $\xi$ are arbitary; therefore
+      \begin{align*}
+        \int_{-\infty}^{\infty} (f \ast g)(x) dx = \int_{-\infty}^{\infty} f(u)du \int_{-\infty}^{\infty} g(v)dv
+      \end{align*}
+      and we are done.
   \end{enumerate}
 \end{proof}
 \newpage
