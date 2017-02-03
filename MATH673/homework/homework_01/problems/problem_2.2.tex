@@ -8,5 +8,22 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] By the shifting property of the Fourier transform, we know that
+      \begin{align*}
+        \fourier{\delta(x \pm ct)} = e^{\pm ik ct}\fourier{\delta(x)}.
+      \end{align*}
+      As shown previously, we also know from the definition of the Fourier transform
+      and the definition of the Dirac delta function that $\fourier{\delta(x)} = 1/\sqrt{2\pi}$. Combining,
+      we see using the linearity of the Fourier transform that
+      \begin{align*}
+        \fourier{ \delta(x - ct) + \delta(x + ct) } &= \fourier{ \delta(x - ct)} + \fourier{\delta(x + ct) } \\
+        &= \left(e^{-ik ct} + e^{ikct} \right)\fourier{\delta(x)} \\
+        &= \frac{2}{\sqrt{2\pi}} \left(\frac{e^{-ik ct} + e^{ikct}}{2}\right) \\
+        &= \sqrt{\frac{2}{\pi}}\cos(kct)
+      \end{align*}
+      where the last equality follows using the definition of the complex exponential.
+    \item[b.]
+  \end{enumerate}
 \end{proof}
 \newpage
