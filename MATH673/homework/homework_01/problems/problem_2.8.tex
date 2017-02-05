@@ -106,7 +106,34 @@
         &= -\frac{1}{\sqrt{2\pi}}\frac{2\pi}{\sqrt{2\pi}}\int_{-a}^{a} f(\xi) e^{|x-\xi|} d\xi \\
         &= \int_{a}^{-a} f(\xi) e^{|x-\xi|} d\xi.
       \end{align*}
-    \item[b.]
+    \item[b.] We begin by applying the Fourier transform
+      to the ordinary differential equation $2 y''(x) + x y'(x) + y(x) = 0$. Doing so, with
+      the aid of the formula $\displaystyle i \der{k}{} F(k) = \fourier{x f(x)}$ proven previously, yields
+      \begin{align*}
+        \fourier{2 y''(x) + x y'(x) + y(x)} &= \fourier{0} = 0
+      \end{align*}
+      which implies that
+      \begin{align*}
+        2\fourier{y''(x)} + \fourier{x y'(x)} + \fourier{y(x)} = i Y'(k) + \left(1 - 2k^2\right) Y(k) = 0,
+      \end{align*}
+      or, equivalently,
+      \begin{align}\label{sep_ode}
+        Y'(k) = i\left(1- 2k^2\right) Y(k) .
+      \end{align}
+
+      Note that \eqref{sep_ode} is a separable ordinary differential equation. Thus, we readily
+      see that the solution to this equation is
+      \begin{align*}
+        Y(k) = c_1 e^{ik - \frac{2ik^3}{3}}
+      \end{align*}
+      for some constant $c_1$.
+
+      Therefore, applying the inverse Fourier transform to $Y(k)$, we see that the solution
+      to the original ordinary differential equation is
+      \begin{align*}
+        y(x) = \fourierinv{Y(k)} &= \frac{c_1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}e^{ikx} e^{ik - \frac{2ik^3}{3}} dk \\
+        &= \frac{c_1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}e^{ik\left(x + 1 - \frac{2k^2}{3}\right) } dk
+      \end{align*}
   \end{enumerate}
 \end{proof}
 \newpage
