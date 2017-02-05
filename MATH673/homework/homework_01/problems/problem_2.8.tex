@@ -9,5 +9,104 @@
 \end{problem}
 
 \begin{proof}
+  Consider the following $n$-th order ordinary differential equation with constant
+  coefficients:
+  \begin{align*}
+    L y(x) = f(x),
+  \end{align*}
+  where $L$ is the $n$-th order differential operation given by
+  \begin{align*}
+    L \equiv a_n \der{x}{n} + a_{n-1}\der{x}{n-1} + \dots + a_1 \der{x}{n} + a_0.
+  \end{align*}
+
+  Applying the Fourier transform to both sides of the ordinary differential equation gives
+  \begin{align}\label{fourier_ode}
+    \left[a_n (ik)^n + a_{n-1}(ik)^{n-1} + \dots +a_1(ik) + a_0\right]Y(k) = F(k)
+  \end{align}
+  where $Y(k) = \fourier{y(x)}$ and $F(k) = \fourier{f(x)}$. Set $P(z) = \sum_{k=0}^n a_k z^k$. Then
+  \eqref{fourier_ode} may be rewritten as $P(ik)Y(k) = F(k),$ or equivalently
+  \begin{align*}
+    Y(k) = \frac{F(k)}{P(ik)} = F(k)Q(k)
+  \end{align*}
+  where $Q(k) = 1/P(ik)$. The Convolution theorem then tell us that $y(x)$, the solution to the
+  ordinary differential equation, is given by
+  \begin{align*}
+    y(x) = \fourierinv{F(k)Q(k)}
+    = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} f(\xi) q(x-\xi)d\xi,
+  \end{align*}
+  where $q(x) = \fourierinv{Q(k)}$ is known explicitly.
+
+  \begin{enumerate}
+    \item[a.] The ordinary differential equation $y''(x) - y(x) + 2f(x) = 0$ may be rewritten
+      as
+      \begin{align*}
+        \left[a_2 \der{x}{2} + a_0\right] y(x) = g(x)
+      \end{align*}
+      where $a_2 = 1$, $a_0 = -1$, and $g(x) = -2f(x)$. Applying the Fourier transform
+      to this ordinary differential equation results in the following equation
+      \begin{align*}
+        \left[a_2(ik)^2 + a_0\right]Y(k) = G(k),
+      \end{align*}
+      where $Y(k) = \fourier{y(x)}$ and $G(k) = \fourier{g(x)}$. Thus, we have that
+      \begin{align*}
+        Y(k) = G(k)Q(k)
+      \end{align*}
+      where
+      \begin{align*}
+        Q(k) = -\frac{1}{k^2+1}.
+      \end{align*}
+
+      By definition, the inverse Fourier transform of a function $Q(k)$ is given by
+      \begin{align*}
+        \fourierinv{Q(k)} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{i k x} Q(k) dk.
+      \end{align*}
+
+      Using Cauchy's Residue theorem allows us to evaluate this integral for $Q(k)$. The theorem
+      states that the integral of $h(k) = e^{i k x} Q(k)$ around any closed contour
+      is given in terms of the residues of $h$ at all singular points bounded by the contour.
+
+      So, suppose first that $x > 0$ and consider the contour $C$ that winds counter clockwise along the straight line segment $[-a, a]$, say $C_1$,
+      through the counter $C_2$ defined to be the half circle such that $z = i$ is bounded by this contour. Then,
+      $h$ is analytic everywhere except at $k=i$ and by Cauchy's Residue theorem we have that
+      \begin{align*}
+        \int_C h(k) dk = \int_{C_1} h(k) dk + \int_{C_2} h(k) dk
+        = 2\pi i\lim_{k\to i} (k-i)h(k)
+        = 2\pi i\left[\frac{e^{-t}}{2i}\right]
+        = \pi e^{-t}.
+      \end{align*}
+
+      Thus,
+      \begin{align*}
+        \int_{-a}^{a} h(k) dk = \pi e^{-t} - \int_{C_2} h(k) dk.
+      \end{align*}
+      It can be shown that
+      \begin{align*}
+        \left| \int_{C_2} h(k) dk \right| \leq \frac{a \pi}{a^2 -1}.
+      \end{align*}
+      As $a\to \infty$, we have that $(a \pi)/(a^2 -1) \to 0$ so
+      \begin{align*}
+        \int_{-\infty}^{\infty} h(k) dk = \pi e^{-x}.
+      \end{align*}
+
+      A similar argument follows when $x < 0$ by changing the contour to wind around $z=-i$ in a clockwise fashion to yield that
+      \begin{align*}
+        \int_{-\infty}^{\infty} h(k) dk = \pi e^{x}.
+      \end{align*}
+
+      Therefore, we have that
+      \begin{align*}
+        \fourierinv{Q(k)} &= -\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \frac{e^{i k x}}{k^2+1}  dk \\
+        &= -\frac{\pi e^{|x|}}{\sqrt{2\pi}}.
+      \end{align*}
+
+      Now, from the previous remarks, this implies that the solution to the ordinary
+      differential equation is given by
+      \begin{align*}
+        y(x) &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} g(\xi) q(x-\xi)d\xi \\
+        &= -\frac{1}{\sqrt{2\pi}}\frac{2\pi}{\sqrt{2\pi}}\int_{-a}^{a} f(\xi) e^{|x-\xi|} d\xi \\
+        &= \int_{a}^{-a} f(\xi) e^{|x-\xi|} d\xi.
+      \end{align*}
+    \item[b.]
+  \end{enumerate}
 \end{proof}
 \newpage
