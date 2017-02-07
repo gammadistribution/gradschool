@@ -10,12 +10,12 @@
   \begin{enumerate}
     \item [a.] Recall from the definition of the Fourier transform in \eqref{fourier} that
       \begin{align*}
-        F(k) = \fourier{f(x)} = \int_{-\infty}^{\infty} e^{-ikx} f(x) dx.
+        F(k) = \fourier{f(x)} = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} e^{-ikx} f(x) dx.
       \end{align*}
       Using the Leibniz integral rule, we have that
       \begin{align*}
-        \der{k}{}F(k) = \der{k}{}\fourier{f(x)} &= \int_{-\infty}^{\infty} \frac{\partial }{\partial k}\left[e^{-ikx} f(x)\right] dx\\
-        &= -\int_{-\infty}^{\infty} ix e^{-ikx} f(x)dx \\
+        \der{k}{}F(k) = \der{k}{}\fourier{f(x)} &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \frac{\partial }{\partial k}\left[e^{-ikx} f(x)\right] dx\\
+        &= -\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} ix e^{-ikx} f(x)dx \\
         &= - i \fourier{x f(x)}.
       \end{align*}
       Of course, this implies that
@@ -28,9 +28,10 @@
       \end{align}
       Then by the Leibniz integral rule, we have that
       \begin{align*}
-        i^n \der{k}{n+1} F(k) = \der{k}{}\left[i^n \der{k}{n} F(k)\right] &= \der{k}{} \int_{-\infty}^{\infty} x^n e^{-ikx} f(x) dx\\
-        &= \int_{-\infty}^{\infty} \frac{\partial }{\partial k}\left[x^ne^{-ikx} f(x)\right] dx\\
-        &= -i\int_{-\infty}^{\infty} x^{n+1} e^{-ikx} f(x)dx \\
+        i^n \der{k}{n+1} F(k) = \der{k}{}\left[i^n \der{k}{n} F(k)\right]
+        &= \der{k}{}\left[\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} x^n e^{-ikx} f(x) dx \right]\\
+        &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \frac{\partial }{\partial k}\left[x^ne^{-ikx} f(x)\right] dx\\
+        &= -i\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} x^{n+1} e^{-ikx} f(x)dx \\
         &= -i \fourier{x^{n+1}f(x)}.
       \end{align*}
       This implies that
