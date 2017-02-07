@@ -108,6 +108,60 @@
       \end{align*}
     \item[b.] We begin by applying the Fourier transform
       to the ordinary differential equation $2 y''(x) + x y'(x) + y(x) = 0$.
+      Using the linearity and other properties of the Fourier transform, we see that the left hand side
+      becomes
+      \begin{align*}
+        \fourier{2 y''(x) + x y'(x) + y(x)}
+        &= 2\fourier{y''(x)} + \fourier{xy'(x)} + \fourier{y(x)} \\
+        &= (1 - 2k^2)\fourier{y(x)} + \fourier{xy'(x)}.
+      \end{align*}
+      We have shown previously that $\displaystyle \fourier{x g(x)} = i \der{k}{} \fourier{g(x)}$
+      and $\fourier{g'(x)} = ik \fourier{g(x)}$. Thus, we have that
+      \begin{align*}
+        \fourier{x y'(x)} &= i \der{k}{}\left[\fourier{y'(x)}\right] \\
+        &= i^2\der{k}{}\left[kY(k)\right] \\
+        &= - Y(k) - kY'(k).
+      \end{align*}
+      So, we see that
+      \begin{align*}
+        \fourier{2 y''(x) + x y'(x) + y(x)}
+        &= (1 - 2k^2)\fourier{y(x)} + \fourier{xy'(x)} \\
+        &= (1-2k^2)Y(k) - Y(k) - kY'(k) \\
+        &= -2k^2Y(k) - kY'(k).
+      \end{align*}
+
+      Since $\fourier{0} = 0$, the ordinary differential equation under the Fourier
+      transform becomes
+      \begin{align*}
+        -2k^2Y(k) - kY'(k) = 0
+      \end{align*}
+      or, equivalently,
+      \begin{align*}
+        Y'(k) = -2kY(k).
+      \end{align*}
+
+      This is a separable differential equation, the solution to which we readily see is
+      \begin{align*}
+        Y(k) = c_1 e^{-k^2}.
+      \end{align*}
+
+      Thus, we have that
+      \begin{align*}
+        y(x) = \fourierinv{c_1 e^{-k^2}} = c_1 \fourierinv{e^{-k^2}}
+      \end{align*}
+      Using a table of Fourier transforms, we have that
+      \begin{align*}
+        \fourierinv{ \frac{1}{\sqrt{2a}} \exp\left(-\frac{k^2}{4a}\right)} = \exp(-ax^2).
+      \end{align*}
+      Setting $a=1/4$, we have that
+      \begin{align*}
+        \sqrt{2}\fourierinv{ \exp\left(-k^2\right)} = \exp\left(-\frac{x^2}{4}\right).
+      \end{align*}
+
+      Therefore, the solution to the ordinary differential equation is given by
+      \begin{align*}
+        y(x) = c_1 \fourierinv{ \exp\left(-k^2\right)} = \frac{1}{c_1\sqrt{2}}e^{-\frac{x^2}{4}}.
+      \end{align*}
   \end{enumerate}
 \end{proof}
 \newpage
