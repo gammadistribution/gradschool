@@ -15,7 +15,7 @@
   \begin{enumerate}
     \item [c.] Suppose that $f$ has a finite discontinuity at the point $x=a$. From
       the definition of the Fourier transform, we have that
-      \begin{align}\label{int}
+      \begin{align}\label{5_int}
         \fourier{f'(x)} &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{-ikx} f'(x) dx \notag \\
         &= \frac{1}{\sqrt{2\pi}} \left[\int_{-\infty}^{a} e^{-ikx} f'(x) dx + \int_{a}^{\infty} e^{-ikx} f'(x) dx \right],
       \end{align}
@@ -35,7 +35,7 @@
         &= -e^{-ika} \lim_{x\to a^{+}}f(x)  + ik \int_{a}^\infty e^{-ikx}f(x) dx.
       \end{align*}
 
-      Combining, we see therefore from \eqref{int} that
+      Combining, we see therefore from \eqref{5_int} that
       \begin{align*}
         \fourier{f'(x)} &= \frac{1}{\sqrt{2\pi}} \left[\int_{-\infty}^{a} e^{-ikx} f'(x) dx + \int_{a}^{\infty} e^{-ikx} f'(x) dx \right] \\
         &= \frac{1}{\sqrt{2\pi}} \left[
@@ -49,9 +49,8 @@
 
       We now wish to show that, in general,
       \begin{align}\label{ind_four}
-        \fourier{f^{(n)}(x)} = (ik)^n F(k) - \frac{1}{\sqrt{2\pi}}e^{-ika}\sum_{j=1}^{n} (ik)^{n-j} [f^{(j-1)}]_a
+        \fourier{f^{(n)}(x)} = (ik)^n F(k) - \frac{1}{\sqrt{2\pi}}e^{-ika}\sum_{j=1}^{n} (ik)^{n-j} [f^{(j-1)}]_a.
       \end{align}
-      given that $f\in \mathbb{S}$, the set of all good functions.
 
       We have shown previously that this result holds for $n=1$, so suppose this result
       holds for $n$.
@@ -60,7 +59,7 @@
         \fourier{f^{(n+1)}} &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-ikx}f^{(n+1)}(x)dx \\
         &= \frac{1}{\sqrt{2\pi}}\left[\int_{-\infty}^{a}e^{-ikx}f^{(n+1)}(x)dx + \int_{-\infty}^{a}e^{-ikx}f^{(n+1)}(x)dx\right].
       \end{align*}
-      Proceeding as before, we integrate by parts using the substitution $u = e^{-ikx}$ and $dv = f^{(n+1}(x)dx$ yielding
+      Proceeding as before, we integrate by parts using the substitution $u = e^{-ikx}$ and $dv = f^{(n+1)}(x)dx$ yielding
       \begin{align*}
         \int_{-\infty}^{a}e^{-ikx}f^{(n+1)}(x)dx &= \left. e^{-ikx}f^{(n)}(x)\right\rvert_{-\infty}^{a^-} + ik \int_{-\infty}^{a} e^{-ikx} f^{(n)}(x)dx \\
         &= e^{-ika}\lim_{x\to a^{-}}f^{(n)}(x) + ik \int_{-\infty}^{a} e^{-ikx} f^{(n)}(x)dx
@@ -75,7 +74,7 @@
       \begin{align*}
         \fourier{f^{(n+1)}}
         &= \frac{1}{\sqrt{2\pi}}\left[\int_{-\infty}^{a}e^{-ikx}f^{(n+1)}(x)dx + \int_{-\infty}^{a}e^{-ikx}f^{(n+1)}(x)dx\right] \\
-        &= \frac{ik}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-ikx}f^{(n)}dx - \frac{1}{\sqrt{2\pi}}e^{-ika}\left(\lim_{x\to a^{+}}f^{(n)}(x) - \lim_{x\to a^{-}}f^{(n)}(x)\right) \\
+        &= \frac{ik}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-ikx}f^{(n)}(x)dx - \frac{1}{\sqrt{2\pi}}e^{-ika}\left(\lim_{x\to a^{+}}f^{(n)}(x) - \lim_{x\to a^{-}}f^{(n)}(x)\right) \\
         &= ik \fourier{f^{(n)}(x)} - \frac{1}{\sqrt{2\pi}}e^{-ika}[f^{(n)}]_a.
       \end{align*}
 

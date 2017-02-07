@@ -71,19 +71,19 @@
       \begin{align*}
         \int_C h(k) dk = \int_{C_1} h(k) dk + \int_{C_2} h(k) dk
         = 2\pi i\lim_{k\to i} (k-i)h(k)
-        = 2\pi i\left[\frac{e^{-t}}{2i}\right]
-        = \pi e^{-t}.
+        = 2\pi i\left[\frac{e^{-x}}{2i}\right]
+        = \pi e^{-x}.
       \end{align*}
 
       Thus,
       \begin{align*}
-        \int_{-a}^{a} h(k) dk = \pi e^{-t} - \int_{C_2} h(k) dk.
+        \int_{-a}^{a} h(k) dk = \pi e^{-x} - \int_{C_2} h(k) dk.
       \end{align*}
       It can be shown that
       \begin{align*}
         \left| \int_{C_2} h(k) dk \right| \leq \frac{a \pi}{a^2 -1}.
       \end{align*}
-      As $a\to \infty$, we have that $(a \pi)/(a^2 -1) \to 0$ so
+      As $a\to \infty$, we have that $a \pi/(a^2 -1) \to 0$ so
       \begin{align*}
         \int_{-\infty}^{\infty} h(k) dk = \pi e^{-x}.
       \end{align*}
@@ -96,44 +96,18 @@
       Therefore, we have that
       \begin{align*}
         \fourierinv{Q(k)} &= -\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \frac{e^{i k x}}{k^2+1}  dk \\
-        &= -\frac{\pi e^{|x|}}{\sqrt{2\pi}}.
+        &= -\frac{\pi e^{-|x|}}{\sqrt{2\pi}}.
       \end{align*}
 
       Now, from the previous remarks, this implies that the solution to the ordinary
       differential equation is given by
       \begin{align*}
         y(x) &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} g(\xi) q(x-\xi)d\xi \\
-        &= -\frac{1}{\sqrt{2\pi}}\frac{2\pi}{\sqrt{2\pi}}\int_{-a}^{a} f(\xi) e^{|x-\xi|} d\xi \\
-        &= \int_{a}^{-a} f(\xi) e^{|x-\xi|} d\xi.
+        &= \frac{1}{\sqrt{2\pi}}\frac{2\pi}{\sqrt{2\pi}}\int_{-a}^{a} f(\xi) e^{-|x-\xi|} d\xi \\
+        &= \int_{-a}^{a} f(\xi) e^{-|x-\xi|} d\xi.
       \end{align*}
     \item[b.] We begin by applying the Fourier transform
-      to the ordinary differential equation $2 y''(x) + x y'(x) + y(x) = 0$. Doing so, with
-      the aid of the formula $\displaystyle i \der{k}{} F(k) = \fourier{x f(x)}$ proven previously, yields
-      \begin{align*}
-        \fourier{2 y''(x) + x y'(x) + y(x)} &= \fourier{0} = 0
-      \end{align*}
-      which implies that
-      \begin{align*}
-        2\fourier{y''(x)} + \fourier{x y'(x)} + \fourier{y(x)} = i Y'(k) + \left(1 - 2k^2\right) Y(k) = 0,
-      \end{align*}
-      or, equivalently,
-      \begin{align}\label{sep_ode}
-        Y'(k) = i\left(1- 2k^2\right) Y(k) .
-      \end{align}
-
-      Note that \eqref{sep_ode} is a separable ordinary differential equation. Thus, we readily
-      see that the solution to this equation is
-      \begin{align*}
-        Y(k) = c_1 e^{ik - \frac{2ik^3}{3}}
-      \end{align*}
-      for some constant $c_1$.
-
-      Therefore, applying the inverse Fourier transform to $Y(k)$, we see that the solution
-      to the original ordinary differential equation is
-      \begin{align*}
-        y(x) = \fourierinv{Y(k)} &= \frac{c_1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}e^{ikx} e^{ik - \frac{2ik^3}{3}} dk \\
-        &= \frac{c_1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}e^{ik\left(x + 1 - \frac{2k^2}{3}\right) } dk
-      \end{align*}
+      to the ordinary differential equation $2 y''(x) + x y'(x) + y(x) = 0$.
   \end{enumerate}
 \end{proof}
 \newpage
