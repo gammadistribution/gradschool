@@ -43,7 +43,7 @@
 
       Applying the inverse Fourier transform to this equation we see that
       \begin{align*}
-        \fourierinv{F(k)} = \fourier{\frac{1}{\sqrt{2\pi}}\frac{G(k)}{\Phi(k)}}
+        \fourierinv{F(k)} = \fourierinv{\frac{1}{\sqrt{2\pi}}\frac{G(k)}{\Phi(k)}}
         = \frac{1}{2\pi} \int_{-\infty}^{\infty}\frac{G(k)}{\Phi(k)}e^{ikx} dk.
       \end{align*}
 
@@ -96,7 +96,7 @@
         &= \frac{a}{\sqrt{\pi(a-b)}} e^{-\left(\frac{ab}{a-b}\right) x^2}.
       \end{align*}
 
-    \item [c.] Let $\displaystyle \phi(x) = \frac{1}{x^2 + a^2}$ and $\displaystyle g(x) = \frac{1}{x^2 + b^2}$.
+    \item [d.] Let $\displaystyle \phi(x) = \frac{1}{x^2 + a^2}$ and $\displaystyle g(x) = \frac{1}{x^2 + b^2}$.
       Then the integral equation becomes
       \begin{align*}
         \int_{-\infty}^{\infty} f(x-t) \phi(t) dt = \sqrt{2\pi}(\phi \ast f)(x) = g(x).
