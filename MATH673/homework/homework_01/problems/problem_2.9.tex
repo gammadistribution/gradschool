@@ -8,5 +8,139 @@
 \end{problem}
 
 \begin{proof}
+  Recall the definition of the convolution
+  \begin{align*}
+    (f \ast g)(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(x - \xi)g(\xi) d\xi.
+  \end{align*}
+  Using the definition of the convolution and the Fourier transform, we derive the
+  following Convolution Theorem
+  \begin{align*}
+    \fourier{(f\ast g)(x)} = \fourier{f(x)}\fourier{g(x)} = F(k)G(k).
+  \end{align*}
+  It is this theorem that allows us to solve the above integral equations.
+
+  \begin{enumerate}
+    \item [a.] From the definition of the convolution, we see that
+      \begin{align*}
+        \int_{-\infty}^{\infty} \phi(x-t) f(t) dt =
+        \sqrt{2\pi}\left[\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \phi(x-t) f(t) dt \right]
+        = \sqrt{2\pi}(\phi \ast f)(x) = g(x).
+      \end{align*}
+
+      Applying the Fourier transform to this equation and using the Convolution Theorem, we see that
+      \begin{align*}
+        \fourier{\sqrt{2\pi} (\phi \ast f)(x)} = \fourier{g(x)}
+      \end{align*}
+      or, equivalently,
+      \begin{align*}
+        \sqrt{2\pi} \Phi(k)F(k) = G(k).
+      \end{align*}
+
+      Thus, we see that
+      \begin{align*}
+        F(k) = \frac{1}{\sqrt{2\pi}} \frac{G(k)}{\Phi(k)}.
+      \end{align*}
+
+      Applying the inverse Fourier transform to this equation we see that
+      \begin{align*}
+        \fourierinv{F(k)} = \fourier{\frac{1}{\sqrt{2\pi}}\frac{G(k)}{\Phi(k)}}
+        = \frac{1}{2\pi} \int_{-\infty}^{\infty}\frac{G(k)}{\Phi(k)}e^{ikx} dk.
+      \end{align*}
+
+      Therefore, the solution to the integral equation is given by
+      \begin{align}\label{int_eq}
+        f(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty}\frac{G(k)}{\Phi(k)}e^{ikx} dk.
+      \end{align}
+
+    \item [b.] Set $\phi(x) = e^{-at^2}$ and $g(x) = e^{-bx^2}$. Then
+      the integral equation becomes
+      \begin{align*}
+        \sqrt{2\pi}\left[\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(x-t) \phi(t) dt \right] = \sqrt{2\pi}(f \ast \phi)(x) = \sqrt{2\pi}(\phi \ast f)(x) = g(x).
+      \end{align*}
+
+      From 2.9.a and \eqref{int_eq}, we see that the solution to the integral equation is given by
+      \begin{align*}
+        f(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty}\frac{G(k)}{\Phi(k)}e^{ikx} dk.
+      \end{align*}
+
+      Using a table of Fourier transforms, we have that
+      \begin{align*}
+        \fourier{e^{-cx^2}} = \frac{1}{\sqrt{2c}} e^{-k^2/4c} \quad \text{for $c > 0$}.
+      \end{align*}
+
+      Thus,
+      \begin{align*}
+        f(x) &= \frac{1}{\sqrt{2\pi}}\left[\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \frac{\sqrt{2a}}{\sqrt{2b}}\frac{e^{-k^2/4b}}{e^{-k^2/4a}}e^{ikx}dk\right]\\
+        &= \frac{\sqrt{a}}{\sqrt{2\pi b}}\left[ \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} e^{-\frac{k^2}{4}\frac{a-b}{ab}} e^{ikx} dk\right] \\
+        &= \frac{\sqrt{a}}{\sqrt{2\pi b}} \fourierinv{e^{-\frac{k^2}{4\frac{ab}{a-b}}}}.
+      \end{align*}
+
+      From our same table of Fourier transforms, we have that
+      \begin{align*}
+        \fourierinv{\frac{1}{2c}e^{-k^2/4c}} = e^{-cx^2}
+      \end{align*}
+      or that
+      \begin{align*}
+        \fourierinv{e^{-k^2/4c}} = \sqrt{2c} e^{-c x^2}.
+      \end{align*}
+
+      Since $a > b > 0$, we have that $\frac{ab}{a-b} > 0$ and
+      \begin{align*}
+        \fourierinv{e^{-\frac{k^2}{4\frac{ab}{a-b}}}} = \sqrt{\frac{2ab}{a-b}} e^{-\left(\frac{ab}{a-b}\right) x^2}.
+      \end{align*}
+
+      Therefore, the solution to the integral equation is given by
+      \begin{align*}
+        f(x) &= \frac{\sqrt{a}}{\sqrt{2\pi b}}\fourierinv{e^{-\frac{k^2}{4\frac{ab}{a-b}}}} \\
+        &= \frac{\sqrt{a}}{\sqrt{2\pi b}} \sqrt{\frac{2ab}{a-b}} e^{-\left(\frac{ab}{a-b}\right) x^2} \\
+        &= \frac{a}{\sqrt{\pi(a-b)}} e^{-\left(\frac{ab}{a-b}\right) x^2}.
+      \end{align*}
+
+    \item [c.] Let $\displaystyle \phi(x) = \frac{1}{x^2 + a^2}$ and $\displaystyle g(x) = \frac{1}{x^2 + b^2}$.
+      Then the integral equation becomes
+      \begin{align*}
+        \int_{-\infty}^{\infty} f(x-t) \phi(t) dt = \sqrt{2\pi}(\phi \ast f)(x) = g(x).
+      \end{align*}
+
+      From 2.9.a and \eqref{int_eq}, we see that the solution to the integral equation is given by
+      \begin{align*}
+        f(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty}\frac{G(k)}{\Phi(k)}e^{ikx} dk.
+      \end{align*}
+
+      Using a table of Fourier transforms, we have that
+      \begin{align*}
+        \fourier{\frac{1}{x^2 + c^2}} = \sqrt{\frac{\pi}{2}} \frac{ e ^{-c |k|}}{c}.
+      \end{align*}
+
+      Thus,
+      \begin{align*}
+        f(x) &= \frac{1}{2\pi} \int_{-\infty}^{\infty} \frac{G(k)}{\Phi(k)}e^{ikx} dk \\
+        &= \frac{1}{2\pi} \int_{-\infty}^{\infty} \frac{a}{b} \frac{e^{-b|k|}}{e^{-a|k|}}e^{ikx} dk \\
+        &= \frac{a}{b\sqrt{2\pi}}\left[\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}e^{-(b-a)|k|}e^{ikx}dk \right] \\
+        &= \frac{a}{b\sqrt{2\pi}} \fourierinv{e^{-(b-a)|k|}}.
+      \end{align*}
+
+      From our same table of Fourier transforms, we have that
+      \begin{align*}
+        \fourierinv{\sqrt{\frac{\pi}{2}}\frac{e^{-c|k|}}{c}} = \frac{1}{x^2 + c} \quad \text{for $c > 0$}
+      \end{align*}
+      or that
+      \begin{align*}
+        \fourierinv{e^{-c|k|}} = c\sqrt{\frac{2}{\pi}}\left(\frac{1}{x^2 + c}\right).
+      \end{align*}
+
+      Since $b > a > 0$, we have that $b-a > 0$ and that
+      \begin{align*}
+        \fourierinv{e^{-(b-a)|k|}} = \sqrt{\frac{2}{\pi}}\left(\frac{b-a}{x^2 + (b-a)^2}\right).
+      \end{align*}
+
+      Therefore, the solution to the integral equation is given by
+      \begin{align*}
+        y(x) &= \frac{a}{b\sqrt{2\pi}} \fourierinv{e^{-(b-a)|k|}} \\
+        &= \frac{a(b-a)}{\pi b}\left(\frac{1}{x^2 + (b-a)^2}\right).
+      \end{align*}
+
+  \end{enumerate}
+
 \end{proof}
 \newpage
