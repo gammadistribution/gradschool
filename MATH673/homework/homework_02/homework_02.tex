@@ -1,0 +1,54 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx, xifthen, mathrsfs, fancyhdr}
+
+\theoremstyle{definition}
+\newtheorem{innercustomthm}{Problem}
+\newenvironment{problem}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\roman{enumi}}
+\newcommand{\fourier}[1]{\mathscr{F}\left\{ {#1} \right\}}
+\newcommand{\fourierinv}[1]{\mathscr{F}^{-1}\left\{ {#1} \right\}}
+\newcommand{\der}[2]{
+  \ifthenelse{\equal{#2}{}}{
+    \frac{d}{d #1}
+  }{
+    \frac{d^{#2}}{d #1^{#2}}
+  }
+}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Homework Assignment 2}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Homework Assignment 2}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\input{problems/problem_2.10}
+
+\input{problems/problem_2.12}
+
+\input{problems/problem_2.14}
+
+\input{problems/problem_2.15}
+
+\input{problems/problem_2.20}
+
+\input{problems/problem_2.22}
+
+
+\end{document}
