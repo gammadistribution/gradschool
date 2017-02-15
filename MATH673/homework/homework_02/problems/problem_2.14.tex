@@ -6,5 +6,48 @@
 \end{problem}
 
 \begin{proof}
+  Recall that the definition of the Fourier cosine transform of a function $f(x)$
+  is given by
+  \begin{align*}
+    \fouriercos{f(x)} = \sqrt{\frac{2}{\pi}} \int_0^\infty \cos kx f(x) dx.
+  \end{align*}
+  \begin{enumerate}
+    \item[a.] From the definition of the Fourier cosine transform we have that
+      \begin{align*}
+        \fouriercos{xe^{-ax}} = \sqrt{\frac{2}{\pi}} \int_0^\infty x e^{-ax}\cos kx  dx.
+      \end{align*}
+
+      Using the definition of the complex exponential, we see that
+      \begin{align*}
+        \fouriercos{xe^{-ax}}
+        &= \sqrt{\frac{2}{\pi}} \int_0^\infty x e^{-ax}\left[\frac{e^{-ikx} + e^{ikx}}{2}\right]  dx \\
+        &= \frac{1}{\sqrt{2\pi}} \int_0^\infty x \left[e^{-(a+ik)x} + e^{-(a-ik)x}\right]  dx.
+      \end{align*}
+
+
+      Now, for $w = a \pm ik$, we see using integration by parts with $u = x$ and $dv =e^{-wx}dx$ that
+      \begin{align*}
+        \int_{0}^\infty x e^{-wx}dx = \left.-\frac{xe^{-wx}}{w}\right\rvert_{0}^\infty + \frac{1}{w} \int_0^\infty e^{-wx} dx.
+      \end{align*}
+
+      Note that
+      \begin{align*}
+        \lim_{x\to\infty} \left| e^{-wx} \right| = \lim_{x\to\infty} \left|e^{-(a\pm ik)x}\right| = \lim_{x\to\infty} \left|e^{-ax}\right|  \left|e^{\mp ikx}\right| \leq \lim_{x\to\infty} \left|e^{-ax}\right|  = 0.
+      \end{align*}
+
+      This implies that $\lim_{x\to\infty} e^{-wx} = 0$. Thus,
+      \begin{align*}
+        \int_{0}^\infty x e^{-wx}dx &= \left.-\frac{xe^{-wx}}{w}\right\rvert_{0}^\infty + \frac{1}{w} \int_0^\infty e^{-wx} dx \\
+        &=  -\frac{1}{w^2} \left[ \left.e^{-wx}\right\rvert_{0}^{\infty} \right] \\
+        &= \frac{1}{w^2}.
+      \end{align*}
+
+      Therefore,
+      \begin{align*}
+        \fouriercos{xe^{-ax}} &= \frac{1}{\sqrt{2\pi}}\left[\int_0^\infty x e^{-(a+ik)x}dx + \int_0^\infty x e^{-(a-ik)x}dx\right] \\
+        &= \frac{1}{\sqrt{2\pi}}\left[\frac{1}{(a+ik)^2} + \frac{1}{(a-ik)^2}\right] \\
+        &= \sqrt{\frac{2}{\pi}}\frac{a^2 - k^2}{\left(a^2 + k^2\right)^2}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
