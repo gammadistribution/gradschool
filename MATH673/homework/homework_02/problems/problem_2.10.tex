@@ -8,5 +8,106 @@
 \end{problem}
 
 \begin{proof}
+  Consider the function $u(x, y)$. The Fourier transform
+  of $u$ with respect to $x$ is defined as
+  \begin{align}\label{fouriermulti}
+    \fourier{u(x, y)} = U(k, y) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} e^{-ikx} u(x, y) dx.
+  \end{align}
+
+  From this definition and the Leibniz integral rule, we can see by induction that
+  \begin{align}\label{partialy}
+    \fourier{\frac{\partial^n }{\partial y^n }\left[u(x,y)\right]}
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \frac{\partial^n}{ \partial y^n}\left[ u(x, y)\right] e^{-ikx} dx \notag \\
+    &= \der{y}{n}\left[\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty u(x, y) e^{-ikx} dx \right] \notag \\
+    &= \der{y}{n}\left[\fourier{u(x,y)}\right].
+  \end{align}
+  Similarly, we see from definition \eqref{fouriermulti} and previous
+  theorems regarding the Fourier transform that
+  \begin{align}\label{partialx}
+    \fourier{\frac{\partial^n}{\partial x^n}\left[u(x, y)\right]}
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \frac{\partial^n}{\partial x^n}\left[u(x, y)\right] e^{-ikx} dx \notag \\
+    &= (ik)^n \left[\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty u(x,y)e^{-ikx} dx \right] \notag \\
+    &= (ik)^n \fourier{u(x,y)}.
+  \end{align}
+
+  Now, applying the Fourier transform to the first equation, we see that
+  \begin{align*}
+    \fourier{u_{tt} - c^2 u_{xx} + a^2 u}
+    &= \der{t}{2}\left[U(k,t)\right] - c^2 (ik)^2 U(k,t) + a^2 U(k,t) \\
+    &= \der{t}{2}\left[U(k,t)\right] + \left(c^2k^2 + a^2\right) U(k,t).
+  \end{align*}
+  Thus, setting $\omega^2 =c^2k^2 + a^2$, we see that
+  \begin{align*}
+    \der{t}{2}\left[U(k,t)\right] + \omega^2 U(k,t) = 0.
+  \end{align*}
+  This is a second-order linear homogeneous ordinary differential equation, the solution to
+  which we readily see is given by
+  \begin{align}\label{ode_solution}
+    U(k, t) = c_1 e^{-i \omega t} + c_2 e^{i \omega t}.
+  \end{align}
+
+  Applying the Fourier transform to the last two equations yields
+  \begin{align*}
+    \fourier{u(x, 0)} = U(k, 0) = F(k) = \fourier{f(x)}
+  \end{align*}
+  and
+  \begin{align*}
+    \fourier{\left[\frac{\partial u}{\partial t}\right]_{t=0}} &= \der{t}{}\left[U(k, t)\right]_{t=0} = G(k) = \fourier{g(x)}.
+  \end{align*}
+
+  Using \eqref{ode_solution}, we see that the first equation reduces to
+  \begin{align*}
+    c_1 + c_2 &= F(k).
+  \end{align*}
+  Taking the derivative of $U(k, t)$ with respect to $t$ yields
+  \begin{align*}
+    \der{t}{}\left[U(k, t)\right] = -i \omega c_1 e^{-i\omega t} + i\omega c_2 e^{i\omega t}
+  \end{align*}
+  and evaluating when $t=0$ produces a second equation
+  \begin{align*}
+    i\omega(c_2 - c_1) = G(k).
+  \end{align*}
+  This results in a system of two equations in two unknowns; the solution of which is given by
+  \begin{align*}
+    c_1 = \frac{\omega F(k) + i G(k)}{2\omega}, \qquad c_2 = \frac{\omega F(k) - i G(k)}{2\omega}.
+  \end{align*}
+
+  Therefore, \eqref{ode_solution} becomes
+  \begin{align*}
+    U(k, t) = \left(\frac{\omega F(k) + i G(k)}{2\omega}\right)e^{-i\omega t} + \left(\frac{\omega F(k) - i G(k)}{2\omega}\right)e^{i\omega t}.
+  \end{align*}
+  Taking the Inverse Fourier transform yields that the solution to original differential equation is given by
+  \begin{align*}
+    u(x, t) &= \fourierinv{\left(\frac{\omega F(k) + i G(k)}{2\omega}\right)e^{-i\omega t} + \left(\frac{\omega F(k) - i G(k)}{2\omega}\right)e^{i\omega t}} \\
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \left[\left(\frac{\omega F(k) + i G(k)}{2\omega}\right)e^{-i\omega t} + \left(\frac{\omega F(k) - i G(k)}{2\omega}\right)e^{i\omega t}\right] e^{ikx} dk \\
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \left(\frac{\omega F(k) + i G(k)}{2\omega}\right)e^{i(kx-\omega t)} + \left(\frac{\omega F(k) - i G(k)}{2\omega}\right)e^{i(kx + \omega t)}dk.
+  \end{align*}
+
+
+  % Applying the Fourier transform to the second equation yields that
+  % \begin{align*}
+  %   \fourier{u(x,0)} = U(k, 0) = F(k) = \fourier{f(x)}.
+  % \end{align*}
+  % This, in conjunction with \eqref{ode_solution}, shows that $c_1 + c_2 = F(k)$ or that
+  % \begin{align*}
+  %   U(k, t) &= \left(F(k) - c_2\right)e^{-i \omega t} + c_2 e^{i\omega t} \\
+  %   &= F(k)e^{-i\omega t} + c_2 e^{-i\omega t} + c_2 e^{i\omega t}.
+  % \end{align*}
+
+  % After applying the Inverse Fourier transform to this equation, we see that
+  % \begin{align*}
+  %   u(x, t) &= \fourierinv{F(k)e^{-i\omega t} + c_2 e^{-i\omega t} + c_2e^{i\omega t}} \\
+  %   &= \fourierinv{F(k)e^{-i\omega t}} + c_2 \fourierinv{e^{-i\omega t}} + c_2 \fourierinv{e^{i\omega t}}.
+  % \end{align*}
+  % Note that, by definition, we have that
+  % \begin{align*}
+  %   \fourierinv{e^{\mp i\omega t}} &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{ikx} e^{\mp i\omega t} dk \\
+  %   &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{i(kx \mp \omega t)}dk.
+  % \end{align*}
+  % The Convolution Theorem tells us that
+  % \begin{align*}
+  %   \fourierinv{F(k)e^{-i\omega t}} = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(\xi) h(x-\xi)d\xi
+  % \end{align*}
+  % where
 \end{proof}
 \newpage
