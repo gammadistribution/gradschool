@@ -2,7 +2,7 @@
   Find the Fourier sine transform of the following functions:
   \begin{enumerate}
     \item[a.] $x e^{-a x}$, $a > 0$.
-    \item [b.] $\displaystyle \frac{1}{x} e^{-ax}$, $a > 0$.
+    \item [b.] $\displaystyle \frac{e^{-ax}}{x}$, $a > 0$.
   \end{enumerate}
 \end{problem}
 
@@ -13,7 +13,7 @@
     \fouriersin{f(x)} = \sqrt{\frac{2}{\pi}} \int_0^\infty \sin kx f(x) dx.
   \end{align*}
   \begin{enumerate}
-    \item[a.] From the definition of the Fourier cosine transform we have that
+    \item[a.] From the definition of the Fourier sine transform we have that
       \begin{align*}
         \fouriersin{xe^{-ax}} = \sqrt{\frac{2}{\pi}} \int_0^\infty x e^{-ax}\sin kx  dx.
       \end{align*}
@@ -48,7 +48,38 @@
         &= -\frac{i}{\sqrt{2\pi}}\left[\frac{1}{(a-ik)^2} - \frac{1}{(a+ik)^2}\right] \\
         &= \sqrt{\frac{2}{\pi}}\frac{2 ak}{\left(a^2 + k^2\right)^2}.
       \end{align*}
-  \end{enumerate}
 
+    \item[b.] From our table of Fourier sine transforms,
+      we see for $a>0$ that
+      \begin{align*}
+        \fouriersin{e^{-ax}} = \sqrt{\frac{2}{\pi}}\int_{0}^\infty e^{-ax}\sin(kx) dx = \sqrt{\frac{2}{\pi}}\left(\frac{k}{k^2 + a^2}\right).
+      \end{align*}
+
+      Thus, we must have that both sides are equal after integrating with respect to $a$ from $a$ to $\infty$, i.e.
+      \begin{align*}
+        \sqrt{\frac{2}{\pi}}\int_{a}^\infty \left[\int_{0}^\infty e^{-ax}\sin(kx) dx \right]da = \sqrt{\frac{2}{\pi}}\int_a^\infty\left(\frac{k}{k^2 + a^2}\right)da.
+      \end{align*}
+      For the integral on the left, since the integrand is continuous on the domain of integration, we can interchange the order of integration
+      and we see that
+      \begin{align*}
+        \sqrt{\frac{2}{\pi}}\int_{a}^\infty \left[\int_{0}^\infty e^{-ax}\sin(kx) dx \right]da
+        &= \sqrt{\frac{2}{\pi}} \int_{0}^\infty \sin(kx) \left[\int_{a}^\infty  e^{-ax}da \right]dx \\
+        &= \sqrt{\frac{2}{\pi}} \int_{0}^\infty \frac{e^{-ax}}{x}\sin(kx) dx \\
+        &= \fouriersin{\frac{e^{-ax}}{x}}.
+      \end{align*}
+      Therefore,
+      \begin{align*}
+        \fouriersin{\frac{e^{-ax}}{x}} = \sqrt{\frac{2}{\pi}}\int_a^\infty\left(\frac{k}{k^2 + a^2}\right)da.
+      \end{align*}
+      Note, the indefinite integral evaluates to $\displaystyle \tan^{-1}\left(\frac{a}{k}\right)$ and we
+      therefore see that
+      \begin{align*}
+        \fouriersin{\frac{e^{-ax}}{x}} &= \sqrt{\frac{2}{\pi}}\int_a^\infty\left(\frac{k}{k^2 + a^2}\right)da \\
+        &= \sqrt{\frac{2}{\pi}} \left(\left. \tan^{-1}\left(\frac{a}{k}\right) \right\rvert_{a}^\infty\right) \\
+        &= \sqrt{\frac{2}{\pi}}\left(\frac{\pi}{2} - \tan^{-1}\left(\frac{a}{k}\right) \right)
+      \end{align*}
+
+
+  \end{enumerate}
 \end{proof}
 \newpage
