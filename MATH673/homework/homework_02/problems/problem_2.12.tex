@@ -7,5 +7,67 @@
 \end{problem}
 
 \begin{proof}
+  Using \eqref{partialy} and \eqref{partialx}, we begin by applying the Fourier transform to the first differential equation yielding
+  \begin{align*}
+    \fourier{u_{tt} + u_{xxxx}} = \der{t}{2}\left[U(k, t)\right] + k^4 U(k, t) = 0 = \fourier{0}.
+  \end{align*}
+  This is a second-order linear homogeneous differential equation, the solution to which we readily see is given by
+  \begin{align}\label{ode_solution}
+    U(k, t) = c_1 \cos(k^2 t) + c_2 \sin(k^2 t).
+  \end{align}
+
+  Applying the Fourier transform to the last two equations yields
+  \begin{align*}
+    \fourier{u(x, 0)} = U(k, 0) = F(k) = \fourier{f(x)}
+  \end{align*}
+  and
+  \begin{align*}
+    \fourier{u_t(x, 0)} = \fourier{\left[\frac{\partial u}{\partial t}\right]_{t=0}} &= \left.\der{t}{}\left[U(k, t)\right]\right\rvert_{t=0} = 0 = \fourier{0}.
+  \end{align*}
+
+  Using the form \eqref{ode_solution} of the solution we see from the second equation that
+  \begin{align*}
+    U(k, 0) = c_1 = F(k).
+  \end{align*}
+  Similarly, we also see from the last equation that
+  \begin{align*}
+    \der{t}{}\left[U(k, t)\right] = -c_1 k^2 \sin(k^2 t) + c_2 k^2 \cos(k^2 t)
+  \end{align*}
+  which implies that
+  \begin{align*}
+    \left.\der{t}{}\left[U(k, t)\right]\right\rvert_{t=0} = c_2 k^2 = 0.
+  \end{align*}
+  Since this equation must hold for all $k$, this implies that $c_2 = 0$.
+  Thus, the solution \eqref{ode_solution} becomes
+  \begin{align*}
+    U(k,t) = F(k)\cos(k^2t).
+  \end{align*}
+
+  From the Convolution Theorem, we see that
+  \begin{align*}
+    u(x,t) = \fourierinv{F(k)\cos(k^2 t)} &= (f \ast g)(x) \\
+    &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}f(x-\xi)g(\xi)d\xi
+  \end{align*}
+  where $g(x) = \fourierinv{\cos(k^2 t}$.
+
+  Note that it can be shown that
+  \begin{align*}
+    \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} e^{ik(x \pm kt)}dk = \frac{1}{2}\left(\frac{(1\pm i)e^{\mp i x^2 / 4t}}{\sqrt{t}}\right).
+  \end{align*}
+  Thus, using the definition of the complex exponential, we have that
+  \begin{align*}
+    g(x) &= \fourierinv{\cos(k^2 t)} \\
+    &= \frac{1}{2\sqrt{2\pi}}\int_{-\infty}^\infty e^{ik(x + kt)} + e^{ik(x - kt)}dk \\
+    &= \frac{1}{4\sqrt{t}}\left[(1+i)e^{-ix^2/4t} + (1-i)e^{ix^2/4t}\right] \\
+    &= \frac{1}{2\sqrt{t}}\left[\frac{e^{ix^2/4t} + e^{-ix^2/4t}}{2} + \frac{e^{ix^2/4t} - e^{-ix^2/4t}}{2i}\right] \\
+    &= \frac{\cos\left(\frac{x^2}{4t}\right) + \sin\left(\frac{x^2}{4t}\right)}{2\sqrt{t}}.
+  \end{align*}
+  Therefore, the solution to the original differential equation is given by
+  \begin{align*}
+    u(x,t)
+    &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}f(x-\xi)g(\xi)d\xi \\
+    &= \frac{1}{2\sqrt{2\pi t}} \int_{-\infty}^{\infty} f(x-\xi)\left(\cos\left(\frac{\xi^2}{4t}\right) + \sin\left(\frac{\xi^2}{4t}\right)\right) d\xi.
+  \end{align*}
+
 \end{proof}
 \newpage
