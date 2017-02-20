@@ -16,7 +16,7 @@
     U(k, t) = c_1 \cos(k^2 t) + c_2 \sin(k^2 t).
   \end{align}
 
-  Applying the Fourier transform to the last two equations yields
+  Applying the Fourier transform to the boundary conditions yields
   \begin{align*}
     \fourier{u(x, 0)} = U(k, 0) = F(k) = \fourier{f(x)}
   \end{align*}
@@ -25,11 +25,11 @@
     \fourier{u_t(x, 0)} = \fourier{\left[\frac{\partial u}{\partial t}\right]_{t=0}} &= \left.\der{t}{}\left[U(k, t)\right]\right\rvert_{t=0} = 0 = \fourier{0}.
   \end{align*}
 
-  Using the form \eqref{ode_solution} of the solution we see from the second equation that
+  Using the form \eqref{ode_solution} of the solution we see from the first boundary condition that
   \begin{align*}
     U(k, 0) = c_1 = F(k).
   \end{align*}
-  Similarly, we also see from the last equation that
+  Similarly, we also see from the second boundary condition that
   \begin{align*}
     \der{t}{}\left[U(k, t)\right] = -c_1 k^2 \sin(k^2 t) + c_2 k^2 \cos(k^2 t)
   \end{align*}
@@ -48,7 +48,7 @@
     u(x,t) = \fourierinv{F(k)\cos(k^2 t)} &= (f \ast g)(x) \\
     &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}f(x-\xi)g(\xi)d\xi
   \end{align*}
-  where $g(x) = \fourierinv{\cos(k^2 t}$.
+  where $g(x) = \fourierinv{\cos(k^2 t)}$.
 
   Note that it can be shown that
   \begin{align*}
