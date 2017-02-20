@@ -83,31 +83,5 @@
     &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \left(\frac{\omega F(k) + i G(k)}{2\omega}\right)e^{i(kx-\omega t)} + \left(\frac{\omega F(k) - i G(k)}{2\omega}\right)e^{i(kx + \omega t)}dk.
   \end{align*}
 
-
-  % Applying the Fourier transform to the second equation yields that
-  % \begin{align*}
-  %   \fourier{u(x,0)} = U(k, 0) = F(k) = \fourier{f(x)}.
-  % \end{align*}
-  % This, in conjunction with \eqref{ode_solution}, shows that $c_1 + c_2 = F(k)$ or that
-  % \begin{align*}
-  %   U(k, t) &= \left(F(k) - c_2\right)e^{-i \omega t} + c_2 e^{i\omega t} \\
-  %   &= F(k)e^{-i\omega t} + c_2 e^{-i\omega t} + c_2 e^{i\omega t}.
-  % \end{align*}
-
-  % After applying the Inverse Fourier transform to this equation, we see that
-  % \begin{align*}
-  %   u(x, t) &= \fourierinv{F(k)e^{-i\omega t} + c_2 e^{-i\omega t} + c_2e^{i\omega t}} \\
-  %   &= \fourierinv{F(k)e^{-i\omega t}} + c_2 \fourierinv{e^{-i\omega t}} + c_2 \fourierinv{e^{i\omega t}}.
-  % \end{align*}
-  % Note that, by definition, we have that
-  % \begin{align*}
-  %   \fourierinv{e^{\mp i\omega t}} &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{ikx} e^{\mp i\omega t} dk \\
-  %   &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{i(kx \mp \omega t)}dk.
-  % \end{align*}
-  % The Convolution Theorem tells us that
-  % \begin{align*}
-  %   \fourierinv{F(k)e^{-i\omega t}} = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(\xi) h(x-\xi)d\xi
-  % \end{align*}
-  % where
 \end{proof}
 \newpage
