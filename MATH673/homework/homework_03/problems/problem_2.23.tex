@@ -34,9 +34,30 @@
         &= \frac{\pi}{2a^2}\int_{-\infty}^\infty e^{-2a|k|} dk \\
         &= \frac{\pi}{a^2}\int_0^\infty e^{-2ak} dk \\
         &= \frac{\pi}{a^2}\left[ \left. -\frac{e^{-2a k}}{2a}\right\rvert_{0}^\infty \right] \\
-        &= \frac{\pi}{2a^3}
+        &= \frac{\pi}{2a^3}.
       \end{align*}
-    \item[b.]
+
+    \item[c.] Let $\displaystyle f(x) = \frac{\sin ax}{x}$. Then from our table of Fourier transforms
+      we see that
+      \begin{align*}
+        \fourier{f(x)} = F(k) = \sqrt{\frac{\pi}{2}}H(a-|k|).
+      \end{align*}
+
+      From Parseval's relation, we see that
+      \begin{align*}
+        \int_{-\infty}^\infty \frac{\sin^2 ax}{x}dx
+        = \int_{-\infty}^\infty f(x)\overline{f(x)} dx
+        = \int_{-\infty}^\infty F(k)\overline{F(k)} dk
+        = \frac{\pi}{2}\int_{-\infty}^\infty H(a-|k|)^2 dk.
+      \end{align*}
+
+      Therefore, we have using the definition of the Heaviside function that
+      \begin{align*}
+        \int_{-\infty}^\infty \frac{\sin^2 ax}{x}dx
+        &= \frac{\pi}{2}\int_{-\infty}^\infty H(a-|k|)^2 dk \\
+        &= \frac{\pi}{2}\int_{-a}^a dk \\
+         &= a\pi.
+      \end{align*}
   \end{enumerate}
 \end{proof}
 \newpage
