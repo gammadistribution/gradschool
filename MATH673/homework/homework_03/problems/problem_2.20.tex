@@ -1,6 +1,77 @@
 \begin{problem}{2.20}
+  Apply the Fourier cosine transform to find the solution $u(x, y)$ of the problem
+  \begin{align*}
+    u_{xx} + u_{yy} = 0 &, \qquad 0 < x < \infty, \quad 0 < y < \infty \\
+    u(x, 0) = H(a-x) &, \qquad x < a \\
+    u_x(0, y) = 0 &, \qquad 0 < x, y < \infty.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Consider the function $u(x, y)$. The Fourier cosine transform
+  of $u$ with respect to $x$ is defined as
+  \begin{align*}
+    \fouriercos{u(x, y)} = U_c(k, y) = \sqrt{\frac{2}{\pi}} \int_{0}^{\infty}  u(x, y)  \cos (kx)dx.
+  \end{align*}
+  From this definition we see using the Leibniz integral rule that
+  \begin{align*}
+    \fouriercos{\frac{\partial^n u(x,y)}{\partial y^n}}
+    &= \sqrt{\frac{2}{\pi}} \int_{0}^{\infty} \frac{\partial^n u(x,y)}{\partial y^n} \cos (kx)dx \\
+    &= \der{y}{n}\left[\sqrt{\frac{2}{\pi}} \int_{0}^{\infty} u(x,y) \cos (kx)dx\right] \\
+    &= \der{y}{n}\left[\fouriercos{u(x,y)}\right].
+  \end{align*}
+  The transforms of the partials of $u$ with respect to $x$ are not as easy to characterize. Nevertheless,
+  we see from the properties of the Fourier cosine transform that
+  \begin{align*}
+    \fouriercos{\frac{\partial u(x,y)}{\partial x}} = k \fouriersin{u(x,y)} - \sqrt{\frac{2}{\pi}}u(0, y)
+  \end{align*}
+  and
+  \begin{align*}
+    \fouriercos{\frac{\partial^2 u(x,y)}{\partial x^2}} = -k^2 \fouriercos{u(x,y)} - \sqrt{\frac{2}{\pi}}u_x(0, y)
+  \end{align*}
+
+  Let $U_c(x, y) = \fouriercos{u(x,y)}$. Then, applying the Fourier cosine transform to the first differential equation shows
+  that
+  \begin{align*}
+    \fouriercos{u_{xx} + u_{yy}} = -k^2 U_c(k,y) - \sqrt{\frac{2}{\pi}}u_x(0,y) + \der{y}{2}\left[U_c(k,y)\right] = 0 = \fouriercos{0}.
+  \end{align*}
+  From the third equation we see that $u_x(0, y) = 0$ for all $0 < x,y < \infty$
+  which implies that the above equation reduces to
+  \begin{align*}
+    \der{y}{2}\left[U_c(k,y)\right] -k^2 U_c(k,y) = 0.
+  \end{align*}
+  This is a second-order linear homogeneous differential equation, the solution to which is readily seen
+  to be
+  \begin{align*}
+    U_c(k,y) = c_1 e^{-ky} + c_2 e^{k y}.
+  \end{align*}
+  However, since $U_c(k,y) \to 0$ as $k \to \infty$, we must have that
+  $c_2 = 0$. Thus, the solution to the previous differential equation is given by
+  \begin{align}\label{costransol}
+    U_c(k,y) = c_1 e^{-ky}.
+  \end{align}
+
+  We now apply the Fourier cosine transform to the second differential equation yielding
+  \begin{align*}
+    \fouriercos{u(x, 0)} = U_c(k, 0) = \fouriercos{H(a-x)}.
+  \end{align*}
+  Using the form \eqref{costransol} of the solution to the transformed differential equation
+  and a table of Fourier cosine transforms we see that
+  \begin{align*}
+    U_c(k,0) = c_1 = \fouriercos{H(a-x)} = \sqrt{\frac{2}{\pi}}\left(\frac{\sin ak}{k}\right).
+  \end{align*}
+  Thus, the solution to the transformed differential equation with the boundary conditions listed above is given by
+  \begin{align*}
+    U_c(k, y) = \fouriercos{H(a-x)}e^{-ky} = \sqrt{\frac{2}{\pi}}\left(\frac{\sin ak}{k}\right)e^{-ky}.
+  \end{align*}
+
+  Therefore, taking the inverse Fourier cosine transform to both sides shows that
+  the solution to the original differential equation is given by
+  \begin{align*}
+    u(x, y) = \fouriercosinv{U_c(k, y)}
+    &= \sqrt{\frac{2}{\pi}} \int_0^\infty \sqrt{\frac{2}{\pi}}\left(\frac{\sin ak}{k}\right)e^{-ky} \cos kx dk \\
+    &= \frac{2}{\pi} \int_0^\infty \left(\frac{\sin ak}{k}\right)e^{-ky} \cos kx dk.
+  \end{align*}
+
 \end{proof}
 \newpage
