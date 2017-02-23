@@ -11,5 +11,40 @@
 \end{problem}
 
 \begin{proof}
+  We begin by applying the Fourier transform to the system of differential equations. Using
+  the properties of the Fourier transform with respect to $x$, we see that
+  \begin{align*}
+    &\der{y}{2}\left[U(k, y)\right] + k^4 U(k, y) = 0 \\
+    &U(k, 0) = F(k)\\
+    &\left. \der{y}{}\left[U(k, y)\right] \right \rvert_{y=0} = 0, \qquad -\infty < k < \infty,\ 0 \leq y.
+  \end{align*}
+  The first equation of the transformed system is a second-order linear homogeneous ordinary differential equation. Its solution
+  is given by
+  \begin{align*}
+    U(k, y) = c_1 \cos(k^2 y) + c_2  \sin (k^2 y).
+  \end{align*}
+
+  From this general solution, we see from the second equation that
+  \begin{align*}
+    U(k, 0) = c_1 = F(k).
+  \end{align*}
+  Similarly, using the general solution, we see from the third equation that
+  \begin{align*}
+    \der{y}{}\left[U(k,y)\right] = -c_1 k^2 \sin(k^2y) + c_2 k^2 \cos(k^2 y)
+  \end{align*}
+  which implies that
+  \begin{align*}
+    &\left. \der{y}{}\left[U(k, y)\right] \right \rvert_{y=0} = c_2 k^2 = 0.
+  \end{align*}
+  Since this must hold for all $k$, we must have have that $c_2 = 0$.
+
+  Thus, the solution to the transformed system is given by
+  \begin{align*}
+    U(k, y) = F(k)\cos(k^2y).
+  \end{align*}
+  Therefore, the solution to the original differential equation is
+  \begin{align*}
+    u(x, y) = \fourierinv{U(k, y)} = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty F(k)\cos(k^2 y) e^{ikx} dk.
+  \end{align*}
 \end{proof}
 \newpage
