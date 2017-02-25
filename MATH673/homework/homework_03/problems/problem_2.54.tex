@@ -8,5 +8,58 @@
 \end{problem}
 
 \begin{proof}
+  Throughout, we assume that $\vec{x} = (x_1, x_2) = (x, y) \in \mathbb{R}^2$.
+  \begin{enumerate}
+    \item[a.] Under our assumption, the equation becomes
+      \begin{align*}
+        Lu(\vec{x}) \equiv \frac{\partial^4}{\partial x_1^4}\left[u(\vec{x})\right] - \frac{\partial^2}{\partial x_2^2}\left[u(\vec{x})\right] + 2u(\vec{x}) = f(\vec{x}).
+      \end{align*}
+      Applying the Fourier transform to this equation yields
+      \begin{align*}
+        \fourier{Lu(\vec{x})}
+        = (i k_1)^4 U(\vec{k}) - (ik_2)^2U(\vec{k}) + 2 U(\vec{k})
+        = F(\vec{k})  = \fourier{f(\vec{x})}.
+      \end{align*}
+      Thus, we see that
+      \begin{align*}
+        [k_1^4 + k_2^2 + 2]U(\vec{k}) = F(\vec{k})
+      \end{align*}
+      or that
+      \begin{align*}
+        U(\vec{k}) = \frac{F(\vec{k})}{k_1^4 + k_2^2 + 2}.
+      \end{align*}
+      Therefore, from the definition of the Fourier inverse, we have that the solution to the original
+      equation is
+      \begin{align*}
+        u(\vec{x}) = \fourierinv{U(\vec{k})}
+        &= \frac{1}{2\pi}\int_{-\infty}^\infty \frac{F(\vec{k})}{k_1^4 + k_2^2 + 2} e^{i \vec{k}\cdot \vec{x}} d\vec{k} \\
+        &= \frac{1}{2\pi}\int_{-\infty}^\infty\int_{-\infty}^\infty \frac{F(k_1, k_2)}{k_1^4 + k_2^2 + 2} e^{i (k_1x_1 + k_2x_2)} dk_1dk_2.
+      \end{align*}
+    \item[b.] Under our assumption, the equation becomes
+      \begin{align*}
+        Lu(\vec{x}) \equiv \frac{\partial^2}{\partial x_1^2}\left[u(\vec{x})\right] + 2 \frac{\partial^2}{\partial x_2^2}\left[u(\vec{x})\right] + 3\frac{\partial}{\partial x_1}\left[u(\vec{x})\right]- 4u(\vec{x}) = f(\vec{x}).
+      \end{align*}
+      Applying the Fourier transform to this equation yields
+      \begin{align*}
+        \fourier{Lu(\vec{x})}
+        = (i k_1)^2 U(\vec{k}) + 2(ik_2)^2U(\vec{k}) + 3i k_1 U(\vec{k}) - 4 U(\vec{k})
+        = F(\vec{k})  = \fourier{f(\vec{x})}.
+      \end{align*}
+      Thus, we see that
+      \begin{align*}
+        [-k_1^2 - 2k_2^2 + 3ik_1- 4]U(\vec{k}) = F(\vec{k})
+      \end{align*}
+      or that
+      \begin{align*}
+        U(\vec{k}) = \frac{F(\vec{k})}{-k_1^2 - 2k_2^2 + 3ik_1- 4}.
+      \end{align*}
+      Therefore, from the definition of the Fourier inverse, we have that the solution to the original
+      equation is
+      \begin{align*}
+        u(\vec{x}) = \fourierinv{U(\vec{k})}
+        &= \frac{1}{2\pi}\int_{-\infty}^\infty \frac{F(\vec{k})}{-k_1^2 - 2k_2^2 + 3ik_1- 4} e^{i \vec{k}\cdot \vec{x}} d\vec{k} \\
+        &= \frac{1}{2\pi}\int_{-\infty}^\infty\int_{-\infty}^\infty \frac{F(k_1, k_2)}{-k_1^2 - 2k_2^2 + 3ik_1- 4} e^{i (k_1x_1 + k_2x_2)} dk_1dk_2.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
