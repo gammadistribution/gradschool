@@ -8,8 +8,98 @@
     &u(x, y, t) \to 0 \quad \text{as} \quad |x| \to \infty,\ |y| \to \infty \qquad \text{for all $t\geq 0$},\\
     &u(x, y, 0) = f(x, y),\quad u_t(x, y, 0) = 0 \qquad \text{for all $x, y$}.
   \end{align*}
+  Solve the differential equation.
 \end{problem}
 
 \begin{proof}
+  Let $\vec{x} = (x_1, x_2, \dots, x_n)\in \mathbb{R}^n$ and suppose that $u(\vec{x}, t)$ is given. The
+  Fourier transform of $u(\vec{x}, t)$ with respect to $\vec{x}$ is defined to be
+  \begin{align}\label{multifourier}
+    \fourier{u(\vec{x}, t)} = U(\vec{k}, t) = \frac{1}{(2\pi)^{n/2}}\int_{-\infty}^\infty u(\vec{x}, t) e^{-i\vec{x}\cdot\vec{k}} d\vec{x}
+  \end{align}
+  where $\vec{k}\in\mathbb{R}^n$.
+
+  In order to investigate the Fourier transform of partials of $u(\vec{x}, t)$ with respect to a given component of $\vec{x}$, define the
+  Fourier transform of $u(\vec{x}, t)$ with respect to $x_j$ as the following
+  \begin{align*}
+    \fourierwrt{u(\vec{x}, t)}{x_j} = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} u(\vec{x}, t) e^{-i x_jk_j }dx_j.
+  \end{align*}
+  Further, we will also use the function $\pi_{j}: \mathbb{R}^n \to \mathbb{R}^{n-1}$ defined as
+  \begin{align*}
+    \pi_{j}(\vec{x}) := (x_1, \dots, x_{j-1}, x_{j+1}, \dots, x_n)
+  \end{align*}
+  to aid in our description of the Fourier transform of partials of $u(\vec{x}, t)$.
+  Now from definition \eqref{multifourier} and Leibniz's integral rule we see that
+  \begin{align*}
+    \fourier{\frac{\partial^n u(\vec{x}, t)}{\partial t^n}} &= \frac{1}{(2\pi)^{n/2}}\int_{-\infty}^\infty \frac{\partial^n }{\partial t^n}\left[u(\vec{x}, t)\right] e^{-i\vec{x}\cdot\vec{k}} d\vec{x} \\
+    &= \der{t}{n}\left[\frac{1}{(2\pi)^{n/2}}\int_{-\infty}^\infty u(\vec{x}, t) e^{-i\vec{x}\cdot\vec{k}} d\vec{x} \right]\\
+    &= \der{t}{n}\left[\fourier{u(\vec{x}, t)}\right].
+  \end{align*}
+  Similarly, from definition \eqref{multifourier} and previous results about the Fourier transform,
+  we see that
+  \begin{align*}
+    \fourier{\frac{\partial^n u(\vec{x}, t)}{\partial x_j^n}}
+    &= \frac{1}{(2\pi)^{n/2}}\int_{-\infty}^\infty \dots \int_{-\infty}^\infty\frac{\partial^n }{\partial x_j^n}\left[u(\vec{x}, t)\right] e^{-i x_1 k_1}\cdots e^{-i x_n k_n} dx_1 \dots dx_n \\
+    &= \frac{1}{(2\pi)^{(n-1)/2}}\int_{-\infty}^\infty \fourierwrt{\frac{\partial^n }{\partial x_j^n}\left[u(\vec{x}, t)\right]}{x_j} e^{-i \pi_j(\vec{x}) \cdot \pi_j(\vec{k})} d\pi_j(\vec{x}) \\
+    &= \frac{(ik_j)^n}{(2\pi)^{(n-1)/2}}\int_{-\infty}^\infty \fourierwrt{u(\vec{x}, t)}{x_j} e^{-i \pi_j(\vec{x}) \cdot \pi_j(\vec{k})} d\pi_j(\vec{x}) \\
+    &= (ik_j)^n\fourier{u(\vec{x}, t)}.
+  \end{align*}
+
+  Now, define $\vec{x} = (x_1, x_2) = (x, y) \in\mathbb{R}^2$. Then the system of differential equations of the function
+  $u(\vec{x}, t) = u(x, y, t)$ becomes
+  \begin{align*}
+    c^2\left(u_{x_1x_1} + u_{x_2x_2}\right) - u_{tt} = 0, \qquad -\infty < x_1, x_2 < \infty,\ 0 < t,
+  \end{align*}
+  with the initial and boundary conditions
+  \begin{align*}
+    &u(\vec{x}, t) \to 0 \quad \text{as} \quad |x_1| \to \infty,\ |x_2| \to \infty \qquad \text{for all $t\geq 0$},\\
+    &u(\vec{x}, 0) = f(\vec{x}),\quad \frac{\partial}{\partial t}\left[u(\vec{x}, 0)\right]= 0 \qquad \text{for all $\vec{x}\in\mathbb{R}^2$}.
+  \end{align*}
+
+  Applying the Fourier transform to the left-hand side of the first equation yields
+  \begin{align*}
+    \fourier{c^2\left(u_{x_1x_1} + u_{x_2x_2}\right) - u_{tt}}
+    &= -c^2k_1^2 U(\vec{k}, t) -c^2k_2^2U(\vec{k}, t) - \der{t}{2}\left[U(\vec{k}, t)\right ]\\
+    &= -\der{t}{2}\left[U(\vec{k}, t)\right ] -c^2\norm{\vec{k}}^2 U(\vec{k}, t)
+  \end{align*}
+  which implies that the transformed first equation becomes
+  \begin{align*}
+    \der{t}{2}\left[U(\vec{k}, t)\right ] +c^2\norm{\vec{k}}^2 U(\vec{k}, t) = 0.
+  \end{align*}
+  Similarly, we deduce that the transformed initial and boundary conditions become
+  \begin{align*}
+    &\fourier{u(\vec{x}, t)} = U(\vec{k}, t) \to 0 \quad \text{as} \quad |k_1| \to \infty,\ |k_2| \to \infty \qquad \text{for all $t\geq 0$},\\
+    &\fourier{u(\vec{x}, 0)} = U(\vec{k}, 0) = F(\vec{k}) = \fourier{f(\vec{x})}, \\
+    &\fourier{\frac{\partial}{\partial t}\left[u(\vec{x}, 0)\right]} = \der{t}{}\left[U(\vec{k}, 0)\right]= 0 \qquad \text{for all $\vec{k}\in\mathbb{R}^2$}.
+  \end{align*}
+
+  We see that the transformed first equation is a second-order linear homogeneous ordinary differential equation, from
+  which we readily see the solution is
+  \begin{align*}
+    U(\vec{k}, t) = c_1 \cos(c\norm{\vec{k}}t) + c_2\sin(c\norm{\vec{k}}t).
+  \end{align*}
+  Using this solution, we see from the transformed boundary condition that
+  \begin{align*}
+    U(\vec{k}, 0) = c_1 = F(\vec{k}).
+  \end{align*}
+  Also from this solution, we see from the transformed initial condition that
+  \begin{align*}
+    \der{t}{}\left[U(\vec{k}, t)\right] = -c_1 \left(c\norm{\vec{k}}\right) \sin(c\norm{\vec{k}}t) + c_2 (c\norm{\vec{k}})\cos(c\norm{\vec{k}}t)
+  \end{align*}
+  which implies that
+  \begin{align*}
+    \der{t}{}\left[U(\vec{k}, 0)\right] = c_2 (c\norm{\vec{k}}) = 0.
+  \end{align*}
+  Since this holds for all $\vec{k}\in\mathbb{R}^2$, we must have that $c_2 = 0$.
+  Thus, the solution to the transformed system of differential equations is
+  \begin{align*}
+    U(\vec{k}, t) = F(\vec{k}) \cos(c\norm{\vec{k}}t).
+  \end{align*}
+
+  Therefore, from the definition of the inverse Fourier transform, the solution
+  to the original system of differential equations is given by
+  \begin{align*}
+    u(\vec{x}, t) = \fourierinv{U(\vec{k}, t)} = \frac{1}{2\pi} \int_{-\infty}^\infty F(\vec{k}) \cos(c\norm{\vec{k}}t) e^{i \vec{x} \cdot \vec{k}} d\vec{k}.
+  \end{align*}
 \end{proof}
 \newpage
