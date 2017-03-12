@@ -7,5 +7,74 @@
 \end{problem}
 
 \begin{proof}
+  Recall that if $f(t) \in L^1(\mathbb{R})$, then the Laplace Transform of $f$ is
+  defined to be
+  \begin{align}\label{laplacedef}
+    \laplace{f(t)} = \bar{f}(s) = \int_0^\infty f(t) e^{-st} dt, \quad \text{Re } s > 0.
+  \end{align}
+  Note that it can be shown that the Laplace transform satisfies the important
+  property
+  \begin{align}\label{laplace1}
+    \laplace{t^n f(t)} = (-1)^n \der{s}{n}\left[\laplace{f(t)}\right].
+  \end{align}
+  \begin{enumerate}
+    \item[a.] Let $\displaystyle f(t) = \int_0^t \frac{\sin ax}{x} dx$. Then $f(0) = 0$
+      and $\displaystyle f'(t) = \frac{\sin at}{t}$ so that $tf'(t) = \sin at$.
+      This implies that
+      \begin{align*}
+        \laplace{tf'(t)} = \laplace{\sin at} = \frac{a}{s^2+a^2}.
+      \end{align*}
+
+      The Laplace transform satisfies the following property that relates a function's
+      derivative to its Laplace Transform:
+      \begin{align*}
+        \laplace{f'(t)} = s \laplace{f(t)} - f(0).
+      \end{align*}
+      This combined with \eqref{laplace1} shows that
+      \begin{align*}
+        \laplace{tf'(t)} = -\der{s}{}\left[\laplace{f'(t)}\right] = -\der{s}{}\left[s\laplace{f(t)} - f(0)\right] = \frac{a}{s^2+a^2},
+      \end{align*}
+      or that
+      \begin{align*}
+        \der{s}{}\left[s \laplace{f(t)}\right] = -\frac{a}{s^2+a^2}.
+      \end{align*}
+      Integrating both sides of the above equation yields that
+      \begin{align*}
+        s\laplace{f(t)} = -\int \frac{a}{s^2+a^2} ds = - \tan^{-1}(s/a) + C.
+      \end{align*}
+      In order to determine the constant of integration, we use the Initial Value Theorem which states
+      that
+      \begin{align*}
+        \lim_{s\to\infty} s \laplace{f(t)} = \lim_{t\to0} f(t) = f(0).
+      \end{align*}
+      Since $f(0) = 0$, this implies that
+      \begin{align*}
+        \lim_{s\to\infty} s \laplace{f(t)} = \lim_{s\to\infty} \left[- \tan^{-1}(s/a) + C\right] = 0
+      \end{align*}
+      or that $C = \frac{\pi}{2}$. Therefore, we have that
+      \begin{align*}
+        s\laplace{f(t)} = - \tan^{-1}(s/a) + \frac{\pi}{2} = \tan^{-1}(a/s)
+      \end{align*}
+      so that
+      \begin{align*}
+        \laplace{f(t)} = \frac{\tan^{-1}(a/s)}{s}.
+      \end{align*}
+
+    \item[b.] Let $f(t) = t H(t-a)$ and assume that $a>0$. By property \eqref{laplace1}
+      we see that
+      \begin{align*}
+        \laplace{t H(t-a)} = -\der{s}{}\left[\laplace{H(t-a)}\right].
+      \end{align*}
+      From our table of Laplace Transforms, we have that
+      \begin{align*}
+        \laplace{H(t-a)} = \frac{e^{-a s}}{s},
+      \end{align*}
+      assuming that $a>0$. Therefore,
+      \begin{align*}
+        \laplace{f(t)} = - \der{s}{}\left[\laplace{H(t-a)}\right] &= - \der{s}{}\left[s^{-1}e^{-as}\right] \\
+        &= -\left[-s^{-2}e^{-as} - as^{-1}e^{-as}\right] \\
+        &= \frac{(1 + as)e^{-as}}{s^2}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
