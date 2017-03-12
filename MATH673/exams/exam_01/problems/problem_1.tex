@@ -20,12 +20,12 @@
         &= \frac{1}{\sqrt{2\pi}}\left[\int_{-\infty}^0 x^2 e^{-(-a+ik)x} dx + \int_{0}^\infty x^2 e^{-(a+ik)x} dx\right].
       \end{align*}
       Now, we see by integration by parts that
-      \begin{align*}
+      \begin{align}\label{intform}
         \int_c^d x^2 e^{-(b+ik)x}dx
-        &= \left.-\frac{x^2}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{2}{b+ik}\int_c^d x e^{-(b+ik)x}dx \\
-        &= \left.-\frac{x^2}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{2}{b+ik}\left[\left.-\frac{x}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{1}{b+ik}\int_c^d e^{-(b+ik)x}dx\right]\\
+        &= \left.-\frac{x^2}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{2}{b+ik}\int_c^d x e^{-(b+ik)x}dx \notag\\
+        &= \left.-\frac{x^2}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{2}{b+ik}\left[\left.-\frac{x}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{1}{b+ik}\int_c^d e^{-(b+ik)x}dx\right]\notag\\
         &=\left.-\frac{x^2}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{2}{b+ik}\left[\left.-\frac{x}{b+ik}e^{-(b+ik)x}\right\rvert_c^d - \left.\frac{1}{(b+ik)^2}e^{-(b+ik)x}\right\rvert_c^d\right].
-      \end{align*}
+      \end{align}
       Thus,
       \begin{align*}
         \int_{-\infty}^0 x^2 e^{-(-a+ik)x} dx = -\frac{2}{(-a+ik)^3}

@@ -7,5 +7,69 @@
 \end{problem}
 
 \begin{proof}
+  Suppose that $F_c(k) = \fouriercos{f(x)}$ and $G_c(k) = \fouriercos{g(x)}$. Then Parseval's
+  relation derived from the Convolution Theorem for the Fourier Cosine Transform states
+  that
+  \begin{align}\label{parseval}
+    \int_{0}^\infty F_c(k)G_c(k) dk = \int_0^\infty f(x)g(x) dx.
+  \end{align}
+  \begin{enumerate}
+    \item[a.] Let $\displaystyle F_c(k) = \frac{\sin a k}{k}$ and $\displaystyle G_c(k) = \frac{\sin b k}{k}$.
+      Then Parseval's theorem shows that
+      \begin{align*}
+        \int_0^\infty \frac{\sin ak \sin bk}{k^2} dk = \int_0^\infty F_c(k)G_c(k)dk = \int_0^\infty f(x)g(x)dx
+      \end{align*}
+      where $f(x) = \fouriercosinv{F_c(k)}$ and $f(x) = \fouriercosinv{G_c(k)}$. From our table
+      of Fourier Cosine Transforms, we see that for $p\in\mathbb{R}$,
+      \begin{align*}
+        \fouriercos{H(p-x)} = \sqrt{\frac{2}{\pi}}\frac{\sin p k }{k}.
+      \end{align*}
+      This implies that
+      \begin{align*}
+        \fouriercosinv{\frac{\sin p k }{k}} = \sqrt{\frac{\pi}{2}}H(p-x).
+      \end{align*}
+      Thus, we have that
+      \begin{align*}
+        \int_0^\infty \frac{\sin ak \sin bk}{k^2} dk = \int_0^\infty F_c(k)G_c(k)dk = \frac{\pi}{2}\int_0^\infty H(a-x)H(b-x)dx.
+      \end{align*}
+      Now, we note from the definition of the Heaviside function that
+      \begin{align*}
+        H(a-x)H(b-x) = \begin{cases}1 & \text{if $x<\min(a,b)$} \\
+        0 & \text{if $x>\min(a,b)$} \end{cases}.
+      \end{align*}
+      Therefore, we have that
+      \begin{align*}
+        \int_0^\infty \frac{\sin ak \sin bk}{k^2} dk = \frac{\pi}{2}\int_0^\infty H(a-x)H(b-x)dx = \frac{\pi}{2}\int_0^{\min(a,b)}dx = \frac{\pi}{2}\min(a,b).
+      \end{align*}
+
+    \item[b.] Let $\displaystyle F_c(k) = \frac{a^2-k^2}{(k^2+a^2)^2}$.
+      Then Parseval's theorem shows that
+      \begin{align*}
+        \int_0^\infty \frac{(a^2 - k^2)^2}{(k^2+a^2)^4} dk = \int_0^\infty F_c(k)F_c(k)dk = \int_0^\infty f(x)f(x)dx
+      \end{align*}
+      where $f(x) = \fouriercosinv{F_c(k)}$. From our table
+      of Fourier Cosine Transforms, we see that for $a > 0$,
+      \begin{align*}
+        \fouriercos{x e^{-a x}} = \sqrt{\frac{2}{\pi}}\frac{a^2-k^2}{(k^2+a^2)^2}.
+      \end{align*}
+      This implies that
+      \begin{align*}
+        \fouriercosinv{\frac{a^2-k^2}{(k^2+a^2)^2}} = \sqrt{\frac{\pi}{2}}.
+      \end{align*}
+
+      Thus, we have that
+      \begin{align*}
+        \int_0^\infty \frac{(a^2 - k^2)^2}{(k^2+a^2)^4} dk = \int_0^\infty F_c(k)F_c(k)dk = \frac{\pi}{2}\int_0^\infty x^2e^{-2ax}dx.
+      \end{align*}
+      From \eqref{intform}, we see by setting $b = 2a$ and $k=0$ that
+      \begin{align*}
+        \int_0^\infty x^2e^{-2ax}dx = \frac{1}{4a^3}.
+      \end{align*}
+
+      Therefore, we have that
+      \begin{align*}
+        \int_0^\infty \frac{(a^2 - k^2)^2}{(k^2+a^2)^4} dk = \frac{\pi}{2}\int_0^\infty x^2e^{-2ax}dx = \frac{\pi}{(2a)^3}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage

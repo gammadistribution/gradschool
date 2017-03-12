@@ -7,5 +7,35 @@
 \end{problem}
 
 \begin{proof}
+  Consider the function $u(x, t)$. The Fourier transform
+  of $u$ with respect to $x$ is defined as
+  \begin{align}\label{fouriermulti}
+    \fourier{u(x, t)} = U(k, t) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} e^{-ikx} u(x, t) dx.
+  \end{align}
+
+  From this definition and the Leibniz integral rule, we can see by induction that
+  \begin{align}\label{partialy}
+    \fourier{\frac{\partial^n }{\partial t^n }\left[u(x,t)\right]}
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \frac{\partial^n}{ \partial t^n}\left[ u(x, t)\right] e^{-ikx} dx \notag \\
+    &= \der{t}{n}\left[\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty u(x, t) e^{-ikx} dx \right] \notag \\
+    &= \der{t}{n}\left[\fourier{u(x,t)}\right].
+  \end{align}
+  Similarly, we see from definition \eqref{fouriermulti} and previous
+  theorems regarding the Fourier transform that
+  \begin{align}\label{partialx}
+    \fourier{\frac{\partial^n}{\partial x^n}\left[u(x, t)\right]}
+    &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \frac{\partial^n}{\partial x^n}\left[u(x, t)\right] e^{-ikx} dx \notag \\
+    &= (ik)^n \left[\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty u(x,t)e^{-ikx} dx \right] \notag \\
+    &= (ik)^n \fourier{u(x,y)}.
+  \end{align}
+
+  Now, applying the Fourier transform to the first equation yields that
+  \begin{align*}
+    \fourier{\frac{\partial u}{\partial t}} = \der{t}{}\left[U(k, t)\right] = -(ak)^2 U(k,t) + F(k, t) =  \fourier{a^2 \frac{\partial^2 u}{\partial x^2} + f(x, t)}.
+  \end{align*}
+  This results in a first-order non-homogeneous linear differential equation
+  \begin{align*}
+    \der{t}{}\left[U(k, t)\right] + (ak)^2 U(k,t) = F(k, t).
+  \end{align*}
 \end{proof}
 \newpage
