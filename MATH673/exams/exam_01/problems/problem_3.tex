@@ -20,14 +20,14 @@
       \begin{align*}
         F_s(k) = \sqrt{\frac{2}{\pi}}G_s(k).
       \end{align*}
-      Thus, we have that
+      Thus, applying the inverse Fourier Sine Transform, we have that
       \begin{align*}
         f(x) = \fouriersininv{F_s(k)} = \sqrt{\frac{2}{\pi}}\fouriersininv{G_s(k)}
       \end{align*}
-      where
-      \begin{align*}
-        \fouriersininv{G_s(k)} = \sqrt{\frac{2}{\pi}}\int_0^\infty G_s(k)\sin kx dk.
-      \end{align*}
+      where the inverse Fourier Sine Transform is defined as
+      \begin{align}\label{fouriersininv}
+        g(x) = \fouriersininv{G_s(k)} = \sqrt{\frac{2}{\pi}}\int_0^\infty G_s(k)\sin kx dk.
+      \end{align}
       Therefore, the solution to the integral equation is
       \begin{align*}
         f(x) = \sqrt{\frac{2}{\pi}}\fouriersininv{G_s(k)} &= \frac{2}{\pi}\int_0^\infty G_s(k)\sin kx dk \\
@@ -65,7 +65,7 @@
       \begin{align*}
         F(k) = \frac{1}{\sqrt{2\pi}}\frac{H(k)}{G(k)} = \frac{2}{3\sqrt{2\pi}}\frac{e^{-3|k|}}{e^{-2|k|}} = \frac{2e^{-|k|}}{3\sqrt{2\pi}}.
       \end{align*}
-      Applying the Fourier Inverse Transform to this equation yields that
+      Applying the inverse Fourier Transform to this equation yields that
       \begin{align*}
         f(x) = \fourierinv{F(k)}= \frac{2}{3\sqrt{2\pi}} \fourierinv{e^{-|k|}}.
       \end{align*}

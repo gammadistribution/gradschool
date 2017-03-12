@@ -1,7 +1,7 @@
 \begin{problem}{4}
   Show that
   \begin{align*}
-    \int_0^\infty F_s(k) G_c(k) \sin kx dx = \frac{1}{2}\int_0^\infty g(\xi) \left[f(\xi + x) - f(\xi - x)\right]d\xi
+    \int_0^\infty F_s(k) G_c(k) \sin kx dk = \frac{1}{2}\int_0^\infty g(\xi) \left[f(\xi + x) - f(\xi - x)\right]d\xi
   \end{align*}
   where
   \begin{align*}
@@ -14,5 +14,35 @@
 \end{problem}
 
 \begin{proof}
+  Using the definition of $G_c(k)$, we see that
+  \begin{align*}
+    \int_0^\infty F_s(k) G_c(k) \sin kx dk = \sqrt{\frac{2}{\pi}}\int_0^\infty F_s(k) \sin kx\left[\int_0^\infty g(\xi) \cos k\xi d\xi\right] dk
+  \end{align*}
+  Interchanging the order of integration from $\xi$ to $k$ shows that
+  \begin{align*}
+    \int_0^\infty F_s(k) G_c(k) \sin kx dk &= \sqrt{\frac{2}{\pi}}\int_0^\infty F_s(k) \sin kx\left[\int_0^\infty g(\xi) \cos k\xi d\xi\right] dk \\
+    &= \sqrt{\frac{2}{\pi}}\int_0^\infty g(\xi) \left[\int_0^\infty F_s(k) \cos k\xi\sin kx dk\right] d\xi
+  \end{align*}
+
+  Using the following trigonometric identity
+  \begin{align*}
+    \cos k \xi \sin k x = \frac{\sin k(\xi + x)-\sin k (\xi -x)}{2},
+  \end{align*}
+  we then see that
+  \begin{align*}
+    \int_0^\infty F_s(k) G_c(k) \sin kx dk
+    &= \sqrt{\frac{2}{\pi}}\int_0^\infty g(\xi) \left[\int_0^\infty F_s(k) \cos k\xi\sin kx dk\right] d\xi \\
+    &= \frac{1}{2}\sqrt{\frac{2}{\pi}}\int_0^\infty g(\xi) \left[\int_0^\infty F_s(k)\sin k(\xi + x) dk - \int_0^\infty F_s(k)\sin k(\xi - x) dk\right] d\xi \\
+    &= \frac{1}{2}\int_0^\infty g(\xi) \left[f(\xi+x)-f(\xi-x)\right]d\xi,
+  \end{align*}
+  where the last line follows using \eqref{fouriersininv}, the definition of the inverse Fourier Sine Transform.
+
+  Therefore,
+  \begin{align*}
+    \int_0^\infty F_s(k) G_c(k) \sin kx dk
+    = \frac{1}{2}\int_0^\infty g(\xi) \left[f(\xi+x)-f(\xi-x)\right]d\xi,
+  \end{align*}
+  and we are done.
+
 \end{proof}
 \newpage
