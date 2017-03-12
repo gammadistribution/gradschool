@@ -7,5 +7,77 @@
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] Recall that the definition of the Fourier Sine Transform is given by
+      \begin{align*}
+        \fouriersin{f(x)} = F_s(k) = \sqrt{\frac{2}{\pi}}\int_{0}^\infty f(x) \sin kx dx.
+      \end{align*}
+      Thus, we see that
+      \begin{align*}
+        \int_0^\infty f(x) \sin kx dx = \sqrt{\frac{\pi}{2}} \fouriersin{f(x)} = \sqrt{\frac{\pi}{2}} F_s(k).
+      \end{align*}
+      Let $\displaystyle G_s(k) = \begin{cases} 1-k & k<1 \\ 0 & k > 1\end{cases}$. Then the above integral equation becomes
+      \begin{align*}
+        F_s(k) = \sqrt{\frac{2}{\pi}}G_s(k).
+      \end{align*}
+      Thus, we have that
+      \begin{align*}
+        f(x) = \fouriersininv{F_s(k)} = \sqrt{\frac{2}{\pi}}\fouriersininv{G_s(k)}
+      \end{align*}
+      where
+      \begin{align*}
+        \fouriersininv{G_s(k)} = \sqrt{\frac{2}{\pi}}\int_0^\infty G_s(k)\sin kx dk.
+      \end{align*}
+      Therefore, the solution to the integral equation is
+      \begin{align*}
+        f(x) = \sqrt{\frac{2}{\pi}}\fouriersininv{G_s(k)} &= \frac{2}{\pi}\int_0^\infty G_s(k)\sin kx dk \\
+        &= \frac{2}{\pi} \int_0^1 (1-k)\sin kx dk \\
+        &= \frac{2}{\pi} \left[\frac{1-\cos x}{x} - \frac{\sin x - x \cos x}{x^2}\right] \\
+        &= \frac{2}{\pi}\left[\frac{x - \sin x}{x^2}\right].
+      \end{align*}
+
+    \item[b.] Recall that the convolution of two functions $f$ and $g$
+      is defined such that
+      \begin{align*}
+        (f \ast g)(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x-\xi)g(\xi) d\xi.
+      \end{align*}
+      Let $\displaystyle g(x) = \frac{1}{x^2 + 2^2}$. Then we see that
+      \begin{align*}
+        \int_{-\infty}^\infty \frac{f(t)}{(x-t)^2 + 4}dt = \int_{-\infty}^\infty f(t) g(x-t)dt
+        = \sqrt{2\pi}(g \ast f)(x) = \sqrt{2\pi}(f \ast g)(x).
+      \end{align*}
+      Now, let $\displaystyle h(x) = \frac{1}{x^2+3^2}$. Then in light of the above remarks, the integral
+      equation becomes
+      \begin{align*}
+        \int_{-\infty}^\infty \frac{f(t)}{(x-t)^2 + 4}dt = \sqrt{2\pi}(f \ast g)(x) = h(x) = \frac{1}{x^2+9}.
+      \end{align*}
+      Applying the Fourier transform to the integral equation, we see by the Convolution Theorem that
+      \begin{align*}
+        \fourier{\sqrt{2\pi}(f\ast g)(x)} = \sqrt{2\pi} F(k)G(k) = H(k) = \fourier{h(x)},
+      \end{align*}
+      where $\fourier{f(x)} = F(k), \fourier{g(x)} = G(k)$, and $\fourier{h(x)} = H(k),$ respectively.
+      From our table of Fourier transforms, we see
+      that for $a>0$ we have that
+      \begin{align}\label{form}
+        \fourier{\frac{1}{x^2+a^2}} = \sqrt{\frac{\pi}{2}}\frac{e^{-a|k|}}{a}.
+      \end{align}
+      Thus, from \eqref{form} we have that
+      \begin{align*}
+        F(k) = \frac{1}{\sqrt{2\pi}}\frac{H(k)}{G(k)} = \frac{2}{3\sqrt{2\pi}}\frac{e^{-3|k|}}{e^{-2|k|}} = \frac{2e^{-|k|}}{3\sqrt{2\pi}}.
+      \end{align*}
+      Applying the Fourier Inverse Transform to this equation yields that
+      \begin{align*}
+        f(x) = \fourierinv{F(k)}= \frac{2}{3\sqrt{2\pi}} \fourierinv{e^{-|k|}}.
+      \end{align*}
+      But from \eqref{form}, we know that
+      \begin{align*}
+        \fourierinv{e^{-|k|}}= \sqrt{\frac{2}{\pi}} \frac{1}{x^2+1}.
+      \end{align*}
+      Therefore, the solution to the integral equation is given by
+      \begin{align*}
+        f(x) = \frac{2}{3\sqrt{2\pi}} \fourierinv{e^{-|k|}} &= \frac{2}{3\sqrt{2\pi}} \left[\sqrt{\frac{2}{\pi}} \frac{1}{x^2+1}\right]\\
+        &= \frac{2}{3\pi} \left[\frac{1}{x^2+1}\right].
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
