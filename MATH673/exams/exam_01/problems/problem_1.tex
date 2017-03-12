@@ -7,5 +7,90 @@
 \end{problem}
 
 \begin{proof}
+  Recall that if $f(x) \in L^1(\mathbb{R})$, then the Fourier Transform of $f$ is
+  defined to be
+  \begin{align}\label{fourierdef}
+    \fourier{f(x)} = F(k) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x) e^{-ikx} dx.
+  \end{align}
+  \begin{enumerate}
+    \item[a.] If $f(x) = x^2 e^{-a|x|}$, $a > 0$, we see from \eqref{fourierdef}
+      that, by definition, the Fourier Transform of $f$ is given by
+      \begin{align*}
+        \fourier{f(x)} = F(k) &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty x^2 e^{-a|x|} e^{-ikx} dx \\
+        &= \frac{1}{\sqrt{2\pi}}\left[\int_{-\infty}^0 x^2 e^{-(-a+ik)x} dx + \int_{0}^\infty x^2 e^{-(a+ik)x} dx\right].
+      \end{align*}
+      Now, we see by integration by parts that
+      \begin{align*}
+        \int_c^d x^2 e^{-(b+ik)x}dx
+        &= \left.-\frac{x^2}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{2}{b+ik}\int_c^d x e^{-(b+ik)x}dx \\
+        &= \left.-\frac{x^2}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{2}{b+ik}\left[\left.-\frac{x}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{1}{b+ik}\int_c^d e^{-(b+ik)x}dx\right]\\
+        &=\left.-\frac{x^2}{b+ik}e^{-(b+ik)x}\right\rvert_c^d + \frac{2}{b+ik}\left[\left.-\frac{x}{b+ik}e^{-(b+ik)x}\right\rvert_c^d - \left.\frac{1}{(b+ik)^2}e^{-(b+ik)x}\right\rvert_c^d\right].
+      \end{align*}
+      Thus,
+      \begin{align*}
+        \int_{-\infty}^0 x^2 e^{-(-a+ik)x} dx = -\frac{2}{(-a+ik)^3}
+      \end{align*}
+      and
+      \begin{align*}
+        \int_{0}^\infty x^2 e^{-(a+ik)x} dx = \frac{2}{(a+ik)^3}.
+      \end{align*}
+      Therefore,
+      \begin{align*}
+        \fourier{f(x)} = F(k)
+        &= \frac{1}{\sqrt{2\pi}}\left[\int_{-\infty}^0 x^2 e^{-(-a+ik)x} dx + \int_{0}^\infty x^2 e^{-(a+ik)x} dx\right]\\
+        &= \frac{1}{\sqrt{2\pi}}\left[-\frac{2}{(-a+ik)^3} + \frac{2}{(a+ik)^3}\right] \\
+        &= \frac{1}{\sqrt{2\pi}}\left[\frac{4a(a^2-3k)}{(a^2+k^2)^3}\right] \\
+        &= \sqrt{\frac{2}{\pi}}\left[\frac{2a(a^2-3k)}{(a^2+k^2)^3}\right].
+      \end{align*}
+    \item[b.] Recall that the Heaviside function $H$ is defined as
+      \begin{align*}
+        H(x) = \begin{cases}
+          1 & \text{if $x > 0$}\\
+          0 & \text{if $x < 0$}.
+        \end{cases}
+      \end{align*}
+      Thus,
+      \begin{align*}
+        H\left(1-\frac{|x|}{2}\right) = \begin{cases}
+          1 & \text{if $|x| < 2$}\\
+          0 & \text{if $|x| > 2$}.
+        \end{cases}
+      \end{align*}
+
+      If $\displaystyle f(x) = \left(1 - \frac{|x|}{2}\right)H\left(1 - \frac{|x|}{2}\right)$, we see from \eqref{fourierdef}
+      that, by definition, the Fourier Transform of $f$ is given by
+      \begin{align*}
+        \fourier{f(x)} = F(k)
+        &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty\left(1 - \frac{|x|}{2}\right)H\left(1 - \frac{|x|}{2}\right) e^{-ikx} dx \\
+        &= \frac{1}{\sqrt{2\pi}}\int_{-2}^2\left(1 - \frac{|x|}{2}\right)e^{-ikx} dx \\
+        &= \frac{1}{\sqrt{2\pi}}\left[\int_{-2}^0 \left(1 + \frac{x}{2}\right) e^{-ikx}dx + \int_{0}^2 \left(1 - \frac{x}{2}\right)e^{-ikx} dx\right].
+      \end{align*}
+      Now, we see by integration by parts that
+      \begin{align*}
+        \int_c^d \left(1 \pm \frac{x}{2}\right) e^{-ikx}dx
+        &= \left.\frac{i}{k}e^{-ikx}\right\rvert_c^d \pm \frac{1}{2}\int_c^d x e^{-ikx}dx \\
+        &= \left.\frac{i}{k}e^{-ikx}\right\rvert_c^d \pm \frac{1}{2}\left[\left.\frac{ix}{k}e^{-ikx} \right\rvert_c^d - \frac{i}{k}\int_c^d e^{-ikx}dx\right] \\
+        &= \left.\frac{i}{k}e^{-ikx}\right\rvert_c^d \pm \frac{1}{2}\left[\left.\frac{ix}{k}e^{-ikx} \right\rvert_c^d + \left.\frac{e^{-ikx}}{k^2} \right\rvert_c^d\right].
+      \end{align*}
+      Thus,
+      \begin{align*}
+        \int_{-2}^0 \left(1 + \frac{x}{2}\right) e^{-ikx}dx = \frac{1-e^{2ik}+2ik}{2k^2}
+      \end{align*}
+      and
+      \begin{align*}
+        \int_{0}^2 \left(1 - \frac{x}{2}\right) e^{-ikx}dx = \frac{1-e^{-2ik}-2ik}{2k^2}
+      \end{align*}
+      Therefore, using the definition of the complex exponential
+      and various trigonometric identities, we have that
+      \begin{align*}
+        \fourier{f(x)} = F(k)
+        &= \frac{1}{\sqrt{2\pi}}\left[\int_{-2}^0 \left(1 + \frac{x}{2}\right) e^{-ikx}dx + \int_{0}^2 \left(1 - \frac{x}{2}\right)e^{-ikx} dx\right] \\
+        &= \frac{1}{\sqrt{2\pi}}\left[\frac{1-e^{2ik}+2ik}{2k^2} + \frac{1-e^{-2ik}-2ik}{2k^2} \right] \\
+        &= \frac{1}{\sqrt{2\pi}}\left[\frac{1}{k^2} - \frac{e^{-2ik}+e^{2ik}}{2k^2} \right]\\
+        &= \frac{1}{\sqrt{2\pi}}\left[\frac{1-\cos 2k}{k^2}\right] \\
+        &= \frac{1}{\sqrt{2\pi}}\left[\frac{1-(\cos^2 k - \sin^2 k)}{k^2}\right] \\
+        &= \frac{2\sin^2 k}{\sqrt{2\pi} k^2}.
+       \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
