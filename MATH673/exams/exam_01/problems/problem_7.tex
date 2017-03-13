@@ -6,10 +6,84 @@
   with the boundary data $0 < y < L$
   \begin{align*}
     &u(x, L) = 0, \quad u(x, 0) = f(x), \\
-    &u(0, y) = 0, \quad u(x, y) \to 0 \text{as $x \to \infty$ uniformly in $y$}.
+    &u(0, y) = 0, \quad u(x, y) \to 0 \text{ as $x \to \infty$ uniformly in $y$}.
   \end{align*}
 \end{problem}
 
 \begin{proof}
+  Consider the function $u(x, y)$. The Fourier Sine Transform
+  of $u$ with respect to $x$ is defined as
+  \begin{align*}
+    \fouriersin{u(x, y)} = U_s(k, y) = \sqrt{\frac{2}{\pi}} \int_{0}^{\infty}  u(x, y)  \sin (kx)dx.
+  \end{align*}
+  From this definition we see using the Leibniz integral rule that
+  \begin{align*}
+    \fouriersin{\frac{\partial^n u(x,y)}{\partial y^n}}
+    &= \sqrt{\frac{2}{\pi}} \int_{0}^{\infty} \frac{\partial^n u(x,y)}{\partial y^n} \sin (kx)dx \\
+    &= \der{y}{n}\left[\sqrt{\frac{2}{\pi}} \int_{0}^{\infty} u(x,y) \sin (kx)dx\right] \\
+    &= \der{y}{n}\left[\fouriersin{u(x,y)}\right].
+  \end{align*}
+  The transforms of the partials of $u$ with respect to $x$ are not as easy to characterize. Nevertheless,
+  we see from the properties of the Fourier Sine Transform that
+  \begin{align*}
+    \fouriersin{\frac{\partial u(x,y)}{\partial x}} = -k \fouriercos{u(x,y)}
+  \end{align*}
+  and
+  \begin{align*}
+    \fouriersin{\frac{\partial^2 u(x,y)}{\partial x^2}} = -k^2 \fouriersin{u(x,y)} + k\sqrt{\frac{2}{\pi}}u(0, y).
+  \end{align*}
+
+  Let $U_s(k, y) = \fouriersin{u(x, y)}$. Then, applying the Fourier Sine Transform to
+  the first differential equation shows that
+  \begin{align*}
+    \fouriersin{\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2}} = \der{y}{2}\left[U_s(k, y)\right] - k^2 U_s(k,y)+k\sqrt{\frac{2}{\pi}}u(0,y) = 0 = \fouriersin{0}.
+  \end{align*}
+  From the boundary equation  $u(0, y) = 0$ we see that the above equation becomes
+  \begin{align*}
+    \der{y}{2}\left[U_s(k, y)\right] - k^2 U_s(k,y) = 0.
+  \end{align*}
+  This is a linear, second-order homogeneous differential equation, the solution
+  of which we readily see is
+  \begin{align}\label{homo}
+    U_s(k, y) = c_1 e^{-ky} + c_2 e^{ky}.
+  \end{align}
+
+  Applying the Fourier Sine Transform to the boundary equations, we see that
+  \begin{align*}
+    U_s(k, L) = 0, \quad U_s(k, 0) = F_s(k), \quad \text{for $0 < k < \infty$, $0<y<L$}.
+  \end{align*}
+  Using these equations and \eqref{homo}, the solution to the homogeneous equation, we see that
+  \begin{align*}
+    U_s(k, 0) &= c_1 + c_2 = F_s(k) \\
+    U_s(k, L) &= c_1 e^{-kL} + c_2 e^{kL} = 0.
+  \end{align*}
+  Solving, we see that
+  \begin{align*}
+    c_1 &= -\frac{e^{2kL}F_s(k)}{1-e^{2kL}}\\
+    c_2 &= \frac{F_s(k)}{1-e^{2kL}}.
+  \end{align*}
+  Thus, the solution to the transformed system of differential equations is
+  \begin{align*}
+    U_s(k,y) &= -\frac{e^{2kL}F_s(k) e^{-ky}}{1-e^{2kL}} + \frac{F_s(k) e^{ky}}{1-e^{2kL}} \\
+    &= F_s(k)\left(\frac{e^{-kL}}{e^{-kL}}\right)\left(\frac{-e^{ky}+e^{2kL-ky}}{-1+e^{2kL}}\right)\\
+    &= F_s(k)\frac{\sinh k(L-y)}{\sinh kL}.
+  \end{align*}
+  Applying the inverse Fourier Sine Transform gives that the solution to the original system
+  of differential equations is
+  \begin{align*}
+    u(x,y)
+    &= \sqrt{\frac{2}{\pi}} \int_0^\infty F_s(k)\frac{\sinh k(L-y)}{\sinh kL} \sin kx dk \\
+    &= \frac{2}{\pi} \int_0^\infty \left[\int_0^\infty f(\xi) \sin k\xi d\xi\right]\frac{\sinh k(L-y)}{\sinh kL} \sin kx dk.
+  \end{align*}
+
+  It is easy to see from the definition of the hyperbolic sine function that
+  $\frac{\sinh k(L-y)}{\sinh kL} \sim e^{-ky}$ as $kL \to\infty$. Thus, the above problem reduces
+  to a simpler problem in the quarter plane instead of the semi-infinite strip. Therefore,
+  the solution to the original differential equation is
+  \begin{align*}
+    u(x, y) &= \frac{2}{\pi} \int_0^\infty f(\xi) d\xi\int_0^\infty \sin k\xi \sin kx e^{-k y} dk \\
+    &= \frac{1}{\pi} \int_0^\infty f(\xi) d\xi\int_0^\infty \left[\cos k(x-\xi) - \cos k(x+\xi)\right] e^{-k y} dk \\
+    &= \frac{1}{\pi} \int_0^\infty f(\xi)\left[\frac{y}{(x-\xi)^2 + y^2} - \frac{y}{(x+\xi)^2 + y^2}\right]d\xi.
+  \end{align*}
 \end{proof}
 \newpage
