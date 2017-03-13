@@ -1,12 +1,47 @@
 \begin{problem}{9}
   Show that if $E$ is a solution of an $m$-th order partial differential equation
   \begin{align*}
-    P(\partial)u = \sum_{k=0}^m a_k \partial^k u = \delta,
+    P(\partial)u = \sum_{n=0}^m a_n \partial^n u = \sqrt{2\pi} \delta,
   \end{align*}
   where $\delta$ is the Dirac delta function, then $E \ast f$ is the solution of
   the partial differential equation $P(\partial)u = f$, where $\ast$ is the convolution.
 \end{problem}
 
 \begin{proof}
+  Suppose that $E$ is a solution of the partial differential equation
+  \begin{align*}
+    P(\partial)u = \sum_{n=0}^m a_n \partial^n u = \sqrt{2\pi} \delta,
+  \end{align*}
+  i.e.\ $P(\partial)E = \sqrt{2\pi}\delta$. Then applying the Fourier Transform
+  shows that
+  \begin{align}\label{partial}
+    \fourier{P(\partial)E} &= \sum_{n=0}^m a_n \fourier{\partial^n E}
+    = \sum_{n=0}^m a_n (ik)^n \fourier{E} = 1 = \fourier{\sqrt{2\pi} \delta}.
+  \end{align}
+  Now, we apply the Fourier Transform to the differential
+  equation replacing $u$ with $E \ast f$. Doing so yields
+  \begin{align*}
+    \fourier{P(\partial)(E\ast f)} &= \sum_{n=0}^m a_n \fourier{\partial^n (E\ast f)} \\
+    &=  \sum_{n=0}^m a_n (ik)^n\fourier{E\ast f}.
+  \end{align*}
+
+  The Convolution Theorem states that $\fourier{E \ast f} = \fourier{E}\fourier{f}$ which implies that
+  \begin{align*}
+    \fourier{P(\partial)(E\ast f)}
+    &=  \sum_{n=0}^m a_n (ik)^n\fourier{E\ast f} \\
+    &=  \sum_{n=0}^m a_n (ik)^n\fourier{E}\fourier{f} \\
+    &=  \fourier{f}\sum_{n=0}^m a_n (ik)^n\fourier{E} \\
+    &= \fourier{f}\fourier{P(\partial)E}.
+  \end{align*}
+  Thus, from \eqref{partial} we see that
+  \begin{align*}
+    \fourier{P(\partial)(E\ast f)} =  \fourier{f}\fourier{P(\partial)E} = \fourier{f}.
+  \end{align*}
+  Therefore, applying the inverse Fourier Transform we have that
+  \begin{align*}
+    P(\partial)(E\ast f) = \fourierinv{\fourier{P(\partial)(E\ast f)}} = \fourierinv{\fourier{f}} = f
+  \end{align*}
+  or that $E\ast f$ is a solution of the partial differential equation $P(\partial)u =f$, and we are done.
+
 \end{proof}
 \newpage
