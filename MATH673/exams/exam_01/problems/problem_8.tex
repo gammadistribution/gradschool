@@ -11,5 +11,90 @@
 \end{problem}
 
 \begin{proof}
+  Let $\vec{x} = (x_1, x_2, \dots, x_n)\in \mathbb{R}^n$ and suppose that $u(\vec{x}, t)$ is given. The
+  Fourier transform of $u(\vec{x}, t)$ with respect to $\vec{x}$ is defined to be
+  \begin{align}\label{multifourier}
+    \fourier{u(\vec{x}, t)} = U(\vec{k}, t) = \frac{1}{(2\pi)^{n/2}}\int_{-\infty}^\infty u(\vec{x}, t) e^{-i\vec{x}\cdot\vec{k}} d\vec{x}
+  \end{align}
+  where $\vec{k}\in\mathbb{R}^n$.
+
+  In order to investigate the Fourier transform of partials of $u(\vec{x}, t)$ with respect to a given component of $\vec{x}$, define the
+  Fourier transform of $u(\vec{x}, t)$ with respect to $x_j$ as the following
+  \begin{align*}
+    \fourierwrt{u(\vec{x}, t)}{x_j} = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} u(\vec{x}, t) e^{-i x_jk_j }dx_j.
+  \end{align*}
+  Further, we will also use the function $\pi_{j}: \mathbb{R}^n \to \mathbb{R}^{n-1}$ defined as
+  \begin{align*}
+    \pi_{j}(\vec{x}) := (x_1, \dots, x_{j-1}, x_{j+1}, \dots, x_n)
+  \end{align*}
+  to aid in our description of the Fourier transform of partials of $u(\vec{x}, t)$.
+  Now from definition \eqref{multifourier} and Leibniz's integral rule we see that
+  \begin{align*}
+    \fourier{\frac{\partial^n u(\vec{x}, t)}{\partial t^n}} &= \frac{1}{(2\pi)^{n/2}}\int_{-\infty}^\infty \frac{\partial^n }{\partial t^n}\left[u(\vec{x}, t)\right] e^{-i\vec{x}\cdot\vec{k}} d\vec{x} \\
+    &= \der{t}{n}\left[\frac{1}{(2\pi)^{n/2}}\int_{-\infty}^\infty u(\vec{x}, t) e^{-i\vec{x}\cdot\vec{k}} d\vec{x} \right]\\
+    &= \der{t}{n}\left[\fourier{u(\vec{x}, t)}\right].
+  \end{align*}
+  Similarly, from definition \eqref{multifourier} and previous results about the Fourier transform,
+  we see that
+  \begin{align*}
+    \fourier{\frac{\partial^n u(\vec{x}, t)}{\partial x_j^n}}
+    &= \frac{1}{(2\pi)^{n/2}}\int_{-\infty}^\infty \dots \int_{-\infty}^\infty\frac{\partial^n }{\partial x_j^n}\left[u(\vec{x}, t)\right] e^{-i x_1 k_1}\cdots e^{-i x_n k_n} dx_1 \dots dx_n \\
+    &= \frac{1}{(2\pi)^{(n-1)/2}}\int_{-\infty}^\infty \fourierwrt{\frac{\partial^n }{\partial x_j^n}\left[u(\vec{x}, t)\right]}{x_j} e^{-i \pi_j(\vec{x}) \cdot \pi_j(\vec{k})} d\pi_j(\vec{x}) \\
+    &= \frac{(ik_j)^n}{(2\pi)^{(n-1)/2}}\int_{-\infty}^\infty \fourierwrt{u(\vec{x}, t)}{x_j} e^{-i \pi_j(\vec{x}) \cdot \pi_j(\vec{k})} d\pi_j(\vec{x}) \\
+    &= (ik_j)^n\fourier{u(\vec{x}, t)}.
+  \end{align*}
+
+  Now, define $\vec{x} = (x_1, x_2, x_3) = (x, y, z) \in\mathbb{R}^3$. The the system of differential equations
+  of the function $u(\vec{x}, t) = u(x_1, x_2, x_3, t)$ becomes
+  \begin{align*}
+    a^2\left(\frac{\partial^2 u}{\partial x_1^2} + \frac{\partial^2 u}{\partial x_2^2} + \frac{\partial^2 u}{\partial x_3^2}\right) - \frac{\partial^2 u}{\partial t^2} = 0, \quad -\infty < x_1, x_2, x_3 < \infty,
+  \end{align*}
+  subject to the initial conditions
+  \begin{align*}
+    &u(\vec{x}, t)\rvert_{t=0} = 0, \qquad\left.\frac{\partial u(\vec{x}, t)}{\partial t}\right\rvert_{t=0} = \delta(\vec{x}).
+  \end{align*}
+
+  Applying the Fourier transform with respect to $\vec{x}$ to the first equation yields
+  \begin{align*}
+    \fourier{a^2\left(\frac{\partial^2 u}{\partial x_1^2} + \frac{\partial^2 u}{\partial x_2^2} + \frac{\partial^2 u}{\partial x_3^2}\right) - \frac{\partial^2 u}{\partial t^2}}
+    =-a^2\norm{\vec{x}}^2U(\vec{k}, t)- \der{t}{2}\left[U(\vec{k}, t)\right] = 0 = \fourier{0}
+  \end{align*}
+  where $U(\vec{k}, t) = \fourier{u(\vec{x}, t)}$. Similarly, we deduce that
+  the transformed initial conditions become
+  \begin{align*}
+    &\fourier{u(\vec{x}, t)\rvert_{t=0}} = U(\vec{k}, t)\rvert_{t=0} = 0 = \fourier{0}, \\
+    &\fourier{\left.\frac{\partial u(\vec{x}, t)}{\partial t}\right\rvert_{t=0}} = \left.\der{t}{}\left[U(\vec{k}, t)\right]\right\rvert_{t=0} = \frac{1}{(2\pi)^{3/2}} = \fourier{\delta(\vec{x})}.
+  \end{align*}
+
+  We see that the first transformed equation is a second-order
+  linear homogeneous ordinary differential equation, from which we readily see that the solution is
+  \begin{align*}
+    U(\vec{k}, t) = c_1 \cos(a\norm{\vec{k}} t) + c_2 \sin(a \norm{\vec{k}} t).
+  \end{align*}
+  Using this solution we see from the first transformed initial condition that
+  \begin{align*}
+    U(\vec{k}, t)\rvert_{t=0}
+    &= \left.c_1 \cos(a\norm{\vec{k}} t) + c_2 \sin(a \norm{\vec{k}} t)\right\rvert_{t=0} = c_1 = 0.
+  \end{align*}
+  From the second transformed initial condition, we see using the above solution that
+  \begin{align*}
+    \left.\der{t}{}\left[U(\vec{k}, t)\right]\right\rvert_{t=0}
+    &= -a\norm{\vec{k}}c_1\sin(a\norm{\vec{k}}t) + a\norm{\vec{k}}c_2\cos(a\norm{\vec{k}}t)\rvert_{t=0} \\
+    &= a\norm{\vec{k}}c_2 \\
+    &= \frac{1}{(2\pi)^{3/2}},
+  \end{align*}
+  or that $\displaystyle c_2 = \frac{1}{a\norm{\vec{k}}(2\pi)^{3/2}}.$ Therefore, the solution to the transformed
+  system of differential equations is
+  \begin{align*}
+    U(\vec{k}, t) = \frac{\sin(a\norm{\vec{k}}t)}{a\norm{\vec{k}}(2\pi)^{3/2}}.
+  \end{align*}
+
+  Applying the inverse Fourier Transform to the above solution gives the solution to the original
+  system
+  \begin{align*}
+    u(\vec{x}, t) &= \fourierinv{\frac{\sin(a\norm{\vec{k}}t)}{a\norm{\vec{k}}(2\pi)^{3/2}}}\\
+    &= \frac{1}{(2\pi)^3}\int_{-\infty}^\infty \frac{\sin(a\norm{\vec{k}}t)}{a\norm{\vec{k}}} e^{i\vec{k}\cdot \vec{x}} d\vec{k} \\
+    &= \frac{1}{(2\pi)^3}\int_{-\infty}^\infty\int_{-\infty}^\infty\int_{-\infty}^\infty \frac{\sin(a\norm{\vec{k}}t)}{a\norm{\vec{k}}} e^{ik_1 x_1} e^{ik_2 x_2} e^{ik_3 x_3}dk_1 dk_2 dk_3 .
+  \end{align*}
 \end{proof}
 \newpage
