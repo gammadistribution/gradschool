@@ -37,5 +37,47 @@
   \begin{align*}
     \der{t}{}\left[U(k, t)\right] + (ak)^2 U(k,t) = F(k, t).
   \end{align*}
+
+  Using well-established techniques, we see that the solution to the linear differential equation is
+  \begin{align*}
+    U(k, t) = c_1 e^{-(ak)^2 t} + e^{-(ak)^2 t}\int_0^t e^{(ak)^2 \xi} F(k, \xi) d\xi.
+  \end{align*}
+  Applying the Fourier Transform to the initial value equation shows that
+  \begin{align*}
+    \fourier{u(x, 0)} = U(k, 0) = \Phi(k) = \fourier{\phi(x)}
+  \end{align*}
+  Thus, from the transformed initial value equation, we see using the above solution that
+  \begin{align*}
+    U(k, 0) = c_1 = \Phi(k)
+  \end{align*}
+  Therefore, the solution to the transformed system of differential equations
+  is
+  \begin{align*}
+    U(k, t) = \Phi(k)e^{-(ak)^2 t}+ e^{-(ak)^2 t}\int_0^t e^{(ak)^2 \xi} F(k, \xi) d\xi.
+  \end{align*}
+
+  Applying the inverse Fourier transform to the solution of the transformed system of differential equations
+  yields that the solution to the original system is
+  \begin{align*}
+    u(x, t) = \fourierinv{U(k, t)} = \fourierinv{\Phi(k)e^{-(ak)^2 t}} + \fourierinv{e^{-(ak)^2 t}\int_0^t e^{(ak)^2 \xi} F(k, \xi) d\xi}
+  \end{align*}
+  Note from our table of Fourier transforms that for $b>0$
+  \begin{align*}
+    \fourier{e^{-b x^2}} =\frac{1}{\sqrt{2b}} \exp\left(-\frac{k^2}{4b}\right)
+  \end{align*}
+  Thus,
+  \begin{align*}
+    \fourierinv{e^{-a^2 t k^2}} = \fourierinv{\exp\left(- \frac{k^2}{4(1/4a^2 t)}\right)} = \sqrt{\frac{1}{2a^2 t}} \exp\left(-\frac{x^2}{4a^2 t}\right) = g(x, t)
+  \end{align*}
+  Now, from the Convolution Theorem, we have that
+  \begin{align*}
+    \fourierinv{\Phi(k)e^{-(ak)^2 t}} = (\phi \ast g)(x) = \int_{-\infty}^\infty \phi(x-\xi) g(\xi, t)d\xi.
+  \end{align*}
+  Therefore, using this identity and the definition of the inverse Fourier Transform, the solution to the original system
+  of differential equations is
+  \begin{align*}
+    u(x, t) &= \fourierinv{\Phi(k)e^{-(ak)^2 t}} + \fourierinv{e^{-(ak)^2 t}\int_0^t e^{(ak)^2 \xi} F(k, \xi) d\xi} \\
+    &= \int_{-\infty}^\infty \phi(x-\xi) g(\xi, t)d\xi + \int_{-\infty}^{\infty}\left[\int_0^t e^{(ak)^2 \xi} F(k, \xi) d\xi\right]e^{-(ak)^2 t} e^{ikx} dk.
+  \end{align*}
 \end{proof}
 \newpage
