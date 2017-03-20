@@ -1,6 +1,50 @@
 \begin{problem}{3.6}
+  Show that
+  \begin{align*}
+    \laplace{\int_0^t \frac{f(u)}{u} du} = \frac{1}{s} \int_s^\infty \bar{f}(x) dx.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  From the definition of the Laplace transform we see that
+  \begin{align*}
+    \laplace{\int_0^t \frac{f(u)}{u} du} = \int_0^\infty e^{-st} \left[\int_0^t \frac{f(u)}{u} du\right]dt.
+  \end{align*}
+  Interchanging the order of integration from $u$ to $t$ where $0 \leq t < \infty$,
+  we see that $u \leq t < \infty$ as $0 \leq u < \infty$ and
+  \begin{align*}
+    \laplace{\int_0^t \frac{f(u)}{u} du} &= \int_0^\infty e^{-st} \left[\int_0^t \frac{f(u)}{u} du\right]dt \\
+    &= \int_0^\infty \frac{f(u)}{u}  \left[\int_u^\infty e^{-st}dt\right]du \\
+    &= \frac{1}{s} \int_0^\infty \frac{f(u)}{u} e^{-su} du.
+  \end{align*}
+
+  We note that $\displaystyle \der{s}{}\left[\frac{e^{-su}}{u}\right] = -e^{-su}$
+  so that in particular we have that
+  \begin{align*}
+    - \int_s^\infty e^{-su} ds = \left.-\frac{e^{-su}}{u}\right\rvert_s^\infty = -\frac{e^{-su}}{u}
+  \end{align*}
+  or that
+  \begin{align*}
+    \int_s^\infty e^{-su} ds = \frac{e^{-su}}{u}.
+  \end{align*}
+  Thus,
+  \begin{align*}
+    \laplace{\int_0^t \frac{f(u)}{u} du}
+    &= \frac{1}{s} \int_0^\infty \frac{f(u)}{u} e^{-su} du \\
+    &= \frac{1}{s}\int_0^\infty f(u)\left[\int_s^\infty e^{-su} ds \right]du.
+  \end{align*}
+
+  Interchanging the order of integration yet again from $s$ to $u$ where $s \leq s < \infty$
+  as $0 \leq u < \infty$, we see that the integration limits remain unchanged and therefore
+  that
+  \begin{align*}
+    \laplace{\int_0^t \frac{f(u)}{u} du}
+    &= \frac{1}{s}\int_0^\infty f(u) \left[\int_s^\infty e^{-su} ds\right] du \\
+    &= \frac{1}{s}\int_s^\infty \left[\int_0^\infty f(u)e^{-su} du\right] ds \\
+    &= \frac{1}{s}\int_s^\infty \bar{f}(s) ds \\
+    &= \frac{1}{s}\int_s^\infty \bar{f}(x) dx,
+  \end{align*}
+  and we are done.
+
 \end{proof}
 \newpage
