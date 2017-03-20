@@ -1,0 +1,111 @@
+\begin{problem}{3.1}
+  Find the Laplace transforms of the following functions:
+  \begin{enumerate}
+    \item[b.] $f(t) = (1-2t)e^{-2t}$
+    \item[c.] $f(t) = t\cos at$
+    \item[d.] $f(t) = t^{3/2}$
+    \item[g.] $f(t) = (t-3)^2 H(t-3)$
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+  Recall that the Laplace transform of the function $f(t)$ defined for $t>0$ is
+  given by
+  \begin{align}\label{laplace}
+    \laplace{f(t)} = \bar{f}(s) = \int_0^\infty f(t) e^{-st} dt.
+  \end{align}
+
+  \begin{enumerate}
+    \item[b.] Let $g(t)=1-2t$. Then $f(t) = (1-2t)e^{-2t} = g(t)e^{-2t}.$
+      From the definition of the Laplace transform, we have that
+      \begin{align*}
+        \laplace{g(t)} = \bar{g}(s) &= \int_0^\infty (1-2t)e^{-st} dt \\
+        &= \int_0^\infty t^0 e^{-st} dt - 2\int_0^\infty t^1 e^{-st} dt \\
+        &= \laplace{t^0} - 2\laplace{t^1}.
+      \end{align*}
+
+      From a previous theorem, we know for $n\in\mathbb{N}$ that
+      \begin{align*}
+        \laplace{t^n} = \int_0^\infty t^n e^{-st} dt = \frac{n!}{s^{n+1}}.
+      \end{align*}
+      Thus,
+      \begin{align*}
+        \bar{g}(s) = \laplace{t^0} - 2\laplace{t^1}
+        =\frac{1}{s} -\frac{2}{s^2}
+        = \frac{s-2}{s^2}.
+      \end{align*}
+      From Heaviside's First Shifting Theorem, we know that for $\bar{g}(s) = \laplace{g(t)}$
+      that
+      \begin{align*}
+        \laplace{g(t)e^{-at}} = \bar{g}(s+a).
+      \end{align*}
+
+      Therefore, the Laplace transform of $f(t) = (1-2t)e^{-2t} = g(t)e^{-2t}$
+      is
+      \begin{align*}
+        \laplace{f(t)} = \laplace{g(t)e^{-2t}} = \bar{g}(s+2) = \frac{s}{(s+2)^2}.
+      \end{align*}
+    \item[c.] From the definition of the complex exponential,
+      we have that $f(t) = t\cos at = \frac{t}{2}\left(e^{-iat} + e^{iat}\right)$.
+      From the definition of the Laplace transform, we have that
+      \begin{align*}
+        \laplace{f(t)} = \bar{f}(s) &= \int_0^\infty \frac{t}{2}\left(e^{-iat} + e^{iat}\right) e^{-st} dt \\
+        &= \frac{1}{2}\left[\int_0^\infty t e^{-(s+ia)t} dt + \int_0^\infty t e^{-(s-ia)t}dt\right].
+      \end{align*}
+
+      We readily see by integrating by parts using $u=t$ and $dv = e^{-(s\pm ia)t}dt$ that
+      \begin{align*}
+        \int_0^\infty t e^{-(s\pm ia)t}dt
+        &= \left.-\frac{t}{s\pm ia} e^{-(s\pm ia)t} \right\rvert_0^\infty + \frac{1}{s\pm ia}\int_0^\infty  e^{-(s\pm ia)t} dt \\
+        &= \left.-\frac{1}{(s\pm ia)^2} e^{-(s\pm ia)t}\right\rvert_0^\infty \\
+        &= \frac{1}{(s\pm ia)^2}.
+      \end{align*}
+
+      Therefore, the Laplace transform of $f(t)$ is given by
+      \begin{align*}
+        \laplace{f(t)} = \bar{f}(s)         &= \frac{1}{2}\left[\int_0^\infty t e^{-(s+ia)t} dt + \int_0^\infty t e^{-(s-ia)t}dt\right] \\
+        &= \frac{1}{2}\left[\frac{1}{(s+ ia)^2} + \frac{1}{(s-ia)^2}\right] \\
+        &= \frac{s^2 - a^2}{(s+ia)^2(s-ia)^2} \\
+        &= \frac{s^2 - a^2}{(s^2 + a^2)^2}.
+      \end{align*}
+    \item[d.] By definition,
+      the Laplace transform of $f(t)$ is given by
+      \begin{align*}
+        \laplace{f(t)} = \bar{f}(s) = \int_0^\infty t^{3/2}e^{-st}dt.
+      \end{align*}
+      Let $u=st$, then $du / s = dt$ and
+      \begin{align*}
+        \laplace{f(t)} = \bar{f}(s)
+        &= \frac{1}{s}\int_0^\infty \left(\frac{u}{s}\right)^{3/2}e^{-u}dt \\
+        &= \frac{1}{s^{5/2}}\int_0^\infty u^{3/2}e^{-u}dt.
+      \end{align*}
+
+      Recall that the definition of the Gamma function is given by
+      \begin{align*}
+        \Gamma(x) = \int_0^\infty u^{x-1} e^{-u} du.
+      \end{align*}
+
+      Therefore, the Laplace transform of $f(t) = t^{3/2}$ is
+      \begin{align*}
+        \laplace{f(t)} = \bar{f}(s)
+        &= \frac{1}{s^{5/2}}\int_0^\infty u^{5/2 - 1}e^{-u}dt \\
+        &= \frac{\Gamma\left(\frac{5}{2}\right)}{s^{5/2}}.
+      \end{align*}
+    \item[g.] Let $g(t)= t^2$ and suppose that
+      $\laplace{g(t)} = \bar{g}(s)$. Then Heaviside's Second Shifting Theorem shows that
+      \begin{align*}
+        \laplace{f(t)} = \laplace{g(t-3)H(t-3)} = e^{-3s} \bar{g}(s).
+      \end{align*}
+
+      As shown previously, we know for $n\in\mathbb{N}$ that
+      \begin{align*}
+        \laplace{t^n} = \frac{n!}{s^{n+1}}.
+      \end{align*}
+
+      Therefore, the Laplace transform of $f(t)$ is
+      \begin{align*}
+        \laplace{f(t)} = \bar{f}(s) = e^{-3s}\bar{g}(s) = \frac{2e^{-3s}}{s^3}.
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+\newpage
