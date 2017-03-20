@@ -1,6 +1,37 @@
 \begin{problem}{3.18}
+  Establish the following result:
+  \begin{enumerate}
+    \item[a.] $\displaystyle \laplace{\sin^2 at} = \frac{2a^2}{s(s^2+4a^2)}.$
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] Recall that $\cos 2\theta = 1 - 2\sin^2 \theta$. Thus,
+      \begin{align*}
+        \laplace{\sin^2 at} = \laplace{\frac{1}{2}\left(1 - \cos 2at \right)} = \frac{1}{2}\left[\laplace{1} - \laplace{\cos 2 at}\right].
+      \end{align*}
+
+      From our table of Laplace transforms, we know that
+      \begin{align*}
+        \laplace{1} = \frac{1}{s}
+      \end{align*}
+      and
+      \begin{align*}
+        \laplace{\cos b t} = \frac{s}{s^2 + b^2}
+      \end{align*}
+      which implies that
+      \begin{align*}
+        \laplace{\cos 2 at} = \frac{s}{s^2 + (2a)^2} = \frac{s}{s^2 + 4a^2}.
+      \end{align*}
+      Therefore, we have that
+      \begin{align*}
+        \laplace{\sin^2 at}
+        &= \frac{1}{2}\left[\laplace{1} - \laplace{\cos 2 at}\right] \\
+        &= \frac{1}{2}\left[\frac{1}{s} - \frac{s}{s^2+4a^2}\right] \\
+        &= \frac{1}{2}\left[\frac{s^2 + 4a^2 - s^2}{s(s^2+4a^2)}\right] \\
+        &= \frac{2a^2}{s(s^2 + 4a^2)}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
