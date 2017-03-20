@@ -1,6 +1,41 @@
 \begin{problem}{3.7}
+  Obtain the inverse Laplace transforms of the following functions:
+  \begin{enumerate}
+    \item[b.] $\displaystyle \bar{f}(s) = \frac{1}{s^2(s^2+c^2)}$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[b.] Let $\bar{f}(s) = \bar{g}(s)\bar{h}(s)$ where $\displaystyle \bar{g}(s) = \frac{1}{s^2}$
+      and $\bar{h}(s) = \frac{1}{s^2+c^2}$.
+
+      Using previous results, we know that
+      \begin{align*}
+        g(t) = \laplaceinv{\bar{g}(s)} = \laplaceinv{\frac{1}{s^2}} = t
+      \end{align*}
+      and
+      \begin{align*}
+        h(t) = \laplaceinv{\bar{h}(s)} = \laplaceinv{\frac{1}{c}\left(\frac{c}{s^2+c^2}\right)} = \frac{\sin ct}{c}.
+      \end{align*}
+
+      Now, by the Convolution Theorem for the Laplace transform, we have that
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)} = \laplaceinv{\bar{g}(s)\bar{h}(s)} = (g\ast h)(t)
+      \end{align*}
+      where
+      \begin{align*}
+        (g \ast h) (s) = \int_0^t g(t - \tau)h(\tau) d\tau.
+      \end{align*}
+
+      Therefore,
+      \begin{align*}
+        f(t) = (g \ast h)(t)
+        &= \frac{1}{c}\int_0^t (t-\tau) \sin c \tau d\tau \\
+        &= \frac{t}{c}\int_0^t \sin c\tau d\tau - \frac{1}{c} \int_0^t \tau \sin c\tau d\tau \\
+        &= \frac{t}{c}\left[\frac{1}{c} - \frac{\cos ct}{c}\right] - \frac{1}{c}\left[-\frac{t\cos ct}{c} + \frac{\sin ct }{c^2}\right] \\
+        &= \frac{t}{c^2} - \frac{\sin ct}{c^3}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
