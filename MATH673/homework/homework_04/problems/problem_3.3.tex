@@ -1,6 +1,62 @@
 \begin{problem}{3.3}
+  The following is a result relating the Laplace transform of a function's derivative
+  to the Laplace transform of that function:
+  \begin{align}\label{result}
+    \laplace{f'(t)} = s \laplace{f(t)} - f(0).
+  \end{align}
+  Use the result to find
+  \begin{enumerate}
+    \item[a.] $\laplace{\cos at},$
+    \item[b.] $\laplace{\sin at}$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] Let $f(t) = \cos at$. Then $f'(t) = -a \sin at$ and from \eqref{result}
+      we have
+      \begin{align}\label{result_cos}
+        -a \laplace{\sin at} = s \laplace{\cos at} - 1.
+      \end{align}
+
+      Now let $g(t) = \sin at$. Then $g'(t) = a \cos at$ and applying \eqref{result} to
+      $g(t)$ yields
+      \begin{align*}
+        a \laplace{\cos at} = s \laplace{\sin at}.
+      \end{align*}
+
+      Therefore, from \eqref{result_cos} we have that
+      \begin{align*}
+        -a \left(\frac{a}{s} \laplace{\cos a t}\right) = s \laplace{\cos at} - 1
+      \end{align*}
+      which implies that
+      \begin{align*}
+        \laplace{\cos at} = \frac{s}{s^2 + a^2}.
+      \end{align*}
+    \item[b.]  Let $f(t) = \sin at$. Then $f'(t) = a \cos at$ and from \eqref{result}
+      we have
+      \begin{align}\label{result_sin}
+        a \laplace{\cos at} = s \laplace{\sin at}.
+      \end{align}
+
+      Now let $g(t) = \cos at$. Then $g'(t) =- a \sin at$ and applying \eqref{result} to
+      $g(t)$ yields
+      \begin{align*}
+        -a \laplace{\sin at} = s \laplace{\cos at} - 1
+      \end{align*}
+      which implies that
+      \begin{align*}
+        \laplace{\cos at} = \frac{1}{s} - \frac{a}{s} \laplace{\sin at}.
+      \end{align*}
+
+      Therefore, from \eqref{result_sin} we have that
+      \begin{align*}
+        a \left(\frac{1}{s} - \frac{a}{s}\laplace{\sin at}\right) = s \laplace{\sin at}
+      \end{align*}
+      which implies that
+      \begin{align*}
+        \laplace{\sin at} = \frac{a}{s^2 + a^2}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
