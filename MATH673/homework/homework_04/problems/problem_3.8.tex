@@ -1,6 +1,26 @@
 \begin{problem}{3.8}
+  Use the Convolution Theorem to fin the inverse Laplace transforms of the following functions:
+  \begin{enumerate}
+    \item[a.] $\displaystyle \bar{f}(s) = \frac{s^2}{(s^2+a^2)^2}$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  Let $\bar{f}(s) = \bar{g}(s)^2$ where $\displaystyle \bar{g}(s) = \frac{s}{s^2 + a^2}$.
+  Then we know that
+  \begin{align*}
+    g(t) = \laplaceinv{\bar{g}(s)} = \cos at.
+  \end{align*}
+  From the Convolution Theorem, we then have that
+  \begin{align*}
+    f(t) = \laplaceinv{\bar{f}(s)} = \laplaceinv{\bar{g}(s)\bar{g}(s)} = (g\ast g)(t).
+  \end{align*}
+  Therefore,
+  \begin{align*}
+    f(t) = (g \ast g )(t) &= \int_0^t \cos a (t-\tau) \cos a \tau d\tau \\
+    &= \cos a t \int_0^t \cos^2 a\tau d\tau + \sin a t \int_0^t \sin a\tau \cos a \tau d\tau \\
+    &= \cos a t\left[\frac{2 a t + \sin 2at}{4a}\right] + \sin at \left[\frac{\sin^2 at}{2a}\right] \\
+    &= \frac{at \cos at + \sin a t}{2a}.
+  \end{align*}
 \end{proof}
 \newpage
