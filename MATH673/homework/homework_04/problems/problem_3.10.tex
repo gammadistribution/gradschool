@@ -1,6 +1,58 @@
 \begin{problem}{3.10}
+  Show that
+  \begin{enumerate}
+    \item[a.] $\displaystyle \laplace{\frac{1}{t}(\sin at - at \cos at)} = \tan^{-1}\left(\frac{a}{s}\right) - \frac{as}{s^2 + a^2}$,
+    \item[b.] $\displaystyle \laplace{\int_0^t \frac{1}{\tau}(\sin a \tau - a\tau \cos a\tau) d\tau} = \frac{1}{s}\left[\tan^{-1}\left(\frac{a}{s}\right) - \frac{as}{s^2 + a^2}\right]$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] If $\bar{f}(s) = \laplace{f(t)}$, then from a previous theorem we have that
+      \begin{align*}
+        \laplace{\frac{f(t)}{t}} = \int_s^\infty \bar{f}(s) ds.
+      \end{align*}
+      Thus, we have that
+      \begin{align*}
+        \laplace{\frac{1}{t}(\sin at - at \cos at)}
+        &= \int_s^\infty \laplace{\sin at - at \cos at}ds \\
+        &= \int_s^\infty \laplace{\sin at} - a\laplace{t \cos at}ds.
+      \end{align*}
+      From our table of Laplace transforms,  we know that
+      \begin{align*}
+        \laplace{\sin at} = \frac{a}{s^2 + a^2}
+      \end{align*}
+      and
+      \begin{align*}
+        \laplace{t\cos at} = \frac{s^2 - a^2}{(s^2 + a^2)^2}.
+      \end{align*}
+      This implies that
+      \begin{align*}
+        \laplace{\frac{1}{t}(\sin at - at \cos at)}
+        &= \int_s^\infty \laplace{\sin at} - a\laplace{t \cos at}ds \\
+        &= \int_s^\infty \frac{a}{s^2 + a^2} - a\left(\frac{s^2 - a^2}{(s^2 + a^2)^2}\right)ds \\
+        &= \left.\tan^{-1}\left(\frac{s}{a}\right)\right\rvert_s^\infty + \left.\frac{as}{s^2 + a^2}\right\rvert_s^\infty \\
+        &= \frac{\pi}{2} - \tan^{-1}\left(\frac{s}{a}\right) - \frac{as}{s^2+a^2} \\
+        &= \tan^{-1}\left(\frac{a}{s}\right) - \frac{as}{s^2 + a^2}.
+      \end{align*}
+
+    \item[b.] From the theorem regarding the Laplace transform of an integral, if $\bar{f}(s) = \laplace{f(t)}$,
+      then
+      \begin{align}\label{laplace_int}
+        \laplace{\int_0^t f(\tau) d\tau} = \frac{\bar{f}(s)}{s}.
+      \end{align}
+      Suppose that $\displaystyle f(t) = \frac{1}{t}(\sin at - at \cos at)$. Then we have shown
+      previously that
+      \begin{align*}
+        \bar{f}(s) = \laplace{f(t)} = \tan^{-1}\left(\frac{a}{s}\right) - \frac{as}{s^2 + a^2}.
+      \end{align*}
+      Therefore, we have by \eqref{laplace_int} that
+      \begin{align*}
+        \laplace{\int_0^t \frac{1}{\tau}(\sin a \tau - a\tau \cos a\tau) d\tau}
+        &= \laplace{\int_0^t f(\tau) d\tau} \\
+        &= \frac{\bar{f}(s)}{s} \\
+        &= \frac{1}{s}\left[\tan^{-1}\left(\frac{a}{s}\right) - \frac{as}{s^2 + a^2}\right] .
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage

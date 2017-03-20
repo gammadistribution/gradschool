@@ -1,6 +1,40 @@
 \begin{problem}{3.12}
+  If $\laplace{f(t)} = \bar{f}(s)$, show that
+  \begin{enumerate}
+    \item[ii.] $\displaystyle \laplaceinv{\frac{\bar{f}(s)}{s^2}} = \int_0^t \left[\int_0^{t_1} f(\tau) d\tau\right] dt_1 = \int_0^t (t-\tau)f(\tau) d\tau.$
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[ii.] Let $\displaystyle \bar{g}(s) = \frac{1}{s}$ and $\bar{h}(s) = \frac{\bar{f}(s)}{s}$.
+      From \eqref{laplace_int} we know that
+      \begin{align*}
+        h(t) = \laplaceinv{\bar{h}(s)} = \laplaceinv{\frac{\bar{f}(s)}{s}} = \int_0^t f(\tau) d\tau.
+      \end{align*}
+      It is easy to see that if $\displaystyle \bar{g}(s) = \frac{1}{s}$ then $g(t) = 1$.
+      Now, by the Convolution Theorem, we have that
+      \begin{align*}
+        \laplaceinv{\frac{\bar{f}(s)}{s^2}} = \laplaceinv{\bar{g}(s)\bar{h}(s)}
+        = (g \ast h)(t)
+        &= \int_0 ^t g(t - t_1)h(t_1) dt_1 \\
+        &= \int_0^t \int_0^{t_1} f(\tau) d\tau dt_1.
+      \end{align*}
+      Thus,
+      \begin{align}\label{int_12}
+        \laplaceinv{\frac{\bar{f}(s)}{s^2}}
+        &= \int_0^t \int_0^{t_1} f(\tau) d\tau dt_1.
+      \end{align}
+
+      By interchanging the order of integration from $\tau$ to $t_1$, where $0 \leq \tau \leq t_1$
+      as $0 \leq t_1 \leq t$, we see that $\tau \leq t_1 \leq t$ and $0 \leq \tau \leq t$ so that
+      \begin{align*}
+        \laplaceinv{\frac{\bar{f}(s)}{s^2}}
+        = \int_0^t \int_0^{t_1} f(\tau) d\tau dt_1
+        = \int_0^t f(\tau) \left[\int_\tau^t dt_1\right] d\tau
+        = \int_0^t (t-\tau) f(\tau) d\tau,
+      \end{align*}
+      and we are done.
+  \end{enumerate}
 \end{proof}
 \newpage
