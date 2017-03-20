@@ -1,6 +1,25 @@
 \begin{problem}{3.15}
+  Show that
+  \begin{enumerate}
+    \item[b.] $\displaystyle \laplace{t^n e^{at}} = \frac{n!}{(s-a)^{n+1}}$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[b.]
+      Let $f(t) = t^n$. By Heaviside's First Shifting Theorem, we have that
+      \begin{align*}
+        \laplace{t^n e^{at}} = \laplace{f(t)e^{at}} = \bar{f}(s-a).
+      \end{align*}
+      As shown previously,
+      \begin{align*}
+        \bar{f}(s) = \laplace{f(t)} = \frac{n!}{s^{n+1}}.
+      \end{align*}
+      Therefore,
+      \begin{align*}
+        \laplace{t^n e^{at}} = \bar{f}(s-a) = \frac{n!}{(s-a)^{n+1}}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
