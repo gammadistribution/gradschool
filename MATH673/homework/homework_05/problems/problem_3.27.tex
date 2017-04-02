@@ -1,6 +1,50 @@
 \begin{problem}{3.27}
+  Use the Initial Value Theorem to find $f(0)$ and $f'(0)$ from the following functions:
+  \begin{enumerate}
+    \item[a.] $\displaystyle \bar{f}(s) = \frac{s}{s^2 - 5s + 12}$,
+    \item[c.] $\displaystyle \bar{f}(s) = \frac{e^{-s a}}{s^2+3s+5}$, $a > 0$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  The Initial Value Theorem states that if $f(t)$ and its derivatives exist as $t\to 0$, then
+  \begin{subequations}
+    \begin{align}
+      \text{i.}\quad&\lim_{s\to \infty} s \bar{f}(s) = f(0) \label{ivt:i}\\
+      \text{ii.}\quad&\lim_{s\to\infty} [s^2 \bar{f}(s) - s f(0)] = f'(0) \label{ivt:ii}.
+    \end{align}
+  \end{subequations}
+
+  \begin{enumerate}
+    \item[a.] If $\displaystyle \bar{f}(s) = \frac{s}{s^2 - 5s + 12}$, then \eqref{ivt:i} of the Initial Value Theorem
+      shows that
+      \begin{align*}
+        f(0) = \lim_{s\to \infty} s \bar{f}(s) = \lim_{s\to\infty}  \frac{s^2}{s^2 - 5s + 12} = 1.
+      \end{align*}
+
+      This implies from \eqref{ivt:ii} of the Initial Value Theorem that
+      \begin{align*}
+        f'(0) = \lim_{s\to\infty} [s^2 \bar{f}(s) - s f(0)]
+        &= \lim_{s\to\infty} \frac{s^3}{s^2 -5s + 12} - s \\
+        &= \lim_{s\to\infty} \frac{s^3 - (s^3 - 5s^2 + 12s)}{s^2 -5s + 12} \\
+        &= \lim_{s\to\infty} \frac{5s^2 - 12s}{s^2 -5s + 12} \\
+        &= 5.
+      \end{align*}
+    \item[c.] Suppose that $p(s)$ and $q(s)$ are both polynomials in $s$ and that $a > 0$. Then from L'Hospital's rule we have that
+      \begin{align}\label{lhosp}
+        \lim_{s\to\infty} \frac{p(s) e^{-s a}}{q(s)} = \lim_{s\to\infty} \frac{p(s)}{e^{sa} q(s)} = 0.
+      \end{align}
+
+      If $\displaystyle \bar{f}(s) = \frac{e^{-s a}}{s^2+3s+5}$ where $a > 0$, then \eqref{ivt:i} of the Initial Value Theorem
+      in combination with \eqref{lhosp} shows that
+      \begin{align*}
+        f(0) = \lim_{s\to \infty} s \bar{f}(s) = \lim_{s\to\infty}  \frac{s e^{-s a}}{s^2+3s+5} = 0.
+      \end{align*}
+
+      Using this result, we have from \eqref{ivt:ii} of the Initial Value Theorem in combination with \eqref{lhosp} that
+      \begin{align*}
+        f'(0) = \lim_{s\to\infty} [s^2 \bar{f}(s) - s f(0)] = \lim_{s\to\infty} \frac{s^2 e^{-s a}}{s^2+3s+5} = 0.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
