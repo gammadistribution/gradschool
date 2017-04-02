@@ -1,6 +1,43 @@
 \begin{problem}{3.24}
+  Suppose that $\laplace{f(t)} = \bar{f}(s)$ and $\laplace{g(x, t)} = \bar{h}(s)\exp(-x\bar{h}(s))$. Prove that:
+  \begin{enumerate}
+    \item[a.] $\displaystyle \laplace{\int_0^\infty g(x, t)f(x) dx} = \bar{h}(s)\bar{f}(\bar{h}(s))$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] From the definition of the Laplace transform, we have that
+      \begin{align*}
+        \laplace{\int_0^\infty g(x,t) f(x) dx} = \int_0^\infty\left[\int_0^\infty g(x,t) f(x) dx\right]e^{-st}dt.
+      \end{align*}
+
+      Interchanging the order of integration yields that
+      \begin{align*}
+        \laplace{\int_0^\infty g(x,t) f(x) dx} &= \int_0^\infty\left[\int_0^\infty g(x,t) f(x) dx\right]e^{-st}dt \\
+        &= \int_0^\infty f(x) \left[\int_0^\infty g(x,t) e^{-st}dt\right]dx \\
+        &= \int_0^\infty f(x) \laplace{g(x, t)}dx.
+      \end{align*}
+
+      From the relation $\laplace{g(x, t)} = \bar{h}(s)\exp(-x\bar{h}(s))$, we thus see that
+      \begin{align*}
+        \laplace{\int_0^\infty g(x,t) f(x) dx} &= \int_0^\infty f(x) \laplace{g(x, t)}dx \\
+        &= \int_0^\infty f(x) \bar{h}(s) \exp(-x\bar{h}(s))dx.
+      \end{align*}
+
+      Using the definition of the Laplace transform, we see that
+      \begin{align*}
+        \bar{f}(\bar{h}(s)) = \int_0^\infty f(t) \exp(-\bar{h}(s)t) dt.
+      \end{align*}
+
+      Therefore,
+      \begin{align*}
+        \laplace{\int_0^\infty g(x,t) f(x) dx}
+        &= \int_0^\infty f(x) \bar{h}(s) \exp(-x\bar{h}(s))dx \\
+        &= \bar{h}(s)\int_0^\infty f(x) \exp(-x\bar{h}(s))dx \\
+        &= \bar{h}(s) \bar{f}(\bar{h}(s)).
+      \end{align*}
+      and we are done.
+  \end{enumerate}
 \end{proof}
 \newpage
