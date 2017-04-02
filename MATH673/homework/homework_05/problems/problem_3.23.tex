@@ -1,6 +1,24 @@
 \begin{problem}{3.23}
+  Show that:
+  \begin{enumerate}
+    \item[a.] $\displaystyle \laplace{t \cos(at) e^{-bt}} = \frac{(s+b)^2 - a^2}{\left[(s+b)^2+a^2\right]^2}.$
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] Let $f(t) = t \cos(at)$ and suppose that $\bar{f}(s) = \laplace{f(t)}$.
+
+      As shown previously, we know that
+      \begin{align*}
+        \bar{f}(s) = \laplace{f(t)} = \laplace{t \cos(at)} = \frac{s^2 - a^2}{(s^2+a^2)^2}.
+      \end{align*}
+
+      Therefore, by Heaviside's First Shifting Theorem,
+      \begin{align*}
+        \laplace{t\cos (at) e^{-bt}} = \laplace{f(t)e^{-bt}} = \bar{f}(s+b) = \frac{(s+b)^2 - a^2}{\left[(s+b)^2+a^2\right]^2},
+      \end{align*}
+      and we are done.
+  \end{enumerate}
 \end{proof}
 \newpage
