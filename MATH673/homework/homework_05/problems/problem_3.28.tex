@@ -1,6 +1,34 @@
 \begin{problem}{3.28}
+  Use the Final Value Theorem to find $\displaystyle \lim_{t\to\infty} f(t)$ if it exists from the following functions:
+  \begin{enumerate}
+    \item[a.] $\displaystyle \bar{f}(s) = \frac{1}{s(s^2+as + b)}$,
+    \item[d.] $\displaystyle \bar{f}(s) = \frac{3}{(s^2 + 4)^2}$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  The Final Value Theorem states that if $\displaystyle \bar{f}(s) = \frac{\bar{p}(s)}{\bar{q}(s)}$ where
+  $\bar{p}(s)$ and $\bar{q}(s)$ are polynomials in $s$ and the degree of $\bar{p}(s)$
+  is less than that of $\bar{q}(s)$, and if all roots of $\bar{q}(s)$ have negative real parts
+  with the possible exception of the root $s=0$, then
+  \begin{align}\label{fvt}
+    \lim_{s\to 0} s\bar{f}(s) = \lim_{t\to\infty} f(t),
+  \end{align}
+  if the limit exists.
+
+  \begin{enumerate}
+    \item[a.] Suppose that $\displaystyle \bar{f}(s) = \frac{1}{s(s^2+as + b)} = \frac{\bar{p}(s)}{\bar{q}(s)}$.
+      Note that the roots of $\bar{q}(s)$ are at $s = 0$ and $\displaystyle s=\frac{1}{2}(-a \pm \sqrt{a^2-4b})$.
+
+      If $a\leq 0$, then the assumptions of the Final Value Theorem are not satisfied and thus cannot be applied.
+      However, if $a > 0$, then the assumptions are satisfied and from \eqref{fvt} we see that
+      \begin{align*}
+        \lim_{t\to\infty}f(t) = \lim_{s\to 0} s\bar{f}(s) = \frac{s}{s(s^2+as + b)} = \frac{1}{b}.
+      \end{align*}
+
+    \item[d.] Suppose that $\displaystyle \bar{f}(s) = \frac{3}{(s^2 + 4)^2} = \frac{\bar{p}(s)}{\bar{q}(s)}$. Note that
+      the roots of $\bar{q}(s)$ are $s = \pm 2i$ each with multiplicity 2. Since
+      the real parts of these roots are not negative, the Final Value Theorem cannot be applied.
+  \end{enumerate}
 \end{proof}
 \newpage
