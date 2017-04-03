@@ -1,6 +1,104 @@
 \begin{problem}{4.1}
+  Using the Laplace transform, solve the following initial value problems:
+  \begin{enumerate}
+    \item[a.] $\displaystyle \frac{dx}{dt} + ax = e^{-bt}$, $t >0$, $a\neq b$, with $x(0) = 0$,
+    \item[c.] $\displaystyle \frac{dx}{dt} + 2x = \cos t$, $t > 0$, $x(0)= 1$,
+    \item[h.] $\displaystyle \frac{\partial u}{\partial t} + x\frac{\partial u}{\partial x} = x f(t)$, $u(x,0)= 0$, $u(0, t) = 0$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  Throughout, we use the following relation
+  \begin{align}\label{lap:der}
+    \laplace{\frac{dx}{dt}} = s\bar{x}(s) - x(0).
+  \end{align}
+
+  \begin{enumerate}
+    \item[a.] Applying the Laplace transform to the differential equation shows that
+      \begin{align*}
+        \laplace{\frac{dx}{dt} + ax} = (s+a)\bar{x}(s) - x(0) = \frac{1}{s+b} = \laplace{e^{-bt}}
+      \end{align*}
+      where we use the relation \eqref{lap:der}.
+
+      Thus,
+      \begin{align*}
+        \bar{x}(s) = \frac{1}{(s+a)(s+b)}.
+      \end{align*}
+
+      Let $\bar{f}(s) = 1/(s+a)$ and $\bar{g}(s) = 1/(s+b)$.
+      Then $f(t) = e^{-at}$ and $g(t) = e^{-bt}$ and by the Convolution Theorem,
+      \begin{align*}
+        x(t) = \laplaceinv{\bar{x}(s)} = \laplaceinv{\bar{f}(s)\bar{g}(s)} &= (f\ast g)(t) \\
+        &= \int_0^t f(t-\tau) g(\tau) d\tau.
+      \end{align*}
+
+      Therefore, the solution to the original initial value problem is
+      \begin{align*}
+        x(t) = \int_0^t f(t-\tau) g(\tau) d\tau &= \int_0^t e^{-a(t-\tau)} e^{-b\tau} d\tau \\
+        &= e^{-at} \int_0^t e^{-(b-a)\tau} d\tau \\
+        &= -\frac{e^{-at}}{b-a}\left(e^{-(b-a)t} - 1\right) \\
+        &= \frac{e^{-at}}{a-b}\left(e^{-bt} - e^{-at}\right).
+      \end{align*}
+
+    \item[c.] Applying the Laplace transform to the differential equation shows that
+      \begin{align*}
+        \laplace{\frac{dx}{dt} + 2x} = (s+2)\bar{x}(s) - x(0) = \frac{s}{s^2 + 1} = \laplace{\cos t}
+      \end{align*}
+      where we use the relation \eqref{lap:der}.
+
+      Thus, using the initial value $x(0) = 1$
+      \begin{align*}
+        \bar{x}(s) = \frac{s}{(s+2)(s^2 + 1)} + \frac{1}{s+2}
+      \end{align*}
+
+      Let $\bar{f}(s) = 1/(s+2)$ and $\bar{g}(s) = s/(s^2+1)$.
+      Then $f(t) = e^{-2t}$ and $g(t) = \cos t$ and by the Convolution Theorem,
+      \begin{align*}
+        x(t) = \laplaceinv{\bar{x}(s)} = \laplaceinv{\bar{f}(s)\bar{g}(s) + \bar{f}(s)}
+        &= (f\ast g)(t) - f(t)\\
+        &= \int_0^t f(t-\tau) g(\tau) d\tau + f(t).
+      \end{align*}
+
+      Therefore, using a computer algebra system, we see that
+      the solution to the original initial value problem is
+      \begin{align*}
+        x(t) = \int_0^t f(t-\tau) g(\tau) d\tau + f(t)
+        &= \int_0^t e^{-2(t-\tau)}\cos \tau d\tau + e^{-2t}\\
+        &= \frac{1}{5}\left(-2 e^{-2t} + 2\cos t + \sin t\right) + e^{-2t}\\
+        &= \frac{1}{5}\left(3 e^{-2t} + 2\cos t + \sin t\right).
+      \end{align*}
+
+    \item[h.] Applying the Laplace transform
+      to the partial differential equation yields that
+      \begin{align*}
+        &s\bar{u}(x, s) + x\frac{d \bar{u}(x, s)}{d x} = x\bar{f}(s) \\
+        &\bar{u}(0, s) = 0
+      \end{align*}
+      where we used the initial value $u(x, 0) = 0$.
+
+      Thus,
+      \begin{align*}
+        \frac{d\bar{u}(x, s)}{dx} + \frac{s}{x}\bar{u}(x, s) = \bar{f}(s).
+      \end{align*}
+      Using a computer algebra system, we see that the solution to this differential equation is
+      \begin{align*}
+        \bar{u}(x, s) = \frac{c_1}{x^s}+ \frac{x\bar{f}(s)}{s+1}.
+      \end{align*}
+
+      Note that $\bar{u}(0, s) = 0$ implies that $c_1 = 0$ and that
+      \begin{align*}
+        \bar{u}(x, s) = \frac{x\bar{f}(s)}{s+1}.
+      \end{align*}
+
+      Let $\bar{g}(s) = 1/(s+1)$. Therefore, $g(t) = e^{-t}$ and using the Convolution Theoreom,
+      the solution to the original differential equation is
+      \begin{align*}
+        u(x,t) = \laplaceinv{\bar{u}(x, s)}
+        &= x \laplaceinv{\bar{f}(s)\bar{g}(s)} \\
+        &= x (f \ast g)(t) \\
+        &= x \int_0^t f(t-\tau) e^{-\tau} d\tau.
+      \end{align*}
+
+  \end{enumerate}
 \end{proof}
 \newpage
