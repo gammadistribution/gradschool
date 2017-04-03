@@ -1,6 +1,45 @@
 \begin{problem}{3.32}
+  Use Heaviside's Second Shifting Theorem to obtain the Laplace transforms of the
+  following functions:
+  \begin{enumerate}
+    \item[a.] $f(t) = (t-a)^n H(t-a)$,
+    \item[e.] $f(t) = \cos 2t H(t-\pi)$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  Heaviside's Second Shifting Theorem states that if $\laplace{f(t)} = \bar{f}(s)$, then
+  \begin{align}
+    \laplace{f(t-a)H(t - a)} = e^{-as}\bar{f}(s) \label{hvs:1}
+  \end{align}
+  or, equivalently,
+  \begin{align}
+    \laplace{f(t)H(t - a)} = e^{-as}\laplace{f(t+a)} \label{hvs:2}.
+  \end{align}
+  \begin{enumerate}
+    \item[a.] Let $g(t) = t^n$. Then $f(t) = g(t-a)H(t-a)$ and from our table
+      of Laplace transforms,
+      \begin{align*}
+        \bar{g}(s) = \laplace{g(t)} = \laplace{t^n} = \frac{n!}{s^{n+1}}.
+      \end{align*}
+      Therefore, from \eqref{hvs:1}, we see that
+      \begin{align*}
+        \laplace{f(t)} = \laplace{g(t-a)H(t-a)} = e^{-as}\bar{g}(s) = \frac{n!e^{-as}}{s^{n+1}}.
+      \end{align*}
+    \item[e.] Let $g(t) = \cos 2t$. Then $f(t) = g(t)H(t-\pi)$ and from
+      \eqref{hvs:2}, we see that
+      \begin{align*}
+        \laplace{f(t)} = \laplace{g(t)H(t-\pi)} = e^{-\pi s} \laplace{g(t+\pi)}.
+      \end{align*}
+      Note that
+      \begin{align*}
+        \laplace{g(t+\pi)} = \laplace{\cos 2(t+\pi)} = \laplace{\cos 2 t} = \frac{s}{s^2+4}.
+      \end{align*}
+      Therefore,
+      \begin{align*}
+        \laplace{f(t)} = e^{-\pi s} \laplace{g(t+\pi)} = \frac{se^{-\pi s}}{s^2+4}.
+      \end{align*}
+  \end{enumerate}
+
 \end{proof}
 \newpage
