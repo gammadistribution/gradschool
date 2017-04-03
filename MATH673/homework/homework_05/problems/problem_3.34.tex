@@ -1,6 +1,27 @@
 \begin{problem}{3.34}
+  Suppose that $f(t) = aH(t) -2a H(t-1) +aH(t-2)$. Show that
+  \begin{align*}
+    \bar{f}(s) = \laplace{f(t)} = \frac{a}{s}\left(1-e^{-s}\right)^2
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Suppose that $g(t) = 1$. The from Heaviside's Second Shifting Theorem \eqref{hvs:2},
+  we see that for $b \geq 0$
+  \begin{align}\label{lap}
+    \laplace{H(t-b)} = \laplace{g(t)H(t-b)}
+    &= e^{-bs}\laplace{g(t+b)} \notag \\
+    &= e^{-bs}\laplace{1} \notag \\
+    &= \frac{e^{-bs}}{s}.
+  \end{align}
+
+  Therefore, using \eqref{lap} and the linearity of the Laplace transform, we see that
+  \begin{align*}
+    \laplace{f(t)} &= \laplace{aH(t) -2a H(t-1) +aH(t-2)} \\
+    &= a\left(\laplace{H(t)} -2 \laplace{H(t-1)} + \laplace{H(t-2)}\right) \\
+    &= \frac{a}{s}\left(1 - 2e^{-s} + e^{-2s}\right) \\
+    &= \frac{a}{s}\left(1-e^{-s}\right)^2,
+  \end{align*}
+  and we are done.
 \end{proof}
 \newpage
