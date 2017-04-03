@@ -1,6 +1,53 @@
 \begin{problem}{3.29}
+  Suppose that $\laplace{f(t)} = \bar{f}(s)$ and $\laplace{g(t)} = \bar{g}(s)$.
+  Show that
+  \begin{align*}
+    \laplaceinv{s \bar{f}(s) \bar{g}(s)} &= f(0)g(t) + \int_0^t g(t-\tau) f'(\tau) d\tau \\
+    \laplaceinv{s \bar{f}(s) \bar{g}(s)} &= g(0)f(t) + \int_0^t f(t-\tau) g'(\tau) d\tau.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  We wish to show that
+  \begin{align*}
+    \laplaceinv{s \bar{f}(s) \bar{g}(s)} &= f(0)g(t) + \int_0^t g(t-\tau) f'(\tau) d\tau.
+  \end{align*}
+  This is equivalent to showing that
+  \begin{align*}
+    \laplace{f(0)g(t) + \int_0^t g(t-\tau)  f'(\tau) d\tau} = s\bar{f}(s)\bar{g}(s).
+  \end{align*}
+  Note that we have by the definition of the convolution that
+  \begin{align*}
+    \int_0^t g(t-\tau)  f'(\tau) d\tau = (g \ast f')(t).
+  \end{align*}
+  Thus,
+  \begin{align*}
+    \laplace{f(0)g(t) + \int_0^t g(t-\tau)  f'(\tau) d\tau} = \laplace{g(t)f(0) + (g \ast f')(t)}.
+  \end{align*}
+
+  Using the linearity of the Laplace transform in combination with the Convolution Theorem, we have that
+  \begin{align*}
+    \laplace{f(0)g(t) + \int_0^t g(t-\tau)  f'(\tau) d\tau}
+    &= \laplace{g(t)f(0) + (g \ast f')(t)} \\
+    &= f(0) \laplace{g(t)} + \laplace{g(t)}\laplace{f'(t)}.
+  \end{align*}
+  Recall that we have shown previously that
+  \begin{align*}
+    \laplace{f'(t)} = s\laplace{f(t)} - f(0).
+  \end{align*}
+
+  Therefore,
+  \begin{align*}
+    \laplace{f(0)g(t) + \int_0^t g(t-\tau)  f'(\tau) d\tau}
+    &= f(0) \laplace{g(t)} + \laplace{g(t)}\laplace{f'(t)} \\
+    &=\laplace{g(t)}\left(f(0) + s \laplace{f(t)} - f(0)\right) \\
+    &= s\laplace{f(t)}\laplace{g(t)} \\
+    &= s\bar{f}(s)\bar{g}(s).
+  \end{align*}
+  Note the same argument can be repeated by interchanging $f$ and $g$ to show that
+  \begin{align*}
+    \laplace{g(0)f(t) + \int_0^t f(t-\tau) g'(\tau) d\tau} = s \bar{f}(s) \bar{g}(s),
+  \end{align*}
+  and we are done.
 \end{proof}
 \newpage
