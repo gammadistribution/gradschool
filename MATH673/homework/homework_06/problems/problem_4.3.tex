@@ -1,0 +1,102 @@
+\begin{problem}{4.3}
+  Find the solutions of the following systems of equations with the initial data:
+  \begin{enumerate}
+    \item[a.]
+      $
+      \begin{array}{ll}
+        \frac{dx}{dt} = x - 2y, \quad x(0) = 1 \\
+        \frac{dy}{dt} = y - 2x, \quad y(0) = 0
+      \end{array}
+      $
+
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item[a.] Applying the Laplace transform to the system yields
+      \begin{align*}
+        \laplace{\frac{dx}{dt}} = s\bar{x}(s) - x(0) = \bar{x}(s) - 2 \bar{y}(s) = \laplace{x - 2y} \\
+        \laplace{\frac{dy}{dt}} = s\bar{y}(s) - y(0) = \bar{y}(s) - 2 \bar{x}(s) = \laplace{y - 2x}.
+      \end{align*}
+
+      Using the initial data, the transformed system becomes
+      \begin{align*}
+        (s-1)\bar{x}(s) + 2 \bar{y}(s) &= 1\\
+        2\bar{x}(s) + (s-1) \bar{y}(s) &= 0,
+      \end{align*}
+      or, equivalently,
+      \begin{align*}
+        \begin{bmatrix}
+          s-1 & 2 \\
+          2 & s-1
+        \end{bmatrix}
+        \begin{bmatrix}
+          \bar{x}(s) \\
+          \bar{y}(s)
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+          1 \\
+          0
+        \end{bmatrix}
+      \end{align*}
+
+      This implies that the solution to the transformed system of equations is given by
+      \begin{align*}
+        \begin{bmatrix}
+          \bar{x}(s) \\
+          \bar{y}(s)
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+          s-1 & 2 \\
+          2 & s-1
+        \end{bmatrix}
+        ^{-1}
+        \begin{bmatrix}
+          1 \\
+          0
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+          \frac{s-1}{(s-3)(s+1)} & -\frac{2}{(s-3)(s+1)} \\
+          -\frac{2}{(s-3)(s+1)} & \frac{s-1}{(s-3)(s+1)}
+        \end{bmatrix}
+        \begin{bmatrix}
+          1 \\
+          0
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+          \frac{s-1}{(s-3)(s+1)} \\
+          -\frac{2}{(s-3)(s+1)}
+        \end{bmatrix}
+      \end{align*}
+      i.e. the solution is given by $\displaystyle \bar{x}(s) = \frac{s-1}{(s-3)(s+1)}$ and $\displaystyle \bar{y}(s) = -\frac{2}{(s-3)(s+1)}$.
+
+      From our table of Laplace Transforms, we know that
+      \begin{align*}
+        \laplace{e^{at} - e^{bt}} = \frac{a-b}{(s-a)(s-b)}
+      \end{align*}
+      and
+      \begin{align*}
+        \laplace{\frac{ae^{at} - be^{bt}}{a-b}} = \frac{s}{(s-a)(s-b)}.
+      \end{align*}
+
+      Therefore, the solution to the original system of differential equations is given by
+      \begin{align*}
+        x(t) = \laplaceinv{\bar{x}(s)} &= \laplaceinv{\frac{s-1}{(s-3)(s+1)}} \\
+        &= \laplaceinv{\frac{s}{(s-3)(s+1)}} - \laplaceinv{\frac{1}{(s-3)(s+1)}} \\
+        &= \frac{3e^{3t}+e^{-t}}{4} - \frac{e^{3t} - e^{-t}}{r} \\
+        &= \frac{e^{3t} + e^{-t}}{2}
+      \end{align*}
+      and
+      \begin{align*}
+        y(t) = \laplaceinv{\bar{y}(s)} &= \laplaceinv{-\frac{2}{(s-3)(s+1)}} \\
+        &= \frac{e^{-t} - e^{3t}}{2}
+      \end{align*}
+
+  \end{enumerate}
+\end{proof}
+\newpage
