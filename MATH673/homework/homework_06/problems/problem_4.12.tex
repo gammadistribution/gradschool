@@ -1,6 +1,59 @@
 \begin{problem}{4.12}
+  Solve the following initial value problems:
+  \begin{enumerate}
+    \item[a.] $\ddot{x} + \omega^2 x = \cos nt$, $x(0) = 1$, $\dot{x}(0) = 0$ where $\omega \neq n$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] We begin by applying the Laplace transform to the equation. Doing
+      so yields
+      \begin{align*}
+        \laplace{\ddot{x} + \omega^2 x} = (s^2 + \omega^2)\bar{x}(s) -sx(0) - \dot{x}(0) = \frac{s}{s^2 + n^2} = \laplace{\cos nt}.
+      \end{align*}
+
+      Using the initial data, the transformed equation becomes
+      \begin{align*}
+        (s^2 + \omega^2)\bar{x}(s) -s = \frac{s}{s^2 + n^2}.
+      \end{align*}
+      Solve the above equation yields that the solution to the transformed equation is
+      \begin{align*}
+        \bar{x}(s) = \frac{s^3+(n^2+1)s}{(s^2 + n^2)(s^2+\omega^2)}.
+      \end{align*}
+
+      From the partial fractions method we see that
+      \begin{align*}
+        \bar{x}(s) = \frac{s^3+(n^2+1)s}{(s^2 + n^2)(s^2+\omega^2)} = \frac{a_1 s + a_0}{s^2 + n^2} + \frac{b_1 s + b_0}{s^2 + \omega^2}.
+      \end{align*}
+      Combining the rational fractions on the right side under a common denominator and equating the coefficients in the numerator
+      we arrive at the following system of equations
+      \begin{align*}
+        a_1 + b+1 &= 1 \\
+        a_0 + b_0 &= 0 \\
+        a_1\omega^2 + b_1 n^2 &= n^2 + 1 \\
+        a_0\omega^2 + b_0n^2 &= 0
+      \end{align*}
+      Solving this system, we see that $a_0 = b_0 = 0$, $\displaystyle a_1 = \frac{1}{\omega^2 - n^2}$,
+      and $\displaystyle b_1 = \frac{\omega^2 - n^2 -1}{\omega^2 - n^2}$.
+
+      Thus, the solution to the transformed system is given by
+      \begin{align*}
+        \bar{x}(s) = \frac{s^3+(n^2+1)s}{(s^2 + n^2)(s^2+\omega^2)} =
+        \left(\frac{1}{\omega^2 - n^2}\right)\frac{s}{s^2 + n^2} + \left(\frac{\omega^2 - n^2 -1}{\omega^2 - n^2}\right)\frac{s}{s^2 + \omega^2}.
+      \end{align*}
+
+      From our table of Laplace transforms, we know that
+      \begin{align*}
+        \laplace{\cos a t} = \frac{s}{s^2 + a^2}.
+      \end{align*}
+
+      Therefore, the solution to the original differential equation is
+      \begin{align*}
+        x(t) = \laplaceinv{\bar{x}(s)}
+        &= \left(\frac{1}{\omega^2 - n^2}\right)\laplaceinv{\frac{s}{s^2 + n^2}} + \left(\frac{\omega^2 - n^2 -1}{\omega^2 - n^2}\right)\laplaceinv{\frac{s}{s^2 + \omega^2}} \\
+        &= \left(\frac{1}{\omega^2 - n^2}\right)\cos n t + \left(\frac{\omega^2 - n^2 -1}{\omega^2 - n^2}\right)\cos \omega t.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
