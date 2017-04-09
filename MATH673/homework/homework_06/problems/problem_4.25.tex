@@ -1,6 +1,146 @@
 \begin{problem}{4.25}
+  Solve the following integral equations:
+  \begin{enumerate}
+    \item[a.] $\displaystyle f(t) = \sin 2 t + \int_0^t f(t-\tau)\sin \tau d\tau$.
+    \item[b.] $\displaystyle f(t) = \frac{t}{2}\sin t + \int_0^t f(\tau)\sin (t - \tau) d\tau$.
+    \item[d.] $\displaystyle f(t) = \sin t + \int_0^t f(\tau)\sin 2(t-\tau) d\tau$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] Let $g(t) = \sin t$. Then
+      \begin{align*}
+        f(t) &= g(2t) + \int_0^t f(t-\tau)g(\tau) d\tau \\
+        &= g(2t) + (f \ast g)(t).
+      \end{align*}
+      Applying the Laplace transform to this equation and using the Convolution Theorem, we have that
+      \begin{align*}
+        \laplace{f(t)} = \bar{f}(s) = \laplace{g(2t)} + \bar{f}(s)\bar{g}(s) = \laplace{g(2t) + (f \ast g)(t)}.
+      \end{align*}
+      From our table of Laplace transforms, we know that
+      \begin{align*}
+        \laplace{\sin n t} = \frac{n}{s^2 + n^2}.
+      \end{align*}
+      Thus, the transformed equation becomes
+      \begin{align*}
+        \bar{f}(s) = \frac{2}{s^2 + 4} + \bar{f}(s)\frac{1}{s^2 + 1},
+      \end{align*}
+      or, equivalently,
+      \begin{align*}
+        \bar{f}(s) = \frac{2(s^2 + 1)}{s^2(s^2+4)}.
+      \end{align*}
+
+      From the partial fractions method we see that
+      \begin{align*}
+        \bar{f}(s) = \frac{2(s^2 + 1)}{s^2(s^2+4)} = \frac{a_1 s + a_0}{s^2} + \frac{b_1 s + b_0}{s^2 + 4}.
+      \end{align*}
+      Combining the rational fractions on the right side under a common denominator and equating the coefficients in the numerator of the left side
+      we arrive at the following system of equations:
+      \begin{align*}
+        a_1 + b_1 &= 0 \\
+        a_0 + b_0 &= 2 \\
+        4a_1 &= 0 \\
+        4a_0 &= 2.
+      \end{align*}
+      By inspection, we see that $a_1 = b_1 = 0$, $a_0 = \frac{1}{2}$, and $b_0 = \frac{3}{2}$.
+
+      Therefore, the solution to the original integral equation is
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)}
+        &= \laplaceinv{\frac{2(s^2 + 1)}{s^2(s^2+4)}}\\
+        &= \frac{1}{2}\laplaceinv{\frac{1}{s^2}} + \frac{3}{2}\laplaceinv{\frac{1}{s^2+4}}\\
+        &= \frac{t}{2} + \frac{3}{4} \sin 2t.
+      \end{align*}
+
+    \item[b.] Let $g(t) = \sin t$. Then
+      \begin{align*}
+        f(t) &= \frac{t}{2}g(t) + \int_0^t f(\tau)g(t-\tau) d\tau \\
+        &= \frac{t}{2}g(t) + (g \ast f)(t) \\
+        &= \frac{t}{2}g(t) + (f \ast g)(t).
+      \end{align*}
+      Applying the Laplace transform to this equation and using the Convolution Theorem, we have that
+      \begin{align*}
+        \laplace{f(t)} = \bar{f}(s) = \frac{1}{2}\laplace{t g(t)} + \bar{f}(s)\bar{g}(s) = \laplace{\frac{t}{2}g(t) + (f \ast g)(t)}.
+      \end{align*}
+      From our table of Laplace transforms, we know that
+      \begin{align*}
+        \laplace{\sin n t} = \frac{n}{s^2 + n^2}
+      \end{align*}
+      and
+      \begin{align*}
+        \laplace{t \sin n t} = \frac{2ns}{\left(s^2 + n^2\right)^2}.
+      \end{align*}
+      Thus, the transformed equation becomes
+      \begin{align*}
+        \bar{f}(s) = \frac{s}{\left(s^2 + 1\right)^2} + \bar{f}(s)\frac{1}{s^2 + 1},
+      \end{align*}
+      or, equivalently,
+      \begin{align*}
+        \bar{f}(s) = \frac{1}{s(s^2+1)} = \bar{h}(s)\bar{g}(s),
+      \end{align*}
+      where $\bar{h}(s) = \frac{1}{s}$. From our table of Laplace transforms, we know that
+      $g(t) = \sin t$ and $h(t) = 1$.
+
+      Therefore, by the Convolution theorem, the solution to the original equation is
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)} &= \laplaceinv{\bar{h}(s)\bar{g}(s)} \\
+        &= (h \ast g)(t) \\
+        &= \int_0^t h(t- \tau) g(\tau) d\tau \\
+        &= \int_0^t \sin \tau d\tau \\
+        &= 1 - \cos t.
+      \end{align*}
+
+    \item[d.] Let $g(t) = \sin t$ and $h(t) = \sin 2 t$. Then
+      \begin{align*}
+        f(t) &= g(t) + \int_0^t f(\tau)h(t-\tau) d\tau \\
+        &= g(t) + (h \ast f)(t) \\
+        &= g(t) + (f \ast h)(t).
+      \end{align*}
+      Applying the Laplace transform to this equation and using the Convolution Theorem, we have that
+      \begin{align*}
+        \laplace{f(t)} = \bar{f}(s) = \bar{g}(s) + \bar{f}(s)\bar{h}(s) = \laplace{g(t) + (f \ast h)(t)}.
+      \end{align*}
+      From our table of Laplace transforms, we know that
+      \begin{align*}
+        \laplace{\sin n t} = \frac{n}{s^2 + n^2}.
+      \end{align*}
+
+      Thus, the transformed equation becomes
+      \begin{align*}
+        \bar{f}(s) = \frac{1}{s^2 + 1} + \bar{f}(s)\frac{2}{s^2 + 4},
+      \end{align*}
+      or, equivalently,
+      \begin{align*}
+        \bar{f}(s) = \frac{s^2 + 4}{(s^2+2)(s^2+1)}.
+      \end{align*}
+
+      From the partial fractions method we see that
+      \begin{align*}
+        \bar{f}(s) = \frac{s^2 + 4}{(s^2+2)(s^2+1)} = \frac{a_1 s + a_0}{s^2 + 2} + \frac{b_1 s + b_0}{s^2 + 1}.
+      \end{align*}
+      Combining the rational fractions on the right side under a common denominator and equating the coefficients in the numerator
+      we arrive at the following system of equations
+      \begin{align*}
+        a_1 + b+1 &= 0 \\
+        a_0 + b_0 &= 1 \\
+        a_1 + 2b_1 &= 0 \\
+        a_0 + 2b_0 &= 4
+      \end{align*}
+      Solving this system, we see that $a_1 = b_1 = 0$, $\displaystyle a_0 = -2$,
+      and $\displaystyle b_0 = 3$. Thus, we see that
+      \begin{align*}
+        \bar{f}(s) = \frac{s^2 + 4}{(s^2+2)(s^2+1)} = -\frac{2}{s^2 + 2} + \frac{3}{s^2 + 1}.
+      \end{align*}
+
+      Therefore, the solution to the original equation is
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)} &= -2\laplaceinv{\frac{1}{s^2 + 2}} + 3\laplaceinv{\frac{1}{s^2 + 1}} \\
+        &= -\frac{2}{\sqrt{2}}\sin \sqrt{2}t + 3 \sin t \\
+        &= - \sqrt{2}\sin \sqrt{2}t + 3 \sin t.
+      \end{align*}
+
+
+  \end{enumerate}
 \end{proof}
 \newpage
