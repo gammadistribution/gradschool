@@ -1,6 +1,96 @@
 \begin{problem}{4.14}
+  With the aid of the Laplace transform, investigate the motion of a particle governed by
+  the equations of motion
+  \begin{align*}
+    \ddot{x} - \omega \dot{y} &= 0 \\
+    \ddot{y} + \omega \dot{x} &= \omega^2 a
+  \end{align*}
+  with the initial conditions $x(0) = y(0) = \dot{x}(0) = \dot{y}(0) = 0$.
 \end{problem}
 
 \begin{proof}
+  We begin by applying the Laplace transform to the system of differential equations. Doing so
+  yields
+  \begin{align*}
+    \laplace{\ddot{x} - \omega \dot{y}} &= s^2\bar{x}(s) - sx(0) - \dot{x}(0) - \omega \left(s \bar{y}(s) - y(0)\right) = 0 = \laplace{0} \\
+    \laplace{\ddot{y} + \omega \dot{x}} &= s^2 \bar{y}(s) -sy(0) - \dot{y}(0) + \omega \left(s \bar{x}(s) - x(0)\right) = \frac{\omega^2 a}{s} = \laplace{\omega^2 a}
+  \end{align*}
+
+  Using the initial data, the above system becomes
+  \begin{align*}
+    s^2\bar{x}(s) - \omega s \bar{y}(s) &= 0 \\
+    s^2 \bar{y}(s) + \omega s \bar{x}(s)&= \frac{\omega^2 a}{s},
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    \begin{bmatrix}
+      s^2 & -\omega s \\
+      \omega s & s^2
+    \end{bmatrix}
+    \begin{bmatrix}
+      \bar{x}(s) \\
+      \bar{y}(s)
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      1 \\
+      \frac{\omega^2 a}{s}
+    \end{bmatrix}
+  \end{align*}
+
+  This implies that the solution to the transformed system of equations is
+  \begin{align*}
+    \begin{bmatrix}
+      \bar{x}(s) \\
+      \bar{y}(s)
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      s^2 & -\omega s \\
+      \omega s & s^2
+    \end{bmatrix}
+    ^{-1}
+    \begin{bmatrix}
+      0 \\
+      \frac{\omega^2 a}{s}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \frac{s^2}{s^2(s^2 + \omega^2)} & \frac{s\omega}{s^2(s^2 + \omega^2)} \\
+      -\frac{s\omega}{s^2(s^2 + \omega^2)} & \frac{s^2}{s^2(s^2 + \omega^2)}
+    \end{bmatrix}
+    \begin{bmatrix}
+      0 \\
+      \frac{\omega^2 a}{s}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \frac{\omega^3 a}{s^2(s^2 + \omega^2)} \\
+      \frac{\omega^2 s a}{s^2(s^2 + \omega^2)} \\
+    \end{bmatrix}
+  \end{align*}
+
+  Let $\bar{f}(s) = \frac{1}{s^2}$, $\bar{g}(s) = \frac{\omega}{s^2 + \omega^2}$, and $\bar{h}(s) = \frac{\omega}{s^2 + \omega^2}$.
+  From our table of Laplace transforms, we know that
+  \begin{align*}
+    f(t) &= \laplaceinv{\bar{f}(s)} = \laplaceinv{\frac{1}{s^2}} = t \\
+    g(t) &= \laplaceinv{\bar{g}(s)} = \laplaceinv{\frac{b}{s^2 + \omega^2}} = \sin \omega t \\
+    h(t) &= \laplaceinv{\bar{h}(s)} = \laplaceinv{\frac{s}{s^2 + \omega^2}} = \cos \omega t.
+  \end{align*}
+  Therefore, by the Convolution Theorem, the solution to the original system of equations is given by
+  \begin{align*}
+    x(t) = \laplaceinv{\bar{x}(s)} = \omega^2 a \laplaceinv{\bar{f}(s)\bar{g}(s)} &= \omega^2 a (f \ast g)(t) \\
+    &= \omega^2 a \int_0^t f(t-\tau)g(\tau) d\tau \\
+    &= \omega^2 a \int_0^t (t-\tau)\sin \omega \tau d\tau \\
+    &= a\omega t - a \sin \omega t.
+  \end{align*}
+  and
+  \begin{align*}
+    y(t) = \laplaceinv{\bar{y}(s)} = \omega^2 a \laplaceinv{\bar{f}(s)\bar{h}(s)} &= \omega^2 a (f \ast h)(t) \\
+    &= \omega^2 a \int_0^t f(t-\tau)h(\tau) d\tau \\
+    &= \omega^2 a \int_0^t (t-\tau)\cos \omega \tau d\tau \\
+    &= a - a \cos \omega t.
+  \end{align*}
+
 \end{proof}
 \newpage
