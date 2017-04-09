@@ -1,6 +1,63 @@
 \begin{problem}{4.22}
+  Solve the Blasius problem of an unsteady boundary layer flow in a semi-infinite body
+  of viscous fluid enclosed by an infinite horizontal disk at $z=0$. The governing equation
+  and the boundary and initial conditions are
+  \begin{align*}
+    \frac{\partial u}{\partial t} &= \nu \frac{\partial ^2 u}{\partial z^2} \\
+    u(z, t) &= U t \quad \text{on $z = 0$, $t > 0$} \\
+    u(z, t) &\to 0 \quad \text{as $z \to \infty$, $t > 0$} \\
+    u(z, t) &= 0 \quad \text{at $t \leq 0$, $z > 0$}.
+  \end{align*}
+  Explain the significance of the solution.
 \end{problem}
 
 \begin{proof}
+  Let $u(z, t)$ be a function in $z, t$. The Laplace transform of $u(z, t)$ with respect to $t$ is
+  given by
+  \begin{align*}
+    \laplace{u(z, t)} = \bar{u}(z, s) = \int_0^\infty u(z, t) e^{-st} dt.
+  \end{align*}
+  From this definition, we see from previous theorems that
+  \begin{align*}
+    \laplace{\frac{\partial^n}{\partial t^n}\left[u(z, t)\right]} = s^n \bar{u}(z, s) - \sum_{k=0}^{n-1}s^{n-1-k} \frac{\partial^k}{\partial t^k}\left[u(z, 0)\right]
+  \end{align*}
+  Similarly, we see from the Leibniz integral rule that
+  \begin{align*}
+    \laplace{\frac{\partial^n}{\partial z^n}\left[u(z, t)\right]} = \der{z}{n}\left[\bar{u}(z, s)\right].
+  \end{align*}
+
+  We begin by applying the Laplace transform to the governing equation and the boundary conditions on the infinity horizontal disk.
+  Doing so yields
+  \begin{align*}
+    s\bar{u}(z, s) - u(z, 0) &= \nu \der{z}{2}\left[\bar{u}(z, s)\right] \\
+    \bar{u}(z, s) &= \frac{U}{s^2}, \quad \text{on $z=0$, $s > 0$} \\
+    \bar{u}(z, s) &\to 0, \quad \text{as $z\to\infty$, $s > 0$}.
+  \end{align*}
+  The initial condition $u(z, t) = 0$ when $t = 0$ shows that the first equation reduces to
+  \begin{align*}
+    \der{z}{2}\left[\bar{u}(z, s)\right] - \frac{s}{\nu}\bar{u}(z, s) = 0.
+  \end{align*}
+
+  This is a second-order, linear homogeneous differential equation, the solution of which we readily see if
+  \begin{align*}
+    \bar{u}(z, s) = c_1 e^{-\sqrt{\frac{s}{\nu}} z} + c_2 e^{\sqrt{\frac{s}{\nu}} z}.
+  \end{align*}
+  From this form, the transformed boundary condition, $\bar{u}(z, s) \to 0$ as $z\to\infty$ for $s > 0$,
+  indicates that $c_2 = 0$, since $\sqrt{\frac{s}{\nu}} > 0$. Similarly the transformed boundary condition,
+  $\bar{u}(z, s) = \frac{U}{s^2}$ on $z=0$ for  $s > 0$, indicates that $c_1 = \frac{U}{s^2}$. Thus,
+  the solution to the transformed equation obeying the initial and boundary conditions is
+  \begin{align*}
+    \bar{u}(z, s) = \frac{U}{s^2}e^{-\sqrt{\frac{s}{\nu}} z}.
+  \end{align*}
+
+  From our table of Laplace transforms, we know that
+  \begin{align*}
+    \laplaceinv{\frac{1}{s^2}e^{-\sqrt{\frac{s}{\nu}}z}} = t\left[1 + 2 \zeta^2 \text{erfc}(\zeta) - \frac{2\zeta}{\sqrt{\pi}}e^{-\zeta^2}\right]
+  \end{align*}
+  where $\zeta = \frac{z}{2\sqrt{\nu t}}$ and $\displaystyle \text{erfc}(z) = \frac{2}{\sqrt{\pi}}\int_z^\infty e^{-t^2} dt$.
+  Therefore, the solution to the original differential equation is
+  \begin{align*}
+    u(z, t) = \laplaceinv{\bar{u}(z, s)} = U\laplaceinv{\frac{1}{s^2}e^{-\sqrt{\frac{s}{\nu}}z}} = Ut\left[1 + 2 \zeta^2 \text{erfc}(\zeta) - \frac{2\zeta}{\sqrt{\pi}}e^{-\zeta^2}\right].
+  \end{align*}
 \end{proof}
 \newpage
