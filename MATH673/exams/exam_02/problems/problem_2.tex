@@ -1,6 +1,88 @@
 \begin{problem}{2}
+  \begin{enumerate}
+    \item[a.] Evaluate the improper definite integral
+      \begin{align*}
+        \int_{-\infty}^\infty \frac{\cos tx}{x^2+a^2} dx
+      \end{align*}
+      where $a, t > 0$.
+    \item[b.] Show that
+      \begin{align*}
+        \int_0^\infty \frac{ \sin \pi t x}{x(1+x^2)} dx = \frac{\pi}{2}(1-e^{-\pi t})
+      \end{align*}
+      where $t > 0$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] Suppose that
+      \begin{align*}
+        f(t) = \int_{-\infty}^\infty \frac{\cos tx}{x^2+a^2} dx.
+      \end{align*}
+
+      In order to evaluate this integral, we take the Laplace transform of $f(t)$ with respect to $t$. Now, due to
+      uniform convergence, we have that
+      \begin{align*}
+        \bar{f}(s) = \laplace{f(t)} = \laplace{\int_{-\infty}^\infty \frac{\cos tx}{x^2+a^2} dx}
+        &= \int_{-\infty}^\infty \laplace{\frac{\cos tx}{x^2+a^2}} dx \\
+        &= \int_{-\infty}^\infty \frac{1}{x^2 + a^2}\laplace{\cos tx}dx \\
+        &= \int_{-\infty}^\infty \frac{s}{(x^2 + a^2)(x^2+s^2)}dx.
+      \end{align*}
+
+      Using the method of partial fraction decomposition, we see that this last integral becomes
+      \begin{align*}
+        \bar{f}(s)
+        &= \int_{-\infty}^\infty \frac{sdx}{(x^2 + a^2)(x^2+s^2)}dx \\
+        &= \frac{s}{s^2-a^2}\int_{-\infty}^\infty \frac{1}{x^2+a^2} - \frac{1}{x^2+s^2} dx.
+      \end{align*}
+
+      Thus, we see that
+      \begin{align*}
+        \bar{f}(s)
+        &= \frac{s}{s^2-a^2}\int_{-\infty}^\infty \frac{1}{x^2+a^2} - \frac{1}{x^2+s^2} dx \\
+        &= \frac{s}{s^2-a^2}\left[\left.\tan^{-1} \frac{x}{a}\right\rvert_{-\infty}^\infty - \left.\tan^{-1}\frac{x}{s}\right\rvert_{-\infty}^\infty\right] \\
+        &= \frac{s}{s^2-a^2}\left[\frac{\pi}{a}-\frac{\pi}{s}\right] \\
+        &= \frac{\pi}{a}\left[\frac{s}{s^2-a^2}-\frac{a}{s^2-a^2}\right].
+      \end{align*}
+
+      Using the table of Laplace transforms, we know that $\displaystyle \laplaceinv{\frac{s}{s^2-a^2}} = \cosh at$
+      and $\displaystyle \laplaceinv{\frac{a}{s^2-a^2}} = \sinh at$. Therefore, we have that
+      \begin{align*}
+        \int_{-\infty}^\infty \frac{\cos tx}{x^2+a^2} dx = f(t) = \laplaceinv{\bar{f}(s)}
+        &= \laplaceinv{\frac{\pi}{a}\left[\frac{s}{s^2-a^2}-\frac{a}{s^2-a^2}\right]} \\
+        &= \frac{\pi}{a}\left[\laplaceinv{\frac{s}{s^2-a^2}} - \laplaceinv{\frac{a}{s^2-a^2}}\right] \\
+        &= \frac{\pi}{a}\left[\cosh at - \sinh at\right] \\
+        &= \frac{\pi}{a} e^{-at}.
+      \end{align*}
+
+   \item[b.] Suppose that
+      \begin{align*}
+        f(t) =         \int_0^\infty \frac{ \sin \pi t x}{x(1+x^2)} dx.
+      \end{align*}
+
+      In order to evaluate this integral, we take the Laplace transform of $f(t)$ with respect to $t$. Now, due to
+      uniform convergence, we have that
+      \begin{align*}
+        \bar{f}(s) = \laplace{f(t)} = \laplace{\int_0^\infty \frac{ \sin \pi t x}{x(1+x^2)} dx}
+        &= \int_{0}^\infty \laplace{ \frac{ \sin \pi t x}{x(1+x^2)} } dx \\
+        &= \int_{0}^\infty \frac{1}{x(1+x^2)}\laplace{\sin \pi tx}dx \\
+        &= \int_{0}^\infty \frac{\pi}{(x^2 + 1)(\pi^2x^2+s^2)}dx.
+      \end{align*}
+
+      Using a computer algebra system, we see that this last integral reduces to
+      \begin{align*}
+        \bar{f}(s) &= \int_{0}^\infty \frac{\pi}{(x^2 + 1)(\pi^2x^2+s^2)}dx \\
+        &= \frac{\pi^2}{2s(\pi + s)} \\
+        &= \frac{\pi}{2}\left[\frac{1}{s} - \frac{1}{s+\pi}\right].
+      \end{align*}
+
+      Therefore, from our table of Laplace transforms, we have that
+      \begin{align*}
+        \int_0^\infty \frac{ \sin \pi t x}{x(1+x^2)} dx = f(t) = \laplaceinv{\bar{f}(s)}
+        &= \frac{\pi}{2}\left[\laplaceinv{\frac{1}{s}} - \laplaceinv{\frac{1}{s+\pi}}\right] \\
+        &= \frac{\pi}{2}\left(1 - e^{-\pi t}\right).
+      \end{align*}
+
+  \end{enumerate}
 \end{proof}
 \newpage
