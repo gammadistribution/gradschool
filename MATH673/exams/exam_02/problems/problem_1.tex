@@ -1,0 +1,101 @@
+\begin{problem}{1}
+  Find the inverse Laplace transform of the function
+  \begin{align*}
+    \bar{f}(s) = \frac{s}{(s- a)(s^2 + b^2)}
+  \end{align*}
+  for $a, b > 0$, by using the following three different approaches:
+  \begin{enumerate}
+    \item Using partial fraction decomposition,
+    \item Applying the Convolution Theorem,
+    \item Applying Heaviside's Expansion Theorem.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+  We will now find the inverse Laplace transform of $\bar{f}(s)$ using the respective approaches listed above:
+  \begin{enumerate}
+    \item
+      From the partial fractions method, we see that
+      \begin{align*}
+        \bar{f}(s) = \frac{s}{(s- a)(s^2 + b^2)} = \frac{c_0}{s- a} + \frac{d_1 s + d_0}{s^2 + b^2}.
+      \end{align*}
+      Combining the rational fractions on the right side under a common denominator and equating the coefficients
+      in the numerator we arrive at the following system of equations
+      \begin{align*}
+        c_0 + d_1 &= 0 \\
+        d_0 - a d_1 &= 0 \\
+        c_0 b^2 - a d_0 &= 0.
+      \end{align*}
+      Solving this system, we see that $\displaystyle c_0 = \frac{a}{a^2+b^2}$,
+      $\displaystyle d_1 = -\frac{a}{a^2+b^2}$, and $\displaystyle d_0 = \frac{b^2}{a^2+b^2}$. Thus,
+      we have that
+      \begin{align*}
+        \bar{f}(s) = \frac{1}{a^2+b^2}\left[\frac{a}{s-a} - \frac{as}{s^2+b^2} + \frac{b^2}{s^2+b^2}\right].
+      \end{align*}
+
+      From our table of Laplace transforms, we know that
+      \begin{align*}
+        \laplaceinv{\frac{1}{s-a}} &= e^{at} \\
+        \laplaceinv{\frac{s}{s^2+b^2}} &= \cos bt \\
+        \laplaceinv{\frac{b}{s^2+b^2}} &= \sin bt.
+      \end{align*}
+
+      Therefore, the inverse Laplace transform of $\bar{f}(s)$ is
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)} &= \frac{1}{a^2+b^2}\left[a\laplaceinv{\frac{1}{s-a}} - a\laplaceinv{\frac{s}{s^2+b^2}} + b\laplaceinv{\frac{b}{s^2+b^2}}\right] \\
+        &= \frac{1}{a^2+b^2}\left[ae^{at} - a \cos bt + b \sin bt\right].
+      \end{align*}
+    \item
+      The Convolution Theorem states that if $\bar{f}(s) = \bar{g}(s)\bar{h}(s)$, then
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)} = \laplaceinv{\bar{g}(s)\bar{h}(s)} = (g \ast h)(t)
+      \end{align*}
+      where
+      \begin{align*}
+        (g \ast h)(t) = \int_0^t g(t - \tau)h(\tau) d\tau.
+      \end{align*}
+      Now, suppose that $\bar{f}(s) = \bar{g}(s)\bar{h}(s)$, where
+      $\displaystyle \bar{g}(s) = \frac{1}{s-a}$ and
+      $\displaystyle \bar{h}(s) = \frac{s}{s^2+b^2}$.
+
+      From our table of Laplace transforms we know that
+      $\displaystyle g(t) = \laplaceinv{\frac{1}{s-a}} = e^{at}$ and
+      $\displaystyle h(t) = \laplaceinv{\frac{s}{s^2+b^2}} = \cos b t$.
+
+      Thus, by the Convolution Theorem, we have that
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)} = \laplaceinv{\bar{g}(s)\bar{h}(s)} = \int_0^t g(t-\tau) h(\tau) d\tau.
+      \end{align*}
+
+      Therefore, using a computer algebra system, we see that
+      \begin{align*}
+        f(t) &= \int_0^t g(t-\tau) h(\tau) d\tau \\
+        &= \int_0^t e^{a(t-\tau)} \cos b\tau d\tau \\
+        &= e^{at}\int_0^t e^{-a\tau)} \cos b\tau d\tau \\
+        &= \frac{1}{a^2+b^2}\left[ae^{at}-a\cos bt + b\sin bt\right].
+      \end{align*}
+
+    \item Heaviside's Expansion Theorem states that
+      if $\displaystyle \bar{f}(s) = \frac{\bar{p}(s)}{\bar{q}(s)}$, where $\bar{p}(s)$ and $\bar{q}(s)$ are
+      polynomials in $s$ and the degree of $\bar{q}$ is higher than that of $\bar{p}$, then
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)} = \sum_{k=1}^n \frac{\bar{p}(\alpha_k)}{\bar{q}'(\alpha_k)}e^{t\alpha_k}
+      \end{align*}
+      where $\alpha_k$ are the distinct root of $\bar{q}(s) = 0$.
+
+      For $\displaystyle \bar{f}(s) = \frac{s}{(s-a)(s^2+b^2)}$, we identify $\bar{p}(s) = s$ and
+      $\bar{q}(s) = (s-a)(s^2+b^2)$. Since $\bar{p}$ and $\bar{q}$ are polynomials in $s$ with the degree of $\bar{q}$
+      greater than that of the degree of $\bar{p}$, the assumptions of Heaviside's Expansion Theorem are satisfied.
+
+      Note that $\bar{q}'(s) = s(3s-2a) + b^2$ and $\alpha_1 = a$, $\alpha_2 = bi$, and $\alpha_3 = -bi$ are the roots of $\bar{q}(s)$.
+
+      Therefore, by the Heaviside's Expansion Theorem, we have that
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)} &= \sum_{k=1}^n \frac{\bar{p}(\alpha_k)}{\bar{q}'(\alpha_k)}e^{t\alpha_k} \\
+        &= \frac{a}{a^2+b^2} e^{at} - \frac{b i}{2bi(a-ib)} e^{bi t} - \frac{bi}{2bi (a+ib)}e^{-bi t} \\
+        &= \frac{1}{a^2+b^2}\left[ae^{at} - \frac{a+ib}{2} e^{bi t} - \frac{a-ib}{2}e^{-bi t}\right] \\
+        &= \frac{1}{a^2+b^2} \left[ae^{at} - a\cos bt +b\sin bt\right].
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+\newpage

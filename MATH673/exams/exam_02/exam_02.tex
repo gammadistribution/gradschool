@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, enumitem, graphicx, xifthen, mathrsfs, fancyhdr}
+
+\theoremstyle{definition}
+\newtheorem{innercustomthm}{Problem}
+\newenvironment{problem}[1]
+  {\renewcommand\theinnercustomthm{#1}\innercustomthm}
+  {\endinnercustomthm}
+
+\renewcommand*{\proofname}{Solution}
+\renewcommand{\theenumi}{\roman{enumi}}
+\newcommand{\fourier}[1]{\mathscr{F}\left\{ {#1} \right\}}
+\newcommand{\fourierinv}[1]{\mathscr{F}^{-1}\left\{ {#1} \right\}}
+\newcommand{\fouriercos}[1]{\mathscr{F}_c\left\{ {#1} \right\}}
+\newcommand{\fouriercosinv}[1]{\mathscr{F}_c^{-1}\left\{ {#1} \right\}}
+\newcommand{\fouriersin}[1]{\mathscr{F}_s\left\{ {#1} \right\}}
+\newcommand{\fouriersininv}[1]{\mathscr{F}_s^{-1}\left\{ {#1} \right\}}
+\newcommand{\der}[2]{
+  \ifthenelse{\equal{#2}{}}{
+    \frac{d}{d #1}
+  }{
+    \frac{d^{#2}}{d #1^{#2}}
+  }
+}
+\newcommand{\norm}[1]{\left\Vert {#1} \right\Vert}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\newcommand{\laplace}[1]{\mathscr{L}\left\{ {#1} \right\}}
+\newcommand{\laplaceinv}[1]{\mathscr{L}^{-1}\left\{ {#1} \right\}}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Exam 2}
+\lhead{Matthew Tiger}
+\cfoot{\thepage}
+
+
+\title{Exam 2}
+\author{Matthew Tiger}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\input{problems/problem_1}
+
+\input{problems/problem_2}
+
+\input{problems/problem_3}
+
+\input{problems/problem_4}
+
+\input{problems/problem_5}
+
+\input{problems/problem_6}
+
+\input{problems/problem_7}
+
+\input{problems/problem_8}
+
+
+\end{document}
