@@ -1,6 +1,53 @@
 \begin{problem}{5}
+  Solve the following integral equation by the Laplace transform
+  \begin{align*}
+    f(t) = t\cos at + a \int_0^t f(\tau)\sin a(t-\tau) d\tau.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Let $g(t) = t \cos a t$ and $h(t) = \sin a t$. Then from the definition of the convolution,
+  the integral equation is equivalent to
+  \begin{align*}
+    f(t) = g(t) + a (h \ast f)(t).
+  \end{align*}
+
+  From the Convolution Theorem, application of the Laplace transform to this equation yields that
+  \begin{align*}
+    \laplace{f}(t) = \bar{f}(s) = \bar{g}(s) + a \bar{f}(s)\bar{h}(s) = \laplace{g(t) + a (h \ast f)(t)},
+  \end{align*}
+  where $\bar{f}(s) = \laplace{f(t)}$, $\bar{g}(s) = \laplace{g(t)}$, and $\bar{h}(s) = \laplace{h(t)}$.
+  The resulting equation is an algebraic one; solving for $\bar{f}(s)$ yields that
+  \begin{align*}
+    \bar{f}(s) = \frac{\bar{g}(s)}{1- a\bar{h}(s)}.
+  \end{align*}
+
+  From the table of Laplace transforms, we know that
+  \begin{align*}
+    \bar{g}(s) = \laplace{t \cos a t} = \frac{s^2 - a^2}{(s^2+a^2)^2}
+  \end{align*}
+  and
+  \begin{align*}
+    \bar{h}(s) = \laplace{\sin a t} = \frac{a}{s^2+a^2}.
+  \end{align*}
+  Thus, we have that
+  \begin{align*}
+    \bar{f}(s) &= \frac{\bar{g}(s)}{1 -a\bar{h}(s) } \\
+    &= \frac{s^2 - a^2}{s^2(s^2 + a^2)}.
+  \end{align*}
+
+  Applying the partial fraction decomposition method to this equation, we see that it can be rewritten as
+  \begin{align*}
+    \bar{f}(s)
+    = \frac{s^2 - a^2}{s^2(s^2 + a^2)}
+    &= -\frac{1}{s^2} + \frac{2}{s^2+a^2}.
+  \end{align*}
+  Therefore, by taking the inverse Laplace transform of this equation, we see that
+  the solution to the original integral equation is
+  \begin{align*}
+    f(t) = \laplaceinv{\bar{f}(s)}
+    &= -\laplaceinv{\frac{1}{s^2}} + 2\laplaceinv{\frac{1}{s^2+a^2}} \\
+    &= -t + \frac{2\sin a t}{a}.
+  \end{align*}
 \end{proof}
 \newpage
