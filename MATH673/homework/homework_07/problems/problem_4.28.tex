@@ -1,0 +1,63 @@
+\begin{problem}{4.28}
+  Using the Laplace transform, evaluate the following integrals:
+  \begin{enumerate}
+    \item[a.] $\displaystyle f(t) = \int_0^\infty \frac{\sin tx}{\sqrt{x}} dx$,
+    \item[e.] $\displaystyle f(t) = \int_0^\infty e^{-tx^2} dx$, $0 < t$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item[a.] We begin by taking the Laplace transform of $f(t)$. Doing so yields
+      \begin{align*}
+        \bar{f}(s) = \laplace{f(t)}
+        &= \laplace{\int_0^\infty \frac{\sin tx}{\sqrt{x}} dx}\\
+        &= \int_0^\infty \laplace{\frac{\sin tx}{\sqrt{x}} }dx\\
+        &= \int_0^\infty \frac{\sqrt{x}}{s^2+x^2}dx.
+      \end{align*}
+
+      Using a computer algebra system, we see that this integral evaluates to
+      \begin{align*}
+        \bar{f}(s) &= \int_0^\infty \frac{\sqrt{x}}{s^2+x^2}dx \\
+        &= \frac{\pi}{\sqrt{2s}}.
+      \end{align*}
+
+      From our table of Laplace transforms, we see that
+      \begin{align*}
+        \laplaceinv{\frac{\Gamma(a + 1)}{s^{a+1}}} = t^a.
+      \end{align*}
+      In particular, for $a = -1/2$, we see that
+      \begin{align*}
+        \laplaceinv{\frac{\Gamma(1/2)}{s^{-1/2}}} = \laplaceinv{\frac{\sqrt{\pi}}{s^{-1/2}}} = t^{-1/2}.
+      \end{align*}
+
+      Therefore, the evaluation of the original integral is
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)} &= \laplaceinv{\frac{\pi}{\sqrt{2s}}} \\
+        &= \sqrt{\frac{\pi}{2}}\laplaceinv{\frac{\sqrt{\pi}}{s^{-1/2}}} \\
+        &= \sqrt{\frac{\pi}{2t}}.
+      \end{align*}
+
+    \item[e.] Applying the Laplace transform to $f(t)$ yields
+      \begin{align*}
+        \bar{f}(s) = \laplace{f(t)}
+        &= \laplace{\int_0^\infty e^{-tx^2} dx} \\
+        &= \int_0^\infty \laplace{e^{-tx^2}} dx \\
+        &= \int_0^\infty \frac{1}{s+x^2} dx \\
+      \end{align*}
+
+      Using a computer algebra system, we see that
+      \begin{align*}
+        \bar{f}(s) &= \int_0^\infty \frac{1}{s+x^2} dx \\
+        &= \frac{\pi}{2\sqrt{s}}.
+      \end{align*}
+
+      Therefore, using previous arguments, we see that the evaluation of the original integral is
+      \begin{align*}
+        f(t) = \laplaceinv{\bar{f}(s)} &= \laplaceinv{\frac{\pi}{2\sqrt{s}}} \\
+        &= \sqrt{\frac{\pi}{4}}\laplaceinv{\frac{\sqrt{\pi}}{s^{-1/2}}} \\
+        &= \sqrt{\frac{\pi}{4t}}.
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+\newpage
