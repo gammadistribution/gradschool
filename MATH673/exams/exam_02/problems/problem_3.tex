@@ -1,6 +1,116 @@
 \begin{problem}{3}
+  Apply the Laplace transform to solve the following Initial Value Problems:
+  \begin{enumerate}
+    \item[a.] $y'' + 2 a y' + (a^2 + 4)y = f(t)$
+
+      $y(0) = 1$, \quad $y'(0) = -a$.
+
+    \item[b.] $u_{tt} = c^2 u_{xx} + \sin x$, \quad  $0 < x < \pi$, \quad $t > 0$
+
+      $u(0, t) = u(\pi, t) = 1$, \quad $u(x, 0) = u_t(x, 0) = 0$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  Recall that if $\bar{y}(s) = \laplace{y(t)}$, then the Laplace transform of the
+  $n$-th derivative of $y(t)$ is given by
+  \begin{align}\label{laplace_nth_der}
+    \laplace{y^{(n)}(t)} = s^n \bar{y}(s) - \sum_{k=0}^{n-1} s^{n-1-k} y^{(k)}(0).
+  \end{align}
+
+  \begin{enumerate}
+    \item[a.] Suppose that $Ly \equiv y''(t) + 2a y'(t) + (a^2 + 4)y(t)$. Using \eqref{laplace_nth_der}, application of the Laplace transform
+      to $Ly = f(t)$ yields that
+      \begin{align*}
+        \laplace{Ly} = (s^2 +2as +a^2+4)\bar{y}(s) -2 a y(0)  -s y(0) - y'(0) = \bar{f}(s) = \laplace{f(t)}.
+      \end{align*}
+      From the initial data, we see that this reduces to
+      \begin{align*}
+        (s^2 +2as +a^2+4)\bar{y}(s) -(s+a) = \bar{f}(s).
+      \end{align*}
+      Solving for $\bar{y}(s)$ yields
+      \begin{align*}
+        \bar{y}(s) = \frac{\bar{f}(s) + s + a}{s^2 +2as +a^2+4} = \frac{\bar{f}(s) + s + a}{(s+a+2i)(s+a-2i)}.
+      \end{align*}
+
+      Note that from our table of Laplace transforms that
+      \begin{align*}
+        \laplaceinv{\frac{a-b}{(s-a)(s-b)}} = e^{at}-e^{bt}
+      \end{align*}
+      and
+      \begin{align*}
+        \laplaceinv{\frac{s}{(s-a)(s-b)}} = \frac{ae^{at}-be^{bt}}{a-b}.
+      \end{align*}
+
+      Therefore, the solution to the original differential equation is given by
+      \begin{align*}
+        y(t) &= \laplaceinv{\bar{f}(s)} \\
+        &= \laplaceinv{\frac{\bar{f}(s) + s + a}{(s+a+2i)(s+a-2i)}} \\
+        &= \laplaceinv{\frac{\bar{f}(s)}{(s+a+2i)(s+a-2i)}} + \frac{e^{-(2i + a) t} }{4} \left[(2-i + ia)e^{4i t} + 2+i -ia\right].
+      \end{align*}
+
+    \item[b.]
+      Let $u(x, t)$ be a function in $x$ and $t$. The Laplace transform of $u(x, t)$ with respect to $t$ is
+      given by
+      \begin{align*}
+        \laplace{u(x, t)} = \bar{u}(x, s) = \int_0^\infty u(x, t) e^{-st} dt.
+      \end{align*}
+      From this definition, we see from previous theorems that
+      \begin{align*}
+        \laplace{\frac{\partial^n}{\partial t^n}\left[u(x, t)\right]} = s^n \bar{u}(x, s) - \sum_{k=0}^{n-1}s^{n-1-k} \frac{\partial^k}{\partial t^k}\left[u(x, 0)\right]
+      \end{align*}
+      Similarly, we see from the Leibniz integral rule that
+      \begin{align*}
+        \laplace{\frac{\partial^n}{\partial x^n}\left[u(x, t)\right]} = \der{x}{n}\left[\bar{u}(x, s)\right].
+      \end{align*}
+
+      Applying the Laplace transform with respect to $t$ to the differential equation yields that
+      \begin{align*}
+        \laplace{u_{tt} - c^2 u_{xx}} = s^2 \bar{u}(x,s) -s u(x, 0) - u_t(x, 0) -c^2 \frac{d^2\bar{u}(x,s)}{dx^2} = \frac{\sin x}{s} = \laplace{\sin x}.
+      \end{align*}
+      In light of the initial data, this equation reduces to
+      \begin{align*}
+        s^2 \bar{u}(x,s) -c^2 \frac{d^2\bar{u}(x,s)}{dx^2} = \frac{\sin x}{s},
+      \end{align*}
+      or, equivalently,
+      \begin{align*}
+        \frac{d^2\bar{u}(x,s)}{dx^2} - \left(\frac{s}{c}\right)^2 \bar{u}(x,s) = -\frac{\sin x}{sc^2}.
+      \end{align*}
+      The homogeneous solution to the above differential equation is easily seen to be
+      \begin{align*}
+        \bar{u}_h(x,s) = c_1 \exp{\left(-\frac{xs}{c}\right)} + c_2 \exp{\left(\frac{xs}{c}\right)}
+      \end{align*}
+      From the method of undetermined coefficients, assuming the particular solution of the equation is of the form $\bar{u}_p(x,s) = A \sin x$ for some unknown $A$,
+      the particular solution of the transformed equation is given by
+      \begin{align*}
+        \bar{u}_p(x,s) = \frac{\sin x}{s(s^2+c^2)}.
+      \end{align*}
+      Therefore, the general solution to the transformed equation is given by
+      \begin{align*}
+        \bar{u}(x, s) = \bar{u}_h(x,s) + \bar{u}_p(x,s) = c_1 \exp{\left(-\frac{xs}{c}\right)} + c_2 \exp{\left(\frac{xs}{c}\right)} + \frac{\sin x}{s(s^2+c^2)}.
+      \end{align*}
+
+      Note that the transformed boundary data is given by $\displaystyle \bar{u}(0, s) = \bar{u}(\pi, s) = \frac{1}{s}$.
+      Using the form of the solution to the transformed equation listed above, we see that in light of the transformed boundary data
+      that
+      \begin{align*}
+        c_1 + c_2 &= \frac{1}{s} \\
+        c_1 \exp{\left(-\frac{\pi s}{c}\right)} + c_2 \exp{\left(\frac{\pi s}{c}\right)} &= \frac{1}{s}
+      \end{align*}
+
+      After solving the above system, we therefore see that the solution to the transformed equation is given by
+      \begin{align*}
+        \bar{u}(x, s) &= c_1 \exp{\left(-\frac{xs}{c}\right)} + c_2 \exp{\left(\frac{xs}{c}\right)} + \frac{\sin x}{s(s^2+c^2)} \\
+        &= \frac{\exp{\left(\frac{\pi s}{c}\right)}\exp{\left(-\frac{xs}{c}\right)}}{s\left(1+\exp{\left(\frac{\pi s}{c}\right)}\right)} + \frac{\exp{\left(\frac{xs}{c}\right)}}{s\left(1+\exp{\left(\frac{\pi s}{c}\right)}\right)} + \frac{\sin x}{s(s^2+c^2)}
+      \end{align*}
+
+      Therefore, the solution to the original differential equation is given by
+      \begin{align*}
+        u(x, t) = \laplaceinv{\bar{u}(x, s)}
+        &= \laplaceinv{\frac{\exp{\left(\frac{\pi s}{c}\right)}\exp{\left(-\frac{xs}{c}\right)}}{s\left(1+\exp{\left(\frac{\pi s}{c}\right)}\right)} + \frac{\exp{\left(\frac{xs}{c}\right)}}{s\left(1+\exp{\left(\frac{\pi s}{c}\right)}\right)} + \frac{\sin x}{s(s^2+c^2)}}.
+      \end{align*}
+
+
+  \end{enumerate}
 \end{proof}
 \newpage
