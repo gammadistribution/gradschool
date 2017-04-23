@@ -1,6 +1,50 @@
 \begin{problem}{6}
+  Apply the Laplace transform to solve the following diffusion problem
+  \begin{align*}
+    & \frac{\partial u(x, t)}{\partial t} = K \frac{\partial^2 u(x, t) }{\partial x^2}, \qquad 0 < x < 1, \quad 0 < t, \\
+    & u(x, 0) = 0, \qquad 0 < x < 1, \\
+    & u(0, t) = f(t), \quad \frac{\partial }{\partial x}\left[u(1, t)\right] = 0, \qquad 0 < t.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  We begin by applying the Laplace transform to the first equation in the diffusion problem.
+  Doing so yields
+  \begin{align*}
+    \laplace{\frac{\partial u(x, t)}{\partial t}} = s\bar{u}(x,s) - \bar{u}(x, 0) = K\frac{d^2\bar{u}(x, s)}{dx^2} = \laplace{K \frac{\partial^2 u(x, t) }{\partial x^2}}
+  \end{align*}
+  From the initial data, we see that this equation reduces to
+  \begin{align*}
+    s\bar{u}(x,s) = K\frac{d^2\bar{u}(x, s)}{dx^2},
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    \frac{d^2\bar{u}(x, s)}{dx^2}-\frac{s}{K}\bar{u}(x,s) =0.
+  \end{align*}
+
+  The solution to this homogeneous equation is readily seen to be
+  \begin{align}\label{sol}
+    \bar{u}(x, s) &= b_1 \exp\left(-x\sqrt{\frac{s}{K}}\right) + b_2 \exp\left(x\sqrt{\frac{s}{K}}\right) \notag \\
+    &= c_1 \cosh\left(x\sqrt{\frac{s}{K}}\right) + c_2 \sinh\left(x\sqrt{\frac{s}{K}}\right).
+  \end{align}
+  Note that the transformed boundary conditions are given by
+  \begin{align*}
+    \bar{u}(0, s) = \bar{f}(s), \quad \left.\frac{d}{dx}\left[\bar{u}(x, s)\right]\right\rvert_{x=1} = 0.
+  \end{align*}
+  Using \eqref{sol} in conjunction with the transformed boundary data, we see that
+  \begin{align*}
+    c_1 &= \bar{f}(s)
+    c_2 &= \bar{f}(s) \exp\left(-2\sqrt{\frac{s}{K}}\right).
+  \end{align*}
+
+  Therefore, the solution to the transformed equation is given by
+  \begin{align*}
+    \bar{u}(x, s) = \bar{f}(s)\cosh\left(x\sqrt{\frac{s}{K}}\right) + \bar{f}(s) \exp\left(-2\sqrt{\frac{s}{K}}\right)\sinh\left(x\sqrt{\frac{s}{K}}\right).
+  \end{align*}
+  and the solution to the original equation is given by
+  \begin{align*}
+    u(x, t) &= \laplaceinv{\bar{u}(x, s)} \\
+    &= \laplaceinv{\bar{f}(s)\cosh\left(x\sqrt{\frac{s}{K}}\right) + \bar{f}(s) \exp\left(-2\sqrt{\frac{s}{K}}\right)\sinh\left(x\sqrt{\frac{s}{K}}\right)}.
+  \end{align*}
 \end{proof}
 \newpage
