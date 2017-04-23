@@ -1,6 +1,87 @@
 \begin{problem}{7}
+  Solve the following difference and differential difference equations:
+  \begin{enumerate}
+    \item[a.] $u_{n+2} - 7u_{n+1}+10 u_n = 0$, $u_0 = 1$, $u_1 = 2$.
+    \item[b.] $\frac{du}{dt} - 2u(t-1) =0$, $u(0) = 1$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  Define $S_n(t) = H(t-n) - H(t-n-1)$ for $n \leq t < n+1$ and define
+  \begin{align*}
+    u(t) = \sum_{n=0}^\infty u_n S_n(t).
+  \end{align*}
+  It follows that for $n \leq t < n+1$ we have that $u(t) = u_n$.
+
+  By a previous theorem, if $\bar{u}(s) = \laplace{u(t)}$, then
+  \begin{align*}
+    \laplace{u(t+1)} = e^s\left[\bar{u}(s)-u_0 \bar{S}_0(s)\right]
+  \end{align*}
+  where $\bar{S}_0 = \frac{1}{s}\left(1-e^{-s}\right)$. It then follows that
+  \begin{align*}
+    \laplace{u(t+2)} = e^{2s}\left[\bar{u}(s)-(u_0 + u_1e^{-s})\bar{S}_0(s)\right].
+  \end{align*}
+
+  \begin{enumerate}
+    \item[a.] We begin by applying the Laplace transform to the difference equation. From the previous remarks,
+      the transformed equation becomes
+      \begin{align*}
+        e^{2s}\left[\bar{u}(s)-(u_0 + u_1e^{-s})\bar{S}_0(s)\right] -7e^s\left[\bar{u}(s)-u_0 \bar{S}_0(s)\right] + 10 \bar{u}(s) = 0.
+      \end{align*}
+      In light of the initial data, this equation becomes
+      \begin{align*}
+        e^{2s}\left[\bar{u}(s)-(1 + 2e^{-s})\bar{S}_0(s)\right] -7e^s\left[\bar{u}(s)- \bar{S}_0(s)\right] + 10 \bar{u}(s) = 0.
+      \end{align*}
+
+      Solving for $\bar{u}(s)$, we see that
+      \begin{align*}
+        \bar{u}(s) = \frac{e^s}{e^s-2}\bar{S}_0(s).
+      \end{align*}
+      Therefore, From a previous result, we see that the solution to the original difference equation is
+      \begin{align*}
+        u(t) = \laplaceinv{\bar{u}(s)} = \laplaceinv{\frac{e^s}{e^s-2}\bar{S}_0(s)} = 2^n.
+      \end{align*}
+
+    \item[b.] Applying the Laplace transformed to the differential difference equation yields
+      that
+      \begin{align*}
+        s\bar{u}(s) - u(0) - 2e^{-s}\left[\bar{u}(s) - u(0)\bar{S}_0(s)\right] = 0
+      \end{align*}
+      In light of the initial data, this equation reduces to
+      \begin{align*}
+        s\bar{u}(s) - 1 - 2e^{-s}\left[\bar{u}(s) - \bar{S}_0(s)\right] = 0,
+      \end{align*}
+      or, equivalently,
+      \begin{align*}
+        \bar{u}(s) = \frac{e^s-2\bar{S}_0(s)}{se^{s}-2}
+        &= \frac{1}{s}\left(1-\frac{2}{s}e^{-s}\right)^{-1} - \frac{2\bar{S}_0(s)}{se^{s}-2} \\
+        &= \frac{1}{s}\left(1-\frac{2}{s}e^{-s}\right)^{-1} - \frac{2}{s^2e^s}\left(1-\frac{2}{s}e^{-s}\right)^{-1} - \frac{2}{s^2e^{2s}}\left(1-\frac{2}{s}e^{-s}\right)^{-1} \\
+        &= \left(\frac{1}{s} - \frac{2}{s^2e^s} - \frac{2}{s^2e^{2s}}\right)\left(1-\frac{2}{s}e^{-s}\right)^{-1}.
+      \end{align*}
+
+      Expanding the right term in terms of its power series we see that
+      \begin{align*}
+        \bar{u}(s)
+        &= \left(\frac{1}{s} - \frac{2}{s^2e^s} - \frac{2}{s^2e^{2s}}\right)\left(1-\frac{2}{s}e^{-s}\right)^{-1} \\
+        &= \left(\frac{1}{s} - \frac{2}{s^2e^s} - \frac{2}{s^2e^{2s}}\right) \sum_{n=0}^\infty \frac{2^ne^{-ns}}{s^n}\\
+        &=\sum_{n=0}^\infty \frac{2^ne^{-ns}}{s^{n+1}} - \sum_{n=0}^\infty \frac{2^{n+1}e^{(-n-1)s}}{s^{n+2}} - \sum_{n=0}^\infty \frac{2^{n+1}e^{(-n-2)s}}{s^{n+2}}.
+      \end{align*}
+
+      Recall that
+      \begin{align*}
+        \laplaceinv{\frac{e^{-as}}{s^n}} = \frac{(t-a)^{n-1}}{\Gamma(n)}H(t-a).
+      \end{align*}
+
+      Therefore, the solution to the original differential difference equation is
+      \begin{align*}
+        u(t) &= \laplaceinv{\sum_{n=0}^\infty \frac{2^ne^{-ns}}{s^{n+1}} - \sum_{n=0}^\infty \frac{2^{n+1}e^{(-n-1)s}}{s^{n+2}} - \sum_{n=0}^\infty \frac{2^{n+1}e^{(-n-2)s}}{s^{n+2}}} \\
+        &= \sum_{n=0}^\infty 2^n\laplaceinv{\frac{e^{-ns}}{s^{n+1}}} -
+        \sum_{n=0}^\infty2^{n+1} \laplaceinv{\frac{e^{-(n+1)s}}{s^{n+2}}} -
+        \sum_{n=0}^\infty 2^{n+1}\laplaceinv{\frac{e^{-(n+2)s}}{s^{n+2}}} \\
+        &= \sum_{n=0}^\infty 2^n\frac{(t-n)^{n}}{\Gamma(n+1)}H(t-n)
+        -\sum_{n=0}^\infty2^{n+1} \frac{(t-n-1)^{n+1}}{\Gamma(n+2)}H(t-n-1)\\
+        &\phantom{=}-\sum_{n=0}^\infty 2^{n+1}\frac{(t-n-2)^{n+1}}{\Gamma(n+2)}H(t-n-2).
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
