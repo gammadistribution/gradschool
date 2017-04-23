@@ -1,6 +1,77 @@
 \begin{problem}{4.35}
+  Using the Laplace transform, solve the following difference equations:
+  \begin{enumerate}
+    \item[a.] $\Delta u_n - 2 u_n = 0$, $u_0 = 1$
+    \item[b.] $\Delta^2 u_n - 2 u_{n+1} + 3 u_n =0$, $u_0 = 0$, $u_1 = 1$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  Define $S_n(t) = H(t-n) - H(t-n-1)$ for $n \leq t < n+1$ and define
+  \begin{align*}
+    u(t) = \sum_{n=0}^\infty u_n S_n(t).
+  \end{align*}
+  It follows that for $n \leq t < n+1$ we have that $u(t) = u_n$.
+
+  By a previous theorem, if $\bar{u}(s) = \laplace{u(t)}$, then
+  \begin{align*}
+    \laplace{u(t+1)} = e^s\left[\bar{u}(s)-u_0 \bar{S}_0(s)\right]
+  \end{align*}
+  where $\bar{S}_0 = \frac{1}{s}\left(1-e^{-s}\right)$. It then follows that
+  \begin{align*}
+    \laplace{u(t+2)} = e^{2s}\left[\bar{u}(s)-(u_0 + u_1e^{-s})\bar{S}_0(s)\right].
+  \end{align*}
+
+  \begin{enumerate}
+    \item[a.] Note that this difference equation is equivalent to
+      \begin{align*}
+        \Delta u_n - 2 u_n  = u_{n+1} - 3 u_{n} = 0.
+      \end{align*}
+      Applying the Laplace transform to the difference equation yields that
+      \begin{align*}
+        \laplace{u_{n+1} - 3 u_n} = e^s\left[\bar{u}(s)-u_0 \bar{S}_0(s)\right] - 3\bar{u}(s) = 0 = \laplace{0}.
+      \end{align*}
+      In light of the initial data, this equation becomes
+      \begin{align*}
+        e^s\left[\bar{u}(s)-\bar{S}_0(s)\right] - 3\bar{u}(s) = 0.
+      \end{align*}
+      Thus, we see that
+      \begin{align*}
+        \bar{u}(s) = \frac{e^{s}\bar{S}_0(s)}{e^s-3}.
+      \end{align*}
+      Therefore, from a previous result, we see that the solution to the original
+      difference equation is
+      \begin{align*}
+        u(t) = \laplaceinv{\bar{u}(s)} = \laplaceinv{\frac{e^{s}\bar{S}_0(s)}{e^s-3}} = 3^n
+      \end{align*}
+
+    \item[b.] Note that this difference equation is equivalent to
+      \begin{align*}
+        \Delta^2 u_n - 2 u_{n+1} + 3 u_n  = u_{n+2} - 4 u_{n+1} + 4 u_n = 0.
+      \end{align*}
+      Applying the Laplace transform to the difference equation yields that
+      \begin{align*}
+        \laplace{u_{n+2} - 4 u_{n+1} + 4 u_n} = e^{2s}\left[\bar{u}(s)-(u_0 + u_1e^{-s})\bar{S}_0(s)\right] - 4e^s\left[\bar{u}(s)-u_0 \bar{S}_0(s)\right] + 4\bar{u}(s) = 0.
+      \end{align*}
+      In light of the initial data, this equation becomes
+      \begin{align*}
+        e^{2s}\left[\bar{u}(s)-e^{-s}\bar{S}_0(s)\right] - 4e^s\bar{u}(s) + 4\bar{u}(s) = 0.
+      \end{align*}
+      Thus, we see that
+      \begin{align*}
+        \bar{u}(s) = \frac{e^{s}\bar{S}_0(s)}{\left(e^s-2\right)^2}.
+      \end{align*}
+      From a previous result, we know that
+      \begin{align*}
+        \laplace{n a^n} = \frac{ae^{s}\bar{S}_0(s)}{\left(e^s-a\right)^2}
+      \end{align*}
+
+      Therefore, we see that the solution to the original
+      difference equation is
+      \begin{align*}
+        u(t) = \laplaceinv{\bar{u}(s)} = \laplaceinv{\frac{e^{s}\bar{S}_0(s)}{\left(e^s-2\right)^2}} = n 2^{n-1}.
+      \end{align*}
+  \end{enumerate}
+
 \end{proof}
 \newpage
