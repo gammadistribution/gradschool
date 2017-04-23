@@ -1,6 +1,46 @@
 \begin{problem}{4.29}
+  Show that
+  \begin{enumerate}
+    \item  [b.]$\displaystyle I(a) = \int_0^{\infty} e^{-ax}\left(\frac{\sin qx - \sin px}{x}\right)dx = \tan^{-1}\left(\frac{q}{a}\right) - \tan^{-1}\left(\frac{p}{a}\right)$
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[b.]
+      Let $f(x) = \sin qx - \sin px$ and $\displaystyle g(x) = \frac{f(x)}{x}$.
+
+      From the definition of the Laplace transform, we see that this integral is the Laplace transform of
+      $\displaystyle \frac{f(x)}{x}$ with respect to $x$ in the variable $a$, i.e.
+      \begin{align*}
+        I(a) = \int_0^{\infty} e^{-ax}\left(\frac{\sin qx - \sin px}{x}\right)dx = \laplace{\frac{f(x)}{x}} = \bar{g}(a).
+      \end{align*}
+
+      From a previous result, we know that
+      \begin{align*}
+        I(a) = \laplace{\frac{f(x)}{x}} = \int_a^\infty \bar{f}(a) da
+      \end{align*}
+      where $\bar{f}(a) = \laplace{f(x)}$. Our table of Laplace transforms shows that
+      \begin{align*}
+        \bar{f}(a) = \laplace{f(x)} &= \laplace{\sin qx - \sin px} \\
+        &= \frac{q}{a^2 + q^2} - \frac{p}{a^2 + p^2}.
+      \end{align*}
+
+      Thus, we see that
+      \begin{align*}
+        I(a) = \int_a^\infty \bar{f}(a) da &= \int_a^\infty \frac{q}{a^2 + q^2} - \frac{p}{a^2 + p^2} da.
+      \end{align*}
+      Recall that
+      \begin{align*}
+        \int \frac{t}{a^2 + t^2}da = \tan^{-1}\left(\frac{a}{t}\right) + C.
+      \end{align*}
+      Therefore, we have that
+      \begin{align*}
+        I(a) &= \int_a^\infty \frac{q}{a^2 + q^2} - \frac{p}{a^2 + p^2} da \\
+        &= \left[\frac{\pi}{2} - \tan^{-1}\left(\frac{a}{q}\right)\right] - \left[\frac{\pi}{2} - \tan^{-1}\left(\frac{a}{p}\right)\right] \\
+        &= \tan^{-1}\left(\frac{q}{a}\right) - \tan^{-1}\left(\frac{p}{a}\right).
+      \end{align*}
+
+  \end{enumerate}
 \end{proof}
 \newpage
