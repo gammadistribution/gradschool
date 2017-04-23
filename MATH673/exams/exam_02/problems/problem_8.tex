@@ -1,6 +1,59 @@
 \begin{problem}{8}
+  Solve the following heat equation by the joint Fourier and Laplace transform
+  \begin{align*}
+    \frac{\partial }{\partial t}u(x, t) = \frac{\partial}{\partial x^2}u(x, t), \qquad - \infty < x <\infty, \quad 0 < t
+  \end{align*}
+  subject to $u(x, 0) = e^{-x^2} = f(x)$.
 \end{problem}
 
 \begin{proof}
+  Define the joint  Fourier and Laplace transform of $u(x, t)$ by
+  \begin{align*}
+    \bar{U}(k,s) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{-ikx}\left[\int_0^\infty e^{-st} u(x, t)dt\right]dx.
+  \end{align*}
+  Applying the Laplace transform with respect to $t$ to the differential equation
+  yields that
+  \begin{align*}
+    \laplace{\frac{\partial }{\partial t}u(x, t)} = s\bar{u}(x, s) - u(x, 0) &= \der{x}{2}\bar{u}(x,s) = \laplace{\frac{\partial}{\partial x^2}u(x, t)}
+  \end{align*}
+  From the initial data, we see that this equation reduces to
+  \begin{align*}
+    s\bar{u}(x, s) - f(x) &= \der{x}{2}\bar{u}(x,s).
+  \end{align*}
+  Now, applying the Fourier transform with respect to $x$ to the resulting equation yields that
+  \begin{align*}
+    \fourier{s\bar{u}(x, s) - f(x)} &= s\bar{U}(k, s) - F(k) =
+    -k^2\bar{U}(k, s) = \fourier{\der{x}{2}\bar{u}(x,s)},
+  \end{align*}
+  where
+  \begin{align*}
+    F(k) = \frac{\exp\left(-\frac{k^2}{4}\right)}{\sqrt{2}}.
+  \end{align*}
+
+  Thus, we see that
+  \begin{align*}
+    \bar{U}(k, s) = \frac{F(k)}{k^2+s}.
+  \end{align*}
+  Taking the inverse Laplace transform of this equation yields that
+  \begin{align*}
+    \bar{u}(k, t) = \laplaceinv{\frac{F(k)}{k^2+s}} = F(k)e^{-k^2t}.
+  \end{align*}
+  Note that for $G(k, t) = e^{-k^2t}$ we have that the function's inverse Fourier transform is
+  \begin{align*}
+    g(x, t) = \fourierinv{G(k, t)} = \fourierinv{e^{-k^2t}} = \frac{1}{\sqrt{2t}}e^{-\frac{x^2}{4t}}
+  \end{align*}
+  Now, from the Convolution Theorem, we see by applying the inverse Fourier transform to the equation resulting
+  from the inverse Laplace transform that
+  \begin{align*}
+    u(x, t) = \fourierinv{\bar{u}(k, t)} = \fourierinv{F(k)e^{-k^2t}} = f(x) \ast g(x, t).
+  \end{align*}
+
+  Therefore, the solution to the original heat equation subject to the specified initial condition
+  is
+  \begin{align*}
+    u(x, t) = f(x) \ast g(x, t) &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(\xi) g(x-\xi, t) d\xi \\
+    &= \frac{1}{\sqrt{4\pi t}}\int_{-\infty}^\infty e^{-\xi^2} e^{-\frac{(x-\xi)^2}{4t}} d\xi \\
+    &= \frac{1}{\sqrt{1 + 4t}}e^{-\frac{x^2}{1+4t}}.
+  \end{align*}
 \end{proof}
 \newpage
