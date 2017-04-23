@@ -1,6 +1,68 @@
 \begin{problem}{4}
+  Apply the Laplace transform to solve the following wave equation
+  \begin{align*}
+    & \frac{\partial^2 u(x, t)}{\partial t^2} - c^2\frac{\partial^2 u(x, t)}{\partial x^2} = f(t), \\
+    & u(0, t) = 0 , \qquad t > 0, \\
+    & u(x, 0) = 0, \quad \frac{\partial}{\partial t}\left[u(x, 0)\right] = 0, \qquad x > 0.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Suppose that $\displaystyle Lu \equiv \frac{\partial^2 u(x, t)}{\partial t^2} - c^2\frac{\partial^2 u(x, t)}{\partial x^2}$.
+  Then applying the Laplace transform to the equation $Lu = f(t)$ yields
+  \begin{align*}
+    \laplace{Lu} = s^2 \bar{u}(x,s) -s u(x, 0) - \frac{\partial}{\partial t}[u(x, 0)] -c^2 \frac{d^2\bar{u}(x,s)}{dx^2} = \bar{f}(s) = \laplace{f(t)}.
+  \end{align*}
+  In light of the initial data, this equation reduces to
+  \begin{align*}
+    s^2 \bar{u}(x,s) -c^2 \frac{d^2\bar{u}(x,s)}{dx^2} = \bar{f}(s),
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    \frac{d^2\bar{u}(x,s)}{dx^2} - \left(\frac{s}{c}\right)^2 \bar{u}(x,s) = -\frac{\bar{f}(s)}{c^2}.
+  \end{align*}
+
+  The homogeneous solution to the above differential equation is easily seen to be
+  \begin{align*}
+    \bar{u}_h(x,s) = c_1 \exp{\left(-\frac{xs}{c}\right)} + c_2 \exp{\left(\frac{xs}{c}\right)}.
+  \end{align*}
+  By inspection, we see that
+  \begin{align*}
+    \bar{u}_p(x, s) = \frac{\bar{f}(s)}{s^2}
+  \end{align*}
+  is a particular solution of the transformed equation. Thus, the general solution to the transformed
+  equation is
+  \begin{align*}
+    \bar{u}(x, s) = \bar{u}_h(x,s) + \bar{u}_p(x, s) = c_1 \exp{\left(-\frac{xs}{c}\right)} + c_2 \exp{\left(\frac{xs}{c}\right)} + \frac{\bar{f}(s)}{s^2}.
+  \end{align*}
+
+  Note that we must have that $\bar{u}(x,s) \to 0$ as $s \to \infty$. For this reason, we must have that $c_2=0$.
+  The transformed boundary data states that $\bar{u}(0, t) = 0$. Using the above solution, this implies that $c_1 = -\bar{f}(s)/s^2$.
+  Thus, the solution to the transformed differential equation is
+  \begin{align*}
+    \bar{u}(x, s) = \bar{u}_h(x,s) + \bar{u}_p(x, s) = \frac{\bar{f}(s)}{s^2}\left[1-\exp{\left(-\frac{xs}{c}\right)}\right]
+  \end{align*}
+
+  We arrive at the solution to the original differential equation by taking the inverse Laplace transform of the above equation.
+  Note from our table of Laplace transforms that $\laplaceinv{1/s^2} = t$ and from Heaviside's Second Shifting Theorem that
+  \begin{align*}
+    \laplaceinv{\frac{\exp{\left(-\frac{xs}{c}\right)}}{s^2}} = \left(t- \frac{x}{c}\right)H\left(t- \frac{x}{c}\right).
+  \end{align*}
+  Now let $g(t) = t$ and $h(t) = \left(t- \frac{x}{c}\right)H\left(t- \frac{x}{c}\right)$. Then from our previous remarks,
+  we have that
+  \begin{align*}
+    \bar{u}(x, s) &= \frac{\bar{f}(s)}{s^2}\left[1-\exp{\left(-\frac{xs}{c}\right)}\right] \\
+    &= \frac{\bar{f}(s)}{s^2}-\frac{\bar{f}(s)\exp{\left(-\frac{xs}{c}\right)}}{s^2} \\
+    &= \bar{f}(s)\bar{g}(s) - \bar{f}(s)\bar{h}(s).
+  \end{align*}
+
+  Therefore, by the Convolution Theorem and the above results, the solution
+  to the original differential equation is
+  \begin{align*}
+    u(x, t) = \laplaceinv{\bar{u}(x, s)} &= \laplaceinv{\bar{f}(s)\bar{g}(s) - \bar{f}(s)\bar{h}(s)} \\
+    &= (f \ast g)(t) - (f \ast h)(t) \\
+    &= \int_0^t \tau f(t-\tau) d\tau - \int_0^t\left(\tau- \frac{x}{c}\right)H\left(\tau- \frac{x}{c}\right) f(t-\tau) d\tau.
+  \end{align*}
+
 \end{proof}
 \newpage
