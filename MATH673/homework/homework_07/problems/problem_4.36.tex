@@ -1,6 +1,45 @@
 \begin{problem}{4.36}
+  Show that the solution of the difference equation
+  \begin{align*}
+    u_{n+2} + 4 u_{n+1} + u_n = 0
+  \end{align*}
+  with $u_0 = 0$ and $u_1 = 1$, is
+  \begin{align*}
+    u_n = \frac{1}{2\sqrt{3}}\left[\left(\sqrt{3}-2\right)^n + (-1)^{n+1} \left(2 + \sqrt{3}\right)^n\right]
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Applying the Laplace transform to the difference equation yields that
+  \begin{align*}
+    \laplace{u_{n+2} + 4 u_{n+1} + u_n} = e^{2s}\left[\bar{u}(s)-(u_0 + u_1e^{-s})\bar{S}_0(s)\right] + 4e^s\left[\bar{u}(s)-u_0 \bar{S}_0(s)\right] + \bar{u}(s) = 0.
+  \end{align*}
+  In light of the initial data, this equation becomes
+  \begin{align*}
+    e^{2s}\left[\bar{u}(s)-e^{-s}\bar{S}_0(s)\right] + 4e^s\bar{u}(s) + \bar{u}(s) = 0.
+  \end{align*}
+  Thus, we see that
+  \begin{align*}
+    \bar{u}(s) = \frac{e^{s}\bar{S}_0(s)}{e^{2s}+4e^{s}+1} = \frac{e^{s}\bar{S}_0(s)}{(e^s - \alpha_1)(e^s - \alpha_2)},
+  \end{align*}
+  where $\alpha_1 = -2 - \sqrt{3}$ and $\alpha_2 = -2 + \sqrt{3}$. From the method of partial fraction decomposition, we then see
+  that
+  \begin{align*}
+    \bar{u}(s) &= \frac{e^{s}\bar{S}_0(s)}{(e^s - \alpha_1)(e^s - \alpha_2)} \\
+    &= \frac{e^{s}\bar{S}_0(s)}{\alpha_2 - \alpha_1}\left(\frac{1}{e^s - \alpha_2} - \frac{1}{e^s-\alpha_1}\right).
+  \end{align*}
+  From a previous result, we know that
+  \begin{align*}
+    \laplaceinv{\frac{e^{s}\bar{S}_0(s)}{e^s - a}} = a^n.
+  \end{align*}
+  Therefore, the solution to the original difference equation is
+  \begin{align*}
+    u(t) = \laplaceinv{\bar{u}(s)} &= \laplaceinv{\frac{e^{s}\bar{S}_0(s)}{\alpha_2 - \alpha_1}\left(\frac{1}{e^s - \alpha_2} - \frac{1}{e^s-\alpha_1}\right)} \\
+    &= \frac{1}{\alpha_2 - \alpha_1}\left[\laplaceinv{\frac{e^{s}\bar{S}_0(s)}{e^s - \alpha_2}} - \laplaceinv{\frac{e^{s}\bar{S}_0(s)}{e^s - \alpha_1}}\right] \\
+    &= \frac{\alpha_2^n - \alpha_1^n}{\alpha_2 - \alpha_1}\\
+    &= \frac{1}{2\sqrt{3}}\left[\left(\sqrt{3}-2\right)^n + (-1)^{n+1} \left(2 + \sqrt{3}\right)^n\right]
+  \end{align*}
+
+
 \end{proof}
 \newpage
