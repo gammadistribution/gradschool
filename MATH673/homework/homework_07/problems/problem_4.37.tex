@@ -1,6 +1,49 @@
 \begin{problem}{4.37}
+  Show that the solution of the differential difference equation
+  \begin{align*}
+    \der{t}{}u(t) - u(t-1) = 2, \qquad u(0) = 0
+  \end{align*}
+  is
+  \begin{align*}
+    u(t) = 2 \left[t - \frac{(t-1)^2}{2!} + \frac{(t-2)^3}{3!} + \dots + \frac{(t-n)^{n+1}}{(n+1)!}\right], \quad t > n
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Applying the Laplace transform to the differential difference equation yields
+  that
+  \begin{align*}
+    s\bar{u}(s) - u(0) - e^{-s}\left[\bar{u}(s) - u(0)\bar{S}_0(s)\right] = \frac{2}{s}
+  \end{align*}
+  In light of the initial data, this equation reduces to
+  \begin{align*}
+    s\bar{u}(s) - e^{-s}\bar{u}(s) = \frac{2}{s},
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    \bar{u}(s) = \frac{2}{s(s-e^{s})} = \frac{2}{s^2}\left(1 - \frac{e^{-s}}{s}\right)^{-1}
+  \end{align*}
+
+  Expanding the right term in terms of its power series we see that
+  \begin{align*}
+    \bar{u}(s)
+    &= \frac{2}{s^2}\left(1 - \frac{e^{-s}}{s}\right)^{-1}\\
+    &= \frac{2}{s^2}\sum_{n=0}^\infty \frac{e^{-ns}}{s^n}\\
+    &= 2\sum_{n=0}^\infty \frac{e^{-ns}}{s^{n+2}}.
+  \end{align*}
+
+  Recall that
+  \begin{align*}
+    \laplaceinv{\frac{e^{-as}}{s^n}} = \frac{(t-a)^{n-1}}{\Gamma(n)}H(t-a).
+  \end{align*}
+
+  Therefore, the solution to the original differential difference equation is
+  \begin{align*}
+    u(t) &= \laplaceinv{2\sum_{n=0}^\infty \frac{e^{-ns}}{s^{n+2}} }\\
+    &= 2\sum_{n=0}^\infty \laplaceinv{\frac{e^{-ns}}{s^{n+2}}} \\
+    &= 2\sum_{n=0}^\infty \frac{(t-n)^{n+1}}{\Gamma(n+2)}H(t-n) \\
+    &= 2\sum_{n=0}^\infty \frac{(t-n)^{n+1}}{(n+1)!}H(t-n).
+  \end{align*}
+
 \end{proof}
 \newpage
