@@ -1,6 +1,76 @@
 \begin{problem}{4.40}
+  Solve the telegraph equation
+  \begin{align*}
+    &u_{tt} - c^2 u_{xx} + 2a u_t = 0, \qquad -\infty < x < \infty, \quad 0 < t \\
+    & u(x, 0) = 0, \quad u_t(x,0) = g(x).
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  % We begin by applying the Fourier transform with respect to $x$ to the differential equation. Doing so,
+  % using previous properties of the Fourier transform, we have that
+  % \begin{align*}
+  %   \der{t}{2}\left[U(k, t)\right] + 2a \der{t}{}\left[U(k, t)\right] + c^2k^2 U(k, t) = 0,
+  % \end{align*}
+  % with the transformed conditions
+  % \begin{align*}
+  %   U(k, 0) &= 0 \\
+  %   \der{t}{}\left[U(k, t)\right] &= G(k).
+  % \end{align*}
+
+  % Now, the transformed equation is a second-order linear homogeneous differential equation with constant
+  % coefficients, the solution of which is readily seen to be
+  % \begin{align*}
+  % \end{align*}
+
+  We begin by applying the Laplace transform
+  to the equation. Doing so yields
+  \begin{align*}
+    s^2\bar{u}(x, s) -su(x, 0) - u_t(x, 0) -c^2 \frac{d^2}{dx^2}\left[\bar{u}(x, s)\right] + 2as\bar{u}(x, s) - 2au(x, 0) = 0.
+  \end{align*}
+  Using the initial data, this equation reduces to
+  \begin{align*}
+    s^2\bar{u}(x, s) - g(x) -c^2 \frac{d^2}{dx^2}\left[\bar{u}(x, s)\right] + 2as\bar{u}(s) = 0,
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    \frac{d^2}{dx^2}\left[\bar{u}(x, s)\right] - \frac{s^2 + 2as}{c^2}\bar{u}(x, s)= -\frac{g(x)}{c^2}.
+  \end{align*}
+
+  Now, applying the Fourier transform to this equation yields
+  \begin{align*}
+    k^2 \bar{U}(k, s) + \frac{s^2 + 2as}{c^2}\bar{U}(k, s)= \frac{G(k)}{c^2}.
+  \end{align*}
+  Solving the resulting algebraic equation for $\bar{U}(k, s)$ shows that
+  \begin{align*}
+    \bar{U}(k, s) = \frac{G(k)}{s^2 + 2as + k^2c^2} = \frac{G(k)}{(s+ a)^2 + k^2c^2- a^2 }.
+  \end{align*}
+  From our table of Laplace transforms, we see that
+  \begin{align*}
+    \laplace{e^{at}\sin bt} = \frac{b}{(s-a)^2+b^2}.
+  \end{align*}
+
+  Thus, the inverse Laplace transform of the above equation is
+  \begin{align*}
+    U(k, t) = \laplaceinv{\bar{U}(k, s)} &= \laplaceinv{\frac{G(k)}{(s+ a)^2 + k^2c^2- a^2 }} \\
+    &= G(k)\frac{e^{-at}\sin\left(t\sqrt{k^2c^2-a^2} \right)}{\sqrt{k^2c^2-a^2}}.
+  \end{align*}
+  Let $\omega(k) = \sqrt{k^2c^2-a^2}$. Then the above equation becomes
+  \begin{align*}
+    U(k, t) &= G(k)\frac{e^{-at}\sin\left(t\sqrt{k^2c^2-a^2} \right)}{\sqrt{k^2c^2-a^2}} \\
+    &= G(k)\frac{e^{-at}\sin\left(\omega(k) t\right)}{\omega(k)} \\
+    &= e^{-at}G(k)F(k, t),
+  \end{align*}
+  where
+  \begin{align*}
+    F(k, t) = \frac{\sin\left(\omega(k) t\right)}{\omega(k)}.
+  \end{align*}
+
+  Therefore, according to the Convolution Theorem, the solution to the original equation is
+  \begin{align*}
+    u(x, t) = \fourierinv{U(k, t)} &= e^{-at}\fourierinv{G(k)F(k, t)} \\
+    &= e^{-at}\left[ g(x) \ast f(x, t) \right]\\
+    &= \frac{e^{-at}}{\sqrt{2\pi}} \int_{-\infty}^\infty g(\xi)f(x-\xi, t) d\xi.
+  \end{align*}
 \end{proof}
 \newpage
