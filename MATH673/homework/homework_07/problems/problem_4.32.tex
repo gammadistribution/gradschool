@@ -1,7 +1,52 @@
 \begin{problem}{4.32}
-
+  A uniform horizontal beam of length $2l$ is clamped at the end $x=0$ and freely supported at $x=2l$.
+  It carries a distributed load of constant value $W$ in $l/2 < x<3l/2$ and zero elsewhere. Obtain the deflection
+  of the beam which satisfies the boundary value problem
+  \begin{align*}
+    & EI \der{x}{4}\left[y(x)\right] = W\left[H\left(x-\frac{l}{2}\right) - H\left(x-\frac{3l}{2}\right)\right], \qquad 0 < x < 2l \\
+    & y(0) = y'(0) = 0, \quad y''(2l) = y'''(2l) = 0.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  We apply the Laplace transform to this equation to transform it from an ordinary differential
+  equation to an algebraic one. Doing so yields
+  \begin{align*}
+    EI\left[s^4 \bar{y}(s) - s^3y(0) - s^2 y'(0) - s y''(0) - y'''(0)\right] = W \left[\frac{e^{-\frac{l}{2}s} - e^{-\frac{3l}{2}s}}{s}\right].
+  \end{align*}
+  In light of the initial data, this equation becomes
+  \begin{align*}
+    EI\left[s^4 \bar{y}(s) - s y''(0) - y'''(0)\right] = W \left[\frac{e^{-\frac{l}{2}s} - e^{-\frac{3l}{2}s}}{s}\right],
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    EI \bar{y}(s) = W \left[\frac{e^{-\frac{l}{2}s} - e^{-\frac{3l}{2}s}}{s^5}\right] + EI\left[\frac{y''(0)}{s^3} + \frac{y'''(0)}{s^4}\right]
+  \end{align*}
+
+  From the Convolution Theorem and previous properties of the Laplace transform, we know that
+  \begin{align*}
+    \laplaceinv{\frac{e^{-as}}{s^5}} &= \laplaceinv{\frac{1}{s^4}\frac{e^{-as}}{s}} \\
+    &= \int_0^tH(\tau-a)\frac{(t-\tau)^3}{6}d\tau \\
+    &= \frac{(t-a)^4}{24}H\left(t- a\right).
+  \end{align*}
+
+  Thus, by taking the inverse Laplace transform, we see that
+  \begin{align*}
+    y(x) &= \frac{W}{24 EI} \left[\left(t-\frac{l}{2}\right)^4H\left(t- \frac{l}{2}\right) - \left(t-\frac{3l}{2}\right)^4H\left(t- \frac{3l}{2}\right)\right] + \frac{y''(0)x^2}{2} + \frac{y''(0)x^3}{6}.
+  \end{align*}
+
+  Now, using a computer algebra system and this form of $y(x)$, we see that the boundary conditions
+  give us a system of equations
+  \begin{align*}
+    y''(0) + 2 y'''(0)l + \frac{l^2W}{EI}  = 0 \\
+    y'''(0) + \frac{l W}{EI} = 0 \\
+  \end{align*}
+  Solving this system we see that $y''(0) = \frac{l^2 W}{EI}$ and $y'''(0) = -\frac{lW}{EI}$.
+
+  Therefore, the solution to the original equation is
+  \begin{align*}
+    y(x) &= \frac{W}{24 EI} \left[\left(t-\frac{l}{2}\right)^4H\left(t- \frac{l}{2}\right) - \left(t-\frac{3l}{2}\right)^4H\left(t- \frac{3l}{2}\right)\right] + \frac{l^2 W x^2}{2EI} - \frac{l Wx^3}{6EI}.
+  \end{align*}
+
 \end{proof}
 \newpage
