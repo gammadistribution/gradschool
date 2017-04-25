@@ -1,6 +1,77 @@
 \begin{problem}{4.43}
+  Solve the diffusion equation
+  \begin{align*}
+    & u_t = k u_{xx}, \qquad -a < x < a, \quad 0 < t \\
+    & u(x, 0) = 1, \qquad -a < x < a \\
+    & u(-a, t) = u(a, t) = 0, \qquad 0 < t.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  We begin by applying the Laplace transform to the differential equation. Doing so yields
+  \begin{align*}
+    s\bar{u}(x, s) - u(x, 0) = k \der{x}{2}\left[\bar{u}(x, s)\right].
+  \end{align*}
+  Using the initial data, this equation reduces to
+  \begin{align*}
+    s\bar{u}(x, s) - 1 = k \der{x}{2}\left[\bar{u}(x, s)\right],
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    \der{x}{2}\left[\bar{u}(x, s)\right] - \frac{s}{k}\bar{u}(x, s) = \frac{1}{k}.
+  \end{align*}
+
+  The homogeneous solution to this linear second-order ordinary differential equation is readily seen to be
+  \begin{align*}
+    \bar{u}_h(x, s) &= b_1 \exp\left(-\sqrt{\frac{s}{k}} x\right) + b_2 \exp\left(\sqrt{\frac{s}{k}} x\right) \\
+    &=c_1 \cosh\left(\sqrt{\frac{s}{k}} x\right) + c_2 \sinh\left(\sqrt{\frac{s}{k}} x\right)
+  \end{align*}
+  By inspection, we see that
+  \begin{align*}
+    \bar{u}_p(x, s) = -\frac{1}{s}
+  \end{align*}
+  is a particular solution of the transformed equation. Thus, the solution to the transformed equation is
+  \begin{align*}
+    \bar{u}(x, s) = \bar{u}_h(x, s) + \bar{u}_p(x,s) =      c_1 \cosh\left(\sqrt{\frac{s}{k}} x\right) + c_2 \sinh\left(\sqrt{\frac{s}{k}} x\right) -\frac{1}{s}.
+  \end{align*}
+
+  Note that the transformed boundary conditions are
+  \begin{align*}
+    \bar{u}(a, s) = \bar{u}(-a, s) = 0.
+  \end{align*}
+  Using the above solution in conjunction with the transformed boundary conditions leads us to the following system of equations
+  \begin{align*}
+    \bar{u}(-a, s) = c_1 \cosh\left(-a\sqrt{\frac{s}{k}} \right) + c_2 \sinh\left(-a\sqrt{\frac{s}{k}} \right) -\frac{1}{s} = 0 \\
+    \bar{u}(a, s) = c_1 \cosh\left(a\sqrt{\frac{s}{k}} \right) + c_2 \sinh\left(a\sqrt{\frac{s}{k}} \right) -\frac{1}{s} = 0.
+  \end{align*}
+  Solving for $c_1$ and $c_2$ we see that
+  \begin{align*}
+    c_1 &= \frac{1}{s\cosh\left(\sqrt{\frac{s}{k}}a\right)} \\
+    c_2 &= 0.
+  \end{align*}
+  Thus, the solution to the transformed equation adhering to the transformed boundary conditions is
+  \begin{align*}
+    \bar{u}(x, s) = \left(\frac{\cosh\left(\sqrt{\frac{s}{k}} x\right)}{s\cosh\left(\sqrt{\frac{s}{k}}a\right)}\right) -\frac{1}{s}.
+  \end{align*}
+
+  Now let
+  \begin{align*}
+    \bar{f}(x, s) = \left(\frac{\cosh\left(\sqrt{\frac{s}{k}} x\right)}{\cosh\left(\sqrt{\frac{s}{k}}a\right)}\right).
+  \end{align*}
+  and
+  \begin{align*}
+    \bar{g}(s) = \frac{1}{s}
+  \end{align*}
+  Then
+  \begin{align*}
+    \bar{u}(x, s) &= \left(\frac{\cosh\left(\sqrt{\frac{s}{k}} x\right)}{s\cosh\left(\sqrt{\frac{s}{k}}a\right)}\right) -\frac{1}{s} \\
+    &= \bar{g}(s)\bar{f}(x, s) - \bar{g}(s)
+  \end{align*}
+  and by the Convolution Theorem, the solution to the original equation is
+  \begin{align*}
+    u(x, t) = \laplaceinv{\bar{u}(x, s)} &= \laplaceinv{\bar{g}(s)\bar{f}(x, s) - \bar{g}(s)}\\
+    &= g(t) \ast f(x, t) - 1 \\
+    &= \int_0^t f(x, \tau) d\tau - 1.
+  \end{align*}
 \end{proof}
 \newpage
