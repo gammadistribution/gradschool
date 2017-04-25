@@ -1,6 +1,54 @@
 \begin{problem}{4.50}
+  \begin{enumerate}
+    \item[a.] Use the joint Laplace and Fourier transform to solve the inhomogeneous diffusion problem
+      \begin{align*}
+        & u_t - \kappa u_{xx} = q(x, t), \qquad -\infty < x < \infty, \quad 0 < t\\
+        & u(x, 0) = f(x), \qquad -\infty < x < \infty.
+      \end{align*}
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  We begin by applying the Laplace transform to the equation. Doing so yields
+  \begin{align*}
+    s \bar{u}(x, s) - u(x, 0) - \kappa \der{x}{2}\left[\bar{u}(x, s)\right] = \bar{q}(x, s).
+  \end{align*}
+  Using the initial condition, we see that this equation reduces to
+  \begin{align*}
+    s \bar{u}(x, s) - f(x) - \kappa \der{x}{2}\left[\bar{u}(x, s)\right] = \bar{q}(x, s).
+  \end{align*}
+
+  We now apply the Fourier transform to this resulting equation. Applying yields
+  \begin{align*}
+    s \bar{U}(k, s) - F(k) + \kappa k^2 \bar{U}(k, s) = \bar{Q}(k, s),
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    \bar{U}(k, s) = \frac{F(k) + \bar{Q}(k, s)}{s + \kappa k ^2}.
+  \end{align*}
+
+  Now applying the inverse Laplace transform, we have that
+  \begin{align*}
+    U(k, t) &= \laplaceinv{\frac{F(k) + \bar{Q}(k, s)}{s + \kappa k ^2}} \\
+    &= \laplaceinv{\frac{F(k)}{s + \kappa k ^2}} + \laplaceinv{\frac{ \bar{Q}(k, s)}{s + \kappa k ^2}} \\
+    &= F(k) e^{-\kappa k^2 t} + \int_0^te^{-\kappa k^2 (t-\tau)}Q(k, \tau) d\tau.
+  \end{align*}
+
+  Let
+  \begin{align*}
+    G(k, t) = e^{-\kappa k^2 t}
+  \end{align*}
+  Then by our table of Fourier transforms, we have that
+  \begin{align*}
+    g(x, t) = \fourierinv{G(k, t)} = \frac{1}{\sqrt{2\kappa t}}e^{-\frac{x^2}{4\kappa t}}
+  \end{align*}
+  Thus, using the Convolution Theorem, we see that inverse Fourier transform of the equation is
+  \begin{align*}
+    u(x, t) &= \fourierinv{F(k) e^{-\kappa k^2 t} + \int_0^te^{-\kappa k^2 (t-\tau)}Q(k, \tau) d\tau} \\
+    &= f(x) \ast g(x, t) + \int_0^t g(x, t-\tau) \ast q(x, \tau) d\tau \\
+    &= \frac{1}{\sqrt{2\pi}}\left[\int_{-\infty}^\infty f(x-\xi)g(\xi, t) d\xi + \int_0^t \left[\int_{-\infty}^\infty g(x - \xi, t - \tau) q(\xi, \tau) d\xi\right] d\tau\right] \\
+    &= \frac{1}{\sqrt{4\pi\kappa t}}\left[\int_{-\infty}^\infty f(x-\xi)e^{-\frac{\xi^2}{4\kappa t}} d\xi + \int_0^t \left[\int_{-\infty}^\infty e^{-\frac{(x-\xi)^2}{4\kappa (t-\tau)}} q(\xi, \tau) d\xi\right] d\tau\right].
+  \end{align*}
+
 \end{proof}
 \newpage
