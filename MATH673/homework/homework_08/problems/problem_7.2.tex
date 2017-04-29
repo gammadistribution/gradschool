@@ -1,6 +1,45 @@
 \begin{problem}{7.2}
+  \begin{enumerate}
+    \item[a.] Show that the solution of the boundary value problem
+      \begin{align*}
+        &u_{rr} + \frac{1}{r}u_r + u_{zz} = 0, \qquad 0 < r <\infty, \quad 0 < z < \infty,\\
+        &u(r, 0) = \frac{1}{\sqrt{a^2 + r^2}}, \qquad 0 < r <\infty,
+      \end{align*}
+      is
+      \begin{align*}
+        u(r, z) = \int_0^\infty e^{-\kappa(z+a)}J_0(\kappa r) d\kappa = \left[(z+a)^2 + r^2\right]^{-1/2}.
+      \end{align*}
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] Let
+      \begin{align*}
+        u(r, z) = \left[(z+a)^2 + r^2\right]^{-1/2}.
+      \end{align*}
+
+      Then it is clear that for $0 < r < \infty$ we have that
+      \begin{align*}
+        u(r, 0) = \frac{1}{\sqrt{a^2 + r^2}}
+      \end{align*}
+      and $u(r,z)$ satisfies the boundary condition.
+
+      Now, note from the definition of $u(r, z)$ that
+      \begin{align*}
+        u_r &= -r\left[(z+a)^2 + r^2\right]^{-3/2}, \\
+        u_{rr} &= -\left[(z+a)^2 + r^2\right]^{-3/2} + 3r^2 \left[(z+a)^2 + r^2\right]^{-5/2}, \\
+        u_z &= -(z+a)\left[(z+a)^2 + r^2\right]^{-3/2}, \\
+        u_{zz} &= -\left[(z+a)^2 + r^2\right]^{-3/2} + 3(z+a)^2 \left[(z+a)^2 + r^2\right]^{-5/2}. \\
+      \end{align*}
+
+      Therefore, we see that
+      \begin{align*}
+        u_{rr} + \frac{1}{r}u_r + u_{zz} & =\frac{3r^2 + 3(z+a)^2}{\left[(z+a)^2 + r^2\right]^{5/2}} - \frac{3}{\left[(z+a)^2 + r^2\right]^{3/2}} \\
+        &= \frac{3r^2 + 3(z+a)^2 - 3\left[(z+a)^2 + r^2\right]}{\left[(z+a)^2 + r^2\right]^{5/2}}\\
+        &= 0,
+      \end{align*}
+      and we see that $u(r, z)$ is a solution of the boundary value problem.
+  \end{enumerate}
 \end{proof}
 \newpage
