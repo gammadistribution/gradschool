@@ -1,0 +1,26 @@
+\begin{problem}{7.1}
+  Show that
+  \begin{enumerate}
+    \item[a.] $\displaystyle \hankel{0}{(a^2-r^2) H(a-r)} = \frac{4a}{\kappa^3} J_1(a\kappa ) - \frac{2a^2}{\kappa^2}J_0(a\kappa)$.
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item[a.] Let $J_n$ be the integral representation of the Bessel function of order $n$, i.e.
+      \begin{align*}
+        J_n(\kappa r) = \frac{1}{2\pi }\int_{\pi/2 - \phi}^{5\pi/2 - \phi} \exp{\left[i(n\alpha - \kappa r \sin \alpha)\right]} d\alpha
+      \end{align*}
+      Then the Hankel transformation of order $n$ of $f(r)$ is defined to be
+      \begin{align*}
+        \hankel{n}{f(r)} = \int_0^\infty r J_n(\kappa r) f(r) dr.
+      \end{align*}
+
+      Using the table of Hankel transforms we see that
+      \begin{align*}
+        \hankel{0}{(a^2-r^2) H(a-r)} = \frac{4a}{\kappa^3} J_1(a\kappa ) - \frac{2a^2}{\kappa^2}J_0(a\kappa),
+      \end{align*}
+      and we are done.
+  \end{enumerate}
+\end{proof}
+\newpage
