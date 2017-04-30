@@ -1,6 +1,64 @@
 \begin{problem}{7.14}
+  Find the steady temperature $u(r, z)$ on a beam, $0 \leq r < \infty$, $0 \leq z \leq a$
+  when the face $z=0$ is kept at temperature $u(r, 0) = 0$ and the face $z=a$
+  is insulated except that the heat is supplied through a circular hole such that
+  \begin{align*}
+    u_z(r, a) = H(b-r).
+  \end{align*}
+  The temperature $u(r, z)$ satisfies the axisymmetric equation
+  \begin{align*}
+    u_{rr} + \frac{1}{r}u_r + u_{zz} = 0, \qquad 0 \leq r < \infty, \quad 0 \leq z \leq a.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  The temperature described above satisfies the following partial differential equation
+  with associated boundary conditions
+  \begin{align*}
+    &u_{rr} + \frac{1}{r}u_r + u_{zz} = 0, \qquad 0 \leq r < \infty, \quad 0 \leq z \leq a, \\
+    &u(r, 0) = 0, \qquad 0 \leq r < \infty, \\
+    &u_z(r, a) = H(b-r), \qquad 0 \leq r < \infty.
+  \end{align*}
+
+  Let $\tilde{u}_0(k, z) = \hankel{0}{u(r, z)}$ be the 0-th order Hankel transform of
+  $u(r, z)$. Now, applying the 0-th order Hankel transform to the differential equation yields that
+  \begin{align*}
+    \der{z}{2}\left[ \tilde{u}_0(k, z)\right] -k^2 \tilde{u}_0(k, z) = 0.
+  \end{align*}
+
+  The resulting equation is a homogeneous linear ordinary differential equation, the
+  solution to which is
+  \begin{align}\label{homo-7-14}
+    \tilde{u}_0(k, z) = c_1(k) e^{-kz} + c_2(k) e^{kz}.
+  \end{align}
+
+  Applying the 0-th order Hankel transform to the boundary conditions yields
+  \begin{align*}
+    &\tilde{u}_0(k, 0) = 0, \qquad 0 \leq k < \infty, \\
+    &\left.\der{z}{}\left[\tilde{u}_0(k, z)\right]\right\rvert_{z=a} = \frac{b}{k}J_1(bk), \qquad 0 \leq k < \infty.
+  \end{align*}
+  Using the solution \eqref{homo-7-14} and the transformed boundary conditions,
+  we see that
+  \begin{align*}
+    c_1(k) + c_2(k) &= 0 \\
+    -c_1(k) k e^{-ka}+ c_2(k) k e^{ka} &= \frac{b}{k}J_1(bk).
+  \end{align*}
+  Solving this system of equation we see that
+  \begin{align*}
+    c_1(k) &= -\frac{b e^{a k }J_1(b k )}{k\left(1 + e^{2 ak }\right)}\\
+    c_2(k) &= \frac{b e^{a k }J_1(b k )}{k\left(1 + e^{2 ak }\right)}.
+  \end{align*}
+  Thus, the solution to the transformed differential equation is
+  \begin{align*}
+    \tilde{u}_0(k, z) &= \left[-\frac{b e^{a k }J_1(b k )}{k\left(1 + e^{2 ak }\right)} \right]e^{-kz}+ \left[\frac{b e^{a k }J_1(b k )}{k\left(1 + e^{2 ak }\right)}\right] e^{kz}\\
+    &= \frac{b J_1(bk) e^{k(a-z)}\left(- 1 + e^{2 kz }\right)}{k \left(1 + e^{2 ak }\right)}\\
+    &= \left(\frac{b J_1(bk)}{k}\right)\frac{\sinh k z}{\cosh ka}.
+  \end{align*}
+
+  Therefore, the solution to the original differential equation is
+  \begin{align*}
+    u(r, z) = \hankelinv{0}{\tilde{u}_0(k, z)} &= \int_0^\infty k \left(\frac{b J_1(bk)}{k}\right)\frac{\sinh k z}{\cosh ka} J_0(k r) dk \\
+    &= \int_0^\infty \left(b J_1(bk)\right)\frac{\sinh k z}{\cosh ka} J_0(k r) dk .
+  \end{align*}
 \end{proof}
 \newpage
