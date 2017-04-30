@@ -1,6 +1,68 @@
 \begin{problem}{7.9}
+  Solve the problem of the electrified unit disk in the $(x,y)$ plane with center at the origin.
+  The electric potential $u(r, z)$ is axisymmetric and satisfies the boundary value problem
+  \begin{align*}
+    &u_{rr} + \frac{1}{r} u_r + u_{zz} = 0, \qquad 0 < r < \infty, \quad 0 < z < \infty,\\
+    &u(r, 0) = u_0, \qquad 0 \leq r < a \\
+    &\frac{\partial u}{\partial z} = 0, \qquad \text{on $z=0$ for $a < r < \infty$},\\
+    & u(r,z) \to 0 \qquad \text{as $z\to\infty$ for all $r$},
+  \end{align*}
+  where $u_0$ is constant. Show that the solution is
+  \begin{align*}
+    u(r,z) = \left(\frac{2au_0}{\pi}\right) \int_0^\infty k J_0(kr) \left(\frac{\sin ak}{k^2}\right)e^{-kz} dk.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  In order to find the solution to the boundary value problem, we will apply
+  the 0-th order Hankel transform to the system of differential equations.
+
+  Let $\tilde{u}_0(k, z) = \hankel{0}{u(r, z)}$. Then
+  from a previous theorem we have that
+  \begin{align}\label{hankel0}
+    \hankel{0}{u_{rr} + \frac{1}{r}u_r} = -k^2 \tilde{u}_0(k, z).
+  \end{align}
+  Thus, from the above result in combination with Leibniz's integral rule, we see that
+  applying the 0-th order Hankel transform to the boundary value problem yields
+  \begin{align*}
+    &\der{z}{2}\left[\tilde{u}_0(k, z)\right] - k^2 \tilde{u}_0(k, z) = 0, \qquad 0 < r < \infty, \quad 0 < z < \infty.
+  \end{align*}
+  This is a homogeneous linear differential equation and we readily see that
+  the solution to the equation is
+  \begin{align}\label{homo}
+    \tilde{u}_0(k, z) = c_1 e^{-kz} + c_2 e^{kz}.
+  \end{align}
+
+  Note that the boundary conditions
+  \begin{align*}
+    &u(r, 0) = u_0, \qquad 0 \leq r < a \\
+    &\der{z}{}\left[\tilde{u}_0(k, z)\right] = 0, \qquad \text{on $z=0$ for $a < r < \infty$}
+  \end{align*}
+  are equivalent to
+  \begin{align*}
+    &u(r, 0) = u_0H(a - r), \qquad 0 \leq r < \infty \\
+    &\der{z}{}\left[\tilde{u}_0(k, z)\right] = H(a-r), \qquad \text{on $z=0$ for $0 < r < \infty$}.
+  \end{align*}
+  Thus, we see that the transformed boundary conditions are
+  \begin{align*}
+    &\tilde{u}_0(k, 0) = \frac{a u_0}{k}J_1(ak),\qquad 0 \leq r < \infty \\
+    &\der{z}{}\left[\tilde{u}_0(k, z)\right] = \frac{a }{k}J_1(ak), \qquad \text{on $z=0$ for $a < r < \infty$},\\
+    &\tilde{u}_0(k, z) \to 0 \qquad \text{as $z\to\infty$ for all $k$}.
+  \end{align*}
+  % Note that if $\tilde{u}_0(k, z)$ is of the form \eqref{homo},
+  % then $\tilde{u}_0(k, z) \to 0 \qquad \text{as $z\to\infty$ for all $k$}$
+  % if and only if $c_2 = 0$. Thus, \eqref{homo} reduces to
+  % \begin{align}\label{homo2}
+  %   \tilde{u}_0(k, z) = c_1 e^{-kz}.
+  % \end{align}
+
+  Using \eqref{homo} and the first transformed boundary condition, we see that
+  \begin{align*}
+    c_1 + c_2 = \frac{a u_0}{k}J_1(ak).
+  \end{align*}
+  Similarly, from \eqref{homo} and the second transformed boundary condition, we see that
+  \begin{align*}
+    -kc_1 + kc_2 = 0.
+  \end{align*}
 \end{proof}
 \newpage

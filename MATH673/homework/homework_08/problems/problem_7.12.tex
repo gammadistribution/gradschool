@@ -1,6 +1,57 @@
 \begin{problem}{7.12}
+  Solve the Cauchy problem for the wave equation in a dissipating medium
+  \begin{align*}
+    u_{tt} + 2 \kappa u_t = c^2 \left(u_{rr} + \frac{1}{r}u_r\right),\qquad 0 < r < \infty, \quad 0 < t, \\
+    u(r, 0) = f(r), \quad u_t(r, 0) = g(r), \qquad 0 < r < \infty.
+  \end{align*}
+  where $\kappa$ is a constant.
 \end{problem}
 
 \begin{proof}
+  We begin by applying the 0-th order Hankel transform to the first equation. Letting
+  $\tilde{u}_0(k, t) = \hankel{0}{u(r, t)}$ and using \eqref{hankel0},
+  we see this results in the following transformed equation
+  \begin{align*}
+    \der{t}{2}\left[\tilde{u}_0(k, t)\right] + 2\kappa \der{t}{}\left[\tilde{u}_0(k, t)\right] = -(kc)^2 \tilde{u}_0(k, t),
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    \der{t}{2}\left[\tilde{u}_0(k, t)\right] + 2\kappa \der{t}{}\left[\tilde{u}_0(k, t)\right] + (kc)^2 \tilde{u}_0(k, t) = 0.
+  \end{align*}
+
+  This is a homogeneous, linear ordinary differential equation, the solution to which
+  we readily see is
+  \begin{align}\label{homo-7-12}
+    \tilde{u}_0(k, t) = c_1 e^{\left(-\kappa - \sqrt{\kappa^2 - (ck)^2}\right)t}  + c_2 e^{\left(-\kappa + \sqrt{\kappa^2 - (ck)^2}\right)t}.
+  \end{align}
+  Taking the 0-th order Hankel transform of the initial conditions, we see that
+  \begin{align*}
+    \tilde{u}_0(k, 0) = \tilde{f}_0(k)&, \qquad 0 < r < \infty \\
+    \der{t}{}\left[\tilde{u}_0(k, 0)\right] = \tilde{g}_0(k) &, \qquad 0 < r < \infty \\
+  \end{align*}
+  Using the solution \eqref{homo-7-12} and the first transformed initial condition, we see that
+  \begin{align*}
+    c_1 + c_2 = \tilde{f}_0(k).
+  \end{align*}
+  Similarly, using the solution \eqref{homo-7-12} and the second transformed initial condition,
+  we see that
+  \begin{align*}
+    \left(-\kappa - \sqrt{\kappa^2 - (ck)^2}\right)c_1 + \left(-\kappa + \sqrt{\kappa^2 - (ck)^2}\right)c_2 = \tilde{f}_0(k).
+  \end{align*}
+  Solving the resulting system of equation for $c_1$ and $c_2$ shows that
+  \begin{align*}
+    c_1 &= - \frac{\tilde{g}_0(k) + \tilde{f}_0(k) \kappa - \tilde{f}_0(k)\sqrt{\kappa^2 - (ck)^2}}{2\sqrt{\kappa^2 - (ck)^2}} \\
+    c_2 &= \frac{\tilde{g}_0(k) + \tilde{f}_0(k) \kappa + \tilde{f}_0(k)\sqrt{\kappa^2 - (ck)^2}}{2\sqrt{\kappa^2 - (ck)^2}}
+  \end{align*}
+  Thus, letting $c_1(k) = c_1$ and $c_2(k) = c_2$, the solution to the transformed differential equation with the
+  specified initial conditions is
+  \begin{align*}
+    \tilde{u}_0(k, t) = c_1(k) e^{\left(-\kappa - \sqrt{\kappa^2 - (ck)^2}\right)t} + c_2(k)e^{\left(-\kappa + \sqrt{\kappa^2 - (ck)^2}\right)t}
+  \end{align*}
+
+  Therefore, the solution to the original differential equation satisfying the specified initial conditions is
+  \begin{align*}
+    u(r, t) = \hankelinv{0}{\tilde{u}_0(k, t)} = \int_0^\infty k J_0(k r) \left[c_1(k) e^{\left(-\kappa - \sqrt{\kappa^2 - (ck)^2}\right)t} + c_2(k)e^{\left(-\kappa + \sqrt{\kappa^2 - (ck)^2}\right)t}\right] dk.
+  \end{align*}
 \end{proof}
 \newpage
