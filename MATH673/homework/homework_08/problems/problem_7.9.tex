@@ -27,42 +27,59 @@
   \begin{align*}
     &\der{z}{2}\left[\tilde{u}_0(k, z)\right] - k^2 \tilde{u}_0(k, z) = 0, \qquad 0 < r < \infty, \quad 0 < z < \infty.
   \end{align*}
-  This is a homogeneous linear differential equation and we readily see that
+  This is a homogeneous linear ordinary differential equation and we readily see that
   the solution to the equation is
   \begin{align}\label{homo}
-    \tilde{u}_0(k, z) = c_1 e^{-kz} + c_2 e^{kz}.
+    \tilde{u}_0(k, z) = c_1(k) e^{-kz} + c_2(k) e^{kz}.
   \end{align}
 
-  Note that the boundary conditions
-  \begin{align*}
-    &u(r, 0) = u_0, \qquad 0 \leq r < a \\
-    &\der{z}{}\left[\tilde{u}_0(k, z)\right] = 0, \qquad \text{on $z=0$ for $a < r < \infty$}
-  \end{align*}
-  are equivalent to
-  \begin{align*}
-    &u(r, 0) = u_0H(a - r), \qquad 0 \leq r < \infty \\
-    &\der{z}{}\left[\tilde{u}_0(k, z)\right] = H(a-r), \qquad \text{on $z=0$ for $0 < r < \infty$}.
-  \end{align*}
-  Thus, we see that the transformed boundary conditions are
-  \begin{align*}
-    &\tilde{u}_0(k, 0) = \frac{a u_0}{k}J_1(ak),\qquad 0 \leq r < \infty \\
-    &\der{z}{}\left[\tilde{u}_0(k, z)\right] = \frac{a }{k}J_1(ak), \qquad \text{on $z=0$ for $a < r < \infty$},\\
-    &\tilde{u}_0(k, z) \to 0 \qquad \text{as $z\to\infty$ for all $k$}.
-  \end{align*}
-  % Note that if $\tilde{u}_0(k, z)$ is of the form \eqref{homo},
-  % then $\tilde{u}_0(k, z) \to 0 \qquad \text{as $z\to\infty$ for all $k$}$
-  % if and only if $c_2 = 0$. Thus, \eqref{homo} reduces to
-  % \begin{align}\label{homo2}
-  %   \tilde{u}_0(k, z) = c_1 e^{-kz}.
-  % \end{align}
+  Note that if $u(r,z) \to 0$ as $z \to \infty$ for all $r$, then
+  $\tilde{u}_0(k, z) \to 0$ as $z \to \infty$ for all $k$. Thus, if
+  $\tilde{u}_0(k, z)$ is of the form \eqref{homo},
+  then $\tilde{u}_0(k, z) \to 0$ as $z\to\infty$ for all $k$
+  if and only if $c_2(k) = 0$. Thus, \eqref{homo} reduces to
+  \begin{align}\label{homo2}
+    \tilde{u}_0(k, z) = c_1(k) e^{-kz}.
+  \end{align}
 
-  Using \eqref{homo} and the first transformed boundary condition, we see that
+  Thus, taking the inverse 0-th order Hankel transform of \eqref{homo2}, we see that
+  the solution to the original differential equation is
   \begin{align*}
-    c_1 + c_2 = \frac{a u_0}{k}J_1(ak).
+    u(r, z) = \hankelinv{0}{\tilde{u}_0(k, z)} = \int_0^\infty k c_1(k) J_0(k r)e^{-kz} dk.
   \end{align*}
-  Similarly, from \eqref{homo} and the second transformed boundary condition, we see that
+
+  From this solution the boundary conditions become
   \begin{align*}
-    -kc_1 + kc_2 = 0.
+    \int_0^\infty k c_1(k)  J_0(k r)dk = u_0\\
+    \int_0^\infty k^2 c_1(k)  J_0(k r) dk = 0.
   \end{align*}
+  Using our table of Hankel transforms, we see that
+  \begin{align*}
+    \hankel{0}{\frac{\sin ak}{k^2}} &= \int_0^\infty k \left(\frac{\sin ak}{k^2}\right) J_0(ak)dk =
+    \begin{cases}
+      \frac{\pi}{2} & \text{if $k < a$} \\
+      \sin^{-1}\left(\frac{a}{k}\right) & \text{if $k > a$} \\
+    \end{cases}\\
+    \hankel{0}{\frac{\sin ak}{k}} &= \int_0^\infty k \left(\frac{\sin ak}{k}\right)J_0(ak) dk =
+    \begin{cases}
+      \left(a^2-k^2\right)^{-1/2} & \text{if $k < a$} \\
+      0 & \text{if $k > a$} \\
+    \end{cases}
+  \end{align*}
+
+  These transforms imply that the solution to the system of integral equations resulting from the boundary conditions is
+  \begin{align*}
+    c_1(k) = \left(\frac{2 u_0}{\pi}\right)\frac{\sin a k}{k^2}.
+  \end{align*}
+  Therefore, the solution to the transformed equation is
+  \begin{align*}
+    \tilde{u}_0(k, z) = \left(\frac{2 u_0}{\pi}\right)\left(\frac{\sin a k}{k^2}\right) e^{-kz}
+  \end{align*}
+  and the solution to the original equation is
+  \begin{align*}
+    u(r, z) = \hankelinv{0}{\tilde{u}_0(k, z)} = \int_0^\infty k\left(\frac{2 u_0}{\pi}\right)\left(\frac{\sin a k}{k^2} \right)e^{-kz} J_0(rk) dk.
+  \end{align*}
+
+
 \end{proof}
 \newpage

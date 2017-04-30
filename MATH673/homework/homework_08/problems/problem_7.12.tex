@@ -24,12 +24,12 @@
   \begin{align}\label{homo-7-12}
     \tilde{u}_0(k, t) = c_1 e^{\left(-\kappa - \sqrt{\kappa^2 - (ck)^2}\right)t}  + c_2 e^{\left(-\kappa + \sqrt{\kappa^2 - (ck)^2}\right)t}.
   \end{align}
-  Taking the 0-th order Hankel transform of the initial conditions, we see that
+  Taking the 0-th order Hankel transform of the boundary conditions, we see that
   \begin{align*}
     \tilde{u}_0(k, 0) = \tilde{f}_0(k)&, \qquad 0 < r < \infty \\
-    \der{t}{}\left[\tilde{u}_0(k, 0)\right] = \tilde{g}_0(k) &, \qquad 0 < r < \infty \\
+    \der{t}{}\left[\tilde{u}_0(k, 0)\right] = \tilde{g}_0(k) &, \qquad 0 < r < \infty
   \end{align*}
-  Using the solution \eqref{homo-7-12} and the first transformed initial condition, we see that
+  Using the solution \eqref{homo-7-12} and the first transformed boundary condition, we see that
   \begin{align*}
     c_1 + c_2 = \tilde{f}_0(k).
   \end{align*}
@@ -41,12 +41,12 @@
   Solving the resulting system of equation for $c_1$ and $c_2$ shows that
   \begin{align*}
     c_1 &= - \frac{\tilde{g}_0(k) + \tilde{f}_0(k) \kappa - \tilde{f}_0(k)\sqrt{\kappa^2 - (ck)^2}}{2\sqrt{\kappa^2 - (ck)^2}} \\
-    c_2 &= \frac{\tilde{g}_0(k) + \tilde{f}_0(k) \kappa + \tilde{f}_0(k)\sqrt{\kappa^2 - (ck)^2}}{2\sqrt{\kappa^2 - (ck)^2}}
+    c_2 &= \frac{\tilde{g}_0(k) + \tilde{f}_0(k) \kappa + \tilde{f}_0(k)\sqrt{\kappa^2 - (ck)^2}}{2\sqrt{\kappa^2 - (ck)^2}}.
   \end{align*}
   Thus, letting $c_1(k) = c_1$ and $c_2(k) = c_2$, the solution to the transformed differential equation with the
   specified initial conditions is
   \begin{align*}
-    \tilde{u}_0(k, t) = c_1(k) e^{\left(-\kappa - \sqrt{\kappa^2 - (ck)^2}\right)t} + c_2(k)e^{\left(-\kappa + \sqrt{\kappa^2 - (ck)^2}\right)t}
+    \tilde{u}_0(k, t) = c_1(k) e^{\left(-\kappa - \sqrt{\kappa^2 - (ck)^2}\right)t} + c_2(k)e^{\left(-\kappa + \sqrt{\kappa^2 - (ck)^2}\right)t}.
   \end{align*}
 
   Therefore, the solution to the original differential equation satisfying the specified initial conditions is
