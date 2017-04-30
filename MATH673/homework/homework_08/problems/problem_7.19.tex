@@ -1,6 +1,52 @@
 \begin{problem}{7.19}
+  Use the joint Hankel and Laplace transform method to solve the initial boundary value problem
+  \begin{align*}
+    &u_{rr} + \frac{1}{r}u_r - u_{tt} - 2 \varepsilon u_t = a \frac{\delta(r)}{r}\delta(t), \qquad 0 < r < \infty, \quad 0 < t, \\
+    &u(r, t) \to 0 \qquad \text{as $r \to \infty$}, \\
+    &u(0, t) \qquad \text{is finite for $0 < t$}, \\
+    &u(r, 0) = u_t(r, 0) = 0 \qquad \text{for $0 < r < \infty$}.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  We begin by applying the 0-th order Hankel transform to the differential equation and its initial and boundary conditions. Doing so yields
+  \begin{align*}
+    &-k^2\tilde{u}_0(k, t) - \der{t}{2}\left[\tilde{u}_0(k, t)\right] -2\varepsilon \der{t}{}\left[\tilde{u}_0(k, t)\right] = a\delta(t), \qquad 0 < r < \infty, \quad 0 < t,\\
+    &\tilde{u}_0(k, t) \to 0 \qquad \text{as $k \to \infty$}, \\
+    &\tilde{u}_0(0, t) \qquad \text{is finite for $0 < t$}, \\
+    &\tilde{u}_0(k, 0) = \left.\der{t}{}\left[\tilde{u}_0(k, t)\right]\right\rvert_{t=0} = 0 \qquad \text{for $0 < k < \infty$}.
+  \end{align*}
+  Now, let $\bar{\tilde{u}}_0(k, s) = \laplace{\tilde{u}_0(k, t)}$. Applying the Laplace transform to the resulting equation shows that
+  \begin{align*}
+    -k^2\bar{\tilde{u}}_0(k, s) - s^2\bar{\tilde{u}}_0(k, s) + s \tilde{u}_0(k, 0) +\left.\der{t}{}\left[\tilde{u}_0(k, t)\right]\right\rvert_{t=0} - 2\varepsilon\left(s\bar{\tilde{u}}_0(k, s) - \tilde{u}_0(k, 0)\right) = a.
+  \end{align*}
+
+  In light of the initial data, this equation reduces to
+  \begin{align*}
+    -k^2\bar{\tilde{u}}_0(k, s) - s^2\bar{\tilde{u}}_0(k, s) - 2\varepsilon s \bar{\tilde{u}}_0(k, s) = a,
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    \left[s^2 + 2\varepsilon s +k^2\right]\bar{\tilde{u}}_0(k, s) = -a.
+  \end{align*}
+  Thus, the solution to the Laplace-transformed equation is
+  \begin{align*}
+    \bar{\tilde{u}}_0(k, s) = -\frac{a}{s^2 + 2\varepsilon s +k^2} = -\frac{a}{\left[s - \left(-\varepsilon -\sqrt{\varepsilon^2 - k^2}\right)\right]\left[s- \left(-\varepsilon +\sqrt{\varepsilon^2 - k^2}\right)\right]}.
+  \end{align*}
+
+  Recall that
+  \begin{align*}
+    \frac{1}{a-b}\laplace{e^{at} - e^{bt}} = \frac{1}{(s-a)(s-b)}.
+  \end{align*}
+  This implies that
+  \begin{align*}
+    \tilde{u}_0(k, t) = \laplaceinv{\bar{\tilde{u}}_0(k, s)} &= -a\laplaceinv{\frac{1}{\left[s - \left(-\varepsilon -\sqrt{\varepsilon^2 - k^2}\right)\right]\left[s- \left(-\varepsilon +\sqrt{\varepsilon^2 - k^2}\right)\right]}} \\
+    &= \frac{a\left[e^{\left(-\varepsilon -\sqrt{\varepsilon^2 - k^2}\right)t} - e^{\left(-\varepsilon +\sqrt{\varepsilon^2 - k^2}\right)t}\right]}{2\sqrt{\varepsilon^2-k^2}}.
+  \end{align*}
+
+  Therefore, the solution to the original differential equation is
+  \begin{align*}
+    u(r, t) = \hankelinv{0}{\tilde{u}_0(k, t)} = \int_0^\infty k \left\{\frac{a\left[e^{\left(-\varepsilon -\sqrt{\varepsilon^2 - k^2}\right)t} - e^{\left(-\varepsilon +\sqrt{\varepsilon^2 - k^2}\right)t}\right]}{2\sqrt{\varepsilon^2-k^2}} \right\}J_0(k r) dk.
+  \end{align*}
 \end{proof}
 \newpage
