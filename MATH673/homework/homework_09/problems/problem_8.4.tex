@@ -1,6 +1,37 @@
 \begin{problem}{8.4}
+  Show that
+  \begin{align*}
+    \mellin{\frac{1}{(1 + ax)^n}} = \frac{\Gamma(p)\Gamma(n-p)}{a^p \Gamma(n)}.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Let $\displaystyle f(x) = \frac{1}{(1+x)^n}$ where $n > 0$. Recall that the Beta function
+  \begin{align*}
+    B(x, y) = \int_0^1 t^{x-1}(1-t)^{y-1}dt
+  \end{align*}
+  satisfies the property that
+  \begin{align*}
+    B(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}.
+  \end{align*}
+
+  From the definition of the Gamma function, we see that
+  \begin{align*}
+    B(x, y) = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)} = \int_0^\infty \frac{t^{x-1}}{(1+t)^{x+y}} dt.
+  \end{align*}
+  Thus, we have from the definition of the Mellin transform that
+  \begin{align*}
+    \mellin{f(x)} &= \int_0^\infty \frac{x^{p-1}}{(1+x)^n} dx\\
+    &= \int_0^\infty \frac{x^{p-1}}{(1+x)^{n-p+p}} dx \\
+    &= \frac{\Gamma(p)\Gamma(n-p)}{\Gamma(n)}.
+  \end{align*}
+
+  Therefore, by the scaling property of the Mellin transform,
+  \begin{align*}
+    \mellin{\frac{1}{(1 + ax)^n}} = \mellin{f(ax)}
+    &= \frac{\mellin{f(x)}}{a^{p}} \\
+    &= \frac{\Gamma(p)\Gamma(n-p)}{a^{p}\Gamma(n)}.
+  \end{align*}
+
 \end{proof}
 \newpage
