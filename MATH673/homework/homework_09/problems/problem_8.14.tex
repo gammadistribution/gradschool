@@ -1,6 +1,42 @@
 \begin{problem}{8.14}
+  Use $\displaystyle \mellininv{\frac{\pi}{\sin p\pi}} = \frac{1}{1+x} = f(x)$ and exercise 8.12
+  to show that
+  \begin{enumerate}
+    \item[a.] $\displaystyle \mellininv{\frac{\pi \cos p\theta}{\sin p\pi}} = \frac{1 + r\cos\theta}{1  +2r \cos\theta + r^2}$,
+    \item[b.] $\displaystyle \mellininv{\frac{\pi \sin p\theta}{\sin p\pi}} = \frac{r\sin\theta}{1  +2r \cos\theta + r^2}$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  Suppose that $\displaystyle F(p) = \frac{\pi}{\sin p\pi}$. Then from our assumption, we have that
+  \begin{align*}
+    \mellin{f(x)} = \mellin{\frac{1}{1+x}} = \frac{\pi}{\sin p\pi} = F(p).
+  \end{align*}
+
+  Now suppose that $x = re^{i\theta}$. Then, from the complex exponential and other properties of complex numbers and trigonometric functions, we have that
+  \begin{align*}
+    f(re^{i\theta}) = \frac{1}{1+re^{i\theta}} &= \frac{1}{1 + r\cos\theta + ir\sin\theta}\left[\frac{1 + r\cos\theta - ir\sin\theta}{1 + r\cos\theta - ir\sin\theta}\right] \\
+    &= \left[\frac{1 + r\cos\theta}{(1 + r\cos\theta)^2 + r^2\sin^2\theta}\right] -i\left[\frac{r\sin\theta}{(1 + r\cos\theta)^2 + r^2\sin^2\theta}\right] \\
+    &= \left[\frac{1 + r\cos\theta}{1 + 2r \cos\theta + r^2}\right] -i\left[\frac{r\sin\theta}{1 + 2r \cos\theta + r^2}\right] \\
+  \end{align*}
+  Thus, we have that
+  \begin{subequations}
+    \begin{align}
+      \Re{\{f(re^{i\theta})\}} &= \frac{1 + r\cos\theta}{1 + 2r \cos\theta + r^2} \label{8.14:real} \\
+      \Re{\{f(re^{i\theta})\}} &= -\frac{r\sin\theta}{1 + 2r \cos\theta + r^2} \label{8.14:imag}
+    \end{align}
+  \end{subequations}
+
+  \begin{enumerate}
+    \item[a.] Therefore, we have from \eqref{8.14:real} and exercise 8.12.b that
+      \begin{align*}
+        \mellininv{\frac{\pi \cos p\theta}{\sin p\pi}} = \mellininv{F(p)\cos p\theta} = \Re{\{f(re^{i\theta})\}} = \frac{1 + r\cos\theta}{1  +2r \cos\theta + r^2}.
+      \end{align*}
+
+    \item[b.] Similarly, we see from \eqref{8.14:imag} and exercise 8.12.c that
+      \begin{align*}
+        \mellininv{\frac{\pi \sin p\theta}{\sin p\pi}} = \mellininv{F(p)\sin p\theta} = -\Im{\{f(re^{i\theta})\}} = \frac{r\sin\theta}{1  +2r \cos\theta + r^2}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
