@@ -1,6 +1,62 @@
 \begin{problem}{8.21}
+  Show that the solution of the boundary value problem
+  \begin{align*}
+    &r^2 \phi_{rr} + r \phi_r + \phi_{\theta\theta} = 0, \qquad 0 < r < \infty, \quad 0 < \theta < \pi \\
+    &\phi(r, 0) = \phi(r, \pi) = f(r)
+  \end{align*}
+  is
+  \begin{align*}
+    \phi(r, \theta) = \frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty} r^{-p} \frac{\tilde{f}(p) \cos\left[p(\theta - \pi / 2)\right]}{\cos\left[\pi p / 2\right]} dp
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Recall that if $\tilde{f}(p) = \mellin{f(x)}$, then the Mellin transform has the following property
+  \begin{align}\label{8.21:mellin}
+    \mellin{x^n f^{(n)}(x)} = (-1)^n \frac{\Gamma(p+n)}{\Gamma(p)} \tilde{f}(p).
+  \end{align}
+  Thus, from \eqref{8.21:mellin}, applying the Mellin transform with respect to $r$ to the boundary value problem yields
+  \begin{align*}
+    p(p+1)\tilde{\phi}(p, \theta) -p \tilde{\phi}(p, \theta) + \der{\theta}{2}\left[\tilde{\phi}(p, \theta)\right] = 0, \qquad 0 < p < \infty, \quad 0 < \theta < \pi.
+  \end{align*}
+  or, equivalently,
+  \begin{align*}
+    \der{\theta}{2}\left[\tilde{\phi}(p, \theta)\right] + p^2\tilde{\phi}(p, \theta)= 0, \qquad 0 < p < \infty, \quad 0 < \theta < \pi.
+  \end{align*}
+
+  The solution to the above homogeneous linear ordinary differential equation is
+  \begin{align}
+    \label{8.21:homo}
+    \tilde{\phi}(p, \theta) = c_1(p) \cos p\theta + c_2(p) \sin p\theta.
+  \end{align}
+  Applying the Mellin transform to the boundary conditions yields that
+  \begin{align*}
+    \tilde{\phi}(p, 0) = \tilde{\phi}(p, \pi) = \tilde{f}(p).
+  \end{align*}
+  Using these transformed boundary conditions in conjunction with \eqref{8.21:homo} gives
+  us the following system of equations
+  \begin{align*}
+    c_1(p) &= \tilde{f}(p) \\
+    c_1(p) \cos p \pi + c_2(p) \sin p\pi &= \tilde{f}(p).
+  \end{align*}
+  We readily see that the solution to this system is
+  \begin{align*}
+    c_1(p) &= \tilde{f}(p) \\
+    c_2(p) &= \frac{\tilde{f}(p)(1-\cos p \pi)}{\sin p \pi}.
+  \end{align*}
+
+  Thus, the solution to the transformed boundary value problem is
+  \begin{align*}
+    \tilde{\phi}(p, \theta)
+    &= \tilde{f}(p) \cos p\theta + \frac{\tilde{f}(p)(1-\cos p \pi)}{\sin p \pi} \sin p\theta \\
+    &=  \tilde{f}(p)\left(\cos p \theta + \sin p \theta \tan p \pi / 2\right)\\
+    &= \frac{\tilde{f}(p) \cos\left[p(\theta - \pi / 2)\right]}{\cos\left[\pi p / 2\right]}.
+  \end{align*}
+  Therefore, the solution to the original boundary value problem is
+  \begin{align*}
+    \phi(r, \theta) = \mellininv{\tilde{\phi}(p, \theta)}
+    &= \mellininv{\frac{\tilde{f}(p) \cos\left[p(\theta - \pi / 2)\right]}{\cos\left[\pi p / 2\right]}} \\
+    &= \frac{1}{2\pi i}\int_{c-i\infty}^{c+i\infty} r^{-p} \frac{\tilde{f}(p) \cos\left[p(\theta - \pi / 2)\right]}{\cos\left[\pi p / 2\right]} dp.
+  \end{align*}
 \end{proof}
 \newpage
