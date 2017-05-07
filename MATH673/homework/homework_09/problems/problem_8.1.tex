@@ -1,0 +1,68 @@
+\begin{problem}{8.1}
+  Find the Mellin transform of each of the following functions:
+  \begin{enumerate}
+    \item[a.] $f(x) = H(a - x)$, $a > 0$,
+    \item[b.] $f(x) = x^m e^{-nx}$, $m,n > 0$,
+    \item[c.] $\displaystyle f(x) = \frac{1}{x^2 + 1}.$
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+  The Mellin transform of the function $f(x)$ is defined to be
+  \begin{align*}
+    \mellin{f(x)} = \tilde{f}(p) = \int_0^\infty x^{p-1} f(x) dx.
+  \end{align*}
+
+  \begin{enumerate}
+    \item[a.] Recall that the Heaviside function $H$ is defined as
+      \begin{align*}
+        H(a-x) =
+        \begin{cases}
+          1 & \text{if $x < a$} \\
+          0 & \text{if $x > a$} \\
+        \end{cases}.
+      \end{align*}
+       Therefore, from the definition of the Mellin transform, we have that for
+       $f(x) = H(a-x)$ with $a > 0$,
+       \begin{align*}
+         \tilde{f}(p) = \mellin{f(x)} &= \int_0^\infty x^{p-1}H(a-x) dx \\
+         &= \int_0^a x^{p-1} dx \\
+         &= \frac{a^p}{p}.
+       \end{align*}
+
+    \item[b.] Let $f(x) = x^m g(x)$ where $g(x) = e^{-nx}$
+      with $m,n > 0$ and let $\tilde{g}(p) = \mellin{g(x)}$.
+
+      By the shifting property of the Mellin transform, we have that
+      \begin{align*}
+        \tilde{f}(p) = \mellin{f(x)} = \mellin{x^m g(x)} = \tilde{g}(p + m).
+      \end{align*}
+
+      From our table of Mellin transforms, we know that
+      \begin{align*}
+        \tilde{g}(p) = \mellin{g(x)} = \frac{\Gamma(p)}{n^p}
+      \end{align*}
+      where $\Re{\{p\}} > 0$.
+
+      Therefore,
+      \begin{align*}
+        \tilde{f}(p) = \mellin{f(x)} = \tilde{g}(p + m) = \frac{\Gamma(p + m)}{n^{p+m}}
+      \end{align*}
+      where $\Re{\{p + m\}} > 0$.
+
+    \item[c.] From our table of Mellin transforms,
+      we see that
+      \begin{align*}
+        \mellin{\frac{1}{(x^a + 1)^s}} = \frac{\Gamma(p/a)\Gamma(s - p/a)}{a \Gamma(s)}.
+      \end{align*}
+
+      Therefore, for $f(x) = \frac{1}{x^2 + 1}$, identifying $a = 2$ and $s = 1$, we have that
+      \begin{align*}
+        \tilde{f}(p) = \mellin{f(x)} = \mellin{\frac{1}{x^2 + 1}}
+        &= \frac{\Gamma(p/2)\Gamma(1 - p/2)}{2 \Gamma(1)} \\
+        &= \frac{\Gamma(p/2)\Gamma(1 - p/2)}{2 }.
+      \end{align*}
+
+  \end{enumerate}
+\end{proof}
+\newpage
