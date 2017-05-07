@@ -1,6 +1,55 @@
 \begin{problem}{8.12}
+  Assuming that
+  \begin{align*}
+    \mellin{f\left(r e^{i \theta}\right)} = \int_0^\infty r^{p-1} f\left(r e^{i \theta}\right) dr
+  \end{align*}
+  where $p$ is real. Putting $\xi = r e^{i \theta}$ and $\mellin{f(\xi)} = F(p)$, show that
+  \begin{enumerate}
+    \item[a.] $\mellin{f(r e^{i \theta})} = e^{-ip\theta}F(p)$.
+  \end{enumerate}
+  Hence, deduce
+  \begin{enumerate}
+    \item[b.] $\mellininv{F(p) \cos p\theta} = \Re{\{f(r e^{i \theta})\}}$,
+    \item[c.] $\mellininv{F(p) \sin p\theta} = -\Im{\{f(r e^{i \theta})\}}.$
+  \end{enumerate}
+
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] If $\xi = r e^{i \theta}$, then $r = \xi e^{-i \theta}$ and $dr = e^{-i \theta}d \xi $.
+      Now, from our assumption, we see that
+      \begin{align*}
+        \mellin{f\left(r e^{i\theta}\right)}
+        &= \int_0^\infty r^{p-1} f\left(r e^{i\theta}\right) dr \\
+        &= \int_0^\infty \left(\xi e^{-i \theta}\right)^{p-1} f\left(\xi\right) e^{-i\theta} d\xi \\
+        &= e^{-ip\theta} \int_0^\infty \xi^{p-1} f\left(\xi\right) d\xi \\
+        &= e^{-ip\theta} F(p),
+      \end{align*}
+      as desired.
+
+    \item[b.] As shown above, we have that
+      \begin{align*}
+        \mellin{f(r e^{i \theta})} = e^{-ip\theta}F(p).
+      \end{align*}
+      From the definition of the complex exponential, this implies that
+      \begin{align*}
+        \mellin{f(r e^{i \theta})} = e^{-ip\theta}F(p) = F(p)\cos p\theta  -i F(p)\sin p \theta.
+      \end{align*}
+      Thus, applying the inverse Mellin transform, we see that
+      \begin{align}\label{com}
+        f(r e^{i \theta}) = \mellininv{F(p)\cos p\theta} -i \mellininv{F(p)\sin p \theta }.
+      \end{align}
+
+      Therefore, we have that
+      \begin{align*}
+        \mellininv{F(p)\cos p\theta } = \Re{\{f(r e^{i \theta})\}}.
+      \end{align*}
+
+    \item[c.] Similarly, from \eqref{com}, we have that
+      \begin{align*}
+        \mellininv{F(p) \sin p\theta} = -\Im{\{f(r e^{i \theta})\}}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
