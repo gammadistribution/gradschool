@@ -1,6 +1,45 @@
 \begin{problem}{8.10}
+  Show that the integral equation
+  \begin{align*}
+    f(x) = h(x) + \int_0^\infty f(\xi) g\left(\frac{x}{\xi}\right) \frac{d\xi}{\xi}
+  \end{align*}
+  has the formal solution
+  \begin{align*}
+    f(x) = \frac{1}{2\pi i} \int_{c -i \infty}^{c + i \infty}\frac{x^{-p}\tilde{h}(p)}{1-\tilde{g}(p)} dp.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Define the convolution of the functions $f(x)$ and $g(x)$ as
+  \begin{align*}
+    (f \ast g)(x) = \int_0^\infty f(\xi) g\left(\frac{x}{\xi}\right) \frac{d\xi}{\xi}.
+  \end{align*}
+  Then the integral equation becomes
+  \begin{align*}
+    f(x) = h(x) + (f \ast g)(x)
+  \end{align*}
+
+  Now, let $\tilde{f}(p), \tilde{g}(p), $ and $\tilde{h}(p)$ denote the Mellin transforms
+  of $f(x), g(x), $ and $h(x)$, respectively.
+  Taking the Mellin transform of the integral equation shows that
+  \begin{align*}
+    \tilde{f}(p) &= \mellin{h(x) + (f \ast g)(x)} \\
+    &= \tilde{h}(p) + \mellin{(f \ast g)(x)} \\
+    &= \tilde{h}(p) + \tilde{f}(p) \tilde{g}(p)
+  \end{align*}
+  where we have used the Convolution Type Theorem which states that
+  \begin{align*}
+    \mellin{(f \ast g)(x)} = \tilde{f}(p) \tilde{g}(p).
+  \end{align*}
+
+  Thus, after taking the Mellin transform, the integral equation becomes an algebraic one
+  in the variable $p$. Solving for $\tilde{f}(p)$ shows that
+  \begin{align*}
+    \tilde{f}(p) = \frac{\tilde{h}(p)}{1 - \tilde{g}(p)}.
+  \end{align*}
+  Therefore, the formal solution to the integral equation is
+  \begin{align*}
+    f(x) = \mellininv{\tilde{f}(p)} = \frac{1}{2\pi i} \int_{c -i \infty}^{c + i \infty}\frac{x^{-p}\tilde{h}(p)}{1-\tilde{g}(p)} dp.
+  \end{align*}
 \end{proof}
 \newpage
