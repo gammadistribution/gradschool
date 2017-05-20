@@ -1,6 +1,55 @@
 \begin{problem}{4}
+  Solve the following Partial Differential Equation by the Mellin transform
+  \begin{align*}
+    &r^{2} \phi_{rr} + r \phi_r + \phi_{\theta \theta} = 0, \qquad 0 < r < \infty, \quad 0 < \theta < \pi \\
+    &\phi(r, 0) =
+    \begin{cases}
+      (1-r)^2 & 0 < r < 1 \\
+      0 & 1 < r
+    \end{cases}\\
+    &\phi(r, \pi) =
+    \begin{cases}
+      1 & 0 < r < 1 \\
+      0 & 1 < r
+    \end{cases},
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Recall that if $\mellin{\phi(r, \theta)} = \tilde{\phi}(p, \theta)$, then the following property holds
+  \begin{align*}
+    \mellin{r^2 \frac{\partial^2}{\partial r^2}\left[\phi(r, \theta)\right] + r \frac{\partial}{\partial r}\left[\phi(r, \theta) \right]} = p^2 \tilde{\phi}(p, \theta).
+  \end{align*}
+  Thus, applying the Mellin transform to the Partial Differential Equation and using our table of Mellin transforms,
+  we see that
+  \begin{align*}
+    &\der{\theta}{2}\left[\tilde{\phi}(p, \theta)\right] + p^2 \tilde{\phi}(p, \theta) = 0, \qquad 0 < p < \infty, \quad 0 < \theta < \pi \\
+    &\tilde{\phi}(p, 0) = \frac{\Gamma(3)\Gamma(p)}{\Gamma(p + 3)},\quad \tilde{\phi}(p, \pi) = \frac{1}{p}.
+  \end{align*}
+
+  The solution to the resulting homogeneous linear Ordinary Differential Equation is
+  \begin{align*}
+    \tilde{\phi}(p, \theta) = c_1(p) \cos p\theta + c_2(p) \sin p\theta.
+  \end{align*}
+  Using the above solution and the transformed boundary conditions, we see that
+  \begin{align*}
+    c_1(p) &= \frac{\Gamma(3)\Gamma(p)}{\Gamma(p + 3)} \\
+    c_1(p)\cos p\pi + c_2(p)\sin p \pi &= \frac{1}{p}.
+  \end{align*}
+  Solving, we see that
+  \begin{align*}
+    c_2(p) &= \left(\frac{1}{p} - \frac{\Gamma(3)\Gamma(p)}{\Gamma(p + 3)} \cos p\pi\right) \csc p\pi \\
+    &= \frac{\csc p\pi}{p} - \frac{\Gamma(3)\Gamma(p)}{\Gamma(p + 3)} \cot p\pi.
+  \end{align*}
+  Thus, the solution to the transformed boundary value problem is
+  \begin{align*}
+    \tilde{\phi}(p, \theta) = \left[\frac{\Gamma(3)\Gamma(p)}{\Gamma(p + 3)}\right] \cos p\theta + \left[\frac{\csc p\pi}{p} - \frac{\Gamma(3)\Gamma(p)}{\Gamma(p + 3)} \cot p\pi\right] \sin p\theta.
+  \end{align*}
+
+  Therefore, the solution to the original boundary value problem is
+  \begin{align*}
+    \phi(r, \theta) &= \mellininv{\left[\frac{\Gamma(3)\Gamma(p)}{\Gamma(p + 3)}\right] \cos p\theta + \left[\frac{\csc p\pi}{p} - \frac{\Gamma(3)\Gamma(p)}{\Gamma(p + 3)} \cot p\pi\right] \sin p\theta} \\
+    &= \frac{1}{2\pi i} \int_{c - i \infty}^{c + i \infty} r^{-p} \left\{\left[\frac{\Gamma(3)\Gamma(p)}{\Gamma(p + 3)}\right] \cos p\theta + \left[\frac{\csc p\pi}{p} - \frac{\Gamma(3)\Gamma(p)}{\Gamma(p + 3)} \cot p\pi\right] \sin p\theta\right\}dp.
+  \end{align*}
 \end{proof}
 \newpage
