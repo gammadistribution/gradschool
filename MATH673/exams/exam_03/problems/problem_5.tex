@@ -1,6 +1,59 @@
 \begin{problem}{5}
+  Show that
+  \begin{align*}
+    \int_0^\infty e^{-ax} \left(\frac{\cos p x - \cos q x}{x}\right) dx = \frac{1}{2} \log \frac{q^2 + a^2}{p^2 + a^2}
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Recall that the Laplace transform of a function $f(t)$ is defined as
+  \begin{align*}
+    \bar{f}(s) = \laplace{f(t)}_s = \int_0^\infty f(t) e^{-st} dt
+  \end{align*}
+  where we explicitly note the transformation variable $s$.
+  Thus, we see that the integral above becomes
+  \begin{align}
+    \label{5:int}
+    \int_0^\infty e^{-ax} \left(\frac{\cos p x - \cos q x}{x}\right) dx &= \int_0^\infty e^{-ax} \left(\frac{\cos p x}{x}\right)dx - \int_0^\infty e^{-ax} \left(\frac{\cos q x}{x}\right) dx \notag \\
+    &= \laplace{\frac{\cos p x}{x}}_a - \laplace{\frac{\cos q x}{x}}_a.
+  \end{align}
+
+  From a previous theorem, if $\laplace{f(t)} = \bar{f}(s)$, then we have that
+  \begin{align*}
+    \laplace{\frac{f(t)}{t}} = \int_s^\infty \bar{f}(z) dz.
+  \end{align*}
+  Thus, we see that \eqref{5:int} becomes
+  \begin{align*}
+    \int_0^\infty e^{-ax} \left(\frac{\cos p x - \cos q x}{x}\right) dx
+    &= \laplace{\frac{\cos p x}{x}}_a - \laplace{\frac{\cos q x}{x}}_a \\
+    &= \int_a^\infty \laplace{\cos px}_z dz - \int_a^\infty \laplace{\cos qx}_z dz
+  \end{align*}
+  From the table of Laplace transforms, we have that
+  \begin{align*}
+    \laplace{\cos b x}_z = \frac{z}{b^2 + z^2}.
+  \end{align*}
+
+  Thus, we have that
+  \begin{align*}
+    \int_0^\infty e^{-ax} \left(\frac{\cos p x - \cos q x}{x}\right) dx
+    &= \int_a^\infty \laplace{\cos px}_z dz - \int_a^\infty \laplace{\cos qx}_z dz\\
+    &= \int_a^\infty \frac{z}{p^2 + z^2} dz - \int_a^\infty \frac{z}{q^2 + z^2} dz
+  \end{align*}
+
+  Using a $u$-substitution to solve the resulting integrals, we have that
+  \begin{align*}
+    \int_0^\infty e^{-ax} \left(\frac{\cos p x - \cos q x}{x}\right) dx
+    &= \int_a^\infty \frac{z}{p^2 + z^2} dz - \int_a^\infty \frac{z}{q^2 + z^2} dz\\
+    &= \left.\frac{1}{2}\log p^2 + z^2 \right\rvert_{a}^\infty - \left.\frac{1}{2}\log p^2 + z^2 \right\rvert_{a}^\infty .
+  \end{align*}
+  Using the properties of logarithms, we therefore see that
+  \begin{align*}
+    \int_0^\infty e^{-ax} \left(\frac{\cos p x - \cos q x}{x}\right) dx
+    &= \left.\frac{1}{2}\log p^2 + z^2 \right\rvert_{a}^\infty - \left.\frac{1}{2}\log p^2 + z^2 \right\rvert_{a}^\infty  \\
+    &= \frac{1}{2} \left[\left.\log \frac{p^2 + z^2}{q^2 + z^2}\right\rvert_{z=\infty} - \left.\log \frac{p^2 + z^2}{q^2 + z^2}\right\rvert_{z=a} \right] \\
+    &= -\frac{1}{2} \log \frac{p^2 + a^2}{q^2 + a^2} \\
+    &= \frac{1}{2} \log \frac{q^2 + a^2}{p^2 + a^2}.
+  \end{align*}
+
 \end{proof}
 \newpage
