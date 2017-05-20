@@ -1,6 +1,91 @@
 \begin{problem}{6}
+  Suppose that $I_n f(x)$ denotes the $n$-th repeated integral of $f(x)$ defined by
+  \begin{align*}
+    I_n f(x) = \int_x^\infty I_{n-1}f(t) dt
+  \end{align*}
+  and that $\mellin{f(x)} = \tilde{f}(p)$. Show that
+  \begin{enumerate}
+    \item[a.] $\displaystyle \mellin{\int_x^\infty f(t) dt} = \frac{1}{p}\tilde{f}(p+1)$,
+    \item[b.] $\displaystyle \mellin{I_n f(x)} = \frac{\Gamma(p)}{\Gamma(p+n)} \tilde{f}(p + n)$
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  Recall that the Mellin transform of the function $f(x)$ is defined as
+  \begin{align}
+    \label{6:Mellin}
+    \mellin{f(x)} = \int_0^\infty x^{p-1} f(x) dx.
+  \end{align}
+
+  \begin{enumerate}
+    \item[a.] From the definition of the Mellin transform \eqref{6:Mellin}, we see that
+      \begin{align*}
+        \mellin{\int_x^\infty f(t) dt}  = \int_0^\infty x^{p-1} \left[\int_x^\infty f(t) dt\right] dx.
+      \end{align*}
+      Interchanging the order of integration from $t$ to $x$, we see that
+      \begin{align*}
+        \mellin{\int_x^\infty f(t) dt}  &= \int_0^\infty x^{p-1} \left[\int_x^\infty f(t) dt\right] dx \\
+        &= \int_0^\infty f(t) \left[\int_0^t x^{p-1} dx\right] dt \\
+        &= \frac{1}{p}\int_0^\infty t^{p}f(t)dt.
+      \end{align*}
+      If $\tilde{f}(p) = \mellin{f(x)}$, then from the definition of the Mellin transform \eqref{6:Mellin},
+      we see that the above integral becomes
+      \begin{align*}
+        \mellin{\int_x^\infty f(t) dt}
+        &= \frac{1}{p}\int_0^\infty t^{p}f(t)dt \\
+        &= \frac{1}{p}\tilde{f}(p+1),
+      \end{align*}
+      and we are done.
+
+    \item[b.] We will now prove the relation
+      \begin{align*}
+        \mellin{I_n f(x)} = \frac{\Gamma(p)}{\Gamma(p+n)} \tilde{f}(p + n)
+      \end{align*}
+      by induction. The results of the previous exercise show that
+      \begin{align*}
+        \mellin{I_1 f(x)}
+        = \mellin{\int_x^\infty f(t) dt}
+        = \frac{1}{p}\tilde{f}(p+1)
+        = \frac{\Gamma(p)}{\Gamma(p+1)}\tilde{f}(p+1)
+      \end{align*}
+      and the base step is established.
+
+      Now assume the relation holds for $n$, i.e.\ assume that
+      \begin{align*}
+        \mellin{I_n f(x)} = \frac{\Gamma(p)}{\Gamma(p+n)} \tilde{f}(p + n).
+      \end{align*}
+
+      Now, we see from the definition of the Mellin transform \eqref{6:Mellin} that
+      \begin{align*}
+        \mellin{I_{n+1} f(x)} &= \mellin{\int_x^\infty I_n f(t) dt} \\
+        &= \int_0^\infty x^{p-1} \left[\int_x^\infty I_n f(t) dt \right] dx.
+      \end{align*}
+      Let $g(t) = I_n f(t)$. Then, proceeding as we did in establishing the result of
+      the base step, interchanging the order of integration
+      from $x$ to $t$ yields
+      \begin{align}
+        \label{6:induction}
+        \mellin{I_{n+1} f(x)}
+        &= \int_0^\infty x^{p-1} \left[\int_x^\infty g(t) dt \right] dx \notag \\
+        &= \int_0^\infty g(t)  \left[\int_0^t x^{p-1}dx \right] dt \notag \\
+        &= \frac{1}{p}\int_0^\infty t^p g(t)dt \notag \\
+        &= \frac{1}{p}\tilde{g}(p + 1)
+      \end{align}
+      where $\tilde{g}(p) = \mellin{g(t)}$.
+
+      From our assumption, we have that
+      \begin{align*}
+        \tilde{g}(p) = \mellin{g(t)} = \mellin{I_n f(x)} = \frac{\Gamma(p)}{\Gamma(p+n)} \tilde{f}(p + n).
+      \end{align*}
+      Thus, the integral in \eqref{6:induction} becomes
+      \begin{align*}
+        \mellin{I_{n+1} f(x)}
+        &= \frac{1}{p}\tilde{g}(p + 1) \\
+        &= \frac{\Gamma(p+1)}{p\Gamma(p+n+1)} \tilde{f}(p + n + 1) \\
+        &= \frac{\Gamma(p)}{\Gamma(p+n+1)} \tilde{f}(p + n + 1).
+      \end{align*}
+      Therefore, the result holds for $n+1$ and the relation holds in general for all $n > 0$.
+
+  \end{enumerate}
 \end{proof}
 \newpage
