@@ -1,6 +1,51 @@
 \begin{problem}{3}
+  Solve the following integral equation by the Mellin transform
+  \begin{align*}
+    f(x) = \sin ax + \int_0^\infty \frac{f(xt)}{1 + t^2} dt.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Let $\displaystyle g(x) = \frac{1}{1+ x^2}$ and $h(x) = \sin ax$. Recall that $(f \circ g)(x)$
+  is defined to be
+  \begin{align*}
+    (f \circ g)(x) = \int_0^\infty f(xt) g(t) dt.
+  \end{align*}
+  Thus, with this knowledge, the integral equation becomes
+  \begin{align*}
+    f(x) &= h(x) + \int_0^\infty f(xt) g(t) dt \\
+    &= h(x) + (f \circ g)(x).
+  \end{align*}
+
+  Let $\mellin{f(x)} = \tilde{f}(p)$, $\mellin{g(x)} = \tilde{g}(p)$, and $\mellin{h(x)} = \tilde{h}(p)$.
+  Then from the Convolution Type theorem regarding the Mellin transform, we see
+  that application of the Mellin transform to the integral equation yields
+  \begin{align*}
+    \tilde{f}(p) &= \mellin{h(x)} + \mellin{(f\circ g)(x)} \\
+    &= \tilde{h}(p) + \tilde{f}(p)\tilde{g}(1-p).
+  \end{align*}
+  Solving the above algebraic equation shows that
+  \begin{align*}
+    \tilde{f}(p) = \frac{\tilde{h}(p)}{1 - \tilde{g}(1-p)}.
+  \end{align*}
+  From our table of Mellin transforms we know that
+  \begin{align*}
+    \tilde{g}(p) = \frac{\pi}{2} \csc\left(\frac{\pi p}{2}\right)
+  \end{align*}
+  and
+  \begin{align*}
+    \tilde{h}(p) = a^{-p}\Gamma(p)\sin\left(\frac{\pi p}{2}\right).
+  \end{align*}
+
+  Therefore, we see that
+  \begin{align*}
+    \tilde{f}(p) &= \frac{a^{-p}\Gamma(p)\sin\left(\frac{\pi p}{2}\right)}{1 - \frac{\pi}{2} \csc\left(\frac{\pi (1-p)}{2}\right)} \\
+      &= \frac{2a^{-p}\Gamma(p)\sin\left(\frac{\pi p}{2}\right)}{2 - \pi\sec\left(\frac{\pi p}{2}\right)}
+  \end{align*}
+  and the solution to the integral equation is
+  \begin{align*}
+      f(x) = \mellininv{\tilde{f}(p)} &= \mellininv{\frac{2a^{-p}\Gamma(p)\sin\left(\frac{\pi p}{2}\right)}{2 - \pi\sec\left(\frac{\pi p}{2}\right)}} \\
+      &= \frac{1}{2\pi i} \int_{c - i \infty}^{c + i \infty} x^{-p} \left[\frac{2a^{-p}\Gamma(p)\sin\left(\frac{\pi p}{2}\right)}{2 - \pi\sec\left(\frac{\pi p}{2}\right)}\right]dp.
+  \end{align*}
 \end{proof}
 \newpage
