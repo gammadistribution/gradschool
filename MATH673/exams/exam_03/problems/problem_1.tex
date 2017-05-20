@@ -1,0 +1,44 @@
+\begin{problem}{1}
+  Solve the non-homogeneous diffusion problem by the Hankel transform
+  \begin{align*}
+    &u_t = a\left(u_{rr} + \frac{1}{r}u_r\right) + Q(r, t), \qquad 0 < r < \infty, \quad 0 < t \\
+    &u(r, 0) = f(r), \qquad 0 < r < \infty.
+  \end{align*}
+\end{problem}
+
+\begin{proof}
+  Application of the 0-th order Hankel transform will transform the above
+  Partial Differential Equation into an Ordinary Differential Equation. The following property
+  of the 0-th order Hankel transform will aid in the application;
+  if $\hankel{0}{u(r, t)} = \tilde{u}_0(\kappa, t)$,
+  then
+  \begin{align}
+    \hankel{0}{\frac{1}{r}\frac{\partial}{\partial r}\left[u(r, t)\right] + \frac{\partial^2}{\partial r^2}\left[u(r, t)\right]} = -\kappa^2 \tilde{u}_0(\kappa, t).
+  \end{align}
+
+  Now, with the above property, we see that applying the 0-th order Hankel transform
+  to the diffusion problem yields
+  \begin{align*}
+    &\der{t}{}\left[\tilde{u}_0(\kappa, t)\right] + a\kappa^2 \tilde{u}_0(\kappa, t) = \tilde{Q}_0(\kappa, t) , \qquad 0 < \kappa < \infty, \quad 0 < t \\
+    &\tilde{u}_0(\kappa, 0) = \tilde{f}_0(\kappa), \qquad 0 < \kappa < \infty.
+  \end{align*}
+
+  This is a first order linear Ordinary Differential Equation, the solution to which is
+  \begin{align*}
+    \tilde{u}_0(\kappa, t) = c_1(\kappa)e^{-a\kappa^2 t} + e^{-a\kappa^2 t}\int_0^t e^{a\kappa^2 x}\tilde{Q}_0(\kappa, x) dx.
+  \end{align*}
+  Thus, from this solution and the transformed boundary condition, we see that $c_1(\kappa) = \tilde{f}_0(\kappa)$ and the solution to the transformed
+  boundary value problem is
+  \begin{align*}
+    \tilde{u}_0(\kappa, t) = \tilde{f}_0(\kappa)e^{-a\kappa^2 t} + e^{-a\kappa^2 t}\int_0^t e^{a\kappa^2 x}\tilde{Q}_0(\kappa, x) dx.
+  \end{align*}
+  Therefore, the solution to the initial diffusion problem is
+  \begin{align*}
+    u(r, t) = \hankelinv{0}{\tilde{u}_0(\kappa, t)}
+    &= \hankelinv{0}{\tilde{f}_0(\kappa)e^{-a\kappa^2 t} + e^{-a\kappa^2 t}\int_0^t e^{a\kappa^2 x}\tilde{Q}_0(\kappa, x) dx} \\
+    &= \int_0^\infty \kappa J_0(\kappa r)\left[\tilde{f}_0(\kappa)e^{-a\kappa^2 t} + e^{-a\kappa^2 t}\int_0^t e^{a\kappa^2 x}\tilde{Q}_0(\kappa, x) dx\right] d\kappa,
+  \end{align*}
+  where $J_0(\kappa r)$ is the Bessel function of order 0.
+
+\end{proof}
+\newpage
