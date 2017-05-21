@@ -1,6 +1,27 @@
 \begin{problem}{12.5}
+  Show that
+  \begin{enumerate}
+    \item[a.] $\displaystyle \Z{n a^{n-1}} = \sum_{n=0}^\infty \frac{z}{(z-a)^2}.$
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] Let $f(n) = a^{n-1}$. Then from the definition of the $Z$-transform,
+      we have that
+      \begin{align*}
+        F(z) = \Z{f(n)} &= \sum_{n=0}^\infty a^{n-1} z^{-n} \\
+        &= \frac{1}{a}\sum_{n=0}^\infty \left(\frac{z}{a}\right)^{-n} \\
+        &= \frac{z}{a(z-a)}.
+      \end{align*}
+
+      By the multiplication theorem \eqref{mult:2}, we
+      therefore have that
+      \begin{align*}
+        \Z{n a^{n-1}} = \Z{n f(n)} &= -z \der{z}{}\left[F(z)\right]\\
+        &= -z \frac{a(z-a) - za}{a^2(z-a)^2} \\
+        &= \frac{z}{(z-a)^2}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
