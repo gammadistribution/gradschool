@@ -1,6 +1,54 @@
 \begin{problem}{7}
+  Solve the following Initial Value Problem by the Z-transform
+  \begin{align*}
+    &f(n + 2) - f(n+1) - 6f(n) = \sin \left(\frac{n \pi}{2}\right), \qquad n \geq 2 \\
+    &f(0) = 0, \quad f(1) = 1.
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Recall that if $\Z{f(n)} = F(z)$ and $m \geq 0$, then the following property holds:
+  \begin{align*}
+    \Z{f(n+m)} = z^m \left[F(z) - \sum_{r=0}^{m-1}f(r) z^{-r}\right].
+  \end{align*}
+  Thus, applying the Z-transform to the Initial Value Problem, we have that
+  \begin{align*}
+    z^2 F(z) - z^2f(0) - z f(1) - z F(z) + z f(0) - 6F(z) = \Z{\sin \left(\frac{n \pi}{2}\right)}.
+  \end{align*}
+  In light of the initial data, this reduces to
+  \begin{align*}
+    \left(z-3\right)\left(z+2\right) F(z) -z = \Z{\sin \left(\frac{n \pi}{2}\right)}.
+  \end{align*}
+
+  From our table of Z-transforms, we know that
+  \begin{align*}
+    \Z{\sin \left(\frac{n \pi}{2}\right)} = \frac{z \sin \frac{\pi}{2}}{z^2 - 2z \cos \frac{\pi}{2}+1} = \frac{z}{z^2+1}
+  \end{align*}
+  Thus, the solution to the transformed equation is
+  \begin{align*}
+    F(z) &= \frac{\Z{\sin \left(\frac{n \pi}{2}\right)}}{(z-3)(z+2)} + \frac{z}{(z-3)(z+2)} \\
+    &= \frac{z}{(z^2+1)(z-3)(z+2)} + \frac{z}{(z-3)(z+2)}.
+  \end{align*}
+
+  Applying the method of partial fraction decomposition to this transformed function shows that
+  \begin{align*}
+    F(z)
+    &= \frac{z}{(z^2+1)(z-3)(z+2)} + \frac{z}{(z-3)(z+2)} \\
+    &= z\left[\frac{a_1z + a_2}{z^2+1} + \frac{a_3}{z-3}+\frac{a_4}{z+2}\right] + z \left[\frac{b_1}{z-3} + \frac{b_2}{z+2}\right]\\
+    &= \frac{1}{50}\left[\frac{z(z-7)}{z^2+1}\right]+\frac{1}{50}\left[\frac{z}{z-3}\right] - \frac{1}{25}\left[\frac{z}{z+2}\right] + \frac{1}{5} \left[\frac{z}{z-3}\right] - \frac{1}{5}\left[\frac{z}{z+2}\right]\\
+    &= \frac{1}{50}\left[\frac{z(z-7)}{z^2+1}\right]+\frac{11}{50}\left[\frac{z}{z-3}\right] - \frac{6}{25}\left[\frac{z}{z+2}\right].
+  \end{align*}
+
+  Therefore, using the fact that
+  \begin{align*}
+    \Z{a^n} = \frac{z}{z-a}
+  \end{align*}
+  and a computer algebra system we see that the solution to the original finite difference equation is
+  \begin{align*}
+    f(n) = \Zinv{F(z)} &= \frac{1}{50}\Zinv{\frac{z(z-7)}{z^2+1}}+\frac{11}{50}\Zinv{\frac{z}{z-3}} - \frac{6}{25}\Zinv{\frac{z}{z+2}} \\
+    &= \frac{1}{50}\left[i^n\left(\frac{1}{2} + \frac{7i}{2}\right) + (-i)^n\left(\frac{1}{2}-\frac{7i}{2}\right)\right]
+    + \frac{11}{50} 3^n - \frac{6}{25}(-2)^n.
+  \end{align*}
+
 \end{proof}
 \newpage
