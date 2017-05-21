@@ -1,6 +1,29 @@
 \begin{problem}{12.3}
+  Show that
+  \begin{align*}
+    \Z{n a^n f(n)} = -z \der{z}{}\left[F\left(\frac{z}{a}\right)\right].
+  \end{align*}
 \end{problem}
 
 \begin{proof}
+  Suppose that $G(z) = \Z{g(n)}$. Then the multiplication theorem states that
+  \begin{align}
+    \label{mult:1}
+    \Z{a^n g(n)} = G\left(\frac{z}{a}\right)
+  \end{align}
+  and
+  \begin{align}
+    \label{mult:2}
+    \Z{n g(n)} = -z \der{z}{}\left[G(z)\right].
+  \end{align}
+
+  Let $g(n) = a^n f(n)$ and suppose that $F(z) = \Z{f(n)}$. By \eqref{mult:1}, we have that
+  \begin{align*}
+    G(z) = \Z{g(n)} = \Z{a^n f(n)} = F\left(\frac{z}{a}\right).
+  \end{align*}
+  Therefore, by \eqref{mult:2}, we have that
+  \begin{align*}
+    \Z{n a^n f(n)} = \Z{n g(n)} = -z \der{z}{}\left[G(z)\right] = -z \der{z}{}\left[F\left(\frac{z}{a}\right)\right].
+  \end{align*}
 \end{proof}
 \newpage
