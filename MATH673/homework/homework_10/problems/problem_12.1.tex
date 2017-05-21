@@ -1,0 +1,47 @@
+\begin{problem}{12.1}
+  Find the $Z$-transform of the following functions:
+  \begin{enumerate}
+    \item[a.] $f(n) = n^3$,
+    \item[b.] $\displaystyle f(n) = \frac{a^n}{n!}$
+  \end{enumerate}
+\end{problem}
+
+\begin{proof}
+  For a function $f(n)$, the $Z$-transform of $f(n)$ is defined as
+  \begin{align*}
+    \Z{f(n)} = F(z) = \sum_{n=0}^\infty f(n) z^{-n}.
+  \end{align*}
+  \begin{enumerate}
+    \item[a.] Let $g(n) = n^2$ and $f(n) = n^3 = n g(n)$.
+      From our table of $Z$-transforms we know that
+      \begin{align*}
+        G(z) = \Z{g(n)} = \sum_{n=0}^{\infty} n^2 z^{-n} = \frac{z(z+1)}{(z-1)^3}
+      \end{align*}
+      given that $|z| > 1$.
+      The multiplication theorem states that if $F(z) = \Z{f(n)}$, then
+      \begin{align*}
+        \Z{n f(n)} = -z \der{z}{}\left[F(z)\right].
+      \end{align*}
+      Thus, we have that
+      \begin{align*}
+        F(z) = \Z{f(n)} &= \Z{n g(n)} \\
+        &= -z \der{z}{}\left[\frac{z(z+1)}{(z-1)^3}\right] \\
+        &= \frac{z(z^2 + 4z + 1)}{(z-1)^4}
+      \end{align*}
+
+    \item[b.] Let $g(n) = \frac{1}{n!}$ and $f(n) = \frac{a^n}{n!} = a^n g(n)$.
+      From our knowledge of infinite series, we know from the definition of the $Z$-transform that
+      \begin{align*}
+        G(z) = \Z{g(n)} &= \sum_{n=0}^\infty \frac{z^{-n}}{n!} = e^{\frac{1}{z}}.
+      \end{align*}
+      From the multiplication theorem, if $F(z) = \Z{f(n)}$, then
+      \begin{align*}
+        \Z{a^n f(n)} = F\left(\frac{z}{a}\right).
+      \end{align*}
+      Therefore, we have that
+      \begin{align*}
+        F(z) = \Z{f(n)} = \Z{a^ng(n)} &= G\left(\frac{z}{a}\right) = e^{\frac{a}{z}}.
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+\newpage
