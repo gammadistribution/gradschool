@@ -1,6 +1,85 @@
 \begin{problem}{8}
+  Find the sum of the following series
+  \begin{enumerate}
+    \item[a.] $\displaystyle \sum_{n=0}^\infty (-1)^n \frac{e^{-n}}{n+1}$,
+    \item[b.] $\displaystyle \sum_{n=0}^\infty n \sin nx$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] Let $f(n) = e^{-n}$, $\displaystyle g(n) = \frac{f(n)}{n+1}$, and $h(n) = (-1)^n g(n)$.
+      Suppose that $H(z) = \Z{h(n)}$. From a previous theorem, we know that
+      \begin{align}
+        \label{sum}
+        \sum_{n=0}^\infty (-1)^n \frac{e^{-n}}{n+1} = \sum_{n=0}^\infty h(n) = \lim_{z\to 1} H(z).
+      \end{align}
+      Thus, we merely need to find the Z-transform of $h(n)$ and evaluate the above limit to find the sum
+      of the series.
+
+      From the table of Z-transforms, we know that
+      \begin{align*}
+        F(z) = \Z{f(n)} = \Z{e^{-n}} = \frac{z}{z-e^{-1}}.
+      \end{align*}
+      A previous theorem states that if $F(z) = \Z{f(n)}$, then
+      \begin{align*}
+        \Z{\frac{f(n)}{n+1}} = z \int_z^\infty \frac{F(\xi)}{\xi^2} d\xi
+      \end{align*}
+      Thus, the Z-transform of $g(n)$ is
+      \begin{align*}
+        G(z) = \Z{g(n)} = \Z{\frac{f(n)}{n+1}} &= z\int_z^\infty\frac{F(\xi)}{\xi^2} d\xi \\
+        &= z \int_z^\infty \frac{d\xi}{(\xi - e^{-1})\xi} \\
+        &= z e\left[1 - \log \left(e - z^{-1}\right)\right].
+      \end{align*}
+
+      Finally, there is another theorem that will aid in finding $H(z)$, namely the multiplication theorem
+      of Z-transforms; if $F(z) = \Z{f(n)}$, then
+      \begin{align*}
+        \Z{a^n f(n)} = F\left(\frac{z}{a}\right).
+      \end{align*}
+      Thus, we have that
+      \begin{align*}
+        H(z) = \Z{h(n)} = \Z{(-1)^n g(n)} &=  G\left(-z\right) \\
+        &= -z e\left[1 - \log \left(e + z^{-1}\right)\right].
+      \end{align*}
+
+      Therefore, by \eqref{sum}, we have that
+      \begin{align*}
+        \sum_{n=0}^\infty (-1)^n \frac{e^{-n}}{n+1} = \lim_{z\to 1} H(z) = -e\left[1 - \log \left(e + 1\right)\right].
+      \end{align*}
+
+    \item[b.] Let $f(n) = \sin nx$ and $g(n) = n f(n)$ and suppose that $G(z) = \Z{g(n)}$. As shown previously,
+      there is a theorem that states that
+      \begin{align}
+        \label{sum2}
+        \sum_{n=0}^\infty n \sin nx = \sum_{n=0}^\infty g(n) = \lim_{z\to 1} G(z).
+      \end{align}
+
+      Thus, we need only find $G(z)$ and evaluate the above limit
+      to find the sum of the series.
+      The table of Z-transforms show that
+      \begin{align*}
+        F(z) = \Z{f(n)} = \frac{z \sin x}{z^2 - 2z \cos x + 1}.
+      \end{align*}
+      From the multiplication theorem of Z-transforms, we know that
+      \begin{align*}
+        G(z) = \Z{g(n)} = \Z{n f(n)} = -z \der{z}{}\left[F(z)\right].
+      \end{align*}
+
+      Thus, we have that
+      \begin{align*}
+        G(z)
+        &= -z \der{z}{}\left[F(z)\right] \\
+        &= -z \der{z}{}\left[\frac{z \sin x}{z^2 - 2z \cos x + 1}\right] \\
+        &= -\frac{(z^2-1) \sin x}{(z^2 - 2 z \cos x + 1)^2}.
+      \end{align*}
+
+      Therefore, by \eqref{sum2}, we have the sum of the series is given by
+      \begin{align*}
+        \sum_{n=0}^\infty n \sin nx &= \lim_{z\to 1} G(z) \\
+        &= -\lim_{z\to 1}\frac{(z^2-1) \sin x}{(z^2 - 2 z \cos x + 1)^2} \\
+        &= 0
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
