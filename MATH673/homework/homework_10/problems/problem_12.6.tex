@@ -1,6 +1,52 @@
 \begin{problem}{12.6}
+  Find the inverse $Z$-transform of the following functions:
+  \begin{enumerate}
+    \item[a.] $\displaystyle F(z) = \frac{z^2}{(z-2)(z-3)}$,
+    \item[e.] $\displaystyle F(z) = \frac{1}{(z-a)^2}$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  \begin{enumerate}
+    \item[a.] Let $\displaystyle G(z) = \frac{z}{z-3}$ and $\displaystyle H(z) = \frac{z}{z-2}$.
+      Recall that
+      \begin{align*}
+        \Zinv{\frac{z}{z-a}} = a^n.
+      \end{align*}
+      Thus, we see that $g(n) = \Zinv{G(z)} = 3^n$ and $h(n) = \Zinv{H(z)} = 2^n$.
+      The Convolution theorem states that if $G(z) = \Z{g(n)}$ and $H(z) = \Z{h(n)}$, then
+      \begin{align}
+        \label{convolve}
+        (g \ast h)(n) = \sum_{m=0}^n g(m) h(n-m) = \Zinv{G(z)H(z)}.
+      \end{align}
+      Therefore, by the Convolution theorem \eqref{convolve}, we have that
+      \begin{align*}
+        \Zinv{\frac{z^2}{(z-2)(z-3)}} = \Zinv{F(z)} &= \Zinv{G(z) H(z)} \\
+        &= \sum_{m=0}^n 3^m 2^{n-m} \\
+        &= 2^n \sum_{m=0}^n \left(\frac{3}{2}\right)^m\\
+        &= 2^n \left(3^{n+1}2^{-n} - 2\right)\\
+        &= 3^{n+1} - 2^{n+1}.
+      \end{align*}
+
+    \item[e.] Let $\displaystyle G(z) = \frac{1}{z-a}$.
+      Then we know that
+      \begin{align*}
+        G(z) = \frac{1}{z-a} = \frac{1}{z}\left(\frac{z}{z-a}\right)
+        &= \frac{1}{z} \sum_{n=0}^\infty a^{n} z^{-n} \\
+        &=\sum_{n=0}^\infty a^{n} z^{-(n+1)} \\
+        &= \sum_{n=1}^\infty a^{n-1} z^{-n} \\
+        &= \sum_{n=0}^\infty a^{n-1}H(n-1) z^{-n} \\
+      \end{align*}
+      Thus, $g(n) = \Zinv{G(z)} = a^{n-1}H(n-1)$. Therefore, by the Convolution theorem \eqref{convolve},
+      we have that
+      \begin{align*}
+        \Zinv{\frac{1}{(z-a)^2}} &= \Zinv{G(z)G(z)} \\
+        &= \sum_{m=0}^n g(m)(n-m) \\
+        &= \sum_{m=0}^n a^{m-1}H(m-1) a^{n-m-1}H(n-m-1) \\
+        &= \sum_{m=1}^{n-1} a^{n-2} \\
+        &= \sum_{m=0}^{n-1} a^{n-2} H(n-1) \\
+        &= a^{n-2}(n-1)H(n-1).
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
