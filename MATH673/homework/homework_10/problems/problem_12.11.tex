@@ -1,6 +1,49 @@
 \begin{problem}{12.11}
+  Find the sum of the following series using the $Z$-transform:
+  \begin{enumerate}
+    \item[a.] $\displaystyle \sum_{n=0}^\infty a^n e^{inx}$,
+    \item[c.] $\displaystyle \sum_{n=0}^\infty e^{-x(2n+1)}$.
+  \end{enumerate}
 \end{problem}
 
 \begin{proof}
+  By a previous theorem, if $\Z{f(n)} = F(z)$, then
+  \begin{align}
+    \label{sum}
+    \sum_{n=0}^\infty f(n) = \lim_{z\to 1} F(z).
+  \end{align}
+  Thus, in order to compute the above series, we need merely find the $Z$-transforms
+  of the sequences and then evaluate the above limit.
+
+  \begin{enumerate}
+    \item[a.] Let $g(n) = e^{inx}$ and $f(n) = a^n g(n)$. From the table of $Z$-transforms,
+      we know that
+      \begin{align*}
+        G(z) = \Z{e^{inx}} = \frac{z}{z-e^{ix}}.
+      \end{align*}
+      Thus, from the multiplication theorem, we have that
+      \begin{align*}
+        F(z) = \Z{a^ng(n)} &= G\left(\frac{z}{a}\right) \\
+        &= \frac{z}{z-ae^{ix}}.
+      \end{align*}
+      Therefore, by \eqref{sum}, we have that
+      \begin{align*}
+        \sum_{n=0}^\infty a^n e^{inx} = \sum_{n=0}^\infty f(n) &= \lim_{z\to 1} F(z) \\
+        &= \lim_{z\to 1}\frac{z}{z-ae^{ix}} \\
+        &= \frac{1}{1-ae^{ix}}.
+      \end{align*}
+
+    \item[c.] Let $f(n) = e^{-x(2n+1)} = e^{-x}e^{-2xn}$. From the table of $Z$-transforms,
+      we know that
+      \begin{align*}
+        F(z) = \Z{f(n)} = e^{-x}\Z{e^{-2xn}} = e^{-x} \left[\frac{z}{z-e^{-2x}}\right].
+      \end{align*}
+      Therefore, we have that
+      \begin{align*}
+        \sum_{n=0}^\infty e^{-x(2n+1)} = \sum_{n=0}^{\infty} f(n) &= \lim_{z\to 1} F(z) \\
+        &= \lim_{z\to 1} e^{-x} \left[\frac{z}{z-e^{-2x}}\right] \\
+        &=  \frac{e^{-x}}{1-e^{-2x}}.
+      \end{align*}
+  \end{enumerate}
 \end{proof}
 \newpage
