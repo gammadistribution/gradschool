@@ -8,5 +8,59 @@
 \end{problem}
 
 \begin{proof}
+  Suppose that $u(r, z, t) = \phi(r, z) e^{i\omega t}$ and $g(r, t) = f(r) e^{i \omega t}$. Then the wave equation
+  becomes
+  \begin{align*}
+    &c^2 e^{i \omega t} \left(\frac{\partial^2}{\partial r^2}\left[\phi(r, z)\right] + \frac{1}{r}\frac{\partial}{\partial r}\left[\phi(r, z)\right] + \frac{\partial^2}{\partial z^2}\left[\phi(r, z)\right]\right) + \omega^2 e^{i \omega t} \phi(r, z) = 0 \\
+    &e^{i\omega t}\left(\left.\frac{\partial}{\partial z}\left[\phi(r,z)\right]\right\rvert_{z=0}- f(r)\right) = 0
+  \end{align*}
+  for $0 < r < \infty$, $0 < t$, and  $0 < z$.
+
+  Suppose that $\hankel{0}{\phi(r,z)} = \tilde{\phi}_0(\kappa, z)$ and $\hankel{0}{f(r)} = \tilde{f}_0(\kappa)$.
+  Then, using \eqref{hankel}, applying the 0-th order Hankel transform with respect to $r$ to the above equation yields
+  \begin{align*}
+    &e^{i\omega t} \left[c^2 \left(\der{z}{2}\left[\tilde{\phi}_0(\kappa, z)\right] - \kappa^2 \tilde{\phi}_0(\kappa, z) \right) + \omega^2 \tilde{\phi}_0(\kappa, z)\right] = 0, \quad 0 < r < \infty, \quad 0 < t, \quad 0 < z \\
+    &e^{i\omega t}\left(\left.\frac{\partial}{\partial z}\left[\tilde{\phi}_0(r,z)\right]\right\rvert_{z=0}- \tilde{f}_0(r)\right) = 0
+  \end{align*}
+  Since the first equation must hold for all $t>0$, we require that
+  \begin{align*}
+    c^2 \left(\der{z}{2}\left[\tilde{\phi}_0(\kappa, z)\right] - \kappa^2 \tilde{\phi}_0(\kappa, z) \right) + \omega^2 \tilde{\phi}_0(\kappa, z) = 0.
+  \end{align*}
+  This is a second-order linear, homogeneous equation, the solution of which is
+  \begin{align*}
+    \tilde{\phi}_0(\kappa, z) = c_1(\kappa) \exp\left[\frac{\sqrt{(c\kappa)^2-\omega^2}}{c} z\right] + c_2(\kappa) \exp\left[-\frac{\sqrt{(c\kappa)^2-\omega^2}}{c} z\right].
+  \end{align*}
+  Note that this solution must converge as $z \to \infty$, which implies that $c_2(\kappa) = 0$.
+  Then from the above solution we have that
+  \begin{align*}
+    \frac{\partial}{\partial z}\left[\tilde{\phi}(\kappa, z)\right] = c_1(\kappa)\frac{\sqrt{(c\kappa)^2-\omega^2}}{c} \exp\left[\frac{\sqrt{(c\kappa)^2-\omega^2}}{c} z\right].
+  \end{align*}
+  Thus, we have that
+  \begin{align*}
+    \left.\frac{\partial}{\partial z}\left[\tilde{\phi}_0(r,z)\right]\right\rvert_{z=0} = c_1(\kappa)\frac{\sqrt{(c\kappa)^2-\omega^2}}{c}.
+  \end{align*}
+  Since the transformed boundary condition must hold for all $t > 0$, we must have that
+  \begin{align*}
+    \left.\frac{\partial}{\partial z}\left[\tilde{\phi}_0(r,z)\right]\right\rvert_{z=0}- \tilde{f}_0(r) = 0
+  \end{align*}
+  or that
+  \begin{align*}
+    c_1(\kappa) = \frac{c\tilde{f}_0(\kappa)}{\sqrt{(c\kappa)^2-\omega^2}}.
+  \end{align*}
+  Thus, the solution to the transformed equation is
+  \begin{align*}
+    \tilde{\phi}_0(\kappa, z) = \frac{c\tilde{f}_0(\kappa)}{\sqrt{(c\kappa)^2-\omega^2}}\exp\left[\frac{\sqrt{(c\kappa)^2-\omega^2}}{c} z\right].
+  \end{align*}
+
+  Therefore, taking the inverse 0-th order Hankel transform, we have that
+  \begin{align*}
+    \phi(r, z) = \hankelinv{0}{\tilde{\phi}_0(\kappa, z)}
+    &= \hankelinv{0}{\frac{c\tilde{f}_0(\kappa)}{\sqrt{(c\kappa)^2-\omega^2}}\exp\left[\frac{\sqrt{(c\kappa)^2-\omega^2}}{c} z\right]} \\
+    &= \int_0^\infty \kappa J_0(\kappa r)\left[\frac{c\tilde{f}_0(\kappa)}{\sqrt{(c\kappa)^2-\omega^2}}\exp\left[\frac{\sqrt{(c\kappa)^2-\omega^2}}{c} z\right]\right] d\kappa
+  \end{align*}
+  and the solution to the original wave equation is
+  \begin{align*}
+    u(r, z, t) = \phi(r, z)e^{i \omega t} = e^{i\omega t}\int_0^\infty \kappa J_0(\kappa r)\left[\frac{c\tilde{f}_0(\kappa)}{\sqrt{(c\kappa)^2-\omega^2}}\exp\left[\frac{\sqrt{(c\kappa)^2-\omega^2}}{c} z\right]\right] d\kappa.
+  \end{align*}
 \end{proof}
 \newpage
