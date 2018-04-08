@@ -7,3 +7,4 @@ credentials.json
 *.toc
 *.out
 *_flymake.tex
+*.DS_Store

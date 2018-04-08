@@ -22,56 +22,116 @@
 \begin{outline}[enumerate]
     \1 \textbf{Introduction}
         \2 \textbf{Thesis Statement}
-            We want to improve accuracy of impression concentration forecasts at the media plan level
-            using sample data from audience measurement source. In addition to improving accuracy, we
-            want to also expose variance around forecasted media plan outcome.
+            We will use the theory of Bayesian statistics to develop a model that
+            will forecast future telecast airings' audience impression concentration
+            distributions corrected for small sample sizes present in the measurement
+            training data. We will then aggregate those distributions in order to provide forecasted
+            audience impressions distributions for media plans.
 
-   \1 \textbf{Motivation and Background}
-       \2 \textbf{Problem Description}
-           Suppliers give us forecasted TV average audience data for their selling titles. We use
-           audience measurement data to come up with forecasted average audience percentages for the selling titles.
-           These forecasted average audience percentages our used by our optimization engine to recommend media plans
-           given certain objectives and constraints. The suppliers give these media plan as recommendations to
-           advertisers and are mostly interested in the outcome of the media plan as a whole.
+    \1 \textbf{Motivation and Background}
+        \2 \textbf{Motivating Example}
+            Provide example of Amazon product ratings. In this example, show that the rating of 4 stars,
+            but only has 3 reviews is more worthy of suspicion than the rating of 4 stars with 3000 reviews.
 
-           We need to explain the following terms in the problem description; their explanation should be used
-           cohesively and will help guide the problem description:
-           \begin{enumerate}
-               \item Selling title
-               \item Broadcast week
-               \item TV rating
-               \item Average Audience
-               \item Media plan
-               \item Telecast
-               \item Schedule
-               \item Post-Campaign Reporting
-           \end{enumerate}
+        \2 \textbf{Problem Description}
+            Suppliers give us forecasted TV average audience data for their selling titles. We use
+            audience measurement data to come up with forecasted average audience percentages for the selling titles.
+            These forecasted average audience percentages our used by our optimization engine to recommend media plans
+            given certain objectives and constraints. The suppliers give these media plan as recommendations to
+            advertisers and are mostly interested in the outcome of the media plan as a whole.
 
-       \2 \textbf{Data}
-           \3 \textbf{Measurement Data}
-               We are given audience measurement data that provides TV viewing habits
-               of the panel sample. For each historical telecast, we are given the respondents
-               that were watching and their total seconds of commercial viewing and total viewing.
-           \3 \textbf{Supplier Data}
-               A given supplier provides us with a schedule that list all content airings
-               historically and their tentative future airings. Additionally, for each selling title / week
-               airing in the future
+            We need to explain the following terms in the problem description; their explanation should be used
+            cohesively and will help guide the problem description:
+            \begin{enumerate}
+            \item Selling title
+            \item Broadcast week
+            \item TV rating
+            \item Average Audience
+            \item Media plan
+            \item Telecast
+            \item Schedule
+            \item Post-Campaign Reporting
+            \end{enumerate}
 
-   \1 \textbf{Model Description}
-       \2 Hierarchical Logistic Regression Model
+        \2 \textbf{Data}
+            \3 \textbf{Measurement Data}
+                We are given audience measurement data that provides TV viewing habits
+                of the panel sample. For each historical telecast, we are given the respondents
+                that were watching and their total seconds of commercial viewing and total viewing.
+            \3 \textbf{Supplier Data}
+                A given supplier provides us with a schedule that list all content airings
+                historically and their tentative future airings. Additionally, for each selling title / week
+                airing in the future
 
-   \1 \textbf{Model Implementation}
-       \2 \textbf{pymc3}
-           We use pymc3 to sample from the posterior distribution. pymc3 uses Hamiltonian Monte Carlo sampling techniques.
-           Sampling with this method took upwards of 48 hours so we
-           \3 We approximate sampling using ADVI mini-batch in order to improve sampling speed.
-               ADVI works best when posterior is Gaussian without too many uncorrelations.
+   \1 \textbf{Model}
+       \2 \textbf{Description}
+           \3 \textbf{Assumptions}
+               \begin{itemize}
+                   \item The draws from the likelihood for a given telecast are iid Bernoulli variables. This assumption must be checked because
+                       we know that the draws from the likelihood might not be independent since co-viewing occurs within the same household.
+                   \item The hierarchical nature of the model which pools data.
+                   \item telecasts within a week are independent of each other. This means that the distribution of a selling title week is just the union of the forecasted distributions of each telecast within that week.
+               \end{itemize}
+
+           \begin{itemize}
+               \item list units of analysis and outcome variable.
+               \item We want to use raw sample data to approximate average audience impression concentrations.
+               \item We determined from literature and substantive experience that network, content, and air time
+                 are critical to determining the impression concentration values of audiences.
+               \item Further, the data that we observe for each telecast airing is the result of Binomial
+                 experiment so it is natural to model the data-generating process under a hierarchical logistic regression model.
+               \item Display Kruschke diagram for the model.
+           \end{itemize}
+
+       \2 \textbf{Implementation}
+           \3 \textbf{pymc3}
+               We make use of computer software to aid in the numerical computation of the posterior distribution.
+               Namely, we use pymc3 to sample from the posterior distribution which makes use of Hamiltonian Monte Carlo sampling techniques.
+               However, Sampling with this method was not feasible for on-demand forecasts.
+               \4 We approximate sampling using ADVI mini-batch in order to improve sampling speed.
+                   ADVI works best when posterior is Gaussian without too many uncorrelations.
+                   We include python module used to sample from posterior in appendix.
+
+       \2 \textbf{Validation}
+           We want to make sure that the posterior distribution resulting from sampling matches not only our
+           beliefs about the system, but also the observed data that is theoretically generated
+           \3 \textbf{Sensitivity Analysis}
+               How much do our inferences change if the model changes or the prior distributions change?
+               We will change the prior distribution used in the model, i.\ e.\  change the regressors' prior distributions to different
+               parameters, and $\kappa$ to different parameters and assess changes in inference. Feature selection is also encompassed here.
+           \3 \textbf{Posterior Predictive Checks}
+               ``If the model fits, then replicated data generated under the model should look similar to observed data.''
+               To this end, we will use the posterior distribution to generate replicated data under the model and compare to observed values.
+               We will check both raw impression concentration values, i.\ e.\  taking the raw proportion values of in-target sample / total sample, and
+               the in-target sample values.
+               We will look at the mean, min, max, and standard deviation of replicated vs.\ observed values
+               and develop test-statistics to determine if they are statistically different.
+
+       \2 \textbf{Predictive Accuracy}
+           \3 \textbf{Raw proportion vs.\ impression concentration values}
+               Is using the raw proportion of successes to total trials a good approximator for the actual average audience concentration values?
+               We observe that in the limit, this raw proportion tends to the average audience concentration that would be computed. We should
+               rigorously prove that this view is valid.
+           \3 Measures used for predictive accuracy in BDA3 that still need to be researched.
+               We will use WAIC for model comparison and CRPS for probabilistic forecast evaluation and MAPE for
+               point estimate forecasts with in-target sample predictions.
+
+       \2 \textbf{Selling Title / broadcast week distributions}
+           Using the posterior distribution created, the distribution of outcomes for a selling title / week is the union of distributions for each telecast associated to that selling title within the week
+           due to the assumption of independence of these telecasts.
+
+       \2 \textbf{Summarizing inferences}
+           We need to summarize the inferences generated by the model to a single point for the optimization engine. We need to describe that strategy here.
 
    \1 \textbf{Results}
-       \2 Allocation level
-       \2 Media plan level
+      \2 \textbf{Media plans}
+      Now that we have a valid model, we want to evaluate its performance at the media plan level.
+      We should look at random allocations of selling title weeks and look at the forecasted distribution and compare
+      with actual.
 
    \1 \textbf{Conclusion}
+   This model helps understand the uncertainty around our forecasts and gives insight into distribution of possible outcomes for each item at the allocation level. This can then be used to understand the uncertainty
+   around the proposed media plan and can help suppliers anticipate any misses on their contractual guarantees.
 
 
 \end{outline}
