@@ -1,0 +1,68 @@
+\begin{chapter}{Introduction}\label{introduction}
+  The world of advertising today consists of
+
+  We are trying to provide better linear tv media plans.
+
+  We will use the theory of Bayesian statistics to develop a model that
+  will forecast future telecast airings' audience impression concentration
+  distributions corrected for small sample sizes present in the measurement
+  training data.
+
+\begin{section}{Background}
+  TV sellers have airtime available for sale to be used to air advertisements.
+  TV buyers purchase airtime from sellers in order to air their desired advertisemensts.
+
+  TV buyers want to buy ad airtime that will help them share their message
+  with a target audience.
+
+  Audience measurement companies provide measurements television viewership.
+  Some companies take these measurements using a statistical sample of the
+  TV viewing population and tracking the viewership of that sample and extrapolating
+  to the population at large.
+
+  TV sellers bundle together airtime into a unit called a selling title.
+  This unit contains logically grouped airings of content. Sometimes the content
+  within the selling title is specific, other times it's a blend of content packaged together.
+
+  An example of a piece of content available is \textit{Funny Animated Cartoon}
+  and an example of a selling title woudl be \textit{Funny Animated Cartoon M-F 8PM}.
+
+  TV sellers accept media plans allocated at the selling title/week level and then
+  as the flight date approaches determine the actual ad schedule that will air.
+  This is known as trafficking the ads.
+
+  The planning is done based off of demo estimates, which are impression estimates of
+  a particular age/gender demographic. The TV seller provided these estimates
+  using their substantive knowledge. The planning for strategic targets is
+  done by forecasting a percentage. The resulting forecast is then the percentage multiplied by the forecasted
+  demo estimate
+\end{section}
+
+\begin{section}{Motivation}
+  The sample sizes used for the majority of telecasts in the measurement source
+  are too small to be trusted on their own. This is the major challenge of providing
+  forecasts for media plans; using the data on its own will produce inaccurate
+  forecasts that do not take into account the small sample size.
+
+  % Show picture of sample sizes in networks
+
+  A motivating example is related to e-commerce reviews: players are judged by their
+  batting average but this metric is not informative with few at-bats. With more
+  information about the league and past historical performances we can use bayesian
+  inference to come up with a better estimate that takes such factors into account
+  as well as the observed at-bats.
+
+  Simiarly, we hope to use the data from past airings to perform better inference
+  on telecasts with small sample sizes.
+\end{section}
+
+\begin{section}{Challenges}
+  Low sample size must be addressed.
+  Variance within selling-title/week.
+  Impression estimates are tied to demo forecasts.
+
+  For the purposes of this thesis we will be addressing the first issue alone.
+  We will assume for testing that we know the outcome of the demo with prescience.
+\end{section}
+
+\end{chapter}
