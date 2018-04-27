@@ -1,0 +1,137 @@
+\begin{chapter}{Model}
+
+
+\begin{section}{Preliminaries}
+  In the following section we will provide preliminary information necessary to
+  understand the model.
+  \begin{subsection}{Units of analysis and observation}
+    We are most interested in the content that airs.
+
+    the units of observation are selling title airings in the schedule. The outcome
+    variable we are measuring for each unit $i$ is $r_i^A$ the average number of panelists
+    associated to target $A$ given the average number of panelists associated to target $B$
+    where $A \subseteq B$. Of primary interest is the proportion of panelists in target $A$ relative to target $B$.
+
+  \end{subsection}
+
+  \begin{subsection}{Covariates}
+
+  Using the conclusions of paper TV ratings, we include the following covariates into the model:
+
+  \begin{enumerate}
+     \item Broadcast Month - The broadcast month associated to the start of a selling title airing.
+       ``The key link between the broadcast and Gregorian calendars is that the first week of every broadcast month always contains the Gregorian calendar first of the month.''
+       %(``https://web.archive.org/web/20111007010739/http://www.tvb.org/planning_buying/179695/5658'')
+     \item Day of Week - The day of the week associated to the start of a selling title
+       airing. These are encoded from 0 - 6 with 0 being Monday and 6 being Saturday
+     \item Stratified Hour - We define the following groupings of hours as this covariate.
+       These groupings are adapted from the measurement source.
+           morning -  airing start hour is in (6, 7, 8, 9),
+           daytime - airing start hour is in  (10, 11, 12, 13, 14),
+           early\_fringe - airing start hour is in (15, 16, 17, 18),
+           prime\_1900\_2000 - airing start hour is 19,
+           prime\_2000\_2100 - airing start hour is 20,
+           prime\_2100\_2200  - airing start hour is 21,
+           prime\_2200\_2300  - airing start hour is 22,
+           late\_fringe - airing start hour is in (23, 0, 1),
+           graveyard - airing start hour is in (2, 3, 4, 5)
+     \item Content Id - The id denoting the content associated with the scheduled airing.
+       e.g. Famous Funny Animated Cartoon show
+     \item Lead-in Content Id - The id denoting the content associated with the preceding airing.
+     \item first-run - Denotes if the airing is not a repeat airing. This is a 1 if it is not a repeat and 0 if it is a repeat.
+       This information is obtained through the measurement source.
+     \item genre-id - Denotes the genre associated to the airing. This conveys the general flavor of the aired content.
+       We will enumerate the different genre-ids and their meaning.
+       This information is obtained through the measurement source.
+  \end{enumerate}
+
+  \end{subsection}
+\end{section}
+
+
+\begin{section}{Assumptions}
+  We assume that the observations are exchangeable given the parameters of the model and the covariates of the selling title airing.
+  We describe the definition of exchangeable here. Exchangeability is important since
+  it allows us to use Bayes' Theorem to compute the posterior.
+  The number of draws from the binomial aren't independent, but we use this as an approximation. this assumption is imperfect.
+\end{section}
+
+\begin{section}{Description}
+  See below for a formal description of the model. Since the data we observe is
+  the average number of panelists in target $A$ given the average number of panelists in target $B$ with $A \subseteq B$,
+  it is natural to model the likelihood as a binomial distribution with unknown probability parameter $\pi$.
+
+  \begin{align*}
+    \theta_i &= \beta_0 + \sum_{j=1}^m X_i^\intercal \beta_j, \quad \beta_j \sim \text{N}(0, 4^2) \\
+    \omega_i &= \logit^{-1}(\theta_i) \\
+    \kappa_i &\sim \text{Exp}(X_i ^\intercal \lambda_l ), \quad \lambda_l \sim \text{U}(1e-3, 1)\\
+    \pi_i &\sim \text{Beta}\left(\omega_i \kappa_i + 1, (1 - \omega_i) \kappa_i + 1\right) \\
+    y_i &| n_i, \theta_i, X_i \sim \text{Bin}(n_i, \pi_i)
+  \end{align*}
+
+  where $\logit^{-1}(\alpha) = \frac{\exp{\alpha}}{1 + \exp{\alpha}}$.
+\end{section}
+
+\begin{section}{Prior Distribution Choice}
+  The coefficients are chosen so that the main mass of the distribution on the logit scale falls between 1e-5 and 1 - 1e-5.
+
+  We chose the lambda to be uniform on 1e-3 and 1 since the kappa variable is the concentration
+  parameter which is roughly the number of trials in the binomial likelihood.
+  For any given telecast airing we will have at most the number of trials be
+  the number of panelists which cannot exceed 100K. This prior on lambda and
+  the exponential reflects that.
+
+  We chose to separate variance based off of is-first-run since we noticed
+  that this variable is indicative of how many trials there will be for an airing.
+\end{section}
+
+\begin{section}{Inference}
+  We perform the inference using \texttt{pymc3}. We will display convergence checks
+  such as gelman-rubin statistics, effective number of parameters among other things
+  to ensure that posterior distribution obtained are representative of the actual
+  posterior distribution.
+
+  Show the calculation of rhat and neff and display summary statistics of values to
+  show that inferences have approximate convergence and that trace objects are representative
+  of
+\end{section}
+
+\begin{section}{Validation}
+  posterior predictive checking.
+
+  Given the posterior distribution obtained through inference, we make draws
+  from the distribution to arrive at replicated data, $y^{\text{rep}}$. We check
+  the distribution of the replicated data using test statistics comparing replicated data to the observed
+  test statistic in the data.
+
+  - We check the resulting posteriors using test statistics
+  of the mean, min, max, and std of the number of in-target panelists. This makes
+  sure that the data generated by the model are consistent with the observed data.
+
+  - ordered discrete data check to see if data is under/overdispersed compared to replicated data.
+
+  - binned residual plots against observed in-target panelists to check that the
+  regression fits make sense.
+
+  - The data was collected sequentially in time so we must check if residuals
+  have autocorrelation.
+
+  - outlier check to see if any impressions conc predictions are greater than 1-2 std of impressions conc.
+
+  - realized residual plots for impressions conc
+\end{section}
+
+\begin{section}{Model selection and Sensitivity Analysis}
+  We use the WAIC to determine the model that has the most predictive accuracy.
+  The WAIC is chosen because it is Bayesian and able to be compared across models
+  with same likelihood.
+
+  Go through the definition of WAIC and explain how it is computed etc.
+
+  Here we will also check to see if the choice in prior is affecting inference.
+
+  - Remove the hierarchical nature on the variance parameter and evaluate how inference is affected
+  - change normal distribution on coefficients to cauchy or student t to see if inference is affected
+\end{section}
+
+\end{chapter}

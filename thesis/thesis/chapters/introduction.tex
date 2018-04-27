@@ -15,6 +15,9 @@
   TV buyers want to buy ad airtime that will help them share their message
   with a target audience.
 
+  A media plan consists of an allocation of a number of equivalized units to
+  a collection of selling title / weeks.
+
   Audience measurement companies provide measurements television viewership.
   Some companies take these measurements using a statistical sample of the
   TV viewing population and tracking the viewership of that sample and extrapolating
@@ -36,6 +39,7 @@
   using their substantive knowledge. The planning for strategic targets is
   done by forecasting a percentage. The resulting forecast is then the percentage multiplied by the forecasted
   demo estimate
+
 \end{section}
 
 \begin{section}{Motivation}
@@ -44,9 +48,9 @@
   forecasts for media plans; using the data on its own will produce inaccurate
   forecasts that do not take into account the small sample size.
 
-  % Show picture of sample sizes in networks
+  (Show picture of sample sizes in networks)
 
-  A motivating example is related to e-commerce reviews: players are judged by their
+  A motivating example is related to evaluating the performance of baseball players: players are judged by their
   batting average but this metric is not informative with few at-bats. With more
   information about the league and past historical performances we can use bayesian
   inference to come up with a better estimate that takes such factors into account
@@ -62,7 +66,13 @@
   Impression estimates are tied to demo forecasts.
 
   For the purposes of this thesis we will be addressing the first issue alone.
-  We will assume for testing that we know the outcome of the demo with prescience.
+  We will assume for testing that we know the outcome of the demo with prescience and
+  that we can traffick the ads wherever we want.
 \end{section}
 
+\begin{section}{Problem Description}
+  Summarize the challenges and what we are trying to solve. Specifically,
+  given the ``noisy'' measurement data and the supplier data, can we create model
+  to forecast the in-target impressions for future selling title airings with some degree of accuracy.
+\end{section}
 \end{chapter}

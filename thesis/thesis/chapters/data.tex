@@ -1,0 +1,88 @@
+\begin{chapter}{Data}\label{data}
+
+We make use of several datasets in order to provide the necessary forecasts.
+
+\begin{section}{Audience measurement data}
+  The audience measurement data contains the programs that aired and who
+  watched them according the audience measurement source.
+
+  Each program in the data contains certain covariates such as the hour in which
+  a program began and on which day of the week etc.
+
+  Each program contains the list of panelists that watched the program and how much
+  viewing is associated to the program. We filter down to only commercial viewing
+  since this is what advertisers are most interested in.
+
+  We are going to use the measurement source data for three networks labeled BCST
+  for a broadcast network that has large reach, ETMT for a cable entertainment network,
+  and SPTS for a cable sports network.
+
+  This data is stored at the minute-level
+  and stores which respondents were watching each minute of a given telecast.
+
+  The definition of the number of impressions per equivalized unit airing
+  during a telecast is the weighted average of the in-target commercial viewing seconds over the number of commercial seconds that aired during the telecast.
+  Formally, let $A$ be the set of panelists that are considered in-target out of a total of $n$ possible panelists.
+  Suppose that telecast $i$ has $t_i$ minutes of programming and let
+  $s_{ij}$ be the number of commercial seconds during minute $j$ of the telecast.
+  Further, let $p_{ijk} = 1$ if panelist $k$ was watching during the $j$-th minute of telecast $i$ and 0 otherwise,
+  and let $w_{k}$ be the weight assigned to the panelist by the measurement source. Then, $m_{i}^A$, the average commercial minute (ACM) of telecast $i$
+  is
+  \begin{align}\label{acm_def}
+    m_{i}^A = \frac{\sum_{k=1}^n w_k \sum_{j=1}^{t_i} s_{ij} p_{ijk} \textbf{1}_A(p_{k})}{\sum_{j=1}^{t_i} s_{ij}}
+  \end{align}
+
+  A related quantity is the unweighted average commercial minute, denoted $r_{i}^A$, which is
+  derived from \eqref{acm_def} by setting the weights $w_k = 1$ for all $k$ and taking the ceiling of the resulting quantity, i.\ e.\
+  \begin{align*}
+    r_{i}^A = \left\lceil\frac{\sum_{k=1}^n \sum_{j=1}^{t_i} s_{ij} p_{ijk} \textbf{1}_A(p_{k})}{\sum_{j=1}^{t_i} s_{ij}}\right\rceil
+  \end{align*}
+
+  This quantity represents the average number of in-target panelists viewing commercials on telecast $i$.
+
+  The impression concentration of target $A$ relative to target $B$ where $A \subseteq B$ for telecast $i$ is
+  \begin{align*}
+    c_i = \frac{m_{i}^A}{m_{i}^B}.
+  \end{align*}
+  Similarly, the unweighted impression concentration for target $A$ relative
+  to target $B$ for telecast $i$ is
+  \begin{align*}
+    u_i = \frac{r_{i}^A}{r_{i}^B}.
+  \end{align*}
+
+  As to be expected $r_i^A$ and $m_i^A$ are nearly perfectly correlated. Further,
+  the Q-Q plots show that the distributions of $c_i$ and $u_i$ for a given network agree
+  after a linear transformation.
+
+  (include QQplots)
+
+  This suggests that the  distribution of unweighted impression concentrations is
+  similar to distribution of impression concentrations. Thus, the ratio of in-target
+  panelists to demo panelists is similar to the ratio of in-target average audience
+  to demo average audience and we may use the raw sample sizes to estimate a population proportion
+  that will be proportional to the actual impression concentration.
+
+  The purpose of the preceding paragraph is to justify the assumption that we can use
+  the raw proportion of in-target to in-demo panelists to estimate the weighted impression concentration.
+
+\end{section}
+
+\begin{section}{TV supplier data}
+  TV suppliers provide us with a future schedule of selling title/content airings.
+  They also provide the demo estimates for a variety of demos for future selling title/weeks
+
+  \begin{subsection}{Linear Media Schedule}
+    Here we will talk in more detail about the schedule and what it contains.
+    We will also provide an example of such data.
+    (include example record)
+  \end{subsection}
+
+  \begin{subsection}{Forecasted Demographic Estimates}
+    These are estimates of forecasted demo impressions per unit. This means
+    the supplier expects to get a certain amount of demo impresions for
+    each allocated unit.
+    (include example record)
+  \end{subsection}
+\end{section}
+
+\end{chapter}
