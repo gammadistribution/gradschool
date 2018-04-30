@@ -44,11 +44,11 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>main.aux</file>
-      <file>main-blx.bib</file>
+      <file>main_flymake.aux</file>
+      <file>main_flymake-blx.bib</file>
     </provides>
     <requires type="dynamic">
-      <file>main.bbl</file>
+      <file>main_flymake.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-compat.def</file>
@@ -66,20 +66,20 @@
     <cmdline>
       <binary>bibtex</binary>
       <option>-min-crossrefs 2</option>
-      <infile>main</infile>
+      <infile>main_flymake</infile>
     </cmdline>
     <input>
-      <file>main.aux</file>
+      <file>main_flymake.aux</file>
     </input>
     <output>
-      <file>main.bbl</file>
+      <file>main_flymake.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>main.bbl</file>
+      <file>main_flymake.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>main.aux</file>
-      <file>main-blx.bib</file>
+      <file>main_flymake.aux</file>
+      <file>main_flymake-blx.bib</file>
     </requires>
     <requires type="editable">
       <file>example.bib</file>

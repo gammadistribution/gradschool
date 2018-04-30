@@ -1,88 +1,185 @@
 \begin{chapter}{Data}\label{data}
-
-We make use of several datasets in order to provide the necessary forecasts.
-
-\begin{section}{Audience measurement data}
-  The audience measurement data contains the programs that aired and who
-  watched them according the audience measurement source.
-
-  Each program in the data contains certain covariates such as the hour in which
-  a program began and on which day of the week etc.
-
-  Each program contains the list of panelists that watched the program and how much
-  viewing is associated to the program. We filter down to only commercial viewing
-  since this is what advertisers are most interested in.
-
-  We are going to use the measurement source data for three networks labeled BCST
-  for a broadcast network that has large reach, ETMT for a cable entertainment network,
-  and SPTS for a cable sports network.
-
-  This data is stored at the minute-level
-  and stores which respondents were watching each minute of a given telecast.
-
-  The definition of the number of impressions per equivalized unit airing
-  during a telecast is the weighted average of the in-target commercial viewing seconds over the number of commercial seconds that aired during the telecast.
-  Formally, let $A$ be the set of panelists that are considered in-target out of a total of $n$ possible panelists.
-  Suppose that telecast $i$ has $t_i$ minutes of programming and let
-  $s_{ij}$ be the number of commercial seconds during minute $j$ of the telecast.
-  Further, let $p_{ijk} = 1$ if panelist $k$ was watching during the $j$-th minute of telecast $i$ and 0 otherwise,
-  and let $w_{k}$ be the weight assigned to the panelist by the measurement source. Then, $m_{i}^A$, the average commercial minute (ACM) of telecast $i$
-  is
-  \begin{align}\label{acm_def}
-    m_{i}^A = \frac{\sum_{k=1}^n w_k \sum_{j=1}^{t_i} s_{ij} p_{ijk} \textbf{1}_A(p_{k})}{\sum_{j=1}^{t_i} s_{ij}}
-  \end{align}
-
-  A related quantity is the unweighted average commercial minute, denoted $r_{i}^A$, which is
-  derived from \eqref{acm_def} by setting the weights $w_k = 1$ for all $k$ and taking the ceiling of the resulting quantity, i.\ e.\
-  \begin{align*}
-    r_{i}^A = \left\lceil\frac{\sum_{k=1}^n \sum_{j=1}^{t_i} s_{ij} p_{ijk} \textbf{1}_A(p_{k})}{\sum_{j=1}^{t_i} s_{ij}}\right\rceil
-  \end{align*}
-
-  This quantity represents the average number of in-target panelists viewing commercials on telecast $i$.
-
-  The impression concentration of target $A$ relative to target $B$ where $A \subseteq B$ for telecast $i$ is
-  \begin{align*}
-    c_i = \frac{m_{i}^A}{m_{i}^B}.
-  \end{align*}
-  Similarly, the unweighted impression concentration for target $A$ relative
-  to target $B$ for telecast $i$ is
-  \begin{align*}
-    u_i = \frac{r_{i}^A}{r_{i}^B}.
-  \end{align*}
-
-  As to be expected $r_i^A$ and $m_i^A$ are nearly perfectly correlated. Further,
-  the Q-Q plots show that the distributions of $c_i$ and $u_i$ for a given network agree
-  after a linear transformation.
-
-  (include QQplots)
-
-  This suggests that the  distribution of unweighted impression concentrations is
-  similar to distribution of impression concentrations. Thus, the ratio of in-target
-  panelists to demo panelists is similar to the ratio of in-target average audience
-  to demo average audience and we may use the raw sample sizes to estimate a population proportion
-  that will be proportional to the actual impression concentration.
-
-  The purpose of the preceding paragraph is to justify the assumption that we can use
-  the raw proportion of in-target to in-demo panelists to estimate the weighted impression concentration.
-
-\end{section}
+  In order to provide the forecasts necessary for media planning, we make use
+  of several data sets. Namely, TV supplier data, which contains the inventory to plan against, and
+  audience measurement data, which contains historical program airings and the
+  amount of viewing associated to those airings for various audiences. We discuss
+  these data sets in more detail in the sections below.
 
 \begin{section}{TV supplier data}
-  TV suppliers provide us with a future schedule of selling title/content airings.
-  They also provide the demo estimates for a variety of demos for future selling title/weeks
+  TV suppliers provide us with a holistic view of their inventory that is for sale.
+  The most granular unit in their inventory is a selling title during a future broadcast week, i.\ e.\ a
+  week that starts on a Monday and ends the following Sunday. This
+  unit is a grouping of content that will air during a given broadcast week and the grouping can be
+  based on either similar time of airing or similar content. The two most important
+  pieces of data provided by TV suppliers are the linear media schedule, which contains the exact air times of
+  selling titles, and the forecasted demographic estimates, both of which are explained below.
 
   \begin{subsection}{Linear Media Schedule}
-    Here we will talk in more detail about the schedule and what it contains.
-    We will also provide an example of such data.
-    (include example record)
+    The linear media schedule lists all scheduled program airings on a given network.
+    Associated to each airing is an identifier for the selling title and an identifier for the content.
+    Note that the selling title indicates the grouping of content that is sold while the content
+    indicates the nature of the programming that will be shown. Example records
+    from a linear media schedule are shown in Table \ref{tab:tvsched}.
+
+    \begin{table}[h!]
+      \centering
+      \begin{adjustbox}{width=1.1\textwidth,center=\textwidth}
+        \large
+        \begin{tabular}{lllllllll}
+          network & selling title & selling title name & content & content name & start datetime & end datetime \\
+          \hline
+          BCST & 100 & Adult Cartoon 8PM & 10 & Adult Cartoon & 2017-04-02 20:00:00 & 2017-04-02 20:30:00 \\
+          BCST & 101 & Adult Cartoon 8:30PM & 10 & Adult Cartoon & 2017-04-02 20:30:00 & 2017-04-02 21:00:00 \\
+        \end{tabular}
+      \end{adjustbox}
+      \caption{Example linear media schedule data for two selling title airings.}\label{tab:tvsched}
+    \end{table}
+
+    As can be seen from Table \ref{tab:tvsched}, the same content identifier can be associated
+    to multiple selling titles. This indicates that the TV supplier wishes to differentiate
+    the content airing at 8:00 PM from the content airing at 8:30 PM, usually to price the airings differently.
+
   \end{subsection}
 
   \begin{subsection}{Forecasted Demographic Estimates}
-    These are estimates of forecasted demo impressions per unit. This means
-    the supplier expects to get a certain amount of demo impresions for
-    each allocated unit.
-    (include example record)
+    The forecasted demographic estimates data contains for each
+    selling title, broadcast week, and demographic audience the expected impressions per unit, i.\ e.\
+    the expected number of audience members that will watch a commercial airing during the given selling title and broadcast week.
+
+
+    Example records from the forecasted demographic estimates data are shown in Table \ref{tab:tvdem}
+
+    \begin{table}[h!]
+      \centering
+        \begin{tabular}{llll}
+          selling title & broadcast week & demographic & impressions per unit \\
+          \hline
+          100 & 2017-03-27 06:00:00 & F45-49 & 150000 \\
+          100 & 2017-03-27 06:00:00 & P18-49 & 1500000 \\
+          101 & 2017-03-27 06:00:00 & F45-49 & 120000 \\
+          101 & 2017-03-27 06:00:00 & P18-49 & 1000000 \\
+        \end{tabular}
+      \caption{Example forecasted demographic estimates data for two selling title weeks.}\label{tab:tvdem}
+    \end{table}
   \end{subsection}
+\end{section}
+
+
+\begin{section}{Audience measurement data}
+  As mentioned previously, the audience measurement data contains the programs that
+  have aired historically and who watched them according to the audience measurement source.
+  This data is stored in two separate tables, the program table and the viewing table.
+
+  The program table details the historical program airings and meta data about those airings.
+  A program in the table corresponds to an identifier of a logical grouping of
+  aired content per the measurement source while the telecast corresponds
+  to an identifier of a single airing of a program.
+  Some information included is the network the program aired on, the start and end datetime of the
+  program airing, as well as the genre associated to the program and whether or not this is a repeat airing of the telecast.
+  Note that the genre information serves to categorize the programs aired by grouping together
+  programs with similar content.
+  Some example program data is provided in Table \ref{tab:amprogram}.
+
+  \begin{table}[h!]
+    \centering
+    \begin{adjustbox}{width=1.1\textwidth,center=\textwidth}
+      \large
+      \begin{tabular}{llllllllll}
+        network & program & telecast & program name & start datetime & end datetime & genre id & is first run & is live\\
+        \hline
+        BCST & 1000 & 301 & Adult Cartoon & 2017-04-02 20:02:00 & 2017-04-02 20:30:00 & Animation & 1 & 0 \\
+        BCST & 1000 & 302 & Adult Cartoon & 2017-04-02 20:30:00 & 2017-04-02 21:00:00 & Animation & 1 & 0
+      \end{tabular}
+    \end{adjustbox}
+    \caption{Example program table data for two historical program airings.}\label{tab:amprogram}
+  \end{table}
+
+  Associated with the program table is the viewing table which details the respondents' viewing of
+  historical programs. This data is stored at the minute level and contains
+  which respondents were watching each minute of a given telecast and how many commercial seconds aired
+  during the minute as well as the total number of commercial seconds that aired.
+  Additionally, limited identifying information about the
+  respondent is stored in this table such as the respondent's age and gender.
+  Some example viewing data is provided in Table \ref{tab:amviewing}.
+
+  \begin{table}[h!]
+    \centering
+    \begin{adjustbox}{width=1.1\textwidth,center=\textwidth}
+      \large
+    \begin{tabular}{lllllllll}
+      program & telecast & respondent & minute & comm secs & weight & age & gender & total comm secs\\
+      \hline
+      1000 & 301 & 2 & 3 & 60 & 2050 & 48 & F & 120\\
+      1000 & 301 & 2 & 4 & 45 & 2050 & 48 & F & 120\\
+      1000 & 301 & 2 & 15 & 60 & 2050 & 48 & F & 120\\
+      1000 & 301 & 2 & 16 & 30 & 2050 & 48 & F & 120\\
+      1000 & 302 & 2 & 22 & 15 & 2050 & 48 & F & 100\\
+      1000 & 302 & 2 & 23 & 60 & 2050 & 48 & F & 100
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Example viewing table data for one respondent's viewing on historical program airings from Table \ref{tab:amprogram}.}\label{tab:amviewing}
+  \end{table}
+
+  Of primary interest from this data set is the impressions per unit,
+  or average commercial minute (ACM), for a given audience.
+  The definition of a program airing's ACM measurement is the weighted average
+  of the in-target commercial viewing seconds over the number of commercial seconds
+  that aired during the program's airing.
+
+  Formally, let $A$ be the set of panelists that are considered in-target out of a total of $n$ possible panelists.
+  Suppose that program airing $i$ has $t_i$ minutes of programming and let
+  $s_{ij}$ be the number of commercial seconds during minute $j$ of the airing.
+  Further, let $p_{ijk} = 1$ if panelist $k$ was watching during the $j$-th minute of program airing $i$ and 0 otherwise
+  and let $w_{k}$ be the weight assigned to the panelist by the measurement source. Then, $m_{i}^A$, the ACM of program airing $i$
+  is
+  \begin{align}\label{acm_def}
+    m_{i}^A = \left\lceil\frac{\sum_{k=1}^n w_k \sum_{j=1}^{t_i} s_{ij} p_{ijk} \textbf{1}_A(p_{k})}{\sum_{j=1}^{t_i} s_{ij}}\right\rceil
+  \end{align}
+
+  A related quantity for program airing $i$, the impression concentration of target $A$ relative to target $B$ where $A \subseteq B$, is
+  \begin{align*}
+    c_i = \frac{m_{i}^A}{m_{i}^B}.
+  \end{align*}
+  This quantity is used to measure the proportion of impressions attributed to target $A$ relative to target $B$.
+
+  As an example, if we consider target $A$ to be the set containing only respondent 2, then
+  from Table \ref{tab:amviewing} we see that for program 1000 and telecast 302, $m_{(1000, 302)}^A = 1538$.
+\end{section}
+
+\begin{section}{Data Used}
+  For the purposes of this project, we limit the data used from the above data sets
+  to three networks labeled BCST, ETMT, and SPTS. These networks are a broadcast network
+  that has large reach, a cable entertainment network, and a cable sports network, respectively.
+  Further, we limit the audience measurement and linear media schedule data to only airings that occur
+  between 2015-12-28 06:00:00 and 2018-01-01 06:00:00 which coincides with broadcast years 2016 through 2017.
+  We shall consider the in-target audience, target $A$, to be Females aged 45 through 49 and the demographic audience, target $B$,
+  to be Persons aged 18 through 49. The demographic audience was chosen as it is representative
+  of the demographic audience typically chosen when constructing a media plan while the in-target
+  audience was chosen as it is small relative to the total number of TV viewers in the United States, roughly 3.3\%.
+  As a consequence, the size of the in-target panel in the audience measurement data is small and the target is
+  exemplary of the issues this project aims to solve.
+
+  The data used for training and testing the model is combined from the above tables to create a
+  data set that associates to each selling title airing in the linear media schedule the program airing in the measurement data whose start and end datetimes
+  most overlap with the start and end datetimes in the linear media schedule. We then assign
+  the selling title airing the ACM of the matched program airing for target $A$ and target $B$.
+  Example data is shown in Table \ref{tab:data}.
+
+  \begin{table}[h!]
+    \centering
+    \begin{adjustbox}{width=1.1\textwidth,center=\textwidth}
+      \large
+      \begin{tabular}{lllllllll}
+        network & selling title & content & start datetime & end datetime & program & telecast & ACM A & ACM B\\
+        \hline
+        BCST & 100 & 10 & 2017-04-02 20:00:00 & 2017-04-02 20:30:00 & 1000 & 301 & 110560 & 1203560\\
+        BCST & 101 & 10 & 2017-04-02 20:30:00 & 2017-04-02 21:00:00 & 1000 & 302 & 210560 & 1501000\\
+      \end{tabular}
+    \end{adjustbox}
+    \caption{Example data set used for model for two selling title airings.}\label{tab:data}
+  \end{table}
+
+
 \end{section}
 
 \end{chapter}
