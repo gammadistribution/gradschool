@@ -363,7 +363,7 @@
     declare that the model fits reasonably well.
   \end{subsection}
 
-  \begin{subsection}{Test Statistics}
+  \begin{subsection}{Test Statistics}\label{sec:test}
     We can also more concretely quantify model discrepancies by defining a test quantity $T(y, \theta)$
     and then measuring the discrepancy between the observed data and the replicated data.
 
@@ -408,7 +408,7 @@
         $T_4(y, \theta)$ (std) & 334052.86 & [325128.37, 364859.10] & 0.90 & 17686.89 & [20021.24, 23205.09] & 1.0 & 22300.18 & [20012.59, 39808.44] & 0.88\\
         $T_5(y, \theta)$ (mean $\pi$)& 0.105 & [0.104, 0.107] & 0.60 & 0.0903 & [0.089, 0.092] & 0.43 & 0.056 & [0.065, 0.0689] & 1.0\\
       \end{tabular}
-        \caption{Example program table data for two historical program airings.}\label{tab:bayesp}
+        \caption{Evaluation of Test Quantities across networks.}\label{tab:bayesp}
     \end{sidewaystable}
   \end{subsection}
 
@@ -426,24 +426,85 @@
     model does not adequately describe all aspects of the observed data.
 
   \begin{subsection}{Regression Fit}
-    The last check that we will perform is the analysis of the regression fit of the
-    model.
+    The last check that we will perform is the analysis of the regression fit to the
+    model. To evaluate this fit, we will analyze the standardized residuals of the model.
+
+    For a model with unknown parameters $\theta$ and predictors $x_i$, the \emph{predicted}
+    value is $\text{E}(y_i | x_i, \theta)$ and the \emph{residual} is $r_i = y_i - \text{E}(y_i | x_i, \theta)$.
+    The $\emph{standardized residual}$ is given by $r_i / \text{std}(y)$ which allows us to
+    ignore the magnitude of the data itself. Using the simulated posterior density,
+    we can compute $\text{E}(y_i | x_i, \theta)$
+    to be the mean of the replicated test, or hold-out, data itself.
+
+    We can evaluate the standardized residuals by graphically comparing the replicated data from the hold-out set
+    and their realized standardized residuals versus the observed data and their standardized residuals in the hold-out set.
+    As we can see from Figure \ref{fig:res}, the standardized residuals have some misfits in the extremes of the data
+    for the ETMT and SPTS network; as the replicated data becomes larger, so does the model's standardized residuals.
+
+    \begin{figure}[!h]
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.625]{BCST_res}
+      \end{subfigure}
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.625]{ETMT_res}
+      \end{subfigure}
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.625]{SPTS_res}
+      \end{subfigure}
+      \caption{Actual standardized residuals data (left) compared to the standardized residuals of the replicated data (right four). For the ETMT and SPTS
+        network, the model's residuals become larger as the replicated becomes larger.}
+      \label{fig:res}
+    \end{figure}
+
+    The misfit seen graphically can be quantified through the test quantity
+    \begin{align*}
+      T(y, \theta, x) = \frac{\overline{r}}{\text{std}(y)},
+    \end{align*}
+    which is the mean standardized residual of the data set. By proceeding as we did in Section \ref{sec:test},
+    we can use \ref{form:bayesp} to calculate the estimated $p$-value of observing standardized residuals
+    of the replicated test data set more extreme than in the observed data.
+
+    \begin{figure}[!h]
+      \begin{subfigure}[b]{.32\textwidth}
+        \centering
+        \includegraphics[scale=0.35]{BCST_res_test}
+      \end{subfigure}
+      \begin{subfigure}[b]{.32\textwidth}
+        \centering
+        \includegraphics[scale=0.35]{ETMT_res_test}
+      \end{subfigure}
+      \begin{subfigure}[b]{.32\textwidth}
+        \centering
+        \includegraphics[scale=0.35]{SPTS_res_test}
+      \end{subfigure}
+      \caption{Graphical comparison of distribution of test quantities $T(y^{\text{rep}}, \theta, x)$ versus observed test quantity $T(y, \theta, x)$
+        (black) in hold-out data set across networks.}
+      \label{fig:res_test}
+    \end{figure}
+
+    The graphical analysis of the above test quantities is shown in Figure \ref{fig:res_test}. As we can see,
+    for the BCST and SPTS networks, the standardized residuals of the replicated data sets do not
+    differ in the extremes of the observed data set, while the standardized residuals do for the ETMT network.
+    However, the magnitude of the discrepancy is small and we accept this deficiency of the model
+    for the ETMT network. Note the results of the test quantities can be found in Table \ref{tab:bayesp_res}.
+
+    \begin{table}[!htbp]
+      \centering
+      \begin{tabular}{lrcc}
+        Network & $T(y, \theta, x)$ & \pbox{2cm}{95\% int. for $T(y^{\text{rep}}, \theta, x)$} & $p_B$ \\
+        \hline
+        BCST & -0.014 & [-0.043, 0.041] & 0.73 \\
+        ETMT & -0.070 & [-0.030, 0.036] & 1.0 \\
+        SPTS & -0.013 & [-0.022, 0.018] & 0.89 \\
+      \end{tabular}
+      \caption{Evaluation of test quantity $T(y, \theta, x)$ using the hold-out data set across networks.}
+      \label{tab:bayesp_res}
+    \end{table}
+
   \end{subsection}
-  % - We check the resulting posteriors using test statistics
-  % of the mean, min, max, and std of the number of in-target panelists. This makes
-  % sure that the data generated by the model are consistent with the observed data.
-
-  % - ordered discrete data check to see if data is under/overdispersed compared to replicated data.
-
-  % - binned residual plots against observed in-target panelists to check that the
-  % regression fits make sense.
-
-  % - The data was collected sequentially in time so we must check if residuals
-  % have autocorrelation.
-
-  % - outlier check to see if any impressions conc predictions are greater than 1-2 std of impressions conc.
-
-  % - realized residual plots for impressions conc
 \end{section}
 
 % \begin{section}{Model selection and Sensitivity Analysis}
