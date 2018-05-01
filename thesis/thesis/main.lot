@@ -18,18 +18,18 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {3.1}{\ignorespaces Evaluation of Test Quantities across networks.\relax }}{18}{table.caption.57}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Evaluation of Test Quantities across networks.\relax }}{16}{table.caption.57}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {3.2}{\ignorespaces Evaluation of test quantity $T(y, \theta , x)$ using the hold-out data set across networks.\relax }}{20}{table.caption.61}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Evaluation of test quantity $T(y, \theta , x)$ using the hold-out data set across networks.\relax }}{17}{table.caption.61}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {4.1}{\ignorespaces Error metrics of the predicted data and the observed data in the hold-out set. Note that $\mathcal {M}$ MAE is computed using the point forecast of the probabilistic forecasts. The average value of $m_i^A$ is presented to illustrate the magnitude of the errors.\relax }}{22}{table.caption.66}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Error metrics of the predicted data and the observed data in the hold-out set. Note that $\mathcal {M}$ MAE is computed using the point forecast of the probabilistic forecasts. The average value of $m_i^A$ is presented to illustrate the magnitude of the errors.\relax }}{20}{table.caption.66}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {4.2}{\ignorespaces .\relax }}{23}{table.caption.68}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Proportion of units of observation that are within the listed Credible Region.\relax }}{21}{table.caption.68}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {4.3}{\ignorespaces Example data set used for model for two selling title airings.\relax }}{24}{table.caption.70}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Error metrics of the predicted data and the observed data in the hold-out set for the quantiled units of observation across the three networks.\relax }}{22}{table.caption.71}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {4.4}{\ignorespaces Example data set used for model for two selling title airings.\relax }}{24}{table.caption.71}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Proportion of quantiles that are within the listed Credible Region.\relax }}{23}{table.caption.72}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }

@@ -81,11 +81,11 @@
     In addition to the error metrics listed above, we are interested in whether or not the forecasted
     probability distributions correctly assign probabilities to the possible outcomes. That is, we
     are interested in knowing if our probabilistic forecasts are calibrated. To assess this,
-    for each unit of observation we can calculate a $(1 - \alpha)$ Credible Region (CR) for $\alpha = 0.5, 0.05, 0.01$
+    for each unit of observation we can calculate a $(1 - \alpha)\%$ Credible Region (CR) for $\alpha = 0.5, 0.05, 0.01$
     and then measure whether the observed outcome was within that CR. If the forecasts are perfectly calibrated, then the proportion
-    of events that are within the $(1 - \alpha)$ CR will be equal to $(1 - \alpha)$.
-    From a Bayesian point of view, a $(1- \alpha)$ Credible Region is the region of the posterior density
-    that contains all events that have a $(1- \alpha)$ chance of occurring.
+    of events that are within the $(1 - \alpha)\%$ CR will be equal to $(1 - \alpha)\%$.
+    From a Bayesian point of view, a $(1- \alpha)\%$ Credible Region is the region of the posterior density
+    that contains all events that have a $(1- \alpha)\%$ chance of occurring.
 
     From table \ref{tab:unitcr}, we can see that the probabilistic forecasts for the units of observation
     are near perfectly calibrated for all networks except for SPTS. Upon closer inspection,
@@ -100,22 +100,22 @@
     \end{figure}
     Thus, technically the observed outcomes are outside of the interval,
     but these lower limits are close enough to 0 for the practical purposes of TV planning.
-    Removing the assumed right-censored data, i.\ e.\ data in which $m_i^A = 0$,
-    shows that 91.8\% of units are within the 95\%, a result consistent with the other networks.
-    This information is useful as we will be able to describe a range of possible outcomes for each
+    Removing the assumed right-censored data on this network, i.\ e.\ data in which $m_i^A = 0$,
+    shows that 91.8\% of units are within the 95\% CR, a result consistent with the other networks.
+    This information is useful as we will be able to forecast a range of possible outcomes for each
     unit of observation and be reasonably certain that the outcome will be within that range.
 
     \begin{table}[h!]
       \centering
         \begin{tabular}{lrrrr}
-          & & \multicolumn{3}{c}{Credible Region $(1 - \alpha)$} \\
+          & & \multicolumn{3}{c}{Credible Region $(1 - \alpha)\%$} \\
           network & level & $\alpha = 0.5$ & $\alpha = 0.05$ & $\alpha = 0.01$ \\
           \hline
           BCST & unit of observation & 0.465 & 0.922 & 0.966 \\
           ETMT & unit of observation & 0.48 & 0.91 & 0.95  \\
           SPTS & unit of observation & 0.416 & 0.765 & 0.799 \\
         \end{tabular}
-      \caption{.}\label{tab:unitcr}
+      \caption{Proportion of units of observation that are within the listed Credible Region.}\label{tab:unitcr}
     \end{table}
 
   \end{section}
@@ -123,36 +123,23 @@
   \begin{section}{Aggregated Predictive Accuracy}
 
     Now that we have evaluated the accuracy of the forecasts on the units of observation,
-    we want to
-    The units are exchangeable under the model assumptions, and given the model parameters are iid,
-    we can assume that the predictions under the model are independent. We can aggregate
-    the forecasts through simple sums of the distribution of outcomes.
+    we want to evaluate the accuracy of the forecasts on aggregations of those units in the form of media plans.
+    Under the model assumptions, the units of observation are exchangeable and given the model parameters,
+    they are independently and identically distributed. Thus, we can assume that the
+    forecasts under the model are independent and we can create the distribution
+    of aggregated impressions through simple sums of the distribution of outcomes at the units of observation.
 
+    We proceed as we did in the previous section by computing error metrics and Credible Regions
+    of unit aggregations. Specifically, for each network, we quantile the units of observation
+    in the hold-out set by the point forecasts of impression concentration for both models into 20 bins.
+    We then compute the forecasted impressions for each quantile and compare to the actual impressions observed. For model $\mathcal{M}_0$
+    this is merely the sum of the point estimates, but for model $\mathcal{M}$, this is the mean of the distribution of sums
+    of impressions for the quantile.
 
-    \begin{table}[h!]
-      \centering
-        \begin{tabular}{lrrrr}
-          network & level & $\mathcal{M}_0$ MAE & $\mathcal{M}$ CRPS & $\mathcal{M}$ MAE \\
-          \hline
-          BCST & quantiled & 324034.14 & 277437.29 & 417797.60 \\
-          ETMT & quantiled & 297512.52 & 311316.38 & 399648.10 \\
-          SPTS & quantiled & 205096.15 & 75962.55 & 90668.35
-        \end{tabular}
-      \caption{Example data set used for model for two selling title airings.}\label{tab:quantileerror}
-    \end{table}
-
-    \begin{table}[h!]
-      \centering
-        \begin{tabular}{lrrrr}
-          & & \multicolumn{3}{c}{Credible Region $(1 - \alpha)$} \\
-          network & level & $\alpha = 0.5$ & $\alpha = 0.05$ & $\alpha = 0.01$ \\
-          \hline
-          BCST & quantiled & 0.45 & 0.95 & 1.0 \\
-          ETMT & quantiled & 0.1 & 0.55  & 0.75 \\
-          SPTS & quantiled & 0.4 & 0.65 & 0.65 \\
-        \end{tabular}
-      \caption{Example data set used for model for two selling title airings.}\label{tab:quantilecr}
-    \end{table}
+    The graphical results of this analysis are shown in Figure \ref{fig:quantiledoutcomes}. From this
+    graph we see that there is less dispersion in the forecasted versus actual values for model $\mathcal{M}$
+    compared to model $\mathcal{M}_0$, especially for the SPTS network. However, graphs can sometime
+    be misleading and so we analyze the resulting error metrics.
 
     \begin{figure}[!h]
       \centering
@@ -168,21 +155,45 @@
         \centering
         \includegraphics[scale=0.6]{SPTS_quantiled}
       \end{subfigure}
-      \caption{Test.}
+      \caption{Comparison of forecasts versus actuals for quantiled units of observation across the three networks
+        for both models.}
       \label{fig:quantiledoutcomes}
     \end{figure}
 
-    \begin{subsection}{Random Media Plans}
-      Create media plans by randomly selecting airings and then compute HPD and mean
-      of media plan where we assume that the demo estimates are known.
+    \begin{table}[h!]
+      \centering
+        \begin{tabular}{lrrrr}
+          network & level & $\mathcal{M}_0$ MAE & $\mathcal{M}$ CRPS & $\mathcal{M}$ MAE \\
+          \hline
+          BCST & quantiled & 324034.14 & 277437.29 & 417797.60 \\
+          ETMT & quantiled & 297512.52 & 311316.38 & 399648.10 \\
+          SPTS & quantiled & 205096.15 & 75962.55 & 90668.35
+        \end{tabular}
+      \caption{Error metrics of the predicted data and the observed data in the hold-out set for the quantiled
+        units of observation across the three networks.}\label{tab:quantileerror}
+    \end{table}
 
-      We want to check that outcomes are within are 95\% HPD
-    \end{subsection}
+    Tables \ref{tab:quantileerror} and \ref{tab:quantilecr} show that the same general story arises when looking at the
+    quantiled units in aggregate as when looking at the units of observation; model $\mathcal{M}_0$ performs better
+    than model $\mathcal{M}$ when only looking at the point forecasts, but model $\mathcal{M}$ outperforms
+    when using the probabilistic forecasts, drastically so on the SPTS network.
+    One notable exception is that the aggregation of units on ETMT do not seem to have the same performance
+    in regard to error metrics and as the individual units themselves. This suggests that some
+    model assumptions must not hold with this network and that the model needs to be re-evaluated.
+    This is in-line with the previous model checks that showed misfit with this particular model.
 
-    \begin{subsection}{Calibration}
-      Show calibration plot of binning up all airings into 20 or so bins
-      and then plotting mean of actual vs mean of predicted. If model is calibrated
-      then ``low stuff should perform low and the high stuff high.''
-    \end{subsection}
+    \begin{table}
+      \centering
+        \begin{tabular}{lrrrr}
+          & & \multicolumn{3}{c}{Credible Region $(1 - \alpha)\%$} \\
+          network & level & $\alpha = 0.5$ & $\alpha = 0.05$ & $\alpha = 0.01$ \\
+          \hline
+          BCST & quantiled & 0.45 & 0.95 & 1.0 \\
+          ETMT & quantiled & 0.1 & 0.55  & 0.75 \\
+          SPTS & quantiled & 0.4 & 0.65 & 0.65 \\
+        \end{tabular}
+      \caption{Proportion of quantiles that are within the listed Credible Region.}\label{tab:quantilecr}
+    \end{table}
+
   \end{section}
 \end{chapter}

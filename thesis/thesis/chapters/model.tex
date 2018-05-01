@@ -40,7 +40,7 @@
     \item Broadcast Month - The broadcast month associated to the start of a program airing.
       The broadcast and Gregorian calendars are related in that the first week of every broadcast month always contains the Gregorian calendar first of the month \cite{calendar}.
     \item Day of Week - The day of the week associated to the start of a program airing.
-      These are encoded from 0 - 6 with 0 being Monday and 6 being Saturday
+      These are encoded from 0 - 6 with 0 being Monday and 6 being Saturday.
     \item Stratified Hour - We define this covariate as the following groupings of hours which are adapted from the measurement source:
       \begin{itemize}
         \item morning - The hour associated to a program airing start time is between 6 and 9, inclusive.
@@ -55,7 +55,7 @@
       \end{itemize}
     \item Content - The identifier denoting the content associated with the program airing per the linear media schedule.
       This covariate will be set to -1 if the content is considered a ``new program'', i.\ e.\ the content only airs in
-      the test set and not in the train set.
+      the hold-out set and not in the train set.
     \item Lead-in Content -
       This covariate intends to capture the ``lead-in effect'' where
       ``viewing a program on the same [network] prior to the current program enhances the viewing of the current program''
@@ -458,7 +458,7 @@
         \includegraphics[scale=0.625]{SPTS_res}
       \end{subfigure}
       \caption{Actual standardized residuals data (left) compared to the standardized residuals of the replicated data (right four). For the ETMT and SPTS
-        network, the model's residuals become larger as the replicated becomes larger.}
+        network, the model's residuals become larger as the replicated becomes larger which is indicative of model misfit.}
       \label{fig:res}
     \end{figure}
 
