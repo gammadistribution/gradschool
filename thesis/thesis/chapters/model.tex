@@ -1,137 +1,462 @@
 \begin{chapter}{Model}
-
+  Using the data set from Section \ref{data:used}, we present a model that will
+  forecast the ACM of target A given the ACM of target B.
 
 \begin{section}{Preliminaries}
   In the following section we will provide preliminary information necessary to
   understand the model.
-  \begin{subsection}{Units of analysis and observation}
-    We are most interested in the content that airs.
 
-    the units of observation are selling title airings in the schedule. The outcome
-    variable we are measuring for each unit $i$ is $r_i^A$ the average number of panelists
-    associated to target $A$ given the average number of panelists associated to target $B$
-    where $A \subseteq B$. Of primary interest is the proportion of panelists in target $A$ relative to target $B$.
+  \begin{subsection}{Units of Analysis and Observation}
+    The units of analysis for this model are the selling title airings during a given broadcast week.
+    These are the units that comprise a media plan allocation and are of importance in evaluating
+    the performance of the forecasting model. As mentioned in Section \ref{data:used}, the units of observation for this model
+    are individual content airings in the linear media schedule. The outcome
+    variable that is measured for each unit $i$ is $m_i^A$, the ACM of target $A$, which we
+    denote as $y_i$ for notational convenience. Similarly, we denote $m_i^B$, the ACM of
+    target $B$ for unit $i$ by $n_i$.
 
   \end{subsection}
 
   \begin{subsection}{Covariates}
+    There are two types of covariates that will be used in constructing the model: time covariates and program
+    covariates. Time covariates relate to the time in which the unit of observation airs
+    while program covariates relate to the a unit of observation's content.
 
-  Using the conclusions of paper TV ratings, we include the following covariates into the model:
+    The covariates that are most important in measuring audience on TV are time covariates
+    such as day of week and time of day as well as program covariates such as the genre of
+    the program airing %\cite{Danaher et al.}.
+    The forecasting models used by Danaher et al.\ that had the highest forecast accuracy when measured by Mean Absolute Error (MAE)
+    allowed for random effects for each program. Further, the forecast accuracy was greatest when a
+    separate model was fit for each network.
+    Thus, we proceed to include the time and program covariates mentioned, plus a content
+    covariate that indicates per the linear media schedule the program that will air. See below
+    for a detailed outline of the covariates that will be used. Binary covariates are ``shifted to have a mean of 0 and to differ by 1 in their upper and lower conditions'' per Gelman et al.%\cite BDA3
 
-  \begin{enumerate}
-     \item Broadcast Month - The broadcast month associated to the start of a selling title airing.
-       ``The key link between the broadcast and Gregorian calendars is that the first week of every broadcast month always contains the Gregorian calendar first of the month.''
-       %(``https://web.archive.org/web/20111007010739/http://www.tvb.org/planning_buying/179695/5658'')
-     \item Day of Week - The day of the week associated to the start of a selling title
-       airing. These are encoded from 0 - 6 with 0 being Monday and 6 being Saturday
-     \item Stratified Hour - We define the following groupings of hours as this covariate.
-       These groupings are adapted from the measurement source.
-           morning -  airing start hour is in (6, 7, 8, 9),
-           daytime - airing start hour is in  (10, 11, 12, 13, 14),
-           early\_fringe - airing start hour is in (15, 16, 17, 18),
-           prime\_1900\_2000 - airing start hour is 19,
-           prime\_2000\_2100 - airing start hour is 20,
-           prime\_2100\_2200  - airing start hour is 21,
-           prime\_2200\_2300  - airing start hour is 22,
-           late\_fringe - airing start hour is in (23, 0, 1),
-           graveyard - airing start hour is in (2, 3, 4, 5)
-     \item Content Id - The id denoting the content associated with the scheduled airing.
-       e.g. Famous Funny Animated Cartoon show
-     \item Lead-in Content Id - The id denoting the content associated with the preceding airing.
-     \item first-run - Denotes if the airing is not a repeat airing. This is a 1 if it is not a repeat and 0 if it is a repeat.
-       This information is obtained through the measurement source.
-     \item genre-id - Denotes the genre associated to the airing. This conveys the general flavor of the aired content.
-       We will enumerate the different genre-ids and their meaning.
-       This information is obtained through the measurement source.
-  \end{enumerate}
+    \begin{enumerate}
+    \item Broadcast Month - The broadcast month associated to the start of a program airing.
+      ``The key link between the broadcast and Gregorian calendars is that the first week of every broadcast month always contains the Gregorian calendar first of the month.''
+      % (``https://web.archive.org/web/20111007010739/http://www.tvb.org/planning_buying/179695/5658'')
+    \item Day of Week - The day of the week associated to the start of a program airing.
+      These are encoded from 0 - 6 with 0 being Monday and 6 being Saturday
+    \item Stratified Hour - We define this covariate as the following groupings of hours which are adapted from the measurement source:
+      \begin{itemize}
+        \item morning - The hour associated to a program airing start time is between 6 and 9, inclusive.
+        \item daytime - The hour associated to a program airing start time is between 10 and 14, inclusive.
+        \item early fringe - The hour associated to a program airing start time is between 15 and 18, inclusive.
+        \item prime 1900 - The hour associated to a program airing start time is 19.
+        \item prime 2000 - The hour associated to a program airing start time is 20.
+        \item prime 2100 - The hour associated to a program airing start time is 21.
+        \item prime 2200 - The hour associated to a program airing start time is 22.
+        \item late fringe - The hour associated to a program airing start time is 23, 0, or 1.
+        \item graveyard - The hour associated to a program airing start time is between 2 and 5, inclusive.
+      \end{itemize}
+    \item Content - The identifier denoting the content associated with the program airing per the linear media schedule.
+      This covariate will be set to -1 if the content is considered a ``new program'', i.\ e.\ the content only airs in
+      the test set and not in the train set.
+    \item Lead-in Content -
+      This covariate intends to capture the ``lead-in effect'' where
+      ``viewing a program on the same [network] prior to the current program enhances the viewing of the current program''
+      by allowing for random effects based off the of the content identifier that aired immediately prior to the unit of observation.
+      This covariate will be set to 0 if there was no prior airing within 15 minutes of the start of a program airing.
+    \item First-run - This covariate denotes if this is the first time that the program content has aired where the covariate
+      is 1 if the content has not aired previously and 0 if the specific program has aired before, i.\ e.\ the program is a ``repeat''.
+      This information is obtained through the measurement source.
+    \item Live-program - This covariate denotes if the program is airing as the event is occurring per the measurement source
+      where 1 indicates that the program is airing live and 0 otherwise.
+      A typical example of a program airing that has a live-program value is a sports event such as a soccer game.
+      Note that this value per the measurement source is 0 for all airings on the BCST network so it is excluded from
+      that network's model definition.
+    \item Genre - The genre associated to the airing which are categorizations
+      of programs based off of the associated content per the measurement source.
+      Some examples of the genre are Animation, General Drama, and Sports Entertainment.
+    \end{enumerate}
+  \end{subsection}
 
+  \begin{subsection}{Bayesian Inference}
+    Bayesian inference is a statistical practice that allows one to provide probability
+    statements that express one's uncertainty on the occurrence of events.
+    The normal course of practicing Bayesian inference involves specifying a model for the data $y$ known
+    as the \emph{likelihood}. The likelihood describes the generative process for the observed data
+    as some probability distribution conditional on some unknown parameter vector $\theta$ and is denoted
+    by $p(y | \theta)$. Once the likelihood has been established, prior belief about the parameter $\theta$
+    is defined in the form of a probability distribution. This distribution is known as the
+    \emph{prior distribution} and is denoted by $p(\theta)$. Once the model is defined,
+    we are interested in determining the probability distribution of the parameter $\theta$
+    that determines the generative process of the data
+    conditional on the data that has been observed. This distribution, $p(\theta | y)$,
+    is the \emph{posterior density} and is the main goal of Bayesian inference.
+
+    Bayes' Theorem states that the posterior density is proportional to the product
+    of the likelihood and the prior distribution, i.\ e.\
+    \begin{align}\label{form:bayes}
+      p(\theta | y) \propto p(y | \theta) p(\theta)
+    \end{align}
+    which is a straightforward consequence of the definition of conditional probability.
+
+    It is formula \ref{form:bayes} that allows for the computation of the posterior density.
   \end{subsection}
 \end{section}
 
-
 \begin{section}{Assumptions}
-  We assume that the observations are exchangeable given the parameters of the model and the covariates of the selling title airing.
-  We describe the definition of exchangeable here. Exchangeability is important since
-  it allows us to use Bayes' Theorem to compute the posterior.
-  The number of draws from the binomial aren't independent, but we use this as an approximation. this assumption is imperfect.
+  We assume that the response variables $y_i$ are exchangeable given the parameters of the model
+  and the covariates of the unit of observation. A sequence of random variables
+  is exchangeable if the ``joint probability density $p(y_1, \dots, y_k)$ is invariant to permutations of the indexes.'' % cite BDA3
+  This allows us to model the data as independently and identically distributed given the covariates and unknown parameters.
+  Note that exchangeability implies that only the model parameters and covariates determine the likelihood distribution.
 \end{section}
 
 \begin{section}{Description}
-  See below for a formal description of the model. Since the data we observe is
-  the average number of panelists in target $A$ given the average number of panelists in target $B$ with $A \subseteq B$,
-  it is natural to model the likelihood as a binomial distribution with unknown probability parameter $\pi$.
+  We will now provide a formal description of the model.
+  We aim to predict the response variable $y_i$ of each unit of
+  observation $i$ is the ACM of target $A$ given $n_i$, the ACM of target $B$ where $A \subseteq B$,
+  and the covariates of the unit $i$. Since target $A$ is
+  contained in $B$ and we are given $n_i$, it is natural to model the likelihood of
+  $y_i$ as a binomial distribution with unknown probability parameter $\pi_i$. This parameter
+  represents the proportion of successes, $y_i$, given the number of trials, i.\ e.\ $n_i$.
+  The prior distribution of the parameter $\pi_i$ is modeled as a Beta distribution which
+  is common throughout the literature. %$\cite{BDA 3, Doing Bayesian Data analysis}.
+  The hyper parameters of the Beta distribution $\alpha_i$ and $\beta_i$ are reparameterized in terms of the Beta distribution's
+  mode $\omega_i$ and concentration $\kappa_i$.
+  The mode of the beta distribution $\omega_i$ is determined by the logistic regression equation
+  of the model covariates while
+  the concentration of the beta distribution $\kappa_i$ has an exponential distribution dependent on the model covariates.
+  We place Student's T distributons on the coefficients of the model covariates. Further, since each model covariate is categorical,
+  we place a hierarchical structure on the model such that each category within a covariate receives its own coefficient
+  but the coefficients themselves are drawn from the same distribution. This type of model is known as a hierarchical logistic regression model.
 
+  Let $X_i$ be the vector of covariates for the unit of observation $i$. Then
+  the above description of the model $\mathcal{M}$ can be written as follows:
   \begin{align*}
-    \theta_i &= \beta_0 + \sum_{j=1}^m X_i^\intercal \beta_j, \quad \beta_j \sim \text{N}(0, 4^2) \\
-    \omega_i &= \logit^{-1}(\theta_i) \\
-    \kappa_i &\sim \text{Exp}(X_i ^\intercal \lambda_l ), \quad \lambda_l \sim \text{U}(1e-3, 1)\\
-    \pi_i &\sim \text{Beta}\left(\omega_i \kappa_i + 1, (1 - \omega_i) \kappa_i + 1\right) \\
-    y_i &| n_i, \theta_i, X_i \sim \text{Bin}(n_i, \pi_i)
+    y_i | X_i, n_i, \pi_i, \omega_i, \kappa_i &\sim \text{Bin}(n_i, \pi_i) \\
+    \pi_i | \omega_i, \kappa_i &\sim \text{Beta}\left(\omega_i \kappa_l + 1, (1 - \omega_i) \kappa_l + 1\right) \\
+    \omega_i &= \logit^{-1}\left(\beta_0 + \sum_{j=1}^m  \beta_j X_{ij}\right), \quad \beta_j \sim t_4(0, \sigma_j^2) \\
+    \kappa_i | X_i &\sim \text{Exp}(\lambda_l X_{il})
   \end{align*}
-
   where $\logit^{-1}(\alpha) = \frac{\exp{\alpha}}{1 + \exp{\alpha}}$.
 \end{section}
 
 \begin{section}{Prior Distribution Choice}
-  The coefficients are chosen so that the main mass of the distribution on the logit scale falls between 1e-5 and 1 - 1e-5.
+  We must now justify the choice of prior distributions for the major components of model $\mathcal{M}$:
+  the linear equation coefficients $\beta_j$ and the concentration
+  parameter $\kappa_i$.
 
-  We chose the lambda to be uniform on 1e-3 and 1 since the kappa variable is the concentration
-  parameter which is roughly the number of trials in the binomial likelihood.
-  For any given telecast airing we will have at most the number of trials be
-  the number of panelists which cannot exceed 100K. This prior on lambda and
-  the exponential reflects that.
+  When choosing the prior distribution of the coefficients $\beta_j$ we wish to provide weakly informative
+  priors, i.\ e.\ priors that are ``intentionally weaker than whatever actual prior knowledge is available.''%cite BDA3.
+  These priors act as constraints on the possible parameters that are to be sampled. From the literature,
+  weakly informative priors for coefficients of logistic regression are chosen to be Student's T distributions
+  with mean 0, degrees of freedom set to 4, and scale 2.5. %cite BDA3
+  The distribution is centered at 0 since apriori we do not
+  know if the coefficient will be positive or negative. The degrees of
+  freedom and scale are chosen such that the mass of the corresponding distributions falls between -5 and 5,
+  which are roughly .01 and 0.99 on the logit scale, respectively.
+  Thus, the prior is constrained such that each coefficient
+  is allowed to account for a change in the logit probability from 0.01 to 0.99, which is a larger effect than is to be expected
+  by any single coefficient. We allow the intercept of the model, $\beta_0$, to account for larger changes by adopting the same Student's T distribution
+  with mean 0 and degrees of freedom 4, but with scale 5.
 
-  We chose to separate variance based off of is-first-run since we noticed
-  that this variable is indicative of how many trials there will be for an airing.
+  Similarly we choose the prior distribution of $\kappa_i$ to be weakly informative as well.
+  The concentration parameter $\kappa_i$ can be interpreted as the average number of trials present
+  in the units of observations.
+  A standard choice for such a parameter would be the the exponential distribution with expected value set
+  to be weakly informative for the data. Since the number of trials is constrained by the un-weighted ACM $m_i^B$,
+  we know that this value can not be larger than the number of panelists which for this
+  particular measurement source is on the order of $10^{5}$. Thus, setting the value of $\lambda_l = 10^{-4}$ allows for the possibility
+  of the concentration parameter to be equal to the total number of panelists, a number that is in practice much smaller.
+
+  Further, as can be seen from Figure \ref{fig:kappa:explanation}, the number of trials
+  appears to be dependent on the first-run covariate. Thus, we allow for heterogeneous concentration
+  parameters by modeling the $\kappa_i$ parameter as conditional on the covariates.
+
+  \begin{figure}[h!]
+    \begin{center}
+      \includegraphics[scale=0.7]{kappa_explanation}
+    \end{center}
+    \caption{Distributions of the number of trials per each unit of observation factored
+      by the covariate first-run.
+      These distributions have much longer tails but have been truncated to illustrate the
+      differences between each covariate factor's distribution. Note that the first-run units have a much wider distribution with
+      a larger mean.
+    }\label{fig:kappa:explanation}
+  \end{figure}
+
 \end{section}
 
 \begin{section}{Inference}
-  We perform the inference using \texttt{pymc3}. We will display convergence checks
-  such as gelman-rubin statistics, effective number of parameters among other things
-  to ensure that posterior distribution obtained are representative of the actual
-  posterior distribution.
+  In order to compute the posterior density of our model, we perform the
+  inference using the probabilistic programming language \texttt{pymc3} available through the programming language Python.
+  This language
+  allows us to specify the model $\mathcal{M}$ along with the observed data
+  and also allows for the computation of the numerical approximation to the posterior density.
 
-  Show the calculation of rhat and neff and display summary statistics of values to
-  show that inferences have approximate convergence and that trace objects are representative
-  of
+  \begin{subsection}{Computation}
+    The computations of the approximation are performed through a Markov Chain Monte Carlo (MCMC) sampling algorithm.
+    The algorithm itself is a variant of the Hamiltonian Monte Carlo (HMC) algorithm
+    called the No U-Turn Sampler (NUTS). The description of the NUTS and HMC algorithms is beyond the scope of this
+    paper, but the main idea is that the sampler borrows physical principles
+    from Hamiltonian mechanics in combination with Monte Carlo simulation in order to compute the posterior density.
+    The algorithm uses the Markov property to chooses the next point in the parameter space conditional
+    only on the previous point. %cite pymc3
+
+    An advantage of NUTS over regular HMC is that
+    that the NUTS sampler has ``several self-tuning strategies
+    for adaptively setting the tuneable parameters of Hamiltonian Monte Carlo.''
+    This translates into the modeler only needing to specify the model and inferences are performed
+    without much effort on the part of the modeler.
+
+    The primary parameter available to the modeler to control the adaptation
+    routines of the NUTS sampler is the \texttt{target\_accept} parameter. The value
+    of this parameter determines the acceptance rate of the NUTS algorithm which is how often
+    the sampler will accept target distributions during sampling. Higher values of this
+    parameter correspond to smaller step sizes and allow the sampler to better explore
+    the parameter space of the posterior density.
+
+    The other parameters that are set include the number of ``tuned'' samples, the number of drawn samples,
+    and the number of sampled Markov chains. The tuned samples are the simulations
+    that are discarded and serve only to move the sampler away from the starting values
+    of the Markov chain. Sampling from more than one Markov chain allows for convergence checks of the simulation
+    as will be discussed
+    in the next section. Once the sampler has been tuned, the algorithm draws the specified number of samples
+    for each chain declared. After drawing the number of specified samples, the drawn parameters from the separate
+    Markov chains are joined together to form the sampled posterior density.
+
+    Throughout this paper, we set the above parameters as follows:
+    \begin{itemize}
+      \item \texttt{target\_accept}: 0.95
+      \item tuned samples: 3000
+      \item drawn samples: 500
+      \item number of chains: 4
+    \end{itemize}
+
+  \end{subsection}
+
+  \begin{subsection}{Convergence}
+    Once we have performed the inference, we
+    are interested in whether or not the simulation has approximately converged to
+    the posterior density. Using samples from a simulation that has not converged
+    carries the danger of biased inference which can lead to incorrect conclusions
+    about the model.
+
+    The main diagnostic check to determine if the sampler has approximately converged
+    is the \emph{Gelman-Rubin} statistic, denoted by $\hat{R}$. This is a measure of
+    the between-sequence and within-sequence variance across the Markov chains and is used to determine
+    if stationarity and mixing has been achieved.
+
+    Formally, for a model parameter $\psi$, suppose we have $N$ simulations
+    and let $\{\phi_{ij}\}_{i=1}^{N}$ for $j=1\dots M$ simulated chains.
+    The between-sequence and within-sequence variance is computed as
+    \begin{align*}
+      B = \frac{N}{M-1}\sum_{j=1}^M \left(\frac{1}{N}\sum_{i=1}^N\psi_{ij} - \frac{1}{MN}\sum_{j=1}^M \sum_{i=1}^N\psi_{ij}\right)^2 \\
+      W = \frac{1}{M(N-1)}\sum_{j=1}^M\sum_{i=1}^N\left(\psi_{ij} - \frac{1}{N}\sum_{i=1}^N\psi_{ij}\right)^2
+    \end{align*}
+    respectively. % cite BDA3
+    Note that, $\text{Var}(\psi | y)$, the marginal posterior variance of the estimand $\psi$,
+    can be estimated by a weighted average of $W$ and $B$, i.\ e.\
+    \begin{align*}
+      \hat{\text{Var}}^+(\psi | y) = \frac{N -1}{N} W + \frac{1}{N} B.
+    \end{align*}
+    which overestimate the marginal posterior variance, but is unbiased under stationarity
+    or in the limit $N \to \infty$. However, the within variance $W$ should underestimate
+    the marginal posterior variance since ``the individual sequences have not had time to range over
+    all of the target distribution''. Thus, in the limit as $N \to \infty$,
+    \begin{align}\label{form:rhat}
+      \hat{R} = \sqrt{\frac{\hat{\text{Var}}^+(\psi | y)}{W}} \to 1,
+    \end{align}
+    and we can check for approximate convergence by determining if $\hat{R}$ is close to 1. % cite BDA 3
+
+    Another diagnostic check is the number of effective samples produced by the simulation, denoted
+    by $n_{\text{eff}}$. Since the simulation draws within each sequence will have autocorrelation,
+    the number of posterior samples is less than the simulation draws. Asymptotically, the effective
+    sample size is
+    \begin{align}\label{form:neff}
+      n_{\text{eff}} = \frac{MN}{1 + 2 \sum_{t=1}^\infty \rho_t}
+    \end{align}
+    where $\rho_t$ is the autocorrelation of the simulation sequence at lag $t$. % cite BDA 3.
+    The interested reader can consult Gelman et al.\
+    for a technical discussion of how to calculate, $\hat{n_{\text{eff}}}$, an estimate of $n_{\text{eff}}$ for finite sequences.
+    The recommendation from BDA3 is that $\hat{n_{\text{eff}}} > 10 M$, i.\ e.\ there are at least 10 independent
+    draws for each sequence.
+
+    For each network model, we have that $0.99 \leq \hat{R} \leq 1.01$ and $\hat{n_{\text{eff}}} > 400$
+    for all model parameters. Thus, we conclude that the chains have mixed, are stationary,
+    and that we have enough parameter samples to use to perform inference.
+  \end{subsection}
+
 \end{section}
 
 \begin{section}{Validation}
-  posterior predictive checking.
+  ``If the model fits, then replicated data under the model should look similar
+  to observed data.'' % Cite BDA3
+  Generating data using the posterior density of a model and then
+  checking some aspect of the generated data set is similar to the analogous aspect
+  of the observed data is called a posterior predictive check.
 
-  Given the posterior distribution obtained through inference, we make draws
-  from the distribution to arrive at replicated data, $y^{\text{rep}}$. We check
-  the distribution of the replicated data using test statistics comparing replicated data to the observed
-  test statistic in the data.
+  Let $y$ be the observed data, $\theta$ be the vector of parameters, and $X$ be the model covariates.
+  For model $\mathcal{M}$, we have that $\theta = (\pi, \omega, \kappa)$. Define $y^{\text{rep}}$
+  to be the replicated data that could have generated given the vector of parameters $\theta$
+  obtained through inference, i.\ e.\
+  \begin{align}\label{form:yrep}
+    p(y^{\text{rep}} | y) = \int p(y^{\text{rep}}|\theta)p(\theta | y) d\theta.
+  \end{align}
+  Note that since we use the posterior density obtained through inference to generate the replicated data sets,
+  the replicated values are necessarily dependent on the observed data just as the posterior density is.
 
-  - We check the resulting posteriors using test statistics
-  of the mean, min, max, and std of the number of in-target panelists. This makes
-  sure that the data generated by the model are consistent with the observed data.
+  The main purpose of posterior predictive checks is to measure the discrepancies between the
+  data and the model and to determine if the discrepancies could have occurred by chance under the assumptions
+  of the model. % cite bDA 3
 
-  - ordered discrete data check to see if data is under/overdispersed compared to replicated data.
+  \begin{subsection}{Replicated versus Actual Data Distributions}
+    The first posterior predictive check we will perform is to assess whether the
+    distribution of replicated data sets is similar to the distribution of observed data.
+    We choose to graphically display these distributions for the assessment of the parameters
+    $m_A^\text{rep}$ vs $m^A$, the observed data, and $c^{\text{rep}} = \pi$ vs $c$, the probability of a success for a given trial.
+    Note that for each model we draw 500 simulated values from posterior predictive distribution.
 
-  - binned residual plots against observed in-target panelists to check that the
-  regression fits make sense.
+    \begin{figure}[!h]
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.625]{BCST_m_rep}
+      \end{subfigure}
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.625]{ETMT_m_rep}
+      \end{subfigure}
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.625]{SPTS_m_rep}
+      \end{subfigure}
+      \caption{Actual $m^A$ data (left) compared to replicated data sets $m^{A\text{rep}}$ (right four). Note that
+        some parts of each distribution may be slightly truncated in order to display the critical features of the distribution.
+        The replicated data sets largely mimic the actual data set.}
+      \label{fig:m_rep}
+    \end{figure}
 
-  - The data was collected sequentially in time so we must check if residuals
-  have autocorrelation.
+    As can be seen from Figure \ref{fig:m_rep}, the replications $m_A^\text{rep}$ that have been drawn
+    from the posterior density reasonably mimic the observed data. Thus, we see that in
+    this aspect, the model is a good fit for the observed data.
 
-  - outlier check to see if any impressions conc predictions are greater than 1-2 std of impressions conc.
+    \begin{figure}[!h]
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.625]{BCST_c_rep}
+      \end{subfigure}
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.625]{ETMT_c_rep}
+      \end{subfigure}
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.625]{SPTS_c_rep}
+      \end{subfigure}
+      \caption{Actual $c$ data (left) compared to the replicated data $c^{\text{rep}}$ (right four). The replicated
+        data sets largely mimic the actual data set with the exception of the replicated data sets of network SPTS.}
+      \label{fig:c_rep}
+    \end{figure}
 
-  - realized residual plots for impressions conc
+    Similarly, we see from Figure \ref{fig:c_rep} that the replications $c^{\text{rep}}$
+    reasonably mimic the observed data with one notable exception; on the SPTS network,
+    the replicated parameters $c^\text{rep}$ do not capture the mode of 0 in the observed data set.
+    This is one aspect of the data that we do not wish to capture as we expect the probability
+    of success to be positive, if only very small. The reasoning behind this is
+    that the mode of 0 is present only due to the right censoring of the data, an artifact
+    of the small number of trials present per unit of observation on the network. Thus, we accept this
+    particular misfit of the model to the observed data and from the graphical replications
+    declare that the model fits reasonably well.
+  \end{subsection}
+
+  \begin{subsection}{Test Statistics}
+    We can also more concretely quantify model discrepancies by defining a test quantity $T(y, \theta)$
+    and then measuring the discrepancy between the observed data and the replicated data.
+
+    Formally, we can compute a posterior predictive $p$-value defined as
+    \begin{align}\label{form:bayesp}
+      p_B = \text{Pr}\left( T(y^{\text{rep}}, \theta) \geq T(y, \theta)  | y \right).
+    \end{align}
+    Values that exist in the extremes of 0 and 1 indicate poor model fit in regard to the particular
+    aspect of the model that the test quantity aims to capture.
+    As we have simulated values of the posterior density, the estimated $p$-value is
+    just the proportion of the simulations such that the test quantity is greater than or equal
+    to the test quantity as measured in the observed data, i.\ e.\
+    \begin{align*}
+      \hat{p_B} = \frac{1}{S}\sum_{i=1}^S [T(y_{(i)}^{\text{rep}}, \theta_{(i)}) \geq T(y, \theta_{(i)})]
+    \end{align*}
+    for $S$ simulations.
+
+    We define the following test quantities to use in evaluating the fit of model $\mathcal{M}$:
+    \begin{itemize}
+      \item $T_1(y, \theta):= \min(y)$,
+      \item $T_2(y, \theta):= \overline{y} = \frac{1}{N}\sum_{i=1}^N y_i$,
+      \item $T_3(y, \theta):= \max(y)$,
+      \item $T_4(y, \theta):= \text{std}(y) = \sqrt {\frac {\sum _{i=1}^{N}(y_{i}- \overline {y})^{2}}{N-1}}$,
+      \item $T_5(y, \theta) := \overline{\pi} = \frac{1}{N}\sum_{i=1}^N \pi_i$.
+    \end{itemize}
+
+    In Table \ref{tab:bayesp} we summarize the results of these test quantities
+    when compared to the observed data. As can be seen from the table, for some
+    test quantities, the estimated $p$-value lie in the extremes. This suggests that the model
+    does not fit those aspects of the data. For instance, on the ETMT network, the mean value of
+    the replicated data are all greater than the mean of the observed data.
+
+    \begin{sidewaystable}[!htbp]
+      \centering
+      \begin{tabular}{lrcccccccc}
+        & \multicolumn{3}{c}{BCST network} & \multicolumn{3}{c}{ETMT network} & \multicolumn{3}{c}{SPTS network} \\
+        Test quantity & $T(y, \theta)$ & \pbox{2cm}{95\% int. for $T(y^{\text{rep}}, \theta)$} & $p_B$ & $T(y, \theta)$ & \pbox{2cm}{95\% int. for $T(y^{\text{rep}}, \theta)$} & $p_B$  & $T(y)$ & \pbox{2cm}{95\% int. for $T(y^{\text{rep}}, \theta)$} & $p_B$ \\
+        \hline
+        $T_1(y, \theta)$ (min) & 3701 & [6245, 14270] & 0.99 & 0 & [9, 182] & 1.0 & 0 & [0, 0] & 1.0 \\
+        $T_2(y, \theta)$ (mean) & 227457.84 & [2266852.49, 236367.09] & 0.95 & 16357.80 & [16705.39, 1748.11] & 1.0 & 3972.45 & [3714.91, 4559.66] & 0.73 \\
+        $T_3(y, \theta)$ (max) & 4311038 & [3443885, 4989241] & 0.34 & 452762 & [307901, 760822] & 0.78 & 526816 & [607186, 2239365] & 0.99 \\
+        $T_4(y, \theta)$ (std) & 334052.86 & [325128.37, 364859.10] & 0.90 & 17686.89 & [20021.24, 23205.09] & 1.0 & 22300.18 & [20012.59, 39808.44] & 0.88\\
+        $T_5(y, \theta)$ (mean $\pi$)& 0.105 & [0.104, 0.107] & 0.60 & 0.0903 & [0.089, 0.092] & 0.43 & 0.056 & [0.065, 0.0689] & 1.0\\
+      \end{tabular}
+        \caption{Example program table data for two historical program airings.}\label{tab:bayesp}
+    \end{sidewaystable}
+  \end{subsection}
+
+    Note that there are pathological examples where the estimated $p$-values are 1,
+    but do not adequately measure the discrepancy between
+    the replicated data, e.\ g.\
+    for the test statistic $T_1$ on the SPTS network, the estimated $p$-value is 1, but the replicated
+    data matches the observed data in regards to this test statistic. Thus, we ignore such cases in evaluating the model fit.
+
+    From these measured test quantities, we see that the model for BCST best fits the data and that
+    the model does not adequately describe some aspects of the data for the other two networks.
+    For the $p$-values of the test quantities that do lie in the extremes, the magnitude
+    of the test quantity discrepancy is small. Thus, these models could be expanded to better accommodate
+    the observed data, but we elect to use these models as is, noting that the
+    model does not adequately describe all aspects of the observed data.
+
+  \begin{subsection}{Regression Fit}
+    The last check that we will perform is the analysis of the regression fit of the
+    model.
+  \end{subsection}
+  % - We check the resulting posteriors using test statistics
+  % of the mean, min, max, and std of the number of in-target panelists. This makes
+  % sure that the data generated by the model are consistent with the observed data.
+
+  % - ordered discrete data check to see if data is under/overdispersed compared to replicated data.
+
+  % - binned residual plots against observed in-target panelists to check that the
+  % regression fits make sense.
+
+  % - The data was collected sequentially in time so we must check if residuals
+  % have autocorrelation.
+
+  % - outlier check to see if any impressions conc predictions are greater than 1-2 std of impressions conc.
+
+  % - realized residual plots for impressions conc
 \end{section}
 
-\begin{section}{Model selection and Sensitivity Analysis}
-  We use the WAIC to determine the model that has the most predictive accuracy.
-  The WAIC is chosen because it is Bayesian and able to be compared across models
-  with same likelihood.
+% \begin{section}{Model selection and Sensitivity Analysis}
+%   We use the WAIC to determine the model that has the most predictive accuracy.
+%   The WAIC is chosen because it is Bayesian and able to be compared across models
+%   with same likelihood.
 
-  Go through the definition of WAIC and explain how it is computed etc.
+%   Go through the definition of WAIC and explain how it is computed etc.
 
-  Here we will also check to see if the choice in prior is affecting inference.
+%   Here we will also check to see if the choice in prior is affecting inference.
 
-  - Remove the hierarchical nature on the variance parameter and evaluate how inference is affected
-  - change normal distribution on coefficients to cauchy or student t to see if inference is affected
-\end{section}
+%   - Remove the hierarchical nature on the variance parameter and evaluate how inference is affected
+%   - change normal distribution on coefficients to cauchy or student t to see if inference is affected
+% \end{section}
 
 \end{chapter}

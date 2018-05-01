@@ -8,6 +8,12 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Distributions of the number of trials per each unit of observation factored by the covariate first-run. These distributions have much longer tails but have been truncated to illustrate the differences between each covariate factor's distribution. Note that the first-run units have a much wider distribution with a larger mean. \relax }}{11}{figure.caption.44}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Actual $m^A$ data (left) compared to replicated data sets $m^{A\text {rep}}$ (right four). Note that some parts of each distribution may be slightly truncated in order to display the critical features of the distribution. The replicated data sets largely mimic the actual data set.\relax }}{15}{figure.caption.53}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Actual $c$ data (left) compared to the replicated data $c^{\text {rep}}$ (right four). The replicated data sets largely mimic the actual data set with the exception of the replicated data sets of network SPTS.\relax }}{16}{figure.caption.54}
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }

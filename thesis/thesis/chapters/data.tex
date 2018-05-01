@@ -12,7 +12,7 @@
   unit is a grouping of content that will air during a given broadcast week and the grouping can be
   based on either similar time of airing or similar content. The two most important
   pieces of data provided by TV suppliers are the linear media schedule, which contains the exact air times of
-  selling titles, and the forecasted demographic estimates, both of which are explained below.
+  selling titles, and the forecasted demographic impressions, both of which are explained below.
 
   \begin{subsection}{Linear Media Schedule}
     The linear media schedule lists all scheduled program airings on a given network.
@@ -41,13 +41,12 @@
 
   \end{subsection}
 
-  \begin{subsection}{Forecasted Demographic Estimates}
-    The forecasted demographic estimates data contains for each
-    selling title, broadcast week, and demographic audience the expected impressions per unit, i.\ e.\
+  \begin{subsection}{Forecasted Demographic Impressions}
+    In the advertising industry, an impression is synonymous with an advertisement viewing.
+    Thus, this data contains for each selling title, broadcast week, and demographic audience the expected impressions per unit, i.\ e.\
     the expected number of audience members that will watch a commercial airing during the given selling title and broadcast week.
 
-
-    Example records from the forecasted demographic estimates data are shown in Table \ref{tab:tvdem}
+    Example records from the forecasted demographic impressions data are shown in Table \ref{tab:tvdem}
 
     \begin{table}[h!]
       \centering
@@ -59,7 +58,7 @@
           101 & 2017-03-27 06:00:00 & F45-49 & 120000 \\
           101 & 2017-03-27 06:00:00 & P18-49 & 1000000 \\
         \end{tabular}
-      \caption{Example forecasted demographic estimates data for two selling title weeks.}\label{tab:tvdem}
+      \caption{Example forecasted demographic impressions data for two selling title weeks.}\label{tab:tvdem}
     \end{table}
   \end{subsection}
 \end{section}
@@ -85,7 +84,7 @@
     \begin{adjustbox}{width=1.1\textwidth,center=\textwidth}
       \large
       \begin{tabular}{llllllllll}
-        network & program & telecast & program name & start datetime & end datetime & genre id & is first run & is live\\
+        network & program & telecast & program name & start datetime & end datetime & genre & is first run & is live\\
         \hline
         BCST & 1000 & 301 & Adult Cartoon & 2017-04-02 20:02:00 & 2017-04-02 20:30:00 & Animation & 1 & 0 \\
         BCST & 1000 & 302 & Adult Cartoon & 2017-04-02 20:30:00 & 2017-04-02 21:00:00 & Animation & 1 & 0
@@ -133,8 +132,10 @@
   and let $w_{k}$ be the weight assigned to the panelist by the measurement source. Then, $m_{i}^A$, the ACM of program airing $i$
   is
   \begin{align}\label{acm_def}
-    m_{i}^A = \left\lceil\frac{\sum_{k=1}^n w_k \sum_{j=1}^{t_i} s_{ij} p_{ijk} \textbf{1}_A(p_{k})}{\sum_{j=1}^{t_i} s_{ij}}\right\rceil
+    m_{i}^A = \left\lceil\frac{\sum_{k=1}^n w_k \sum_{j=1}^{t_i} s_{ij} p_{ijk} \textbf{1}_A(p_{k})}{\sum_{j=1}^{t_i} s_{ij}}\right\rceil.
   \end{align}
+  Throughout, we will refer to impressions and ACM interchangeably as the ACM is in fact a measurement
+  of the number of impressions a commercial airing receives.
 
   A related quantity for program airing $i$, the impression concentration of target $A$ relative to target $B$ where $A \subseteq B$, is
   \begin{align*}
@@ -146,7 +147,7 @@
   from Table \ref{tab:amviewing} we see that for program 1000 and telecast 302, $m_{(1000, 302)}^A = 1538$.
 \end{section}
 
-\begin{section}{Data Used}
+\begin{section}{Data Used}\label{data:used}
   For the purposes of this project, we limit the data used from the above data sets
   to three networks labeled BCST, ETMT, and SPTS. These networks are a broadcast network
   that has large reach, a cable entertainment network, and a cable sports network, respectively.
@@ -166,7 +167,6 @@
   Example data is shown in Table \ref{tab:data}.
 
   \begin{table}[h!]
-    \centering
     \begin{adjustbox}{width=1.1\textwidth,center=\textwidth}
       \large
       \begin{tabular}{lllllllll}
