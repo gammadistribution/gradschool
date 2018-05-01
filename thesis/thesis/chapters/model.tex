@@ -6,15 +6,18 @@
   In the following section we will provide preliminary information necessary to
   understand the model.
 
-  \begin{subsection}{Units of Analysis and Observation}
-    The units of analysis for this model are the selling title airings during a given broadcast week.
-    These are the units that comprise a media plan allocation and are of importance in evaluating
-    the performance of the forecasting model. As mentioned in Section \ref{data:used}, the units of observation for this model
+  \begin{subsection}{Units of Observation and Analysis}
+    As mentioned in Section \ref{data:used}, the units of observation for this model
     are individual content airings in the linear media schedule. The outcome
     variable that is measured for each unit $i$ is $m_i^A$, the ACM of target $A$, which we
     denote as $y_i$ for notational convenience. Similarly, we denote $m_i^B$, the ACM of
     target $B$ for unit $i$ by $n_i$.
 
+    The desired units of analysis for this model are the selling title airings during a given broadcast week.
+    These are the units that comprise a media plan allocation and are of importance in evaluating
+    the performance of the forecasting model. However, for the purposes of this paper,
+    we will instead use the units of observation as the units of analysis in order to gain
+    a better understanding of basic model performance.
   \end{subsection}
 
   \begin{subsection}{Covariates}
@@ -24,18 +27,18 @@
 
     The covariates that are most important in measuring audience on TV are time covariates
     such as day of week and time of day as well as program covariates such as the genre of
-    the program airing %\cite{Danaher et al.}.
+    the program airing \cite{tvforecasting}.
     The forecasting models used by Danaher et al.\ that had the highest forecast accuracy when measured by Mean Absolute Error (MAE)
     allowed for random effects for each program. Further, the forecast accuracy was greatest when a
     separate model was fit for each network.
     Thus, we proceed to include the time and program covariates mentioned, plus a content
     covariate that indicates per the linear media schedule the program that will air. See below
-    for a detailed outline of the covariates that will be used. Binary covariates are ``shifted to have a mean of 0 and to differ by 1 in their upper and lower conditions'' per Gelman et al.%\cite BDA3
+    for a detailed outline of the covariates that will be used. Binary
+    covariates are ``shifted to have a mean of 0 and to differ by 1 in their upper and lower conditions'' per Gelman et al \cite{bda3}.
 
     \begin{enumerate}
     \item Broadcast Month - The broadcast month associated to the start of a program airing.
-      ``The key link between the broadcast and Gregorian calendars is that the first week of every broadcast month always contains the Gregorian calendar first of the month.''
-      % (``https://web.archive.org/web/20111007010739/http://www.tvb.org/planning_buying/179695/5658'')
+      The broadcast and Gregorian calendars are related in that the first week of every broadcast month always contains the Gregorian calendar first of the month \cite{calendar}.
     \item Day of Week - The day of the week associated to the start of a program airing.
       These are encoded from 0 - 6 with 0 being Monday and 6 being Saturday
     \item Stratified Hour - We define this covariate as the following groupings of hours which are adapted from the measurement source:
@@ -56,7 +59,7 @@
     \item Lead-in Content -
       This covariate intends to capture the ``lead-in effect'' where
       ``viewing a program on the same [network] prior to the current program enhances the viewing of the current program''
-      by allowing for random effects based off the of the content identifier that aired immediately prior to the unit of observation.
+      by allowing for random effects based off the of the content identifier that aired immediately prior to the unit of observation \cite{tvforecasting}.
       This covariate will be set to 0 if there was no prior airing within 15 minutes of the start of a program airing.
     \item First-run - This covariate denotes if this is the first time that the program content has aired where the covariate
       is 1 if the content has not aired previously and 0 if the specific program has aired before, i.\ e.\ the program is a ``repeat''.
@@ -100,7 +103,7 @@
 \begin{section}{Assumptions}
   We assume that the response variables $y_i$ are exchangeable given the parameters of the model
   and the covariates of the unit of observation. A sequence of random variables
-  is exchangeable if the ``joint probability density $p(y_1, \dots, y_k)$ is invariant to permutations of the indexes.'' % cite BDA3
+  is exchangeable if the ``joint probability density $p(y_1, \dots, y_k)$ is invariant to permutations of the indexes \cite{bda3}.''
   This allows us to model the data as independently and identically distributed given the covariates and unknown parameters.
   Note that exchangeability implies that only the model parameters and covariates determine the likelihood distribution.
 \end{section}
@@ -114,7 +117,7 @@
   $y_i$ as a binomial distribution with unknown probability parameter $\pi_i$. This parameter
   represents the proportion of successes, $y_i$, given the number of trials, i.\ e.\ $n_i$.
   The prior distribution of the parameter $\pi_i$ is modeled as a Beta distribution which
-  is common throughout the literature. %$\cite{BDA 3, Doing Bayesian Data analysis}.
+  is common throughout the literature \cite{bda3, kruschke}.
   The hyper parameters of the Beta distribution $\alpha_i$ and $\beta_i$ are reparameterized in terms of the Beta distribution's
   mode $\omega_i$ and concentration $\kappa_i$.
   The mode of the beta distribution $\omega_i$ is determined by the logistic regression equation
@@ -141,10 +144,10 @@
   parameter $\kappa_i$.
 
   When choosing the prior distribution of the coefficients $\beta_j$ we wish to provide weakly informative
-  priors, i.\ e.\ priors that are ``intentionally weaker than whatever actual prior knowledge is available.''%cite BDA3.
+  priors, i.\ e.\ priors that are ``intentionally weaker than whatever actual prior knowledge is available \cite{bda3}.''
   These priors act as constraints on the possible parameters that are to be sampled. From the literature,
   weakly informative priors for coefficients of logistic regression are chosen to be Student's T distributions
-  with mean 0, degrees of freedom set to 4, and scale 2.5. %cite BDA3
+  with mean 0, degrees of freedom set to 4, and scale 2.5 \cite{bda3}.
   The distribution is centered at 0 since apriori we do not
   know if the coefficient will be positive or negative. The degrees of
   freedom and scale are chosen such that the mass of the corresponding distributions falls between -5 and 5,
@@ -195,7 +198,7 @@
     paper, but the main idea is that the sampler borrows physical principles
     from Hamiltonian mechanics in combination with Monte Carlo simulation in order to compute the posterior density.
     The algorithm uses the Markov property to chooses the next point in the parameter space conditional
-    only on the previous point. %cite pymc3
+    only on the previous point \cite{pymc3}.
 
     An advantage of NUTS over regular HMC is that
     that the NUTS sampler has ``several self-tuning strategies
@@ -248,7 +251,7 @@
       B = \frac{N}{M-1}\sum_{j=1}^M \left(\frac{1}{N}\sum_{i=1}^N\psi_{ij} - \frac{1}{MN}\sum_{j=1}^M \sum_{i=1}^N\psi_{ij}\right)^2 \\
       W = \frac{1}{M(N-1)}\sum_{j=1}^M\sum_{i=1}^N\left(\psi_{ij} - \frac{1}{N}\sum_{i=1}^N\psi_{ij}\right)^2
     \end{align*}
-    respectively. % cite BDA3
+    respectively \cite{bda3}.
     Note that, $\text{Var}(\psi | y)$, the marginal posterior variance of the estimand $\psi$,
     can be estimated by a weighted average of $W$ and $B$, i.\ e.\
     \begin{align*}
@@ -261,7 +264,7 @@
     \begin{align}\label{form:rhat}
       \hat{R} = \sqrt{\frac{\hat{\text{Var}}^+(\psi | y)}{W}} \to 1,
     \end{align}
-    and we can check for approximate convergence by determining if $\hat{R}$ is close to 1. % cite BDA 3
+    and we can check for approximate convergence by determining if $\hat{R}$ is close to 1 \cite{bda3}.
 
     Another diagnostic check is the number of effective samples produced by the simulation, denoted
     by $n_{\text{eff}}$. Since the simulation draws within each sequence will have autocorrelation,
@@ -270,7 +273,7 @@
     \begin{align}\label{form:neff}
       n_{\text{eff}} = \frac{MN}{1 + 2 \sum_{t=1}^\infty \rho_t}
     \end{align}
-    where $\rho_t$ is the autocorrelation of the simulation sequence at lag $t$. % cite BDA 3.
+    where $\rho_t$ is the autocorrelation of the simulation sequence at lag $t$ \cite{bda3}.
     The interested reader can consult Gelman et al.\
     for a technical discussion of how to calculate, $\hat{n_{\text{eff}}}$, an estimate of $n_{\text{eff}}$ for finite sequences.
     The recommendation from BDA3 is that $\hat{n_{\text{eff}}} > 10 M$, i.\ e.\ there are at least 10 independent
@@ -285,7 +288,7 @@
 
 \begin{section}{Validation}
   ``If the model fits, then replicated data under the model should look similar
-  to observed data.'' % Cite BDA3
+  to observed data.'' \cite{bda3}
   Generating data using the posterior density of a model and then
   checking some aspect of the generated data set is similar to the analogous aspect
   of the observed data is called a posterior predictive check.
@@ -302,7 +305,7 @@
 
   The main purpose of posterior predictive checks is to measure the discrepancies between the
   data and the model and to determine if the discrepancies could have occurred by chance under the assumptions
-  of the model. % cite bDA 3
+  of the model \cite{bda3, kruschke}.
 
   \begin{subsection}{Replicated versus Actual Data Distributions}
     The first posterior predictive check we will perform is to assess whether the
@@ -482,10 +485,10 @@
       \end{subfigure}
       \caption{Graphical comparison of distribution of test quantities $T(y^{\text{rep}}, \theta, x)$ versus observed test quantity $T(y, \theta, x)$
         (black) in hold-out data set across networks.}
-      \label{fig:res_test}
+      \label{fig:restest}
     \end{figure}
 
-    The graphical analysis of the above test quantities is shown in Figure \ref{fig:res_test}. As we can see,
+    The graphical analysis of the above test quantities is shown in Figure \ref{fig:restest}. As we can see,
     for the BCST and SPTS networks, the standardized residuals of the replicated data sets do not
     differ in the extremes of the observed data set, while the standardized residuals do for the ETMT network.
     However, the magnitude of the discrepancy is small and we accept this deficiency of the model
@@ -506,18 +509,4 @@
 
   \end{subsection}
 \end{section}
-
-% \begin{section}{Model selection and Sensitivity Analysis}
-%   We use the WAIC to determine the model that has the most predictive accuracy.
-%   The WAIC is chosen because it is Bayesian and able to be compared across models
-%   with same likelihood.
-
-%   Go through the definition of WAIC and explain how it is computed etc.
-
-%   Here we will also check to see if the choice in prior is affecting inference.
-
-%   - Remove the hierarchical nature on the variance parameter and evaluate how inference is affected
-%   - change normal distribution on coefficients to cauchy or student t to see if inference is affected
-% \end{section}
-
 \end{chapter}

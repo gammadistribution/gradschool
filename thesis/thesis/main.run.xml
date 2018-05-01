@@ -44,32 +44,31 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>main.aux</file>
-      <file>main-blx.bib</file>
+      <file>main.bcf</file>
     </provides>
     <requires type="dynamic">
       <file>main.bbl</file>
     </requires>
     <requires type="static">
+      <file>blx-dm.def</file>
       <file>blx-compat.def</file>
       <file>biblatex.def</file>
       <file>blx-natbib.def</file>
-      <file>authoryear.bbx</file>
+      <file>numeric.bbx</file>
       <file>standard.bbx</file>
-      <file>authoryear.cbx</file>
+      <file>numeric.cbx</file>
       <file>biblatex.cfg</file>
       <file>english.lbx</file>
     </requires>
   </internal>
   <external package="biblatex" priority="5" active="0">
-    <generic>bibtex</generic>
+    <generic>biber</generic>
     <cmdline>
-      <binary>bibtex</binary>
-      <option>-min-crossrefs 2</option>
+      <binary>biber</binary>
       <infile>main</infile>
     </cmdline>
     <input>
-      <file>main.aux</file>
+      <file>main.bcf</file>
     </input>
     <output>
       <file>main.bbl</file>
@@ -78,14 +77,10 @@
       <file>main.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>main.aux</file>
-      <file>main-blx.bib</file>
+      <file>main.bcf</file>
     </requires>
     <requires type="editable">
-      <file>example.bib</file>
-    </requires>
-    <requires type="static">
-      <file>biblatex.bst</file>
+      <file>bibliography/thesis.bib</file>
     </requires>
   </external>
 </requests>

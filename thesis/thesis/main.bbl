@@ -1,0 +1,297 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.4 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{nty}{nty}
+    \entry{seasonality}{article}{}
+      \name{labelname}{4}{}{%
+        {{hash=c9f8e2d7f6661d9d074032f984ccc8c3}{Barnet}{B\bibinitperiod}{George\bibnamedelima A.}{G\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=0b5c117ac445256351e21d206b16f20b}{Chang}{C\bibinitperiod}{Hsiu-Jung}{H\bibinithyphendelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=01dfd427836854c76799a55beb8369ef}{Fink}{F\bibinitperiod}{Edward\bibnamedelima L.}{E\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+        {{hash=42ec21d01b12574518974e1847efabb8}{William\bibnamedelimb D.\bibnamedelimi Richard}{W\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim R\bibinitperiod}{Jr.}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{4}{}{%
+        {{hash=c9f8e2d7f6661d9d074032f984ccc8c3}{Barnet}{B\bibinitperiod}{George\bibnamedelima A.}{G\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=0b5c117ac445256351e21d206b16f20b}{Chang}{C\bibinitperiod}{Hsiu-Jung}{H\bibinithyphendelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=01dfd427836854c76799a55beb8369ef}{Fink}{F\bibinitperiod}{Edward\bibnamedelima L.}{E\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+        {{hash=42ec21d01b12574518974e1847efabb8}{William\bibnamedelimb D.\bibnamedelimi Richard}{W\bibinitperiod\bibinitdelim D\bibinitperiod\bibinitdelim R\bibinitperiod}{Jr.}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{9f39e4c5bb928d287281ba9ec1af70b9}
+      \strng{fullhash}{59bc3ad33286a9b6e555c35da5590972}
+      \field{sortinit}{B}
+      \field{sortinithash}{1a3a21dbed09540af12d49a0b14f4751}
+      \field{labeltitle}{Seasonality in Television Viewing: A Mathematical Model of Cultural Processes}
+      \field{journaltitle}{Communication Research}
+      \field{title}{Seasonality in Television Viewing: A Mathematical Model of Cultural Processes}
+      \field{volume}{18}
+      \field{year}{1991}
+      \field{pages}{755\bibrangedash 772}
+    \endentry
+    \entry{calendar}{online}{}
+      \field{sortinit}{B}
+      \field{sortinithash}{1a3a21dbed09540af12d49a0b14f4751}
+      \field{labeltitle}{Broadcast Calendar / Nielsen Survey Dates}
+      \field{howpublished}{https://web.archive.org/web/20111007010739/http://www.tvb.org/planning_buying/179695/5658}
+      \field{note}{Accessed: 2018-04-03}
+      \field{title}{Broadcast Calendar / Nielsen Survey Dates}
+    \endentry
+    \entry{crps}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=e0940be312bdac251b17f4d5c290ab97}{Br{\"{o}}cker}{B\bibinitperiod}{Jochen}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=e0940be312bdac251b17f4d5c290ab97}{Br{\"{o}}cker}{B\bibinitperiod}{Jochen}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{e0940be312bdac251b17f4d5c290ab97}
+      \strng{fullhash}{e0940be312bdac251b17f4d5c290ab97}
+      \field{sortinit}{B}
+      \field{sortinithash}{1a3a21dbed09540af12d49a0b14f4751}
+      \field{labeltitle}{Evaluating raw ensembles with the continuous ranked probability score}
+      \field{journaltitle}{Quarterly Journal of the Royal Meteorological Society}
+      \field{title}{Evaluating raw ensembles with the continuous ranked probability score}
+      \field{volume}{138}
+      \field{year}{2012}
+      \field{pages}{1611\bibrangedash 1617}
+    \endentry
+    \entry{tvforecasting:logit}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=df6c9dd0351c8ec8608ac05528befbfd}{Danaher}{D\bibinitperiod}{Peter\bibnamedelima J.}{P\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=dc68a6190bc3b4184f00d3f5c904293b}{Dagger}{D\bibinitperiod}{Tracey\bibnamedelima S.}{T\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=df6c9dd0351c8ec8608ac05528befbfd}{Danaher}{D\bibinitperiod}{Peter\bibnamedelima J.}{P\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=dc68a6190bc3b4184f00d3f5c904293b}{Dagger}{D\bibinitperiod}{Tracey\bibnamedelima S.}{T\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{aa59a51faa7a9754a01320b5891a26d8}
+      \strng{fullhash}{aa59a51faa7a9754a01320b5891a26d8}
+      \field{sortinit}{D}
+      \field{sortinithash}{a01c54d1737685bc6dbf0ea0673fa44c}
+      \field{labeltitle}{Using a nested logit model to forecast television ratings}
+      \field{journaltitle}{International Journal of Forecasting}
+      \field{title}{Using a nested logit model to forecast television ratings}
+      \field{volume}{28}
+      \field{year}{2012}
+      \field{pages}{607\bibrangedash 622}
+    \endentry
+    \entry{tvforecasting}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=df6c9dd0351c8ec8608ac05528befbfd}{Danaher}{D\bibinitperiod}{Peter\bibnamedelima J.}{P\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=dc68a6190bc3b4184f00d3f5c904293b}{Dagger}{D\bibinitperiod}{Tracey\bibnamedelima S.}{T\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+        {{hash=386b6d7710f49b2bf6d291a0229b331c}{Smith}{S\bibinitperiod}{Michael\bibnamedelima S.}{M\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=df6c9dd0351c8ec8608ac05528befbfd}{Danaher}{D\bibinitperiod}{Peter\bibnamedelima J.}{P\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=dc68a6190bc3b4184f00d3f5c904293b}{Dagger}{D\bibinitperiod}{Tracey\bibnamedelima S.}{T\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+        {{hash=386b6d7710f49b2bf6d291a0229b331c}{Smith}{S\bibinitperiod}{Michael\bibnamedelima S.}{M\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{33e78538ff466815d396e6cc0983913b}
+      \strng{fullhash}{33e78538ff466815d396e6cc0983913b}
+      \field{sortinit}{D}
+      \field{sortinithash}{a01c54d1737685bc6dbf0ea0673fa44c}
+      \field{labeltitle}{Forecasting television ratings}
+      \field{journaltitle}{International Journal of Forecasting}
+      \field{title}{Forecasting television ratings}
+      \field{volume}{27}
+      \field{year}{2011}
+      \field{pages}{1215\bibrangedash 1240}
+    \endentry
+    \entry{gelman:prior}{article}{}
+      \name{labelname}{1}{}{%
+        {{hash=1e1eb60e3b6e222217bf8e9b24070b28}{Gelman}{G\bibinitperiod}{Andrew}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=1e1eb60e3b6e222217bf8e9b24070b28}{Gelman}{G\bibinitperiod}{Andrew}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{1e1eb60e3b6e222217bf8e9b24070b28}
+      \strng{fullhash}{1e1eb60e3b6e222217bf8e9b24070b28}
+      \field{sortinit}{G}
+      \field{sortinithash}{480ee01f9ffd559b3258d822f54a8ac2}
+      \field{labeltitle}{Prior distributions for variance parameters in hierarchical models}
+      \field{journaltitle}{Bayesian Analysis}
+      \field{title}{Prior distributions for variance parameters in hierarchical models}
+      \field{volume}{1}
+      \field{year}{2006}
+      \field{pages}{515\bibrangedash 533}
+    \endentry
+    \entry{gelman:book}{book}{}
+      \name{labelname}{2}{}{%
+        {{hash=1e1eb60e3b6e222217bf8e9b24070b28}{Gelman}{G\bibinitperiod}{Andrew}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=1fd6540b91678ae8d3f51574305d2455}{Hill}{H\bibinitperiod}{Jennifer}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=1e1eb60e3b6e222217bf8e9b24070b28}{Gelman}{G\bibinitperiod}{Andrew}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=1fd6540b91678ae8d3f51574305d2455}{Hill}{H\bibinitperiod}{Jennifer}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge}%
+      }
+      \strng{namehash}{602df721bcd10fe1eca95cb5554d134b}
+      \strng{fullhash}{602df721bcd10fe1eca95cb5554d134b}
+      \field{sortinit}{G}
+      \field{sortinithash}{480ee01f9ffd559b3258d822f54a8ac2}
+      \field{labeltitle}{Data Analysis Using Regression and Multilevel/Hierarchical Models}
+      \field{edition}{First}
+      \field{title}{Data Analysis Using Regression and Multilevel/Hierarchical Models}
+      \field{year}{2007}
+    \endentry
+    \entry{bda3}{book}{}
+      \name{labelname}{6}{}{%
+        {{hash=1e1eb60e3b6e222217bf8e9b24070b28}{Gelman}{G\bibinitperiod}{Andrew}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=a9dc7431f2554b66f2a02255050dd692}{Carlin}{C\bibinitperiod}{Jon\bibnamedelima B.}{J\bibinitperiod\bibinitdelim B\bibinitperiod}{}{}{}{}}%
+        {{hash=1d67b4656f9551333d9785747b11cf8b}{Stern}{S\bibinitperiod}{Hal\bibnamedelima S.}{H\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+        {{hash=d0372712969a665b40376f6322d14e39}{Dunson}{D\bibinitperiod}{David\bibnamedelima B.}{D\bibinitperiod\bibinitdelim B\bibinitperiod}{}{}{}{}}%
+        {{hash=5d36e97683cbc9d6ef06fc2ec40becb0}{Vehtari}{V\bibinitperiod}{Aki}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=37fe180f849ae0085cba2b45692be375}{Rubin}{R\bibinitperiod}{Donald\bibnamedelima B.}{D\bibinitperiod\bibinitdelim B\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{6}{}{%
+        {{hash=1e1eb60e3b6e222217bf8e9b24070b28}{Gelman}{G\bibinitperiod}{Andrew}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=a9dc7431f2554b66f2a02255050dd692}{Carlin}{C\bibinitperiod}{Jon\bibnamedelima B.}{J\bibinitperiod\bibinitdelim B\bibinitperiod}{}{}{}{}}%
+        {{hash=1d67b4656f9551333d9785747b11cf8b}{Stern}{S\bibinitperiod}{Hal\bibnamedelima S.}{H\bibinitperiod\bibinitdelim S\bibinitperiod}{}{}{}{}}%
+        {{hash=d0372712969a665b40376f6322d14e39}{Dunson}{D\bibinitperiod}{David\bibnamedelima B.}{D\bibinitperiod\bibinitdelim B\bibinitperiod}{}{}{}{}}%
+        {{hash=5d36e97683cbc9d6ef06fc2ec40becb0}{Vehtari}{V\bibinitperiod}{Aki}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=37fe180f849ae0085cba2b45692be375}{Rubin}{R\bibinitperiod}{Donald\bibnamedelima B.}{D\bibinitperiod\bibinitdelim B\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {CRC Press}%
+      }
+      \strng{namehash}{7b511f44eded88e08c98470ecd75568d}
+      \strng{fullhash}{3b0134ec63e2b3c49dc6e0f90bcab8d4}
+      \field{sortinit}{G}
+      \field{sortinithash}{480ee01f9ffd559b3258d822f54a8ac2}
+      \field{labeltitle}{Bayesian Data Analysis}
+      \field{edition}{Third}
+      \field{title}{Bayesian Data Analysis}
+      \field{year}{2013}
+    \endentry
+    \entry{comptv}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=5036db0889312d6adcb626b612d8a339}{Gensch}{G\bibinitperiod}{Dennis}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=d8f5312d8e8713edf9943f58ead6fc70}{Shaman}{S\bibinitperiod}{Paul}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=5036db0889312d6adcb626b612d8a339}{Gensch}{G\bibinitperiod}{Dennis}{D\bibinitperiod}{}{}{}{}}%
+        {{hash=d8f5312d8e8713edf9943f58ead6fc70}{Shaman}{S\bibinitperiod}{Paul}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{81efc8022ab00d5457ca7d6e8abb27e7}
+      \strng{fullhash}{81efc8022ab00d5457ca7d6e8abb27e7}
+      \field{sortinit}{G}
+      \field{sortinithash}{480ee01f9ffd559b3258d822f54a8ac2}
+      \field{labeltitle}{Models of Competitive Television Ratings}
+      \field{journaltitle}{Journal of Marketing Research}
+      \field{title}{Models of Competitive Television Ratings}
+      \field{volume}{17}
+      \field{year}{1980}
+      \field{pages}{307\bibrangedash 315}
+    \endentry
+    \entry{cauchy:priors}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=7c4317705fc22b9c945903e63d0acea6}{{Ghosh}}{G\bibinitperiod}{J.}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=38fcf426aad9f6b84953f797dca3a801}{{Li}}{L\bibinitperiod}{Y.}{Y\bibinitperiod}{}{}{}{}}%
+        {{hash=7ccf50232347adc431291611c4dfeb4c}{{Mitra}}{M\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=7c4317705fc22b9c945903e63d0acea6}{{Ghosh}}{G\bibinitperiod}{J.}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=38fcf426aad9f6b84953f797dca3a801}{{Li}}{L\bibinitperiod}{Y.}{Y\bibinitperiod}{}{}{}{}}%
+        {{hash=7ccf50232347adc431291611c4dfeb4c}{{Mitra}}{M\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{bbb7086cfb10091f740181336482be81}
+      \strng{fullhash}{bbb7086cfb10091f740181336482be81}
+      \field{sortinit}{G}
+      \field{sortinithash}{480ee01f9ffd559b3258d822f54a8ac2}
+      \field{labeltitle}{{On the Use of Cauchy Prior Distributions for Bayesian Logistic Regression}}
+      \field{eprintclass}{stat.ME}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{ArXiv e-prints}
+      \field{month}{07}
+      \field{title}{{On the Use of Cauchy Prior Distributions for Bayesian Logistic Regression}}
+      \field{year}{2015}
+      \verb{eprint}
+      \verb 1507.07170
+      \endverb
+      \keyw{Statistics - Methodology}
+    \endentry
+    \entry{cauchy}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=cdc78a8fdd713b6fb5d9912aefd6fdf2}{Ghosh}{G\bibinitperiod}{Joyee}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=c0ad45bc7e327508a8422f7a385e97e5}{Li}{L\bibinitperiod}{Yingbo}{Y\bibinitperiod}{}{}{}{}}%
+        {{hash=4ef5e1aa35aae40f08d21f383904c965}{Mitra}{M\bibinitperiod}{Robin}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=cdc78a8fdd713b6fb5d9912aefd6fdf2}{Ghosh}{G\bibinitperiod}{Joyee}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=c0ad45bc7e327508a8422f7a385e97e5}{Li}{L\bibinitperiod}{Yingbo}{Y\bibinitperiod}{}{}{}{}}%
+        {{hash=4ef5e1aa35aae40f08d21f383904c965}{Mitra}{M\bibinitperiod}{Robin}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{45e1f667c991e875451b3e340dc1476b}
+      \strng{fullhash}{45e1f667c991e875451b3e340dc1476b}
+      \field{sortinit}{G}
+      \field{sortinithash}{480ee01f9ffd559b3258d822f54a8ac2}
+      \field{labeltitle}{On the Use of Cauchy Prior Distributions for Bayesian Logistic Regression}
+      \field{journaltitle}{Journal of Marketing Research}
+      \field{title}{On the Use of Cauchy Prior Distributions for Bayesian Logistic Regression}
+      \field{volume}{17}
+      \field{year}{1980}
+      \field{pages}{307\bibrangedash 315}
+    \endentry
+    \entry{pymc3}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=737124641db45f0c454bfbf154bbdf5a}{J.}{J\bibinitperiod}{Salvatier}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=26f22244dcae5ced9838156f5e9aeb77}{T.V.}{T\bibinitperiod}{Wiecki}{W\bibinitperiod}{}{}{}{}}%
+        {{hash=a11f2c8d20019d8d0b9a579029d3a730}{C.}{C\bibinitperiod}{Fonnesbeck}{F\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=737124641db45f0c454bfbf154bbdf5a}{J.}{J\bibinitperiod}{Salvatier}{S\bibinitperiod}{}{}{}{}}%
+        {{hash=26f22244dcae5ced9838156f5e9aeb77}{T.V.}{T\bibinitperiod}{Wiecki}{W\bibinitperiod}{}{}{}{}}%
+        {{hash=a11f2c8d20019d8d0b9a579029d3a730}{C.}{C\bibinitperiod}{Fonnesbeck}{F\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{6f14a9bd236eb7cb2f846ab2126eaa77}
+      \strng{fullhash}{6f14a9bd236eb7cb2f846ab2126eaa77}
+      \field{sortinit}{J}
+      \field{sortinithash}{f75b22df8c340a961dce37019e29107f}
+      \field{labeltitle}{Probabilistic programming in Python using PyMC3.}
+      \field{journaltitle}{PeerJ Computer Science}
+      \field{title}{Probabilistic programming in Python using PyMC3.}
+      \field{volume}{2:e55}
+      \field{year}{2016}
+      \verb{doi}
+      \verb "10.7717/peerj-cs.55"
+      \endverb
+    \endentry
+    \entry{kruschke}{book}{}
+      \name{labelname}{1}{}{%
+        {{hash=39392e503bcb42b8420c3ea1a7978474}{Kruschke}{K\bibinitperiod}{John\bibnamedelima K.}{J\bibinitperiod\bibinitdelim K\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{1}{}{%
+        {{hash=39392e503bcb42b8420c3ea1a7978474}{Kruschke}{K\bibinitperiod}{John\bibnamedelima K.}{J\bibinitperiod\bibinitdelim K\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{39392e503bcb42b8420c3ea1a7978474}
+      \strng{fullhash}{39392e503bcb42b8420c3ea1a7978474}
+      \field{sortinit}{K}
+      \field{sortinithash}{33bf4c961fa093ee6a297ccbd88eacc0}
+      \field{labeltitle}{Doing Bayesian Data Analysis: A Tutorial with R, JAGS, and Stan}
+      \field{edition}{Second}
+      \field{title}{Doing Bayesian Data Analysis: A Tutorial with R, JAGS, and Stan}
+      \field{year}{2015}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

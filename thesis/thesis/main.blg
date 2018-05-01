@@ -1,0 +1,18 @@
+[0] Config.pm:321> INFO - This is Biber 1.9
+[0] Config.pm:324> INFO - Logfile is 'main.blg'
+[22] biber:277> INFO - === Tue May  1, 2018, 16:32:43
+[22] Biber.pm:334> INFO - Reading 'main.bcf'
+[70] Biber.pm:633> INFO - Using all citekeys in bib section 0
+[81] Biber.pm:3052> INFO - Processing section 0
+[94] Biber.pm:3190> INFO - Looking for bibtex format file 'bibliography/thesis.bib' for section 0
+[95] bibtex.pm:979> INFO - Decoding LaTeX character macros into UTF-8
+[96] bibtex.pm:853> INFO - Found BibTeX data source 'bibliography/thesis.bib'
+[97] Utils.pm:144> WARN - Duplicate entry key: 'gelman:prior' in file 'bibliography/thesis.bib', skipping ...
+[183] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[183] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[183] Biber.pm:2929> INFO - Sorting list 'nty' of type 'entry' with scheme 'nty' and locale 'en-US'
+[183] Biber.pm:2933> INFO - No sort tailoring available for locale 'en-US'
+[205] bbl.pm:517> INFO - Writing 'main.bbl' with encoding 'ascii'
+[206] Utils.pm:144> WARN - The entry 'crps' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
+[208] bbl.pm:606> INFO - Output to main.bbl
+[208] Biber.pm:107> INFO - WARNINGS: 2

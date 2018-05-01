@@ -43,21 +43,20 @@ headsepline, % Uncomment to get a line under the header
 % \usepackage[T1]{fontenc} % Output font encoding for international characters
 \usepackage{amsmath}
 \usepackage{mathpazo} % Use the Palatino font by default
-% \usepackage{sfmath}
 \usepackage{adjustbox}
 \usepackage{pbox}
 \usepackage{rotating}
 \usepackage{subcaption}
-\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage{amssymb}
 
-\addbibresource{example.bib} % The filename of the bibliography
 
+\usepackage[backend=biber,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\addbibresource{bibliography/thesis.bib} % The filename of the bibliography
+
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
 
 \graphicspath{ {images/} }
 
-
-\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
-\usepackage{amssymb}
 
 \makeatletter
 \def\@makechapterhead#1{%
@@ -255,6 +254,7 @@ The acknowledgments and the people to thank go here, don't forget to include you
 \include{chapters/model}
 \include{chapters/results}
 \include{chapters/conclusion}
+\cite{bda3}
 
 %----------------------------------------------------------------------------------------
 %   THESIS CONTENT - APPENDICES
@@ -272,10 +272,8 @@ The acknowledgments and the people to thank go here, don't forget to include you
 %----------------------------------------------------------------------------------------
 %   BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
-
-\printbibliography[heading=bibintoc]
-
-
+\nocite{*}
+\printbibliography[title={References}]
 %----------------------------------------------------------------------------------------
 
 \end{document}

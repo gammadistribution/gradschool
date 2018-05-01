@@ -24,4 +24,12 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {4.1}{\ignorespaces Error metrics of the predicted data and the observed data in the hold-out set. Note that $\mathcal {M}$ MAE is computed using the point forecast of the probabilistic forecasts. The average value of $m_i^A$ is presented to illustrate the magnitude of the errors.\relax }}{22}{table.caption.66}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {4.2}{\ignorespaces .\relax }}{23}{table.caption.68}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {4.3}{\ignorespaces Example data set used for model for two selling title airings.\relax }}{24}{table.caption.70}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {4.4}{\ignorespaces Example data set used for model for two selling title airings.\relax }}{24}{table.caption.71}
+\defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
