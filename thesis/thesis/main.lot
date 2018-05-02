@@ -6,30 +6,30 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {2.1}{\ignorespaces Example linear media schedule data for two selling title airings.\relax }}{3}{table.caption.18}
+\contentsline {table}{\numberline {2.1}{\ignorespaces Example linear media schedule data for two selling title airings.\relax }}{3}{table.caption.15}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {2.2}{\ignorespaces Example forecasted demographic impressions data for two selling title weeks.\relax }}{4}{table.caption.20}
+\contentsline {table}{\numberline {2.2}{\ignorespaces Example forecasted demographic impressions data for two selling title weeks.\relax }}{4}{table.caption.17}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {2.3}{\ignorespaces Example program table data for two historical program airings.\relax }}{4}{table.caption.22}
+\contentsline {table}{\numberline {2.3}{\ignorespaces Example program table data for two historical program airings.\relax }}{4}{table.caption.19}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {2.4}{\ignorespaces Example viewing table data for one respondent's viewing on historical program airings from Table \ref {tab:amprogram}.\relax }}{5}{table.caption.23}
+\contentsline {table}{\numberline {2.4}{\ignorespaces Example viewing table data for one respondent's viewing on historical program airings from Table \ref {tab:amprogram}.\relax }}{5}{table.caption.20}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {2.5}{\ignorespaces Example data set used for model for two selling title airings.\relax }}{6}{table.caption.26}
-\defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
-\defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {3.1}{\ignorespaces Evaluation of Test Quantities across networks.\relax }}{16}{table.caption.57}
-\defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {3.2}{\ignorespaces Evaluation of test quantity $T(y, \theta , x)$ using the hold-out data set across networks.\relax }}{17}{table.caption.61}
+\contentsline {table}{\numberline {2.5}{\ignorespaces Example data set used for model for two selling title airings.\relax }}{6}{table.caption.23}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {4.1}{\ignorespaces Error metrics of the predicted data and the observed data in the hold-out set. Note that $\mathcal {M}$ MAE is computed using the point forecast of the probabilistic forecasts. The average value of $m_i^A$ is presented to illustrate the magnitude of the errors.\relax }}{20}{table.caption.66}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Evaluation of Test Quantities across networks.\relax }}{16}{table.caption.54}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {4.2}{\ignorespaces Proportion of units of observation that are within the listed Credible Region.\relax }}{21}{table.caption.68}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Evaluation of test quantity $T(y, \theta , x)$ using the hold-out data set across networks.\relax }}{17}{table.caption.58}
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {4.3}{\ignorespaces Error metrics of the predicted data and the observed data in the hold-out set for the quantiled units of observation across the three networks.\relax }}{22}{table.caption.71}
+\addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {4.4}{\ignorespaces Proportion of quantiles that are within the listed Credible Region.\relax }}{23}{table.caption.72}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Error metrics of the predicted data and the observed data in the hold-out set. Note that $\mathcal {M}$ MAE is computed using the point forecast of the probabilistic forecasts. The average value of $m_i^A$ is presented to illustrate the magnitude of the errors.\relax }}{20}{table.caption.63}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {4.2}{\ignorespaces Proportion of units of observation that are within the listed Credible Region.\relax }}{21}{table.caption.65}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {4.3}{\ignorespaces Error metrics of the predicted data and the observed data in the hold-out set for the quantiled units of observation across the three networks.\relax }}{22}{table.caption.68}
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {4.4}{\ignorespaces Proportion of quantiles that are within the listed Credible Region.\relax }}{23}{table.caption.69}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }

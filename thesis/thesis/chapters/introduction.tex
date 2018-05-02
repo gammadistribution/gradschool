@@ -1,78 +1,72 @@
 \begin{chapter}{Introduction}\label{introduction}
-  The world of advertising today consists of
+  The world of advertising today consists of a multitude of options
+  for delivering a message to a targeted audience, but the relevance of TV advertising
+  remains as important as ever.
 
-  We are trying to provide better linear tv media plans.
-
-  We will use the theory of Bayesian statistics to develop a model that
-  will forecast future telecast airings' audience impression concentration
-  distributions corrected for small sample sizes present in the measurement
-  training data.
+  Thus, the need to correctly account for and forecast audience viewership is not surprising.
+  Throughout this paper we discuss why that need exists, the challenges of providing such forecasts,
+  and a solution to the issue at hand.
 
 \begin{section}{Background}
-  TV sellers have airtime available for sale to be used to air advertisements.
-  TV buyers purchase airtime from sellers in order to air their desired advertisemensts.
+  The TV advertising landscape consists of TV sellers, who have airtime available
+  for sale to be used to air advertisements, and TV buyers, who purchase airtime
+  from TV sellers in order to air their desired advertisements.
 
-  TV buyers want to buy ad airtime that will help them share their message
-  with a target audience.
+  In the normal course of events, TV buyers specify the target metrics that
+  they wish to achieve through advertising such as meeting a certain number of impressions within their demographic target audience,
+  i.\ e.\ a certain number of advertisement views.
+  The TV sellers then create a media plan, which is a collection of advertising spots/units, to present to the TV buyer.
+  The basis of the media plan is the forecasted number of demographic (or buy-demo) impressions for each unit.
+  These demographic impressions are called the buy-demo impressions because the TV buyer is charged
+  based off of the total number of forecasted demographic impressions in a media plan .
+  The TV buyer then accepts or proposes changes to the media plan and eventually
+  a deal is struck and the units are set to air. These buy-demo impressions are guaranteed to
+  the TV buyer and additional units will be added in order to achieve that guarantee \cite{tvforecasting}. Thus, the need
+  for accurate forecasts becomes clear under this paradigm.
 
-  A media plan consists of an allocation of a number of equivalized units to
-  a collection of selling title / weeks.
+  In addition to having a demographic target audience, the TV buyer may also have some sub-population
+  target in mind, called a strategic target audience. It is then the job of the TV seller to
+  provide forecasted in-target impressions for each unit in order to generate the media plan.
+  The forecasted strategic target impressions are generated based off the
+  forecasted buy-demo impressions since it is the latter
+  that form the currency of the media plan.
 
-  Audience measurement companies provide measurements television viewership.
-  Some companies take these measurements using a statistical sample of the
-  TV viewing population and tracking the viewership of that sample and extrapolating
-  to the population at large.
-
-  TV sellers bundle together airtime into a unit called a selling title.
-  This unit contains logically grouped airings of content. Sometimes the content
-  within the selling title is specific, other times it's a blend of content packaged together.
-
-  An example of a piece of content available is \textit{Funny Animated Cartoon}
-  and an example of a selling title woudl be \textit{Funny Animated Cartoon M-F 8PM}.
-
-  TV sellers accept media plans allocated at the selling title/week level and then
-  as the flight date approaches determine the actual ad schedule that will air.
-  This is known as trafficking the ads.
-
-  The planning is done based off of demo estimates, which are impression estimates of
-  a particular age/gender demographic. The TV seller provided these estimates
-  using their substantive knowledge. The planning for strategic targets is
-  done by forecasting a percentage. The resulting forecast is then the percentage multiplied by the forecasted
-  demo estimate
-
-\end{section}
-
-\begin{section}{Motivation}
-  The sample sizes used for the majority of telecasts in the measurement source
-  are too small to be trusted on their own. This is the major challenge of providing
-  forecasts for media plans; using the data on its own will produce inaccurate
-  forecasts that do not take into account the small sample size.
-
-  (Show picture of sample sizes in networks)
-
-  A motivating example is related to evaluating the performance of baseball players: players are judged by their
-  batting average but this metric is not informative with few at-bats. With more
-  information about the league and past historical performances we can use bayesian
-  inference to come up with a better estimate that takes such factors into account
-  as well as the observed at-bats.
-
-  Simiarly, we hope to use the data from past airings to perform better inference
-  on telecasts with small sample sizes.
+  Note that the forecasts that are used by TV sellers are based off of
+  television viewership as measured through audience measurement companies. Some companies
+  provide such measurements
+  using a statistical sample of the TV viewing population
+  and track the viewership of that sample, extrapolating to the population at large.
+  However, such approaches have disadvantages as will be discussed in the coming sections.
 \end{section}
 
 \begin{section}{Challenges}
-  Low sample size must be addressed.
-  Variance within selling-title/week.
-  Impression estimates are tied to demo forecasts.
+  For the audience measurement source used for this paper, the sample sizes
+  present on an individual program airing are orders of magnitude smaller than the statistical panel sample.
+  The issue is exacerbated on networks that have low viewership and is made worse when
+  the strategic target is small relative to the national population.
+  This is the major challenge of providing forecasts for media plans;
+  the measurements provided through the measurement company are based off of a sample
+  and results in noisy data for the typical past program airing.
 
-  For the purposes of this thesis we will be addressing the first issue alone.
-  We will assume for testing that we know the outcome of the demo with prescience and
-  that we can traffick the ads wherever we want.
+  A related problem exists in evaluating the performance of baseball players:
+  players are judged by their batting average (percentage of hits) but this metric is not informative when
+  the player has few at-bats. With more information about the league and past historical performances we are able to
+  come up with a better estimate that takes such factors into account
+  as well as the observed at-bats through Bayesian inference.
+
+  Thus, we adopt the use of a similar approach in order to create better forecasts when
+  small sample sizes occur in past airings data.
 \end{section}
 
 \begin{section}{Problem Description}
-  Summarize the challenges and what we are trying to solve. Specifically,
-  given the ``noisy'' measurement data and the supplier data, can we create model
-  to forecast the in-target impressions for future selling title airings with some degree of accuracy.
+  Given the challenges outlined above, the problem this paper aims to solve is whether or not
+  we can devise a model using
+  the noisy measurement data as well as the TV supplier data that will accurately
+  forecast the strategic target impressions for future program airings.
+  In addition to accuracy, forecasting the range of possible outcomes for each future airing is desired
+  so as to understand the probability that an advertiser will reach their targeting goals given a media plan.
+
+  To this end, we use the theory of Bayesian statistics to develop such a model
+  and provide the desired forecasts.
 \end{section}
 \end{chapter}

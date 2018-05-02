@@ -1969,24 +1969,25 @@
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1">tvforecasting</bcf:citekey>
-    <bcf:citekey order="2">bda3</bcf:citekey>
-    <bcf:citekey order="3">calendar</bcf:citekey>
-    <bcf:citekey order="4">tvforecasting</bcf:citekey>
-    <bcf:citekey order="5">bda3</bcf:citekey>
+    <bcf:citekey order="2">tvforecasting</bcf:citekey>
+    <bcf:citekey order="3">bda3</bcf:citekey>
+    <bcf:citekey order="4">calendar</bcf:citekey>
+    <bcf:citekey order="5">tvforecasting</bcf:citekey>
     <bcf:citekey order="6">bda3</bcf:citekey>
-    <bcf:citekey order="6">kruschke</bcf:citekey>
     <bcf:citekey order="7">bda3</bcf:citekey>
+    <bcf:citekey order="7">kruschke</bcf:citekey>
     <bcf:citekey order="8">bda3</bcf:citekey>
-    <bcf:citekey order="9">pymc3</bcf:citekey>
-    <bcf:citekey order="10">bda3</bcf:citekey>
+    <bcf:citekey order="9">bda3</bcf:citekey>
+    <bcf:citekey order="10">pymc3</bcf:citekey>
     <bcf:citekey order="11">bda3</bcf:citekey>
     <bcf:citekey order="12">bda3</bcf:citekey>
     <bcf:citekey order="13">bda3</bcf:citekey>
     <bcf:citekey order="14">bda3</bcf:citekey>
-    <bcf:citekey order="14">kruschke</bcf:citekey>
-    <bcf:citekey order="15">tvforecasting</bcf:citekey>
-    <bcf:citekey order="16">crps</bcf:citekey>
-    <bcf:citekey order="17">bda3</bcf:citekey>
+    <bcf:citekey order="15">bda3</bcf:citekey>
+    <bcf:citekey order="15">kruschke</bcf:citekey>
+    <bcf:citekey order="16">tvforecasting</bcf:citekey>
+    <bcf:citekey order="17">crps</bcf:citekey>
+    <bcf:citekey order="18">bda3</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty" type="entry" sortscheme="nty">
