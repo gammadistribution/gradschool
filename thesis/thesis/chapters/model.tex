@@ -61,17 +61,17 @@
       ``viewing a program on the same [network] prior to the current program enhances the viewing of the current program''
       by allowing for random effects based off the of the content identifier that aired immediately prior to the unit of observation \cite{tvforecasting}.
       This covariate will be set to 0 if there was no prior airing within 15 minutes of the start of a program airing.
-    \item First-run - This covariate denotes if this is the first time that the program content has aired where the covariate
-      is 1 if the content has not aired previously and 0 if the specific program has aired before, i.e.\ the program is a ``repeat''.
-      This information is obtained through the measurement source.
+    \item Genre - The genre associated to the airing which are categorizations
+      of programs based off of the associated content per the measurement source.
+      Some examples of the genre are Animation, General Drama, and Sports Entertainment.
     \item Live-program - This covariate denotes if the program is airing as the event is occurring per the measurement source
       where 1 indicates that the program is airing live and 0 otherwise.
       A typical example of a program airing that has a live-program value is a sports event such as a soccer game.
       Note that this value per the measurement source is 0 for all airings on the BCST network so it is excluded from
       that network's model definition.
-    \item Genre - The genre associated to the airing which are categorizations
-      of programs based off of the associated content per the measurement source.
-      Some examples of the genre are Animation, General Drama, and Sports Entertainment.
+    \item First-run - This covariate denotes if this is the first time that the program content has aired where the covariate
+      is 1 if the content has not aired previously and 0 if the specific program has aired before, i.e.\ the program is a ``repeat''.
+      This information is obtained through the measurement source.
     \end{enumerate}
   \end{subsection}
 
@@ -122,7 +122,8 @@
   mode $\omega_i$ and concentration $\kappa_i$.
   The mode of the beta distribution $\omega_i$ is determined by the logistic regression equation
   of the model covariates while
-  the concentration of the beta distribution $\kappa_i$ has an exponential distribution dependent on the model covariates.
+  the concentration of the beta distribution $\kappa_i$ has an exponential distribution dependent upon the
+  first run covariate which we list as the $m$-th covariate for convenience.
   We place Student's T distributons on the coefficients of the model covariates. Further, since each model covariate is categorical,
   we place a hierarchical structure on the model such that each category within a covariate receives its own coefficient
   but the coefficients themselves are drawn from the same distribution. This type of model is known as a hierarchical logistic regression model.
@@ -131,9 +132,9 @@
   the above description of the model $\mathcal{M}$ can be written as follows:
   \begin{align*}
     y_i | X_i, n_i, \pi_i, \omega_i, \kappa_i &\sim \text{Bin}(n_i, \pi_i) \\
-    \pi_i | \omega_i, \kappa_i &\sim \text{Beta}\left(\omega_i \kappa_l + 1, (1 - \omega_i) \kappa_l + 1\right) \\
-    \omega_i &= \logit^{-1}\left(\beta_0 + \sum_{j=1}^m  \beta_j X_{ij}\right), \quad \beta_j \sim t_4(0, \sigma_j^2) \\
-    \kappa_i | X_i &\sim \text{Exp}(\lambda_l X_{il})
+    \pi_i | \omega_i, \kappa_i &\sim \text{Beta}\left(\omega_i \kappa_i + 1, (1 - \omega_i) \kappa_i + 1\right) \\
+    \omega_i &= \logit^{-1}\left(\beta_0 + \sum_{j=1}^m  \beta_j X_{ij}\right), \quad \beta_j \sim t_4(0, \sigma_j^2) \quad \text{for $0 \leq j \leq m$}\\
+    \kappa_i | X_{im} &\sim \text{Exp}(\lambda_p X_{im}), \quad \text{for $p = 0, 1$}
   \end{align*}
   where $\logit^{-1}(\alpha) = \frac{\exp{\alpha}}{1 + \exp{\alpha}}$.
 \end{section}
