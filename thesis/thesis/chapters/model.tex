@@ -8,7 +8,7 @@
 
   \begin{subsection}{Units of Observation and Analysis}
     As mentioned in Section \ref{data:used}, the units of observation for this model
-    are individual content airings in the linear media schedule. The outcome
+    are individual content airings in the media schedule. The outcome
     variable that is measured for each unit $i$ is $m_i^A$, the ACM of target $A$, which we
     denote as $y_i$ for notational convenience. Similarly, we denote $m_i^B$, the ACM of
     target $B$ for unit $i$ by $n_i$.
@@ -20,7 +20,7 @@
     a better understanding of basic model performance.
   \end{subsection}
 
-  \begin{subsection}{Covariates}
+  \begin{subsection}{Covariates}\label{model:covariates}
     There are two types of covariates that will be used in constructing the model: time covariates and program
     covariates. Time covariates relate to the time in which the unit of observation airs
     while program covariates relate to the a unit of observation's content.
@@ -32,7 +32,7 @@
     allowed for random effects for each program. Further, the forecast accuracy was greatest when a
     separate model was fit for each network.
     Thus, we proceed to include the time and program covariates mentioned, plus a content
-    covariate that indicates per the linear media schedule the program that will air. See below
+    covariate that indicates per the media schedule the program that will air. See below
     for a detailed outline of the covariates that will be used. Binary
     covariates are ``shifted to have a mean of 0 and to differ by 1 in their upper and lower conditions'' per Gelman et al \cite{bda3}.
 
@@ -53,7 +53,7 @@
         \item late fringe - The hour associated to a program airing start time is 23, 0, or 1.
         \item graveyard - The hour associated to a program airing start time is between 2 and 5, inclusive.
       \end{itemize}
-    \item Content - The identifier denoting the content associated with the program airing per the linear media schedule.
+    \item Content - The identifier denoting the content associated with the program airing per the media schedule.
       This covariate will be set to -1 if the content is considered a ``new program'', i.e.\ the content only airs in
       the hold-out set and not in the train set.
     \item Lead-in Content -
