@@ -54,7 +54,7 @@
         \item graveyard - The hour associated to a program airing start time is between 2 and 5, inclusive.
       \end{itemize}
     \item Content - The identifier denoting the content associated with the program airing per the linear media schedule.
-      This covariate will be set to -1 if the content is considered a ``new program'', i.\ e.\ the content only airs in
+      This covariate will be set to -1 if the content is considered a ``new program'', i.e.\ the content only airs in
       the hold-out set and not in the train set.
     \item Lead-in Content -
       This covariate intends to capture the ``lead-in effect'' where
@@ -62,7 +62,7 @@
       by allowing for random effects based off the of the content identifier that aired immediately prior to the unit of observation \cite{tvforecasting}.
       This covariate will be set to 0 if there was no prior airing within 15 minutes of the start of a program airing.
     \item First-run - This covariate denotes if this is the first time that the program content has aired where the covariate
-      is 1 if the content has not aired previously and 0 if the specific program has aired before, i.\ e.\ the program is a ``repeat''.
+      is 1 if the content has not aired previously and 0 if the specific program has aired before, i.e.\ the program is a ``repeat''.
       This information is obtained through the measurement source.
     \item Live-program - This covariate denotes if the program is airing as the event is occurring per the measurement source
       where 1 indicates that the program is airing live and 0 otherwise.
@@ -90,7 +90,7 @@
     is the \emph{posterior density} and is the main goal of Bayesian inference.
 
     Bayes' Theorem states that the posterior density is proportional to the product
-    of the likelihood and the prior distribution, i.\ e.\
+    of the likelihood and the prior distribution, i.e.\
     \begin{align}\label{form:bayes}
       p(\theta | y) \propto p(y | \theta) p(\theta)
     \end{align}
@@ -115,7 +115,7 @@
   and the covariates of the unit $i$. Since target $A$ is
   contained in $B$ and we are given $n_i$, it is natural to model the likelihood of
   $y_i$ as a binomial distribution with unknown probability parameter $\pi_i$. This parameter
-  represents the proportion of successes, $y_i$, given the number of trials, i.\ e.\ $n_i$.
+  represents the proportion of successes, $y_i$, given the number of trials, i.e.\ $n_i$.
   The prior distribution of the parameter $\pi_i$ is modeled as a Beta distribution which
   is common throughout the literature \cite{bda3, kruschke}.
   The hyper parameters of the Beta distribution $\alpha_i$ and $\beta_i$ are reparameterized in terms of the Beta distribution's
@@ -144,7 +144,7 @@
   parameter $\kappa_i$.
 
   When choosing the prior distribution of the coefficients $\beta_j$ we wish to provide weakly informative
-  priors, i.\ e.\ priors that are ``intentionally weaker than whatever actual prior knowledge is available \cite{bda3}.''
+  priors, i.e.\ priors that are ``intentionally weaker than whatever actual prior knowledge is available \cite{bda3}.''
   These priors act as constraints on the possible parameters that are to be sampled. From the literature,
   weakly informative priors for coefficients of logistic regression are chosen to be Student's T distributions
   with mean 0, degrees of freedom set to 4, and scale 2.5 \cite{bda3}.
@@ -253,7 +253,7 @@
     \end{align*}
     respectively \cite{bda3}.
     Note that, $\text{Var}(\psi | y)$, the marginal posterior variance of the estimand $\psi$,
-    can be estimated by a weighted average of $W$ and $B$, i.\ e.\
+    can be estimated by a weighted average of $W$ and $B$, i.e.\
     \begin{align*}
       \hat{\text{Var}}^+(\psi | y) = \frac{N -1}{N} W + \frac{1}{N} B.
     \end{align*}
@@ -276,7 +276,7 @@
     where $\rho_t$ is the autocorrelation of the simulation sequence at lag $t$ \cite{bda3}.
     The interested reader can consult Gelman et al.\
     for a technical discussion of how to calculate, $\hat{n_{\text{eff}}}$, an estimate of $n_{\text{eff}}$ for finite sequences.
-    The recommendation from BDA3 is that $\hat{n_{\text{eff}}} > 10 M$, i.\ e.\ there are at least 10 independent
+    The recommendation from BDA3 is that $\hat{n_{\text{eff}}} > 10 M$, i.e.\ there are at least 10 independent
     draws for each sequence.
 
     For each network model, we have that $0.99 \leq \hat{R} \leq 1.01$ and $\hat{n_{\text{eff}}} > 400$
@@ -296,7 +296,7 @@
   Let $y$ be the observed data, $\theta$ be the vector of parameters, and $X$ be the model covariates.
   For model $\mathcal{M}$, we have that $\theta = (\pi, \omega, \kappa)$. Define $y^{\text{rep}}$
   to be the replicated data that could have generated given the vector of parameters $\theta$
-  obtained through inference, i.\ e.\
+  obtained through inference, i.e.\
   \begin{align}\label{form:yrep}
     p(y^{\text{rep}} | y) = \int p(y^{\text{rep}}|\theta)p(\theta | y) d\theta.
   \end{align}
@@ -378,7 +378,7 @@
     aspect of the model that the test quantity aims to capture.
     As we have simulated values of the posterior density, the estimated $p$-value is
     just the proportion of the simulations such that the test quantity is greater than or equal
-    to the test quantity as measured in the observed data, i.\ e.\
+    to the test quantity as measured in the observed data, i.e.\
     \begin{align*}
       \hat{p_B} = \frac{1}{S}\sum_{i=1}^S [T(y_{(i)}^{\text{rep}}, \theta_{(i)}) \geq T(y, \theta_{(i)})]
     \end{align*}
@@ -417,7 +417,7 @@
 
     Note that there are pathological examples where the estimated $p$-values are 1,
     but do not adequately measure the discrepancy between
-    the replicated data, e.\ g.\
+    the replicated data, e.g.\
     for the test statistic $T_1$ on the SPTS network, the estimated $p$-value is 1, but the replicated
     data matches the observed data in regards to this test statistic. Thus, we ignore such cases in evaluating the model fit.
 
