@@ -1987,7 +1987,6 @@
     <bcf:citekey order="15">kruschke</bcf:citekey>
     <bcf:citekey order="16">tvforecasting</bcf:citekey>
     <bcf:citekey order="17">crps</bcf:citekey>
-    <bcf:citekey order="18">bda3</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty" type="entry" sortscheme="nty">

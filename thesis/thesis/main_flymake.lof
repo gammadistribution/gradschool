@@ -8,20 +8,20 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Distributions of the number of trials per each unit of observation factored by the covariate first-run. These distributions have much longer tails but have been truncated to illustrate the differences between each covariate factor's distribution. Note that the first-run units have a much wider distribution with a larger mean. \relax }}{11}{figure.caption.44}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Distributions of the number of trials per each unit of observation factored by the covariate first-run. These distributions have much longer tails but have been truncated to illustrate the differences between each covariate factor's distribution. Note that the first-run units have a much wider distribution with a larger mean. \relax }}{11}{figure.caption.41}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Actual $m^A$ data (left) compared to replicated data sets $m^{A\text {rep}}$ (right four). Note that some parts of each distribution may be slightly truncated in order to display the critical features of the distribution. The replicated data sets largely mimic the actual data set.\relax }}{15}{figure.caption.53}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Actual $m^A$ data (left) compared to replicated data sets $m^{A\text {rep}}$ (right four). Note that some parts of each distribution may be slightly truncated in order to display the critical features of the distribution. The replicated data sets largely mimic the actual data set.\relax }}{14}{figure.caption.50}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Actual $c$ data (left) compared to the replicated data $c^{\text {rep}}$ (right four). The replicated data sets largely mimic the actual data set with the exception of the replicated data sets of network SPTS.\relax }}{16}{figure.caption.54}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Actual $c$ data (left) compared to the replicated data $c^{\text {rep}}$ (right four). The replicated data sets largely mimic the actual data set with the exception of the replicated data sets of network SPTS.\relax }}{15}{figure.caption.51}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Actual standardized residuals data (left) compared to the standardized residuals of the replicated data (right four). For the ETMT and SPTS network, the model's residuals become larger as the replicated becomes larger.\relax }}{19}{figure.caption.59}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Actual standardized residuals data (left) compared to the standardized residuals of the replicated data (right four). For the ETMT and SPTS network, the model's residuals become larger as the replicated becomes larger which is indicative of model misfit.\relax }}{18}{figure.caption.56}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Graphical comparison of distribution of test quantities $T(y^{\text {rep}}, \theta , x)$ versus observed test quantity $T(y, \theta , x)$ (black) in hold-out data set across networks.\relax }}{19}{figure.caption.60}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Graphical comparison of distribution of test quantities $T(y^{\text {rep}}, \theta , x)$ versus observed test quantity $T(y, \theta , x)$ (black) in hold-out data set across networks.\relax }}{18}{figure.caption.57}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Distribution of the left end point of the 95\% Credible Region for the SPTS network where the outcome was not within the Credible Region.\relax }}{23}{figure.caption.67}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Distribution of the left end point of the 95\% Credible Region for the SPTS network where the outcome was not within the Credible Region.\relax }}{21}{figure.caption.64}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Test.\relax }}{25}{figure.caption.72}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of forecasts versus actuals for quantiled units of observation across the three networks for both models.\relax }}{22}{figure.caption.67}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }

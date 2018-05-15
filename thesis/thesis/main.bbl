@@ -248,6 +248,29 @@
       \field{year}{1980}
       \field{pages}{307\bibrangedash 315}
     \endentry
+    \entry{ppc:assessments}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=4e26bb543d299e3579882b30d5baba03}{Green}{G\bibinitperiod}{Martin\bibnamedelima J.}{M\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=72eeb2900b7bcb5ce23f3b0f1d99db53}{Medley}{M\bibinitperiod}{Graham\bibnamedelima F.}{G\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
+        {{hash=df4f28166a415962eeb285f8fc6db741}{Browne}{B\bibinitperiod}{William\bibnamedelima J.}{W\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=4e26bb543d299e3579882b30d5baba03}{Green}{G\bibinitperiod}{Martin\bibnamedelima J.}{M\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+        {{hash=72eeb2900b7bcb5ce23f3b0f1d99db53}{Medley}{M\bibinitperiod}{Graham\bibnamedelima F.}{G\bibinitperiod\bibinitdelim F\bibinitperiod}{}{}{}{}}%
+        {{hash=df4f28166a415962eeb285f8fc6db741}{Browne}{B\bibinitperiod}{William\bibnamedelima J.}{W\bibinitperiod\bibinitdelim J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{4b674f9beeff7d0b7f6a1de3d2abf7cd}
+      \strng{fullhash}{4b674f9beeff7d0b7f6a1de3d2abf7cd}
+      \field{sortinit}{G}
+      \field{sortinithash}{480ee01f9ffd559b3258d822f54a8ac2}
+      \field{labeltitle}{Use of posterior predictive assessments to evaluate model fit in multlevel logistic regression}
+      \field{journaltitle}{EDP Sciences}
+      \field{title}{Use of posterior predictive assessments to evaluate model fit in multlevel logistic regression}
+      \field{year}{2009}
+      \verb{doi}
+      \verb 10.1051/vetres/2009013
+      \endverb
+    \endentry
     \entry{pymc3}{article}{}
       \name{labelname}{3}{}{%
         {{hash=737124641db45f0c454bfbf154bbdf5a}{J.}{J\bibinitperiod}{Salvatier}{S\bibinitperiod}{}{}{}{}}%
@@ -269,7 +292,7 @@
       \field{volume}{2:e55}
       \field{year}{2016}
       \verb{doi}
-      \verb "10.7717/peerj-cs.55"
+      \verb 10.7717/peerj-cs.55
       \endverb
     \endentry
     \entry{kruschke}{book}{}
@@ -290,6 +313,26 @@
       \field{edition}{Second}
       \field{title}{Doing Bayesian Data Analysis: A Tutorial with R, JAGS, and Stan}
       \field{year}{2015}
+    \endentry
+    \entry{predictive:utility}{article}{}
+      \name{labelname}{2}{}{%
+        {{hash=5d36e97683cbc9d6ef06fc2ec40becb0}{Vehtari}{V\bibinitperiod}{Aki}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=157f7841fe679dd5aff351562c85122c}{Ojanen}{O\bibinitperiod}{Janne}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{2}{}{%
+        {{hash=5d36e97683cbc9d6ef06fc2ec40becb0}{Vehtari}{V\bibinitperiod}{Aki}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=157f7841fe679dd5aff351562c85122c}{Ojanen}{O\bibinitperiod}{Janne}{J\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{1f44ef7c72b924566ebc1bd50eee9562}
+      \strng{fullhash}{1f44ef7c72b924566ebc1bd50eee9562}
+      \field{sortinit}{V}
+      \field{sortinithash}{63562d1af2cd68fb37e2e14e0c6d5c96}
+      \field{labeltitle}{A survey of Bayesian predictive methods for model assessment, selection, and comparison}
+      \field{journaltitle}{Statistics Surveys}
+      \field{title}{A survey of Bayesian predictive methods for model assessment, selection, and comparison}
+      \field{volume}{6}
+      \field{year}{2012}
+      \field{pages}{142\bibrangedash 228}
     \endentry
   \endsortlist
 \endrefsection
