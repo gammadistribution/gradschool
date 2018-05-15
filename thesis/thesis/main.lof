@@ -14,7 +14,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Actual $c$ data (left) compared to the replicated data $c^{\text {rep}}$ (right four). The replicated data sets largely mimic the actual data set with the exception of the replicated data sets of network SPTS.\relax }}{15}{figure.caption.51}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Actual standardized residuals data (left) compared to the standardized residuals of the replicated data (right four). For the ETMT and SPTS network, the model's residuals become larger as the replicated becomes larger which is indicative of model misfit.\relax }}{18}{figure.caption.56}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Actual standardized residuals data (left) compared to the standardized residuals of the replicated data (right four). For the ETMT and SPTS networks, the model's residuals become larger as the replicated becomes larger which is indicative of model misfit.\relax }}{18}{figure.caption.56}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Graphical comparison of distribution of test quantities $T(y^{\text {rep}}, \theta , x)$ versus observed test quantity $T(y, \theta , x)$ (black) in hold-out data set across networks.\relax }}{18}{figure.caption.57}
 \defcounter {refsection}{0}\relax 

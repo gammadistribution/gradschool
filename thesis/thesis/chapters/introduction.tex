@@ -18,8 +18,8 @@
   The TV sellers then create a media plan, which is a collection of advertising spots/units, to present to the TV buyer.
   The basis of the media plan is the forecasted number of demographic (or buy-demo) impressions for each unit.
   These demographic impressions are called the buy-demo impressions because the TV buyer is charged
-  based off of the total number of forecasted demographic impressions in a media plan .
-  The TV buyer then accepts or proposes changes to the media plan and eventually
+  based off of the total number of forecasted demographic impressions in a media plan.
+  The TV buyer then accepts the media plan or proposes changes. Eventually,
   a deal is struck and the units are set to air. These buy-demo impressions are guaranteed to
   the TV buyer and additional units will be added in order to achieve that guarantee \cite{tvforecasting}. Thus, the need
   for accurate forecasts becomes clear under this paradigm.
@@ -50,9 +50,10 @@
 
   A related problem exists in evaluating the performance of baseball players:
   players are judged by their batting average (percentage of hits) but this metric is not informative when
-  the player has few at-bats. With more information about the league and past historical performances we are able to
-  come up with a better estimate that takes such factors into account
-  as well as the observed at-bats through Bayesian inference.
+  the player has few at-bats. With more information about the league and past historical performances,
+  we are able to come up with a better estimate through Bayesian inference. Note that these estimates
+  take into account the observed number of at-bats for each player
+  which places larger evidence of skill, or lack thereof, on players with larger numbers of at-bats.
 
   Thus, we adopt the use of a similar approach in order to create better forecasts when
   small sample sizes occur in past airings data.
@@ -60,11 +61,10 @@
 
 \begin{section}{Problem Description}
   Given the challenges outlined above, the problem this paper aims to solve is whether or not
-  we can devise a model using
-  the noisy measurement data as well as the TV supplier data that will accurately
-  forecast the strategic target impressions for future program airings
-  and provide improvement from the current forecasting methodology.
-  Further, we wish to understand if is possible to accurately forecast the range of likely
+  we can devise a model that will accurately
+  forecast the strategic target impressions for future program airings using the combination of the
+  noisy measurement data and the TV supplier data, as well as provide improvement from the current forecasting methodology.
+  Further, we wish to understand if it is possible to accurately forecast the range of likely
   outcomes for each future airing. If so, then it will be possible to understand the
   probability that an advertiser will reach their targeting goals given a media plan.
 
