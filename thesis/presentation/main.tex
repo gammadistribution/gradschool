@@ -4,6 +4,7 @@
 
 
 \usepackage[utf8]{inputenc}
+\usepackage{adjustbox}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{pbox}
@@ -31,49 +32,205 @@
 \section{Introduction}
 
 \begin{frame}
+\frametitle{Background - TV Advertising Buying and Selling}
+
+\begin{itemize}
+\item
+  The TV advertising landscape consists of TV sellers, who have airtime available
+  for sale to be used to air advertisements, and TV buyers, who purchase airtime
+  from TV sellers in order to air their desired advertisements.
+\pause
+\item TV sellers form \emph{media plans} based on the goals of TV buyers.
+\pause
+\item With each media plan, there is a certain number of guaranteed \emph{impressions} based off a declared buy-demographic.
+\pause
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Background - TV Advertising Buying and Selling}
+\begin{itemize}
+\item To complicate the matter, the TV buyer may be interested in a sub-target audience and would want their advertising message to reach those additional people as well.
+\pause
+\item The TV seller must then provide forecasts for both targets and categorize the content according to what will efficiently target the sub-target audience. Inaccurate forecasts lead to either upset TV buyers or upset TV sellers.
+\pause
+\item The forecasts provided by the TV seller are based off audience measurement data. This data is based off of sampled data and could be noisy.
+\end{itemize}
+\end{frame}
+\begin{frame}
 \frametitle{Problem}
 
+How can we forecast impressions of this sub-target given the forecasted impressions of the buy-demographic using noisy data?
+
+\pause
+
+Answer: \alert{Bayesian Inference!}
 \end{frame}
 
 \begin{frame}
-\frametitle{TV Advertising Buying and Selling}
+\frametitle{Motivating Example: Baseball}
+\begin{itemize}
+  \item Baseball players are judged by their batting average (percentage of hits) but this metric is not informative when
+  the player has few at-bats.
+  \pause
+  \item With more information about the league and past historical performances,
+  we are able to come up with a better estimate through Bayesian inference.
+  \pause
+  \item
+    Note that these estimates
+  take into account the observed number of at-bats for each player
+  which places larger evidence of skill, or lack thereof, on players with larger numbers of at-bats.
+\end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Motivating Example}
-Baseball example
-\end{frame}
-
-\begin{frame}
-\frametitle{Formal Statement of Problem}
-\end{frame}
 
 \begin{frame}
 \frametitle{Bayesian Inference}
-Baseball example
+
+\begin{itemize}
+  \item Bayesian inference is the statistical practice that allows one to provide probability statements
+    that express one's uncertainty on the occurrence of events and then learn about the parameters that determine those probabilities.
+
+  \pause
+\item A model for the data $y$ conditional on some unknown parameter $\theta$ is assigned
+  as the \emph{likelihood} denoted by $p(y | \theta)$.
+\pause
+\item Based on prior knowledge some probability distribution is given to $p(\theta)$, i.e.\ the prior distribution for the parameter $\theta$.
+\pause
+\item Through the definition of conditional probability, we have that:
+
+    \begin{align}\label{form:bayes}
+      p(\theta | y) \propto p(y | \theta) p(\theta).
+    \end{align}
+\end{itemize}
 \end{frame}
 
 
 \section{Data}
 
 \begin{frame}
-\frametitle{Types of Data}
+\frametitle{Datasets}
+\begin{itemize}
+\item
+  The data used to generate the forecasts come from two main sources TV suppliers and audience measurement companies.
+\pause
+\item TV suppliers provide the content that is set to air and the forecasted buy-demographic impressions
+\pause
+\item Audience measurement companies provide the measured historical impressions.
+\pause
+\item We will now discuss these datasets in more detail.
+\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Programming Schedule}
+See below for sample records from the programming schedule provided by TV suppliers:
+    \begin{table}[h!]
+      \centering
+      \begin{adjustbox}{width=1\textwidth,center=\textwidth}
+        \large
+        \begin{tabular}{lllllllll}
+          network & selling title & selling title name & content & content name & start datetime & end datetime \\
+          \hline
+          BCST & 100 & Adult Cartoon 8PM & 10 & Adult Cartoon & 2017-04-02 20:00:00 & 2017-04-02 20:30:00 \\
+          BCST & 101 & Adult Cartoon 8:30PM & 10 & Adult Cartoon & 2017-04-02 20:30:00 & 2017-04-02 21:00:00 \\
+        \end{tabular}
+      \end{adjustbox}
+    \end{table}
 \end{frame}
 
 \begin{frame}
 \frametitle{Forecasted Impressions}
+Sample records from the forecasted impressions data provided by TV suppliers:
+    \begin{table}[h!]
+      \centering
+        \begin{tabular}{llll}
+          selling title & broadcast week & demographic & impressions per unit \\
+          \hline
+          100 & 2017-03-27 06:00:00 & F45-49 & 150000 \\
+          100 & 2017-03-27 06:00:00 & P18-49 & 1500000 \\
+          101 & 2017-03-27 06:00:00 & F45-49 & 120000 \\
+          101 & 2017-03-27 06:00:00 & P18-49 & 1000000 \\
+        \end{tabular}
+    \end{table}
+
 \end{frame}
 
 \begin{frame}
-\frametitle{Audience Measurement}
+\frametitle{Audience Measurement - Programs}
+Sample records from Audience Measurement Programs Data:
+  \begin{table}[h!]
+    \centering
+    \begin{adjustbox}{width=1\textwidth,center=\textwidth}
+      \large
+      \begin{tabular}{lllllllllll}
+        airing & network & program & telecast & program name & start datetime & end datetime & genre & is first run & is live\\
+        \hline
+        35 & BCST & 1000 & 301 & Adult Cartoon & 2017-04-02 20:02:00 & 2017-04-02 20:30:00 & Animation & 1 & 0 \\
+        36 & BCST & 1000 & 302 & Adult Cartoon & 2017-04-02 20:30:00 & 2017-04-02 21:00:00 & Animation & 1 & 0
+      \end{tabular}
+    \end{adjustbox}
+  \end{table}
+
+
 \end{frame}
+
+\begin{frame}
+\frametitle{Audience Measurement - Viewing}
+Sample records from Audience Measurement Viewing Data:
+  \begin{table}[h!]
+    \centering
+    \begin{adjustbox}{width=0.8\textwidth,center=\textwidth}
+      \large
+    \begin{tabular}{lllllllll}
+      program & telecast & respondent & minute & comm secs & weight & age & gender & total comm secs\\
+      \hline
+      1000 & 301 & 2 & 3 & 60 & 2050 & 48 & F & 120\\
+      1000 & 301 & 2 & 4 & 45 & 2050 & 48 & F & 120\\
+      1000 & 301 & 2 & 15 & 60 & 2050 & 48 & F & 120\\
+      1000 & 301 & 2 & 16 & 30 & 2050 & 48 & F & 120\\
+      1000 & 302 & 2 & 22 & 15 & 2050 & 48 & F & 100\\
+      1000 & 302 & 2 & 23 & 60 & 2050 & 48 & F & 100
+    \end{tabular}
+    \end{adjustbox}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Audience Measurement - Measurements}
+  \begin{itemize}
+    \item The impressions associated to a telecast is given by the Average Commercial Minute (ACM).
+      \pause
+      \item This is the weighted sum of the commercial viewing of a target over the total number of commercial seconds.
+        \pause
+      \item Define $m_{i}^A$, the ACM of target A for airing $i$ as follows:
+  \begin{align}\label{acm_def}
+    m_{i}^A = \left\lceil\frac{\sum_{k=1}^n w_k \sum_{j=1}^{t_i} s_{ij} p_{ijk} \textbf{1}_A(p_{k})}{\sum_{j=1}^{t_i} s_{ij}}\right\rceil.
+  \end{align}
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Training Data}
+
+\begin{itemize}
+  \item We limit the data from the above data sets to three networks labeled BCST, ETMT, and SPTS during broadcast years 2016 - 2017.
+  \item We consider the in-target audience, target $A$, to be Females aged 45 - 49 and the buy-demographic audience, target $B$,
+    to be Persons aged 18-49.
+  \item We combine the information from the above data sets to form the training data:
+  \begin{table}[h!]
+    \centering
+    \begin{adjustbox}{width=0.9\textwidth}
+      \large
+      \begin{tabular}{llllllllll}
+        network & selling title & content & start datetime & end datetime & program & telecast & ACM A & ACM B\\
+        \hline
+        BCST & 100 & 10 & 2017-04-02 20:00:00 & 2017-04-02 20:30:00 & 1000 & 301 & 110560 & 1203560\\
+        BCST & 101 & 10 & 2017-04-02 20:30:00 & 2017-04-02 21:00:00 & 1000 & 302 & 210560 & 1501000\\
+      \end{tabular}
+    \end{adjustbox}
+  \end{table}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -88,7 +245,16 @@ Baseball example
 \section{Model}
 
 \begin{frame}
-\frametitle{Units of Observation and Analysis}
+\frametitle{Units of Observation}
+\begin{itemize}
+  \item The units of observation for this model are individual content airings in the media schedule.
+    \pause
+  \item The outcome variable that is measured for each unit $i$ is $m_i^A$, the ACM of target $A$, which we
+    denote as $y_i$ for notational convenience.
+    \pause
+  \item Similarly, we denote $m_i^B$, the ACM of target $B$ for unit $i$ by $n_i$.
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
@@ -403,19 +569,225 @@ We define the following test quantities to use in evaluating the fit of model $\
 \section{Results}
 
 \begin{frame}
-\frametitle{Units of Observation}
+\frametitle{Industry Standard Model}
+
+\begin{itemize}
+\item The industry standard model used today to forecast impressions is based on the average of observed data.
+\pause
+\item Define model $\mathcal{M}_0$ to be as follows:
+  \begin{enumerate}
+    \item Using the content and stratified hour, take the average impression concentration $c_i$ of the train set.
+    \item Using the stratified hour, take the average impression concentration $c'_i$ of the train set.
+    \item The forecasted $m_i^A$ for airing $i$ is then $c_i m_i^B$ if it exists, otherwise it is $c_i' m_i^B$.
+  \end{enumerate}
+\pause
+\item We wish to compare the performance of model $\mathcal{M}$ to model $\mathcal{M}_0$ and determine
+  if the proposed model outperforms the industry standard model.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analysis - Error Metrics}
+\begin{itemize}
+  \item The main error metric we will use to evaluate model performance is the Mean Absolute Error. It is defined as
+    \begin{align*}
+      MAE = \frac{1}{N}\sum_{i=1}^N|y_i^{\text{act}} - y_i^{\text{pred}}|
+    \end{align*}
+  \pause
+  \item Additionally, we can use an analogous metric to evaluate the probabilistic forecasts called
+    the Continuous Ranked Probability Score (CRPS).
+\pause
+\item Let $F$ be the cumulative distribution function of a random variable $X$
+    and $x$ be the observed value. Then we have that:
+    \begin{align}\label{form:crps}
+      \text{CRPS}(F, x) = \int_{-\infty}^{\infty}\left(F(y) - H(y - x)\right)^2dy
+    \end{align}
+    Note that this is a generalization of the Mean Absolute Error.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analysis - Calibration}
+\begin{itemize}
+  \item We are also interested in the \emph{calibaration} of the forecasted probability distributions.
+    \pause
+  \item We can assess the calibration of the probabilistic forecasts by calculating
+    Credible Regions (CRs) for each unit of observation and determining the proportion of units
+    that fall within the CRs compared to the number of units.
+  \pause
+    \item The forecasts are perfectly calibrated if for a CR of $(1 - \alpha)\%$, the proportion of units
+    within the CR is $(1-\alpha)\%$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analysis - Units of Observation}
+\begin{itemize}
+  \item The table below shows the evaluation of error metrics between the models:
+    \begin{table}[h!]
+      \centering
+      \begin{tabular}{lrrrr}
+        network & $\overline{m_i^A}$ & $\mathcal{M}_0$ MAE & $\mathcal{M}$ CRPS & $\mathcal{M}$ MAE \\
+        \hline
+        BCST & 171450.06 & 23307.81 & 15247.91 & 21408.24 \\
+        ETMT & 13034.77 & 5123.70 & 3683.04 & 5226.42 \\
+        SPTS & 3164.84 & 1844.51 & 1426.60 & 1942.76
+      \end{tabular}
+    \end{table}
+  \item The point-forecasts of Model $\mathcal{M}$ perform on-par with, or slightly worse than $\mathcal{M}_0$.
+  \pause
+  \item However, the probabilistic forecasts of model $\mathcal{M}$ greatly outperform model $\mathcal{M}_0$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Analysis - Units of Observation}
+The table below shows the calibration of the probabilistic forecasts at the level
+of the units of observation.
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{lrrr}
+    & \multicolumn{3}{c}{Credible Region $(1 - \alpha)\%$} \\
+    network & $\alpha = 0.5$ & $\alpha = 0.05$ & $\alpha = 0.01$ \\
+    \hline
+    BCST & 0.465 & 0.922 & 0.966 \\
+    ETMT & 0.48 & 0.91 & 0.95  \\
+    SPTS & 0.416 & 0.765 & 0.799 \\
+  \end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analysis - Units of Observation - SPTS}
+
+\begin{itemize}
+  \item Closer analysis reveals that the right-censored data is causing the miscalibration
+    on the SPTS network.
+    \pause
+  \item The figure below shows the distribution of lower-limits of 95\% CRs in which
+    the outcome was outside the above specified CRs:
+    \begin{figure}[!h]
+      \centering
+      \includegraphics[scale=0.4]{SPTS_CR_analysis}
+    \end{figure}
+  \item Removing the right-censored data and recalculating the $95\%$ CRs shows that
+    91.8\% of units are within the forecasted CR, consistent with other networks.
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Quantiled Media Plans}
+
+\begin{itemize}
+  \item We are interested in understanding the performance of aggregations of units of observation
+    since these aggregations form the media plans.
+    \pause
+  \item To do this, we quantile the units in the hold-out set into 20 bins ordered by the point forecasts
+    of the impression concentration as a proxy for creating media plans. We then compute the total forecasted
+    impressions of the media plan using each model.
+   \pause
+  \item For model $\mathcal{M}_0$, the total forecasted impressions are the sum of the individual point forecasts.
+    \pause
+  \item For model $\mathcal{M}$, under the model assumptions, the units are i.i.d.\ given the covariates and parameters.
+    We can create the distribution of aggregated impressions through simple sums of the distributions of outcomes at the level of the units of observation.
+\end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Quantiled Media Plans}
+    \begin{figure}[!h]
+      \centering
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.3]{BCST_quantiled}
+      \end{subfigure}
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.3]{ETMT_quantiled}
+      \end{subfigure}
+      \begin{subfigure}[b]{.75\textwidth}
+        \centering
+        \includegraphics[scale=0.3]{SPTS_quantiled}
+      \end{subfigure}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Quantiled Media Plans - Error Metrics}
+  \begin{itemize}
+    \item
+      The table below shows the error metrics between the two models for the quantiled media plans.
+    \begin{table}[h!]
+      \centering
+        \begin{tabular}{lrrrr}
+          network  & $\mathcal{M}_0$ MAE & $\mathcal{M}$ CRPS & $\mathcal{M}$ MAE \\
+          \hline
+          BCST & 324034.14 & 277437.29 & 417797.60 \\
+          ETMT & 297512.52 & 311316.38 & 399648.10 \\
+          SPTS & 205096.15 & 75962.55 & 90668.35
+        \end{tabular}
+    \end{table}
+    \pause
+    \item The point-forecasts of model $\mathcal{M}$ perform worse on BCST and ETMT, but much better
+      on SPTS compared to $\mathcal{M}_0$.
+      \pause
+    \item The probabilistic forecasts perform on-par or better with the industry standard model.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quantiled Media Plans - Calibration}
+\begin{itemize}
+\item The table below shows the calibration of the probabilistic forecasts at the media-plan-level.
+    \begin{table}
+      \centering
+        \begin{tabular}{lrrr}
+          & \multicolumn{3}{c}{Credible Region $(1 - \alpha)\%$} \\
+          network & $\alpha = 0.5$ & $\alpha = 0.05$ & $\alpha = 0.01$ \\
+          \hline
+          BCST & 0.45 & 0.95 & 1.0 \\
+          ETMT & 0.1 & 0.55  & 0.75 \\
+          SPTS & 0.4 & 0.65 & 0.65 \\
+        \end{tabular}
+    \end{table}
+\pause
+\item From this table we can see that the model is well-calibrated on the BCST network, but not on the others.
+\pause
+\item More analysis is needed to understand which assumptions are violated when aggregating the units of observation
+on the ETMT and SPTS networks.
+\end{itemize}
+\end{frame}
 
 \section{Conclusion}
 
 \begin{frame}
-\frametitle{Sample frame title}
+\frametitle{Conclusions}
+\begin{itemize}
+  \item We aimed to create a model that outperformed the Industry Standard model and also
+    provided probabilistic forecasts.
+    \pause
+  \item The proposed model's point forecasts are on-par with the Industry Standard model at the level of unit of observation
+    and either better or worse for aggregations.
+    \pause
+  \item The proposed model is well-calibrated at the level of units of observation, but not for aggregations of units.
+  \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Conclusions}
+\begin{itemize}
+  \item The data generated under the proposed model for the ETMT network has obvious misfit and this translates into the forecasts.
+    \pause
+  \item The proposed model greatly outperforms the Industry Standard model on the SPTS network in terms of aggregations of units.
+    \pause
+  \item More work is needed to iterate on model and address the misfit and the loss of calibration for aggregations.
+    \pause
+  \item The probabilistic forecasts generated are well-calibrated at the unit of observation level and thus can
+    be leveraged to provide media planners with insight as to what the volatility of the media plan might be.
+\end{itemize}
+\end{frame}
 
 \end{document}
