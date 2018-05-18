@@ -152,7 +152,7 @@
   The distribution is centered at 0 since apriori we do not
   know if the coefficient will be positive or negative. The degrees of
   freedom and scale are chosen such that the mass of the corresponding distributions falls between -5 and 5,
-  which are roughly .01 and 0.99 on the logit scale, respectively.
+  which are roughly 0.01 and 0.99 on the logit scale, respectively.
   Thus, the prior is constrained such that each coefficient
   is allowed to account for a change in the logit probability from 0.01 to 0.99, which is a larger effect than is to be expected
   by any single coefficient. We allow the intercept of the model, $\beta_0$, to account for larger changes by adopting the same Student's T distribution
@@ -407,7 +407,7 @@
         Test quantity & $T(y, \theta)$ & \pbox{2cm}{95\% int. for $T(y^{\text{rep}}, \theta)$} & $p_B$ & $T(y, \theta)$ & \pbox{2cm}{95\% int. for $T(y^{\text{rep}}, \theta)$} & $p_B$  & $T(y)$ & \pbox{2cm}{95\% int. for $T(y^{\text{rep}}, \theta)$} & $p_B$ \\
         \hline
         $T_1(y, \theta)$ (min) & 3701 & [6245, 14270] & 0.99 & 0 & [9, 182] & 1.0 & 0 & [0, 0] & 1.0 \\
-        $T_2(y, \theta)$ (mean) & 227457.84 & [2266852.49, 236367.09] & 0.95 & 16357.80 & [16705.39, 1748.11] & 1.0 & 3972.45 & [3714.91, 4559.66] & 0.73 \\
+        $T_2(y, \theta)$ (mean) & 227457.84 & [2266852.49, 236367.09] & 0.95 & 16357.80 & [16705.39, 17489.11] & 1.0 & 3972.45 & [3714.91, 4559.66] & 0.73 \\
         $T_3(y, \theta)$ (max) & 4311038 & [3443885, 4989241] & 0.34 & 452762 & [307901, 760822] & 0.78 & 526816 & [607186, 2239365] & 0.99 \\
         $T_4(y, \theta)$ (std) & 334052.86 & [325128.37, 364859.10] & 0.90 & 17686.89 & [20021.24, 23205.09] & 1.0 & 22300.18 & [20012.59, 39808.44] & 0.88\\
         $T_5(y, \theta)$ (mean $\pi$)& 0.105 & [0.104, 0.107] & 0.60 & 0.0903 & [0.089, 0.092] & 0.43 & 0.056 & [0.065, 0.0689] & 1.0\\
@@ -429,7 +429,7 @@
     the observed data, but we elect to use these models as is, noting that the
     model does not adequately describe all aspects of the observed data.
 
-  \begin{subsection}{Regression Fit}
+  \begin{subsection}{Residual Analysis}
     The last check that we will perform is the analysis of the regression fit to the
     model. To evaluate this fit, we will analyze the standardized residuals of the model.
 
